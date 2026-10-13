@@ -111,7 +111,11 @@ public class EquivalencyExtensibilityTests {
             var expected = new Basket(["a", "b"]);
             var strict = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeEquivalentTo(expected));
             Assert.AreEqual(
-                "Expected actual to be equivalent, but found 2 difference(s):\r\n1. Tags[0] was 'b' instead of 'a'.\r\n2. Tags[1] was 'a' instead of 'b'.",
+                string.Join(
+                    Environment.NewLine,
+                    "Expected actual to be equivalent, but found 2 difference(s):",
+                    "1. Tags[0] was 'b' instead of 'a'.",
+                    "2. Tags[1] was 'a' instead of 'b'."),
                 strict.Message);
 
             await Task.Run(() => {
@@ -122,7 +126,11 @@ public class EquivalencyExtensibilityTests {
 
             var stillStrict = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeEquivalentTo(expected));
             Assert.AreEqual(
-                "Expected actual to be equivalent, but found 2 difference(s):\r\n1. Tags[0] was 'b' instead of 'a'.\r\n2. Tags[1] was 'a' instead of 'b'.",
+                string.Join(
+                    Environment.NewLine,
+                    "Expected actual to be equivalent, but found 2 difference(s):",
+                    "1. Tags[0] was 'b' instead of 'a'.",
+                    "2. Tags[1] was 'a' instead of 'b'."),
                 stillStrict.Message);
         }
         finally {
@@ -243,7 +251,11 @@ public class EquivalencyExtensibilityTests {
         var strict = Assert.ThrowsExactly<AssertionFailedException>(
             () => actual.Should().BeEquivalentTo(expected, static o => o.UsingOrderingRule(new StrictTagsRule())));
         Assert.AreEqual(
-            "Expected actual to be equivalent, but found 2 difference(s):\r\n1. Tags[0] was 'b' instead of 'a'.\r\n2. Tags[1] was 'a' instead of 'b'.",
+            string.Join(
+                Environment.NewLine,
+                "Expected actual to be equivalent, but found 2 difference(s):",
+                "1. Tags[0] was 'b' instead of 'a'.",
+                "2. Tags[1] was 'a' instead of 'b'."),
             strict.Message);
 
         actual.Should().BeEquivalentTo(expected, static o => o.UsingOrderingRule(new StrictTagsRule()).WithoutOrderingRules());

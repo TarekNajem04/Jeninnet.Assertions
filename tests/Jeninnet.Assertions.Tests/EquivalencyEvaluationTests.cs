@@ -48,7 +48,11 @@ public class EquivalencyEvaluationTests {
         Assert.AreEqual("01/01/2026 00:00:05", updatedAt.Actual);
 
         Assert.AreEqual(
-            "Expected the graphs to be equivalent, but found 2 difference(s):\r\n1. CreatedAt was 01/01/2026 00:00:02 instead of 01/01/2026 00:00:00.\r\n2. UpdatedAt was 01/01/2026 00:00:05 instead of 01/01/2026 00:00:00.",
+            string.Join(
+                Environment.NewLine,
+                "Expected the graphs to be equivalent, but found 2 difference(s):",
+                "1. CreatedAt was 01/01/2026 00:00:02 instead of 01/01/2026 00:00:00.",
+                "2. UpdatedAt was 01/01/2026 00:00:05 instead of 01/01/2026 00:00:00."),
             result.Message);
     }
 

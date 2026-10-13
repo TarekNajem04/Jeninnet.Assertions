@@ -37,7 +37,11 @@ public class EquivalencyTests {
         var expected = new Person("b", 2, new Address("x", "1"), []);
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeEquivalentTo(expected));
         Assert.AreEqual(
-            "Expected actual to be equivalent, but found 2 difference(s):\r\n1. Age was 1 instead of 2.\r\n2. Name was 'a' instead of 'b'.",
+            string.Join(
+                Environment.NewLine,
+                "Expected actual to be equivalent, but found 2 difference(s):",
+                "1. Age was 1 instead of 2.",
+                "2. Name was 'a' instead of 'b'."),
             ex.Message);
     }
 
@@ -130,7 +134,11 @@ public class EquivalencyTests {
         var ex = Assert.ThrowsExactly<AssertionFailedException>(
             () => actual.Should().BeEquivalentTo(expected, static o => o.WithStrictOrdering()));
         Assert.AreEqual(
-            "Expected actual to be equivalent, but found 2 difference(s):\r\n1. Tags[0] was 't1' instead of 't2'.\r\n2. Tags[1] was 't2' instead of 't1'.",
+            string.Join(
+                Environment.NewLine,
+                "Expected actual to be equivalent, but found 2 difference(s):",
+                "1. Tags[0] was 't1' instead of 't2'.",
+                "2. Tags[1] was 't2' instead of 't1'."),
             ex.Message);
     }
 
@@ -159,7 +167,11 @@ public class EquivalencyTests {
         var strict = Assert.ThrowsExactly<AssertionFailedException>(
             () => subject.Should().BeEquivalentTo(reordered, static o => o.WithStrictOrdering()));
         Assert.AreEqual(
-            "Expected subject to be equivalent, but found 2 difference(s):\r\n1. [0] was 1 instead of 3.\r\n2. [2] was 3 instead of 1.",
+            string.Join(
+                Environment.NewLine,
+                "Expected subject to be equivalent, but found 2 difference(s):",
+                "1. [0] was 1 instead of 3.",
+                "2. [2] was 3 instead of 1."),
             strict.Message);
 
         int[] shorter = [1, 2];

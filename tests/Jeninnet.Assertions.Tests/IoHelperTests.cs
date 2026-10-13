@@ -168,8 +168,7 @@ public class PathHelperTests {
     [TestMethod]
     public void Normalize_ConvertsForwardSlashes() {
         var normalized = PathHelper.Normalize("a/b/c");
-        Assert.IsFalse(normalized.Contains('/'));
-        Assert.AreEqual(Path.DirectorySeparatorChar, normalized[1]);
+        Assert.AreEqual(string.Join(Path.DirectorySeparatorChar, "a", "b", "c"), normalized);
     }
 
     [TestMethod]

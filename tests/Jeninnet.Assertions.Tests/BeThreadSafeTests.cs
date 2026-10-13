@@ -30,7 +30,7 @@ public class BeThreadSafeTests {
     public async Task AllCopiesFail_AggregatedIntoSingleGroupedFailure() {
         Action action = static () => throw new InvalidOperationException("boom");
 
-        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 4));
+        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 4, timeout: TimeSpan.FromSeconds(60)));
         Assert.AreEqual("Expected action to be thread-safe, but 4 of 4 copies failed:\n1. InvalidOperationException: boom (copies: 1, 2, 3, 4).", ex.Message);
     }
 
@@ -43,7 +43,7 @@ public class BeThreadSafeTests {
             }
         };
 
-        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 3));
+        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 3, timeout: TimeSpan.FromSeconds(60)));
         Assert.Contains("Expected action to be thread-safe, but 1 of 3 copies failed:", ex.Message);
         Assert.Contains("1. InvalidOperationException: boom (copies: ", ex.Message);
     }
