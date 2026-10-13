@@ -49,7 +49,14 @@ jobs:
       - name: Quality gate details
         if: inputs.action == 'quality-gate'
         run: |
+          echo "== main (no branch) =="
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECT"
+          echo ""
+          echo "== branch=main =="
           curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/qualitygates/project_status?projectKey=$PROJECT&branch=main"
+          echo ""
+          echo "== measures =="
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/measures/component?component=$PROJECT&branch=main&metricKeys=coverage,new_coverage,new_bugs,new_code_smells,new_vulnerabilities,new_duplicated_lines_density,new_security_hotspots_reviewed,new_maintainability_rating,new_reliability_rating,new_security_rating"
 
       - name: Final listing
         if: always()
