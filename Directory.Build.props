@@ -83,14 +83,21 @@
     </PropertyGroup>
 
     <!--
-    Local development loop (Debug only): centralize all outputs under
+    Local development loop (Debug only, outside CI): centralize all outputs under
     <LocalArtifacts> and auto-pack packable projects after a successful build.
-    Release/CI builds keep the classic bin/obj layout and pack explicitly.
+    Release builds keep the classic bin/obj layout and pack explicitly.
+
+    CI (the CI environment variable that GitHub Actions and most agents set) is
+    excluded: pipelines restore with the default configuration (Debug) and then
+    build with the Release configuration (dotnet build -c Release), so redirecting
+    only the Debug restore outputs under artifacts/ leaves the Release build
+    without its assets (NETSDK1004).
+
     The condition intentionally checks Configuration only: SDK-style projects
     leave $(Platform) empty unless it is passed explicitly, so a
     'Debug|AnyCPU' comparison would silently never match.
     -->
-    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug' and '$(CI)' != 'true'">
         <UseArtifactsOutput>true</UseArtifactsOutput>
         <ArtifactsPath>$(LocalArtifacts)</ArtifactsPath>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
