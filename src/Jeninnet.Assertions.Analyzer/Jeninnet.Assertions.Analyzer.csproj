@@ -6,6 +6,9 @@
         <!-- The assembly ships under analyzers/, never as a runtime library. -->
         <IncludeBuildOutput>false</IncludeBuildOutput>
         <DevelopmentDependency>true</DevelopmentDependency>
+        <!-- No lib/ output exists, so no PDB can be paired into a symbol package; the
+             generated .snupkg would contain no symbols and nuget.org rejects it (HTTP 400). -->
+        <IncludeSymbols>false</IncludeSymbols>
         <!-- Analyzer packages carry no Roslyn runtime dependencies; the host provides them. -->
         <NoWarn>$(NoWarn);NU5128</NoWarn>
         <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
