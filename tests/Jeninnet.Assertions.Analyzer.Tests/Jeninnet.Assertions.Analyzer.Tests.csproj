@@ -25,6 +25,7 @@
         <PackageReference Include="System.Composition.AttributedModel" />
         <PackageReference Include="MSTest.TestFramework" />
         <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+        <PackageReference Include="System.Text.Json" />
     </ItemGroup>
 
     <ItemGroup>
