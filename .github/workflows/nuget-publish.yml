@@ -148,16 +148,16 @@ jobs:
         with:
           user: ${{ vars.NUGET_USER }}
 
+      # Symbols ride along with this push: NuGet pairs each sibling .snupkg and only
+      # uploads it when the package upload itself succeeds. A separate
+      # `dotnet nuget push *.snupkg` step must NOT exist: on a re-run for an
+      # already-published version it would overwrite the published symbols with PDBs
+      # from a different build (different commit), and nuget.org rejects that with
+      # "The uploaded symbols package contains pdb(s) for a corresponding dll(s)
+      # not found in the nuget package." (NuGet/Home#10475).
       - name: Push packages to NuGet
         run: |
           dotnet nuget push "${{ env.PACKAGES_DIR }}/*.nupkg" \
-            --api-key ${{ steps.login.outputs.NUGET_API_KEY }} \
-            --source https://api.nuget.org/v3/index.json \
-            --skip-duplicate
-
-      - name: Push symbol packages to NuGet
-        run: |
-          dotnet nuget push "${{ env.PACKAGES_DIR }}/*.snupkg" \
             --api-key ${{ steps.login.outputs.NUGET_API_KEY }} \
             --source https://api.nuget.org/v3/index.json \
             --skip-duplicate
