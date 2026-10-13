@@ -12,26 +12,26 @@ public static class InvoiceRenderer {
     /// <param name="order">The order being invoiced; must not be <see langword="null"/>.</param>
     /// <param name="price">The computed price breakdown; must not be <see langword="null"/>.</param>
     /// <param name="trackingNumber">The shipping tracking number.</param>
-    /// <returns>The invoice text, one line per entry.</returns>
+    /// <returns>The invoice text, one line per entry, using <c>\n</c> line separators so snapshots are byte-identical on every machine.</returns>
     /// <exception cref="ArgumentNullException">An argument is <see langword="null"/>.</exception>
     public static string Render(Order order, PriceBreakdown price, string trackingNumber) {
         ArgumentNullException.ThrowIfNull(order);
         ArgumentNullException.ThrowIfNull(price);
 
         var builder = new StringBuilder();
-        builder.AppendLine("INVOICE");
-        builder.AppendLine(CultureInfo.InvariantCulture, $"Customer: {order.CustomerId}");
+        builder.Append("INVOICE\n");
+        builder.Append(CultureInfo.InvariantCulture, $"Customer: {order.CustomerId}\n");
 
         foreach(var line in order.Lines) {
-            builder.AppendLine(
+            builder.Append(
                 CultureInfo.InvariantCulture,
-                $"{line.Quantity} x {line.Sku} @ {line.UnitPrice:0.00} = {line.Quantity * line.UnitPrice:0.00}");
+                $"{line.Quantity} x {line.Sku} @ {line.UnitPrice:0.00} = {line.Quantity * line.UnitPrice:0.00}\n");
         }
 
-        builder.AppendLine(CultureInfo.InvariantCulture, $"Subtotal: {price.Subtotal:0.00}");
-        builder.AppendLine(CultureInfo.InvariantCulture, $"Discount: {price.Discount:0.00}");
-        builder.AppendLine(CultureInfo.InvariantCulture, $"Tax: {price.Tax:0.00}");
-        builder.AppendLine(CultureInfo.InvariantCulture, $"Total: {price.Total:0.00}");
+        builder.Append(CultureInfo.InvariantCulture, $"Subtotal: {price.Subtotal:0.00}\n");
+        builder.Append(CultureInfo.InvariantCulture, $"Discount: {price.Discount:0.00}\n");
+        builder.Append(CultureInfo.InvariantCulture, $"Tax: {price.Tax:0.00}\n");
+        builder.Append(CultureInfo.InvariantCulture, $"Total: {price.Total:0.00}\n");
         builder.Append(CultureInfo.InvariantCulture, $"Tracking: {trackingNumber}");
 
         return builder.ToString();
