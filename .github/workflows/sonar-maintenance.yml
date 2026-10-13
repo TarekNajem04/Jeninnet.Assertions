@@ -75,3 +75,6 @@ jobs:
           echo ""
           echo "== leak period: file-query =="
           curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/settings/values?component=jeninnet-file-query&keys=sonar.leak.period"
+          echo ""
+          echo "== leak period: organization default =="
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/settings/values?organization=jeninnet&keys=sonar.leak.period"
