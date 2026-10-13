@@ -1,0 +1,51 @@
+name: Sonar Maintenance
+
+on:
+  workflow_dispatch:
+    inputs:
+      action:
+        description: "Operation to run against the SonarCloud project"
+        required: true
+        default: "list"
+        type: choice
+        options:
+          - "list"
+          - "rename-main"
+          - "delete-branch"
+      branch:
+        description: "Branch name (delete-branch only)"
+        required: false
+        default: "main"
+
+permissions:
+  contents: read
+
+jobs:
+  maintenance:
+    name: SonarCloud maintenance
+    runs-on: ubuntu-latest
+
+    env:
+      SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+      PROJECT: jeninnet-assertions
+
+    steps:
+      - name: List branches
+        if: inputs.action == 'list'
+        run: |
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/project_branches/list?project=$PROJECT"
+
+      - name: Rename main branch
+        if: inputs.action == 'rename-main'
+        run: |
+          curl -sS -u "$SONAR_TOKEN:" -X POST "https://sonarcloud.io/api/project_branches/rename?project=$PROJECT&name=main"
+
+      - name: Delete branch
+        if: inputs.action == 'delete-branch'
+        run: |
+          curl -sS -u "$SONAR_TOKEN:" -X POST "https://sonarcloud.io/api/project_branches/delete?project=$PROJECT&branch=${{ inputs.branch }}"
+
+      - name: Final listing
+        if: always()
+        run: |
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/project_branches/list?project=$PROJECT" || true
