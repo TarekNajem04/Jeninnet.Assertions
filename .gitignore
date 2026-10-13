@@ -210,3 +210,6 @@ TestResults/
 
 # Documentation site output (built by docs-build.yml)
 docs/_site/
+
+# Generated API reference (produced by the docfx metadata step)
+docs/api/

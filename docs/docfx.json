@@ -1,22 +1,72 @@
 {
-  "build": {
-    "content": [
-      {
-        "files": [
-          "index.md",
-          "toc.yml",
-          "en/*.md",
-          "ar/*.md"
-        ],
-        "exclude": [
-          "_site/**"
-        ]
-      }
+    "$schema": "https://raw.githubusercontent.com/dotnet/docfx/main/schemas/docfx.schema.json",
+
+    "metadata": [
+        {
+            "src": [
+                {
+                    "src": "../src",
+                    "files": [
+                        "Jeninnet.Assertions/Jeninnet.Assertions.csproj",
+                        "Jeninnet.Assertions.MSTest/Jeninnet.Assertions.MSTest.csproj",
+                        "Jeninnet.Assertions.Analyzer/Jeninnet.Assertions.Analyzer.csproj"
+                    ]
+                }
+            ],
+            "dest": "api",
+            "includePrivateMembers": false,
+            "disableGitFeatures": false,
+            "disableDefaultFilter": false,
+            "noRestore": false,
+            "namespaceLayout": "nested",
+            "memberLayout": "separatePages",
+            "allowCompilationErrors": false
+        }
     ],
-    "dest": "_site",
-    "globalMetadata": {
-      "_appTitle": "Jeninnet.Assertions Documentation",
-      "_enableSearch": true
+
+    "build": {
+        "content": [
+            {
+                "files": [ "api/**.yml", "api/index.md" ]
+            },
+            {
+                "files": [
+                    "index.md",
+                    "toc.yml",
+                    "en/*.md",
+                    "ar/*.md"
+                ],
+                "exclude": [
+                    "_site/**"
+                ]
+            }
+        ],
+
+        "output": "_site",
+
+        "template": [ "default", "modern" ],
+
+        "globalMetadata": {
+            "_appName": "Jeninnet.Assertions",
+            "_appTitle": "Jeninnet.Assertions Documentation",
+            "_enableSearch": true,
+            "_disableContribution": false,
+            "_gitContribute": {
+                "repo": "https://github.com/TarekNajem04/Jeninnet.Assertions",
+                "branch": "main",
+                "apiSpecFolder": "docs/api"
+            },
+            "_gitUrlPattern": "github"
+        },
+
+        "sitemap": {
+            "baseUrl": "https://tareknajem04.github.io/Jeninnet.Assertions"
+        },
+
+        "xref": [
+            "https://learn.microsoft.com/en-us/dotnet/.xrefmap.json"
+        ],
+
+        "pdf": false
     }
-  }
 }

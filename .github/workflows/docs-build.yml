@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'src/**'
       - 'README.md'
       - 'scripts/docs/**'
       - '.github/workflows/docs-build.yml'
@@ -15,6 +16,7 @@ on:
       - main
     paths:
       - 'docs/**'
+      - 'src/**'
       - 'README.md'
       - 'scripts/docs/**'
       - '.github/workflows/docs-build.yml'
