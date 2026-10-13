@@ -1,0 +1,4 @@
+// Public API baseline for Jeninnet.Assertions.MSTest (net10.0).
+type Jeninnet.Assertions.MSTest.MSTestAssertions
+  method static System.Threading.Tasks.Task ThatAsync(System.Func<System.Threading.Tasks.Task>)
+  method static System.Void That(System.Action)

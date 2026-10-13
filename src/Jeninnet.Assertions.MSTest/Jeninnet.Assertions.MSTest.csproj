@@ -1,0 +1,39 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Label="Target frameworks">
+        <TargetFrameworks>net6.0;net8.0;net10.0</TargetFrameworks>
+        <!-- Clear the repo-wide single TargetFramework so cross-targeting dispatch runs. -->
+        <TargetFramework Condition="'$(TargetFrameworks)' != ''"></TargetFramework>
+        <!-- Multi-targeting requires per-framework output folders (overrides the single-TFM repo default). -->
+        <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <!-- Flows to consumers: the adapter is meaningless without the MSTest runtime. -->
+        <PackageReference Include="MSTest.TestFramework" />
+    </ItemGroup>
+
+    <PropertyGroup Label="Package info">
+        <IsPackable>true</IsPackable>
+        <Title>Jeninnet.Assertions.MSTest</Title>
+        <Description>Optional MSTest integration for Jeninnet.Assertions: surfaces fluent assertion failures as MSTest outcomes.</Description>
+        <Authors>Jeninnet</Authors>
+        <Company>Jeninnet</Company>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>test;assertions;mstest;testing;dotnet;jeninnet</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" Link="icon.png" />
+    </ItemGroup>
+
+</Project>

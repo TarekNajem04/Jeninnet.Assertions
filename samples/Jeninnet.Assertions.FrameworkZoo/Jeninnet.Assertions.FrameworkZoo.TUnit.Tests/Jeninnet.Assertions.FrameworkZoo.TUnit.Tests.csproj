@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsPackable>false</IsPackable>
+        <!--
+            TUnit is a Microsoft.Testing.Platform application. The repository's CI runs the
+            VSTest-based dotnet test experience, which cannot execute Microsoft.Testing.Platform
+            applications on .NET 10, so this project is intentionally kept out of the solution
+            and is run directly instead with 'dotnet run' on this project.
+        -->
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="TUnit" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <ProjectReference Include="..\Jeninnet.Assertions.FrameworkZoo.Core\Jeninnet.Assertions.FrameworkZoo.Core.csproj" />
+    </ItemGroup>
+
+</Project>

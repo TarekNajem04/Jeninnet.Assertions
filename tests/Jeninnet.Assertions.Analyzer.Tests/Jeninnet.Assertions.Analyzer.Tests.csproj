@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+        <!-- net9.0 (not the repo-default net10.0): the MSTest 4.3.3 runner needs a net9.0+ host, and Net90
+             reference assemblies then unify cleanly with the net9.0 MSTest and net8.0 library assets. -->
+        <TargetFramework>net9.0</TargetFramework>
+        <!-- NU1701: the analyzer test harness pulls Microsoft.Composition (netfx-only) for its MEF test host;
+             test-only restore shim, verified working by the passing harness tests below. -->
+        <NoWarn>$(NoWarn);NU1701</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="MSTest" />
+        <PackageReference Include="MSTest.TestAdapter" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Analyzer.Testing" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.CodeFix.Testing" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp.Workspaces" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" />
+        <!-- Aligns the composition attribute assembly with the version the analyzer was compiled
+             against: Roslyn Workspaces 5.9 pulls 10.0.1 transitively, which otherwise conflicts
+             with the analyzer's 10.0.12 reference (MSB3277). -->
+        <PackageReference Include="System.Composition.AttributedModel" />
+        <PackageReference Include="MSTest.TestFramework" />
+        <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions.Analyzer\Jeninnet.Assertions.Analyzer.csproj" />
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+    </ItemGroup>
+
+</Project>

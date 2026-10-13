@@ -1,0 +1,9 @@
+INVOICE
+Customer: C-42
+2 x WIDGET @ 60.00 = 120.00
+1 x GADGET @ 10.00 = 10.00
+Subtotal: 130.00
+Discount: 13.00
+Tax: 16.38
+Total: 133.38
+Tracking: TRACK-42

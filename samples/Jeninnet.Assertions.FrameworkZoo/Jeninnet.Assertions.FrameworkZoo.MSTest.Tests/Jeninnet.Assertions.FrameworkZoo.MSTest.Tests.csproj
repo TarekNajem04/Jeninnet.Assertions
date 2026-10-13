@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="MSTest" />
+        <PackageReference Include="MSTest.TestAdapter" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <ProjectReference Include="..\..\..\src\Jeninnet.Assertions.MSTest\Jeninnet.Assertions.MSTest.csproj" />
+        <ProjectReference Include="..\Jeninnet.Assertions.FrameworkZoo.Core\Jeninnet.Assertions.FrameworkZoo.Core.csproj" />
+    </ItemGroup>
+
+</Project>

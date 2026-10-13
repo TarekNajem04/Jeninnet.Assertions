@@ -1,0 +1,128 @@
+<Solution>
+    <Folder Name="/.github/">
+        <File Path=".github/CODEOWNERS" />
+        <File Path=".github/COMMUNITY_GUIDELINES.md" />
+        <File Path=".github/dependabot.yml" />
+        <File Path=".github/PULL_REQUEST_TEMPLATE.md" />
+        <File Path=".github/SECURITY.md" />
+        <File Path=".github/SUPPORT.md" />
+    </Folder>
+    <Folder Name="/.github/ISSUE_TEMPLATE/">
+        <File Path=".github/ISSUE_TEMPLATE/bug_report.yml" />
+        <File Path=".github/ISSUE_TEMPLATE/config.yml" />
+        <File Path=".github/ISSUE_TEMPLATE/feature_request.yml" />
+    </Folder>
+    <Folder Name="/.github/workflows/">
+        <File Path=".github/workflows/auto-approve-dependabot.yml" />
+        <File Path=".github/workflows/ci.yml" />
+        <File Path=".github/workflows/docs-build.yml" />
+        <File Path=".github/workflows/nuget-publish.yml" />
+        <File Path=".github/workflows/sonarcloud.yml" />
+    </Folder>
+    
+    <Folder Name="/consumers/">
+        <Project Path="consumers/Jeninnet.Assertions.Consumer/Jeninnet.Assertions.Consumer.csproj" />
+        <Project Path="consumers/Jeninnet.Assertions.Consumer.Tests/Jeninnet.Assertions.Consumer.Tests.csproj" />
+    </Folder>
+    <Folder Name="/scripts/" />
+    <Folder Name="/scripts/clean/">
+        <File Path="scripts/clean/clean.config.json" />
+        <File Path="scripts/clean/clean.ps1" />
+        <File Path="scripts/clean/clean.schema.json" />
+        <File Path="scripts/clean/README.md" />
+    </Folder>
+    <Folder Name="/scripts/common/">
+        <File Path="scripts/common/Common.psd1" />
+        <File Path="scripts/common/Common.psm1" />
+        <File Path="scripts/common/README.md" />
+    </Folder>
+    <Folder Name="/scripts/coverage/">
+        <File Path="scripts/coverage/coverage.config.json" />
+        <File Path="scripts/coverage/coverage.ps1" />
+        <File Path="scripts/coverage/coverage.schema.json" />
+        <File Path="scripts/coverage/README.md" />
+    </Folder>
+    <Folder Name="/scripts/format/">
+        <File Path="scripts/format/format.config.json" />
+        <File Path="scripts/format/format.ps1" />
+        <File Path="scripts/format/format.schema.json" />
+        <File Path="scripts/format/README.md" />
+    </Folder>
+    <Folder Name="/scripts/sonar/">
+        <File Path="scripts/sonar/preview.ps1" />
+        <File Path="scripts/sonar/README.md" />
+    </Folder>
+    
+    <Folder Name="/Solution Items/">
+        <File Path=".editorconfig" />
+        <File Path=".gitattributes" />
+        <File Path=".gitignore" />
+        <File Path="CHANGELOG.md" />
+        <File Path="CODE_OF_CONDUCT.md" />
+        <File Path="CONTRIBUTING.md" />
+        <File Path="Directory.Build.props" />
+        <File Path="Directory.Build.targets" />
+        <File Path="Directory.Packages.props" />
+        <File Path="LICENSE" />
+        <File Path="README.md" />
+        <File Path="ROADMAP.md" />
+    </Folder>
+    
+    <Folder Name="/doc/" />
+    
+    <Folder Name="/doc/en/">
+        <File Path="docs/en/00-index.md" />
+        <File Path="docs/en/01-first-steps.md" />
+        <File Path="docs/en/02-core-values.md" />
+        <File Path="docs/en/03-collections.md" />
+        <File Path="docs/en/04-time-and-identity.md" />
+        <File Path="docs/en/05-actions-async.md" />
+        <File Path="docs/en/06-equivalency-snapshots.md" />
+        <File Path="docs/en/07-reflection.md" />
+        <File Path="docs/en/08-io-formats-events.md" />
+        <File Path="docs/en/09-engine-room.md" />
+        <File Path="docs/en/10-ecosystem.md" />
+        <File Path="docs/en/10-migration.md" />
+        <File Path="docs/en/11-validators.md" />
+        <File Path="docs/en/12-snapshots.md" />
+    </Folder>
+    <Folder Name="/doc/ar/">
+        <File Path="docs/ar/00-index.md" />
+        <File Path="docs/ar/01-first-steps.md" />
+        <File Path="docs/ar/02-core-values.md" />
+        <File Path="docs/ar/03-collections.md" />
+        <File Path="docs/ar/04-time-and-identity.md" />
+        <File Path="docs/ar/05-actions-async.md" />
+        <File Path="docs/ar/06-equivalency-snapshots.md" />
+        <File Path="docs/ar/07-reflection.md" />
+        <File Path="docs/ar/08-io-formats-events.md" />
+        <File Path="docs/ar/09-engine-room.md" />
+        <File Path="docs/ar/10-ecosystem.md" />
+        <File Path="docs/ar/10-migration.md" />
+        <File Path="docs/ar/11-validators.md" />
+        <File Path="docs/ar/12-snapshots.md" />
+    </Folder>
+
+    <Folder Name="/src/">
+        <Project Path="src/Jeninnet.Assertions.Analyzer/Jeninnet.Assertions.Analyzer.csproj" />
+        <Project Path="src/Jeninnet.Assertions.MSTest/Jeninnet.Assertions.MSTest.csproj" />
+        <Project Path="src/Jeninnet.Assertions/Jeninnet.Assertions.csproj" />
+    </Folder>
+    
+    <Folder Name="/tests/">
+        <Project Path="tests/Jeninnet.Assertions.Analyzer.Tests/Jeninnet.Assertions.Analyzer.Tests.csproj" />
+        <Project Path="tests/Jeninnet.Assertions.MSTest.Tests/Jeninnet.Assertions.MSTest.Tests.csproj" />
+        <Project Path="tests/Jeninnet.Assertions.Tests/Jeninnet.Assertions.Tests.csproj" />
+    </Folder>
+
+    <Folder Name="/samples/">
+        <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Core/Jeninnet.Assertions.FrameworkZoo.Core.csproj" />
+        <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Expecto.Tests/Jeninnet.Assertions.FrameworkZoo.Expecto.Tests.fsproj" />
+        <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Fixie.Tests/Jeninnet.Assertions.FrameworkZoo.Fixie.Tests.csproj" />
+        <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.MSTest.Tests/Jeninnet.Assertions.FrameworkZoo.MSTest.Tests.csproj" />
+        <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.NUnit.Tests/Jeninnet.Assertions.FrameworkZoo.NUnit.Tests.csproj" />
+        <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Xunit.Tests/Jeninnet.Assertions.FrameworkZoo.Xunit.Tests.csproj" />
+        <Project Path="samples/Jeninnet.Assertions.Playground/Jeninnet.Assertions.Playground.csproj" />
+    </Folder>
+    
+</Solution>

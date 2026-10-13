@@ -1,0 +1,3 @@
+invoice: 42
+total: 84.00 USD
+lines: 2

@@ -1,0 +1,10 @@
+<!--Directory.Build.targets-->
+<Project>
+
+    <!-- Ensure the local package output folder exists before any pack -->
+    <Target Name="EnsureLocalPackagesDirectory"
+            BeforeTargets="Pack">
+        <MakeDir Directories="$(PackageOutputPath)" />
+    </Target>
+
+</Project>

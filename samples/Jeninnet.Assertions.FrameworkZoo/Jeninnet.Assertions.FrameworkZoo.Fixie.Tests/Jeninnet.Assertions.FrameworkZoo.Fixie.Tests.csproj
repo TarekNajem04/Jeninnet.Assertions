@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Fixie" />
+        <PackageReference Include="Fixie.TestAdapter" />
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <ProjectReference Include="..\Jeninnet.Assertions.FrameworkZoo.Core\Jeninnet.Assertions.FrameworkZoo.Core.csproj" />
+    </ItemGroup>
+
+</Project>

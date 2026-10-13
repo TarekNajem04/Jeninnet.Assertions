@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <IsPackable>false</IsPackable>
+        <IsTestProject>true</IsTestProject>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Microsoft.NET.Test.Sdk" />
+        <PackageReference Include="MSTest" />
+        <PackageReference Include="MSTest.TestAdapter" />
+        <PackageReference Include="coverlet.collector" PrivateAssets="all" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <!-- Build-only: makes the adapter assembly loadable for public-surface baseline validation. -->
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions.MSTest\Jeninnet.Assertions.MSTest.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="ApiBaselines\*.txt" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
+
+</Project>

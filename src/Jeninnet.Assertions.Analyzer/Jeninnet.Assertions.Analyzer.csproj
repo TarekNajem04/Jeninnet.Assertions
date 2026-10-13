@@ -1,0 +1,46 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Label="Analyzer packaging">
+        <!-- Analyzers target netstandard2.0 to load in every Roslyn host. -->
+        <TargetFramework>netstandard2.0</TargetFramework>
+        <!-- The assembly ships under analyzers/, never as a runtime library. -->
+        <IncludeBuildOutput>false</IncludeBuildOutput>
+        <DevelopmentDependency>true</DevelopmentDependency>
+        <!-- Analyzer packages carry no Roslyn runtime dependencies; the host provides them. -->
+        <NoWarn>$(NoWarn);NU5128</NoWarn>
+        <EnforceExtendedAnalyzerRules>true</EnforceExtendedAnalyzerRules>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <!-- Packs as a package dependency so fixed code always resolves Should(). -->
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <PackageReference Include="Microsoft.CodeAnalysis.CSharp" PrivateAssets="all" />
+        <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" PrivateAssets="all" />
+        <PackageReference Include="System.Collections.Immutable" PrivateAssets="all" />
+        <PackageReference Include="System.Composition.AttributedModel" PrivateAssets="all" />
+        <None Include="$(OutputPath)$(AssemblyName).dll" Pack="true" PackagePath="analyzers/dotnet/cs" Visible="false" />
+    </ItemGroup>
+
+    <PropertyGroup Label="Package info">
+        <IsPackable>true</IsPackable>
+        <Title>Jeninnet.Assertions.Analyzer</Title>
+        <Description>Roslyn analyzer suggesting fluent Should() assertions over MSTest Assert calls, with code fixes.</Description>
+        <Authors>Jeninnet</Authors>
+        <Company>Jeninnet</Company>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>test;assertions;roslyn;analyzer;codefix;dotnet;jeninnet</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" Link="icon.png" />
+    </ItemGroup>
+
+</Project>

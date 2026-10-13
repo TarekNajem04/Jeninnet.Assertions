@@ -1,0 +1,17 @@
+<Project>
+
+    <Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />
+
+    <!--
+        Shorten the artifacts output folder name only. With the full project names the generated
+        paths under artifacts/bin/<project>/debug/fine-code-coverage/... exceed the Windows
+        MAX_PATH limit, which breaks Visual Studio tooling that writes per-project files there:
+        the Fine Code Coverage extension fails to generate its runsettings, leaves a broken
+        RunSettingsFilePath behind in the project file, and the Visual Studio test runner then
+        refuses to start. Project names, namespaces, and solution entries stay unchanged.
+    -->
+    <PropertyGroup>
+        <ArtifactsProjectName>$(MSBuildProjectName.Replace('Jeninnet.Assertions.', ''))</ArtifactsProjectName>
+    </PropertyGroup>
+
+</Project>

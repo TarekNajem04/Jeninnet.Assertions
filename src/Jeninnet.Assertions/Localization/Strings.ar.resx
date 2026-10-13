@@ -1,0 +1,2045 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    to represent .NET resources.
+
+    The particular data format is defined as follows:
+
+    <xsd:schema> ... </xsd:schema>
+    <resheader name="resmimetype"> ... </resheader>
+    <resheader name="version"> ... </resheader>
+    <resheader name="reader"> ... </resheader>
+    <resheader name="writer"> ... </resheader>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, ..." />
+    <data name="myObject"> ... </data>
+    <data name="myString"> ... </data>
+    <data name="myBlob"> ... </data>
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>  <data name="BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون true، لكن وُجد false.</value>
+  </data>
+  <data name="BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون false، لكن وُجد true.</value>
+  </data>
+  <data name="BOOLEAN_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="BOOLEAN_IMPLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يستلزم {1}، لكن {2} لا يستلزم {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون true، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_TRUE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون true، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون false، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_FALSE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون false، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="NUMERIC_BE_POSITIVE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موجباً، لكن وُجد {1}.</value>
+  </data>
+  <data name="NUMERIC_BE_NEGATIVE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون سالباً، لكن وُجد {1}.</value>
+  </data>
+  <data name="NUMERIC_APPROXIMATE" xml:space="preserve">
+    <value>المتوقع من {0} أن يقارب {1} (±{2})، لكن وُجد {3}.</value>
+  </data>
+  <data name="NUMERIC_NOT_APPROXIMATE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يقارب {1} (±{2})، لكن وُجد {3}.</value>
+  </data>
+  <data name="NUMERIC_BE_NAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون NaN، لكن وُجد {1}.</value>
+  </data>
+  <data name="NUMERIC_NOT_BE_NAN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون NaN، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكبر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكبر من أو يساوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أصغر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أصغر من أو يساوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_BETWEEN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بين {1} و{2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بين {1} و{2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_ONE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أحد {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق '{1}'، لكنه لم يطابق.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="STRING_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_BE_ONE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أحد {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكنه لم يكن null.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="STRING_BE_EMPTY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكنه كان null.</value>
+  </data>
+  <data name="STRING_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكنه كان فارغاً.</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null أو مسافة بيضاء، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null أو مسافة بيضاء، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_HAVE_LENGTH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_HAVE_LENGTH" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله {1}، لكن وُجد {2} بطول {3}.</value>
+  </data>
+  <data name="STRING_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون طوله {1}، لكن وُجد {2} بطول {1}.</value>
+  </data>
+  <data name="STRING_BE_UPPER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بأحرف كبيرة، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_UPPER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بأحرف كبيرة، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_BE_LOWER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بأحرف صغيرة، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_LOWER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بأحرف صغيرة، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_CONTAIN_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_CONTAIN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_TIMES_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} {2}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_CONTAIN_TIMES" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_ALL_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي كل السلاسل المعطاة، لكنه كان null.</value>
+  </data>
+  <data name="STRING_CONTAIN_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1}، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_ALL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي كل السلاسل المعطاة، لكنها كلها وُجدت.</value>
+  </data>
+  <data name="STRING_CONTAIN_ANY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي واحداً على الأقل من {1}، {2}.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_ANY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي أياً من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي ما يكافئ {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي ما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_TIMES_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي ما يكافئ {1} {2}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_TIMES" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي ما يكافئ {1} {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي ما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_START_WITH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بـ {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_START_WITH" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_START_WITH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يبدأ بـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_START_WITH_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بما يكافئ {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_START_WITH_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_START_WITH_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يبدأ بما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_END_WITH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بـ {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_END_WITH" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_END_WITH" xml:space="preserve">
+    <value>المتوقع من {0} ألا ينتهي بـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_END_WITH_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بما يكافئ {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_END_WITH_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_END_WITH_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا ينتهي بما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق {1}، {2}.</value>
+  </data>
+  <data name="STRING_NOT_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يطابق {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_MATCH_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق ما يكافئ {1}، {2}.</value>
+  </data>
+  <data name="STRING_NOT_MATCH_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يطابق ما يكافئ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق التعبير النمطي {1}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق التعبير النمطي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_TIMES_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق التعبير النمطي {1} {2}، لكنه كان null.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_TIMES" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق التعبير النمطي {1} {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="STRING_NOT_MATCH_REGEX" xml:space="preserve">
+    <value>المتوقع من {0} ألا يطابق التعبير النمطي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_MORE_THAN_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أكثر من {1} من العناصر، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_MORE_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أكثر من {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_LEAST_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأقل {1} من العناصر، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_LEAST" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأقل {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_FEWER_THAN_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أقل من {1} من العناصر، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_FEWER_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أقل من {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_MOST_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأكثر {1} من العناصر، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_MOST" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأكثر {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون له نفس عدد المجموعة المتوقعة، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1} من العناصر.</value>
+  </data>
+  <data name="STRING_COLLECTION_ALL_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون كل عناصره '{1}'، لكن المجموعة null.</value>
+  </data>
+  <data name="STRING_COLLECTION_ALL_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون كل عناصره '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="STRING_COLLECTION_CONTAIN_MATCH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصرًا يطابق '{1}'، لكن المجموعة null.</value>
+  </data>
+  <data name="STRING_COLLECTION_CONTAIN_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصرًا يطابق '{1}'، لكن لم يُعثر على أي.</value>
+  </data>
+  <data name="STRING_COLLECTION_NOT_CONTAIN_MATCH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصرًا يطابق '{1}'، لكن المجموعة null.</value>
+  </data>
+  <data name="STRING_COLLECTION_NOT_CONTAIN_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصرًا يطابق '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1} من العناصر.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_PREDICATE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً يطابق الشرط، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_PREDICATE_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً يطابق الشرط، لكن لم يُعثر على أي عنصر.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ITEM_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}'، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ITEM_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ONLY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عناصر مطابقة فقط، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ONLY_OFFENDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عناصر مطابقة فقط، لكن وُجد '{1}'.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_SINGLE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً واحداً بالضبط، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_SINGLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً واحداً بالضبط، لكن وُجد {1}.</value>
+  </data>
+  <data name="COLLECTION_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكافئاً، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_START_WITH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بـ {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_END_WITH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بـ {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_IN_ORDER_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العناصر بالترتيب، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_IN_ORDER_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' بالترتيب، لكنه لم يُعثر عليه في التسلسل.</value>
+  </data>
+  <data name="ASYNC_ENUM_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون تدفقاً غير متزامن قائماً، لكنه كان null.</value>
+  </data>
+  <data name="ASYNC_ENUM_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1} من العناصر.</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكنه كان فارغاً.</value>
+  </data>
+  <data name="ASYNC_ENUM_HAVE_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي '{1}'، لكن وُجد عند الفهرس {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' بالترتيب، لكنه لم يُعثر عليه عند الفهرس {2} أو بعده.</value>
+  </data>
+  <data name="ASYNC_ENUM_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكافئ العناصر المتوقعة، لكن لا عنصر مكافئ لـ'{1}'.</value>
+  </data>
+  <data name="MATCH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مطابقة ناجحة، لكن المطابقة null.</value>
+  </data>
+  <data name="MATCH_SUCCEED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مطابقة ناجحة، لكنها فشلت.</value>
+  </data>
+  <data name="MATCH_HAVE_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="MATCH_HAVE_VALUE_FAILED" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق '{1}'، لكن المطابقة فشلت.</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المجموعة '{1}' بقيمة '{2}'، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المجموعة '{1}'، لكنها غير موجودة (المتاح: {2}).</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_FAILED" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المجموعة '{1}' بقيمة '{2}'، لكن المطابقة فشلت.</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من المجموعات، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_ASCENDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بترتيب تصاعدي، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_DESCENDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بترتيب تنازلي، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية من {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_INTERSECT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يتقاطع مع {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_INTERSECT_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يتقاطع مع {1}، لكن لم تُعثر على عناصر مشتركة.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكنه كان فارغاً.</value>
+  </data>
+  <data name="COLLECTION_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null أو فارغاً، لكن وُجد {1} من العناصر.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL_OR_EMPTY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null أو فارغاً، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null أو فارغاً، لكنه كان فارغاً.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_PREDICATE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصراً يطابق الشرط، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_PREDICATE_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصراً يطابق الشرط، لكن وُجد عنصر.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ITEM_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي '{1}'، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ITEM_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي '{1}'، لكنه وُجد.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_CHECK_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المجموعة الجزئية، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون له نفس العدد ({1}) مثل المجموعة المتوقعة، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_EQUIVALENT_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكافئاً بنفس الترتيب، لكن العنصر في الفهرس {1} كان '{2}' بدل '{3}'.</value>
+  </data>
+  <data name="COLLECTION_EQUIVALENT_CARDINALITY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكافئاً، لكن العنصر '{1}' وُجد {2} من المرات؛ والمتوقع {3}.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكن وُجد {2} من العناصر بدل {3}.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكن العنصر في الفهرس {2} كان '{3}' بدل '{4}'.</value>
+  </data>
+  <data name="COLLECTION_START_WITH_SHORT" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بـ {1}، لكن وُجد {2} من العناصر فقط.</value>
+  </data>
+  <data name="COLLECTION_START_WITH_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يبدأ بـ {1}، لكن العنصر في الفهرس {2} كان '{3}'.</value>
+  </data>
+  <data name="COLLECTION_END_WITH_SHORT" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بـ {1}، لكن وُجد {2} من العناصر فقط.</value>
+  </data>
+  <data name="COLLECTION_END_WITH_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن ينتهي بـ {1}، لكن العنصر في الفهرس {2} كان '{3}'.</value>
+  </data>
+  <data name="COLLECTION_ASCENDING_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بترتيب تصاعدي، لكن وُجد '{1}' بعد '{2}' في الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_DESCENDING_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بترتيب تنازلي، لكن وُجد '{1}' بعد '{2}' في الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_THEN_ASCENDING" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بعد ذلك بترتيب تصاعدي، لكن وُجد '{1}' بعد '{2}' في الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_THEN_DESCENDING" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بعد ذلك بترتيب تنازلي، لكن وُجد '{1}' بعد '{2}' في الفهرس {3}.</value>
+  </data>
+  <data name="DICT_ASCENDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بترتيب تصاعدي، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_DESCENDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بترتيب تنازلي، لكن القاموس null.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية من {1}، لكن وُجد '{2}' خارجها.</value>
+  </data>
+  <data name="COLLECTION_BE_SUPERSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة لـ{1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_BE_SUPERSET" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة لـ{1}، لكن '{2}' كان مفقودًا منها.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUBSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية فعلية من {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUBSET_SAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية فعلية من {1}، لكنهما يحتويان نفس العناصر.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUPERSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة فعلية لـ{1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUPERSET_SAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة فعلية لـ{1}، لكنهما يحتويان نفس العناصر.</value>
+  </data>
+  <data name="COLLECTION_HAVE_COUNT_PREDICATE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون عدده محققًا لـ'{1}'، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصرًا مكافئًا لـ{1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصرًا مكافئًا لـ{1}، لكن لم يُعثر على أي.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصرًا مكافئًا لـ{1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصرًا مكافئًا لـ{1}، لكن وُجد.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصر المجموعة الجزئية '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="COLLECTION_NOT_INTERSECT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يتقاطع مع {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_INTERSECT_SHARED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يتقاطع مع {1}، لكن وُجد العنصر المشترك '{2}'.</value>
+  </data>
+  <data name="COLLECTION_ONLY_UNIQUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عناصر فريدة فقط، لكن وُجد العنصر المكرر '{1}'.</value>
+  </data>
+  <data name="COLLECTION_ONLY_UNIQUE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عناصر فريدة فقط، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_NULLS_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عناصر null، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_NULLS_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عناصر null، لكن وُجد null عند الفهرس {1}.</value>
+  </data>
+  <data name="COLLECTION_CONSECUTIVE_ORDER_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} بترتيب متتابع، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONSECUTIVE_ORDER_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} بترتيب متتابع، لكن لم يُعثر على التسلسل.</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' عند الفهرس {2}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_SHORT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' عند الفهرس {2}، لكن وُجد {3} عنصر فقط.</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_MISMATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' عند الفهرس {2}، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="ACTION_THROW_WRONG" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1}، لكن رُمي {2}.</value>
+  </data>
+  <data name="ACTION_THROW_NONE" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1}، لكن لم يُرمَ أي استثناء.</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_NOT_HONORED" xml:space="preserve">
+    <value>المتوقع من {0} أن يحترم الإلغاء، لكنه اكتمل دون رمي OperationCanceledException.</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_WRONG_TOKEN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحترم الإلغاء، لكنه رمى OperationCanceledException برمز إلغاء مختلف.</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_WRONG_EXCEPTION" xml:space="preserve">
+    <value>المتوقع من {0} أن يحترم الإلغاء، لكنه رمى {1} بدل OperationCanceledException.</value>
+  </data>
+  <data name="ACTION_COMPLETE_DESPITE_CANCELLATION" xml:space="preserve">
+    <value>المتوقع من {0} أن يكتمل رغم الإلغاء، لكنه أُلغي.</value>
+  </data>
+  <data name="ACTION_COMPLETE_DESPITE_CANCELLATION_THREW" xml:space="preserve">
+    <value>المتوقع من {0} أن يكتمل رغم الإلغاء، لكنه رمى {1}.</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_FAILURES" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون آمناً للتزامن، لكن فشلت {1} من {2} نسخ:</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_ENTRY" xml:space="preserve">
+    <value>{0}. {1} (النسخ: {2}).</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_TIMEOUT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون آمناً للتزامن، لكن {1} من {2} نسخ لم تكتمل خلال {3} (جمود محتمل أو انتظار غير محدود).</value>
+  </data>
+  <data name="ACTION_THROW_EXACTLY_WRONG" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1} بالضبط، لكن رُمي {2}.</value>
+  </data>
+  <data name="ACTION_THROW_EXACTLY_NONE" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1} بالضبط، لكن لم يُرمَ أي استثناء.</value>
+  </data>
+  <data name="ACTION_NOT_THROW" xml:space="preserve">
+    <value>المتوقع من {0} ألا يرمي، لكن رُمي {1}.</value>
+  </data>
+  <data name="ACTION_NOT_THROW_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يرمي خلال {1}، لكن رُمي {2}.</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_NONE" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1} خلال {2}، لكن لم يُرمَ أي استثناء.</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_WRONG" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1} خلال {2}، لكن رُمي {3}.</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_TIMEOUT" xml:space="preserve">
+    <value>المتوقع من {0} أن يرمي {1} خلال {2}، لكنه لم يكتمل في الوقت المحدد.</value>
+  </data>
+  <data name="ACTION_SUCCEED_WITHIN" xml:space="preserve">
+    <value>المتوقع من {0} أن ينجح خلال {1}، لكنه ظل يفشل: {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_AT_MOST_THREW" xml:space="preserve">
+    <value>المتوقع من {0} أن يخصص {1} على الأكثر، لكنه رمى {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_AT_MOST" xml:space="preserve">
+    <value>المتوقع من {0} أن يخصص {1} على الأكثر، لكن خصص {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_LESS_THAN_THREW" xml:space="preserve">
+    <value>المتوقع من {0} أن يخصص أقل من {1}، لكنه رمى {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_LESS_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يخصص أقل من {1}، لكن خصص {2}.</value>
+  </data>
+  <data name="DATE_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_SAME_DATE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون في نفس تاريخ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_SAME_DATE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون في نفس تاريخ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قبل {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قبل {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_ON_OR_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون في {1} أو قبله، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بعد {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بعد {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_ON_OR_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون في {1} أو بعده، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_CLOSE_TO" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قريباً من {1} (±{2})، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_NOT_BE_CLOSE_TO" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قريباً من {1} (±{2})، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_HAVE_YEAR" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون سنته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_MONTH" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون شهره {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_DAY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون يومه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_HOUR" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون ساعته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_MINUTE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون دقيقته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_SECOND" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون ثانيته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_MILLISECOND" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون المللي ثانية {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="DATE_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="TIMESPAN_BE_POSITIVE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موجباً، لكن وُجد {1}.</value>
+  </data>
+  <data name="TIMESPAN_BE_NEGATIVE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون سالباً، لكن وُجد {1}.</value>
+  </data>
+  <data name="TIMESPAN_BE_GREATER_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكبر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكبر من أو يساوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_BE_LESS_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أصغر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أصغر من أو يساوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_DAYS" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون أيامه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_HOURS" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون ساعاته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_MINUTES" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون دقائقه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_SECONDS" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون ثوانيه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_MILLISECONDS" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون المللي ثانية {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_TICKS" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون تكاته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TYPE_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="TYPE_HAVE_METHOD" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الدالة '{1}'، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="TYPE_HAVE_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الخاصية '{1}'، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="TYPE_HAVE_CONSTRUCTOR" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المنشئ '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_METHOD" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الدالة '{1}'، لكنها وُجدت.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الخاصية '{1}'، لكنها وُجدت.</value>
+  </data>
+  <data name="TYPE_BE_SEALED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مختوماً، لكن {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_SEALED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مختوماً، لكنه كان.</value>
+  </data>
+  <data name="TYPE_BE_ABSTRACT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجرداً، لكن {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_ABSTRACT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مجرداً، لكنه كان.</value>
+  </data>
+  <data name="TYPE_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للإسناد إلى {1}، لكن {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للإسناد إلى {1}، لكنه كان.</value>
+  </data>
+  <data name="TYPE_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موسوماً بـ {1}، لكن {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون موسوماً بـ {1}، لكنه كان.</value>
+  </data>
+  <data name="TYPE_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موسوماً بـ {1} أو يرثه، لكن {2}.</value>
+  </data>
+  <data name="TYPE_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون معدل الوصول {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_SEALED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مختوماً، لكنه لم يكن.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_ABSTRACT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجرداً، لكنه لم يكن.</value>
+  </data>
+  <data name="METHOD_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون نوع إرجاعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="METHOD_HAVE_PARAMETER" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المعامل '{1}' من النوع {2}، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="METHOD_BE_VIRTUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون افتراضياً، لكن {1}.</value>
+  </data>
+  <data name="METHOD_BE_STATIC" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ساكناً، لكن {1}.</value>
+  </data>
+  <data name="METHOD_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موسوماً بـ {1}، لكن {2}.</value>
+  </data>
+  <data name="METHOD_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون معدل الوصول {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_READABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للقراءة، لكن {1}.</value>
+  </data>
+  <data name="PROPERTY_BE_WRITABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للكتابة، لكن {1}.</value>
+  </data>
+  <data name="PROPERTY_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون معدل الوصول {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASSEMBLY_DEFINE_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} أن يعرّف النوع '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="ASSEMBLY_NOT_DEFINE_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يعرّف النوع '{1}'، لكنه وُجد.</value>
+  </data>
+  <data name="ASSEMBLY_REFERENCE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يشير إلى التجميع '{1}'، لكن وُجد null.</value>
+  </data>
+  <data name="ASSEMBLY_REFERENCE_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يشير إلى التجميع '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="ASSEMBLY_NOT_REFERENCE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يشير إلى التجميع '{1}'، لكن وُجد null.</value>
+  </data>
+  <data name="ASSEMBLY_NOT_REFERENCE_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يشير إلى التجميع '{1}'، لكنه وُجد.</value>
+  </data>
+  <data name="CTOR_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكنه لم يكن null.</value>
+  </data>
+  <data name="CTOR_BE_PUBLIC" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون عاماً، لكن {1}.</value>
+  </data>
+  <data name="SELECTOR_HAVE_COUNT" xml:space="preserve">
+    <value>المتوقع من الأنواع المحددة أن تحتوي {0} من العناصر، لكن وُجد {1}.</value>
+  </data>
+  <data name="SELECTOR_HAVE_METHOD" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الدالة '{1}'، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="SELECTOR_HAVE_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الخاصية '{1}'، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="COMPARABLE_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_GREATER_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكبر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكبر من أو يساوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_LESS_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أصغر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أصغر من أو يساوي {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_BETWEEN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون بين {1} و{2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بين {1} و{2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="COMPARABLE_BE_ONE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أحد {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق '{1}'، لكنه لم يطابق.</value>
+  </data>
+  <data name="COMPARABLE_BE_RANKED_EQUALLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مساوياً في الترتيب لـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE_RANKED_EQUALLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مساوياً في الترتيب لـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1} من العناصر.</value>
+  </data>
+  <data name="DICT_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="DICT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_HAVE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1} من العناصر.</value>
+  </data>
+  <data name="DICT_NOT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكنه كان فارغاً.</value>
+  </data>
+  <data name="DICT_CONTAIN_KEY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المفتاح {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_CONTAIN_KEY_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المفتاح {1}، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="SUGGESTION_SINGLE" xml:space="preserve">
+    <value>هل تقصد '{0}'؟</value>
+  </data>
+  <data name="SUGGESTION_MULTIPLE" xml:space="preserve">
+    <value>هل تقصد أحد هذه الخيارات: {0}؟</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المفتاح {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المفتاح {1}، لكنه وُجد.</value>
+  </data>
+  <data name="DICT_CONTAIN_KEYS_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المفاتيح المعطاة، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEYS_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المفاتيح المعطاة، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_CONTAIN_VALUE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي القيمة {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_CONTAIN_VALUE_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي القيمة {1}، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="DICT_HAVE_VALUE_AT_KEY" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون قيمته {1} عند المفتاح {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="EQUIVALENCE_DETAIL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكافئاً، لكن {1}.</value>
+  </data>
+  <data name="OBJECT_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون '{1}'، لكن كان '{2}'.</value>
+  </data>
+  <data name="OBJECT_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="OBJECT_BE_ONE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون واحداً من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_BE_XML_SERIALIZABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للتسلسل عبر XML، لكن {1}.</value>
+  </data>
+  <data name="OBJECT_BE_JSON_SERIALIZABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للتسلسل عبر JSON، لكن {1}.</value>
+  </data>
+  <data name="OBJECT_BE_DATA_CONTRACT_SERIALIZABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للتسلسل عبر DataContract، لكن {1}.</value>
+  </data>
+  <data name="SPAN_BE_STRING" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_BE_SAME_INSTANCE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون نفس المثيل '{1}'، لكن وُجد مرجع مختلف.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_SAME_INSTANCE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون نفس المثيل '{1}'، لكنه كان.</value>
+  </data>
+  <data name="OBJECT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكنه لم يكن null.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="OBJECT_BE_OF_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون من النوع {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_OF_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون من النوع {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للإسناد إلى {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للإسناد إلى {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_AS" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للتحويل إلى {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق '{1}'، لكنه لم يطابق.</value>
+  </data>
+  <data name="OBJECT_SATISFY_ALL_CONDITIONS" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق جميع الشروط، لكن فشلت الشروط التالية:{1}</value>
+  </data>
+  <data name="STREAM_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكنه لم يكن null.</value>
+  </data>
+  <data name="STREAM_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="STREAM_BE_READABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للقراءة، لكن {1}.</value>
+  </data>
+  <data name="STREAM_NOT_BE_READABLE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للقراءة، لكنه كان.</value>
+  </data>
+  <data name="STREAM_BE_WRITABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للكتابة، لكن {1}.</value>
+  </data>
+  <data name="STREAM_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للكتابة، لكنه كان.</value>
+  </data>
+  <data name="STREAM_BE_SEEKABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للتموضع، لكن {1}.</value>
+  </data>
+  <data name="STREAM_NOT_BE_SEEKABLE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للتموضع، لكنه كان.</value>
+  </data>
+  <data name="STREAM_BE_READ_ONLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون للقراءة فقط، لكنه لم يكن.</value>
+  </data>
+  <data name="STREAM_NOT_BE_READ_ONLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون للقراءة فقط، لكنه كان.</value>
+  </data>
+  <data name="STREAM_BE_WRITE_ONLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون للكتابة فقط، لكنه لم يكن.</value>
+  </data>
+  <data name="STREAM_NOT_BE_WRITE_ONLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون للكتابة فقط، لكنه كان.</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله {1}، لكن وُجد null.</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH_UNSEEKABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله {1}، لكن الدفق لا يدعم التموضع.</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STREAM_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون طوله {1}، لكنه وُجد.</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موضعه {1}، لكن وُجد null.</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION_UNSEEKABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موضعه {1}، لكن الدفق لا يدعم التموضع.</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موضعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="STREAM_NOT_HAVE_POSITION" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون موضعه {1}، لكنه وُجد.</value>
+  </data>
+  <data name="ENUM_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_FLAG" xml:space="preserve">
+    <value>المتوقع من {0} أن يحمل الراية {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_FLAG" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحمل الراية {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_BE_DEFINED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قيمة {1} معرّفة، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_NOT_BE_DEFINED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قيمة {1} معرّفة، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_BE_ONE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون واحدًا من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون قيمته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون قيمته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_SAME_NAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يحمل نفس اسم {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_SAME_NAME" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحمل نفس اسم {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_SAME_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحمل نفس قيمة {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_SAME_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحمل نفس قيمة {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ENUM_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق '{1}'، لكنه لم يطابق.</value>
+  </data>
+  <data name="ENUM_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="ENUM_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="GUID_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="GUID_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="GUID_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1}.</value>
+  </data>
+  <data name="GUID_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكن وُجد {1}.</value>
+  </data>
+  <data name="GUID_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="GUID_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="JSON_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكافئاً، لكن وُجد {1} بدل {2}.</value>
+  </data>
+  <data name="JSON_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مكافئاً، لكن وُجد {1} بدل {2}.</value>
+  </data>
+  <data name="JSON_CONTAIN_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="JSON_HAVE_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون قيمته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="JSON_HAVE_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الخاصية '{1}'، لكن وُجد {2}.</value>
+  </data>
+  <data name="JSON_HAVE_PATH" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المسار '{1}'، لكن {2}.</value>
+  </data>
+  <data name="JSON_NOT_HAVE_PATH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المسار '{1}'، لكنه موجود.</value>
+  </data>
+  <data name="JSON_PATH_MISSING_PROPERTY" xml:space="preserve">
+    <value>الخاصية '{0}' غير موجودة تحت '{1}'</value>
+  </data>
+  <data name="JSON_PATH_AVAILABLE" xml:space="preserve">
+    <value>(المتاح: {0})</value>
+  </data>
+  <data name="JSON_PATH_INDEX_OUT_OF_RANGE" xml:space="preserve">
+    <value>الفهرس {0} خارج النطاق تحت '{1}' (عدد العناصر الحالي {2})</value>
+  </data>
+  <data name="JSON_PATH_IS_NULL" xml:space="preserve">
+    <value>'{0}' قيمته null</value>
+  </data>
+  <data name="JSON_PATH_NOT_OBJECT" xml:space="preserve">
+    <value>'{0}' ليس كائن JSON</value>
+  </data>
+  <data name="JSON_PATH_NOT_ARRAY" xml:space="preserve">
+    <value>'{0}' ليس مصفوفة JSON</value>
+  </data>
+  <data name="JSON_BE_STRING" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون سلسلة JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_STRING" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون سلسلة JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_NUMERIC" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون رقم JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_NUMERIC" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون رقم JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_BOOL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قيمة منطقية في JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_BOOL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قيمة منطقية في JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_ARRAY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مصفوفة JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_ARRAY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مصفوفة JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_UTC_DATE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون تاريخ UTC، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_UTC_DATE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون تاريخ UTC، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_LOCAL_DATE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون تاريخاً محلياً، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_LOCAL_DATE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون تاريخاً محلياً، لكن وُجد {1}.</value>
+  </data>
+  <data name="XML_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكنه لم يكن null.</value>
+  </data>
+  <data name="XML_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد null.</value>
+  </data>
+  <data name="XML_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="XML_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ELEMENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي العنصر '{1}'، لكنه وُجد.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_WITH_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' بالقيمة '{2}'، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ELEMENT_WITH_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي العنصر '{1}' بالقيمة '{2}'، لكنه وُجد.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_ONCE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' مرة واحدة بالضبط، لكن وُجد {2}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_LEAST_ONCE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' مرة واحدة على الأقل، لكن وُجد {2}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_LEAST" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' {2} من المرات على الأقل، لكن وُجد {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_MOST" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' {2} من المرات على الأكثر، لكن وُجد {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' {2} من المرات بالضبط، لكن وُجد {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_OCCURRENCE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_WITH_NAMESPACE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي العنصر '{1}' في مساحة الاسم '{2}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي السمة '{1}'، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي السمة '{1}'، لكنها وُجدت.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن تحتوي السمة '{1}' القيمة '{2}'، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_WITH_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن تحتوي السمة '{1}' القيمة '{2}'، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ATTRIBUTE_WITH_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} ألا تحتوي السمة '{1}' القيمة '{2}'، لكنها وُجدت.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_WITH_NAMESPACE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي السمة '{1}' في مساحة الاسم '{2}'، لكنه لم يُعثر عليها.</value>
+  </data>
+  <data name="XML_HAVE_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون قيمته '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="XML_HAVE_INNER_TEXT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون نصه الداخلي '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="XML_NOT_HAVE_INNER_TEXT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون نصه الداخلي '{1}'، لكنه وُجد.</value>
+  </data>
+  <data name="XML_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكافئاً، لكن وُجد {1} بدل {2}.</value>
+  </data>
+  <data name="XML_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مكافئاً، لكن وُجد {1} بدل {2}.</value>
+  </data>
+  <data name="XML_HAVE_ROOT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الجذر '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="TIME_BE_LESS_THAN" xml:space="preserve">
+    <value>المتوقع من زمن التنفيذ أن يكون أقل من {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="TIME_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من زمن التنفيذ أن يكون أقل من أو يساوي {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="TIME_BE_GREATER_THAN" xml:space="preserve">
+    <value>المتوقع من زمن التنفيذ أن يكون أكبر من {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="TIME_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع من زمن التنفيذ أن يكون أكبر من أو يساوي {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="TIME_BE_CLOSE_TO" xml:space="preserve">
+    <value>المتوقع من زمن التنفيذ أن يكون قريباً من {0} (±{1})، لكن وُجد {2}.</value>
+  </data>
+  <data name="EXCEPTION_MESSAGE_MATCH" xml:space="preserve">
+    <value>المتوقع من رسالة الاستثناء أن تطابق {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="EXCEPTION_MESSAGE_NOT_MATCH" xml:space="preserve">
+    <value>المتوقع من رسالة الاستثناء ألا تطابق {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="EXCEPTION_INNER_BE" xml:space="preserve">
+    <value>المتوقع من الاستثناء الداخلي أن يكون {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="EXCEPTION_INNER_BE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من الاستثناء الداخلي أن يكون {0} بالضبط، لكن وُجد {1}.</value>
+  </data>
+  <data name="EXCEPTION_MATCH" xml:space="preserve">
+    <value>المتوقع من الاستثناء أن يطابق '{0}'، لكنه لم يطابق.</value>
+  </data>
+  <data name="EXCEPTION_PARAM_NAME" xml:space="preserve">
+    <value>المتوقع من اسم معامل الاستثناء أن يكون {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="TASK_COMPLETE_WITHIN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكتمل خلال {1}، لكنه لم يكتمل.</value>
+  </data>
+  <data name="TASK_COMPLETE_SUCCESSFULLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكتمل بنجاح خلال {1}، لكن رُمي {2}.</value>
+  </data>
+  <data name="TASK_NOT_COMPLETE_WITHIN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكتمل خلال {1}، لكنه اكتمل.</value>
+  </data>
+  <data name="TASK_WITH_RESULT" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون نتيجته {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TASK_WITH_RESULT_NOT_COMPLETED" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون له نتيجة مكتملة، لكنه لم يكتمل.</value>
+  </data>
+  <data name="EVENT_RAISE" xml:space="preserve">
+    <value>المتوقع من {0} أن يثير الحدث '{1}'، لكنه لم يُثر.</value>
+  </data>
+  <data name="EVENT_NOT_RAISE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يثير الحدث '{1}'، لكنه أُثير {2} من المرات.</value>
+  </data>
+  <data name="EVENT_WITH_SENDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مُرسِله {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="EVENT_WITH_ARGS_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} من الوسائط، لكن وُجد {2}.</value>
+  </data>
+  <data name="EVENT_WITH_ARGS" xml:space="preserve">
+    <value>المتوقع من وسيط {0} عند الفهرس {1} أن يحقق المسند، لكن وُجد {2}.</value>
+  </data>
+  <data name="EVENT_PROPERTY_CHANGE" xml:space="preserve">
+    <value>المتوقع من {0} أن يثير تغيير الخاصية '{1}'، لكنه لم يُثر.</value>
+  </data>
+  <data name="EVENT_NOT_PROPERTY_CHANGE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يثير تغيير الخاصية '{1}'، لكنه أُثير {2} من المرات.</value>
+  </data>
+  <data name="BUFFERED_HAVE_SIZE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون حجم المخزن المؤقت {1}، لكن وُجد null.</value>
+  </data>
+  <data name="BUFFERED_HAVE_SIZE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون حجم المخزن المؤقت {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="BUFFERED_NOT_HAVE_SIZE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون حجم المخزن المؤقت {1}، لكنه وُجد.</value>
+  </data>
+  <data name="MESSAGE_BECAUSE" xml:space="preserve">
+    <value>لأن </value>
+  </data>
+  <data name="SCOPE_ASSERTION_FAILURES" xml:space="preserve">
+    <value>{0} من إخفاقات التأكيد:</value>
+  </data>
+  <data name="ACTION_EVENTUALLY_SATISFY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق الشرط خلال {1}، لكن القيمة الأخيرة كانت {2}.</value>
+  </data>
+  <data name="ACTION_EVENTUALLY_SATISFY_ERROR" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق الشرط خلال {1}، لكن القيمة الأخيرة كانت {2} (آخر خطأ: {3}).</value>
+  </data>
+  <data name="SNAPSHOT_MISSING_BASELINE" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق اللقطة '{1}'، لكن لا توجد لقطة معتمدة. راجع '{2}' وأعد تسميته إلى '{3}' لقبوله.</value>
+  </data>
+  <data name="SNAPSHOT_MISMATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يطابق اللقطة '{1}'، لكن المحتوى مختلف. راجع '{2}'.</value>
+  </data>
+  <data name="SNAPSHOT_RECEIVED_PREVIEW" xml:space="preserve">
+    <value>المحتوى المستلم:&#xA;{0}</value>
+  </data>
+  <data name="HTTP_HAVE_STATUS_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون رمز الحالة {1}، لكن الاستجابة null.</value>
+  </data>
+  <data name="HTTP_HAVE_STATUS" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون رمز الحالة {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="HTTP_BE_SUCCESSFUL_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ناجحاً، لكن الاستجابة null.</value>
+  </data>
+  <data name="HTTP_BE_SUCCESSFUL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ناجحاً، لكن وُجد {1}.</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الترويسة '{1}'، لكن الاستجابة null.</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الترويسة '{1}'، لكن لم يُعثر عليها.</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الترويسة '{1}' بالقيمة '{2}'، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null أو فارغاً، لكن وُجد {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null أو فارغاً، لكنه كان كذلك.</value>
+  </data>
+  <data name="STRING_CONTAIN_LINE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي السطر {1}، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_LINE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي السطر {1}، لكن وُجد.</value>
+  </data>
+  <data name="STRING_HAVE_LINE_COUNT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} سطراً، لكن وُجد null.</value>
+  </data>
+  <data name="STRING_HAVE_LINE_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} سطراً، لكن وُجد {2}.</value>
+  </data>
+  <data name="STRING_NOT_HAVE_LINE_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} سطراً، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} عنصراً، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} عنصراً، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي نفس عدد {1} عنصراً، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي نفس عدد {1} عنصراً، لكن وُجد {2}.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي {1}، لكنهما متساويان.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي {1}، لكن وُجد {2} عنصراً بدلاً من {3}.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي {1}، لكن وُجد {2} في الفهرس {3} بدلاً من {4}.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكافئ {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكافئ {1}، لكن وُجدت اختلافات.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_SUBSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مجموعة جزئية من {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مجموعة جزئية من {1}، لكن وُجد {2} في المجموعة الشاملة.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_IN_ORDER_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} بالترتيب، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_IN_ORDER_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} بالترتيب، لكن وُجد.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONSECUTIVE_ORDER_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} بالترتيب المتتالي، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONSECUTIVE_ORDER_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} بالترتيب المتتالي، لكن وُجد.</value>
+  </data>
+  <data name="COLLECTION_NOT_ASCENDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بترتيب تصاعدي، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_ASCENDING_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بترتيب تصاعدي، لكن وُجد {1} بعد {2} في الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_NOT_DESCENDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بترتيب تنازلي، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_DESCENDING_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون بترتيب تنازلي، لكن وُجد {1} بعد {2} في الفهرس {3}.</value>
+  </data>
+  <data name="DICT_NOT_EQUAL_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_EQUAL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي {1}، لكن وُجدت اختلافات.</value>
+  </data>
+  <data name="DICT_EQUAL_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_EQUAL_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكنه يحتوي {2} من العناصر بدل {3}.</value>
+  </data>
+  <data name="DICT_EQUAL_MISSING_KEY" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكن المفتاح '{2}' لم يُعثر عليه.</value>
+  </data>
+  <data name="DICT_EQUAL_WRONG_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي {1}، لكن المفتاح '{2}' كان '{3}' بدل '{4}'.</value>
+  </data>
+  <data name="DICT_BE_SUBSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية من {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_BE_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية من {1}، لكن وُجد '{2}' خارجها.</value>
+  </data>
+  <data name="DICT_BE_SUPERSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة لـ{1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_BE_SUPERSET" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة لـ{1}، لكن '{2}' كان مفقودًا منها.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUBSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية فعلية من {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUBSET_SAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة جزئية فعلية من {1}، لكنهما يحتويان نفس العناصر.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUPERSET_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة فعلية لـ{1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUPERSET_SAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجموعة شاملة فعلية لـ{1}، لكنهما يحتويان نفس العناصر.</value>
+  </data>
+  <data name="DICT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون له نفس العدد ({1}) مثل المجموعة المتوقعة، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المفتاح {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المفتاح {1}، لكن وُجد.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIR_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الزوج {1}، لكن وُجد.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIRS_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الأزواج {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIRS_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الأزواج {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_PAIR" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي المفتاح {1} بالقيمة {2}، لكن وُجد.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي القيمة {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUE_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي القيمة {1}، لكن وُجدت.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUES_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي القيم {1}، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUES_FOUND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي القيم {1}، لكن وُجدت.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} عنصراً، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي {1} عنصراً، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي نفس عدد {1} عنصراً، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي نفس عدد {1} عنصراً، لكن وُجد {2}.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكافئ {1}، لكن الكائن null.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكافئ {1}، لكن وُجدت اختلافات.</value>
+  </data>
+  <data name="VALUE_THAT_MATCHES" xml:space="preserve">
+    <value>المتوقع من القيمة أن تطابق {0}، لكن وُجد {1}.</value>
+  </data>
+  <data name="VALUE_THAT_SATISFIES" xml:space="preserve">
+    <value>المتوقع من القيمة أن تحقق الفحص المعطى، لكن رُمي {0}: {1}.</value>
+  </data>
+  <data name="JSON_NOT_HAVE_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الخاصية {1}، لكن وُجدت.</value>
+  </data>
+  <data name="DATE_NOT_BE_ON_OR_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون في {1} أو بعده، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_ON_OR_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون في {1} أو قبله، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_YEAR" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون سنته {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MONTH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون شهره {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_DAY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون يومه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_HOUR" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون ساعته {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MINUTE" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون دقيقته {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_SECOND" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون ثانيته {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MILLISECOND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون جزؤه من الثانية {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_ONE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون واحداً من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_IN_KIND" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون نوعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_IN_KIND" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون نوعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_HAVE_OFFSET" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون إزاحته {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_OFFSET" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون إزاحته {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مطابقاً تماماً لـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_EXACTLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مطابقاً تماماً لـ {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_WITHIN_NOW" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ضمن {1} من اللحظة الحالية، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_NOW" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أقل من {1} من اللحظة الحالية، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_NOW" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكثر من {1} من اللحظة الحالية، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_NOW" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1} على الأقل من اللحظة الحالية، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_NOW" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1} بالضبط من اللحظة الحالية، لكن وُجد {2}.</value>
+  </data>
+  <data name="DATE_BE_WITHIN_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ضمن {1} قبل {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_WITHIN_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ضمن {1} بعد {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أقل من {1} قبل {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أقل من {1} بعد {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكثر من {1} قبل {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أكثر من {1} بعد {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1} على الأقل قبل {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1} على الأقل بعد {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_BEFORE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1} بالضبط قبل {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_AFTER" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1} بالضبط بعد {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق {1} من الفاحصين بالترتيب، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق {1} من الفاحصين بالترتيب، لكن وُجد {2} من العناصر.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_FAILURES" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق {1} من الفاحصين بالترتيب، لكن {2} من الفحوصات فشلت:</value>
+  </data>
+  <data name="COLLECTION_ALL_SATISFY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق الفاحص لجميع العناصر، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_ALL_SATISFY_FAILURES" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق الفاحص لجميع {1} من العناصر، لكن {2} منها فشلت:</value>
+  </data>
+  <data name="COLLECTION_SATISFY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق {1} من الشروط، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_UNMATCHED" xml:space="preserve">
+    <value>المتوقع من {0} أن يحقق {1} من الشروط، لكن {2} لم يطابق أي عنصر:</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_OF_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون جميع العناصر من النوع {1}، لكن وُجد '{2}' عند الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_OF_TYPE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون جميع العناصر من النوع {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون جميع العناصر قابلة للإسناد إلى {1}، لكن وُجد '{2}' عند الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_ASSIGNABLE_TO_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون جميع العناصر قابلة للإسناد إلى {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_EQUIVALENT" xml:space="preserve">
+    <value>المتوقع من {0} أن تكافئ جميع العناصر '{1}'، لكن وُجد '{2}' عند الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن تكافئ جميع العناصر '{1}'، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ASSIGNABLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً قابلاً للإسناد إلى {1}، لكن لم يُعثر على شيء.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ASSIGNABLE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً قابلاً للإسناد إلى {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ASSIGNABLE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصراً قابلاً للإسناد إلى {1}، لكن وُجد '{2}' عند الفهرس {3}.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ASSIGNABLE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عنصراً قابلاً للإسناد إلى {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_PRECEDING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' قبل '{2}' مباشرة، لكن لم يُعثر على هذا الزوج.</value>
+  </data>
+  <data name="COLLECTION_HAVE_PRECEDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' قبل '{2}' مباشرة، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SUCCEEDING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' بعد '{2}' مباشرة، لكن لم يُعثر على هذا الزوج.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SUCCEEDING_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي '{1}' بعد '{2}' مباشرة، لكن المجموعة null.</value>
+  </data>
+  <data name="TYPE_IMPLEMENT" xml:space="preserve">
+    <value>المتوقع من {0} أن ينفّذ {1}، لكن {2}.</value>
+  </data>
+  <data name="TYPE_NOT_IMPLEMENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا ينفّذ {1}، لكنه ينفّذه.</value>
+  </data>
+  <data name="TYPE_BE_DERIVED_FROM" xml:space="preserve">
+    <value>المتوقع من {0} أن يشتق من {1}، لكن {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DERIVED_FROM" xml:space="preserve">
+    <value>المتوقع من {0} ألا يشتق من {1}، لكنه يشتق منه.</value>
+  </data>
+  <data name="TYPE_BE_STATIC" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ثابتاً، لكن {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_STATIC" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون ثابتاً، لكنه كان كذلك.</value>
+  </data>
+  <data name="TYPE_HAVE_DEFAULT_CONSTRUCTOR" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي بانِياً افتراضياً، لكن {1}.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_DEFAULT_CONSTRUCTOR" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي بانِياً افتراضياً، لكنه يحتويه.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_CONSTRUCTOR" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الباني ({1})، لكن وُجد.</value>
+  </data>
+  <data name="TYPE_HAVE_INDEXER" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي مفهرساً من النوع {1} بالمعاملات ({2})، لكن لم يُعثر عليه.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_INDEXER" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي مفهرساً بالمعاملات ({1})، لكن وُجد.</value>
+  </data>
+  <data name="TYPE_HAVE_IMPLICIT_CONVERSION" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عامل تحويل ضمني لـ {1}، لكن لم يُعثر عليه.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_IMPLICIT_CONVERSION" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عامل تحويل ضمني لـ {1}، لكن وُجد.</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_CONVERSION" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عامل تحويل صريح لـ {1}، لكن لم يُعثر عليه.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_CONVERSION" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي عامل تحويل صريح لـ {1}، لكن وُجد.</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_METHOD" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي التابع الصريح '{1}'، لكن لم يُعثر عليه.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_METHOD" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي التابع الصريح '{1}'، لكن وُجد.</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الخاصية الصريحة '{1}'، لكن لم يُعثر عليها.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_PROPERTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي الخاصية الصريحة '{1}'، لكن وُجدت.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مزيّناً بـ {1} أو يرثه، لكن وُجد.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>المتوقع من {0} ألا تكون إمكانية وصوله {1}، لكن وُجدت {2}.</value>
+  </data>
+  <data name="TYPE_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="METHOD_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون افتراضياً، لكن {1}.</value>
+  </data>
+  <data name="METHOD_NOT_BE_STATIC" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون ساكناً، لكن {1}.</value>
+  </data>
+  <data name="METHOD_BE_ASYNC" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون غير متزامن، لكن {1}.</value>
+  </data>
+  <data name="METHOD_NOT_BE_ASYNC" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون غير متزامن، لكن {1}.</value>
+  </data>
+  <data name="METHOD_NOT_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون نوع إرجاعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="METHOD_RETURN_VOID" xml:space="preserve">
+    <value>المتوقع من {0} أن يُرجع void، لكن وُجد {1}.</value>
+  </data>
+  <data name="METHOD_NOT_RETURN_VOID" xml:space="preserve">
+    <value>المتوقع من {0} ألا يُرجع void، لكن وُجد {1}.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_READABLE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للقراءة، لكن {1}.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون قابلاً للكتابة، لكن {1}.</value>
+  </data>
+  <data name="PROPERTY_BE_VIRTUAL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون افتراضياً، لكن {1}.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون افتراضياً، لكن {1}.</value>
+  </data>
+  <data name="PROPERTY_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون نوع إرجاعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PROPERTY_NOT_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون نوع إرجاعه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_READABLE_ACCESS" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للقراءة بوصول {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_WRITABLE_ACCESS" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للكتابة بوصول {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASSEMBLY_BE_UNSIGNED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون غير موقّع، لكنه كان موقّعاً.</value>
+  </data>
+  <data name="ASSEMBLY_BE_UNSIGNED_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون غير موقّع، لكن وُجد null.</value>
+  </data>
+  <data name="ASSEMBLY_BE_SIGNED_WITH_KEY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موقّعاً بالمفتاح '{1}'، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASSEMBLY_BE_SIGNED_WITH_KEY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موقّعاً بالمفتاح '{1}'، لكن وُجد null.</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_SEALED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مختوماً، لكنه كان كذلك.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مزيّناً بـ {1}، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مزيّناً بـ {1}، لكنه كان كذلك.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مزيّناً بـ {1} أو يرثه، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مزيّناً بـ {1} أو يرثه، لكنه كان كذلك.</value>
+  </data>
+  <data name="SELECTOR_BE_IN_NAMESPACE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون في النطاق '{1}'، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="SELECTOR_NOT_BE_IN_NAMESPACE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون في النطاق '{1}'، لكنه كان كذلك.</value>
+  </data>
+  <data name="SELECTOR_BE_UNDER_NAMESPACE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون تحت النطاق '{1}'، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="SELECTOR_NOT_BE_UNDER_NAMESPACE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون تحت النطاق '{1}'، لكنه كان كذلك.</value>
+  </data>
+  <data name="MEMBER_HAVE_COUNT" xml:space="preserve">
+    <value>المتوقع من الأعضاء المحددة أن تحتوي {0} من العناصر، لكن وُجد {1}.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون مزيّناً بـ {1}، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' ألا يكون مزيّناً بـ {1}، لكنه كان كذلك.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون مزيّناً بـ {1} أو يرثه، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="MEMBER_RETURN" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يُرجع {1}، لكنه يُرجع {2}.</value>
+  </data>
+  <data name="MEMBER_RETURN_VOID" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' ألا يُرجع قيمة، لكنه يُرجع {1}.</value>
+  </data>
+  <data name="MEMBER_BE_ASYNC" xml:space="preserve">
+    <value>المتوقع من الدالة '{0}' أن تكون async، لكنها لم تكن كذلك.</value>
+  </data>
+  <data name="MEMBER_BE_VIRTUAL" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون virtual، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="MEMBER_BE_STATIC" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون static، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="MEMBER_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون معدّل الوصول {1}، لكنه {2}.</value>
+  </data>
+  <data name="MEMBER_HAVE_DECLARING_TYPE" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون معلناً في {1}، لكنه معلن في {2}.</value>
+  </data>
+  <data name="MEMBER_BE_READ_ONLY" xml:space="preserve">
+    <value>المتوقع من الخاصية '{0}' أن تكون للقراءة فقط، لكنها لم تكن كذلك.</value>
+  </data>
+  <data name="MEMBER_BE_WRITE_ONLY" xml:space="preserve">
+    <value>المتوقع من الخاصية '{0}' أن تكون للكتابة فقط، لكنها لم تكن كذلك.</value>
+  </data>
+  <data name="MEMBER_BE_WRITABLE" xml:space="preserve">
+    <value>المتوقع من الخاصية '{0}' أن تكون قابلة للكتابة، لكنها لم تكن كذلك.</value>
+  </data>
+  <data name="MEMBER_HAVE_GETTER" xml:space="preserve">
+    <value>المتوقع من الخاصية '{0}' أن تحتوي getter، لكنها لا تحتوي.</value>
+  </data>
+  <data name="MEMBER_HAVE_SETTER" xml:space="preserve">
+    <value>المتوقع من الخاصية '{0}' أن تحتوي setter، لكنها لا تحتوي.</value>
+  </data>
+  <data name="MEMBER_NOT_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' ألا يكون معدّل الوصول {1}، لكنه كذلك.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' أن يكون مزيّناً بـ {1} مطابقاً للشرط، لكنه لم يكن كذلك.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' ألا يكون مزيّناً بـ {1} مطابقاً للشرط، لكنه كان كذلك.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_ASYNC" xml:space="preserve">
+    <value>المتوقع من الدالة '{0}' ألا تكون async، لكنها كانت كذلك.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>المتوقع من العضو '{0}' ألا يكون virtual، لكنه كان كذلك.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>المتوقع من الخاصية '{0}' ألا تكون قابلة للكتابة، لكنها كانت كذلك.</value>
+  </data>
+</root>

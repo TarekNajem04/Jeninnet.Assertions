@@ -1,0 +1,63 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup Label="Target frameworks">
+        <TargetFrameworks>netstandard2.0;net6.0;net8.0;net10.0</TargetFrameworks>
+        <!-- Clear the repo-wide single TargetFramework so cross-targeting dispatch runs. -->
+        <TargetFramework Condition="'$(TargetFrameworks)' != ''"></TargetFramework>
+        <!-- Multi-targeting requires per-framework output folders (overrides the single-TFM repo default). -->
+        <AppendTargetFrameworkToOutputPath>true</AppendTargetFrameworkToOutputPath>
+        <!-- NU1510: System.Text.Json / System.Xml.XDocument are referenced for netstandard2.0 only.
+             Newer TFMs resolve them from the shared framework and NuGet prunes the references;
+             that pruning warning is expected and therefore suppressed here. -->
+        <!-- CA1510: explicit null checks are used instead of ArgumentNullException.ThrowIfNull,
+             which is unavailable on .NET Standard 2.0. -->
+        <!-- CA1512: explicit range checks are used instead of ArgumentOutOfRangeException.ThrowIf*,
+             which is unavailable on .NET Standard 2.0 / .NET 6. -->
+        <!-- CA2249: IndexOf comparisons are used instead of string.Contains overloads,
+             which are unavailable on .NET Standard 2.0. -->
+        <!-- CA2250: CancellationToken.IsCancellationRequested is checked explicitly instead of
+             ThrowIfCancellationRequested, which is unavailable on .NET Standard 2.0. -->
+        <NoWarn>$(NoWarn);NU1510;CA1510;CA1512;CA2249;CA2250</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+        <Compile Remove="DateOnlyAssertions.cs;NullableDateOnlyAssertions.cs;TimeOnlyAssertions.cs;NullableTimeOnlyAssertions.cs" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <!-- System.Text.Json 8 provides JsonNode.DeepEquals/GetValueKind, missing from the .NET 6 inbox version. -->
+        <PackageReference Include="System.Text.Json" Condition="'$(TargetFramework)' == 'netstandard2.0' or '$(TargetFramework)' == 'net6.0'" />
+        <PackageReference Include="System.Xml.XDocument" Condition="'$(TargetFramework)' == 'netstandard2.0'" />
+    </ItemGroup>
+
+    <PropertyGroup>
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <Deterministic>true</Deterministic>
+        <ContinuousIntegrationBuild>true</ContinuousIntegrationBuild>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+    </PropertyGroup>
+
+    <PropertyGroup Label="Package info">
+        <IsPackable>true</IsPackable>
+        <Title>Jeninnet.Assertions</Title>
+        <Description>A fluent, framework-agnostic assertion library for .NET tests, providing expressive validation for objects, strings, collections, async operations, and IO infrastructure.</Description>
+        <Authors>Jeninnet</Authors>
+        <Company>Jeninnet</Company>
+        <PackageProjectUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</PackageProjectUrl>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PackageTags>test;assertions;fluent;testing;dotnet;jeninnet;tdd</PackageTags>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PackageReadmeFile>README.md</PackageReadmeFile>
+        <PackageIcon>icon.png</PackageIcon>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="README.md" Pack="true" PackagePath="\" />
+        <None Include="..\..\assets\icon.png" Pack="true" PackagePath="\" Link="icon.png" />
+    </ItemGroup>
+
+</Project>

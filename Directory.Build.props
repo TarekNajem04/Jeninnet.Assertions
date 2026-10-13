@@ -1,0 +1,99 @@
+<Project>
+
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <LangVersion>14.0</LangVersion>
+
+        <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <Nullable>enable</Nullable>
+
+        <!--
+            https://www.tabsoverspaces.com/233608-stopping-msbuild-appending-targetframework-to-outputpath
+            Stopping MSBuild appending TargetFramework to OutputPath
+        -->
+        <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+        <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+
+        <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
+
+        <GenerateDocumentationFile>true</GenerateDocumentationFile>
+        <DocumentationFile>$(MSBuildProjectName).xml</DocumentationFile>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="SonarAnalyzer.CSharp">
+            <PrivateAssets>all</PrivateAssets>
+            <IncludeAssets>analyzers</IncludeAssets>
+        </PackageReference>
+    </ItemGroup>
+
+    <PropertyGroup>
+        <EnableNETAnalyzers>true</EnableNETAnalyzers>
+        <AnalysisLevel>latest</AnalysisLevel>
+        <AnalysisMode>recommended</AnalysisMode>
+        <EnforceCodeStyleInBuild>true</EnforceCodeStyleInBuild>
+        <!-- System.Text.Json 10 and its dependency chain (System.IO.Pipelines, System.Text.Encodings.Web)
+             do not officially support the EOL net6.0 target. The library needs System.Text.Json 8+ there
+             for JsonNode.DeepEquals, so the newer package is used on net6.0 knowingly; this silences only
+             the "TFM not tested" build-transitive warnings for that target. -->
+        <SuppressTfmSupportBuildWarnings Condition="'$(TargetFramework)' == 'net6.0'">true</SuppressTfmSupportBuildWarnings>
+    </PropertyGroup>
+
+    <!--
+        Standalone product version: all projects share the single 4-part 1.0.0.0 version; bump it
+        and tag the repository with the matching v*.*.*.* tag (nuget-publish.yml verifies equality).
+        ProjectName == AssemblyName == RootNamespace == PackageId == Version.
+    -->
+    <PropertyGroup>
+        <Version>1.0.0.0</Version>
+        <AssemblyVersion>1.0.0.0</AssemblyVersion>
+        <FileVersion>1.0.0.0</FileVersion>
+        <PackageVersion>$(Version)</PackageVersion>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <PackageId>$(MSBuildProjectName)</PackageId>
+        <Authors>Jeninnet</Authors>
+        <Copyright>Copyright (c) Jeninnet</Copyright>
+        <RepositoryType>git</RepositoryType>
+        <RepositoryUrl>https://github.com/TarekNajem04/Jeninnet.Assertions</RepositoryUrl>
+        <PackageLicenseExpression>MIT</PackageLicenseExpression>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <IncludeSymbols>true</IncludeSymbols>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+        <MinClientVersion>7.3.0</MinClientVersion>
+    </PropertyGroup>
+
+    <PropertyGroup Condition="'$(IsUnitTestProject)' == ''">
+        <IsUnitTestProject>false</IsUnitTestProject>
+        <IsUnitTestProject Condition="$(MSBuildProjectName.EndsWith('.Tests'))">true</IsUnitTestProject>
+    </PropertyGroup>
+
+    <PropertyGroup>
+        <NoWarn Condition="'$(IsUnitTestProject)' == 'true'">$(NoWarn);1591</NoWarn>
+    </PropertyGroup>
+
+    <!-- Local package output used by restore-source verification -->
+    <PropertyGroup>
+        <LocalArtifacts>$(MSBuildThisFileDirectory)artifacts\</LocalArtifacts>
+        <PackageOutputPath>$(LocalArtifacts)packages\</PackageOutputPath>
+    </PropertyGroup>
+
+    <!--
+    Local development loop (Debug only): centralize all outputs under
+    <LocalArtifacts> and auto-pack packable projects after a successful build.
+    Release/CI builds keep the classic bin/obj layout and pack explicitly.
+    The condition intentionally checks Configuration only: SDK-style projects
+    leave $(Platform) empty unless it is passed explicitly, so a
+    'Debug|AnyCPU' comparison would silently never match.
+    -->
+    <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+        <UseArtifactsOutput>true</UseArtifactsOutput>
+        <ArtifactsPath>$(LocalArtifacts)</ArtifactsPath>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    </PropertyGroup>
+
+</Project>

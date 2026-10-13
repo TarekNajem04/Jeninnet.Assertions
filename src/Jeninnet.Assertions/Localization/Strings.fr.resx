@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>Attendu que {0} soit true, mais trouvé false.</value>
+  </data>
+  <data name="BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>Attendu que {0} soit false, mais trouvé true.</value>
+  </data>
+  <data name="BOOLEAN_NOT_BE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="BOOLEAN_IMPLY" xml:space="preserve">
+    <value>Attendu que {0} implique {1}, mais {2} n'implique pas {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE" xml:space="preserve">
+    <value>Attendu que {0} soit {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>Attendu que {0} soit true, mais trouvé {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_TRUE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas true, mais trouvé {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>Attendu que {0} soit false, mais trouvé {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_FALSE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas false, mais trouvé {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_NULL" xml:space="preserve">
+    <value>Attendu que {0} soit null, mais trouvé {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_NULL" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas null, mais trouvé null.</value>
+  </data>
+  <data name="NUMERIC_BE_POSITIVE" xml:space="preserve">
+    <value>Attendu que {0} soit positif, mais trouvé {1}.</value>
+  </data>
+  <data name="NUMERIC_BE_NEGATIVE" xml:space="preserve">
+    <value>Attendu que {0} soit négatif, mais trouvé {1}.</value>
+  </data>
+  <data name="NUMERIC_APPROXIMATE" xml:space="preserve">
+    <value>Attendu que {0} soit proche de {1} (±{2}), mais trouvé {3}.</value>
+  </data>
+  <data name="NUMERIC_NOT_BE_APPROXIMATE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas proche de {1} (±{2}), mais trouvé {3}.</value>
+  </data>
+  <data name="NUMERIC_BE_NAN" xml:space="preserve">
+    <value>Attendu que {0} soit NaN, mais trouvé {1}.</value>
+  </data>
+  <data name="NUMERIC_NOT_BE_NAN" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas NaN, mais trouvé {1}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE" xml:space="preserve">
+    <value>Attendu que {0} soit {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN" xml:space="preserve">
+    <value>Attendu que {0} soit supérieur à {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Attendu que {0} soit supérieur ou égal à {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN" xml:space="preserve">
+    <value>Attendu que {0} soit inférieur à {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Attendu que {0} soit inférieur ou égal à {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_BETWEEN" xml:space="preserve">
+    <value>Attendu que {0} soit entre {1} et {2}, mais trouvé {3}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas entre {1} et {2}, mais trouvé {3}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_ONE_OF" xml:space="preserve">
+    <value>Attendu que {0} soit l'un de {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_MATCH" xml:space="preserve">
+    <value>Attendu que {0} corresponde à '{1}', mais ce n'est pas le cas.</value>
+  </data>
+  <data name="STRING_BE" xml:space="preserve">
+    <value>Attendu que {0} soit {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_NOT_BE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_BE_EQUIVALENT" xml:space="preserve">
+    <value>Attendu que {0} soit équivalent à {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas équivalent à {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_BE_ONE_OF" xml:space="preserve">
+    <value>Attendu que {0} soit l'un de {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_BE_NULL" xml:space="preserve">
+    <value>Attendu que {0} soit null, mais il ne l'était pas.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas null, mais trouvé null.</value>
+  </data>
+  <data name="STRING_BE_EMPTY" xml:space="preserve">
+    <value>Attendu que {0} soit vide, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas vide, mais il l'était.</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>Attendu que {0} soit null ou un espace blanc, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas null ou un espace blanc, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_BE_UPPER" xml:space="preserve">
+    <value>Attendu que {0} soit en majuscules, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_UPPER" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas en majuscules, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_BE_LOWER" xml:space="preserve">
+    <value>Attendu que {0} soit en minuscules, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_LOWER" xml:space="preserve">
+    <value>Attendu que {0} ne soit pas en minuscules, mais trouvé {1}.</value>
+  </data>
+  <data name="STRING_CONTAIN" xml:space="preserve">
+    <value>Attendu que {0} contienne {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_NULL" xml:space="preserve">
+    <value>Attendu que {0} contienne {1}, mais il était null.</value>
+  </data>
+  <data name="STRING_CONTAIN_MISSING" xml:space="preserve">
+    <value>Attendu que {0} contienne {1}, mais il est introuvable.</value>
+  </data>
+  <data name="STRING_START_WITH" xml:space="preserve">
+    <value>Attendu que {0} commence par {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="STRING_START_WITH_NULL" xml:space="preserve">
+    <value>Attendu que {0} commence par {1}, mais il était null.</value>
+  </data>
+  <data name="STRING_END_WITH" xml:space="preserve">
+    <value>Attendu que {0} se termine par {1}, mais trouvé {2}.</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY_NULL" xml:space="preserve">
+    <value>Attendu que {0} soit vide, mais la collection est null.</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY" xml:space="preserve">
+    <value>Attendu que {0} soit vide, mais trouvé {1} élément(s).</value>
+  </data>
+  <data name="SNAPSHOT_RECEIVED_PREVIEW" xml:space="preserve">
+    <value>Contenu reçu :&#xA;{0}</value>
+  </data>
+</root>

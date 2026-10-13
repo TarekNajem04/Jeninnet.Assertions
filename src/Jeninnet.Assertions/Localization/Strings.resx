@@ -1,0 +1,2045 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    to represent .NET resources.
+
+    The particular data format is defined as follows:
+
+    <xsd:schema> ... </xsd:schema>
+    <resheader name="resmimetype"> ... </resheader>
+    <resheader name="version"> ... </resheader>
+    <resheader name="reader"> ... </resheader>
+    <resheader name="writer"> ... </resheader>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, ..." />
+    <data name="myObject"> ... </data>
+    <data name="myString"> ... </data>
+    <data name="myBlob"> ... </data>
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>  <data name="BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>Expected {0} to be true, but found false.</value>
+  </data>
+  <data name="BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>Expected {0} to be false, but found true.</value>
+  </data>
+  <data name="BOOLEAN_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="BOOLEAN_IMPLY" xml:space="preserve">
+    <value>Expected {0} to imply {1}, but {2} does not imply {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>Expected {0} to be true, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_TRUE" xml:space="preserve">
+    <value>Expected {0} not to be true, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>Expected {0} to be false, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_FALSE" xml:space="preserve">
+    <value>Expected {0} not to be false, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="NUMERIC_BE_POSITIVE" xml:space="preserve">
+    <value>Expected {0} to be positive, but found {1}.</value>
+  </data>
+  <data name="NUMERIC_BE_NEGATIVE" xml:space="preserve">
+    <value>Expected {0} to be negative, but found {1}.</value>
+  </data>
+  <data name="NUMERIC_APPROXIMATE" xml:space="preserve">
+    <value>Expected {0} to approximate {1} (±{2}), but found {3}.</value>
+  </data>
+  <data name="NUMERIC_NOT_APPROXIMATE" xml:space="preserve">
+    <value>Expected {0} not to approximate {1} (±{2}), but found {3}.</value>
+  </data>
+  <data name="NUMERIC_BE_NAN" xml:space="preserve">
+    <value>Expected {0} to be NaN, but found {1}.</value>
+  </data>
+  <data name="NUMERIC_NOT_BE_NAN" xml:space="preserve">
+    <value>Expected {0} not to be NaN, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN" xml:space="preserve">
+    <value>Expected {0} to be greater than {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to be greater than or equal to {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN" xml:space="preserve">
+    <value>Expected {0} to be less than {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to be less than or equal to {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_BETWEEN" xml:space="preserve">
+    <value>Expected {0} to be between {1} and {2}, but found {3}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>Expected {0} not to be between {1} and {2}, but found {3}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_ONE_OF" xml:space="preserve">
+    <value>Expected {0} to be one of {1}, but found {2}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_MATCH" xml:space="preserve">
+    <value>Expected {0} to match '{1}', but it did not.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="STRING_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to be equivalent to {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to be equivalent to {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_BE_ONE_OF" xml:space="preserve">
+    <value>Expected {0} to be one of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but it was not null.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="STRING_BE_EMPTY_NULL" xml:space="preserve">
+    <value>Expected {0} to be empty, but it was null.</value>
+  </data>
+  <data name="STRING_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but it was empty.</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>Expected {0} to be null or whitespace, but found {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>Expected {0} not to be null or whitespace, but found {1}.</value>
+  </data>
+  <data name="STRING_HAVE_LENGTH_NULL" xml:space="preserve">
+    <value>Expected {0} to have length {1}, but it was null.</value>
+  </data>
+  <data name="STRING_HAVE_LENGTH" xml:space="preserve">
+    <value>Expected {0} to have length {1}, but found {2} with length {3}.</value>
+  </data>
+  <data name="STRING_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>Expected {0} not to have length {1}, but found {2} with length {1}.</value>
+  </data>
+  <data name="STRING_BE_UPPER" xml:space="preserve">
+    <value>Expected {0} to be upper cased, but found {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_UPPER" xml:space="preserve">
+    <value>Expected {0} not to be upper cased, but found {1}.</value>
+  </data>
+  <data name="STRING_BE_LOWER" xml:space="preserve">
+    <value>Expected {0} to be lower cased, but found {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_LOWER" xml:space="preserve">
+    <value>Expected {0} not to be lower cased, but found {1}.</value>
+  </data>
+  <data name="STRING_CONTAIN_NULL" xml:space="preserve">
+    <value>Expected {0} to contain {1}, but it was null.</value>
+  </data>
+  <data name="STRING_CONTAIN" xml:space="preserve">
+    <value>Expected {0} to contain {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_TIMES_NULL" xml:space="preserve">
+    <value>Expected {0} to contain {1} {2}, but it was null.</value>
+  </data>
+  <data name="STRING_CONTAIN_TIMES" xml:space="preserve">
+    <value>Expected {0} to contain {1} {2}, but found {3}.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN" xml:space="preserve">
+    <value>Expected {0} not to contain {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_ALL_NULL" xml:space="preserve">
+    <value>Expected {0} to contain all of the given strings, but it was null.</value>
+  </data>
+  <data name="STRING_CONTAIN_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain {1}, but it was not found.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_ALL" xml:space="preserve">
+    <value>Expected {0} not to contain all of the given strings, but all of them were found.</value>
+  </data>
+  <data name="STRING_CONTAIN_ANY" xml:space="preserve">
+    <value>Expected {0} to contain at least one of {1}, {2}.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_ANY" xml:space="preserve">
+    <value>Expected {0} not to contain any of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} to contain equivalent of {1}, but it was null.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to contain equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_TIMES_NULL" xml:space="preserve">
+    <value>Expected {0} to contain equivalent of {1} {2}, but it was null.</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_TIMES" xml:space="preserve">
+    <value>Expected {0} to contain equivalent of {1} {2}, but found {3}.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to contain equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_START_WITH_NULL" xml:space="preserve">
+    <value>Expected {0} to start with {1}, but it was null.</value>
+  </data>
+  <data name="STRING_START_WITH" xml:space="preserve">
+    <value>Expected {0} to start with {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_START_WITH" xml:space="preserve">
+    <value>Expected {0} not to start with {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_START_WITH_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} to start with equivalent of {1}, but it was null.</value>
+  </data>
+  <data name="STRING_START_WITH_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to start with equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_START_WITH_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to start with equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_END_WITH_NULL" xml:space="preserve">
+    <value>Expected {0} to end with {1}, but it was null.</value>
+  </data>
+  <data name="STRING_END_WITH" xml:space="preserve">
+    <value>Expected {0} to end with {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_END_WITH" xml:space="preserve">
+    <value>Expected {0} not to end with {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_END_WITH_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} to end with equivalent of {1}, but it was null.</value>
+  </data>
+  <data name="STRING_END_WITH_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to end with equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_END_WITH_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to end with equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_MATCH" xml:space="preserve">
+    <value>Expected {0} to match {1}, {2}.</value>
+  </data>
+  <data name="STRING_NOT_MATCH" xml:space="preserve">
+    <value>Expected {0} not to match {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_MATCH_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to match equivalent of {1}, {2}.</value>
+  </data>
+  <data name="STRING_NOT_MATCH_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to match equivalent of {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_NULL" xml:space="preserve">
+    <value>Expected {0} to match regex {1}, but it was null.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX" xml:space="preserve">
+    <value>Expected {0} to match regex {1}, but found {2}.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_TIMES_NULL" xml:space="preserve">
+    <value>Expected {0} to match regex {1} {2}, but it was null.</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_TIMES" xml:space="preserve">
+    <value>Expected {0} to match regex {1} {2}, but found {3}.</value>
+  </data>
+  <data name="STRING_NOT_MATCH_REGEX" xml:space="preserve">
+    <value>Expected {0} not to match regex {1}, but found {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>Expected {0} to contain {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_EXACTLY" xml:space="preserve">
+    <value>Expected {0} to contain {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_MORE_THAN_NULL" xml:space="preserve">
+    <value>Expected {0} to contain more than {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_MORE_THAN" xml:space="preserve">
+    <value>Expected {0} to contain more than {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_LEAST_NULL" xml:space="preserve">
+    <value>Expected {0} to contain at least {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_LEAST" xml:space="preserve">
+    <value>Expected {0} to contain at least {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_FEWER_THAN_NULL" xml:space="preserve">
+    <value>Expected {0} to contain fewer than {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_FEWER_THAN" xml:space="preserve">
+    <value>Expected {0} to contain fewer than {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_MOST_NULL" xml:space="preserve">
+    <value>Expected {0} to contain at most {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_MOST" xml:space="preserve">
+    <value>Expected {0} to contain at most {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>Expected {0} to have the same count as the expected collection, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1} item(s).</value>
+  </data>
+  <data name="STRING_COLLECTION_ALL_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to have all items be '{1}', but collection is null.</value>
+  </data>
+  <data name="STRING_COLLECTION_ALL_BE" xml:space="preserve">
+    <value>Expected {0} to have all items be '{1}', but found '{2}'.</value>
+  </data>
+  <data name="STRING_COLLECTION_CONTAIN_MATCH_NULL" xml:space="preserve">
+    <value>Expected {0} to contain an item matching '{1}', but collection is null.</value>
+  </data>
+  <data name="STRING_COLLECTION_CONTAIN_MATCH" xml:space="preserve">
+    <value>Expected {0} to contain an item matching '{1}', but none was found.</value>
+  </data>
+  <data name="STRING_COLLECTION_NOT_CONTAIN_MATCH_NULL" xml:space="preserve">
+    <value>Expected {0} to contain no item matching '{1}', but collection is null.</value>
+  </data>
+  <data name="STRING_COLLECTION_NOT_CONTAIN_MATCH" xml:space="preserve">
+    <value>Expected {0} to contain no item matching '{1}', but found '{2}'.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found null.</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY_NULL" xml:space="preserve">
+    <value>Expected {0} to be empty, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1} item(s).</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_PREDICATE_NULL" xml:space="preserve">
+    <value>Expected {0} to contain an item matching the predicate, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_PREDICATE_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain an item matching the predicate, but none was found.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ITEM_NULL" xml:space="preserve">
+    <value>Expected {0} to contain '{1}', but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ITEM_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain '{1}', but it was not found.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ONLY_NULL" xml:space="preserve">
+    <value>Expected {0} to contain only matching items, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ONLY_OFFENDER" xml:space="preserve">
+    <value>Expected {0} to contain only matching items, but found '{1}'.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_SINGLE_NULL" xml:space="preserve">
+    <value>Expected {0} to contain exactly one item, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_SINGLE" xml:space="preserve">
+    <value>Expected {0} to contain exactly one item, but found {1}.</value>
+  </data>
+  <data name="COLLECTION_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} to be equivalent, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_NULL" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_START_WITH_NULL" xml:space="preserve">
+    <value>Expected {0} to start with {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_END_WITH_NULL" xml:space="preserve">
+    <value>Expected {0} to end with {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_IN_ORDER_NULL" xml:space="preserve">
+    <value>Expected {0} to contain items in order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_IN_ORDER_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain '{1}' in order, but it was not found in sequence.</value>
+  </data>
+  <data name="ASYNC_ENUM_NULL" xml:space="preserve">
+    <value>Expected {0} to be a non-null async sequence, but it was null.</value>
+  </data>
+  <data name="ASYNC_ENUM_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1} item(s).</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but it was empty.</value>
+  </data>
+  <data name="ASYNC_ENUM_HAVE_COUNT" xml:space="preserve">
+    <value>Expected {0} to have {1} item(s), but found {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN" xml:space="preserve">
+    <value>Expected {0} to contain '{1}', but it was not found.</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN" xml:space="preserve">
+    <value>Expected {0} not to contain '{1}', but found it at index {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>Expected {0} to contain '{1}' in order, but it was not found at or after index {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to be equivalent to the expected items, but no match was found for '{1}'.</value>
+  </data>
+  <data name="MATCH_NULL" xml:space="preserve">
+    <value>Expected {0} to be a successful match, but the match is null.</value>
+  </data>
+  <data name="MATCH_SUCCEED" xml:space="preserve">
+    <value>Expected {0} to be a successful match, but it failed.</value>
+  </data>
+  <data name="MATCH_HAVE_VALUE" xml:space="preserve">
+    <value>Expected {0} to match '{1}', but found '{2}'.</value>
+  </data>
+  <data name="MATCH_HAVE_VALUE_FAILED" xml:space="preserve">
+    <value>Expected {0} to match '{1}', but the match failed.</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_VALUE" xml:space="preserve">
+    <value>Expected {0} to have group '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_MISSING" xml:space="preserve">
+    <value>Expected {0} to have group '{1}', but it does not exist (available: {2}).</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_FAILED" xml:space="preserve">
+    <value>Expected {0} to have group '{1}' with value '{2}', but the match failed.</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_COUNT" xml:space="preserve">
+    <value>Expected {0} to have {1} group(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_ASCENDING_NULL" xml:space="preserve">
+    <value>Expected {0} to be in ascending order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_DESCENDING_NULL" xml:space="preserve">
+    <value>Expected {0} to be in descending order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a subset of {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_INTERSECT_NULL" xml:space="preserve">
+    <value>Expected {0} to intersect with {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_INTERSECT_EMPTY" xml:space="preserve">
+    <value>Expected {0} to intersect with {1}, but no common items were found.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>Expected {0} not to be empty, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but it was empty.</value>
+  </data>
+  <data name="COLLECTION_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be null or empty, but found {1} item(s).</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL_OR_EMPTY_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null or empty, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be null or empty, but it was empty.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_PREDICATE_NULL" xml:space="preserve">
+    <value>Expected {0} to not contain an item matching the predicate, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_PREDICATE_FOUND" xml:space="preserve">
+    <value>Expected {0} to not contain an item matching the predicate, but one was found.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ITEM_NULL" xml:space="preserve">
+    <value>Expected {0} to not contain '{1}', but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ITEM_FOUND" xml:space="preserve">
+    <value>Expected {0} to not contain '{1}', but it was found.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_CHECK_NULL" xml:space="preserve">
+    <value>Expected {0} to contain the subset, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>Expected {0} to have the same count ({1}) as the expected collection, but found {2}.</value>
+  </data>
+  <data name="COLLECTION_EQUIVALENT_ORDER" xml:space="preserve">
+    <value>Expected {0} to be equivalent in the same order, but item at index {1} was '{2}' instead of '{3}'.</value>
+  </data>
+  <data name="COLLECTION_EQUIVALENT_CARDINALITY" xml:space="preserve">
+    <value>Expected {0} to be equivalent, but item '{1}' was found {2} time(s); expected {3}.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_COUNT" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but found {2} item(s) instead of {3}.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_ORDER" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but item at index {2} was '{3}' instead of '{4}'.</value>
+  </data>
+  <data name="COLLECTION_START_WITH_SHORT" xml:space="preserve">
+    <value>Expected {0} to start with {1}, but found only {2} item(s).</value>
+  </data>
+  <data name="COLLECTION_START_WITH_ORDER" xml:space="preserve">
+    <value>Expected {0} to start with {1}, but item at index {2} was '{3}'.</value>
+  </data>
+  <data name="COLLECTION_END_WITH_SHORT" xml:space="preserve">
+    <value>Expected {0} to end with {1}, but found only {2} item(s).</value>
+  </data>
+  <data name="COLLECTION_END_WITH_ORDER" xml:space="preserve">
+    <value>Expected {0} to end with {1}, but item at index {2} was '{3}'.</value>
+  </data>
+  <data name="COLLECTION_ASCENDING_ORDER" xml:space="preserve">
+    <value>Expected {0} to be in ascending order, but found '{1}' after '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_DESCENDING_ORDER" xml:space="preserve">
+    <value>Expected {0} to be in descending order, but found '{1}' after '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_THEN_ASCENDING" xml:space="preserve">
+    <value>Expected {0} to then be in ascending order, but found '{1}' after '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_THEN_DESCENDING" xml:space="preserve">
+    <value>Expected {0} to then be in descending order, but found '{1}' after '{2}' at index {3}.</value>
+  </data>
+  <data name="DICT_ASCENDING_NULL" xml:space="preserve">
+    <value>Expected {0} to be in ascending order, but dictionary is null.</value>
+  </data>
+  <data name="DICT_DESCENDING_NULL" xml:space="preserve">
+    <value>Expected {0} to be in descending order, but dictionary is null.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>Expected {0} to be a subset of {1}, but found '{2}' outside of it.</value>
+  </data>
+  <data name="COLLECTION_BE_SUPERSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a superset of {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_BE_SUPERSET" xml:space="preserve">
+    <value>Expected {0} to be a superset of {1}, but '{2}' was missing from it.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUBSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a proper subset of {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUBSET_SAME" xml:space="preserve">
+    <value>Expected {0} to be a proper subset of {1}, but they contain the same items.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUPERSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a proper superset of {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUPERSET_SAME" xml:space="preserve">
+    <value>Expected {0} to be a proper superset of {1}, but they contain the same items.</value>
+  </data>
+  <data name="COLLECTION_HAVE_COUNT_PREDICATE" xml:space="preserve">
+    <value>Expected {0} to have a count satisfying '{1}', but found {2}.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} to contain an item equivalent to {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to contain an item equivalent to {1}, but none was found.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain an item equivalent to {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to contain an item equivalent to {1}, but found one.</value>
+  </data>
+  <data name="COLLECTION_SUBSET_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain subset item '{1}', but it was not found.</value>
+  </data>
+  <data name="COLLECTION_NOT_INTERSECT_NULL" xml:space="preserve">
+    <value>Expected {0} to not intersect with {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_INTERSECT_SHARED" xml:space="preserve">
+    <value>Expected {0} to not intersect with {1}, but found shared item '{2}'.</value>
+  </data>
+  <data name="COLLECTION_ONLY_UNIQUE" xml:space="preserve">
+    <value>Expected {0} to contain only unique items, but found duplicate '{1}'.</value>
+  </data>
+  <data name="COLLECTION_ONLY_UNIQUE_NULL" xml:space="preserve">
+    <value>Expected {0} to contain only unique items, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_NULLS_NULL" xml:space="preserve">
+    <value>Expected {0} to contain no null items, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_NULLS_FOUND" xml:space="preserve">
+    <value>Expected {0} to contain no null items, but found null at index {1}.</value>
+  </data>
+  <data name="COLLECTION_CONSECUTIVE_ORDER_NULL" xml:space="preserve">
+    <value>Expected {0} to contain {1} in consecutive order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONSECUTIVE_ORDER_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain {1} in consecutive order, but the sequence was not found.</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_NULL" xml:space="preserve">
+    <value>Expected {0} to have '{1}' at index {2}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_SHORT" xml:space="preserve">
+    <value>Expected {0} to have '{1}' at index {2}, but found only {3} item(s).</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_MISMATCH" xml:space="preserve">
+    <value>Expected {0} to have '{1}' at index {2}, but found '{3}'.</value>
+  </data>
+  <data name="ACTION_THROW_WRONG" xml:space="preserve">
+    <value>Expected {0} to throw {1}, but {2} was thrown.</value>
+  </data>
+  <data name="ACTION_THROW_NONE" xml:space="preserve">
+    <value>Expected {0} to throw {1}, but no exception was thrown.</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_NOT_HONORED" xml:space="preserve">
+    <value>Expected {0} to honor cancellation, but it completed without throwing OperationCanceledException.</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_WRONG_TOKEN" xml:space="preserve">
+    <value>Expected {0} to honor cancellation, but it threw OperationCanceledException with a different cancellation token.</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_WRONG_EXCEPTION" xml:space="preserve">
+    <value>Expected {0} to honor cancellation, but it threw {1} instead of OperationCanceledException.</value>
+  </data>
+  <data name="ACTION_COMPLETE_DESPITE_CANCELLATION" xml:space="preserve">
+    <value>Expected {0} to complete despite cancellation, but it was canceled.</value>
+  </data>
+  <data name="ACTION_COMPLETE_DESPITE_CANCELLATION_THREW" xml:space="preserve">
+    <value>Expected {0} to complete despite cancellation, but it threw {1}.</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_FAILURES" xml:space="preserve">
+    <value>Expected {0} to be thread-safe, but {1} of {2} copies failed:</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_ENTRY" xml:space="preserve">
+    <value>{0}. {1} (copies: {2}).</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_TIMEOUT" xml:space="preserve">
+    <value>Expected {0} to be thread-safe, but {1} of {2} copies did not complete within {3} (a deadlock or an unbounded wait).</value>
+  </data>
+  <data name="ACTION_THROW_EXACTLY_WRONG" xml:space="preserve">
+    <value>Expected {0} to throw exactly {1}, but {2} was thrown.</value>
+  </data>
+  <data name="ACTION_THROW_EXACTLY_NONE" xml:space="preserve">
+    <value>Expected {0} to throw exactly {1}, but no exception was thrown.</value>
+  </data>
+  <data name="ACTION_NOT_THROW" xml:space="preserve">
+    <value>Expected {0} not to throw, but {1} was thrown.</value>
+  </data>
+  <data name="ACTION_NOT_THROW_AFTER" xml:space="preserve">
+    <value>Expected {0} not to throw within {1}, but {2} was thrown.</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_NONE" xml:space="preserve">
+    <value>Expected {0} to throw {1} within {2}, but no exception was thrown.</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_WRONG" xml:space="preserve">
+    <value>Expected {0} to throw {1} within {2}, but {3} was thrown.</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_TIMEOUT" xml:space="preserve">
+    <value>Expected {0} to throw {1} within {2}, but it did not complete in time.</value>
+  </data>
+  <data name="ACTION_SUCCEED_WITHIN" xml:space="preserve">
+    <value>Expected {0} to succeed within {1}, but it kept failing: {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_AT_MOST_THREW" xml:space="preserve">
+    <value>Expected {0} to allocate at most {1}, but it threw {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_AT_MOST" xml:space="preserve">
+    <value>Expected {0} to allocate at most {1}, but allocated {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_LESS_THAN_THREW" xml:space="preserve">
+    <value>Expected {0} to allocate less than {1}, but it threw {2}.</value>
+  </data>
+  <data name="ACTION_ALLOCATE_LESS_THAN" xml:space="preserve">
+    <value>Expected {0} to allocate less than {1}, but allocated {2}.</value>
+  </data>
+  <data name="DATE_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_SAME_DATE" xml:space="preserve">
+    <value>Expected {0} to be on the same date as {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_SAME_DATE" xml:space="preserve">
+    <value>Expected {0} not to be on the same date as {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be before {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_BEFORE" xml:space="preserve">
+    <value>Expected {0} not to be before {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_ON_OR_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be on or before {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_AFTER" xml:space="preserve">
+    <value>Expected {0} to be after {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_AFTER" xml:space="preserve">
+    <value>Expected {0} not to be after {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_ON_OR_AFTER" xml:space="preserve">
+    <value>Expected {0} to be on or after {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_CLOSE_TO" xml:space="preserve">
+    <value>Expected {0} to be close to {1} (±{2}), but found {3}.</value>
+  </data>
+  <data name="DATE_NOT_BE_CLOSE_TO" xml:space="preserve">
+    <value>Expected {0} not to be close to {1} (±{2}), but found {3}.</value>
+  </data>
+  <data name="DATE_HAVE_YEAR" xml:space="preserve">
+    <value>Expected {0} to have year {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_MONTH" xml:space="preserve">
+    <value>Expected {0} to have month {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_DAY" xml:space="preserve">
+    <value>Expected {0} to have day {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_HOUR" xml:space="preserve">
+    <value>Expected {0} to have hour {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_MINUTE" xml:space="preserve">
+    <value>Expected {0} to have minute {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_SECOND" xml:space="preserve">
+    <value>Expected {0} to have second {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_MILLISECOND" xml:space="preserve">
+    <value>Expected {0} to have millisecond {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="DATE_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="TIMESPAN_BE_POSITIVE" xml:space="preserve">
+    <value>Expected {0} to be positive, but found {1}.</value>
+  </data>
+  <data name="TIMESPAN_BE_NEGATIVE" xml:space="preserve">
+    <value>Expected {0} to be negative, but found {1}.</value>
+  </data>
+  <data name="TIMESPAN_BE_GREATER_THAN" xml:space="preserve">
+    <value>Expected {0} to be greater than {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to be greater than or equal to {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_BE_LESS_THAN" xml:space="preserve">
+    <value>Expected {0} to be less than {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to be less than or equal to {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_DAYS" xml:space="preserve">
+    <value>Expected {0} to have days {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_HOURS" xml:space="preserve">
+    <value>Expected {0} to have hours {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_MINUTES" xml:space="preserve">
+    <value>Expected {0} to have minutes {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_SECONDS" xml:space="preserve">
+    <value>Expected {0} to have seconds {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_MILLISECONDS" xml:space="preserve">
+    <value>Expected {0} to have milliseconds {1}, but found {2}.</value>
+  </data>
+  <data name="TIMESPAN_HAVE_TICKS" xml:space="preserve">
+    <value>Expected {0} to have ticks {1}, but found {2}.</value>
+  </data>
+  <data name="TYPE_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found null.</value>
+  </data>
+  <data name="TYPE_HAVE_METHOD" xml:space="preserve">
+    <value>Expected {0} to have method '{1}', but it was not found.</value>
+  </data>
+  <data name="TYPE_HAVE_PROPERTY" xml:space="preserve">
+    <value>Expected {0} to have property '{1}', but it was not found.</value>
+  </data>
+  <data name="TYPE_HAVE_CONSTRUCTOR" xml:space="preserve">
+    <value>Expected {0} to have constructor '{1}', but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_METHOD" xml:space="preserve">
+    <value>Expected {0} not to have method '{1}', but it was found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_PROPERTY" xml:space="preserve">
+    <value>Expected {0} not to have property '{1}', but it was found.</value>
+  </data>
+  <data name="TYPE_BE_SEALED" xml:space="preserve">
+    <value>Expected {0} to be sealed, but {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_SEALED" xml:space="preserve">
+    <value>Expected {0} not to be sealed, but it was.</value>
+  </data>
+  <data name="TYPE_BE_ABSTRACT" xml:space="preserve">
+    <value>Expected {0} to be abstract, but {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_ABSTRACT" xml:space="preserve">
+    <value>Expected {0} not to be abstract, but it was.</value>
+  </data>
+  <data name="TYPE_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>Expected {0} to be assignable to {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>Expected {0} not to be assignable to {1}, but it was.</value>
+  </data>
+  <data name="TYPE_BE_DECORATED" xml:space="preserve">
+    <value>Expected {0} to be decorated with {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED" xml:space="preserve">
+    <value>Expected {0} not to be decorated with {1}, but it was.</value>
+  </data>
+  <data name="TYPE_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>Expected {0} to be decorated with {1} or inherit it, but {2}.</value>
+  </data>
+  <data name="TYPE_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>Expected {0} to have {1} accessibility, but found {2}.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_SEALED" xml:space="preserve">
+    <value>Expected {0} to be sealed, but it was not.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_ABSTRACT" xml:space="preserve">
+    <value>Expected {0} to be abstract, but it was not.</value>
+  </data>
+  <data name="METHOD_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>Expected {0} to have return type {1}, but found {2}.</value>
+  </data>
+  <data name="METHOD_HAVE_PARAMETER" xml:space="preserve">
+    <value>Expected {0} to have parameter '{1}' of type {2}, but it was not found.</value>
+  </data>
+  <data name="METHOD_BE_VIRTUAL" xml:space="preserve">
+    <value>Expected {0} to be virtual, but {1}.</value>
+  </data>
+  <data name="METHOD_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} to be static, but {1}.</value>
+  </data>
+  <data name="METHOD_BE_DECORATED" xml:space="preserve">
+    <value>Expected {0} to be decorated with {1}, but {2}.</value>
+  </data>
+  <data name="METHOD_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>Expected {0} to have {1} accessibility, but found {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_READABLE" xml:space="preserve">
+    <value>Expected {0} to be readable, but {1}.</value>
+  </data>
+  <data name="PROPERTY_BE_WRITABLE" xml:space="preserve">
+    <value>Expected {0} to be writable, but {1}.</value>
+  </data>
+  <data name="PROPERTY_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>Expected {0} to have {1} accessibility, but found {2}.</value>
+  </data>
+  <data name="ASSEMBLY_DEFINE_TYPE" xml:space="preserve">
+    <value>Expected {0} to define type '{1}', but it was not found.</value>
+  </data>
+  <data name="ASSEMBLY_NOT_DEFINE_TYPE" xml:space="preserve">
+    <value>Expected {0} not to define type '{1}', but it was found.</value>
+  </data>
+  <data name="ASSEMBLY_REFERENCE_NULL" xml:space="preserve">
+    <value>Expected {0} to reference assembly '{1}', but found null.</value>
+  </data>
+  <data name="ASSEMBLY_REFERENCE_MISSING" xml:space="preserve">
+    <value>Expected {0} to reference assembly '{1}', but it was not found.</value>
+  </data>
+  <data name="ASSEMBLY_NOT_REFERENCE_NULL" xml:space="preserve">
+    <value>Expected {0} not to reference assembly '{1}', but found null.</value>
+  </data>
+  <data name="ASSEMBLY_NOT_REFERENCE_FOUND" xml:space="preserve">
+    <value>Expected {0} not to reference assembly '{1}', but it was found.</value>
+  </data>
+  <data name="CTOR_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but it was not null.</value>
+  </data>
+  <data name="CTOR_BE_PUBLIC" xml:space="preserve">
+    <value>Expected {0} to be public, but {1}.</value>
+  </data>
+  <data name="SELECTOR_HAVE_COUNT" xml:space="preserve">
+    <value>Expected selected types to contain {0} item(s), but found {1}.</value>
+  </data>
+  <data name="SELECTOR_HAVE_METHOD" xml:space="preserve">
+    <value>Expected {0} to have method '{1}', but it was not found.</value>
+  </data>
+  <data name="SELECTOR_HAVE_PROPERTY" xml:space="preserve">
+    <value>Expected {0} to have property '{1}', but it was not found.</value>
+  </data>
+  <data name="COMPARABLE_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_GREATER_THAN" xml:space="preserve">
+    <value>Expected {0} to be greater than {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to be greater than or equal to {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_LESS_THAN" xml:space="preserve">
+    <value>Expected {0} to be less than {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to be less than or equal to {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_BE_BETWEEN" xml:space="preserve">
+    <value>Expected {0} to be between {1} and {2}, but found {3}.</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>Expected {0} not to be between {1} and {2}, but found {3}.</value>
+  </data>
+  <data name="COMPARABLE_BE_ONE_OF" xml:space="preserve">
+    <value>Expected {0} to be one of {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_MATCH" xml:space="preserve">
+    <value>Expected {0} to match '{1}', but it did not.</value>
+  </data>
+  <data name="COMPARABLE_BE_RANKED_EQUALLY" xml:space="preserve">
+    <value>Expected {0} to be ranked equal to {1}, but found {2}.</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE_RANKED_EQUALLY" xml:space="preserve">
+    <value>Expected {0} not to be ranked equal to {1}, but found {2}.</value>
+  </data>
+  <data name="DICT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1} item(s).</value>
+  </data>
+  <data name="DICT_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found null.</value>
+  </data>
+  <data name="DICT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>Expected {0} to contain {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_HAVE_EXACTLY" xml:space="preserve">
+    <value>Expected {0} to contain {1} item(s), but found {2}.</value>
+  </data>
+  <data name="DICT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>Expected {0} to be empty, but dictionary is null.</value>
+  </data>
+  <data name="DICT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1} item(s).</value>
+  </data>
+  <data name="DICT_NOT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>Expected {0} not to be empty, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but it was empty.</value>
+  </data>
+  <data name="DICT_CONTAIN_KEY_NULL" xml:space="preserve">
+    <value>Expected {0} to contain key {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_CONTAIN_KEY_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain key {1}, but it was not found.</value>
+  </data>
+  <data name="SUGGESTION_SINGLE" xml:space="preserve">
+    <value>Did you mean '{0}'?</value>
+  </data>
+  <data name="SUGGESTION_MULTIPLE" xml:space="preserve">
+    <value>Did you mean one of {0}?</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain key {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_FOUND" xml:space="preserve">
+    <value>Expected {0} not to contain key {1}, but it was found.</value>
+  </data>
+  <data name="DICT_CONTAIN_KEYS_NULL" xml:space="preserve">
+    <value>Expected {0} to contain the given keys, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEYS_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain the given keys, but dictionary is null.</value>
+  </data>
+  <data name="DICT_CONTAIN_VALUE_NULL" xml:space="preserve">
+    <value>Expected {0} to contain value {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_CONTAIN_VALUE_MISSING" xml:space="preserve">
+    <value>Expected {0} to contain value {1}, but it was not found.</value>
+  </data>
+  <data name="DICT_HAVE_VALUE_AT_KEY" xml:space="preserve">
+    <value>Expected {0} to have value {1} at key {2}, but found {3}.</value>
+  </data>
+  <data name="EQUIVALENCE_DETAIL" xml:space="preserve">
+    <value>Expected {0} to be equivalent, but {1}.</value>
+  </data>
+  <data name="OBJECT_BE" xml:space="preserve">
+    <value>Expected {0} to be '{1}', but got '{2}'.</value>
+  </data>
+  <data name="OBJECT_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be '{1}', but found '{2}'.</value>
+  </data>
+  <data name="OBJECT_BE_ONE_OF" xml:space="preserve">
+    <value>Expected {0} to be one of {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_BE_XML_SERIALIZABLE" xml:space="preserve">
+    <value>Expected {0} to be XML-serializable, but {1}.</value>
+  </data>
+  <data name="OBJECT_BE_JSON_SERIALIZABLE" xml:space="preserve">
+    <value>Expected {0} to be JSON-serializable, but {1}.</value>
+  </data>
+  <data name="OBJECT_BE_DATA_CONTRACT_SERIALIZABLE" xml:space="preserve">
+    <value>Expected {0} to be data-contract-serializable, but {1}.</value>
+  </data>
+  <data name="SPAN_BE_STRING" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_BE_SAME_INSTANCE" xml:space="preserve">
+    <value>Expected {0} to be the same instance as '{1}', but found a different reference.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_SAME_INSTANCE" xml:space="preserve">
+    <value>Expected {0} not to be the same instance as '{1}', but it was.</value>
+  </data>
+  <data name="OBJECT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but it was not null.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="OBJECT_BE_OF_TYPE" xml:space="preserve">
+    <value>Expected {0} to be of type {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_OF_TYPE" xml:space="preserve">
+    <value>Expected {0} not to be of type {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>Expected {0} to be assignable to {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>Expected {0} not to be assignable to {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_AS" xml:space="preserve">
+    <value>Expected {0} to be castable to {1}, but found {2}.</value>
+  </data>
+  <data name="OBJECT_MATCH" xml:space="preserve">
+    <value>Expected {0} to match '{1}', but it did not.</value>
+  </data>
+  <data name="OBJECT_SATISFY_ALL_CONDITIONS" xml:space="preserve">
+    <value>Expected {0} to satisfy all conditions, but the following failed:{1}</value>
+  </data>
+  <data name="STREAM_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but it was not null.</value>
+  </data>
+  <data name="STREAM_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found null.</value>
+  </data>
+  <data name="STREAM_BE_READABLE" xml:space="preserve">
+    <value>Expected {0} to be readable, but {1}.</value>
+  </data>
+  <data name="STREAM_NOT_BE_READABLE" xml:space="preserve">
+    <value>Expected {0} not to be readable, but it was.</value>
+  </data>
+  <data name="STREAM_BE_WRITABLE" xml:space="preserve">
+    <value>Expected {0} to be writable, but {1}.</value>
+  </data>
+  <data name="STREAM_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>Expected {0} not to be writable, but it was.</value>
+  </data>
+  <data name="STREAM_BE_SEEKABLE" xml:space="preserve">
+    <value>Expected {0} to be seekable, but {1}.</value>
+  </data>
+  <data name="STREAM_NOT_BE_SEEKABLE" xml:space="preserve">
+    <value>Expected {0} not to be seekable, but it was.</value>
+  </data>
+  <data name="STREAM_BE_READ_ONLY" xml:space="preserve">
+    <value>Expected {0} to be read-only, but it was not.</value>
+  </data>
+  <data name="STREAM_NOT_BE_READ_ONLY" xml:space="preserve">
+    <value>Expected {0} not to be read-only, but it was.</value>
+  </data>
+  <data name="STREAM_BE_WRITE_ONLY" xml:space="preserve">
+    <value>Expected {0} to be write-only, but it was not.</value>
+  </data>
+  <data name="STREAM_NOT_BE_WRITE_ONLY" xml:space="preserve">
+    <value>Expected {0} not to be write-only, but it was.</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH_NULL" xml:space="preserve">
+    <value>Expected {0} to have length {1}, but found null.</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH_UNSEEKABLE" xml:space="preserve">
+    <value>Expected {0} to have length {1}, but the stream does not support seeking.</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH" xml:space="preserve">
+    <value>Expected {0} to have length {1}, but found {2}.</value>
+  </data>
+  <data name="STREAM_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>Expected {0} not to have length {1}, but found it.</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION_NULL" xml:space="preserve">
+    <value>Expected {0} to have position {1}, but found null.</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION_UNSEEKABLE" xml:space="preserve">
+    <value>Expected {0} to have position {1}, but the stream does not support seeking.</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION" xml:space="preserve">
+    <value>Expected {0} to have position {1}, but found {2}.</value>
+  </data>
+  <data name="STREAM_NOT_HAVE_POSITION" xml:space="preserve">
+    <value>Expected {0} not to have position {1}, but found it.</value>
+  </data>
+  <data name="ENUM_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_FLAG" xml:space="preserve">
+    <value>Expected {0} to have flag {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_FLAG" xml:space="preserve">
+    <value>Expected {0} not to have flag {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_BE_DEFINED" xml:space="preserve">
+    <value>Expected {0} to be a defined {1} value, but found {2}.</value>
+  </data>
+  <data name="ENUM_NOT_BE_DEFINED" xml:space="preserve">
+    <value>Expected {0} not to be a defined {1} value, but found {2}.</value>
+  </data>
+  <data name="ENUM_BE_ONE_OF" xml:space="preserve">
+    <value>Expected {0} to be one of {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_VALUE" xml:space="preserve">
+    <value>Expected {0} to have value {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_VALUE" xml:space="preserve">
+    <value>Expected {0} not to have value {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_SAME_NAME" xml:space="preserve">
+    <value>Expected {0} to have the same name as {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_SAME_NAME" xml:space="preserve">
+    <value>Expected {0} not to have the same name as {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_HAVE_SAME_VALUE" xml:space="preserve">
+    <value>Expected {0} to have the same value as {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_SAME_VALUE" xml:space="preserve">
+    <value>Expected {0} not to have the same value as {1}, but found {2}.</value>
+  </data>
+  <data name="ENUM_MATCH" xml:space="preserve">
+    <value>Expected {0} to match '{1}', but it did not.</value>
+  </data>
+  <data name="ENUM_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="ENUM_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="GUID_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="GUID_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="GUID_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1}.</value>
+  </data>
+  <data name="GUID_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but found {1}.</value>
+  </data>
+  <data name="GUID_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="GUID_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to not be null, but found null.</value>
+  </data>
+  <data name="JSON_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to be equivalent, but found {1} instead of {2}.</value>
+  </data>
+  <data name="JSON_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to be equivalent, but found {1} instead of {2}.</value>
+  </data>
+  <data name="JSON_CONTAIN_COUNT" xml:space="preserve">
+    <value>Expected {0} to contain {1} item(s), but found {2}.</value>
+  </data>
+  <data name="JSON_HAVE_VALUE" xml:space="preserve">
+    <value>Expected {0} to have value {1}, but found {2}.</value>
+  </data>
+  <data name="JSON_HAVE_PROPERTY" xml:space="preserve">
+    <value>Expected {0} to have property '{1}', but found {2}.</value>
+  </data>
+  <data name="JSON_HAVE_PATH" xml:space="preserve">
+    <value>Expected {0} to have path '{1}', but {2}.</value>
+  </data>
+  <data name="JSON_NOT_HAVE_PATH" xml:space="preserve">
+    <value>Expected {0} not to have path '{1}', but it exists.</value>
+  </data>
+  <data name="JSON_PATH_MISSING_PROPERTY" xml:space="preserve">
+    <value>property '{0}' was not found under '{1}'</value>
+  </data>
+  <data name="JSON_PATH_AVAILABLE" xml:space="preserve">
+    <value>(available: {0})</value>
+  </data>
+  <data name="JSON_PATH_INDEX_OUT_OF_RANGE" xml:space="preserve">
+    <value>index {0} is out of range under '{1}' ({2} element(s) present)</value>
+  </data>
+  <data name="JSON_PATH_IS_NULL" xml:space="preserve">
+    <value>'{0}' is null</value>
+  </data>
+  <data name="JSON_PATH_NOT_OBJECT" xml:space="preserve">
+    <value>'{0}' is not a JSON object</value>
+  </data>
+  <data name="JSON_PATH_NOT_ARRAY" xml:space="preserve">
+    <value>'{0}' is not a JSON array</value>
+  </data>
+  <data name="JSON_BE_STRING" xml:space="preserve">
+    <value>Expected {0} to be a JSON string, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_STRING" xml:space="preserve">
+    <value>Expected {0} not to be a JSON string, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_NUMERIC" xml:space="preserve">
+    <value>Expected {0} to be a JSON number, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_NUMERIC" xml:space="preserve">
+    <value>Expected {0} not to be a JSON number, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_BOOL" xml:space="preserve">
+    <value>Expected {0} to be a JSON boolean, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_BOOL" xml:space="preserve">
+    <value>Expected {0} not to be a JSON boolean, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_ARRAY" xml:space="preserve">
+    <value>Expected {0} to be a JSON array, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_ARRAY" xml:space="preserve">
+    <value>Expected {0} not to be a JSON array, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_UTC_DATE" xml:space="preserve">
+    <value>Expected {0} to be a UTC date, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_UTC_DATE" xml:space="preserve">
+    <value>Expected {0} not to be a UTC date, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_LOCAL_DATE" xml:space="preserve">
+    <value>Expected {0} to be a local date, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_LOCAL_DATE" xml:space="preserve">
+    <value>Expected {0} not to be a local date, but found {1}.</value>
+  </data>
+  <data name="XML_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but it was not null.</value>
+  </data>
+  <data name="XML_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found null.</value>
+  </data>
+  <data name="XML_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="XML_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT" xml:space="preserve">
+    <value>Expected {0} to have element '{1}', but it was not found.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ELEMENT" xml:space="preserve">
+    <value>Expected {0} not to have element '{1}', but it was found.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_WITH_VALUE" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ELEMENT_WITH_VALUE" xml:space="preserve">
+    <value>Expected {0} not to have element '{1}' with value '{2}', but found it.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_ONCE" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' exactly once, but found {2}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_LEAST_ONCE" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' at least once, but found {2}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_LEAST" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' at least {2} time(s), but found {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_MOST" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' at most {2} time(s), but found {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_EXACTLY" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' exactly {2} time(s), but found {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_OCCURRENCE" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' {2}, but found {3}.</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_WITH_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} to have element '{1}' in namespace '{2}', but it was not found.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>Expected {0} to have attribute '{1}', but it was not found.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>Expected {0} not to have attribute '{1}', but it was found.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_VALUE" xml:space="preserve">
+    <value>Expected {0} to have attribute '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_WITH_VALUE" xml:space="preserve">
+    <value>Expected {0} to have attribute '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="XML_NOT_HAVE_ATTRIBUTE_WITH_VALUE" xml:space="preserve">
+    <value>Expected {0} not to have attribute '{1}' with value '{2}', but found it.</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_WITH_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} to have attribute '{1}' in namespace '{2}', but it was not found.</value>
+  </data>
+  <data name="XML_HAVE_VALUE" xml:space="preserve">
+    <value>Expected {0} to have value '{1}', but found '{2}'.</value>
+  </data>
+  <data name="XML_HAVE_INNER_TEXT" xml:space="preserve">
+    <value>Expected {0} to have inner text '{1}', but found '{2}'.</value>
+  </data>
+  <data name="XML_NOT_HAVE_INNER_TEXT" xml:space="preserve">
+    <value>Expected {0} not to have inner text '{1}', but found it.</value>
+  </data>
+  <data name="XML_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} to be equivalent, but found {1} instead of {2}.</value>
+  </data>
+  <data name="XML_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to be equivalent, but found {1} instead of {2}.</value>
+  </data>
+  <data name="XML_HAVE_ROOT" xml:space="preserve">
+    <value>Expected {0} to have root '{1}', but it was not found.</value>
+  </data>
+  <data name="TIME_BE_LESS_THAN" xml:space="preserve">
+    <value>Expected execution time to be less than {0}, but found {1}.</value>
+  </data>
+  <data name="TIME_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected execution time to be less than or equal to {0}, but found {1}.</value>
+  </data>
+  <data name="TIME_BE_GREATER_THAN" xml:space="preserve">
+    <value>Expected execution time to be greater than {0}, but found {1}.</value>
+  </data>
+  <data name="TIME_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected execution time to be greater than or equal to {0}, but found {1}.</value>
+  </data>
+  <data name="TIME_BE_CLOSE_TO" xml:space="preserve">
+    <value>Expected execution time to be close to {0} (±{1}), but found {2}.</value>
+  </data>
+  <data name="EXCEPTION_MESSAGE_MATCH" xml:space="preserve">
+    <value>Expected exception message to match {0}, but found {1}.</value>
+  </data>
+  <data name="EXCEPTION_MESSAGE_NOT_MATCH" xml:space="preserve">
+    <value>Expected exception message not to match {0}, but found {1}.</value>
+  </data>
+  <data name="EXCEPTION_INNER_BE" xml:space="preserve">
+    <value>Expected inner exception to be {0}, but found {1}.</value>
+  </data>
+  <data name="EXCEPTION_INNER_BE_EXACTLY" xml:space="preserve">
+    <value>Expected inner exception to be exactly {0}, but found {1}.</value>
+  </data>
+  <data name="EXCEPTION_MATCH" xml:space="preserve">
+    <value>Expected exception to match '{0}', but it did not.</value>
+  </data>
+  <data name="EXCEPTION_PARAM_NAME" xml:space="preserve">
+    <value>Expected exception parameter name to be {0}, but found {1}.</value>
+  </data>
+  <data name="TASK_COMPLETE_WITHIN" xml:space="preserve">
+    <value>Expected {0} to complete within {1}, but it did not.</value>
+  </data>
+  <data name="TASK_COMPLETE_SUCCESSFULLY" xml:space="preserve">
+    <value>Expected {0} to complete successfully within {1}, but {2} was thrown.</value>
+  </data>
+  <data name="TASK_NOT_COMPLETE_WITHIN" xml:space="preserve">
+    <value>Expected {0} not to complete within {1}, but it completed.</value>
+  </data>
+  <data name="TASK_WITH_RESULT" xml:space="preserve">
+    <value>Expected {0} to have result {1}, but found {2}.</value>
+  </data>
+  <data name="TASK_WITH_RESULT_NOT_COMPLETED" xml:space="preserve">
+    <value>Expected {0} to have a completed result, but it did not complete.</value>
+  </data>
+  <data name="EVENT_RAISE" xml:space="preserve">
+    <value>Expected {0} to raise event '{1}', but it was not raised.</value>
+  </data>
+  <data name="EVENT_NOT_RAISE" xml:space="preserve">
+    <value>Expected {0} not to raise event '{1}', but it was raised {2} time(s).</value>
+  </data>
+  <data name="EVENT_WITH_SENDER" xml:space="preserve">
+    <value>Expected {0} to have sender {1}, but found {2}.</value>
+  </data>
+  <data name="EVENT_WITH_ARGS_COUNT" xml:space="preserve">
+    <value>Expected {0} to have {1} argument(s), but found {2}.</value>
+  </data>
+  <data name="EVENT_WITH_ARGS" xml:space="preserve">
+    <value>Expected {0} argument at index {1} to satisfy the predicate, but found {2}.</value>
+  </data>
+  <data name="EVENT_PROPERTY_CHANGE" xml:space="preserve">
+    <value>Expected {0} to raise property change for '{1}', but it was not raised.</value>
+  </data>
+  <data name="EVENT_NOT_PROPERTY_CHANGE" xml:space="preserve">
+    <value>Expected {0} not to raise property change for '{1}', but it was raised {2} time(s).</value>
+  </data>
+  <data name="BUFFERED_HAVE_SIZE_NULL" xml:space="preserve">
+    <value>Expected {0} to have buffer size {1}, but found null.</value>
+  </data>
+  <data name="BUFFERED_HAVE_SIZE" xml:space="preserve">
+    <value>Expected {0} to have buffer size {1}, but found {2}.</value>
+  </data>
+  <data name="BUFFERED_NOT_HAVE_SIZE" xml:space="preserve">
+    <value>Expected {0} not to have buffer size {1}, but found it.</value>
+  </data>
+  <data name="MESSAGE_BECAUSE" xml:space="preserve">
+    <value>because </value>
+  </data>
+  <data name="SCOPE_ASSERTION_FAILURES" xml:space="preserve">
+    <value>{0} assertion failures:</value>
+  </data>
+  <data name="ACTION_EVENTUALLY_SATISFY" xml:space="preserve">
+    <value>Expected {0} to satisfy the condition within {1}, but the last value was {2}.</value>
+  </data>
+  <data name="ACTION_EVENTUALLY_SATISFY_ERROR" xml:space="preserve">
+    <value>Expected {0} to satisfy the condition within {1}, but the last value was {2} (last error: {3}).</value>
+  </data>
+  <data name="SNAPSHOT_MISSING_BASELINE" xml:space="preserve">
+    <value>Expected {0} to match snapshot '{1}', but no verified snapshot exists. Review '{2}' and rename it to '{3}' to accept it.</value>
+  </data>
+  <data name="SNAPSHOT_MISMATCH" xml:space="preserve">
+    <value>Expected {0} to match snapshot '{1}', but the content differs. Review '{2}'.</value>
+  </data>
+  <data name="SNAPSHOT_RECEIVED_PREVIEW" xml:space="preserve">
+    <value>Received:&#xA;{0}</value>
+  </data>
+  <data name="HTTP_HAVE_STATUS_NULL" xml:space="preserve">
+    <value>Expected {0} to have status code {1}, but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_STATUS" xml:space="preserve">
+    <value>Expected {0} to have status code {1}, but found {2}.</value>
+  </data>
+  <data name="HTTP_BE_SUCCESSFUL_NULL" xml:space="preserve">
+    <value>Expected {0} to be successful, but response is null.</value>
+  </data>
+  <data name="HTTP_BE_SUCCESSFUL" xml:space="preserve">
+    <value>Expected {0} to be successful, but found {1}.</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_NULL" xml:space="preserve">
+    <value>Expected {0} to have header '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_MISSING" xml:space="preserve">
+    <value>Expected {0} to have header '{1}', but it was not found.</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_VALUE" xml:space="preserve">
+    <value>Expected {0} to have header '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be null or empty, but found {1}.</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be null or empty, but it was.</value>
+  </data>
+  <data name="STRING_CONTAIN_LINE" xml:space="preserve">
+    <value>Expected {0} to contain line {1}, but it was not found.</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_LINE" xml:space="preserve">
+    <value>Expected {0} not to contain line {1}, but found it.</value>
+  </data>
+  <data name="STRING_HAVE_LINE_COUNT_NULL" xml:space="preserve">
+    <value>Expected {0} to have {1} line(s), but found null.</value>
+  </data>
+  <data name="STRING_HAVE_LINE_COUNT" xml:space="preserve">
+    <value>Expected {0} to have {1} line(s), but found {2}.</value>
+  </data>
+  <data name="STRING_NOT_HAVE_LINE_COUNT" xml:space="preserve">
+    <value>Expected {0} not to have {1} line(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_EXACTLY" xml:space="preserve">
+    <value>Expected {0} not to contain {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>Expected {0} not to have the same count as {1} item(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>Expected {0} not to have the same count as {1} item(s), but found {2}.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_NULL" xml:space="preserve">
+    <value>Expected {0} not to equal {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL" xml:space="preserve">
+    <value>Expected {0} not to equal {1}, but they are equal.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_COUNT" xml:space="preserve">
+    <value>Expected {0} not to equal {1}, but found {2} item(s) instead of {3}.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_ORDER" xml:space="preserve">
+    <value>Expected {0} not to equal {1}, but found {2} at index {3} instead of {4}.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} not to be equivalent to {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to be equivalent to {1}, but found differences.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_SUBSET_NULL" xml:space="preserve">
+    <value>Expected {0} not to be a subset of {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>Expected {0} not to be a subset of {1}, but found {2} in the superset.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_IN_ORDER_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain {1} in order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_IN_ORDER_MISSING" xml:space="preserve">
+    <value>Expected {0} not to contain {1} in order, but found it.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONSECUTIVE_ORDER_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain {1} in consecutive order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONSECUTIVE_ORDER_MISSING" xml:space="preserve">
+    <value>Expected {0} not to contain {1} in consecutive order, but found it.</value>
+  </data>
+  <data name="COLLECTION_NOT_ASCENDING_NULL" xml:space="preserve">
+    <value>Expected {0} not to be in ascending order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_ASCENDING_ORDER" xml:space="preserve">
+    <value>Expected {0} not to be in ascending order, but found {1} after {2} at index {3}.</value>
+  </data>
+  <data name="COLLECTION_NOT_DESCENDING_NULL" xml:space="preserve">
+    <value>Expected {0} not to be in descending order, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_DESCENDING_ORDER" xml:space="preserve">
+    <value>Expected {0} not to be in descending order, but found {1} after {2} at index {3}.</value>
+  </data>
+  <data name="DICT_NOT_EQUAL_NULL" xml:space="preserve">
+    <value>Expected {0} not to equal {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_EQUAL" xml:space="preserve">
+    <value>Expected {0} not to equal {1}, but found differences.</value>
+  </data>
+  <data name="DICT_EQUAL_NULL" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_EQUAL_COUNT" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but it has {2} item(s) instead of {3}.</value>
+  </data>
+  <data name="DICT_EQUAL_MISSING_KEY" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but key '{2}' was not found.</value>
+  </data>
+  <data name="DICT_EQUAL_WRONG_VALUE" xml:space="preserve">
+    <value>Expected {0} to equal {1}, but key '{2}' was '{3}' instead of '{4}'.</value>
+  </data>
+  <data name="DICT_BE_SUBSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a subset of {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_BE_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>Expected {0} to be a subset of {1}, but found '{2}' outside of it.</value>
+  </data>
+  <data name="DICT_BE_SUPERSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a superset of {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_BE_SUPERSET" xml:space="preserve">
+    <value>Expected {0} to be a superset of {1}, but '{2}' was missing from it.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUBSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a proper subset of {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUBSET_SAME" xml:space="preserve">
+    <value>Expected {0} to be a proper subset of {1}, but they contain the same items.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUPERSET_NULL" xml:space="preserve">
+    <value>Expected {0} to be a proper superset of {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUPERSET_SAME" xml:space="preserve">
+    <value>Expected {0} to be a proper superset of {1}, but they contain the same items.</value>
+  </data>
+  <data name="DICT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>Expected {0} to have the same count ({1}) as the expected collection, but found {2}.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain key {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_FOUND" xml:space="preserve">
+    <value>Expected {0} not to contain key {1}, but found it.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIR_FOUND" xml:space="preserve">
+    <value>Expected {0} not to contain pair {1}, but found it.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIRS_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain pairs {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIRS_FOUND" xml:space="preserve">
+    <value>Expected {0} not to contain pairs {1}, but found {2}.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_PAIR" xml:space="preserve">
+    <value>Expected {0} not to contain key {1} with value {2}, but found it.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUE_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain value {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUE_FOUND" xml:space="preserve">
+    <value>Expected {0} not to contain value {1}, but found it.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUES_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain values {1}, but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUES_FOUND" xml:space="preserve">
+    <value>Expected {0} not to contain values {1}, but found them.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_EXACTLY" xml:space="preserve">
+    <value>Expected {0} not to contain {1} item(s), but found {2}.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>Expected {0} not to have the same count as {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_NOT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>Expected {0} not to have the same count as {1} item(s), but found {2}.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} not to be equivalent to {1}, but object is null.</value>
+  </data>
+  <data name="OBJECT_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} not to be equivalent to {1}, but found differences.</value>
+  </data>
+  <data name="VALUE_THAT_MATCHES" xml:space="preserve">
+    <value>Expected value to match {0}, but found {1}.</value>
+  </data>
+  <data name="VALUE_THAT_SATISFIES" xml:space="preserve">
+    <value>Expected value to satisfy the given check, but {0} was thrown: {1}.</value>
+  </data>
+  <data name="JSON_NOT_HAVE_PROPERTY" xml:space="preserve">
+    <value>Expected {0} not to have property {1}, but found it.</value>
+  </data>
+  <data name="DATE_NOT_BE_ON_OR_AFTER" xml:space="preserve">
+    <value>Expected {0} not to be on or after {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_ON_OR_BEFORE" xml:space="preserve">
+    <value>Expected {0} not to be on or before {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_YEAR" xml:space="preserve">
+    <value>Expected {0} not to have year {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MONTH" xml:space="preserve">
+    <value>Expected {0} not to have month {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_DAY" xml:space="preserve">
+    <value>Expected {0} not to have day {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_HOUR" xml:space="preserve">
+    <value>Expected {0} not to have hour {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MINUTE" xml:space="preserve">
+    <value>Expected {0} not to have minute {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_SECOND" xml:space="preserve">
+    <value>Expected {0} not to have second {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MILLISECOND" xml:space="preserve">
+    <value>Expected {0} not to have millisecond {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_ONE_OF" xml:space="preserve">
+    <value>Expected {0} to be one of {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_IN_KIND" xml:space="preserve">
+    <value>Expected {0} to have kind {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_IN_KIND" xml:space="preserve">
+    <value>Expected {0} not to have kind {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_HAVE_OFFSET" xml:space="preserve">
+    <value>Expected {0} to have offset {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_HAVE_OFFSET" xml:space="preserve">
+    <value>Expected {0} not to have offset {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY" xml:space="preserve">
+    <value>Expected {0} to be exactly {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_NOT_BE_EXACTLY" xml:space="preserve">
+    <value>Expected {0} not to be exactly {1}, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_WITHIN_NOW" xml:space="preserve">
+    <value>Expected {0} to be within {1} of the current moment, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_NOW" xml:space="preserve">
+    <value>Expected {0} to be less than {1} from the current moment, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_NOW" xml:space="preserve">
+    <value>Expected {0} to be more than {1} from the current moment, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_NOW" xml:space="preserve">
+    <value>Expected {0} to be at least {1} from the current moment, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_NOW" xml:space="preserve">
+    <value>Expected {0} to be exactly {1} from the current moment, but found {2}.</value>
+  </data>
+  <data name="DATE_BE_WITHIN_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be within {1} before {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_WITHIN_AFTER" xml:space="preserve">
+    <value>Expected {0} to be within {1} after {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be less than {1} before {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_AFTER" xml:space="preserve">
+    <value>Expected {0} to be less than {1} after {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be more than {1} before {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_AFTER" xml:space="preserve">
+    <value>Expected {0} to be more than {1} after {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be at least {1} before {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_AFTER" xml:space="preserve">
+    <value>Expected {0} to be at least {1} after {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_BEFORE" xml:space="preserve">
+    <value>Expected {0} to be exactly {1} before {2}, but found {3}.</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_AFTER" xml:space="preserve">
+    <value>Expected {0} to be exactly {1} after {2}, but found {3}.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_NULL" xml:space="preserve">
+    <value>Expected {0} to satisfy {1} inspector(s) respectively, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_COUNT" xml:space="preserve">
+    <value>Expected {0} to satisfy {1} inspector(s) respectively, but found {2} item(s).</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_FAILURES" xml:space="preserve">
+    <value>Expected {0} to satisfy {1} inspector(s) respectively, but {2} inspection(s) failed:</value>
+  </data>
+  <data name="COLLECTION_ALL_SATISFY_NULL" xml:space="preserve">
+    <value>Expected {0} to satisfy the inspector for all items, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_ALL_SATISFY_FAILURES" xml:space="preserve">
+    <value>Expected {0} to satisfy the inspector for all {1} item(s), but {2} item(s) failed:</value>
+  </data>
+  <data name="COLLECTION_SATISFY_NULL" xml:space="preserve">
+    <value>Expected {0} to satisfy {1} predicate(s), but collection is null.</value>
+  </data>
+  <data name="COLLECTION_SATISFY_UNMATCHED" xml:space="preserve">
+    <value>Expected {0} to satisfy {1} predicate(s), but {2} matched no element:</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_OF_TYPE" xml:space="preserve">
+    <value>Expected {0} for all elements to be of type {1}, but found '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_OF_TYPE_NULL" xml:space="preserve">
+    <value>Expected {0} for all elements to be of type {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>Expected {0} for all elements to be assignable to {1}, but found '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_ASSIGNABLE_TO_NULL" xml:space="preserve">
+    <value>Expected {0} for all elements to be assignable to {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_EQUIVALENT" xml:space="preserve">
+    <value>Expected {0} for all elements to be equivalent to '{1}', but found '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>Expected {0} for all elements to be equivalent to '{1}', but collection is null.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ASSIGNABLE" xml:space="preserve">
+    <value>Expected {0} to contain an item assignable to {1}, but found none.</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ASSIGNABLE_NULL" xml:space="preserve">
+    <value>Expected {0} to contain an item assignable to {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ASSIGNABLE" xml:space="preserve">
+    <value>Expected {0} not to contain an item assignable to {1}, but found '{2}' at index {3}.</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ASSIGNABLE_NULL" xml:space="preserve">
+    <value>Expected {0} not to contain an item assignable to {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_PRECEDING" xml:space="preserve">
+    <value>Expected {0} to have '{1}' immediately preceding '{2}', but found no such pair.</value>
+  </data>
+  <data name="COLLECTION_HAVE_PRECEDING_NULL" xml:space="preserve">
+    <value>Expected {0} to have '{1}' immediately preceding '{2}', but collection is null.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SUCCEEDING" xml:space="preserve">
+    <value>Expected {0} to have '{1}' immediately succeeding '{2}', but found no such pair.</value>
+  </data>
+  <data name="COLLECTION_HAVE_SUCCEEDING_NULL" xml:space="preserve">
+    <value>Expected {0} to have '{1}' immediately succeeding '{2}', but collection is null.</value>
+  </data>
+  <data name="TYPE_IMPLEMENT" xml:space="preserve">
+    <value>Expected {0} to implement {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_NOT_IMPLEMENT" xml:space="preserve">
+    <value>Expected {0} not to implement {1}, but it does.</value>
+  </data>
+  <data name="TYPE_BE_DERIVED_FROM" xml:space="preserve">
+    <value>Expected {0} to derive from {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DERIVED_FROM" xml:space="preserve">
+    <value>Expected {0} not to derive from {1}, but it does.</value>
+  </data>
+  <data name="TYPE_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} to be static, but {1}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} not to be static, but it was.</value>
+  </data>
+  <data name="TYPE_HAVE_DEFAULT_CONSTRUCTOR" xml:space="preserve">
+    <value>Expected {0} to have a default constructor, but {1}.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_DEFAULT_CONSTRUCTOR" xml:space="preserve">
+    <value>Expected {0} not to have a default constructor, but it does.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_CONSTRUCTOR" xml:space="preserve">
+    <value>Expected {0} not to have constructor ({1}), but it was found.</value>
+  </data>
+  <data name="TYPE_HAVE_INDEXER" xml:space="preserve">
+    <value>Expected {0} to have indexer of type {1} with parameters ({2}), but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_INDEXER" xml:space="preserve">
+    <value>Expected {0} not to have indexer with parameters ({1}), but it was found.</value>
+  </data>
+  <data name="TYPE_HAVE_IMPLICIT_CONVERSION" xml:space="preserve">
+    <value>Expected {0} to have an implicit conversion operator for {1}, but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_IMPLICIT_CONVERSION" xml:space="preserve">
+    <value>Expected {0} not to have an implicit conversion operator for {1}, but it was found.</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_CONVERSION" xml:space="preserve">
+    <value>Expected {0} to have an explicit conversion operator for {1}, but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_CONVERSION" xml:space="preserve">
+    <value>Expected {0} not to have an explicit conversion operator for {1}, but it was found.</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_METHOD" xml:space="preserve">
+    <value>Expected {0} to have explicit method '{1}', but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_METHOD" xml:space="preserve">
+    <value>Expected {0} not to have explicit method '{1}', but it was found.</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_PROPERTY" xml:space="preserve">
+    <value>Expected {0} to have explicit property '{1}', but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_PROPERTY" xml:space="preserve">
+    <value>Expected {0} not to have explicit property '{1}', but it was found.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>Expected {0} not to be decorated with {1} or inherit it, but it was found.</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>Expected {0} not to have {1} accessibility, but found {2}.</value>
+  </data>
+  <data name="TYPE_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="METHOD_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>Expected {0} not to be virtual, but {1}.</value>
+  </data>
+  <data name="METHOD_NOT_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} not to be static, but {1}.</value>
+  </data>
+  <data name="METHOD_BE_ASYNC" xml:space="preserve">
+    <value>Expected {0} to be async, but {1}.</value>
+  </data>
+  <data name="METHOD_NOT_BE_ASYNC" xml:space="preserve">
+    <value>Expected {0} not to be async, but {1}.</value>
+  </data>
+  <data name="METHOD_NOT_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>Expected {0} not to have return type {1}, but found {2}.</value>
+  </data>
+  <data name="METHOD_RETURN_VOID" xml:space="preserve">
+    <value>Expected {0} to return void, but found {1}.</value>
+  </data>
+  <data name="METHOD_NOT_RETURN_VOID" xml:space="preserve">
+    <value>Expected {0} not to return void, but found {1}.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_READABLE" xml:space="preserve">
+    <value>Expected {0} not to be readable, but {1}.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>Expected {0} not to be writable, but {1}.</value>
+  </data>
+  <data name="PROPERTY_BE_VIRTUAL" xml:space="preserve">
+    <value>Expected {0} to be virtual, but {1}.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>Expected {0} not to be virtual, but {1}.</value>
+  </data>
+  <data name="PROPERTY_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>Expected {0} to have return type {1}, but found {2}.</value>
+  </data>
+  <data name="PROPERTY_NOT_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>Expected {0} not to have return type {1}, but found {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_READABLE_ACCESS" xml:space="preserve">
+    <value>Expected {0} to be readable with {1} access, but found {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_WRITABLE_ACCESS" xml:space="preserve">
+    <value>Expected {0} to be writable with {1} access, but found {2}.</value>
+  </data>
+  <data name="ASSEMBLY_BE_UNSIGNED" xml:space="preserve">
+    <value>Expected {0} to be unsigned, but it was signed.</value>
+  </data>
+  <data name="ASSEMBLY_BE_UNSIGNED_NULL" xml:space="preserve">
+    <value>Expected {0} to be unsigned, but found null.</value>
+  </data>
+  <data name="ASSEMBLY_BE_SIGNED_WITH_KEY" xml:space="preserve">
+    <value>Expected {0} to be signed with public key '{1}', but found {2}.</value>
+  </data>
+  <data name="ASSEMBLY_BE_SIGNED_WITH_KEY_NULL" xml:space="preserve">
+    <value>Expected {0} to be signed with public key '{1}', but found null.</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_SEALED" xml:space="preserve">
+    <value>Expected {0} not to be sealed, but it was.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_DECORATED" xml:space="preserve">
+    <value>Expected {0} to be decorated with {1}, but it was not.</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>Expected {0} not to be decorated with {1}, but it was.</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>Expected {0} to be decorated with {1} or inherit it, but it was not.</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>Expected {0} not to be decorated with {1} or inherit it, but it was.</value>
+  </data>
+  <data name="SELECTOR_BE_IN_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} to be in namespace '{1}', but it was not.</value>
+  </data>
+  <data name="SELECTOR_NOT_BE_IN_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} not to be in namespace '{1}', but it was.</value>
+  </data>
+  <data name="SELECTOR_BE_UNDER_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} to be under namespace '{1}', but it was not.</value>
+  </data>
+  <data name="SELECTOR_NOT_BE_UNDER_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} not to be under namespace '{1}', but it was.</value>
+  </data>
+  <data name="MEMBER_HAVE_COUNT" xml:space="preserve">
+    <value>Expected selected members to contain {0} item(s), but found {1}.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED" xml:space="preserve">
+    <value>Expected member '{0}' to be decorated with {1}, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>Expected member '{0}' not to be decorated with {1}, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>Expected member '{0}' to be decorated with {1} or inherit it, but it was not.</value>
+  </data>
+  <data name="MEMBER_RETURN" xml:space="preserve">
+    <value>Expected member '{0}' to return {1}, but it returns {2}.</value>
+  </data>
+  <data name="MEMBER_RETURN_VOID" xml:space="preserve">
+    <value>Expected member '{0}' to return void, but it returns {1}.</value>
+  </data>
+  <data name="MEMBER_BE_ASYNC" xml:space="preserve">
+    <value>Expected method '{0}' to be async, but it was not.</value>
+  </data>
+  <data name="MEMBER_BE_VIRTUAL" xml:space="preserve">
+    <value>Expected member '{0}' to be virtual, but it was not.</value>
+  </data>
+  <data name="MEMBER_BE_STATIC" xml:space="preserve">
+    <value>Expected member '{0}' to be static, but it was not.</value>
+  </data>
+  <data name="MEMBER_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>Expected member '{0}' to have access modifier {1}, but it has {2}.</value>
+  </data>
+  <data name="MEMBER_HAVE_DECLARING_TYPE" xml:space="preserve">
+    <value>Expected member '{0}' to be declared in {1}, but it is declared in {2}.</value>
+  </data>
+  <data name="MEMBER_BE_READ_ONLY" xml:space="preserve">
+    <value>Expected property '{0}' to be read-only, but it was not.</value>
+  </data>
+  <data name="MEMBER_BE_WRITE_ONLY" xml:space="preserve">
+    <value>Expected property '{0}' to be write-only, but it was not.</value>
+  </data>
+  <data name="MEMBER_BE_WRITABLE" xml:space="preserve">
+    <value>Expected property '{0}' to be writable, but it was not.</value>
+  </data>
+  <data name="MEMBER_HAVE_GETTER" xml:space="preserve">
+    <value>Expected property '{0}' to have a getter, but it does not.</value>
+  </data>
+  <data name="MEMBER_HAVE_SETTER" xml:space="preserve">
+    <value>Expected property '{0}' to have a setter, but it does not.</value>
+  </data>
+  <data name="MEMBER_NOT_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>Expected member '{0}' not to have access modifier {1}, but it does.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>Expected member '{0}' to be decorated with {1} matching the predicate, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>Expected member '{0}' not to be decorated with {1} matching the predicate, but it was.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_ASYNC" xml:space="preserve">
+    <value>Expected method '{0}' not to be async, but it was.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>Expected member '{0}' not to be virtual, but it was.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>Expected property '{0}' not to be writable, but it was.</value>
+  </data>
+</root>

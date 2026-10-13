@@ -1,0 +1,22 @@
+{
+  "build": {
+    "content": [
+      {
+        "files": [
+          "index.md",
+          "toc.yml",
+          "en/*.md",
+          "ar/*.md"
+        ],
+        "exclude": [
+          "_site/**"
+        ]
+      }
+    ],
+    "dest": "_site",
+    "globalMetadata": {
+      "_appTitle": "Jeninnet.Assertions Documentation",
+      "_enableSearch": true
+    }
+  }
+}
