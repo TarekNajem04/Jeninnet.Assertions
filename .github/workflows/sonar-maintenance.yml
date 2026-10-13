@@ -12,6 +12,7 @@ on:
           - "list"
           - "rename-main"
           - "delete-branch"
+          - "quality-gate"
       branch:
         description: "Branch name (delete-branch only)"
         required: false
@@ -44,6 +45,11 @@ jobs:
         if: inputs.action == 'delete-branch'
         run: |
           curl -sS -u "$SONAR_TOKEN:" -X POST "https://sonarcloud.io/api/project_branches/delete?project=$PROJECT&branch=${{ inputs.branch }}"
+
+      - name: Quality gate details
+        if: inputs.action == 'quality-gate'
+        run: |
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/qualitygates/project_status?project=$PROJECT&branch=main"
 
       - name: Final listing
         if: always()
