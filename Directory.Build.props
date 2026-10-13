@@ -15,6 +15,15 @@
         <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
         <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
 
+        <!--
+            The SDK disables reference assemblies for netstandard2.0/2.1 targets for backward
+            compatibility. Tooling that resolves project references through their ref outputs
+            (DocFX metadata extraction, dotnet format) then warns
+            "Found project reference without a matching metadata reference" - and the docs build
+            runs with warnings treated as errors, so it fails. Produce them for every target framework.
+        -->
+        <ProduceReferenceAssembly>true</ProduceReferenceAssembly>
+
         <GenerateAssemblyInfo>true</GenerateAssemblyInfo>
 
         <GenerateDocumentationFile>true</GenerateDocumentationFile>
