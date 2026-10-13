@@ -43,14 +43,14 @@ jobs:
       - name: Show new code period
         if: inputs.action == 'show-new-code'
         run: |
-          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/new_code_periods/show?project=$PROJECT"
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/settings/values?component=$PROJECT&keys=sonar.leak.period,sonar.newCode.referenceBranch"
 
       - name: Set new code period to 30 days
         if: inputs.action == 'set-new-code-days'
         run: |
-          curl -sS -u "$SONAR_TOKEN:" -X POST "https://sonarcloud.io/api/new_code_periods/set?project=$PROJECT&type=NUMBER_OF_DAYS&value=30"
+          curl -sS -u "$SONAR_TOKEN:" -X POST "https://sonarcloud.io/api/settings/set?component=$PROJECT&key=sonar.leak.period&value=30"
           echo ""
-          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/new_code_periods/show?project=$PROJECT"
+          curl -sS -u "$SONAR_TOKEN:" "https://sonarcloud.io/api/settings/values?component=$PROJECT&keys=sonar.leak.period,sonar.newCode.referenceBranch"
 
       - name: Quality gate details
         if: inputs.action == 'quality-gate'
