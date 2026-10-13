@@ -1,4 +1,4 @@
-<#
+﻿<#
 .SYNOPSIS
     Previews SonarCloud analysis locally before pushing to GitHub.
 
@@ -7,30 +7,25 @@
     .github/workflows/sonarcloud.yml from your machine, then prints the
     open issues and the Quality Gate status that CI would report.
 
-    Two servers are supported: SonarCloud (default) and a local SonarQube
-    server started from the Community Build zip (-Local).
-
     Two modes are available:
 
     -FetchIssues
-        Queries the server only. Read-only, no local analysis is run.
+        Queries SonarCloud only. Read-only, no local analysis is run.
 
     Default
         Builds the solution, runs the analysis, then prints the report.
         Tests and coverage are skipped unless -WithCoverage is specified.
 
     Notes:
-    - Requires a token (-Token or the SONAR_TOKEN environment variable).
-      SonarCloud: create a User Token at
-      SonarCloud > My Account > Security > Tokens.
-      Local: create one at http://localhost:9000 > My Account > Security
-      (the first login is admin/admin).
-    - SonarCloud only (not local): the Free plan only accepts main branch
-      analyses, and a local analysis replaces the latest main branch
-      snapshot. The next CI run restores it.
+    - Requires a SonarCloud token (-Token or the SONAR_TOKEN environment
+      variable). Create a User Token at:
+      SonarCloud > My Account > Security > Tokens
+    - The SonarCloud Free plan only accepts main branch analyses, and a
+      local analysis replaces the latest main branch snapshot.
+      The next CI run restores it.
 
 .PARAMETER FetchIssues
-    Fetches the open issues currently reported by the server
+    Fetches the open issues currently reported by SonarCloud
     without running a local analysis.
 
 .PARAMETER WithCoverage
@@ -41,31 +36,14 @@
     Exits with code 1 when the Quality Gate status is not OK,
     simulating sonar.qualitygate.wait=true used by CI.
 
-.PARAMETER Local
-    Uses the local SonarQube server at http://localhost:9000
-    instead of SonarCloud.
-
-.PARAMETER ServerUrl
-    Overrides the Sonar server URL
-    (defaults to SonarCloud, or http://localhost:9000 with -Local).
-
-.PARAMETER ProjectKey
-    The Sonar project key. Defaults to jeninnet-assertions.
-
 .PARAMETER Token
-    Sonar token.
+    SonarCloud token.
     Defaults to the SONAR_TOKEN environment variable.
 
 .EXAMPLE
     .\preview.ps1 -FetchIssues
 
     Lists the open issues currently stored in SonarCloud.
-
-.EXAMPLE
-    .\preview.ps1 -Local -Token $env:SONAR_TOKEN
-
-    Builds and analyzes the working copy against the local SonarQube
-    server, then prints the report.
 
 .EXAMPLE
     .\preview.ps1
@@ -101,18 +79,6 @@ param(
     $FailOnQualityGate,
 
 
-    [switch]
-    $Local,
-
-
-    [string]
-    $ServerUrl,
-
-
-    [string]
-    $ProjectKey = "jeninnet-assertions",
-
-
     [string]
     $Token = $env:SONAR_TOKEN
 )
@@ -123,15 +89,8 @@ $ErrorActionPreference = "Stop"
 
 
 $script:Organization = "jeninnet"
-$script:ProjectKey = $ProjectKey
-$script:SonarHostUrl = if ($ServerUrl) { $ServerUrl.TrimEnd('/') } elseif ($Local) { "http://localhost:9000" } else { "https://sonarcloud.io" }
-$script:IsSonarCloud = $script:SonarHostUrl -like "*sonarcloud.io*"
-$script:TokenHint = if ($script:IsSonarCloud) {
-    "Create a User Token at SonarCloud > My Account > Security > Tokens"
-}
-else {
-    "Create a token at $script:SonarHostUrl > My Account > Security > Tokens (first login is admin/admin)"
-}
+$script:ProjectKey = "jeninnet-assertions"
+$script:SonarHostUrl = "https://sonarcloud.io"
 
 
 Import-Module -Name (Join-Path $PSScriptRoot ".." "common" "Common.psd1") -Force
@@ -180,11 +139,11 @@ function Get-SonarApi {
                 continue
             }
 
-            throw "Sonar API request failed: $($_.Exception.Message)"
+            throw "SonarCloud API request failed: $($_.Exception.Message)"
         }
     }
 
-    throw "The server rejected the token. $script:TokenHint, then pass it with -Token or `$env:SONAR_TOKEN."
+    throw "SonarCloud rejected the token. Create a User Token at SonarCloud > My Account > Security > Tokens, then pass it with -Token or `$env:SONAR_TOKEN."
 }
 
 
@@ -193,7 +152,7 @@ function Test-SonarToken {
     $result = Get-SonarApi -Path "api/authentication/validate"
 
     if (-not $result.valid) {
-        throw "The token is not valid. $script:TokenHint."
+        throw "The SonarCloud token is not valid. Create a User Token at SonarCloud > My Account > Security > Tokens."
     }
 }
 
@@ -247,17 +206,16 @@ function Wait-SonarAnalysis {
     )
 
 
-    Write-Step "Waiting for the Sonar server to process the analysis..."
+    Write-Step "Waiting for SonarCloud to process the analysis..."
 
 
     Start-Sleep -Seconds 5
 
     $deadline = (Get-Date).AddSeconds($TimeoutSeconds)
-    $started = if ($script:AnalysisStart) { $script:AnalysisStart } else { (Get-Date).AddMinutes(-1) }
 
     while ((Get-Date) -lt $deadline) {
 
-        $activity = Get-SonarApi -Path "api/ce/activity" -Query "ps=50"
+        $activity = Get-SonarApi -Path "api/ce/activity" -Query "component=$script:ProjectKey&ps=10"
 
         $tasks = @()
 
@@ -265,41 +223,18 @@ function Wait-SonarAnalysis {
             $tasks = @($activity.tasks)
         }
 
-        $recent = @()
-
-        foreach ($task in $tasks) {
-
-            if (-not $task.PSObject.Properties["componentKey"] -or $task.componentKey -ne $script:ProjectKey) {
-                continue
-            }
-
-            if (-not $task.PSObject.Properties["submittedAt"] -or -not $task.submittedAt) {
-                continue
-            }
-
-            if (([datetime]$task.submittedAt) -lt $started.AddSeconds(-30)) {
-                continue
-            }
-
-            $recent += $task
-        }
-
-        $activeTask = $recent | Where-Object {
+        $activeTask = $tasks | Where-Object {
             $_.status -in @("PENDING", "IN_PROGRESS", "RUNNING")
         } | Select-Object -First 1
 
-        $finishedTask = $recent | Where-Object {
-            $_.status -in @("SUCCESS", "FAILED", "CANCELED")
-        } | Select-Object -First 1
-
-        if ($null -eq $activeTask -and $null -ne $finishedTask) {
+        if ($null -eq $activeTask) {
             return
         }
 
         Start-Sleep -Seconds 5
     }
 
-    Write-Host "Timed out waiting for Sonar processing. Results may be stale." -ForegroundColor Yellow
+    Write-Host "Timed out waiting for SonarCloud processing. Results may be stale." -ForegroundColor Yellow
 }
 
 
@@ -523,7 +458,7 @@ try {
 
     if ([string]::IsNullOrWhiteSpace($Token)) {
 
-        throw "No token found. Set `$env:SONAR_TOKEN or pass -Token. $script:TokenHint."
+        throw "No SonarCloud token found. Set `$env:SONAR_TOKEN or pass -Token. Create a User Token at SonarCloud > My Account > Security > Tokens."
     }
 
 
@@ -549,7 +484,6 @@ try {
     Write-Section "Environment"
     Write-Host "Repository : $repositoryRoot"
     Write-Host "Project    : $script:ProjectKey"
-    Write-Host "Server     : $script:SonarHostUrl"
 
 
     $javaHome = Resolve-JavaHome
@@ -565,7 +499,7 @@ try {
 
     $currentBranch = (& git -C $repositoryRoot rev-parse --abbrev-ref HEAD 2>$null | Out-String).Trim()
 
-    if ($script:IsSonarCloud -and $currentBranch -and $currentBranch -ne "main") {
+    if ($currentBranch -and $currentBranch -ne "main") {
 
         Write-Host ""
         Write-Host "Warning: git branch is '$currentBranch'." -ForegroundColor Yellow
@@ -589,14 +523,8 @@ try {
     $beginArguments = @(
         "sonarscanner",
         "begin",
-        "/k:$script:ProjectKey"
-    )
-
-    if ($script:IsSonarCloud) {
-        $beginArguments += "/o:$script:Organization"
-    }
-
-    $beginArguments += @(
+        "/k:$script:ProjectKey",
+        "/o:$script:Organization",
         "/d:sonar.host.url=$script:SonarHostUrl",
         "/d:sonar.token=$Token",
         "/d:sonar.cs.vstest.reportsPaths=TestResults/**/*.trx",
@@ -610,12 +538,11 @@ try {
 
     $failureMessage = ""
     $analysisStarted = $false
-    $script:AnalysisStart = Get-Date
 
 
     try {
 
-        Invoke-DotNetCommand -Label "Begin Sonar analysis" -Arguments $beginArguments
+        Invoke-DotNetCommand -Label "Begin SonarCloud analysis" -Arguments $beginArguments
 
         $analysisStarted = $true
 
@@ -632,6 +559,7 @@ try {
                 Invoke-DotNetCommand -Label "Run tests with coverage" -Arguments @(
                     "test",
                     "-c", "Release",
+                    "--no-build",
                     "--settings", "tests/Jeninnet.Assertions.Tests/.runsettings",
                     "--collect:XPlat Code Coverage",
                     "--logger", "trx;LogFileName=results.trx",
@@ -652,7 +580,7 @@ try {
 
         if ($analysisStarted) {
 
-            Write-Step "End Sonar analysis..."
+            Write-Step "End SonarCloud analysis..."
 
             & dotnet sonarscanner end "/d:sonar.token=$Token"
 
@@ -693,15 +621,8 @@ try {
 
     Write-Host ""
     Write-Host "Dashboard:" -ForegroundColor Cyan
-
-    if ($script:IsSonarCloud) {
-        Write-Host "  $script:SonarHostUrl/project/issues?id=$script:ProjectKey"
-        Write-Host "  $script:SonarHostUrl/summary/new_code?id=$script:ProjectKey"
-    }
-    else {
-        Write-Host "  $script:SonarHostUrl/dashboard?id=$script:ProjectKey"
-        Write-Host "  $script:SonarHostUrl/project/issues?id=$script:ProjectKey"
-    }
+    Write-Host "  https://sonarcloud.io/project/issues?id=$script:ProjectKey"
+    Write-Host "  https://sonarcloud.io/summary/new_code?id=$script:ProjectKey"
 
 
     if ($FailOnQualityGate -and $gate.status -ne "OK") {
