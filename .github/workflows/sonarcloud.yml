@@ -127,14 +127,13 @@ jobs:
       # 8) Begin SonarCloud analysis
       # ---------------------------------------------------------
       - name: Begin SonarCloud analysis
-        if: env.SONAR_TOKEN != ''
+        if: env.SONAR_TOKEN != '' && github.event_name == 'push'
         run: |
           dotnet sonarscanner begin \
             /k:"jeninnet-assertions" \
-            /o:"jeninnet" \
+            /o:"jeninnet-assertions" \
             /d:sonar.host.url="https://sonarcloud.io" \
             /d:sonar.token="$SONAR_TOKEN" \
-            /d:sonar.qualitygate.wait=true \
             /d:sonar.cs.vstest.reportsPaths="TestResults/**/*.trx" \
             /d:sonar.cs.opencover.reportsPaths="**/coverage.opencover.xml" \
             /d:sonar.coverage.exclusions="**/*.ps1,**/*.md,docs/**,scripts/**,.github/**,assets/**,badges/**,private/**" \
@@ -176,7 +175,7 @@ jobs:
       # 12) End SonarCloud analysis
       # ---------------------------------------------------------
       - name: End SonarCloud analysis
-        if: env.SONAR_TOKEN != ''
+        if: env.SONAR_TOKEN != '' && github.event_name == 'push'
         run: |
           dotnet sonarscanner end \
             /d:sonar.token="$SONAR_TOKEN"
