@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Anonymous versus named failure message">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="0%" r="80%">
+      <stop offset="0%" stop-color="#2D7DD2" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#2D7DD2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" fill="#0B1220"/>
+  <rect width="1200" height="630" fill="url(#glow)"/>
+  <text x="64" y="72" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#8B949E">01 · THE FAILURE MESSAGE</text>
+  <text x="64" y="128" font-family="Segoe UI, Arial, sans-serif" font-size="44" font-weight="bold" fill="#FFFFFF">Anonymous vs named</text>
+  <rect x="64" y="164" width="1072" height="152" rx="14" fill="#161B22" stroke="#30363D" stroke-width="2"/>
+  <line x1="80" y1="176" x2="80" y2="304" stroke="#DA3633" stroke-width="5" stroke-linecap="round"/>
+  <text x="110" y="240" font-family="Consolas, 'Courier New', monospace" font-size="28" fill="#8B949E">Expected True, but found False.</text>
+  <circle cx="1050" cy="240" r="20" fill="#DA3633"/>
+  <path d="M1041 231 L1059 249 M1059 231 L1041 249" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round"/>
+  <text x="110" y="282" font-family="Segoe UI, Arial, sans-serif" font-size="21" fill="#6E7681">Anonymous — names nothing. Which assertion failed?</text>
+  <rect x="64" y="332" width="1072" height="168" rx="14" fill="#0E1A13" stroke="#238636" stroke-width="2"/>
+  <line x1="80" y1="344" x2="80" y2="488" stroke="#3FB950" stroke-width="5" stroke-linecap="round"/>
+  <text x="110" y="407" font-family="Consolas, 'Courier New', monospace" font-size="28" fill="#E9EDF3">Expected username to be <tspan fill="#A5D6FF">'jonas'</tspan>, but found <tspan fill="#FF7B72">'dennis'</tspan>.</text>
+  <circle cx="1050" cy="402" r="20" fill="#238636"/>
+  <path d="M1040 402 L1047 409 L1061 393" fill="none" stroke="#FFFFFF" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="110" y="449" font-family="Segoe UI, Arial, sans-serif" font-size="21" fill="#9AA4B2">Self-locating — pastes cleanly into any thread.</text>
+  <text x="600" y="556" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#8B949E">Same failed comparison — one rules nothing out, the other locates itself.</text>
+</svg>

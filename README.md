@@ -1,5 +1,16 @@
 # Jeninnet.Assertions
 
+<img src="assets/hero-diagnostic-surface.svg" alt="Jeninnet.Assertions — a failing assertion and the diagnostic message that names its subject" width="100%">
+
+![GitHub Actions CI Workflow Status](https://img.shields.io/github/actions/workflow/status/TarekNajem04/Jeninnet.Assertions/ci.yml)
+![GitHub release](https://img.shields.io/github/v/release/TarekNajem04/Jeninnet.Assertions)
+![GitHub contributors](https://img.shields.io/github/contributors/TarekNajem04/Jeninnet.Assertions)
+[![GitHub stars](https://img.shields.io/github/stars/TarekNajem04/Jeninnet.Assertions)](https://github.com/TarekNajem04/Jeninnet.Assertions/stargazers)
+[![GitHub license](https://img.shields.io/github/license/TarekNajem04/Jeninnet.Assertions)](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/LICENSE)
+
+![NuGet Version](https://img.shields.io/nuget/v/Jeninnet.Assertions)
+[![NuGet downloads](https://img.shields.io/nuget/dt/Jeninnet.Assertions)](https://www.nuget.org/packages/Jeninnet.Assertions/)
+
 A fluent, framework-agnostic assertion library for .NET, providing expressive validation for objects, strings, collections, numerics, dates, exceptions, asynchronous operations, reflection metadata, streams, XML, JSON, events, and IO test infrastructure.
 
 This repository contains the **standalone** `Jeninnet.Assertions` package. It has been separated from the `Jeninnet.Localization` repository so it can build, test, and publish independently.

@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="420" viewBox="0 0 1200 420" role="img" aria-label="Fluent assertion chain: value.Should().Be(jonas).And.NotBeNull()">
+  <defs>
+    <radialGradient id="glow" cx="50%" cy="0%" r="90%">
+      <stop offset="0%" stop-color="#2D7DD2" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#2D7DD2" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="420" fill="#0B1220"/>
+  <rect width="1200" height="420" fill="url(#glow)"/>
+  <text x="600" y="78" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#8B949E">FLUENT BY CONSTRUCTION</text>
+  <rect x="65" y="150" width="178" height="68" rx="12" fill="#131A26" stroke="#2D7DD2" stroke-width="2"/>
+  <text x="154" y="195" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" fill="#FFA657">"jonas"</text>
+  <line x1="249" y1="184" x2="281" y2="184" stroke="#2D7DD2" stroke-width="3"/>
+  <polygon points="287,184 275,177 275,191" fill="#2D7DD2"/>
+  <rect x="297" y="150" width="196" height="68" rx="12" fill="#131A26" stroke="#2D7DD2" stroke-width="2"/>
+  <text x="395" y="195" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" fill="#79C0FF">Should()</text>
+  <line x1="499" y1="184" x2="531" y2="184" stroke="#2D7DD2" stroke-width="3"/>
+  <polygon points="537,184 525,177 525,191" fill="#2D7DD2"/>
+  <rect x="547" y="150" width="124" height="68" rx="12" fill="#131A26" stroke="#2D7DD2" stroke-width="2"/>
+  <text x="609" y="195" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" fill="#79C0FF">Be()</text>
+  <line x1="677" y1="184" x2="709" y2="184" stroke="#2D7DD2" stroke-width="3"/>
+  <polygon points="715,184 703,177 703,191" fill="#2D7DD2"/>
+  <rect x="725" y="150" width="102" height="68" rx="12" fill="#131A26" stroke="#2D7DD2" stroke-width="2"/>
+  <text x="776" y="195" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" fill="#E6EDF3">And</text>
+  <line x1="833" y1="184" x2="865" y2="184" stroke="#2D7DD2" stroke-width="3"/>
+  <polygon points="871,184 859,177 859,191" fill="#2D7DD2"/>
+  <rect x="881" y="150" width="250" height="68" rx="12" fill="#131A26" stroke="#2D7DD2" stroke-width="2"/>
+  <text x="1006" y="195" text-anchor="middle" font-family="Consolas, 'Courier New', monospace" font-size="30" fill="#79C0FF">NotBeNull()</text>
+  <text x="239" y="300" font-family="Consolas, 'Courier New', monospace" font-size="28" fill="#E6EDF3">value<tspan fill="#79C0FF">.Should()</tspan><tspan fill="#79C0FF">.Be(</tspan><tspan fill="#A5D6FF">"jonas"</tspan>).And<tspan fill="#79C0FF">.NotBeNull()</tspan>;</text>
+  <text x="600" y="362" text-anchor="middle" font-family="Segoe UI, Arial, sans-serif" font-size="22" fill="#8B949E">reads like a sentence, fails like a report</text>
+</svg>
