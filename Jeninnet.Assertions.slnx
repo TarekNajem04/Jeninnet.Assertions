@@ -68,7 +68,11 @@
         <File Path="ROADMAP.md" />
     </Folder>
     
-    <Folder Name="/doc/" />
+    <Folder Name="/doc/">
+        <File Path="docs/docfx.json" />
+        <File Path="docs/index.md" />
+        <File Path="docs/toc.yml" />
+    </Folder>
     
     <Folder Name="/doc/en/">
         <File Path="docs/en/00-index.md" />
