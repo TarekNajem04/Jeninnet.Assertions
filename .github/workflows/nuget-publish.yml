@@ -49,10 +49,14 @@ jobs:
       - name: Setup .NET SDK
         uses: actions/setup-dotnet@v6.0.0
         with:
+          # The SDK version comes from global.json.
+          global-json-file: global.json
+
+      - name: Install .NET 9 runtime for the analyzer tests
+        uses: actions/setup-dotnet@v6.0.0
+        with:
           # 9.0.x: the analyzer test project targets net9.0 and its test host needs the .NET 9 runtime.
-          dotnet-version: |
-            9.0.x
-            10.0.x
+          dotnet-version: 9.0.x
 
       # ---------------------------------------------------------
       # 3) Resolve Version from Tag
@@ -66,13 +70,15 @@ jobs:
           echo "Publishing version: $VERSION"
 
       # ---------------------------------------------------------
-      # 4) Verify Package Versions match Tag
+      # 4) Verify the solution-wide version matches the Tag
+      #    (Directory.Build.props owns <Version> for every package)
       # ---------------------------------------------------------
-      - name: Verify project versions
+      - name: Verify solution version
         shell: pwsh
         run: |
           $expected = "${{ steps.version.outputs.version }}"
-          $projectList = "${{ env.PROJECTS }}".Split(' ', [System.StringSplitOptions]::RemoveEmptyEntries)
+          $props = [xml](Get-Content -LiteralPath Directory.Build.props -Raw)
+          $actual = @($props.Project.PropertyGroup | ForEach-Object { $_.Version } | Where-Object { $_ }) | Select-Object -First 1
 
           # NuGet treats 1.0.0 and 1.0.0.0 as the same version, so compare four-part numeric forms.
           function Get-FourPartVersion([string]$version) {
@@ -84,21 +90,15 @@ jobs:
             return ($parts -join '.')
           }
 
-          foreach ($project in $projectList) {
-            # Resolve the effective Version property (projects may inherit it from Directory.Build.props).
-            $actual = (dotnet msbuild $project -getProperty:Version -nologo -verbosity:quiet).Trim()
-            if ($actual -eq $expected) {
-              continue
-            }
-
+          if ($actual -ne $expected) {
             $expectedNormalized = Get-FourPartVersion $expected
             $actualNormalized = Get-FourPartVersion $actual
-            if ($null -ne $expectedNormalized -and $null -ne $actualNormalized -and $actualNormalized -eq $expectedNormalized) {
-              continue
+            if ($null -eq $expectedNormalized -or $null -eq $actualNormalized -or $actualNormalized -ne $expectedNormalized) {
+              throw "Validation failed: Directory.Build.props Version '$actual' does not match tag version '$expected'."
             }
-
-            throw "Validation failed: $project version '$actual' does not match tag version '$expected'."
           }
+
+          Write-Host "Version verified: $actual"
 
       # ---------------------------------------------------------
       # 5) Build and Test

@@ -17,6 +17,75 @@ This repository contains the **standalone** `Jeninnet.Assertions` package. It ha
 
 Targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`.
 
+## See it in action
+
+One test that pins the clock, batches independent failures, and treats architecture as an assertion — the library itself references no test framework, so this body runs unchanged under xUnit, NUnit, MSTest, or a plain console check:
+
+```csharp
+using Jeninnet.Assertions;
+using Jeninnet.Assertions.Types;
+
+public abstract record Entity(string Id);
+public sealed record Order(string Id, decimal Amount, DateTime CreatedAt, string Status) : Entity(Id);
+
+// Subject under test: reads the ambient clock instead of DateTime.UtcNow.
+public class OrderProcessor {
+    public async Task<Order> ProcessAsync(Order order) {
+        await Task.Delay(10);
+        return order with { Status = "Processed", CreatedAt = AssertionClock.Current.UtcNow.DateTime };
+    }
+}
+
+async Task Processing_pins_time_batches_failures_and_enforces_sealing() {
+    var order = new Order("ORD-99", 1500.00m, DateTime.MinValue, "New");
+
+    using(AssertionIsolation.Isolate()) {
+        // Freeze the clock: every time-relative verb and the subject both see this instant.
+        AssertionClock.Current = new ManualClock(new DateTimeOffset(2026, 10, 30, 12, 0, 0, TimeSpan.Zero));
+
+        var result = await new OrderProcessor().ProcessAsync(order);
+
+        // Two independent checks; if either fails, both appear in one report.
+        using var scope = new AssertionScope();
+        result.Status.Should().Be("Processed");
+        result.CreatedAt.Should().Be(new DateTime(2026, 10, 30, 12, 0, 0));
+
+        // Architecture as a test: every Entity subtype must be sealed.
+        AllTypes.From(typeof(Order).Assembly)
+            .ThatDeriveFrom<Entity>()
+            .Should().BeSealed();
+    }
+}
+```
+
+Assert `"Shipped"` instead of `"Processed"` and expect the earlier hour: the scope then reports every failure at once instead of stopping at the first:
+
+```text
+2 assertion failures:
+1. Expected result.Status to be 'Shipped', but found 'Processed'.
+2. Expected result.CreatedAt to be 10/30/2026 11:00:00, but found 10/30/2026 12:00:00.
+```
+
+The architecture assertion fails the same way when a new subtype forgets the `sealed` keyword:
+
+```text
+Expected UnsealedOrder to be sealed, but it was not.
+```
+
+Diagnostics go beyond the message: a mistyped lookup key names the nearest existing one, across dictionary keys, JSON properties and paths, and string collections:
+
+```text
+Expected settings to contain key 'nmae', but it was not found. Did you mean 'name'?
+```
+
+And the messages themselves are a product, not an afterthought — point `AssertionCulture.Current` at another culture and the same failure is reported in that language (Arabic ships complete, French as a reference satellite):
+
+```text
+المتوقع من result.CreatedAt أن يكون 10/30/2026 11:00:00، لكن وُجد 10/30/2026 12:00:00.
+```
+
+Beyond the two `using` directives at the top, nothing above needs setup: `AssertionIsolation.Isolate()` restores the clock, culture, formatter registry, and equivalency template when the scope exits, even through an exception.
+
 ## License and independence
 
 This library is **MIT licensed** and depends on no test framework: nothing from MSTest, xUnit, or NUnit
@@ -331,6 +400,9 @@ Token-aware delegates are first-class: `HonorCancellationAsync()` hands over an 
 Failure messages are English by default and can be switched at runtime — per async-flow, so parallel tests stay isolated:
 
 ```csharp
+using System.Globalization;
+using Jeninnet.Assertions.Localization;
+
 AssertionCulture.Current = new CultureInfo("ar");
 flag.Should().BeTrue(); // المتوقع من flag أن يكون true، لكن وُجد false.
 ```

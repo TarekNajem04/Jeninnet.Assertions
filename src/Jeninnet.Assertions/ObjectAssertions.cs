@@ -18,6 +18,10 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
 
     private static string Format<TValue>(TValue value) => AssertionScope.FormatInvariant(value);
 
+    /// <summary>Names the run-time type of <paramref name="value"/>, or <c>null</c> when the value is <see langword="null"/>.</summary>
+    /// <remarks>Kept out of line so the failure message stays lazily built on the success path.</remarks>
+    private static string RuntimeTypeName(object? value) => value?.GetType().Name ?? "null";
+
     /// <summary>Asserts that the value equals <paramref name="expected"/> using the default equality comparer.</summary>
     /// <param name="expected">The expected value.</param>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
@@ -213,7 +217,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     public AndConstraint<ObjectAssertions<T>> NotBeOfType<TExpected>(string? because = null, params object?[] becauseArgs) {
         var actualType = _value as Type ?? _value?.GetType();
         if(actualType == typeof(TExpected)) {
-            Fail(Strings.Format(StringKeys.OBJECT_NOT_BE_OF_TYPE, Expression, typeof(TExpected).Name, actualType?.Name ?? "null"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.OBJECT_NOT_BE_OF_TYPE, Expression, typeof(TExpected).Name, actualType.Name), because, becauseArgs);
         }
 
         return new(this);
@@ -227,7 +231,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <exception cref="AssertionFailedException">The value is <see langword="null"/> or is not assignable to the expected type.</exception>
     public AndConstraint<ObjectAssertions<T>> BeAssignableTo<TExpected>(string? because = null, params object?[] becauseArgs) {
         if(_value is not TExpected) {
-            Fail(Strings.Format(StringKeys.OBJECT_BE_ASSIGNABLE_TO, Expression, typeof(TExpected).Name, _value?.GetType().Name ?? "null"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.OBJECT_BE_ASSIGNABLE_TO, Expression, typeof(TExpected).Name, RuntimeTypeName(_value)), because, becauseArgs);
         }
 
         return new(this);
@@ -241,7 +245,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <exception cref="AssertionFailedException">The value is assignable to the unexpected type.</exception>
     public AndConstraint<ObjectAssertions<T>> NotBeAssignableTo<TExpected>(string? because = null, params object?[] becauseArgs) {
         if(_value is TExpected) {
-            Fail(Strings.Format(StringKeys.OBJECT_NOT_BE_ASSIGNABLE_TO, Expression, typeof(TExpected).Name, _value?.GetType().Name ?? "null"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.OBJECT_NOT_BE_ASSIGNABLE_TO, Expression, typeof(TExpected).Name, RuntimeTypeName(_value)), because, becauseArgs);
         }
 
         return new(this);

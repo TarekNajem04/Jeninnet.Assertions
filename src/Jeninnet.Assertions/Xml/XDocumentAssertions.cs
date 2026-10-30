@@ -256,7 +256,7 @@ public class XDocumentAssertions(XDocument? value, string? expression = null) : 
             return null;
         }
 
-        return root.Name == name ? root : _value?.Descendants(name).FirstOrDefault();
+        return root.Name == name ? root : root.Descendants(name).FirstOrDefault();
     }
 
     /// <summary>Finds the root and every descendant with the given qualified name.</summary>
@@ -273,7 +273,7 @@ public class XDocumentAssertions(XDocument? value, string? expression = null) : 
             matches.Add(root);
         }
 
-        matches.AddRange(_value?.Descendants(name) ?? []);
+        matches.AddRange(root.Descendants(name));
         return matches;
     }
 
