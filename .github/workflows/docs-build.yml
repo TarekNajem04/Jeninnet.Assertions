@@ -1,6 +1,8 @@
 name: Documentation
 
 on:
+  workflow_dispatch:
+
   push:
     branches:
       - main
@@ -10,6 +12,7 @@ on:
       - 'Directory.Build.props'
       - 'Directory.Build.targets'
       - 'Directory.Packages.props'
+      - 'global.json'
       - 'README.md'
       - 'scripts/docs/**'
       - '.github/workflows/docs-build.yml'
@@ -23,6 +26,7 @@ on:
       - 'Directory.Build.props'
       - 'Directory.Build.targets'
       - 'Directory.Packages.props'
+      - 'global.json'
       - 'README.md'
       - 'scripts/docs/**'
       - '.github/workflows/docs-build.yml'
@@ -60,7 +64,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v6.0.0
         with:
-          dotnet-version: 10.0.x
+          global-json-file: global.json
 
       - name: Install DocFX
         run: dotnet tool install -g docfx
