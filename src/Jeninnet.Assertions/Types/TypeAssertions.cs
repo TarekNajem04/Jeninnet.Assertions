@@ -143,7 +143,7 @@ public partial class TypeAssertions(Type? value, string? expression = null) : As
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The type is <see langword="null"/> or not static.</exception>
     public AndConstraint<TypeAssertions> BeStatic(string? because = null, params object?[] becauseArgs) {
-        if(_value?.IsAbstract != true || _value?.IsSealed != true) {
+        if(_value is null || !_value.IsAbstract || !_value.IsSealed) {
             Fail(Strings.Format(StringKeys.TYPE_BE_STATIC, Expression, _value is null ? FOUND_NULL : WAS_NOT), because, becauseArgs);
         }
 
