@@ -13,6 +13,12 @@ dotnet add package Jeninnet.Assertions.Analyzer
 The analyzer targets `netstandard2.0` (loads in every Roslyn host) and pulls the core
 `Jeninnet.Assertions` package automatically, so fixed code always resolves `Should()`.
 
+Compiler requirement: the analyzer is built against Roslyn `5.9.0`, so consuming projects
+must build with a .NET SDK whose compiler is `5.9.0` or newer — in practice, a current
+.NET 10 SDK (this repository builds with the newest installed `10.0.x` via the
+`latestFeature` roll-forward in `global.json`). An older compiler fails the build with
+`CS9057`.
+
 ## Rules
 
 Rule IDs use the `JNA` prefix (Jeninnet Assertions).
