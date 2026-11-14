@@ -2042,4 +2042,76 @@
   <data name="MEMBER_NOT_BE_WRITABLE" xml:space="preserve">
     <value>Expected property '{0}' not to be writable, but it was.</value>
   </data>
+  <data name="URI_NULL" xml:space="preserve">
+    <value>Expected {0} to be a URI, but found &lt;null&gt;.</value>
+  </data>
+  <data name="URI_BE" xml:space="preserve">
+    <value>Expected {0} to be {1}, but found {2}.</value>
+  </data>
+  <data name="URI_NOT_BE" xml:space="preserve">
+    <value>Expected {0} not to be {1}, but found {2}.</value>
+  </data>
+  <data name="URI_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found {1}.</value>
+  </data>
+  <data name="URI_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found &lt;null&gt;.</value>
+  </data>
+  <data name="URI_BE_ABSOLUTE" xml:space="preserve">
+    <value>Expected {0} to be absolute, but it is relative.</value>
+  </data>
+  <data name="URI_BE_RELATIVE" xml:space="preserve">
+    <value>Expected {0} to be relative, but it is absolute.</value>
+  </data>
+  <data name="URI_REQUIRE_ABSOLUTE" xml:space="preserve">
+    <value>Expected {0} to be an absolute URI, but it is relative.</value>
+  </data>
+  <data name="URI_HAVE_SCHEME" xml:space="preserve">
+    <value>Expected {0} to have scheme '{1}', but found '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_SCHEME" xml:space="preserve">
+    <value>Expected {0} not to have scheme '{1}', but it did.</value>
+  </data>
+  <data name="URI_HAVE_HOST" xml:space="preserve">
+    <value>Expected {0} to have host '{1}', but found '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_HOST" xml:space="preserve">
+    <value>Expected {0} not to have host '{1}', but it did.</value>
+  </data>
+  <data name="URI_HAVE_PORT" xml:space="preserve">
+    <value>Expected {0} to have port {1}, but found {2}.</value>
+  </data>
+  <data name="URI_NOT_HAVE_PORT" xml:space="preserve">
+    <value>Expected {0} not to have port {1}, but it did.</value>
+  </data>
+  <data name="URI_HAVE_PATH" xml:space="preserve">
+    <value>Expected {0} to have path '{1}', but found '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_PATH" xml:space="preserve">
+    <value>Expected {0} not to have path '{1}', but it did.</value>
+  </data>
+  <data name="URI_HAVE_FRAGMENT" xml:space="preserve">
+    <value>Expected {0} to have fragment '{1}', but found '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_FRAGMENT" xml:space="preserve">
+    <value>Expected {0} not to have fragment '{1}', but it did.</value>
+  </data>
+  <data name="URI_QUERY_MISSING" xml:space="preserve">
+    <value>Expected {0} to have query parameter '{1}', but it was not found (available: {2}).</value>
+  </data>
+  <data name="URI_QUERY_VALUE" xml:space="preserve">
+    <value>Expected {0} to have query parameter '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="URI_NOT_QUERY" xml:space="preserve">
+    <value>Expected {0} not to have query parameter '{1}', but found '{2}'.</value>
+  </data>
+  <data name="URI_BASE_OF" xml:space="preserve">
+    <value>Expected {0} to be a base of {1}, but it was not.</value>
+  </data>
+  <data name="URI_NOT_BASE_OF" xml:space="preserve">
+    <value>Expected {0} not to be a base of {1}, but it was.</value>
+  </data>
+  <data name="URI_BASE_REQUIRES_ABSOLUTE" xml:space="preserve">
+    <value>Expected {0} to be an absolute base URI, but it is relative.</value>
+  </data>
 </root>

@@ -72,6 +72,21 @@ Available builders: month factories (`1.March(2010)`), `At(hour, minute[, second
 
 ## 4.4 Identity: `Guid` and enums
 
+### URIs
+
+A `Uri` carries both identity and structure. `BeAbsolute()` / `BeRelative()` state the kind, while component assertions require an absolute URI. Scheme and host compare case-insensitively, ports include scheme defaults, and path/fragment compare after unescaping. Query names and values are case-sensitive after unescaping; duplicates are preserved, and `HaveQueryParameter()` exposes the first value through `Which`.
+
+```csharp
+var uri = new Uri("https://api.example.com:8443/orders/42?page=2#top");
+uri.Should().BeAbsolute().And.HaveScheme("https").And.HaveHost("api.example.com").And.HavePort(8443);
+uri.Should().HavePath("/orders/42").And.HaveFragment("top");
+uri.Should().HaveQueryParameter("page").Which.Should().Be("2");
+uri.Should().HaveQueryParameterValue("page", "2");
+new Uri("https://api.example.com").Should().BeBaseOf(uri);
+```
+
+`BeBaseOf()` respects path-segment boundaries: `/orders` is a base of `/orders/42`, but not of `/orders-archive`.
+
 ### Guids
 
 `Guid.Empty` is commonly used to mean "not assigned yet". It's important to distinguish explicitly between "empty" and "assigned":

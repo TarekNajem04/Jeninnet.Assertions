@@ -2042,4 +2042,76 @@
   <data name="MEMBER_NOT_BE_WRITABLE" xml:space="preserve">
     <value>المتوقع من الخاصية '{0}' ألا تكون قابلة للكتابة، لكنها كانت كذلك.</value>
   </data>
+  <data name="URI_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون عنوان URI، لكن وُجد &lt;null&gt;.</value>
+  </data>
+  <data name="URI_BE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="URI_NOT_BE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="URI_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون null، لكن وُجد {1}.</value>
+  </data>
+  <data name="URI_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون null، لكن وُجد &lt;null&gt;.</value>
+  </data>
+  <data name="URI_BE_ABSOLUTE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مطلقاً، لكنه نسبي.</value>
+  </data>
+  <data name="URI_BE_RELATIVE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون نسبياً، لكنه مطلق.</value>
+  </data>
+  <data name="URI_REQUIRE_ABSOLUTE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون عنوان URI مطلقاً، لكنه نسبي.</value>
+  </data>
+  <data name="URI_HAVE_SCHEME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مخططه '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_SCHEME" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مخططه '{1}'، لكنه كذلك.</value>
+  </data>
+  <data name="URI_HAVE_HOST" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مضيفه '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_HOST" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مضيفه '{1}'، لكنه كذلك.</value>
+  </data>
+  <data name="URI_HAVE_PORT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون منفذه {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="URI_NOT_HAVE_PORT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون منفذه {1}، لكنه كذلك.</value>
+  </data>
+  <data name="URI_HAVE_PATH" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مساره '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_PATH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مساره '{1}'، لكنه كذلك.</value>
+  </data>
+  <data name="URI_HAVE_FRAGMENT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مقطعه '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="URI_NOT_HAVE_FRAGMENT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مقطعه '{1}'، لكنه كذلك.</value>
+  </data>
+  <data name="URI_QUERY_MISSING" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي معامل استعلام '{1}'، لكنه غير موجود (المتاح: {2}).</value>
+  </data>
+  <data name="URI_QUERY_VALUE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي معامل الاستعلام '{1}' بالقيمة '{2}'، لكن وُجد '{3}'.</value>
+  </data>
+  <data name="URI_NOT_QUERY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي معامل الاستعلام '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="URI_BASE_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون أساساً لـ {1}، لكنه لم يكن.</value>
+  </data>
+  <data name="URI_NOT_BASE_OF" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون أساساً لـ {1}، لكنه كان.</value>
+  </data>
+  <data name="URI_BASE_REQUIRES_ABSOLUTE" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون عنوان URI مطلقاً للأساس، لكنه نسبي.</value>
+  </data>
 </root>

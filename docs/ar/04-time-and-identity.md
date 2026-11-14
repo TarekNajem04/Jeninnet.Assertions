@@ -110,6 +110,25 @@ window.Should().HaveHours(2).And.HaveMinutes(30);
 
 ## ٤.٤ الهوية: <code dir="ltr">Guid</code> والتعدادات
 
+### عناوين URI
+
+يحمل <code dir="ltr">Uri</code> الهوية والبنية معًا. تحدّد <code dir="ltr">BeAbsolute()</code> / <code dir="ltr">BeRelative()</code> النوع، بينما تتطلب توكيدات المكوّنات عنوانًا مطلقًا. يُقارن المخطط والمضيف دون حساسية لحالة الأحرف، وتشمل المنافذ المنافذ الافتراضية للمخطط، ويُقارن المسار والمقطع بعد فك الترميز. أسماء معاملات الاستعلام وقيمها حساسة لحالة الأحرف بعد فك الترميز؛ وتُحفظ التكرارات، وتعيد <code dir="ltr">HaveQueryParameter()</code> أول قيمة عبر <code dir="ltr">Which</code>.
+
+<div dir="ltr">
+
+```csharp
+var uri = new Uri("https://api.example.com:8443/orders/42?page=2#top");
+uri.Should().BeAbsolute().And.HaveScheme("https").And.HaveHost("api.example.com").And.HavePort(8443);
+uri.Should().HavePath("/orders/42").And.HaveFragment("top");
+uri.Should().HaveQueryParameter("page").Which.Should().Be("2");
+uri.Should().HaveQueryParameterValue("page", "2");
+new Uri("https://api.example.com").Should().BeBaseOf(uri);
+```
+
+</div>
+
+تحترم <code dir="ltr">BeBaseOf()</code> حدود مقاطع المسار: <code dir="ltr">/orders</code> أساس لـ <code dir="ltr">/orders/42</code>، وليس أساسًا لـ <code dir="ltr">/orders-archive</code>.
+
 ### <code dir="ltr">Guid</code>
 
 يُستخدم <code dir="ltr">Guid.Empty</code> غالبًا للدلالة على "لم يُسنَد بعد". من المهم التمييز بين **فارغ** و**موجود** صراحةً:

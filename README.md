@@ -274,6 +274,17 @@ Expand any group to see its verbs; every backticked identifier is verified again
 </details>
 
 <details>
+<summary><strong>Uris</strong> · Should()</summary>
+
+- Identity: `Be` / `NotBe`, `BeNull` / `NotBeNull`
+- Kind: `BeAbsolute` / `BeRelative`
+- Components: `HaveScheme` / `NotHaveScheme`, `HaveHost` / `NotHaveHost`, `HavePort` / `NotHavePort`, `HavePath` / `NotHavePath`, `HaveFragment` / `NotHaveFragment`
+- Query: `HaveQueryParameter` (+`Which`), `HaveQueryParameterValue`, `NotHaveQueryParameter`
+- Hierarchy: `BeBaseOf` / `NotBeBaseOf`
+
+</details>
+
+<details>
 <summary><strong>Dates, times, Guid, enums</strong> · Should()</summary>
 
 - Ordering and windows: ordering, `BeCloseTo`, relative windows (`BeWithin` / `BeLessThan` / `BeMoreThan` / `BeAtLeast` / `BeExactly` + `Before` / `After`)

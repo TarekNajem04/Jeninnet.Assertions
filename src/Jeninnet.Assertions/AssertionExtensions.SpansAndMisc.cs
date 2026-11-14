@@ -64,6 +64,11 @@ public static partial class AssertionExtensions {
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
     public static EventMonitorAssertions Should(this EventMonitor value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
+    /// <summary>Creates a <see cref="UriAssertions"/> for the given URI.</summary>
+    /// <param name="value">The URI to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static UriAssertions Should(this Uri? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
 #if !NETSTANDARD2_0
     /// <summary>Creates a <see cref="SpanAssertions{T}"/> for the given memory block.</summary>
     /// <remarks>Unavailable on .NET Standard 2.0, where <c>Memory&lt;T&gt;</c> cannot appear in the public surface; use <c>AsAssertions()</c> there.</remarks>
