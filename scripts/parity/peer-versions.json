@@ -1,0 +1,51 @@
+{
+    "schemaVersion": 1,
+    "packages": {
+        "FluentAssertions": "8.11.0",
+        "AwesomeAssertions": "9.6.0",
+        "Shouldly": "4.3.0",
+        "NFluent": "3.1.0"
+    },
+    "probes": [
+        {
+            "name": "Uri",
+            "fullName": "System.Uri",
+            "note": "Not exposed by the reflected peer assemblies; FA's Uris documentation may describe an unreleased or main-branch API. Treat it as forward-compatibility, not a current parity gap."
+        },
+        {
+            "name": "IComparable<T>",
+            "fullName": "System.IComparable`1",
+            "note": "FA/AA expose Should<T>(IComparable<T>); Jeninnet's ComparableTypeAssertions is currently unreachable from Should()."
+        },
+        {
+            "name": "IReadOnlyDictionary<TKey,TValue>",
+            "fullName": "System.Collections.Generic.IReadOnlyDictionary`2",
+            "note": "FA accepts it structurally through Should(IEnumerable<KeyValuePair<,>>); no exact overload was found. An exact overload improves diagnostics and overload selection."
+        },
+        {
+            "name": "KeyValuePair<TKey,TValue>",
+            "fullName": "System.Collections.Generic.KeyValuePair`2",
+            "note": "Dictionary overloads accept IEnumerable<KeyValuePair<,>>; a standalone KeyValuePair subject is not a peer feature."
+        },
+        {
+            "name": "JsonElement",
+            "fullName": "System.Text.Json.JsonElement",
+            "note": "Not exposed by FA 8.11 (JsonNode only). This is an ecosystem gap rather than direct peer parity."
+        },
+        {
+            "name": "JsonDocument",
+            "fullName": "System.Text.Json.JsonDocument",
+            "note": "Not exposed by FA 8.11; JsonDocument is common in ASP.NET and System.Text.Json consumers."
+        },
+        {
+            "name": "ParameterInfo",
+            "fullName": "System.Reflection.ParameterInfo",
+            "note": "AwesomeAssertions 9.6 exposes ParameterInfoAssertions; FA 8.11 does not. This is peer parity with AA."
+        },
+        {
+            "name": "char",
+            "fullName": "System.Char",
+            "note": "NFluent exposes char checks through Check.That, not Should(); Jeninnet currently boxes char into ObjectAssertions."
+        }
+    ]
+}
