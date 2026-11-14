@@ -542,6 +542,15 @@
   <data name="COLLECTION_EQUAL_ORDER" xml:space="preserve">
     <value>Expected {0} to equal {1}, but item at index {2} was '{3}' instead of '{4}'.</value>
   </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_NULL" xml:space="preserve">
+    <value>Expected {0} to approximately equal {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_COUNT" xml:space="preserve">
+    <value>Expected {0} to approximately equal {1}, but found {2} item(s) instead of {3}.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_ORDER" xml:space="preserve">
+    <value>Expected {0} to approximately equal {1}, but item at index {2} was '{3}' instead of '{4}' with precision '{5}'.</value>
+  </data>
   <data name="COLLECTION_START_WITH_SHORT" xml:space="preserve">
     <value>Expected {0} to start with {1}, but found only {2} item(s).</value>
   </data>
@@ -1615,6 +1624,12 @@
   </data>
   <data name="COLLECTION_NOT_EQUAL" xml:space="preserve">
     <value>Expected {0} not to equal {1}, but they are equal.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_APPROXIMATELY_NULL" xml:space="preserve">
+    <value>Expected {0} not to approximately equal {1}, but collection is null.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_APPROXIMATELY" xml:space="preserve">
+    <value>Expected {0} not to approximately equal {1}, but they are approximately equal with precision '{2}'.</value>
   </data>
   <data name="COLLECTION_NOT_EQUAL_COUNT" xml:space="preserve">
     <value>Expected {0} not to equal {1}, but found {2} item(s) instead of {3}.</value>

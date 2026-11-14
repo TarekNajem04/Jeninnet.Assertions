@@ -39,7 +39,12 @@ gift.Should().BeGreaterThan(0);
 gift.Description.Should().Be("Gift");
 ```
 
-`ContainSingle(predicate).Which` returns the single matching element, letting you continue asserting against it. Existence alone is only half the test.
+`ContainSingle(predicate).Which` returns the single matching element, letting you continue asserting against it. Existence alone is only half the test. Drop the predicate to require exactly one item overall; the same `.Which` returns it:
+
+```csharp
+var only = lines.Should().ContainSingle().Which;
+only.Should().Be(first);
+```
 
 ## 3.3 Layer 3: Order—choose the right strength
 
@@ -57,6 +62,15 @@ lines.Should().HaveElementAt(0, a);               // specific index and value
 Rule of thumb: **start with the weakest constraint that fits, and only tighten it when order is truly part of the contract.** Forcing `Equal` when display order is incidental creates brittle tests.
 
 You can pass a custom comparer for ordering: `BeInAscendingOrder(StringComparer.OrdinalIgnoreCase)`.
+
+Numeric sequences can be compared element by element with a tolerance:
+
+```csharp
+coordinates.Should().EqualApproximately([1.0, 2.0], 0.01);
+coordinates.Should().NotEqualApproximately([1.0, 2.5], 0.01);
+```
+
+`EqualApproximately` is available on net8.0+ and follows the same type-aware precision rules as scalar numeric assertions: `decimal` and 64-bit integers stay exact, 128-bit integers and `BigInteger` use arbitrary precision, equal infinities match, and NaN never approximates a value.
 
 ## 3.4 When order doesn't matter: `BeEquivalentTo()`
 

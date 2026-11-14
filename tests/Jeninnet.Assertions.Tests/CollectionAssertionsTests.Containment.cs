@@ -7,6 +7,17 @@
 namespace Jeninnet.Assertions.Tests;
 
 public partial class CollectionAssertionsTests {
+    private sealed class CountingSequence<T>(IEnumerable<T> items) : IEnumerable<T> {
+        public int Enumerations { get; private set; }
+
+        public IEnumerator<T> GetEnumerator() {
+            Enumerations++;
+            return items.GetEnumerator();
+        }
+
+        System.Collections.IEnumerator System.Collections.IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
     [TestMethod]
     public void Contain_Item_PassWhenPresent() {
         int[] values = [1, 2, 3];
@@ -64,6 +75,28 @@ public partial class CollectionAssertionsTests {
         int[] values = [7];
         var which = values.Should().ContainSingle();
         Assert.AreEqual(7, which.Which);
+    }
+
+    [TestMethod]
+    public void ContainSingle_NoPredicate_FailsForEmpty() {
+        int[] values = [];
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().ContainSingle());
+        Assert.AreEqual("Expected values to contain exactly one item, but found 0.", ex.Message);
+    }
+
+    [TestMethod]
+    public void ContainSingle_NoPredicate_FailsForMultiple() {
+        int[] values = [1, 2];
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().ContainSingle());
+        Assert.AreEqual("Expected values to contain exactly one item, but found 2.", ex.Message);
+    }
+
+    [TestMethod]
+    public void ContainSingle_NoPredicate_EnumeratesLazySequenceOnce() {
+        var counting = new CountingSequence<int>([7]);
+        var which = counting.Should().ContainSingle();
+        Assert.AreEqual(7, which.Which);
+        Assert.AreEqual(1, counting.Enumerations);
     }
 
     [TestMethod]

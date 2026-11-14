@@ -224,8 +224,9 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Types: `AllBeOfType`, `AllBeAssignableTo`, `ContainItemsAssignableTo`
 - Ordering: `ContainInOrder` / `NotContainInOrder`, `ContainInConsecutiveOrder` (+negative), ordering (+negatives, expression/`Func` overloads, `ThenBeIn` chains via `SubsequentOrderingAssertions<T>`)
 - Position and neighbors: `HaveElementAt`, `HaveElementPreceding`, `HaveElementSucceeding`, `StartWith` / `EndWith` (single-item + element-predicate overloads)
+- Singletons: `ContainSingle` (+`Which`, optional predicate)
 - Sets: `BeSupersetOf`, `BeProperSubsetOf` / `SupersetOf`, +`NotBeSubsetOf`, `IntersectWith` / `NotIntersectWith`
-- Equality: `Equal` / `NotEqual` / `BeEqualTo` / `NotBeEqualTo` (+element-predicate overloads)
+- Equality: `Equal` / `NotEqual` / `BeEqualTo` / `NotBeEqualTo` (+element-predicate overloads), `EqualApproximately` / `NotEqualApproximately` (net8.0+)
 - Equivalency: `BeEquivalentTo` / `NotBeEquivalentTo` / `AllBeEquivalentTo`, `ContainEquivalentOf` / `NotContainEquivalentOf`, counts (+predicate overload)
 - Strings: `AllBe`, `ContainMatch` + `Which` / `NotContainMatch`
 

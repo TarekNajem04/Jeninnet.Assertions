@@ -542,6 +542,15 @@
   <data name="COLLECTION_EQUAL_ORDER" xml:space="preserve">
     <value>المتوقع من {0} أن يساوي {1}، لكن العنصر في الفهرس {2} كان '{3}' بدل '{4}'.</value>
   </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي تقريباً {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي تقريباً {1}، لكن وُجد {2} من العناصر بدل {3}.</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_ORDER" xml:space="preserve">
+    <value>المتوقع من {0} أن يساوي تقريباً {1}، لكن العنصر في الفهرس {2} كان '{3}' بدل '{4}' بدقة '{5}'.</value>
+  </data>
   <data name="COLLECTION_START_WITH_SHORT" xml:space="preserve">
     <value>المتوقع من {0} أن يبدأ بـ {1}، لكن وُجد {2} من العناصر فقط.</value>
   </data>
@@ -1615,6 +1624,12 @@
   </data>
   <data name="COLLECTION_NOT_EQUAL" xml:space="preserve">
     <value>المتوقع من {0} ألا يساوي {1}، لكنهما متساويان.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_APPROXIMATELY_NULL" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي تقريباً {1}، لكن المجموعة null.</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_APPROXIMATELY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يساوي تقريباً {1}، لكنهما متساويان تقريباً بدقة '{2}'.</value>
   </data>
   <data name="COLLECTION_NOT_EQUAL_COUNT" xml:space="preserve">
     <value>المتوقع من {0} ألا يساوي {1}، لكن وُجد {2} عنصراً بدلاً من {3}.</value>

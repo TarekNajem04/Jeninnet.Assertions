@@ -223,6 +223,28 @@ public partial class LocalizationTests {
     }
 
     [TestMethod]
+    public void Arabic_CollectionApproximately() {
+        using var _ = new ArabicScope();
+
+        int[] actual = [1, 2, 3];
+        var order = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().EqualApproximately([1, 2, 4], 0));
+        Assert.AreEqual("المتوقع من actual أن يساوي تقريباً ['1', '2', '4']، لكن العنصر في الفهرس 2 كان '3' بدل '4' بدقة '0'.", order.Message);
+
+        var count = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().EqualApproximately([1, 2], 0));
+        Assert.AreEqual("المتوقع من actual أن يساوي تقريباً ['1', '2']، لكن وُجد 3 من العناصر بدل 2.", count.Message);
+
+        int[]? missing = null;
+        var nullCollection = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().EqualApproximately([1], 0));
+        Assert.AreEqual("المتوقع من missing أن يساوي تقريباً ['1']، لكن المجموعة null.", nullCollection.Message);
+
+        var notEqual = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().NotEqualApproximately([1, 2, 3], 0));
+        Assert.AreEqual("المتوقع من actual ألا يساوي تقريباً ['1', '2', '3']، لكنهما متساويان تقريباً بدقة '0'.", notEqual.Message);
+
+        var notEqualNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotEqualApproximately([1], 0));
+        Assert.AreEqual("المتوقع من missing ألا يساوي تقريباً ['1']، لكن المجموعة null.", notEqualNull.Message);
+    }
+
+    [TestMethod]
     public void Arabic_Dictionary() {
         using var _ = new ArabicScope();
 

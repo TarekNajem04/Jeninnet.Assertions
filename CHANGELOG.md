@@ -16,6 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- Numeric collections support `EqualApproximately` / `NotEqualApproximately` on net8.0+ via
+  `INumber<T>`. Precision follows the type-aware scalar rules: decimal and 64-bit integers stay
+  exact, 128-bit integers and `BigInteger` use arbitrary precision, and NaN never approximates.
 - Dictionary assertions now accept `IReadOnlyDictionary<TKey,TValue>` implementations (including
   immutable and frozen dictionaries) and any `IEnumerable<KeyValuePair<TKey,TValue>>` sequence.
   Lazy pair sequences are materialized once, and `ContainSingle()` exposes the sole pair through

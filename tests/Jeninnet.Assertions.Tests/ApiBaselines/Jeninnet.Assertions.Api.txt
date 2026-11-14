@@ -224,6 +224,9 @@ type Jeninnet.Assertions.CancellationAssertions
   ctor(System.Func<System.Threading.CancellationToken,System.Threading.Tasks.Task>, System.String)
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.CancellationAssertions>> CompleteDespiteCancellationAsync(System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.CancellationAssertions>> HonorCancellationAsync(System.String, System.Object[])
+type Jeninnet.Assertions.CollectionApproximateExtensions
+  method static Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.CollectionAssertions<T>> EqualApproximately<T>(Jeninnet.Assertions.CollectionAssertions<T>, System.Collections.Generic.IEnumerable<T>, T, System.String, System.Object[])
+  method static Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.CollectionAssertions<T>> NotEqualApproximately<T>(Jeninnet.Assertions.CollectionAssertions<T>, System.Collections.Generic.IEnumerable<T>, T, System.String, System.Object[])
 type Jeninnet.Assertions.CollectionAssertions<T>
   ctor(System.Collections.Generic.IEnumerable<T>, System.String)
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.CollectionAssertions<T>> AllBeEquivalentTo(T, System.Func<Jeninnet.Assertions.CollectionEquivalencyOptions<T>,Jeninnet.Assertions.CollectionEquivalencyOptions<T>>, System.String, System.Object[])
