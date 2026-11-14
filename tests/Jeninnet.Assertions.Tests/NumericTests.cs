@@ -302,7 +302,7 @@ public class NumericTests {
 
     [TestMethod]
     public void Should_SupportsBigInteger() {
-        BigInteger value = BigInteger.Parse("123456789012345678901234567890", CultureInfo.InvariantCulture);
+        var value = BigInteger.Parse("123456789012345678901234567890", CultureInfo.InvariantCulture);
         value.Should().BeGreaterThan(BigInteger.One);
         value.Should().BeApproximately(value + 1, BigInteger.One);
         value.Should().NotBeZero();
@@ -313,7 +313,7 @@ public class NumericTests {
 
     [TestMethod]
     public void Should_SupportsHalf() {
-        Half value = (Half)1.5;
+        var value = (Half)1.5;
         value.Should().BeApproximately((Half)1.6, (Half)0.11);
         Half.NaN.Should().BeNaN();
         ((Half)0).Should().BeZero();
@@ -321,12 +321,12 @@ public class NumericTests {
 
     [TestMethod]
     public void Should_SupportsInt128AndUInt128() {
-        Int128 signed = Int128.MaxValue;
+        var signed = Int128.MaxValue;
         signed.Should().BeApproximately(Int128.MaxValue - 1, 1);
         Int128.MinValue.Should().BeApproximately(Int128.MinValue + 1, 1);
         Assert.ThrowsExactly<AssertionFailedException>(() => signed.Should().BeApproximately(Int128.MaxValue - 1, 0));
 
-        UInt128 unsigned = UInt128.MaxValue;
+        var unsigned = UInt128.MaxValue;
         unsigned.Should().BeApproximately(UInt128.MaxValue - 1, 1);
         Assert.ThrowsExactly<AssertionFailedException>(() => unsigned.Should().BeApproximately(UInt128.MaxValue - 1, 0));
     }

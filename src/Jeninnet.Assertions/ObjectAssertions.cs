@@ -19,6 +19,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     private static string Format<TValue>(TValue value) => AssertionScope.FormatInvariant(value);
 
     /// <summary>Names the run-time type of <paramref name="value"/>, or <c>null</c> when the value is <see langword="null"/>.</summary>
+    /// <param name="value">The value whose run-time type name is to be determined.</param>
     /// <remarks>Kept out of line so the failure message stays lazily built on the success path.</remarks>
     private static string RuntimeTypeName(object? value) => value?.GetType().Name ?? "null";
 
