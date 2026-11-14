@@ -18,15 +18,41 @@ public partial class UseShouldTests {
                 public static void Null(object? value) { }
                 public static void NotNull(object? value) { }
                 public static void Contains(string expectedSubstring, string actualString) { }
+                public static void Contains<T>(T expected, System.Collections.Generic.IEnumerable<T> collection) { }
+                public static void DoesNotContain<T>(T expected, System.Collections.Generic.IEnumerable<T> collection) { }
+                public static void StartsWith(string expectedStartString, string actualString) { }
+                public static void EndsWith(string expectedEndString, string actualString) { }
+                public static void Empty(System.Collections.IEnumerable collection) { }
+                public static void NotEmpty(System.Collections.IEnumerable collection) { }
+                public static object? Single(System.Collections.IEnumerable collection) => null;
+                public static T IsType<T>(object? value) => default!;
+                public static T IsAssignableFrom<T>(object? value) => default!;
+                public static T Throws<T>(System.Action action) where T : System.Exception => default!;
+                public static System.Threading.Tasks.Task<T> ThrowsAsync<T>(System.Func<System.Threading.Tasks.Task> action) where T : System.Exception => null!;
             }
         }
         """;
 
     private const string NUNIT_CLASSIC_STUB = """
         namespace NUnit.Framework {
+            public delegate void TestDelegate();
+            public delegate System.Threading.Tasks.Task AsyncTestDelegate();
             public static class Assert {
                 public static void AreEqual<T>(T expected, T actual) { }
                 public static void IsTrue(bool condition) { }
+                public static void IsEmpty(System.Collections.IEnumerable collection) { }
+                public static void IsNotEmpty(System.Collections.IEnumerable collection) { }
+                public static void Contains(object expected, System.Collections.ICollection collection) { }
+                public static void DoesNotContain(object expected, System.Collections.ICollection collection) { }
+                public static T IsInstanceOf<T>(object? value) => default!;
+                public static T IsAssignableFrom<T>(object? value) => default!;
+                public static T Throws<T>(TestDelegate code) where T : System.Exception => default!;
+                public static System.Threading.Tasks.Task<T> ThrowsAsync<T>(AsyncTestDelegate code) where T : System.Exception => null!;
+            }
+            public static class StringAssert {
+                public static void Contains(string actual, string expected) { }
+                public static void StartsWith(string actual, string expected) { }
+                public static void EndsWith(string actual, string expected) { }
             }
         }
         """;

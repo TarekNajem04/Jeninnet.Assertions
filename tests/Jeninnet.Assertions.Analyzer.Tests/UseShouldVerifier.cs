@@ -53,6 +53,23 @@ internal static class UseShouldVerifier {
         await test.RunAsync();
     }
 
+    /// <summary>Verifies that Fix All converts two marked occurrences and produces the batch-fixed document.</summary>
+    /// <param name="source">The code under test, with the triggering calls wrapped in <c>{|#0:|}</c> and <c>{|#1:|}</c> markup.</param>
+    /// <param name="fixedSource">The expected code after Fix All.</param>
+    /// <param name="diagnosticId">The expected diagnostic ID.</param>
+    /// <param name="extraSource">An additional compiled source file (e.g. a framework stub).</param>
+    /// <param name="messageArgs">The expected diagnostic message arguments.</param>
+    /// <returns>A task that represents the asynchronous verification operation.</returns>
+    internal static async Task VerifyFixAllWithReferencesAsync(string source, string fixedSource, string diagnosticId, string extraSource, params string[] messageArgs) {
+        var test = new ShouldCodeFixTest { TestCode = source, FixedCode = fixedSource, BatchFixedCode = fixedSource };
+        test.TestState.Sources.Add(extraSource);
+        test.FixedState.Sources.Add(extraSource);
+        test.BatchFixedState.Sources.Add(extraSource);
+        test.ExpectedDiagnostics.Add(new DiagnosticResult(diagnosticId, DiagnosticSeverity.Info).WithLocation(0).WithArguments(messageArgs));
+        test.ExpectedDiagnostics.Add(new DiagnosticResult(diagnosticId, DiagnosticSeverity.Info).WithLocation(1).WithArguments(messageArgs));
+        await test.RunAsync();
+    }
+
     private sealed class ShouldAnalyzerTest : CSharpAnalyzerTest<UseShouldAnalyzer, DefaultVerifier> {
         public ShouldAnalyzerTest() {
             ReferenceAssemblies = ReferenceAssemblies.Net.Net90;

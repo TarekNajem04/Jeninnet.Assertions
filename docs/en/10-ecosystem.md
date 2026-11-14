@@ -29,8 +29,13 @@ The `Jeninnet.Assertions.Analyzer` package provides Roslyn analyzers with code f
 
 | ID | Converts |
 |---|---|
-| `JNA1001` | `Assert.AreEqual` / `AreNotEqual`, xUnit `Assert.Equal` / `NotEqual` / `Contains`, NUnit `Is.EqualTo` / `Is.Not.EqualTo` → `Should().Be(...)` / `NotBe(...)` / `Contain(...)` |
+| `JNA1001` | `Assert.AreEqual` / `AreNotEqual`, xUnit `Assert.Equal` / `NotEqual`, NUnit `Is.EqualTo` / `Is.Not.EqualTo` → `Should().Be(...)` / `NotBe(...)` |
 | `JNA1002` | `Assert.IsTrue` / `IsFalse` / `IsNull` / `IsNotNull`, xUnit `Assert.True` / `False` / `Null` / `NotNull`, NUnit `Is.True` / `False` / `Null` / `Is.Not.Null` → `BeTrue()` / `BeFalse()` / `BeNull()` / `NotBeNull()` |
+| `JNA1003` | String assertions (`StringAssert.Contains`/`StartsWith`/`EndsWith`, xUnit string `Contains`/`StartsWith`/`EndsWith`) → `Contain()` / `StartWith()` / `EndWith()` |
+| `JNA1004` | Collection emptiness/single/containment → `BeEmpty()` / `NotBeEmpty()` / `ContainSingle()` / `Contain()` / `NotContain()` |
+| `JNA1005` | Exception assertions in statement position → `Throw<T>()` / `ThrowExactly<T>()` and async variants |
+| `JNA1006` | Type assertions in statement position → `BeOfType<T>()` / `BeAssignableTo<T>()` |
+| `JNA1007` | `Assert.True/False(task.IsCompleted)` → `BeCompleted()` / `NotBeCompleted()` |
 
 The `JNA` prefix stands for Jeninnet Assertions.
 
@@ -38,7 +43,10 @@ The `JNA` prefix stands for Jeninnet Assertions.
 
 - **Compile-safe suggestions:** Fixes only appear when the generated code is proven to compile via speculative binding.
 - **Conservative by design:** Overloads involving tolerance, custom comparers, or culture are never converted, since meaning can change subtly.
+- **Statement-position only:** Exception and type assertions are converted only when their result is discarded; `Single`/`IsType` results that are consumed are skipped.
+- **Exact-throw semantics preserved:** xUnit/NUnit `Throws` and MSTest `ThrowsException` map to `ThrowExactly`; MSTest `Throws` keeps its non-strict semantics with `Throw`.
 - **Smart message mapping:** `message:` parameters are automatically converted to `because:` while preserving format arguments.
+- **Fix All supported:** Document, Project, and Solution scopes batch the same safe rewrites.
 
 The principle is simple: **an analyzer that suggests unsafe conversions is worse than no analyzer at all.** The framework-by-framework before/after tables and the explicit list of unconverted forms live in the [Migration Playbook](10-migration.md).
 

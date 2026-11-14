@@ -37,8 +37,13 @@ await MSTestAssertions.ThatAsync(() => action.Should().NotThrowAsync());
 
 | الرمز | التحويل |
 |---|---|
-| <code dir="ltr">JNA1001</code> | <code dir="ltr">Assert.AreEqual</code> / <code dir="ltr">AreNotEqual</code>، وxUnit <code dir="ltr">Assert.Equal</code> / <code dir="ltr">NotEqual</code> / <code dir="ltr">Contains</code>، وNUnit <code dir="ltr">Is.EqualTo</code> / <code dir="ltr">Is.Not.EqualTo</code> ← <code dir="ltr">Should().Be(...)</code> / <code dir="ltr">NotBe(...)</code> / <code dir="ltr">Contain(...)</code> |
+| <code dir="ltr">JNA1001</code> | <code dir="ltr">Assert.AreEqual</code> / <code dir="ltr">AreNotEqual</code>، وxUnit <code dir="ltr">Assert.Equal</code> / <code dir="ltr">NotEqual</code>، وNUnit <code dir="ltr">Is.EqualTo</code> / <code dir="ltr">Is.Not.EqualTo</code> ← <code dir="ltr">Should().Be(...)</code> / <code dir="ltr">NotBe(...)</code> |
 | <code dir="ltr">JNA1002</code> | <code dir="ltr">Assert.IsTrue</code> / <code dir="ltr">IsFalse</code> / <code dir="ltr">IsNull</code> / <code dir="ltr">IsNotNull</code>، وxUnit <code dir="ltr">Assert.True</code> / <code dir="ltr">False</code> / <code dir="ltr">Null</code> / <code dir="ltr">NotNull</code>، وNUnit <code dir="ltr">Is.True</code> / <code dir="ltr">False</code> / <code dir="ltr">Null</code> / <code dir="ltr">Is.Not.Null</code> ← <code dir="ltr">BeTrue()</code> / <code dir="ltr">BeFalse()</code> / <code dir="ltr">BeNull()</code> / <code dir="ltr">NotBeNull()</code> |
+| <code dir="ltr">JNA1003</code> | توكيدات النصوص (<code dir="ltr">StringAssert.Contains</code>/<code dir="ltr">StartsWith</code>/<code dir="ltr">EndsWith</code>، وxUnit نص <code dir="ltr">Contains</code>/<code dir="ltr">StartsWith</code>/<code dir="ltr">EndsWith</code>) ← <code dir="ltr">Contain()</code> / <code dir="ltr">StartWith()</code> / <code dir="ltr">EndWith()</code> |
+| <code dir="ltr">JNA1004</code> | فراغ/عنصر واحد/احتواء المجموعات ← <code dir="ltr">BeEmpty()</code> / <code dir="ltr">NotBeEmpty()</code> / <code dir="ltr">ContainSingle()</code> / <code dir="ltr">Contain()</code> / <code dir="ltr">NotContain()</code> |
+| <code dir="ltr">JNA1005</code> | توكيدات الاستثناء في موضع العبارة ← <code dir="ltr">Throw&lt;T&gt;()</code> / <code dir="ltr">ThrowExactly&lt;T&gt;()</code> والصيغ غير المتزامنة |
+| <code dir="ltr">JNA1006</code> | توكيدات الأنواع في موضع العبارة ← <code dir="ltr">BeOfType&lt;T&gt;()</code> / <code dir="ltr">BeAssignableTo&lt;T&gt;()</code> |
+| <code dir="ltr">JNA1007</code> | <code dir="ltr">Assert.True/False(task.IsCompleted)</code> ← <code dir="ltr">BeCompleted()</code> / <code dir="ltr">NotBeCompleted()</code> |
 
 البادئة <code dir="ltr">JNA</code> تعني Jeninnet Assertions.
 
@@ -46,7 +51,10 @@ await MSTestAssertions.ThatAsync(() => action.Should().NotThrowAsync());
 
 - **شدة <code dir="ltr">Info</code> فقط:** لا يكسر البناء أبدًا، حتى لو كان <code dir="ltr">TreatWarningsAsErrors</code> مفعَّلًا.
 - **لا يقترح إلا ما يُترجَم:** يظهر الاقتراح فقط حين يتبيَّن أن الكود المُولَّد سيتجمَّع بنجاح. لهذا السبب لا يُحوَّل أي <code dir="ltr">overload</code> يتعامل مع تفاوت أو مقارنة مخصَّصة أو معلمة ثقافة — لأن المعنى قد يختلف.
+- **موضع العبارة فقط:** لا تُحوَّل توكيدات الاستثناء والأنواع إلا حين تُهمَل نتيجتها؛ وتُترك <code dir="ltr">Single</code>/<code dir="ltr">IsType</code> إذا استُهلكت نتيجتهما.
+- **الحفاظ على دلالة النوع الدقيق:** تُحوَّل <code dir="ltr">Throws</code> في xUnit/NUnit و<code dir="ltr">ThrowsException</code> في MSTest إلى <code dir="ltr">ThrowExactly</code>، بينما يحتفظ <code dir="ltr">Throws</code> في MSTest بدلالته غير الصارمة عبر <code dir="ltr">Throw</code>.
 - **تحويل ذكي للرسالة:** يتحوَّل <code dir="ltr">message:</code> تلقائيًا إلى <code dir="ltr">because:</code> مع الحفاظ على وسائط التنسيق إن وُجدت.
+- **دعم Fix All:** تُطبَّق التحويلات الآمنة نفسها على نطاق المستند أو المشروع أو الحل.
 
 المبدأ الأساسي: **مُحلِّل يقترح ما لا يُترجَم بأمان أسوأ من عدم وجوده**. أما جداول «قبل/بعد» لكل إطار، وقائمة الصيغ غير المحوَّلة عن قصد، فتجدها في [دليل الهجرة](10-migration.md).
 

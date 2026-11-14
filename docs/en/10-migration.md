@@ -10,10 +10,15 @@ The analyzer ships as a separate, `netstandard2.0` package that loads in every R
 dotnet add package Jeninnet.Assertions.Analyzer
 ```
 
-It reports two `Info` diagnostics and offers a code fix for each (the `JNA` prefix stands for Jeninnet Assertions):
+It reports seven `Info` diagnostics and offers a code fix for each (the `JNA` prefix stands for Jeninnet Assertions):
 
 - **`JNA1001`** — equality: `Assert.AreEqual` / `AreNotEqual`, xUnit `Assert.Equal` / `NotEqual`, NUnit `Assert.That(actual, Is.EqualTo(...))`.
 - **`JNA1002`** — conditions: `Assert.IsTrue` / `IsFalse` / `IsNull` / `IsNotNull`, xUnit `Assert.True` / `False` / `Null` / `NotNull`, NUnit `Assert.That(actual, Is.True / False / Null / Not.Null)`.
+- **`JNA1003`** — strings: `StringAssert.Contains` / `StartsWith` / `EndsWith`, xUnit `Assert.Contains` (string) / `StartsWith` / `EndsWith`.
+- **`JNA1004`** — collections: `Assert.Empty` / `NotEmpty` / `Single` / `Contains` / `DoesNotContain`, `Assert.IsEmpty` / `IsNotEmpty`, and `CollectionAssert.Contains`.
+- **`JNA1005`** — exceptions: `Assert.Throws` / `ThrowsAsync` / `ThrowsException` / `ThrowsExceptionAsync` in statement position.
+- **`JNA1006`** — types: `Assert.IsInstanceOfType` / `IsType` / `IsAssignableFrom` in statement position.
+- **`JNA1007`** — task state: `Assert.True(task.IsCompleted)` / `Assert.False(task.IsCompleted)`.
 
 `Info` never fails a build, so the migration is always your decision.
 
@@ -36,6 +41,14 @@ It reports two `Info` diagnostics and offers a code fix for each (the `JNA` pref
 | `Assert.IsFalse(flag)` | `flag.Should().BeFalse()` |
 | `Assert.IsNull(value)` | `value.Should().BeNull()` |
 | `Assert.IsNotNull(value)` | `value.Should().NotBeNull()` |
+| `StringAssert.Contains(actual, "frag")` | `actual.Should().Contain("frag")` |
+| `StringAssert.StartsWith(actual, "start")` | `actual.Should().StartWith("start")` |
+| `StringAssert.EndsWith(actual, "end")` | `actual.Should().EndWith("end")` |
+| `CollectionAssert.Contains(items, item)` | `items.Should().Contain(item)` |
+| `Assert.IsInstanceOfType(value, typeof(Order))` | `value.Should().BeAssignableTo<Order>()` |
+| `Assert.IsExactInstanceOfType(value, typeof(Order))` | `value.Should().BeOfType<Order>()` |
+| `Assert.Throws<T>(() => Act())` | `new Action(() => Act()).Should().Throw<T>()` |
+| `Assert.IsTrue(task.IsCompleted)` | `task.Should().BeCompleted()` |
 
 ### xUnit (`Xunit.Assert`)
 
@@ -48,10 +61,20 @@ It reports two `Info` diagnostics and offers a code fix for each (the `JNA` pref
 | `Assert.Null(value)` | `value.Should().BeNull()` |
 | `Assert.NotNull(value)` | `value.Should().NotBeNull()` |
 | `Assert.Contains(fragment, actual)` | `actual.Should().Contain(fragment)` |
+| `Assert.StartsWith(prefix, actual)` | `actual.Should().StartWith(prefix)` |
+| `Assert.EndsWith(suffix, actual)` | `actual.Should().EndWith(suffix)` |
+| `Assert.Empty(items)` | `items.Should().BeEmpty()` |
+| `Assert.NotEmpty(items)` | `items.Should().NotBeEmpty()` |
+| `Assert.Single(items)` | `items.Should().ContainSingle()` |
+| `Assert.Contains(item, items)` | `items.Should().Contain(item)` |
+| `Assert.IsType<Order>(value)` | `value.Should().BeOfType<Order>()` |
+| `Assert.IsAssignableFrom<Entity>(value)` | `value.Should().BeAssignableTo<Entity>()` |
+| `Assert.Throws<T>(() => Act())` | `new Action(() => Act()).Should().ThrowExactly<T>()` |
+| `Assert.True(task.IsCompleted)` | `task.Should().BeCompleted()` |
 
 ### NUnit classic (`NUnit.Framework.Assert`)
 
-`AreEqual`, `AreNotEqual`, `IsTrue`, `IsFalse`, `IsNull`, and `IsNotNull` map exactly as the MSTest table above.
+`AreEqual`, `AreNotEqual`, `IsTrue`, `IsFalse`, `IsNull`, and `IsNotNull` map exactly as the MSTest table above. `StringAssert.Contains`/`StartsWith`/`EndsWith` use the same `Contain`/`StartWith`/`EndWith` targets, `Assert.IsEmpty`/`IsNotEmpty`/`Contains`/`DoesNotContain` map to the collection verbs, `Assert.IsInstanceOf`/`IsAssignableFrom` map to `BeAssignableTo` (derived types allowed), and `Assert.Throws<T>` maps to `ThrowExactly<T>` (NUnit requires the exact exception type).
 
 ### NUnit constraint model (`Assert.That`)
 
@@ -75,6 +98,11 @@ The analyzer only offers a fix when the generated call is guaranteed to compile 
 - **Custom comparers** — `IEqualityComparer` overloads.
 - **Numeric and enum equality** — `Assert.AreEqual` on plain numbers or enums is left alone so you can choose the right numeric verb (`BeApproximately`, `BeGreaterThan`, …).
 - **Complex NUnit constraints** — anything beyond `Is.EqualTo`, `Is.True/False`, `Is.Null`, and their `Is.Not` forms (e.g. `Is.GreaterThan`, `Is.InRange`, `Has.Count`).
+- **String case/culture overloads** — `StringAssert.Contains(actual, text, StringComparison...)` stays manual.
+- **Consumed results** — `Assert.Single`, `Assert.IsType`/`IsAssignableFrom`, and exception assertions are converted only when their result is discarded; the fluent calls return assertion objects, not the item/exception/typed value.
+- **Plain `Exception`** — `Assert.Throws<Exception>` is left manual because the intended exception contract is unclear.
+- **Dictionary containment** — dictionary `Contains` needs `ContainKey`/`ContainValue`, so it is not mapped to `Contain`.
+- **Snapshot tools** — `ShouldMatchApproved`/`Verify` have different approval semantics and are never converted.
 - **Literal receivers** — `Assert.AreEqual("a", "b")` has no subject expression to anchor `Should()`.
 - **Value-returning asserts** — conversions that would need to change a value's type are never proposed.
 

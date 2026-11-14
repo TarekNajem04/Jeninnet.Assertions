@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Roslyn analyzer expansion: new `JNA1003`–`JNA1007` rules cover string assertions, collection
+  emptiness/single/containment, exception assertions (`Throw`/`ThrowExactly` with exact-throw
+  semantics preserved), type assertions (`BeOfType`/`BeAssignableTo`), and `task.IsCompleted`
+  state checks. Conversions stay in statement position when results would change type, preserve
+  `message:` as `because:`, skip `StringComparison`/dictionary/consumed-result cases, and support
+  Fix All across document/project/solution.
 - Architecture assertions v2: reflection-level dependency rules (`NotDependOn`, `OnlyDependOn`,
   `NotDependOnAny`), `HaveNoCycles` with concrete cycle paths, public-surface rules
   (`OnlyHavePublicMembers`, `NotExposeTypes`), namespace/name/access/record/immutability assertions,

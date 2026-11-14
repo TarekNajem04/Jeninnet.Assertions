@@ -25,13 +25,28 @@ Rule IDs use the `JNA` prefix (Jeninnet Assertions).
 
 | ID | Severity | Converts |
 |---|---|---|
-| `JNA1001` | Info | `Assert.AreEqual`/`AreNotEqual`, xUnit `Assert.Equal`/`NotEqual`, `Assert.Contains`, NUnit `Is.EqualTo`/`Is.Not.EqualTo` → `Be` / `NotBe` / `Contain` |
+| `JNA1001` | Info | `Assert.AreEqual`/`AreNotEqual`, xUnit `Assert.Equal`/`NotEqual`, NUnit `Is.EqualTo`/`Is.Not.EqualTo` → `Be` / `NotBe` |
 | `JNA1002` | Info | `Assert.IsTrue`/`IsFalse`/`IsNull`/`IsNotNull`, xUnit `Assert.True`/`False`/`Null`/`NotNull`, NUnit `Is.True`/`False`/`Null`/`Is.Not.Null` → `BeTrue` / `BeFalse` / `BeNull` / `NotBeNull` |
+| `JNA1003` | Info | String assertions: MSTest/NUnit `StringAssert.Contains`/`StartsWith`/`EndsWith`, xUnit `Assert.Contains` (string)/`StartsWith`/`EndsWith` → `Contain` / `StartWith` / `EndWith` |
+| `JNA1004` | Info | Collection emptiness/single/containment: xUnit `Assert.Empty`/`NotEmpty`/`Single`/`Contains`/`DoesNotContain`, NUnit `Assert.IsEmpty`/`IsNotEmpty`/`Contains`/`DoesNotContain`, MSTest `CollectionAssert.Contains` → `BeEmpty` / `NotBeEmpty` / `ContainSingle` / `Contain` / `NotContain` |
+| `JNA1005` | Info | MSTest `Assert.Throws`/`ThrowsException`[Async], xUnit/NUnit `Assert.Throws`/`ThrowsAsync` in statement position → `Throw`/`ThrowExactly` and async variants |
+| `JNA1006` | Info | MSTest `Assert.IsInstanceOfType`, xUnit `Assert.IsType`/`IsAssignableFrom`, NUnit `Assert.IsInstanceOf`/`IsAssignableFrom` in statement position → `BeOfType` / `BeAssignableTo` (and negatives) |
+| `JNA1007` | Info | `Assert.True(task.IsCompleted)` / `Assert.False(task.IsCompleted)` → `BeCompleted` / `NotBeCompleted` |
 
 Suggestions appear only when the generated code is guaranteed to compile (verified by speculative
 binding); a `message:` argument becomes `because:`. Info severity never breaks
-`TreatWarningsAsErrors` builds. Tolerance, comparer, and culture overloads are deliberately left
-manual.
+`TreatWarningsAsErrors` builds.
+
+Safety rules worth knowing:
+
+- Tolerance, comparer, culture, and `StringComparison` overloads are left manual.
+- Exception and type assertions are converted only in statement position: the framework call returns the
+  exception/typed value, while the fluent call returns an assertion object. Exact-throw frameworks
+  (xUnit/NUnit `Throws`, MSTest `ThrowsException`) map to `ThrowExactly`; MSTest `Throws` keeps its
+  non-strict semantics with `Throw`.
+- `Assert.Single` and `Assert.IsType`/`IsAssignableFrom` are skipped when their result is consumed.
+- Dictionary `Contains` is left manual (needs `ContainKey`/`ContainValue`).
+- Snapshot tools (`ShouldMatchApproved`, `Verify`) are intentionally not converted (different semantics).
 
 ## License
 

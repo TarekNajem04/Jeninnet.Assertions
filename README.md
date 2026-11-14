@@ -549,8 +549,13 @@ The optional `Jeninnet.Assertions.Analyzer` package suggests fluent assertions o
 
 | ID | Severity | Converts |
 |---|---|---|
-| `JNA1001` | Info | `Assert.AreEqual`/`AreNotEqual`, xUnit `Assert.Equal`/`NotEqual`, `Assert.Contains`, NUnit `Is.EqualTo`/`Is.Not.EqualTo` → `Be` / `NotBe` / `Contain` (tolerance, comparer, and culture overloads are never suggested) |
+| `JNA1001` | Info | `Assert.AreEqual`/`AreNotEqual`, xUnit `Assert.Equal`/`NotEqual`, NUnit `Is.EqualTo`/`Is.Not.EqualTo` → `Be` / `NotBe` (tolerance, comparer, and culture overloads are never suggested) |
 | `JNA1002` | Info | `Assert.IsTrue`/`IsFalse`/`IsNull`/`IsNotNull`, xUnit `Assert.True`/`False`/`Null`/`NotNull`, NUnit `Is.True`/`False`/`Null`/`Is.Not.Null` → `BeTrue` / `BeFalse` / `BeNull` / `NotBeNull` |
+| `JNA1003` | Info | String assertions (`StringAssert`, xUnit string `Contains`/`StartsWith`/`EndsWith`) → `Contain` / `StartWith` / `EndWith` |
+| `JNA1004` | Info | Collection emptiness/single/containment (`Empty`, `NotEmpty`, `Single`, `Contains`, `DoesNotContain`, `CollectionAssert.Contains`) → `BeEmpty` / `NotBeEmpty` / `ContainSingle` / `Contain` / `NotContain` |
+| `JNA1005` | Info | Exception assertions in statement position (`Throws`, `ThrowsAsync`, `ThrowsException`) → `Throw` / `ThrowExactly` and async variants |
+| `JNA1006` | Info | Type assertions in statement position (`IsInstanceOfType`, `IsType`, `IsAssignableFrom`) → `BeOfType` / `BeAssignableTo` |
+| `JNA1007` | Info | `Assert.True/False(task.IsCompleted)` → `BeCompleted` / `NotBeCompleted` |
 
 Suggestions appear only when the generated code is guaranteed to compile (verified by speculative binding); `message:` becomes `because:`. Info severity never breaks `TreatWarningsAsErrors` builds. Requires the core package alongside (pulled automatically). See the [migration playbook](docs/en/10-migration.md) ([العربية](docs/ar/10-migration.md)) for the full before/after cheat sheet and what is deliberately left manual.
 

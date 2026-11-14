@@ -10,7 +10,15 @@ namespace Jeninnet.Assertions.Analyzer;
 [ExportCodeFixProvider(LanguageNames.CSharp, Name = nameof(UseShouldCodeFixProvider)), Shared]
 public sealed class UseShouldCodeFixProvider : CodeFixProvider {
     /// <inheritdoc />
-    public override ImmutableArray<string> FixableDiagnosticIds => [UseShouldAnalyzer.ARE_EQUAL_ID, UseShouldAnalyzer.IS_CONDITION_ID];
+    public override ImmutableArray<string> FixableDiagnosticIds => [
+        UseShouldAnalyzer.ARE_EQUAL_ID,
+        UseShouldAnalyzer.IS_CONDITION_ID,
+        UseShouldAnalyzer.STRING_ASSERTION_ID,
+        UseShouldAnalyzer.COLLECTION_ASSERTION_ID,
+        UseShouldAnalyzer.EXCEPTION_ASSERTION_ID,
+        UseShouldAnalyzer.TYPE_ASSERTION_ID,
+        UseShouldAnalyzer.TASK_STATE_ID,
+    ];
 
     /// <inheritdoc />
     public override FixAllProvider GetFixAllProvider() => WellKnownFixAllProviders.BatchFixer;
@@ -28,13 +36,7 @@ public sealed class UseShouldCodeFixProvider : CodeFixProvider {
             return;
         }
 
-        var replacement = method.Name switch {
-            "AreEqual" or "AreNotEqual" or "Equal" or "NotEqual" => ShouldMapping.TryMapEquality(semanticModel, invocation, method, context.CancellationToken),
-            "IsTrue" or "IsFalse" or "IsNull" or "IsNotNull" or "True" or "False" or "Null" or "NotNull" => ShouldMapping.TryMapCondition(semanticModel, invocation, method, context.CancellationToken),
-            "Contains" => ShouldMapping.TryMapContains(semanticModel, invocation, method, context.CancellationToken),
-            "That" => ShouldMapping.TryMapConstraint(semanticModel, invocation, method, context.CancellationToken),
-            _ => null,
-        };
+        var replacement = ShouldMapping.TryMap(semanticModel, invocation, method, context.CancellationToken);
         if(replacement is null) {
             return;
         }
@@ -61,11 +63,12 @@ public sealed class UseShouldCodeFixProvider : CodeFixProvider {
         ShouldMapping.Replacement replacement,
         CancellationToken cancellationToken) {
         _ = cancellationToken;
-        var receiver = SyntaxFactory.MemberAccessExpression(
+        var receiver = AsReceiver(replacement.Actual, replacement.RequiresAwait);
+        var receiverAccess = SyntaxFactory.MemberAccessExpression(
             SyntaxKind.SimpleMemberAccessExpression,
-            replacement.Actual.WithoutTrivia(),
+            receiver,
             SyntaxFactory.IdentifierName("Should"));
-        var shouldCall = SyntaxFactory.InvocationExpression(receiver);
+        var shouldCall = SyntaxFactory.InvocationExpression(receiverAccess);
         var arguments = new List<ArgumentSyntax>();
         if(replacement.Expected is not null) {
             arguments.Add(RenameArgument(replacement.Expected, "notExpected", "unexpected"));
@@ -76,13 +79,41 @@ public sealed class UseShouldCodeFixProvider : CodeFixProvider {
         }
 
         var fluentCall = SyntaxFactory.InvocationExpression(
-            SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, shouldCall, SyntaxFactory.IdentifierName(replacement.TargetMethod)),
+            SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, shouldCall, MethodName(replacement)),
             SyntaxFactory.ArgumentList(SyntaxFactory.SeparatedList(arguments)));
+        ExpressionSyntax converted = replacement.RequiresAwait ? SyntaxFactory.AwaitExpression(fluentCall) : fluentCall;
+        var replacedNode = replacement.RequiresAwait && invocation.Parent is AwaitExpressionSyntax awaited
+            ? (SyntaxNode)awaited
+            : invocation;
         var replaced = root.ReplaceNode(
-            invocation,
-            fluentCall.WithLeadingTrivia(invocation.GetLeadingTrivia()).WithTrailingTrivia(invocation.GetTrailingTrivia()));
+            replacedNode,
+            converted.WithLeadingTrivia(replacedNode.GetLeadingTrivia()).WithTrailingTrivia(replacedNode.GetTrailingTrivia()));
         return Task.FromResult(document.WithSyntaxRoot(EnsureUsing(replaced, "Jeninnet.Assertions")));
     }
+
+    /// <summary>Builds the <c>Should()</c> receiver, wrapping a bare lambda in an explicit delegate creation.</summary>
+    /// <param name="actual">The expression becoming the subject.</param>
+    /// <param name="requiresAwait">Whether the target is an async assertion (uses <c>Func&lt;Task&gt;</c>).</param>
+    /// <returns>The receiver expression.</returns>
+    private static ExpressionSyntax AsReceiver(ExpressionSyntax actual, bool requiresAwait) {
+        var expression = actual.WithoutTrivia();
+        if(expression is not (LambdaExpressionSyntax or AnonymousMethodExpressionSyntax)) {
+            return expression;
+        }
+
+        var delegateType = requiresAwait ? "System.Func<System.Threading.Tasks.Task>" : "System.Action";
+        return SyntaxFactory.ObjectCreationExpression(SyntaxFactory.ParseTypeName(delegateType))
+            .WithArgumentList(SyntaxFactory.ArgumentList(SyntaxFactory.SingletonSeparatedList(SyntaxFactory.Argument(expression))));
+    }
+
+    /// <summary>Builds the target method name, applying a generic type argument when the mapping requires one.</summary>
+    /// <param name="replacement">The planned fluent replacement.</param>
+    /// <returns>A plain or generic method name.</returns>
+    private static SimpleNameSyntax MethodName(ShouldMapping.Replacement replacement) =>
+        replacement.TypeArgument is null
+            ? SyntaxFactory.IdentifierName(replacement.TargetMethod)
+            : SyntaxFactory.GenericName(SyntaxFactory.Identifier(replacement.TargetMethod))
+                .WithTypeArgumentList(SyntaxFactory.TypeArgumentList(SyntaxFactory.SingletonSeparatedList(replacement.TypeArgument)));
 
     /// <summary>Renames a carried-over named argument (e.g. <c>message:</c> to <c>because:</c>).</summary>
     /// <param name="argument">The argument to inspect.</param>

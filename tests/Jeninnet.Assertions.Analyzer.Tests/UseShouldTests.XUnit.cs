@@ -134,6 +134,6 @@ public partial class UseShouldTests {
                 }
             }
             """;
-        await UseShouldVerifier.VerifyCodeFixWithReferencesAsync(source, fixedSource, "JNA1001", XUNIT_STUB, "Contain", "Contains");
+        await UseShouldVerifier.VerifyCodeFixWithReferencesAsync(source, fixedSource, "JNA1003", XUNIT_STUB, "Contain", "Contains");
     }
 }
