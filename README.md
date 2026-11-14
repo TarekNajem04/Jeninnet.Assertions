@@ -305,7 +305,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Entry: `FluentActions`, or `Should()` on the delegate
 - Exceptions: `Throw`, `ThrowExactly`, `ThrowWithinAsync`, `NotThrow`, `NotThrowAfter`, `WithMessage` / `WithoutMessage`, `WithInnerException` / `WithInnerExceptionExactly`, `Where`, `WithParameterName`, `Which`
 - Timing: `SucceedWithin`, delegate timing (`CompleteWithinAsync` / `NotCompleteWithinAsync`, `Which` result for `Func<Task<T>>`), `EventuallySatisfy` (+`PollingBackoff`)
-- Allocations and concurrency: `AllocateAtMost`, `AllocateLessThan` (+async), `BeThreadSafeAsync` (simultaneous copies, aggregated failures, deadlock detection)
+- Allocations and concurrency: `AllocateAtMost`, `AllocateLessThan` (+async), `BeThreadSafeAsync` on sync, async, and `Func<T>` actions (simultaneous copies, aggregated failures, deadlock detection)
 - Cancellation: `HonorCancellationAsync` / `CompleteDespiteCancellationAsync` on token-aware delegates
 - Construction: `Invoking` / `Awaiting` / `Enumerating`, `As<TTo>`
 
@@ -315,6 +315,8 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <summary><strong>Tasks</strong> · Should() / ExecutionTime()</summary>
 
 - `CompleteWithinAsync` (+`WithResultAsync`), `NotCompleteWithinAsync`
+- States: `BeCompleted`, `NotBeCompleted`, `BeCompletedSuccessfully`, `BeFaulted` (+`Which` base exception), `BeCanceled`
+- Results: `HaveResult` (+predicate, `Which`) on `Task<T>` — immediate failure when not completed successfully
 - Execution-time bounds: `BeLessThan[OrEqualTo]`, `BeGreaterThan[OrEqualTo]`, `BeCloseTo`, member-expression overload `ExecutionTimeOf`
 
 </details>

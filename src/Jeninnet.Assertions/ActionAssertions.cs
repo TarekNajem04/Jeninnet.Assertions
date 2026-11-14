@@ -72,73 +72,22 @@ public class ActionAssertions(Action action, string? expression = null) : Assert
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="copies"/> is less than two or <paramref name="timeout"/> is negative.</exception>
     /// <exception cref="AssertionFailedException">A copy failed or did not complete within <paramref name="timeout"/>.</exception>
     public async Task<AndConstraint<ActionAssertions>> BeThreadSafeAsync(int copies = 8, TimeSpan? timeout = null, string? because = null, params object?[] becauseArgs) {
-        if(copies < 2) {
-            throw new ArgumentOutOfRangeException(nameof(copies), "At least two copies are required.");
-        }
+        var wait = ConcurrencyStress.Validate(copies, timeout);
+        var result = await ConcurrencyStress.RunAsync(() => {
+            _action();
+            return Task.CompletedTask;
+        }, copies, wait).ConfigureAwait(false);
 
-        var wait = timeout ?? TimeSpan.FromSeconds(5);
-        if(wait < TimeSpan.Zero) {
-            throw new ArgumentOutOfRangeException(nameof(timeout), "Timeout must not be negative.");
-        }
-
-        var failures = new List<(int Copy, Exception Exception)>();
-        using var barrier = new Barrier(copies);
-        var tasks = new Task[copies];
-        for(var index = 0; index < copies; index++) {
-            var copy = index + 1;
-            tasks[index] = Task.Run(() => {
-                barrier.SignalAndWait();
-                try {
-                    _action();
-                }
-                catch(Exception exception) {
-                    lock(failures) {
-                        failures.Add((copy, exception));
-                    }
-                }
-            });
-        }
-
-        var all = Task.WhenAll(tasks);
-        var winner = await Task.WhenAny(all, Task.Delay(wait));
-        if(winner != all) {
-            var pending = tasks.Count(static task => !task.IsCompleted);
-            Fail(Strings.Format(StringKeys.ACTION_THREAD_SAFE_TIMEOUT, Expression, AssertionScope.FormatInvariant(pending), AssertionScope.FormatInvariant(copies), AssertionScope.FormatInvariant(wait)), because, becauseArgs);
+        if(result.Pending != 0) {
+            Fail(Strings.Format(StringKeys.ACTION_THREAD_SAFE_TIMEOUT, Expression, AssertionScope.FormatInvariant(result.Pending), AssertionScope.FormatInvariant(copies), AssertionScope.FormatInvariant(wait)), because, becauseArgs);
             return new(this);
         }
 
-        for(var index = 0; index < tasks.Length; index++) {
-            if(tasks[index].IsFaulted) {
-                failures.Add((index + 1, tasks[index].Exception!.GetBaseException()));
-            }
-        }
-
-        if(failures.Count != 0) {
-            Fail(BuildThreadSafetyMessage(failures, copies), because, becauseArgs);
+        if(result.Failures.Count != 0) {
+            Fail(ConcurrencyStress.BuildFailureMessage(Expression, result.Failures, copies), because, becauseArgs);
         }
 
         return new(this);
-    }
-
-    /// <summary>Builds the aggregated failure message for concurrent invocation failures, grouping identical exceptions.</summary>
-    /// <param name="failures">The failed copies with their exceptions.</param>
-    /// <param name="copies">The total number of simultaneous copies.</param>
-    /// <returns>The localized multi-line report with one entry per distinct exception.</returns>
-    private string BuildThreadSafetyMessage(List<(int Copy, Exception Exception)> failures, int copies) {
-        var builder = new StringBuilder();
-        builder.Append(Strings.Format(StringKeys.ACTION_THREAD_SAFE_FAILURES, Expression, AssertionScope.FormatInvariant(failures.Count), AssertionScope.FormatInvariant(copies)));
-        var entry = 0;
-        foreach(var group in failures
-            .GroupBy(static failure => (failure.Exception.GetType().Name, failure.Exception.Message))
-            .OrderBy(static group => group.Min(static failure => failure.Copy))) {
-            entry++;
-            var type = group.Key.Name;
-            var detail = string.IsNullOrEmpty(group.Key.Message) ? type : $"{type}: {group.Key.Message}";
-            var copiesList = string.Join(", ", group.OrderBy(static failure => failure.Copy).Select(static failure => AssertionScope.FormatInvariant(failure.Copy)));
-            builder.Append('\n').Append(Strings.Format(StringKeys.ACTION_THREAD_SAFE_ENTRY, AssertionScope.FormatInvariant(entry), detail, copiesList));
-        }
-
-        return builder.ToString();
     }
 
     /// <summary>Asserts that repeated invocations stop throwing within <paramref name="waitTime"/>, checking every <paramref name="pollInterval"/>.</summary>

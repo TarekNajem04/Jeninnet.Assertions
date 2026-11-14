@@ -51,6 +51,13 @@ internal static partial class StringKeys {
     internal const string TASK_NOT_COMPLETE_WITHIN = "TASK_NOT_COMPLETE_WITHIN";
     internal const string TASK_WITH_RESULT = "TASK_WITH_RESULT";
     internal const string TASK_WITH_RESULT_NOT_COMPLETED = "TASK_WITH_RESULT_NOT_COMPLETED";
+    internal const string TASK_BE_COMPLETED = "TASK_BE_COMPLETED";
+    internal const string TASK_NOT_BE_COMPLETED = "TASK_NOT_BE_COMPLETED";
+    internal const string TASK_BE_COMPLETED_SUCCESSFULLY = "TASK_BE_COMPLETED_SUCCESSFULLY";
+    internal const string TASK_BE_FAULTED = "TASK_BE_FAULTED";
+    internal const string TASK_BE_CANCELED = "TASK_BE_CANCELED";
+    internal const string TASK_HAVE_RESULT_NOT_COMPLETED = "TASK_HAVE_RESULT_NOT_COMPLETED";
+    internal const string TASK_HAVE_RESULT_PREDICATE = "TASK_HAVE_RESULT_PREDICATE";
 
     internal const string EVENT_RAISE = "EVENT_RAISE";
     internal const string EVENT_NOT_RAISE = "EVENT_NOT_RAISE";

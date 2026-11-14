@@ -10,7 +10,7 @@ namespace Jeninnet.Assertions;
 /// <param name="task">The task to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
 /// <exception cref="ArgumentNullException"><paramref name="task"/> is <see langword="null"/>.</exception>
-public class TaskAssertions(Task? task, string? expression = null) : AssertionsBase(expression, "task") {
+public partial class TaskAssertions(Task? task, string? expression = null) : AssertionsBase(expression, "task") {
     private readonly Task _task = task ?? throw new ArgumentNullException(nameof(task));
 
     /// <summary>Asserts that the task completes within <paramref name="timeout"/>; faults and cancellations still fail, with the original exception preserved.</summary>
@@ -66,7 +66,7 @@ public class TaskAssertions(Task? task, string? expression = null) : AssertionsB
 /// <param name="task">The task to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
 /// <exception cref="ArgumentNullException"><paramref name="task"/> is <see langword="null"/>.</exception>
-public class TaskAssertions<T>(Task<T>? task, string? expression = null) : AssertionsBase(expression, "task") {
+public partial class TaskAssertions<T>(Task<T>? task, string? expression = null) : AssertionsBase(expression, "task") {
     private readonly Task<T> _task = task ?? throw new ArgumentNullException(nameof(task));
 
     /// <summary>Asserts that the task completes within <paramref name="timeout"/> and exposes its result; faults and cancellations still fail, with the original exception preserved.</summary>

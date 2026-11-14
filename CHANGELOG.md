@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- Task assertions now cover every terminal state without waiting: `BeCompleted`, `NotBeCompleted`,
+  `BeCompletedSuccessfully`, `BeFaulted` (exposing the base exception through `Which`), and
+  `BeCanceled`. `Task<T>` adds `HaveResult` (exact, predicate, and `Which`) and a successful
+  completion constraint that exposes the value. `BeThreadSafeAsync` is now available on async
+  actions and `Func<T>` delegates, sharing one barrier-based stress runner with aggregated failures.
 - HTTP response assertions now cover null/status sugar (`BeRedirect`, `BeClientError`, `BeServerError`,
   `BeNoContent`), content metadata (`HaveContentType`, `HaveContentLength`), protocol details
   (`HaveVersion`, `HaveReasonPhrase`), caching/redirect headers (`HaveETag`, `HaveRetryAfter`,

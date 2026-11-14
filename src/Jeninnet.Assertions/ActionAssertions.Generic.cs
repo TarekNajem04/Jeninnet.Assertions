@@ -11,7 +11,7 @@ namespace Jeninnet.Assertions;
 /// <param name="action">The synchronous delegate to invoke and verify.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
 /// <exception cref="ArgumentNullException"><paramref name="action"/> is <see langword="null"/>.</exception>
-public class ActionAssertions<T>(Func<T> action, string? expression = null) : AssertionsBase(expression, "action") {
+public partial class ActionAssertions<T>(Func<T> action, string? expression = null) : AssertionsBase(expression, "action") {
     private readonly Func<T> _action = action ?? throw new ArgumentNullException(nameof(action));
 
     /// <summary>Asserts that the synchronous action throws an exception of type <typeparamref name="TException"/>.</summary>

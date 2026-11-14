@@ -79,6 +79,21 @@ await pending.Should().NotCompleteWithinAsync(TimeSpan.FromMilliseconds(50));
 
 Completion means the task settled in any terminal state: a faulted or canceled task still counts as complete for timing, then fails with the original exception preserved. `WithResultAsync()` continues from a completed value without re-awaiting the operation.
 
+State verbs answer the terminal-state questions directly, without waiting:
+
+```csharp
+completed.Should().BeCompleted().And.BeCompletedSuccessfully();
+pending.Should().NotBeCompleted();
+canceled.Should().BeCanceled();
+faulted.Should().BeFaulted().Which.Should().BeOfType<PaymentException>();
+
+var result = valueTask.Should().HaveResult().Which;   // Task<T>: fails immediately unless successful
+valueTask.Should().HaveResult(42);
+valueTask.Should().HaveResult(static value => value > 0);
+```
+
+`BeFaulted()` exposes the base exception, not just `AggregateException`. `HaveResult` uses `EqualityComparer<T>.Default` (not object-graph equivalency) and never waits: a pending, faulted, or canceled task fails immediately with its state.
+
 ### Honoring cancellation
 
 A delegate that accepts a `CancellationToken` makes a promise: when the token is already canceled, stop before doing the work. Assert that promise directly — the verb hands over a pre-canceled token and requires `OperationCanceledException` carrying that same token, with no wall-clock waiting:
@@ -123,7 +138,12 @@ Concurrency bugs hide behind the first exception. `BeThreadSafeAsync()` starts t
 
 ```csharp
 Action refresh = () => cache.Refresh();
+Func<Task> flushAsync = () => cache.FlushAsync();
+Func<int> read = () => cache.Read();
+
 await refresh.Should().BeThreadSafeAsync(copies: 8, timeout: TimeSpan.FromSeconds(5));
+await flushAsync.Should().BeThreadSafeAsync(copies: 8);
+await read.Should().BeThreadSafeAsync(copies: 4);   // results are intentionally ignored
 ```
 
 Copies that do not complete within the timeout are reported as a possible deadlock; note that their threads cannot be interrupted, so a deadlocked action keeps them until the process exits. This is a diagnostic stress check, not a proof of thread safety.

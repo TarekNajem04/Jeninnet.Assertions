@@ -1619,6 +1619,27 @@
   <data name="TASK_WITH_RESULT_NOT_COMPLETED" xml:space="preserve">
     <value>المتوقع من {0} أن تكون له نتيجة مكتملة، لكنه لم يكتمل.</value>
   </data>
+  <data name="TASK_BE_COMPLETED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مكتملاً، لكنه كان {1}.</value>
+  </data>
+  <data name="TASK_NOT_BE_COMPLETED" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مكتملاً، لكنه كان {1}.</value>
+  </data>
+  <data name="TASK_BE_COMPLETED_SUCCESSFULLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكتمل بنجاح، لكنه كان {1}.</value>
+  </data>
+  <data name="TASK_BE_FAULTED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فاشلاً، لكنه كان {1}.</value>
+  </data>
+  <data name="TASK_BE_CANCELED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون ملغى، لكنه كان {1}.</value>
+  </data>
+  <data name="TASK_HAVE_RESULT_NOT_COMPLETED" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون له نتيجة، لكنه كان {1}.</value>
+  </data>
+  <data name="TASK_HAVE_RESULT_PREDICATE" xml:space="preserve">
+    <value>المتوقع من {0} أن تكون نتيجته مطابقة للشرط، لكن وُجد {1}.</value>
+  </data>
   <data name="EVENT_RAISE" xml:space="preserve">
     <value>المتوقع من {0} أن يثير الحدث '{1}'، لكنه لم يُثر.</value>
   </data>

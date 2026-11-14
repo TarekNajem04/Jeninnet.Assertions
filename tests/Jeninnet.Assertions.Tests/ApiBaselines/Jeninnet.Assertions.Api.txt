@@ -22,6 +22,7 @@ type Jeninnet.Assertions.ActionAssertions<T>
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.ActionAssertions<T>> SucceedWithin(System.TimeSpan, System.Nullable<System.TimeSpan>, System.String, System.Object[])
   method Jeninnet.Assertions.ExceptionAssertions<TException> Throw<TException>(System.String, System.Object[])
   method Jeninnet.Assertions.ExceptionAssertions<TException> ThrowExactly<TException>(System.String, System.Object[])
+  method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.ActionAssertions<T>>> BeThreadSafeAsync(System.Int32, System.Nullable<System.TimeSpan>, System.String, System.Object[])
 type Jeninnet.Assertions.AndConstraint<TParent>
   ctor(TParent)
   property TParent And { get; }
@@ -182,6 +183,7 @@ type Jeninnet.Assertions.AsyncActionAssertions
   method System.Threading.Tasks.Task NotThrowAsync(System.String, System.Object[])
   method System.Threading.Tasks.Task SucceedWithinAsync(Jeninnet.Assertions.PollingBackoff, System.TimeSpan, System.String, System.Object[])
   method System.Threading.Tasks.Task SucceedWithinAsync(System.TimeSpan, System.Nullable<System.TimeSpan>, System.String, System.Object[])
+  method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.AsyncActionAssertions>> BeThreadSafeAsync(System.Int32, System.Nullable<System.TimeSpan>, System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.AsyncActionAssertions>> CompleteWithinAsync(System.TimeSpan, System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.AsyncActionAssertions>> NotCompleteWithinAsync(System.TimeSpan, System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.AsyncActionAssertions>> NotThrowAfterAsync(System.TimeSpan, System.TimeSpan, System.String, System.Object[])
@@ -1563,10 +1565,23 @@ type Jeninnet.Assertions.SystemClock
   property static Jeninnet.Assertions.IClock Instance { get; }
 type Jeninnet.Assertions.TaskAssertions
   ctor(System.Threading.Tasks.Task, System.String)
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions> BeCanceled(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions> BeCompleted(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions> BeCompletedSuccessfully(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions> NotBeCompleted(System.String, System.Object[])
+  method Jeninnet.Assertions.WhichConstraint<System.Exception> BeFaulted(System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions>> CompleteWithinAsync(System.TimeSpan, System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions>> NotCompleteWithinAsync(System.TimeSpan, System.String, System.Object[])
 type Jeninnet.Assertions.TaskAssertions<T>
   ctor(System.Threading.Tasks.Task<T>, System.String)
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions<T>> BeCanceled(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions<T>> BeCompleted(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions<T>> HaveResult(System.Func<T,System.Boolean>, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions<T>> HaveResult(T, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions<T>> NotBeCompleted(System.String, System.Object[])
+  method Jeninnet.Assertions.AndWhichConstraint<Jeninnet.Assertions.TaskAssertions<T>,T> BeCompletedSuccessfully(System.String, System.Object[])
+  method Jeninnet.Assertions.WhichConstraint<System.Exception> BeFaulted(System.String, System.Object[])
+  method Jeninnet.Assertions.WhichConstraint<T> HaveResult(System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.TaskAssertions<T>>> NotCompleteWithinAsync(System.TimeSpan, System.String, System.Object[])
   method System.Threading.Tasks.Task<Jeninnet.Assertions.AndWhichConstraint<Jeninnet.Assertions.TaskAssertions<T>,T>> CompleteWithinAsync(System.TimeSpan, System.String, System.Object[])
 type Jeninnet.Assertions.TaskCompletionSourceAssertions

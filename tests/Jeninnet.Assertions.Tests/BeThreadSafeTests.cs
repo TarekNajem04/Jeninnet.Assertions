@@ -101,6 +101,75 @@ public class BeThreadSafeTests {
         Assert.AreEqual("timeout", timeoutEx.ParamName);
     }
 
+    [TestMethod]
+    public async Task AsyncCopies_RunSimultaneously_AndAllComplete() {
+        var inside = 0;
+        var maxInside = 0;
+        Func<Task> action = async () => {
+            var current = Interlocked.Increment(ref inside);
+            InterlockedMax(ref maxInside, current);
+            await Task.Delay(100);
+            Interlocked.Decrement(ref inside);
+        };
+
+        await action.Should().BeThreadSafeAsync(copies: 4, timeout: TimeSpan.FromSeconds(60));
+
+        Assert.AreEqual(4, Volatile.Read(ref maxInside));
+    }
+
+    [TestMethod]
+    public async Task AsyncAllCopiesFail_AggregatedIntoSingleGroupedFailure() {
+        Func<Task> action = static () => Task.FromException(new InvalidOperationException("boom"));
+
+        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 4, timeout: TimeSpan.FromSeconds(60)));
+        Assert.AreEqual("Expected action to be thread-safe, but 4 of 4 copies failed:\n1. InvalidOperationException: boom (copies: 1, 2, 3, 4).", ex.Message);
+    }
+
+    [TestMethod]
+    public async Task AsyncPartialFailure_CarriesTheFailingCopyNumber() {
+        var ordinal = 0;
+        Func<Task> action = async () => {
+            if(Interlocked.Increment(ref ordinal) == 2) {
+                throw new InvalidOperationException("boom");
+            }
+
+            await Task.Yield();
+        };
+
+        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 3, timeout: TimeSpan.FromSeconds(60)));
+        Assert.Contains("Expected action to be thread-safe, but 1 of 3 copies failed:", ex.Message);
+        Assert.Contains("1. InvalidOperationException: boom (copies: ", ex.Message);
+    }
+
+    [TestMethod]
+    public async Task AsyncPendingCopies_AreReportedAsAPossibleDeadlock() {
+        Func<Task> action = static () => new TaskCompletionSource().Task;
+
+        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 2, timeout: TimeSpan.FromMilliseconds(300)));
+        Assert.AreEqual("Expected action to be thread-safe, but 2 of 2 copies did not complete within 00:00:00.3000000 (a deadlock or an unbounded wait).", ex.Message);
+    }
+
+    [TestMethod]
+    public async Task ValueReturningAction_CanBeCheckedForThreadSafety() {
+        Func<int> action = static () => 42;
+        await action.Should().BeThreadSafeAsync(copies: 2, timeout: TimeSpan.FromSeconds(60));
+
+        Func<int> faulty = static () => throw new InvalidOperationException("boom");
+        var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => faulty.Should().BeThreadSafeAsync(copies: 2, timeout: TimeSpan.FromSeconds(60)));
+        Assert.Contains("to be thread-safe, but 2 of 2 copies failed", ex.Message);
+    }
+
+    [TestMethod]
+    public async Task AsyncGuards_RejectTooFewCopiesAndNegativeTimeout() {
+        Func<Task> action = static () => Task.CompletedTask;
+
+        var copiesEx = await Assert.ThrowsExactlyAsync<ArgumentOutOfRangeException>(() => action.Should().BeThreadSafeAsync(copies: 1));
+        Assert.AreEqual("copies", copiesEx.ParamName);
+
+        var timeoutEx = await Assert.ThrowsExactlyAsync<ArgumentOutOfRangeException>(() => action.Should().BeThreadSafeAsync(copies: 2, timeout: TimeSpan.FromSeconds(-1)));
+        Assert.AreEqual("timeout", timeoutEx.ParamName);
+    }
+
     private static void InterlockedMax(ref int target, int value) {
         int current;
         while(value > (current = Volatile.Read(ref target))) {

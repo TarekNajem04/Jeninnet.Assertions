@@ -9,6 +9,87 @@ namespace Jeninnet.Assertions.Tests;
 [TestClass]
 public class TaskCompletionTests {
     [TestMethod]
+    public void BeCompleted_AndNotBeCompleted() {
+        var completed = Task.CompletedTask;
+        completed.Should().BeCompleted().And.BeCompletedSuccessfully();
+
+        var pending = new TaskCompletionSource().Task;
+        pending.Should().NotBeCompleted();
+
+        var completedEx = Assert.ThrowsExactly<AssertionFailedException>(() => pending.Should().BeCompleted());
+        Assert.AreEqual("Expected pending to be completed, but it was WaitingForActivation.", completedEx.Message);
+
+        var notCompletedEx = Assert.ThrowsExactly<AssertionFailedException>(() => completed.Should().NotBeCompleted());
+        Assert.AreEqual("Expected completed not to be completed, but it was RanToCompletion.", notCompletedEx.Message);
+    }
+
+    [TestMethod]
+    public void BeCompletedSuccessfully_FaultAndCancel() {
+        var faulted = Task.FromException(new InvalidOperationException("boom"));
+        var successEx = Assert.ThrowsExactly<AssertionFailedException>(() => faulted.Should().BeCompletedSuccessfully());
+        Assert.AreEqual("Expected faulted to complete successfully, but it was Faulted (InvalidOperationException).", successEx.Message);
+
+        var canceled = Task.FromCanceled(new CancellationToken(canceled: true));
+        canceled.Should().BeCanceled();
+        var canceledEx = Assert.ThrowsExactly<AssertionFailedException>(() => canceled.Should().BeCompletedSuccessfully());
+        Assert.AreEqual("Expected canceled to complete successfully, but it was Canceled.", canceledEx.Message);
+    }
+
+    [TestMethod]
+    public void BeFaulted_ExposesBaseException() {
+        var faulted = Task.FromException(new InvalidOperationException("boom"));
+        var which = faulted.Should().BeFaulted();
+        Assert.IsInstanceOfType<InvalidOperationException>(which.Which);
+
+        var completed = Task.CompletedTask;
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => completed.Should().BeFaulted());
+        Assert.AreEqual("Expected completed to be faulted, but it was RanToCompletion.", ex.Message);
+    }
+
+    [TestMethod]
+    public void BeCanceled_FailsForCompletedTask() {
+        var completed = Task.CompletedTask;
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => completed.Should().BeCanceled());
+        Assert.AreEqual("Expected completed to be canceled, but it was RanToCompletion.", ex.Message);
+    }
+
+    [TestMethod]
+    public void TaskOfT_StateAndResult() {
+        var result = Task.FromResult(7);
+        result.Should().BeCompleted()
+            .And.BeCompletedSuccessfully().Which.Should().Be(7);
+        result.Should().HaveResult().Which.Should().Be(7);
+        result.Should().HaveResult(7);
+        result.Should().HaveResult(static value => value == 7);
+
+        var mismatch = Assert.ThrowsExactly<AssertionFailedException>(() => result.Should().HaveResult(8));
+        Assert.AreEqual("Expected result to have result 8, but found 7.", mismatch.Message);
+
+        var predicate = Assert.ThrowsExactly<AssertionFailedException>(() => result.Should().HaveResult(static value => value > 10));
+        Assert.AreEqual("Expected result to have a result matching the predicate, but found 7.", predicate.Message);
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => result.Should().HaveResult((Func<int, bool>)null!));
+    }
+
+    [TestMethod]
+    public void TaskOfT_HaveResult_FailsImmediatelyWhenNotSuccessful() {
+        var pending = new TaskCompletionSource<int>().Task;
+        var pendingEx = Assert.ThrowsExactly<AssertionFailedException>(() => pending.Should().HaveResult(1));
+        Assert.AreEqual("Expected pending to have a result, but it was WaitingForActivation.", pendingEx.Message);
+
+        var faulted = Task.FromException<int>(new InvalidOperationException("boom"));
+        var faultedWhich = faulted.Should().BeFaulted();
+        Assert.IsInstanceOfType<InvalidOperationException>(faultedWhich.Which);
+        var faultedEx = Assert.ThrowsExactly<AssertionFailedException>(() => faulted.Should().HaveResult(1));
+        Assert.Contains("to have a result, but it was Faulted (InvalidOperationException)", faultedEx.Message);
+
+        var canceled = Task.FromCanceled<int>(new CancellationToken(canceled: true));
+        canceled.Should().BeCanceled();
+        var canceledEx = Assert.ThrowsExactly<AssertionFailedException>(() => canceled.Should().BeCompletedSuccessfully());
+        Assert.Contains("to complete successfully, but it was Canceled", canceledEx.Message);
+    }
+
+    [TestMethod]
     public async Task CompleteWithinAsync_PassForCompletedSource_Async() {
         var source = new TaskCompletionSource();
         source.SetResult();

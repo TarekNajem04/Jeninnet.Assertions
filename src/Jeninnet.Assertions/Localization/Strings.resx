@@ -1619,6 +1619,27 @@
   <data name="TASK_WITH_RESULT_NOT_COMPLETED" xml:space="preserve">
     <value>Expected {0} to have a completed result, but it did not complete.</value>
   </data>
+  <data name="TASK_BE_COMPLETED" xml:space="preserve">
+    <value>Expected {0} to be completed, but it was {1}.</value>
+  </data>
+  <data name="TASK_NOT_BE_COMPLETED" xml:space="preserve">
+    <value>Expected {0} not to be completed, but it was {1}.</value>
+  </data>
+  <data name="TASK_BE_COMPLETED_SUCCESSFULLY" xml:space="preserve">
+    <value>Expected {0} to complete successfully, but it was {1}.</value>
+  </data>
+  <data name="TASK_BE_FAULTED" xml:space="preserve">
+    <value>Expected {0} to be faulted, but it was {1}.</value>
+  </data>
+  <data name="TASK_BE_CANCELED" xml:space="preserve">
+    <value>Expected {0} to be canceled, but it was {1}.</value>
+  </data>
+  <data name="TASK_HAVE_RESULT_NOT_COMPLETED" xml:space="preserve">
+    <value>Expected {0} to have a result, but it was {1}.</value>
+  </data>
+  <data name="TASK_HAVE_RESULT_PREDICATE" xml:space="preserve">
+    <value>Expected {0} to have a result matching the predicate, but found {1}.</value>
+  </data>
   <data name="EVENT_RAISE" xml:space="preserve">
     <value>Expected {0} to raise event '{1}', but it was not raised.</value>
   </data>

@@ -105,6 +105,25 @@ await pending.Should().NotCompleteWithinAsync(TimeSpan.FromMilliseconds(50));
 
 يعني الاكتمال أن المهمة استقرت في أي حالة نهائية: فالمهمة الفاشلة أو الملغاة تُحتسب مكتملة زمنيًا، ثم تفشل مع الاحتفاظ بالاستثناء الأصلي. ويتابع <code dir="ltr">WithResultAsync()</code> من القيمة المكتملة دون إعادة انتظار العملية. وهذا التقسيم إلى سؤالين — «هل استقرت في الميزانية؟» ثم «وبأي نتيجة استقرت؟» — يمنحك تشخيصًا دقيقًا حين يتأخر شيء: هل المشكلة في زمن الوصول، أم في النتيجة التي وصلت؟ وأما <code dir="ltr">NotCompleteWithinAsync</code> فهي الأداة الصحيحة لفحص أن شيئًا **لم يكن يجب أن ينتهي بعد** — مهمة طويلة الأجل، أو عملية عُلِّقت عمدًا — فتحوِّل الغياب إلى نتيجة مُثبَتة لا مجرد مصادفة.
 
+وتجيب أفعال الحالة عن أسئلة الحالة النهائية مباشرةً، بلا انتظار:
+
+<div dir="ltr">
+
+```csharp
+completed.Should().BeCompleted().And.BeCompletedSuccessfully();
+pending.Should().NotBeCompleted();
+canceled.Should().BeCanceled();
+faulted.Should().BeFaulted().Which.Should().BeOfType<PaymentException>();
+
+var result = valueTask.Should().HaveResult().Which;   // Task<T>: يفشل فوراً إن لم ينجح
+valueTask.Should().HaveResult(42);
+valueTask.Should().HaveResult(static value => value > 0);
+```
+
+</div>
+
+يكشف <code dir="ltr">BeFaulted()</code> الاستثناء الأساسي لا <code dir="ltr">AggregateException</code> فقط. ويستخدم <code dir="ltr">HaveResult</code> المساواة الافتراضية <code dir="ltr">EqualityComparer&lt;T&gt;.Default</code> (لا تكافؤ الرسم الكائني)، ولا ينتظر أبدًا: المهمة المعلقة أو الفاشلة أو الملغاة تفشل فورًا مع حالتها.
+
 ### احترام الإلغاء
 
 المفوَّض الذي يقبل <code dir="ltr">CancellationToken</code> يعقد وعدًا: إذا كان الرمز ملغىً مسبقًا فليتوقف قبل أداء العمل. وكِّد هذا الوعد مباشرة — يمرر الفعل رمزًا ملغىً ويعتبر النجاح رمي <code dir="ltr">OperationCanceledException</code> حاملًا الرمز نفسه، بلا أي انتظار زمني:
@@ -165,7 +184,12 @@ var items = (await stream.Should().CompleteAsync()).Which;   // استنزاف �
 
 ```csharp
 Action refresh = () => cache.Refresh();
+Func<Task> flushAsync = () => cache.FlushAsync();
+Func<int> read = () => cache.Read();
+
 await refresh.Should().BeThreadSafeAsync(copies: 8, timeout: TimeSpan.FromSeconds(5));
+await flushAsync.Should().BeThreadSafeAsync(copies: 8);
+await read.Should().BeThreadSafeAsync(copies: 4);   // النتائج تُتجاهل عمداً
 ```
 
 </div>

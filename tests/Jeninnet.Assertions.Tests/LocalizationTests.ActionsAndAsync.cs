@@ -120,6 +120,31 @@ public partial class LocalizationTests {
         Action action = static () => throw new InvalidOperationException("boom");
         var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => action.Should().BeThreadSafeAsync(copies: 2));
         Assert.AreEqual("المتوقع من action أن يكون آمناً للتزامن، لكن فشلت 2 من 2 نسخ:\n1. InvalidOperationException: boom (النسخ: 1, 2).", ex.Message);
+
+        Func<Task> asyncAction = static () => Task.FromException(new InvalidOperationException("boom"));
+        var asyncEx = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => asyncAction.Should().BeThreadSafeAsync(copies: 2));
+        Assert.AreEqual("المتوقع من asyncAction أن يكون آمناً للتزامن، لكن فشلت 2 من 2 نسخ:\n1. InvalidOperationException: boom (النسخ: 1, 2).", asyncEx.Message);
+    }
+
+    [TestMethod]
+    public void Arabic_TaskStates() {
+        using var _ = new ArabicScope();
+
+        var pending = new TaskCompletionSource().Task;
+        var completed = Assert.ThrowsExactly<AssertionFailedException>(() => pending.Should().BeCompleted());
+        Assert.AreEqual("المتوقع من pending أن يكون مكتملاً، لكنه كان WaitingForActivation.", completed.Message);
+
+        var faulted = Task.FromException(new InvalidOperationException("boom"));
+        var successful = Assert.ThrowsExactly<AssertionFailedException>(() => faulted.Should().BeCompletedSuccessfully());
+        Assert.AreEqual("المتوقع من faulted أن يكتمل بنجاح، لكنه كان Faulted (InvalidOperationException).", successful.Message);
+
+        var result = Task.FromResult(7);
+        var mismatch = Assert.ThrowsExactly<AssertionFailedException>(() => result.Should().HaveResult(8));
+        Assert.AreEqual("المتوقع من result أن تكون نتيجته 8، لكن وُجد 7.", mismatch.Message);
+
+        var done = Task.CompletedTask;
+        var canceled = Assert.ThrowsExactly<AssertionFailedException>(() => done.Should().BeCanceled());
+        Assert.AreEqual("المتوقع من done أن يكون ملغى، لكنه كان RanToCompletion.", canceled.Message);
     }
 
     [TestMethod]
