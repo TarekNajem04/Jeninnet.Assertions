@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- HTTP response assertions now cover null/status sugar (`BeRedirect`, `BeClientError`, `BeServerError`,
+  `BeNoContent`), content metadata (`HaveContentType`, `HaveContentLength`), protocol details
+  (`HaveVersion`, `HaveReasonPhrase`), caching/redirect headers (`HaveETag`, `HaveRetryAfter`,
+  `HaveLocation`), and `HaveCookie` for multiple `Set-Cookie` headers. Async
+  `HaveStringContentAsync`, `HaveJsonContentAsync`, and `BeProblemDetailsAsync` are token-aware and
+  read the body exactly once.
 - File-system assertions for `FileInfo` and `DirectoryInfo`: existence, names/full paths/extensions,
   file-length bounds, empty checks, attributes, UTC timestamps with tolerance, path-boundary parent
   checks, directory contents, and top-level file/directory counts. Missing subjects fail with a clear

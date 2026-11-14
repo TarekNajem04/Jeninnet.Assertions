@@ -213,6 +213,32 @@ response.Should().HaveHeader("Content-Type", "application/json");
 
 </div>
 
+تختصر توكيدات الحالة والبيانات الوصفية الفحوص الشائعة:
+
+<div dir="ltr">
+
+```csharp
+response.Should().BeClientError().And.HaveContentType("application/problem+json");
+response.Should().HaveRetryAfter(TimeSpan.FromSeconds(30)).And.HaveCookie("session");
+response.Should().HaveETag("v1").And.HaveLocation("/orders/42");
+```
+
+</div>
+
+ويُقرأ الجسم بالأفعال غير المتزامنة؛ تُقرأ الاستجابة مرة واحدة فقط، وكل فعل يقبل <code dir="ltr">CancellationToken</code>:
+
+<div dir="ltr">
+
+```csharp
+var body = await response.Should().HaveStringContentAsync("{\"id\":1}");
+var json = await response.Should().HaveJsonContentAsync();
+await response.Should().BeProblemDetailsAsync(title: "Bad request", status: 400, detail: "Missing id");
+```
+
+</div>
+
+يقارن <code dir="ltr">HaveContentType</code> نوع الوسيط ومجموعة المحارف دون حساسية للحالة. ويقرأ <code dir="ltr">HaveContentLength</code> الترويسة المعلنة، لذا تفشل الاستجابات المجزأة (chunked) برسالة واضحة عن غياب الطول. ويقارن <code dir="ltr">HaveRetryAfter</code> الثواني بدقة تامة، ويقارن قيم تاريخ HTTP بهامش ساعة خمس ثوانٍ. ويبحث <code dir="ltr">HaveCookie</code> في كل ترويسات <code dir="ltr">Set-Cookie</code> ويقبل القيم المقتبسة. ويقبل <code dir="ltr">BeProblemDetailsAsync</code> نوعي المحتوى <code dir="ltr">application/problem+json</code> أو <code dir="ltr">application/json</code>، ويشترط كائن JSON، ويتحقق فقط من الحقول التي تمررها.
+
 **قاعدة صارمة:** اختبر دائمًا ضد <code dir="ltr">HttpMessageHandler</code> مزيَّف، لا ضد شبكة حقيقية. الشبكة غير حتمية، بطيئة، وعرضة للتغير — ما يجعل الاختبار هشًا ويصعب تكراره.
 
 لو كانت <code dir="ltr">response</code> <code dir="ltr">null</code>، فستفشل كل توكيد برسالة واضحة عن <code dir="ltr">null</code> بدلًا من رمي <code dir="ltr">NullReferenceException</code>. هذا يحافظ على تشخيص واضح.

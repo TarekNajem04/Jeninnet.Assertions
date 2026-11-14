@@ -10,7 +10,7 @@ namespace Jeninnet.Assertions;
 /// <summary>Provides assertion methods for verifying <see cref="HttpResponseMessage"/> responses.</summary>
 /// <param name="value">The response to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
-public class HttpResponseMessageAssertions(HttpResponseMessage? value, string? expression = null) : AssertionsBase(expression, "response") {
+public partial class HttpResponseMessageAssertions(HttpResponseMessage? value, string? expression = null) : AssertionsBase(expression, "response") {
     private readonly HttpResponseMessage? _value = value;
 
     /// <summary>Asserts that the response status code equals <paramref name="expected"/>.</summary>
@@ -82,6 +82,24 @@ public class HttpResponseMessageAssertions(HttpResponseMessage? value, string? e
         }
 
         return new(this);
+    }
+
+    /// <summary>Fails with <paramref name="messageKey"/> when the response is null.</summary>
+    /// <param name="messageKey">The localization key for the null-response failure.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <param name="formatArgs">Arguments appended after the subject expression.</param>
+    /// <returns><see langword="true"/> when the response is null and the failure was recorded.</returns>
+    private bool FailIfNull(string messageKey, string? because, object?[] becauseArgs, params object?[] formatArgs) {
+        if(_value is not null) {
+            return false;
+        }
+
+        var arguments = new object?[formatArgs.Length + 1];
+        arguments[0] = Expression;
+        formatArgs.CopyTo(arguments, 1);
+        Fail(Strings.Format(messageKey, arguments), because, becauseArgs);
+        return true;
     }
 
     /// <summary>Looks up header values on the response or its content.</summary>

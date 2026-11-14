@@ -334,7 +334,9 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <details>
 <summary><strong>HTTP responses</strong> · Should() (net6.0+)</summary>
 
-- `HaveStatusCode`, `BeSuccessful` (2xx), `HaveHeader` (response + content headers)
+- Status: `HaveStatusCode`, `BeSuccessful`, `BeRedirect` / `NotBeRedirect`, `BeClientError`, `BeServerError`, `BeNoContent`
+- Headers and metadata: `HaveHeader` (response + content), `HaveContentType`, `HaveContentLength`, `HaveVersion`, `HaveReasonPhrase`, `HaveETag`, `HaveRetryAfter`, `HaveLocation`, `HaveCookie`
+- Async body: `HaveStringContentAsync` (exact/predicate), `HaveJsonContentAsync`, `BeProblemDetailsAsync` — all token-aware and read the body once
 
 </details>
 

@@ -1691,6 +1691,135 @@
   <data name="HTTP_HAVE_HEADER_VALUE" xml:space="preserve">
     <value>Expected {0} to have header '{1}' with value '{2}', but found '{3}'.</value>
   </data>
+  <data name="HTTP_BE_NULL" xml:space="preserve">
+    <value>Expected {0} to be null, but found a response.</value>
+  </data>
+  <data name="HTTP_NOT_BE_NULL" xml:space="preserve">
+    <value>Expected {0} not to be null, but found null.</value>
+  </data>
+  <data name="HTTP_BE_REDIRECT_NULL" xml:space="preserve">
+    <value>Expected {0} to be a redirect (3xx), but response is null.</value>
+  </data>
+  <data name="HTTP_BE_REDIRECT" xml:space="preserve">
+    <value>Expected {0} to be a redirect (3xx), but found {1}.</value>
+  </data>
+  <data name="HTTP_NOT_BE_REDIRECT" xml:space="preserve">
+    <value>Expected {0} not to be a redirect, but found {1}.</value>
+  </data>
+  <data name="HTTP_BE_CLIENT_ERROR_NULL" xml:space="preserve">
+    <value>Expected {0} to be a client error (4xx), but response is null.</value>
+  </data>
+  <data name="HTTP_BE_CLIENT_ERROR" xml:space="preserve">
+    <value>Expected {0} to be a client error (4xx), but found {1}.</value>
+  </data>
+  <data name="HTTP_BE_SERVER_ERROR_NULL" xml:space="preserve">
+    <value>Expected {0} to be a server error (5xx), but response is null.</value>
+  </data>
+  <data name="HTTP_BE_SERVER_ERROR" xml:space="preserve">
+    <value>Expected {0} to be a server error (5xx), but found {1}.</value>
+  </data>
+  <data name="HTTP_BE_NO_CONTENT_NULL" xml:space="preserve">
+    <value>Expected {0} to have no content (204), but response is null.</value>
+  </data>
+  <data name="HTTP_BE_NO_CONTENT" xml:space="preserve">
+    <value>Expected {0} to have no content (204), but found {1}.</value>
+  </data>
+  <data name="HTTP_CONTENT_MISSING" xml:space="preserve">
+    <value>Expected {0} to have content, but content was null.</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_TYPE_NULL" xml:space="preserve">
+    <value>Expected {0} to have content type '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_TYPE_MISSING" xml:space="preserve">
+    <value>Expected {0} to have content type '{1}', but no content type was present.</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_TYPE" xml:space="preserve">
+    <value>Expected {0} to have content type '{1}', but found '{2}'.</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_LENGTH_NULL" xml:space="preserve">
+    <value>Expected {0} to have content length {1}, but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_LENGTH_MISSING" xml:space="preserve">
+    <value>Expected {0} to have content length {1}, but no content length was present.</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_LENGTH" xml:space="preserve">
+    <value>Expected {0} to have content length {1}, but found {2}.</value>
+  </data>
+  <data name="HTTP_HAVE_VERSION_NULL" xml:space="preserve">
+    <value>Expected {0} to use HTTP version {1}, but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_VERSION" xml:space="preserve">
+    <value>Expected {0} to use HTTP version {1}, but found {2}.</value>
+  </data>
+  <data name="HTTP_HAVE_REASON_NULL" xml:space="preserve">
+    <value>Expected {0} to have reason phrase '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_REASON" xml:space="preserve">
+    <value>Expected {0} to have reason phrase '{1}', but found '{2}'.</value>
+  </data>
+  <data name="HTTP_HAVE_ETAG_NULL" xml:space="preserve">
+    <value>Expected {0} to have ETag '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_ETAG_MISSING" xml:space="preserve">
+    <value>Expected {0} to have ETag '{1}', but no ETag was present.</value>
+  </data>
+  <data name="HTTP_HAVE_ETAG" xml:space="preserve">
+    <value>Expected {0} to have ETag '{1}', but found '{2}'.</value>
+  </data>
+  <data name="HTTP_HAVE_RETRY_AFTER_NULL" xml:space="preserve">
+    <value>Expected {0} to have Retry-After '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_RETRY_AFTER_MISSING" xml:space="preserve">
+    <value>Expected {0} to have Retry-After '{1}', but no Retry-After was present.</value>
+  </data>
+  <data name="HTTP_HAVE_RETRY_AFTER" xml:space="preserve">
+    <value>Expected {0} to have Retry-After '{1}', but found '{2}'.</value>
+  </data>
+  <data name="HTTP_HAVE_LOCATION_NULL" xml:space="preserve">
+    <value>Expected {0} to have Location '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_LOCATION_MISSING" xml:space="preserve">
+    <value>Expected {0} to have Location '{1}', but no Location was present.</value>
+  </data>
+  <data name="HTTP_HAVE_LOCATION" xml:space="preserve">
+    <value>Expected {0} to have Location '{1}', but found '{2}'.</value>
+  </data>
+  <data name="HTTP_HAVE_COOKIE_NULL" xml:space="preserve">
+    <value>Expected {0} to set cookie '{1}', but response is null.</value>
+  </data>
+  <data name="HTTP_HAVE_COOKIE_MISSING" xml:space="preserve">
+    <value>Expected {0} to set cookie '{1}', but it was not found.</value>
+  </data>
+  <data name="HTTP_HAVE_COOKIE_VALUE" xml:space="preserve">
+    <value>Expected {0} to set cookie '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
+  <data name="HTTP_STRING_CONTENT_NULL" xml:space="preserve">
+    <value>Expected {0} to have string content, but response is null.</value>
+  </data>
+  <data name="HTTP_STRING_CONTENT" xml:space="preserve">
+    <value>Expected {0} to have string content '{1}', but found '{2}'.</value>
+  </data>
+  <data name="HTTP_STRING_CONTENT_PREDICATE" xml:space="preserve">
+    <value>Expected {0} to have string content matching the predicate, but found '{1}'.</value>
+  </data>
+  <data name="HTTP_JSON_CONTENT_NULL" xml:space="preserve">
+    <value>Expected {0} to have JSON content, but response is null.</value>
+  </data>
+  <data name="HTTP_JSON_CONTENT_INVALID" xml:space="preserve">
+    <value>Expected {0} to have valid JSON content, but parsing failed. Content: {1}</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_NULL" xml:space="preserve">
+    <value>Expected {0} to be ProblemDetails, but response is null.</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_CONTENT_TYPE" xml:space="preserve">
+    <value>Expected {0} to be ProblemDetails with content type 'application/problem+json' or 'application/json', but found '{1}'.</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_NOT_OBJECT" xml:space="preserve">
+    <value>Expected {0} to be a ProblemDetails JSON object, but found {1}.</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_FIELD" xml:space="preserve">
+    <value>Expected {0} to have ProblemDetails field '{1}' with value '{2}', but found '{3}'.</value>
+  </data>
   <data name="STRING_BE_NULL_OR_EMPTY" xml:space="preserve">
     <value>Expected {0} to be null or empty, but found {1}.</value>
   </data>

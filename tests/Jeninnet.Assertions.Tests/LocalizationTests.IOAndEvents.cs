@@ -30,6 +30,32 @@ public partial class LocalizationTests {
     }
 
     [TestMethod]
+    public async Task Arabic_Http() {
+        using var _ = new ArabicScope();
+        using var response = new HttpResponseMessage(HttpStatusCode.OK) {
+            Content = new StringContent("abc", Encoding.UTF8, "text/plain"),
+        };
+
+        var contentType = Assert.ThrowsExactly<AssertionFailedException>(() => response.Should().HaveContentType("application/json"));
+        Assert.AreEqual("المتوقع من response أن يكون نوع المحتوى 'application/json'، لكن وُجد 'text/plain; charset=utf-8'.", contentType.Message);
+
+        var length = Assert.ThrowsExactly<AssertionFailedException>(() => response.Should().HaveContentLength(5));
+        Assert.AreEqual("المتوقع من response أن يكون طول المحتوى 5، لكن وُجد 3.", length.Message);
+
+        var clientError = Assert.ThrowsExactly<AssertionFailedException>(() => response.Should().BeClientError());
+        Assert.AreEqual("المتوقع من response أن يكون خطأ عميل (4xx)، لكن وُجد OK.", clientError.Message);
+
+        var cookie = Assert.ThrowsExactly<AssertionFailedException>(() => response.Should().HaveCookie("session"));
+        Assert.AreEqual("المتوقع من response أن يضبط الكوكي 'session'، لكنه لم يُعثر عليه.", cookie.Message);
+
+        using var problem = new HttpResponseMessage(HttpStatusCode.BadRequest) {
+            Content = new StringContent("{}", Encoding.UTF8, "text/plain"),
+        };
+        var problemDetails = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => problem.Should().BeProblemDetailsAsync());
+        Assert.AreEqual("المتوقع من problem أن يكون ProblemDetails بنوع محتوى 'application/problem+json' أو 'application/json'، لكن وُجد 'text/plain'.", problemDetails.Message);
+    }
+
+    [TestMethod]
     public void Arabic_Stream() {
         using var _ = new ArabicScope();
 

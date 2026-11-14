@@ -146,6 +146,24 @@ response.Should().HaveHeader("X-Request-Id");
 response.Should().HaveHeader("Content-Type", "application/json");
 ```
 
+Status sugar and content metadata keep common checks short:
+
+```csharp
+response.Should().BeClientError().And.HaveContentType("application/problem+json");
+response.Should().HaveRetryAfter(TimeSpan.FromSeconds(30)).And.HaveCookie("session");
+response.Should().HaveETag("v1").And.HaveLocation("/orders/42");
+```
+
+Read the body with the async verbs; the response is read exactly once, and every verb accepts a `CancellationToken`:
+
+```csharp
+var body = await response.Should().HaveStringContentAsync("{\"id\":1}");
+var json = await response.Should().HaveJsonContentAsync();
+await response.Should().BeProblemDetailsAsync(title: "Bad request", status: 400, detail: "Missing id");
+```
+
+`HaveContentType` compares media type and charset case-insensitively. `HaveContentLength` reads the declared header, so chunked responses fail with a clear "no content length" message. `HaveRetryAfter` compares delta-seconds exactly and HTTP-date values with a five-second clock tolerance. `HaveCookie` searches every `Set-Cookie` header and accepts quoted values. `BeProblemDetailsAsync` accepts `application/problem+json` or `application/json`, requires a JSON object, and validates only the fields you pass.
+
 **Hard rule:** always test against a fake `HttpMessageHandler`, never against a real network. The network is non-deterministic, slow, and environment-dependent—making tests flaky and hard to reproduce.
 
 If `response` is `null`, every assertion fails with a clear null-specific message instead of throwing `NullReferenceException`. That keeps diagnostics clean.

@@ -17,6 +17,7 @@ global using System.Numerics;
 #if NET6_0_OR_GREATER
 global using System.Net;
 global using System.Net.Http;
+global using System.Net.Http.Headers;
 #endif
 global using System.Reflection;
 global using System.Resources;
