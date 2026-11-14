@@ -13,6 +13,7 @@ global using System.Globalization;
 global using System.IO;
 global using System.Linq;
 global using System.Linq.Expressions;
+global using System.Numerics;
 #if NET6_0_OR_GREATER
 global using System.Net;
 global using System.Net.Http;

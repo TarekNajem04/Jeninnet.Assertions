@@ -104,18 +104,21 @@ discount.Should().BeInRange(0, 10);
 
 </div>
 
-ترتيب الفحص هنا مقصود: نثبت الوجود أولًا ثم القيمة، فيقرؤها القارئ كجملة واحدة واضحة الترتيب. ومن التوكيدات الشائعة <code dir="ltr">BeGreaterThan()</code> و<code dir="ltr">BeLessThan()</code>، وصيغتاهما غير الحادَّتين <code dir="ltr">BeGreaterOrEqualTo()</code> و<code dir="ltr">BeLessOrEqualTo()</code>، والنطاق الشامل للطرفين <code dir="ltr">BeInRange(min, max)</code>، والإشارة <code dir="ltr">BePositive()</code> و<code dir="ltr">BeNegative()</code>، والقرب <code dir="ltr">BeApproximately(precision)</code> للقيم العشرية أو الفاصلة العائمة، والعضوية <code dir="ltr">BeOneOf(...)</code> للتحقُّق من انتماء القيمة إلى مجموعة محدَّدة.
+ترتيب الفحص هنا مقصود: نثبت الوجود أولًا ثم القيمة، فيقرؤها القارئ كجملة واحدة واضحة الترتيب. ومن التوكيدات الشائعة <code dir="ltr">BeGreaterThan()</code> و<code dir="ltr">BeLessThan()</code>، وصيغتاهما غير الحادَّتين <code dir="ltr">BeGreaterOrEqualTo()</code> و<code dir="ltr">BeLessOrEqualTo()</code>، والنطاق الشامل للطرفين <code dir="ltr">BeInRange(min, max)</code>، والإشارة <code dir="ltr">BePositive()</code> و<code dir="ltr">BeNegative()</code>، والصفر <code dir="ltr">BeZero()</code> و<code dir="ltr">NotBeZero()</code>، والقرب <code dir="ltr">BeApproximately(precision)</code> للقيم العشرية أو الفاصلة العائمة، والعضوية <code dir="ltr">BeOneOf(...)</code> للتحقُّق من انتماء القيمة إلى مجموعة محدَّدة.
 
 <div dir="ltr">
 
 ```csharp
 price.Should().BeApproximately(9.99m, precision: 0.01m);
 score.Should().BeOneOf(0, 1, 2, 3);
+balance.Should().BeZero();
 ```
 
 </div>
 
 ملاحظة عملية: <code dir="ltr">BeApproximately()</code> مناسب للقياسات أو الحسابات التقريبية، أما الأموال فالأفضل التحقُّق منها بنطاق واضح <code dir="ltr">BeInRange()</code> لتفادي الغموض. المنطق أن السؤال «هل السعر صحيح؟» سؤال نطاق لا سؤال تقريب: الخطأ المسموح في القياس فيزيائي بطبيعته، أما في المال فقرار تجاري يجب أن يُكتب بحدوده. وحين يظهر <code dir="ltr">BeApproximately</code> على حساب مالي، فهي إشارة إلى أن العقد لم يُصَغ بعد، لا إلى أن الاختبار متقدِّم.
+
+مقارنات التقريب نوعية: تُقارن <code dir="ltr">decimal</code> والأعداد الصحيحة ذات 64 بت بدقة تامة، بينما يستخدم <code dir="ltr">BigInteger</code> والأعداد ذات 128 بت فروقاً دقيقة غير محدودة، فلا تُقرَّب القيم الكبيرة عبر <code dir="ltr">double</code>. و<code dir="ltr">NaN</code> لا يقارب أي قيمة، ولا يتقارب اللانهاية إلا مع نظيرها. وتشمل توكيدات الأرقام أيضاً <code dir="ltr">Half</code> و<code dir="ltr">Int128</code> و<code dir="ltr">UInt128</code> و<code dir="ltr">BigInteger</code> والأعداد الأصلية حيث يدعمها الإطار الهدف.
 
 ## ٢.٤ النصوص: مساواة، واحتواء، ونمط، وطول
 

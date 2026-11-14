@@ -108,7 +108,7 @@ public class NullableNumericAssertions<T>(T? value, string? expression = null) :
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The value is <see langword="null"/>, zero, or negative.</exception>
     public AndConstraint<NullableNumericAssertions<T>> BePositive(string? because = null, params object?[] becauseArgs) {
-        if(_value is null || IsNaN(_value.Value) || _value.Value.CompareTo(default) <= 0) {
+        if(_value is null || NumericComparison.IsNaN(_value.Value) || _value.Value.CompareTo(default) <= 0) {
             Fail(Strings.Format(StringKeys.NUMERIC_BE_POSITIVE, Expression, Format(_value)), because, becauseArgs);
         }
 
@@ -121,8 +121,34 @@ public class NullableNumericAssertions<T>(T? value, string? expression = null) :
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The value is <see langword="null"/>, zero, or positive.</exception>
     public AndConstraint<NullableNumericAssertions<T>> BeNegative(string? because = null, params object?[] becauseArgs) {
-        if(_value is null || IsNaN(_value.Value) || _value.Value.CompareTo(default) >= 0) {
+        if(_value is null || NumericComparison.IsNaN(_value.Value) || _value.Value.CompareTo(default) >= 0) {
             Fail(Strings.Format(StringKeys.NUMERIC_BE_NEGATIVE, Expression, Format(_value)), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    /// <summary>Asserts that the value is zero; a <see langword="null"/> subject fails.</summary>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">The value is <see langword="null"/> or not zero.</exception>
+    public AndConstraint<NullableNumericAssertions<T>> BeZero(string? because = null, params object?[] becauseArgs) {
+        if(_value is null || _value.Value.CompareTo(default) != 0) {
+            Fail(Strings.Format(StringKeys.NULLABLE_NUMERIC_BE, Expression, Format(default(T)), Format(_value)), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    /// <summary>Asserts that the value is not zero; a <see langword="null"/> subject passes.</summary>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">The value is zero.</exception>
+    public AndConstraint<NullableNumericAssertions<T>> NotBeZero(string? because = null, params object?[] becauseArgs) {
+        if(_value is not null && _value.Value.CompareTo(default) == 0) {
+            Fail(Strings.Format(StringKeys.NULLABLE_NUMERIC_NOT_BE, Expression, Format(default(T)), Format(_value)), because, becauseArgs);
         }
 
         return new(this);
@@ -175,13 +201,18 @@ public class NullableNumericAssertions<T>(T? value, string? expression = null) :
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="precision"/> is negative.</exception>
-    /// <exception cref="AssertionFailedException">The value is <see langword="null"/> or differs by more than <paramref name="precision"/>.</exception>
+    /// <exception cref="AssertionFailedException">The value is <see langword="null"/>, differs by more than <paramref name="precision"/>, or either side is NaN.</exception>
+    /// <remarks>
+    /// Comparisons are type-aware: decimal and 64-bit integers are compared exactly, while
+    /// <see cref="BigInteger"/> and 128-bit integers use exact arbitrary-precision differences.
+    /// Equal infinities compare as approximately equal; NaN never approximates a value.
+    /// </remarks>
     public AndConstraint<NullableNumericAssertions<T>> BeApproximately(T expected, T precision, string? because = null, params object?[] becauseArgs) {
         if(precision.CompareTo(default) < 0) {
             throw new ArgumentOutOfRangeException(nameof(precision), "Precision must not be negative.");
         }
 
-        if(_value is null || Math.Abs(Convert.ToDouble(_value.Value, CultureInfo.InvariantCulture) - Convert.ToDouble(expected, CultureInfo.InvariantCulture)) > Convert.ToDouble(precision, CultureInfo.InvariantCulture)) {
+        if(_value is null || !NumericComparison.WithinPrecision(_value.Value, expected, precision)) {
             Fail(Strings.Format(StringKeys.NUMERIC_APPROXIMATE, Expression, Format(expected), Format(precision), Format(_value)), because, becauseArgs);
         }
 
@@ -196,38 +227,39 @@ public class NullableNumericAssertions<T>(T? value, string? expression = null) :
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="ArgumentOutOfRangeException"><paramref name="precision"/> is negative.</exception>
     /// <exception cref="AssertionFailedException">The value is within <paramref name="precision"/> of <paramref name="unexpected"/>.</exception>
+    /// <remarks>NaN always satisfies this assertion because it never approximates a value.</remarks>
     public AndConstraint<NullableNumericAssertions<T>> NotBeApproximately(T unexpected, T precision, string? because = null, params object?[] becauseArgs) {
         if(precision.CompareTo(default) < 0) {
             throw new ArgumentOutOfRangeException(nameof(precision), "Precision must not be negative.");
         }
 
-        if(_value is not null && Math.Abs(Convert.ToDouble(_value.Value, CultureInfo.InvariantCulture) - Convert.ToDouble(unexpected, CultureInfo.InvariantCulture)) <= Convert.ToDouble(precision, CultureInfo.InvariantCulture)) {
+        if(_value is not null && NumericComparison.WithinPrecision(_value.Value, unexpected, precision)) {
             Fail(Strings.Format(StringKeys.NUMERIC_NOT_APPROXIMATE, Expression, Format(unexpected), Format(precision), Format(_value)), because, becauseArgs);
         }
 
         return new(this);
     }
 
-    /// <summary>Asserts that the value is <see cref="double.NaN"/> (only floating-point types can satisfy this).</summary>
+    /// <summary>Asserts that the value is a floating-point NaN (double, float, or Half).</summary>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The value is <see langword="null"/> or not NaN.</exception>
     public AndConstraint<NullableNumericAssertions<T>> BeNaN(string? because = null, params object?[] becauseArgs) {
-        if(_value is null || !IsNaN(_value.Value)) {
+        if(_value is null || !NumericComparison.IsNaN(_value.Value)) {
             Fail(Strings.Format(StringKeys.NUMERIC_BE_NAN, Expression, Format(_value)), because, becauseArgs);
         }
 
         return new(this);
     }
 
-    /// <summary>Asserts that the value is not <see cref="double.NaN"/>. A <see langword="null"/> subject passes.</summary>
+    /// <summary>Asserts that the value is not a floating-point NaN. A <see langword="null"/> subject passes.</summary>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The value is NaN.</exception>
     public AndConstraint<NullableNumericAssertions<T>> NotBeNaN(string? because = null, params object?[] becauseArgs) {
-        if(_value is not null && IsNaN(_value.Value)) {
+        if(_value is not null && NumericComparison.IsNaN(_value.Value)) {
             Fail(Strings.Format(StringKeys.NUMERIC_NOT_BE_NAN, Expression, Format(_value)), because, becauseArgs);
         }
 
@@ -313,6 +345,4 @@ public class NullableNumericAssertions<T>(T? value, string? expression = null) :
         BeNull(because, becauseArgs);
 
     private static string Format(T? value) => value is null ? "<null>" : AssertionScope.FormatInvariant(value);
-
-    private static bool IsNaN(T value) => value is double d ? double.IsNaN(d) : value is float f && float.IsNaN(f);
 }

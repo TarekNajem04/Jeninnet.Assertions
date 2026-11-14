@@ -135,6 +135,70 @@ public static partial class AssertionExtensions {
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
     public static NullableNumericAssertions<decimal> Should(this decimal? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
+    /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given arbitrary-precision integer.</summary>
+    /// <param name="value">The value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NumericAssertions<BigInteger> Should(this BigInteger value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="NullableNumericAssertions{T}"/> for the given nullable arbitrary-precision integer.</summary>
+    /// <param name="value">The nullable value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NullableNumericAssertions<BigInteger> Should(this BigInteger? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given native-sized signed integer.</summary>
+    /// <param name="value">The value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NumericAssertions<long> Should(this IntPtr value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value.ToInt64(), expression);
+
+    /// <summary>Creates a <see cref="NullableNumericAssertions{T}"/> for the given nullable native-sized signed integer.</summary>
+    /// <param name="value">The nullable value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NullableNumericAssertions<long> Should(this IntPtr? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value?.ToInt64(), expression);
+
+    /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given native-sized unsigned integer.</summary>
+    /// <param name="value">The value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NumericAssertions<ulong> Should(this UIntPtr value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value.ToUInt64(), expression);
+
+    /// <summary>Creates a <see cref="NullableNumericAssertions{T}"/> for the given nullable native-sized unsigned integer.</summary>
+    /// <param name="value">The nullable value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NullableNumericAssertions<ulong> Should(this UIntPtr? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value?.ToUInt64(), expression);
+
+#if NET6_0_OR_GREATER
+    /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given half-precision floating-point value.</summary>
+    /// <param name="value">The value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NumericAssertions<Half> Should(this Half value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="NullableNumericAssertions{T}"/> for the given nullable half-precision floating-point value.</summary>
+    /// <param name="value">The nullable value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NullableNumericAssertions<Half> Should(this Half? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+#endif
+
+#if NET7_0_OR_GREATER
+    /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given signed 128-bit integer.</summary>
+    /// <param name="value">The value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NumericAssertions<Int128> Should(this Int128 value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="NullableNumericAssertions{T}"/> for the given nullable signed 128-bit integer.</summary>
+    /// <param name="value">The nullable value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NullableNumericAssertions<Int128> Should(this Int128? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given unsigned 128-bit integer.</summary>
+    /// <param name="value">The value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NumericAssertions<UInt128> Should(this UInt128 value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="NullableNumericAssertions{T}"/> for the given nullable unsigned 128-bit integer.</summary>
+    /// <param name="value">The nullable value to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static NullableNumericAssertions<UInt128> Should(this UInt128? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+#endif
+
     /// <summary>Creates a <see cref="StringAssertions"/> for the given string value.</summary>
     /// <param name="value">The string value to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>

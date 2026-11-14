@@ -72,4 +72,33 @@ public class NullableNumericTests {
         double? nan = double.NaN;
         nan.Should().BeNaN();
     }
+
+    [TestMethod]
+    public void BeZero_And_NotBeZero() {
+        int? zero = 0;
+        zero.Should().BeZero();
+
+        int? missing = null;
+        missing.Should().NotBeZero();
+        var beZero = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeZero());
+        Assert.AreEqual("Expected missing to be 0, but found <null>.", beZero.Message);
+
+        var notBeZero = Assert.ThrowsExactly<AssertionFailedException>(() => zero.Should().NotBeZero());
+        Assert.AreEqual("Expected zero not to be 0, but found 0.", notBeZero.Message);
+    }
+
+    [TestMethod]
+    public void BeApproximately_DecimalDoesNotLosePrecision() {
+        decimal? actual = 0.1m + 0.2m;
+        actual.Should().BeApproximately(0.3m, 0.0000000000000000000000000001m);
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeApproximately(0.3m + 0.0000000000000000000000000002m, 0.0000000000000000000000000001m));
+        Assert.Contains("to approximate", ex.Message);
+    }
+
+    [TestMethod]
+    public void NotBeApproximately_PassForNull() {
+        double? missing = null;
+        missing.Should().NotBeApproximately(1.0, 0.1);
+    }
 }

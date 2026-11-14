@@ -78,15 +78,19 @@ Common numeric assertions:
 - `BeGreaterOrEqualTo()` / `BeLessOrEqualTo()`
 - `BeInRange(min, max)`
 - `BePositive()` / `BeNegative()`
+- `BeZero()` / `NotBeZero()`
 - `BeApproximately(precision)` for decimals or floating point
 - `BeOneOf(params ...)` to check membership
 
 ```csharp
 price.Should().BeApproximately(9.99m, precision: 0.01m);
 score.Should().BeOneOf(0, 1, 2, 3);
+balance.Should().BeZero();
 ```
 
 A practical note: `BeApproximately()` is best for measurements or approximate calculations. For monetary values, prefer explicit ranges with `BeInRange()` to avoid ambiguity.
+
+Approximate comparisons are type-aware. `decimal` and 64-bit integers are compared exactly, while `BigInteger` and 128-bit integers use exact arbitrary-precision differences, so large values do not round through `double`. NaN never approximates a value; equal infinities compare as approximately equal. Numeric assertions also cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized integers where the target framework exposes them.
 
 ## 2.4 Strings: equality, length, containment, and patterns
 

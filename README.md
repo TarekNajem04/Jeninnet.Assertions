@@ -265,8 +265,10 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <summary><strong>Numerics</strong> · Should()</summary>
 
 - `Be` / `NotBe` (chainable), comparisons, ranges
+- Zero checks: `BeZero` / `NotBeZero`
 - Rank equality (`BeRankedEquallyTo` / `NotBeRankedEquallyTo`, `BeEquivalentTo`)
 - Signs and special values: `BePositive` / `BeNegative`, `BeApproximately`, `BeNaN`
+- Types: all primitive numerics, plus Half/Int128/UInt128/BigInteger and native-sized integers where the target framework supports them
 - `BeOneOf`, `Match` (+nullable with `HaveValue` / `NotHaveValue`)
 
 </details>

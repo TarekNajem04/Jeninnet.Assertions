@@ -4,6 +4,8 @@
 // Repository: https://github.com/TarekNajem04/Jeninnet.Assertions/
 // Licensed under the MIT License.
 //
+using System.Numerics;
+
 namespace Jeninnet.Assertions.Tests;
 
 [TestClass]
@@ -213,5 +215,130 @@ public class NumericTests {
 
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => rank.Should().BeEquivalentTo(6));
         Assert.Contains("to be equivalent", ex.Message);
+    }
+
+    [TestMethod]
+    public void BeApproximately_DecimalDoesNotLosePrecision() {
+        const decimal actual = 0.1m + 0.2m;
+        actual.Should().BeApproximately(0.3m, 0.0000000000000000000000000001m);
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeApproximately(0.3m + 0.0000000000000000000000000002m, 0.0000000000000000000000000001m));
+        Assert.Contains("to approximate", ex.Message);
+    }
+
+    [TestMethod]
+    public void BeApproximately_LongDoesNotRoundThroughDouble() {
+        const long actual = long.MaxValue;
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeApproximately(long.MaxValue - 1, 0L));
+        Assert.Contains("but found 9223372036854775807", ex.Message);
+
+        actual.Should().BeApproximately(long.MaxValue - 1, 1L);
+        actual.Should().NotBeApproximately(long.MaxValue - 1, 0L);
+    }
+
+    [TestMethod]
+    public void BeApproximately_ULongDoesNotRoundThroughDouble() {
+        const ulong actual = ulong.MaxValue;
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeApproximately(ulong.MaxValue - 1, 0UL));
+        Assert.Contains("but found 18446744073709551615", ex.Message);
+
+        actual.Should().BeApproximately(ulong.MaxValue - 1, 1UL);
+    }
+
+    [TestMethod]
+    public void BeApproximately_DecimalMaxValueDoesNotRoundThroughDouble() {
+        const decimal actual = decimal.MaxValue;
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().BeApproximately(decimal.MaxValue - 1m, 0m));
+        Assert.Contains("to approximate", ex.Message);
+
+        actual.Should().BeApproximately(decimal.MaxValue - 1m, 1m);
+    }
+
+    [TestMethod]
+    public void BeApproximately_DecimalExtremesDoNotOverflow() {
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => decimal.MaxValue.Should().BeApproximately(decimal.MinValue, decimal.MaxValue));
+        Assert.Contains("to approximate", ex.Message);
+
+        decimal.MaxValue.Should().NotBeApproximately(decimal.MinValue, decimal.MaxValue);
+    }
+
+    [TestMethod]
+    public void BeApproximately_NaN_NeverApproximates() {
+        const double nan = double.NaN;
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => nan.Should().BeApproximately(double.NaN, 1.0));
+        Assert.Contains("NaN", ex.Message);
+
+        nan.Should().NotBeApproximately(1.0, 1.0);
+        nan.Should().NotBeApproximately(double.NaN, 1.0);
+    }
+
+    [TestMethod]
+    public void BeApproximately_Infinity_RequiresEqualInfinity() {
+        double.PositiveInfinity.Should().BeApproximately(double.PositiveInfinity, 0.0);
+        double.NegativeInfinity.Should().BeApproximately(double.NegativeInfinity, 0.0);
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => double.PositiveInfinity.Should().BeApproximately(double.NegativeInfinity, 1.0));
+        Assert.Contains("to approximate", ex.Message);
+
+        double.PositiveInfinity.Should().NotBeApproximately(double.NegativeInfinity, 1.0);
+    }
+
+    [TestMethod]
+    public void BeZero_And_NotBeZero() {
+        const int zero = 0;
+        zero.Should().BeZero();
+        const decimal zeroDecimal = 0m;
+        zeroDecimal.Should().BeZero();
+
+        const int five = 5;
+        five.Should().NotBeZero();
+
+        var beZero = Assert.ThrowsExactly<AssertionFailedException>(() => five.Should().BeZero());
+        Assert.AreEqual("Expected five to be 0, but found 5.", beZero.Message);
+
+        var notBeZero = Assert.ThrowsExactly<AssertionFailedException>(() => zero.Should().NotBeZero());
+        Assert.AreEqual("Expected zero not to be 0, but found 0.", notBeZero.Message);
+    }
+
+    [TestMethod]
+    public void Should_SupportsBigInteger() {
+        BigInteger value = BigInteger.Parse("123456789012345678901234567890", CultureInfo.InvariantCulture);
+        value.Should().BeGreaterThan(BigInteger.One);
+        value.Should().BeApproximately(value + 1, BigInteger.One);
+        value.Should().NotBeZero();
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => value.Should().BeApproximately(value + 2, BigInteger.One));
+        Assert.Contains("to approximate", ex.Message);
+    }
+
+    [TestMethod]
+    public void Should_SupportsHalf() {
+        Half value = (Half)1.5;
+        value.Should().BeApproximately((Half)1.6, (Half)0.11);
+        Half.NaN.Should().BeNaN();
+        ((Half)0).Should().BeZero();
+    }
+
+    [TestMethod]
+    public void Should_SupportsInt128AndUInt128() {
+        Int128 signed = Int128.MaxValue;
+        signed.Should().BeApproximately(Int128.MaxValue - 1, 1);
+        Int128.MinValue.Should().BeApproximately(Int128.MinValue + 1, 1);
+        Assert.ThrowsExactly<AssertionFailedException>(() => signed.Should().BeApproximately(Int128.MaxValue - 1, 0));
+
+        UInt128 unsigned = UInt128.MaxValue;
+        unsigned.Should().BeApproximately(UInt128.MaxValue - 1, 1);
+        Assert.ThrowsExactly<AssertionFailedException>(() => unsigned.Should().BeApproximately(UInt128.MaxValue - 1, 0));
+    }
+
+    [TestMethod]
+    public void Should_SupportsNativeSizedIntegers() {
+        nint signed = 5;
+        signed.Should().Be(5L);
+        signed.Should().BePositive();
+
+        nuint unsigned = 5;
+        unsigned.Should().Be(5UL);
+        unsigned.Should().BePositive();
     }
 }
