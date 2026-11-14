@@ -32,6 +32,12 @@ internal static partial class StringKeys {
     internal const string JSON_NOT_BE_BOOL = "JSON_NOT_BE_BOOL";
     internal const string JSON_BE_ARRAY = "JSON_BE_ARRAY";
     internal const string JSON_NOT_BE_ARRAY = "JSON_NOT_BE_ARRAY";
+    internal const string JSON_BE_OBJECT = "JSON_BE_OBJECT";
+    internal const string JSON_NOT_BE_OBJECT = "JSON_NOT_BE_OBJECT";
+    internal const string JSON_DOCUMENT_DISPOSED = "JSON_DOCUMENT_DISPOSED";
+    internal const string JSON_PATH_MULTIPLE_RESULTS = "JSON_PATH_MULTIPLE_RESULTS";
+    internal const string JSON_PATH_NO_MATCH = "JSON_PATH_NO_MATCH";
+    internal const string JSON_PATH_TOO_MANY_RESULTS = "JSON_PATH_TOO_MANY_RESULTS";
     internal const string JSON_BE_UTC_DATE = "JSON_BE_UTC_DATE";
     internal const string JSON_NOT_BE_UTC_DATE = "JSON_NOT_BE_UTC_DATE";
     internal const string JSON_BE_LOCAL_DATE = "JSON_BE_LOCAL_DATE";

@@ -132,9 +132,24 @@ node.Should().BeLocalDate();
 
 يعامل <code dir="ltr">JsonArray.Should()</code> المصفوفة كمجموعة، بينما يحافظ <code dir="ltr">Should&lt;T&gt;()</code> على نوع عقدة JSON المغلق للتوكيدات العامة.
 
+ويستخدم <code dir="ltr">JsonElement</code> و<code dir="ltr">JsonDocument</code> المفردات نفسها، فلا حاجة إلى تحويل حمولات ASP.NET أو <code dir="ltr">JsonSerializer.Deserialize</code>:
+
+<div dir="ltr">
+
+```csharp
+using var document = JsonDocument.Parse(payload);
+document.RootElement.Should().BeObject()
+    .And.HaveProperty("total").Which.Should().HaveValue(42.00m);
+document.Should().BeAnArray().And.HaveCount(3);
+```
+
+</div>
+
+تُلتقط نسخة من العنصر عند استدعاء <code dir="ltr">Should()</code>؛ أبقِ المستند حيًّا حتى تلك اللحظة. والمستند المفكوك يفشل برسالة واضحة بدل <code dir="ltr">ObjectDisposedException</code> غامض.
+
 واختيار الواجهة بحسب السؤال: هل تسأل عن *شكل* العقدة أم عن *نوعها الدقيق*؟ فعبارات النوع (<code dir="ltr">BeString</code>، <code dir="ltr">BeNumeric</code>، <code dir="ltr">BeBool</code>، <code dir="ltr">BeAnArray</code>) تتحقق من الحالة ثم تتيح لك مواصلة التوكيد عبر <code dir="ltr">Which</code> على القيمة المستخرجة، فيبقى الفحص على مسارين متصلين: هل هذا نص؟ وما النص؟ — بدل أن يفكك الاختبار العقدة يدويًّا ثم يقارن قطعًا معدودة.
 
-للمخرجات الكبيرة جدًا، يُفضَّل **لقطات JSON** بدل تفكيك كل عقدة (راجع الفصل ٦).
+للمخرجات الكبيرة جدًا، يُفضَّل **لقطات JSON** بدل تفكيك كل عقدة (راجع الفصل ٦). و<code dir="ltr">JsonElement.MatchSnapshot</code> يرتب مفاتيح الكائنات ترتيبًا معجميًا، ويستخدم مسافة بادئة من فراغين، ويكتب نهايات أسطر LF فقط، فتبقى اللقطة متطابقة بايتًا ببايت عبر الأجهزة.
 
 ### مسارات JSON
 
@@ -145,14 +160,27 @@ node.Should().BeLocalDate();
 ```csharp
 node.Should().HaveJsonPath("$.users[0].name").Which.Should().BeString().Which.Should().Be("ada");
 node.Should().HaveJsonPath("$.user.middle").Which.Should().BeNull();   // قيمة null ما زالت «موجودة»
+node.Should().HaveJsonPath("$['user.name']").Which.Should().BeString(); // الأسماء المقتبسة قد تحتوي نقاطًا
+node.Should().HaveJsonPath("$.users[-1].name");                         // الفهارس السالبة من النهاية
 node.Should().NotHaveJsonPath("$.user.deleted");
 ```
 
 </div>
 
-اختبار API نموذجي يحلِّل الحمولة مرة واحدة (<code dir="ltr">JsonNode.Parse</code> بعد <code dir="ltr">BeJsonSerializable</code>)، ثم يثبّت الحقول المهمة بالمسارات. وعند غياب مقطع، يسمّي الفشل المقطع المكسور ويسرد الخصائص الشقيقة الموجودة فعلًا (<code dir="ltr">(available: …)</code> بحدّ عشرة)، مع تلميح أقرب اسم عندما يشبه الخطأ خطأً كتابيًا (<code dir="ltr">هل تقصد 'name'؟</code>)؛ والمسارات المشوَّهة (بلا <code dir="ltr">$</code> أو مقاطع فارغة أو فهارس غير رقمية) ترمي <code dir="ltr">ArgumentException</code>. البدائل والفلاتر والأسماء المقتبسة والنزول التكراري مستبعدة عمدًا.
+وقد تنتج البدائل والنزول التكراري عدة مطابقات؛ يشترط <code dir="ltr">HaveJsonPath</code> نتيجة واحدة ويوجّهك إلى <code dir="ltr">HaveJsonPathValues</code> غير ذلك:
 
-وقيمة هذا التشخيص تظهر في أكثر أخطاء تكامل الـAPI شيوعًا: تسمية حقل تغيّرت، أو بنية سرية («name» بدل «user.name»). رسالة تقول «المقطع user.name غير موجود، والمتاح user: name, id» تختصر عليك فتح الحمولة ومقارنتها؛ وتلميح «هل تقصد name؟» ينهي الحيرة إذا كان الفرق حرفًا واحدًا. ولهذا سقطت البدائل والفلاتر من النطاق: قوّتها الصيغية تجعل التشخيص يدور في احتمالات، والصيغة المحدودة تفشل بجملة لا تحتمل الاحتمالات.
+<div dir="ltr">
+
+```csharp
+var names = node.Should().HaveJsonPathValues("$.users[*].name").Which;
+var everyName = node.Should().HaveJsonPathValues("$..name").Which;
+```
+
+</div>
+
+تتبع النتائج ترتيب الوثيقة. واختبار API نموذجي يحلِّل الحمولة مرة واحدة (<code dir="ltr">JsonNode.Parse</code> بعد <code dir="ltr">BeJsonSerializable</code>)، ثم يثبّت الحقول المهمة بالمسارات. وعند غياب مقطع، يسمّي الفشل المقطع المكسور ويسرد الخصائص الشقيقة الموجودة فعلًا (<code dir="ltr">(available: …)</code> بحدّ عشرة)، مع تلميح أقرب اسم عندما يشبه الخطأ خطأً كتابيًا (<code dir="ltr">هل تقصد 'name'؟</code>)؛ والمسارات المشوَّهة (بلا <code dir="ltr">$</code> أو مقاطع فارغة أو فهارس غير رقمية أو اقتباس غير مغلق) ترمي <code dir="ltr">ArgumentException</code>. أما الفلاتر والتعبيرات فتبقى خارج النطاق.
+
+وقيمة هذا التشخيص تظهر في أكثر أخطاء تكامل الـAPI شيوعًا: تسمية حقل تغيّرت، أو بنية سرية («name» بدل «user.name»). رسالة تقول «المقطع user.name غير موجود، والمتاح user: name, id» تختصر عليك فتح الحمولة ومقارنتها؛ وتلميح «هل تقصد name؟» ينهي الحيرة إذا كان الفرق حرفًا واحدًا. ولهذا بقيت الفلاتر خارج النطاق: قوّتها الصيغية تجعل التشخيص يدور في احتمالات، والصيغة المحدودة تفشل بجملة لا تحتمل الاحتمالات.
 
 ### التسلسل ذهابًا وإيابًا
 

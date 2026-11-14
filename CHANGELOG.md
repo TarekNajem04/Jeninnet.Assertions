@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- JSON assertions now accept `JsonElement` and `JsonDocument` in addition to `JsonNode`, with
+  object/array kind checks, scalar values, deep equivalency, properties, paths, and deterministic
+  snapshots (`MatchSnapshot` sorts object keys ordinally). Disposed documents fail with a clear message.
+- JSON paths now support quoted names (`$['a.b']`), wildcards (`[*]`, `.*`), recursive descent
+  (`$..name`), and negative indexes (`$[-1]`). `HaveJsonPath` remains the single-result verb;
+  `HaveJsonPathValues` returns every wildcard/recursive match in document order.
 - Numeric collections support `EqualApproximately` / `NotEqualApproximately` on net8.0+ via
   `INumber<T>`. Precision follows the type-aware scalar rules: decimal and 64-bit integers stay
   exact, 128-bit integers and `BigInteger` use arbitrary precision, and NaN never approximates.

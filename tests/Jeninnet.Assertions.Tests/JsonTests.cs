@@ -24,6 +24,16 @@ public class JsonTests {
     }
 
     [TestMethod]
+    public void BeObject_NotBeObject_PassAndFail() {
+        JsonNode.Parse("""{"a":1}""").Should().BeObject().And.NotBeAnArray();
+        JsonNode.Parse("[1]").Should().NotBeObject();
+
+        var array = JsonNode.Parse("[1]");
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => array.Should().BeObject());
+        Assert.AreEqual("Expected array to be a JSON object, but found [1].", ex.Message);
+    }
+
+    [TestMethod]
     public void HaveCount_PassAndFail() {
         var array = JsonNode.Parse("[1,2,3]");
         array.Should().HaveCount(3);

@@ -1331,6 +1331,15 @@
   <data name="JSON_NOT_HAVE_PATH" xml:space="preserve">
     <value>المتوقع من {0} ألا يحتوي المسار '{1}'، لكنه موجود.</value>
   </data>
+  <data name="JSON_PATH_MULTIPLE_RESULTS" xml:space="preserve">
+    <value>المتوقع من {0} أن يحل المسار '{1}' إلى قيمة واحدة، لكنه أنتج {2} قيمة. استخدم HaveJsonPathValues للنتائج المتعددة.</value>
+  </data>
+  <data name="JSON_PATH_NO_MATCH" xml:space="preserve">
+    <value>المتوقع من {0} أن يحل المسار '{1}'، لكن لم تُطابق أي قيمة.</value>
+  </data>
+  <data name="JSON_PATH_TOO_MANY_RESULTS" xml:space="preserve">
+    <value>المتوقع من {0} أن يحل المسار '{1}'، لكنه أنتج أكثر من {2} قيمة.</value>
+  </data>
   <data name="JSON_PATH_MISSING_PROPERTY" xml:space="preserve">
     <value>الخاصية '{0}' غير موجودة تحت '{1}'</value>
   </data>
@@ -1372,6 +1381,15 @@
   </data>
   <data name="JSON_NOT_BE_ARRAY" xml:space="preserve">
     <value>المتوقع من {0} ألا يكون مصفوفة JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_BE_OBJECT" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون كائن JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_OBJECT" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون كائن JSON، لكن وُجد {1}.</value>
+  </data>
+  <data name="JSON_DOCUMENT_DISPOSED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مستند JSON حياً، لكنه كان مفكوكاً.</value>
   </data>
   <data name="JSON_BE_UTC_DATE" xml:space="preserve">
     <value>المتوقع من {0} أن يكون تاريخ UTC، لكن وُجد {1}.</value>

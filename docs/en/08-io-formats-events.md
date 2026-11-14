@@ -91,7 +91,18 @@ node.Should().BeLocalDate();
 
 `JsonArray.Should()` treats an array as a collection, while `Should<T>()` preserves the closed JSON node type for generic assertions.
 
-For very large outputs, snapshots (Chapter 6) are often cleaner than asserting individual nodes.
+`JsonElement` and `JsonDocument` use the same vocabulary, so payloads from ASP.NET or `JsonSerializer.Deserialize` need no conversion:
+
+```csharp
+using var document = JsonDocument.Parse(payload);
+document.RootElement.Should().BeObject()
+    .And.HaveProperty("total").Which.Should().HaveValue(42.00m);
+document.Should().BeAnArray().And.HaveCount(3);
+```
+
+The element is snapshotted by `Should()`; keep the document alive until then. A disposed document fails with a clear message instead of an opaque `ObjectDisposedException`.
+
+For very large outputs, snapshots (Chapter 6) are often cleaner than asserting individual nodes. `JsonElement.MatchSnapshot` sorts object keys ordinally, uses two-space indentation, and writes LF-only files, so snapshots stay byte-identical across machines.
 
 ### JSON paths
 
@@ -100,10 +111,19 @@ Reaching into nested documents with a mini path beats chaining `HaveProperty` ca
 ```csharp
 node.Should().HaveJsonPath("$.users[0].name").Which.Should().BeString().Which.Should().Be("ada");
 node.Should().HaveJsonPath("$.user.middle").Which.Should().BeNull();   // a JSON null still counts as present
+node.Should().HaveJsonPath("$['user.name']").Which.Should().BeString(); // quoted names may contain dots
+node.Should().HaveJsonPath("$.users[-1].name");                         // negative indexes count from the end
 node.Should().NotHaveJsonPath("$.user.deleted");
 ```
 
-A typical API test parses the payload once (`JsonNode.Parse` after `BeJsonSerializable`), then pins the fields that matter with paths. When a segment is missing, the failure names the breaking segment and lists the sibling properties that do exist (`(available: …)`, capped at ten), plus a nearest-name hint when the miss looks like a typo (`Did you mean 'name'?`); malformed paths (no `$`, empty segments, non-numeric indexes) throw `ArgumentException`. Wildcards, filters, quoted names, and recursive descent are deliberately out of scope.
+Wildcards and recursive descent can produce several matches; `HaveJsonPath` requires exactly one and points you to `HaveJsonPathValues` otherwise:
+
+```csharp
+var names = node.Should().HaveJsonPathValues("$.users[*].name").Which;
+var everyName = node.Should().HaveJsonPathValues("$..name").Which;
+```
+
+Results follow document order. A typical API test parses the payload once (`JsonNode.Parse` after `BeJsonSerializable`), then pins the fields that matter with paths. When a segment is missing, the failure names the breaking segment and lists the sibling properties that do exist (`(available: …)`, capped at ten), plus a nearest-name hint when the miss looks like a typo (`Did you mean 'name'?`); malformed paths (no `$`, empty segments, non-numeric indexes, unterminated quotes) throw `ArgumentException`. Filters and expressions remain out of scope.
 
 ### Round-trip serialization
 

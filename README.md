@@ -351,8 +351,10 @@ Expand any group to see its verbs; every backticked identifier is verified again
 
 - Elements, attributes, namespaces, values, inner text, occurrence constraints
 - `Be` / `NotBe` (elements and attributes), deep equivalency (+`Which`), `NotBeEquivalentTo`
-- JSON strings/numbers/booleans/arrays/UTC-local dates, `NotHaveProperty` (JSON)
-- JSON paths: `HaveJsonPath` / `NotHaveJsonPath` (e.g. `$.users[0].name`)
+- JSON entry points for JsonNode, JsonElement, and JsonDocument
+- JSON objects/arrays, strings/numbers/booleans/null, UTC-local dates, `HaveProperty` / `NotHaveProperty`
+- JSON paths: `HaveJsonPath` / `HaveJsonPathValues` / `NotHaveJsonPath` (quoted names, wildcards, recursive descent, negative indexes)
+- JSON snapshots: `MatchSnapshot` (deterministic sorted-key JSON with LF)
 
 </details>
 

@@ -135,10 +135,83 @@ public class JsonPathTests {
     }
 
     [TestMethod]
+    public void QuotedNames_AllowDotsAndSpaces() {
+        var node = JsonNode.Parse("""{"a.b":{"c d":1}}""");
+        node.Should().HaveJsonPath("$['a.b']['c d']").Which.Should().HaveValue(1);
+        node.Should().HaveJsonPath("$[\"a.b\"].c d").Which.Should().HaveValue(1);
+    }
+
+    [TestMethod]
+    public void Wildcard_OnArrays_ReturnsEveryMatchInDocumentOrder() {
+        var node = JsonNode.Parse("""{"users":[{"name":"ada"},{"name":"grace"}]}""");
+
+        var values = node.Should().HaveJsonPathValues("$.users[*].name").Which;
+        Assert.HasCount(2, values);
+        Assert.AreEqual("ada", values[0]?.GetValue<string>());
+        Assert.AreEqual("grace", values[1]?.GetValue<string>());
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => node.Should().HaveJsonPath("$.users[*].name"));
+        Assert.AreEqual("Expected node to resolve path '$.users[*].name' to a single value, but it produced 2 values. Use HaveJsonPathValues for multiple results.", ex.Message);
+    }
+
+    [TestMethod]
+    public void Wildcard_OnObjects_ReturnsEveryPropertyValue() {
+        var node = JsonNode.Parse("""{"users":{"first":{"name":"ada"},"second":{"name":"grace"}}}""");
+
+        var values = node.Should().HaveJsonPathValues("$.users.*.name").Which;
+        Assert.HasCount(2, values);
+        Assert.AreEqual("ada", values[0]?.GetValue<string>());
+        Assert.AreEqual("grace", values[1]?.GetValue<string>());
+    }
+
+    [TestMethod]
+    public void RecursiveDescent_CollectsPropertiesAtEveryDepth() {
+        var node = JsonNode.Parse("""{"a":{"name":"root"},"b":[{"name":"child"}]}""");
+
+        var values = node.Should().HaveJsonPathValues("$..name").Which;
+        Assert.HasCount(2, values);
+        Assert.AreEqual("root", values[0]?.GetValue<string>());
+        Assert.AreEqual("child", values[1]?.GetValue<string>());
+    }
+
+    [TestMethod]
+    public void NegativeIndex_CountsFromTheEnd() {
+        var node = JsonNode.Parse("""[{"name":"ada"},{"name":"grace"}]""");
+
+        node.Should().HaveJsonPath("$[-1].name").Which.Should().HaveValue("grace");
+        node.Should().HaveJsonPath("$[-2].name").Which.Should().HaveValue("ada");
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => node.Should().HaveJsonPath("$[-3]"));
+        Assert.AreEqual("Expected node to have path '$[-3]', but index -3 is out of range under '$' (2 element(s) present).", ex.Message);
+    }
+
+    [TestMethod]
+    public void HaveJsonPathValues_SupportsSimplePathsAndReportsEmptyWildcards() {
+        var node = JsonNode.Parse("""{"users":[{"name":"ada"}]}""");
+
+        var single = node.Should().HaveJsonPathValues("$.users[0].name").Which;
+        Assert.HasCount(1, single);
+        Assert.AreEqual("ada", single[0]?.GetValue<string>());
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => node.Should().HaveJsonPathValues("$.users[*].missing"));
+        Assert.AreEqual("Expected node to resolve path '$.users[*].missing', but no values matched.", ex.Message);
+    }
+
+    [TestMethod]
+    public void NotHaveJsonPath_SupportsMultiResultPaths() {
+        var node = JsonNode.Parse("""{"users":[{"name":"ada"}]}""");
+
+        node.Should().NotHaveJsonPath("$.users[*].missing");
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => node.Should().NotHaveJsonPath("$.users[*].name"));
+        Assert.AreEqual("Expected node not to have path '$.users[*].name', but it exists.", ex.Message);
+    }
+
+    [TestMethod]
     public void MalformedPaths_ThrowArgumentException() {
         var node = JsonNode.Parse("""{"a":[1]}""");
 
-        foreach(var path in (string[])["user.name", "$.", "$..a", "$.a[", "$[]", "$[-1]", "$[a]", "$.a]", "$.a[0]b", "$x", "$[99999999999999]"]) {
+        foreach(var path in (string[])["user.name", "$.", "$..", "$.a[", "$[]", "$[a]", "$.a]", "$.a[0]b", "$x", "$[99999999999999]", "$['a'", "$[*", "$..*", "$[--1]", "$['a'x]"]) {
             var ex = Assert.ThrowsExactly<ArgumentException>(() => node.Should().HaveJsonPath(path));
             Assert.AreEqual("path", ex.ParamName);
             Assert.Contains("malformed", ex.Message);

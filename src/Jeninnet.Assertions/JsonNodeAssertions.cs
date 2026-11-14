@@ -12,6 +12,7 @@ namespace Jeninnet.Assertions;
 public class JsonNodeAssertions(JsonNode? value, string? expression = null) : AssertionsBase(expression, "JSON") {
     private const int PREVIEW_LENGTH = 120;
     private const int AVAILABLE_NAMES_LIMIT = 10;
+    private const int MAX_PATH_RESULTS = 1000;
 
     private readonly JsonNode? _value = value;
 
@@ -193,6 +194,32 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
         return new(this);
     }
 
+    /// <summary>Asserts that the node is a JSON object.</summary>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">The node is not a JSON object.</exception>
+    public AndConstraint<JsonNodeAssertions> BeObject(string? because = null, params object?[] becauseArgs) {
+        if(_value is not JsonObject) {
+            Fail(Strings.Format(StringKeys.JSON_BE_OBJECT, Expression, Preview(_value)), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    /// <summary>Asserts that the node is not a JSON object.</summary>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">The node is a JSON object.</exception>
+    public AndConstraint<JsonNodeAssertions> NotBeObject(string? because = null, params object?[] becauseArgs) {
+        if(_value is JsonObject) {
+            Fail(Strings.Format(StringKeys.JSON_NOT_BE_OBJECT, Expression, Preview(_value)), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
     /// <summary>Asserts that the node is a UTC date and exposes its value for further assertions.</summary>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
@@ -309,14 +336,15 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
     }
 
     /// <summary>
-    /// Asserts that the mini JSON path <paramref name="path"/> resolves against the node and returns a
-    /// <see cref="WhichConstraint{T}"/> exposing the resolved node for further assertions.
+    /// Asserts that the mini JSON path <paramref name="path"/> resolves to exactly one node and returns a
+    /// <see cref="WhichConstraint{T}"/> exposing that node for further assertions.
     /// </summary>
     /// <remarks>
-    /// Supported subset: <c>$</c> for the root, <c>.property</c> for object members (case-sensitive),
-    /// and <c>[index]</c> for array elements. A path that ends on a JSON null still counts as present.
-    /// Wildcards, filters, and recursive descent are not supported; property names may not contain
-    /// <c>.</c>, <c>[</c>, or <c>]</c>.
+    /// Supported subset: <c>$</c> for the root, <c>.property</c> and <c>['property.with.dots']</c> for
+    /// object members (case-sensitive), <c>[index]</c> and <c>[-index]</c> for array elements, <c>[*]</c>
+    /// or <c>.*</c> for every child, and <c>..name</c> for recursive descent. A path that ends on a JSON
+    /// null still counts as present. Filters and expressions are not supported. A path producing more
+    /// than one result must use <see cref="HaveJsonPathValues"/>.
     /// </remarks>
     /// <param name="path">The path to resolve (for example, <c>$.users[0].name</c>).</param>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
@@ -324,19 +352,77 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
     /// <returns>A <see cref="WhichConstraint{T}"/> wrapping the resolved node (which may be a JSON null).</returns>
     /// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="path"/> is malformed.</exception>
-    /// <exception cref="AssertionFailedException">The path does not resolve.</exception>
+    /// <exception cref="AssertionFailedException">The path does not resolve or resolves to multiple nodes.</exception>
     public WhichConstraint<JsonNode?> HaveJsonPath(string path, string? because = null, params object?[] becauseArgs) {
         if(path is null) {
             throw new ArgumentNullException(nameof(path));
         }
 
         var segments = JsonPath.Parse(path);
-        if(TryResolvePath(segments, out var node, out var reason, out var suggestion)) {
-            return new WhichConstraint<JsonNode?>(node);
+        if(!HasMultiMatchSegment(segments)) {
+            if(TryResolvePath(segments, out var node, out var reason, out var suggestion)) {
+                return new WhichConstraint<JsonNode?>(node);
+            }
+
+            Fail(Strings.Format(StringKeys.JSON_HAVE_PATH, Expression, path, reason) + suggestion, because, becauseArgs);
+            return new WhichConstraint<JsonNode?>(null);
         }
 
-        Fail(Strings.Format(StringKeys.JSON_HAVE_PATH, Expression, path, reason) + suggestion, because, becauseArgs);
-        return new WhichConstraint<JsonNode?>(null);
+        if(!TryResolveMatches(segments, out var matches, out var exceededLimit)) {
+            Fail(exceededLimit
+                ? Strings.Format(StringKeys.JSON_PATH_TOO_MANY_RESULTS, Expression, path, AssertionScope.FormatInvariant(MAX_PATH_RESULTS))
+                : Strings.Format(StringKeys.JSON_PATH_NO_MATCH, Expression, path), because, becauseArgs);
+            return new WhichConstraint<JsonNode?>(null);
+        }
+
+        if(matches.Count != 1) {
+            Fail(Strings.Format(StringKeys.JSON_PATH_MULTIPLE_RESULTS, Expression, path, AssertionScope.FormatInvariant(matches.Count)), because, becauseArgs);
+            return new WhichConstraint<JsonNode?>(null);
+        }
+
+        return new WhichConstraint<JsonNode?>(matches[0]);
+    }
+
+    /// <summary>
+    /// Asserts that the mini JSON path <paramref name="path"/> resolves to one or more nodes and exposes
+    /// every match in document order.
+    /// </summary>
+    /// <remarks>
+    /// This is the multi-result companion of <see cref="HaveJsonPath"/> for wildcards and recursive
+    /// descent. The supported syntax is documented on <see cref="HaveJsonPath"/>. Results are returned
+    /// depth-first in document order; an empty match fails.
+    /// </remarks>
+    /// <param name="path">The path to resolve.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>A <see cref="WhichConstraint{T}"/> wrapping every matched node in document order.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="path"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="path"/> is malformed.</exception>
+    /// <exception cref="AssertionFailedException">The path does not resolve to any node.</exception>
+    public WhichConstraint<IReadOnlyList<JsonNode?>> HaveJsonPathValues(string path, string? because = null, params object?[] becauseArgs) {
+        if(path is null) {
+            throw new ArgumentNullException(nameof(path));
+        }
+
+        var segments = JsonPath.Parse(path);
+        IReadOnlyList<JsonNode?> matches;
+        if(!HasMultiMatchSegment(segments)) {
+            if(!TryResolvePath(segments, out var node, out var reason, out var suggestion)) {
+                Fail(Strings.Format(StringKeys.JSON_HAVE_PATH, Expression, path, reason) + suggestion, because, becauseArgs);
+                return new WhichConstraint<IReadOnlyList<JsonNode?>>([]);
+            }
+
+            matches = [node];
+        } else if(!TryResolveMatches(segments, out var resolved, out var exceededLimit)) {
+            Fail(exceededLimit
+                ? Strings.Format(StringKeys.JSON_PATH_TOO_MANY_RESULTS, Expression, path, AssertionScope.FormatInvariant(MAX_PATH_RESULTS))
+                : Strings.Format(StringKeys.JSON_PATH_NO_MATCH, Expression, path), because, becauseArgs);
+            return new WhichConstraint<IReadOnlyList<JsonNode?>>([]);
+        } else {
+            matches = resolved;
+        }
+
+        return new WhichConstraint<IReadOnlyList<JsonNode?>>(matches);
     }
 
     /// <summary>Asserts that the mini JSON path <paramref name="path"/> does not resolve against the node.</summary>
@@ -354,8 +440,18 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
         }
 
         var segments = JsonPath.Parse(path);
-        if(TryResolvePath(segments, out _, out _, out _)) {
-            Fail(Strings.Format(StringKeys.JSON_NOT_HAVE_PATH, Expression, path), because, becauseArgs);
+        if(!HasMultiMatchSegment(segments)) {
+            if(TryResolvePath(segments, out _, out _, out _)) {
+                Fail(Strings.Format(StringKeys.JSON_NOT_HAVE_PATH, Expression, path), because, becauseArgs);
+            }
+
+            return new(this);
+        }
+
+        if(TryResolveMatches(segments, out _, out var exceededLimit) || exceededLimit) {
+            Fail(exceededLimit
+                ? Strings.Format(StringKeys.JSON_PATH_TOO_MANY_RESULTS, Expression, path, AssertionScope.FormatInvariant(MAX_PATH_RESULTS))
+                : Strings.Format(StringKeys.JSON_NOT_HAVE_PATH, Expression, path), because, becauseArgs);
         }
 
         return new(this);
@@ -373,17 +469,125 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
         suggestion = string.Empty;
         var prefix = "$";
         foreach(var segment in segments) {
-            if(segment.IsIndex) {
+            if(segment.IsElement) {
                 if(!TryDescendIntoIndex(segment, ref node, ref prefix, out reason)) {
                     return false;
                 }
-            } else if(!TryDescendIntoProperty(segment, ref node, ref prefix, out reason, out suggestion)) {
-                return false;
+            } else if(segment.IsProperty) {
+                if(!TryDescendIntoProperty(segment, ref node, ref prefix, out reason, out suggestion)) {
+                    return false;
+                }
+            } else {
+                throw new InvalidOperationException($"Unexpected JSON path segment '{segment.Kind}'.");
             }
         }
 
         return true;
     }
+
+    /// <summary>Resolves a path that may contain wildcards or recursive descent into every match.</summary>
+    /// <param name="segments">The parsed path segments.</param>
+    /// <param name="matches">The matched nodes in document order when resolution succeeds.</param>
+    /// <param name="exceededLimit">Whether the result count exceeded the safety limit.</param>
+    /// <returns><see langword="true"/> when at least one node matched.</returns>
+    private bool TryResolveMatches(IReadOnlyList<JsonPathSegment> segments, out List<JsonNode?> matches, out bool exceededLimit) {
+        matches = [];
+        exceededLimit = false;
+        if(_value is null) {
+            return false;
+        }
+
+        List<JsonNode?> current = [_value];
+        foreach(var segment in segments) {
+            var next = new List<JsonNode?>();
+            switch(segment.Kind) {
+                case JsonPathSegmentKind.Property:
+                    foreach(var node in current) {
+                        if(node is JsonObject obj && obj.TryGetPropertyValue(segment.Name!, out var child)) {
+                            next.Add(child);
+                        }
+                    }
+                    break;
+                case JsonPathSegmentKind.Element:
+                    foreach(var node in current) {
+                        if(node is not JsonArray array) {
+                            continue;
+                        }
+
+                        var index = segment.Index < 0 ? array.Count + segment.Index : segment.Index;
+                        if(index >= 0 && index < array.Count) {
+                            next.Add(array[index]);
+                        }
+                    }
+                    break;
+                case JsonPathSegmentKind.Wildcard:
+                    foreach(var node in current) {
+                        switch(node) {
+                            case JsonObject obj:
+                                next.AddRange(obj.Select(static property => property.Value));
+                                break;
+                            case JsonArray array:
+                                next.AddRange(array);
+                                break;
+                        }
+                    }
+                    break;
+                case JsonPathSegmentKind.RecursiveProperty:
+                    foreach(var node in current) {
+                        CollectRecursive(node, segment.Name!, next);
+                    }
+                    break;
+            }
+
+            if(next.Count == 0) {
+                return false;
+            }
+
+            if(next.Count > MAX_PATH_RESULTS) {
+                exceededLimit = true;
+                return false;
+            }
+
+            current = next;
+        }
+
+        matches = current;
+        return true;
+    }
+
+    /// <summary>Collects every descendant property named <paramref name="name"/> in document order.</summary>
+    /// <param name="node">The subtree root.</param>
+    /// <param name="name">The property name to collect.</param>
+    /// <param name="results">The result list to append to.</param>
+    private static void CollectRecursive(JsonNode? node, string name, List<JsonNode?> results) {
+        var stack = new Stack<JsonNode?>();
+        stack.Push(node);
+        while(stack.Count > 0 && results.Count <= MAX_PATH_RESULTS) {
+            var current = stack.Pop();
+            switch(current) {
+                case JsonObject obj:
+                    if(obj.TryGetPropertyValue(name, out var matched)) {
+                        results.Add(matched);
+                    }
+
+                    foreach(var descendant in obj.Select(static property => property.Value).Reverse()) {
+                        stack.Push(descendant);
+                    }
+                    break;
+                case JsonArray array:
+                    for(var index = array.Count - 1; index >= 0; index--) {
+                        stack.Push(array[index]);
+                    }
+                    break;
+            }
+        }
+    }
+
+    /// <summary>Determines whether a path can produce multiple matches.</summary>
+    /// <param name="segments">The parsed path segments.</param>
+    /// <returns><see langword="true"/> when a wildcard or recursive segment is present.</returns>
+    private static bool HasMultiMatchSegment(IReadOnlyList<JsonPathSegment> segments) =>
+        segments.Any(static segment => segment.IsMultiMatch);
 
     /// <summary>Descends one array index, failing when the node is not an array or the index is out of range.</summary>
     /// <param name="segment">The index segment.</param>
@@ -398,12 +602,13 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
             return false;
         }
 
-        if(segment.Index >= array.Count) {
+        var index = segment.Index < 0 ? array.Count + segment.Index : segment.Index;
+        if(index < 0 || index >= array.Count) {
             reason = Strings.Format(StringKeys.JSON_PATH_INDEX_OUT_OF_RANGE, AssertionScope.FormatInvariant(segment.Index), prefix, AssertionScope.FormatInvariant(array.Count));
             return false;
         }
 
-        node = array[segment.Index];
+        node = array[index];
         prefix = $"{prefix}[{AssertionScope.FormatInvariant(segment.Index)}]";
         return true;
     }
@@ -430,9 +635,28 @@ public class JsonNodeAssertions(JsonNode? value, string? expression = null) : As
         }
 
         node = child;
-        prefix = $"{prefix}.{segment.Name}";
+        prefix = AppendProperty(prefix, segment.Name!);
         return true;
     }
+
+    /// <summary>Appends a property name to a diagnostic path, quoting names that are not bare-safe.</summary>
+    /// <param name="prefix">The rendered path prefix.</param>
+    /// <param name="name">The property name.</param>
+    /// <returns>The extended diagnostic path.</returns>
+    private static string AppendProperty(string prefix, string name) =>
+        IsSimpleName(name) ? $"{prefix}.{name}" : $"{prefix}['{name.Replace("\\", "\\\\").Replace("'", "\\'")}']";
+
+    /// <summary>Determines whether a property name can be rendered after a dot without quotes.</summary>
+    /// <param name="name">The property name.</param>
+    /// <returns><see langword="true"/> when the name contains no path delimiters or quotes.</returns>
+    private static bool IsSimpleName(string name) =>
+        name.Length > 0
+        && name.IndexOf('.') < 0
+        && name.IndexOf('[') < 0
+        && name.IndexOf(']') < 0
+        && name.IndexOf('\'') < 0
+        && name.IndexOf('"') < 0
+        && name.IndexOf('\\') < 0;
 
     /// <summary>Renders the existing property names of an object for a missing-property message.</summary>
     /// <param name="obj">The object whose names are listed.</param>

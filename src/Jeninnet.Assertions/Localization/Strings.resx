@@ -1331,6 +1331,15 @@
   <data name="JSON_NOT_HAVE_PATH" xml:space="preserve">
     <value>Expected {0} not to have path '{1}', but it exists.</value>
   </data>
+  <data name="JSON_PATH_MULTIPLE_RESULTS" xml:space="preserve">
+    <value>Expected {0} to resolve path '{1}' to a single value, but it produced {2} values. Use HaveJsonPathValues for multiple results.</value>
+  </data>
+  <data name="JSON_PATH_NO_MATCH" xml:space="preserve">
+    <value>Expected {0} to resolve path '{1}', but no values matched.</value>
+  </data>
+  <data name="JSON_PATH_TOO_MANY_RESULTS" xml:space="preserve">
+    <value>Expected {0} to resolve path '{1}', but it produced more than {2} values.</value>
+  </data>
   <data name="JSON_PATH_MISSING_PROPERTY" xml:space="preserve">
     <value>property '{0}' was not found under '{1}'</value>
   </data>
@@ -1372,6 +1381,15 @@
   </data>
   <data name="JSON_NOT_BE_ARRAY" xml:space="preserve">
     <value>Expected {0} not to be a JSON array, but found {1}.</value>
+  </data>
+  <data name="JSON_BE_OBJECT" xml:space="preserve">
+    <value>Expected {0} to be a JSON object, but found {1}.</value>
+  </data>
+  <data name="JSON_NOT_BE_OBJECT" xml:space="preserve">
+    <value>Expected {0} not to be a JSON object, but found {1}.</value>
+  </data>
+  <data name="JSON_DOCUMENT_DISPOSED" xml:space="preserve">
+    <value>Expected {0} to be a live JSON document, but it was disposed.</value>
   </data>
   <data name="JSON_BE_UTC_DATE" xml:space="preserve">
     <value>Expected {0} to be a UTC date, but found {1}.</value>

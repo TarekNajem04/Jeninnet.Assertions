@@ -61,6 +61,28 @@ public partial class LocalizationTests {
     }
 
     [TestMethod]
+    public void Arabic_JsonElementAndPathV2() {
+        using var _ = new ArabicScope();
+
+        using var arrayDocument = JsonDocument.Parse("[1,2]");
+        var element = arrayDocument.RootElement.Clone();
+        var beObject = Assert.ThrowsExactly<AssertionFailedException>(() => element.Should().BeObject());
+        Assert.AreEqual("المتوقع من element أن يكون كائن JSON، لكن وُجد [1,2].", beObject.Message);
+
+        var document = JsonDocument.Parse("{}");
+        document.Dispose();
+        var disposed = Assert.ThrowsExactly<AssertionFailedException>(() => document.Should());
+        Assert.AreEqual("المتوقع من document أن يكون مستند JSON حياً، لكنه كان مفكوكاً.", disposed.Message);
+
+        var node = JsonNode.Parse("""{"users":[{"name":"ada"},{"name":"grace"}]}""")!;
+        var multiple = Assert.ThrowsExactly<AssertionFailedException>(() => node.Should().HaveJsonPath("$.users[*].name"));
+        Assert.AreEqual("المتوقع من node أن يحل المسار '$.users[*].name' إلى قيمة واحدة، لكنه أنتج 2 قيمة. استخدم HaveJsonPathValues للنتائج المتعددة.", multiple.Message);
+
+        var noMatch = Assert.ThrowsExactly<AssertionFailedException>(() => node.Should().HaveJsonPathValues("$.users[*].missing"));
+        Assert.AreEqual("المتوقع من node أن يحل المسار '$.users[*].missing'، لكن لم تُطابق أي قيمة.", noMatch.Message);
+    }
+
+    [TestMethod]
     public void Arabic_Xml() {
         using var _ = new ArabicScope();
 
