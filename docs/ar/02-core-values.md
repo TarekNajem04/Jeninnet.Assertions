@@ -120,6 +120,22 @@ balance.Should().BeZero();
 
 مقارنات التقريب نوعية: تُقارن <code dir="ltr">decimal</code> والأعداد الصحيحة ذات 64 بت بدقة تامة، بينما يستخدم <code dir="ltr">BigInteger</code> والأعداد ذات 128 بت فروقاً دقيقة غير محدودة، فلا تُقرَّب القيم الكبيرة عبر <code dir="ltr">double</code>. و<code dir="ltr">NaN</code> لا يقارب أي قيمة، ولا يتقارب اللانهاية إلا مع نظيرها. وتشمل توكيدات الأرقام أيضاً <code dir="ltr">Half</code> و<code dir="ltr">Int128</code> و<code dir="ltr">UInt128</code> و<code dir="ltr">BigInteger</code> والأعداد الأصلية حيث يدعمها الإطار الهدف.
 
+وتحصل أنواع القيم المخصصة التي تطبّق <code dir="ltr">IComparable&lt;T&gt;</code> على المفردات المقارنة نفسها دون أن تصبح أعداداً. تبقى overloads الأنواع العددية والنصية والزمنية وGuid والتعدادات أكثر تحديداً؛ أما overload المقارنة العامة فهو الملاذ لأنواع القيم المرتّبة الخاصة بك:
+
+<div dir="ltr">
+
+```csharp
+public readonly record struct Money(decimal Amount) : IComparable<Money> {
+    public int CompareTo(Money other) => Amount.CompareTo(other.Amount);
+}
+
+var small = new Money(10m);
+var large = new Money(20m);
+large.Should().BeGreaterThan(small).And.BeInRange(small, new Money(30m));
+```
+
+</div>
+
 ## ٢.٤ النصوص: مساواة، واحتواء، ونمط، وطول
 
 نُطوِّر فحص النص خطوةً بخطوة حتى نحصل على ما نريد بالضبط:

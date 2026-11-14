@@ -51,6 +51,7 @@ type Jeninnet.Assertions.AssertionExtensions
   method static Jeninnet.Assertions.CollectionAssertions<System.Text.Json.Nodes.JsonNode> Should(System.Text.Json.Nodes.JsonArray, System.String)
   method static Jeninnet.Assertions.CollectionAssertions<T> Should<T>(System.Collections.Generic.IEnumerable<T>, System.String)
   method static Jeninnet.Assertions.CollectionAssertions<T> Should<T>(T[], System.String)
+  method static Jeninnet.Assertions.ComparableTypeAssertions<T> Should<T>(System.IComparable<T>, System.String)
   method static Jeninnet.Assertions.DateOnlyAssertions Should(System.DateOnly, System.String)
   method static Jeninnet.Assertions.DateTimeAssertions Should(System.DateTime, System.String)
   method static Jeninnet.Assertions.DateTimeOffsetAssertions Should(System.DateTimeOffset, System.String)

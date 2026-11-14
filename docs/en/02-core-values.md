@@ -92,6 +92,18 @@ A practical note: `BeApproximately()` is best for measurements or approximate ca
 
 Approximate comparisons are type-aware. `decimal` and 64-bit integers are compared exactly, while `BigInteger` and 128-bit integers use exact arbitrary-precision differences, so large values do not round through `double`. NaN never approximates a value; equal infinities compare as approximately equal. Numeric assertions also cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized integers where the target framework exposes them.
 
+Domain value types that implement `IComparable<T>` get the same comparison vocabulary without becoming numbers. The concrete numeric, string, date/time, Guid, and enum overloads remain more specific; the generic comparable overload is the fallback for your own ordered value types:
+
+```csharp
+public readonly record struct Money(decimal Amount) : IComparable<Money> {
+    public int CompareTo(Money other) => Amount.CompareTo(other.Amount);
+}
+
+var small = new Money(10m);
+var large = new Money(20m);
+large.Should().BeGreaterThan(small).And.BeInRange(small, new Money(30m));
+```
+
 ## 2.4 Strings: equality, length, containment, and patterns
 
 We can build string checks progressively, expressing exactly what we're looking for:

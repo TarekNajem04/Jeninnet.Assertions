@@ -174,6 +174,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Graphs: `BeEquivalentTo` / `NotBeEquivalentTo` (object graphs)
 - Aggregation and custom equality: `SatisfyAllConditions` (direct extension, aggregates failures), custom `IEqualityComparer<T>` overloads
 - Serialization round trips: `BeXmlSerializable` / `BeJsonSerializable` / `BeDataContractSerializable`
+- Custom comparable values: `Should()` returns `ComparableTypeAssertions<T>` for types implementing IComparable<T>
 
 </details>
 
