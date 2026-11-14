@@ -67,10 +67,41 @@ public sealed class AssertionScope : IDisposable {
         _parent = _current.Value;
         _current.Value = this;
         Formatting = _parent?.Formatting.Copy() ?? new ValueFormatterOptions();
+        Expectation = _parent?.Expectation;
     }
 
     /// <summary>Gets the value formatters scoped to this scope (inherited as a snapshot from the parent scope).</summary>
     public ValueFormatterOptions Formatting { get; }
+
+    /// <summary>Gets the expectation prefix applied to failures reported in this scope, or <see langword="null"/> when none is set.</summary>
+    /// <remarks>Nested scopes inherit the parent value; changing the expectation on a child never mutates the parent.</remarks>
+    public string? Expectation { get; private set; }
+
+    /// <summary>Sets the expectation prefix used for failures reported while this scope is active.</summary>
+    /// <remarks>
+    /// The expectation replaces the leading <c>Expected {expression}</c> phrase (in either supported language) so a custom
+    /// assertion can name the real subject, for example <c>Expected order.Total</c>. Messages that do not start with the
+    /// standard expectation marker are prefixed with the expectation followed by a space.
+    /// </remarks>
+    /// <param name="expectation">The full expectation prefix (must not be <see langword="null"/>; whitespace clears it).</param>
+    /// <returns>This scope for chaining.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="expectation"/> is <see langword="null"/>.</exception>
+    public AssertionScope WithExpectation(string expectation) {
+        if(expectation is null) {
+            throw new ArgumentNullException(nameof(expectation));
+        }
+
+        var trimmed = expectation.Trim();
+        Expectation = trimmed.Length == 0 ? null : trimmed;
+        return this;
+    }
+
+    /// <summary>Clears the expectation prefix for this scope so failures use the standard <c>Expected …</c> form.</summary>
+    /// <returns>This scope for chaining.</returns>
+    public AssertionScope ClearExpectation() {
+        Expectation = null;
+        return this;
+    }
 
     /// <summary>Gets the currently active scope, or <see langword="null"/> when assertions run outside any scope.</summary>
     /// <remarks>Public so external frameworks and tooling can observe the ambient collection point.</remarks>
@@ -132,8 +163,29 @@ public sealed class AssertionScope : IDisposable {
     /// </param>
     /// <exception cref="AssertionFailedException">No scope is active and the assertion failed.</exception>
     internal static void Fail(string message, Exception? innerException = null) {
-        var scope = _current.Value ?? throw new AssertionFailedException(message, innerException);
-        scope._assertionStrategy.HandleFailure(message);
+        var scope = _current.Value;
+        if(scope is null) {
+            throw new AssertionFailedException(message, innerException);
+        }
+
+        scope._assertionStrategy.HandleFailure(scope.ApplyExpectation(message, null));
+    }
+
+    /// <summary>
+    /// Reports a failure whose message already names the subject, so a scope expectation can replace that
+    /// subject phrase precisely. Falls back to the marker-replacement rule when no scope is active.
+    /// </summary>
+    /// <param name="message">The fully formatted failure message (including any <c>because</c> clause).</param>
+    /// <param name="expression">The subject expression that appears immediately after the expectation marker.</param>
+    /// <param name="innerException">The cause of the failure, preserved only when thrown immediately.</param>
+    /// <exception cref="AssertionFailedException">No scope is active and the assertion failed.</exception>
+    internal static void Fail(string message, string? expression, Exception? innerException = null) {
+        var scope = _current.Value;
+        if(scope is null) {
+            throw new AssertionFailedException(message, innerException);
+        }
+
+        scope._assertionStrategy.HandleFailure(scope.ApplyExpectation(message, expression));
     }
 
     /// <summary>
@@ -147,17 +199,74 @@ public sealed class AssertionScope : IDisposable {
     /// </param>
     /// <exception cref="AssertionFailedException">No scope is active and the assertion failed.</exception>
     internal static void Fail(AssertionFailure failure, Exception? innerException = null) {
-        var scope = _current.Value ?? throw new AssertionFailedException(failure.Message, innerException);
+        var scope = _current.Value;
+        if(scope is null) {
+            throw new AssertionFailedException(failure.Message, innerException);
+        }
+
+        var message = scope.ApplyExpectation(failure.Message, failure.Expression);
+        var effective = string.Equals(message, failure.Message, StringComparison.Ordinal)
+            ? failure
+            : new AssertionFailure(failure.Expression, failure.Category, message, failure.Actual, failure.Expected);
         if(scope._assertionStrategy is CollectingAssertionStrategy collector) {
-            collector.AddFailure(failure);
+            collector.AddFailure(effective);
         } else {
-            scope._assertionStrategy.HandleFailure(failure.Message);
+            scope._assertionStrategy.HandleFailure(effective.Message);
         }
     }
 
     /// <summary>Gets the structured failures collected so far (empty for strategies that only record messages).</summary>
     internal IReadOnlyList<AssertionFailure> StructuredFailures =>
         _assertionStrategy is CollectingAssertionStrategy collector ? collector.Failures : (IReadOnlyList<AssertionFailure>)[];
+
+    /// <summary>Restores a previously captured expectation (used by <see cref="AssertionIsolation"/>).</summary>
+    /// <param name="expectation">The expectation to restore, or <see langword="null"/> to clear it.</param>
+    internal void RestoreExpectation(string? expectation) => Expectation = expectation;
+
+    /// <summary>Applies this scope's expectation prefix to a failure message.</summary>
+    /// <param name="message">The fully formatted failure message.</param>
+    /// <param name="expression">The subject expression, when the caller reports a structured failure.</param>
+    /// <returns>The message with the expectation applied, or the original message when no expectation is set.</returns>
+    private string ApplyExpectation(string message, string? expression) {
+        if(Expectation is not { Length: > 0 } expectation) {
+            return message;
+        }
+
+        var marker = Strings.Get(StringKeys.MESSAGE_EXPECTED);
+        if(!message.StartsWith(marker, StringComparison.Ordinal)) {
+            return expectation + " " + message;
+        }
+
+        if(expression is { Length: > 0 }) {
+            var bodyStart = marker.Length;
+            var index = message.IndexOf(expression, bodyStart, StringComparison.Ordinal);
+            if(index >= 0 && index - bodyStart <= 16 && IsExpressionBoundary(message, index + expression.Length)) {
+                return PrependExpectation(expectation, message, index + expression.Length);
+            }
+        }
+
+        return PrependExpectation(expectation + " ", message, marker.Length);
+    }
+
+    /// <summary>Prepends <paramref name="expectation"/> to the remainder of <paramref name="message"/>.</summary>
+    /// <param name="expectation">The expectation prefix.</param>
+    /// <param name="message">The failure message.</param>
+    /// <param name="startIndex">The index in <paramref name="message"/> where the remainder begins.</param>
+    /// <returns>The expectation followed by the message remainder.</returns>
+    private static string PrependExpectation(string expectation, string message, int startIndex) {
+#if NETSTANDARD2_0
+        return expectation + message.Substring(startIndex);
+#else
+        return string.Concat(expectation, message.AsSpan(startIndex));
+#endif
+    }
+
+    /// <summary>Determines whether an expression match ends at a natural phrase boundary.</summary>
+    /// <param name="message">The failure message being inspected.</param>
+    /// <param name="index">The character index immediately after the matched expression.</param>
+    /// <returns><see langword="true"/> at the end of the message or before whitespace/punctuation.</returns>
+    private static bool IsExpressionBoundary(string message, int index) =>
+        index >= message.Length || char.IsWhiteSpace(message[index]) || char.IsPunctuation(message[index]);
 
     /// <summary>
     /// Formats a value with the invariant culture so failure messages are deterministic
@@ -170,22 +279,21 @@ public sealed class AssertionScope : IDisposable {
         InitializerRunner.EnsureInitialized();
 
         var scope = _current.Value;
+        var options = scope?.Formatting ?? AssertionConfiguration.Formatting;
         if(scope is not null) {
             var scoped = scope.Formatting.Snapshot().FirstOrDefault(formatter => formatter.CanFormat(value));
             if(scoped is not null) {
-                return scoped.Format(value) ?? DefaultFormat(value);
+                return FormattingContext.ApplyLimits(scoped.Format(value) ?? FormattingContext.DefaultFormat(value, options), options);
             }
         }
 
         var global = AssertionConfiguration.Formatting.Snapshot().FirstOrDefault(formatter => formatter.CanFormat(value));
         if(global is not null) {
-            return global.Format(value) ?? DefaultFormat(value);
+            return FormattingContext.ApplyLimits(global.Format(value) ?? FormattingContext.DefaultFormat(value, options), options);
         }
 
-        return DefaultFormat(value);
+        return FormattingContext.DefaultFormat(value, options);
     }
-
-    private static string DefaultFormat<T>(T value) => string.Format(CultureInfo.InvariantCulture, "{0}", value);
 
     /// <summary>
     /// Appends a <c>because</c> clause to a base failure message using sentence-style semantics.

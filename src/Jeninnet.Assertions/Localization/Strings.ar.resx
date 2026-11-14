@@ -1673,8 +1673,26 @@
   <data name="MESSAGE_BECAUSE" xml:space="preserve">
     <value>لأن </value>
   </data>
+  <data name="MESSAGE_EXPECTED" xml:space="preserve">
+    <value>المتوقع </value>
+  </data>
   <data name="SCOPE_ASSERTION_FAILURES" xml:space="preserve">
     <value>{0} من إخفاقات التأكيد:</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_LINES" xml:space="preserve">
+    <value>… ({0} سطر إضافي مخفي)</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_CHARS" xml:space="preserve">
+    <value>… ({0} حرف إضافي مخفي)</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_ITEMS" xml:space="preserve">
+    <value>… (مقتطع)</value>
+  </data>
+  <data name="FORMATTING_MAX_DEPTH" xml:space="preserve">
+    <value>… (أقصى عمق)</value>
+  </data>
+  <data name="FORMATTING_CYCLE" xml:space="preserve">
+    <value>… (دورة مرجعية)</value>
   </data>
   <data name="ACTION_EVENTUALLY_SATISFY" xml:space="preserve">
     <value>المتوقع من {0} أن يحقق الشرط خلال {1}، لكن القيمة الأخيرة كانت {2}.</value>

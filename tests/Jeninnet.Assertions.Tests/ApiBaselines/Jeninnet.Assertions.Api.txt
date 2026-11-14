@@ -166,6 +166,8 @@ type Jeninnet.Assertions.AssertionResult
 type Jeninnet.Assertions.AssertionScope
   ctor(Jeninnet.Assertions.IAssertionStrategy)
   ctor(System.String)
+  method Jeninnet.Assertions.AssertionScope ClearExpectation()
+  method Jeninnet.Assertions.AssertionScope WithExpectation(System.String)
   method Jeninnet.Assertions.GivenSelector<T> Given<T>(System.Func<T>)
   method System.Boolean HasFailures()
   method System.String[] Discard()
@@ -173,6 +175,7 @@ type Jeninnet.Assertions.AssertionScope
   method System.Void AppendTracing(System.String)
   method override System.Void Dispose()
   property Jeninnet.Assertions.ValueFormatterOptions Formatting { get; }
+  property System.String Expectation { get; }
   property System.String Name { get; }
   property static Jeninnet.Assertions.AssertionScope Current { get; }
 type Jeninnet.Assertions.AssertionsBase
@@ -2046,6 +2049,12 @@ type Jeninnet.Assertions.ValueFormatterOptions
   method System.Boolean RemoveFormatter<TFormatter>()
   method System.Void AddFormatter(Jeninnet.Assertions.IValueFormatter)
   method System.Void Clear()
+  property System.Boolean RespectRuntimeTypes { get; set; }
+  property System.Boolean UseLineBreaks { get; set; }
+  property System.Int32 MaxDepth { get; set; }
+  property System.Int32 MaxEnumerables { get; set; }
+  property System.Int32 MaxLines { get; set; }
+  property System.Int32 MaxStringLength { get; set; }
 type Jeninnet.Assertions.WhichConstraint<T>
   ctor(T)
   property T Which { get; }

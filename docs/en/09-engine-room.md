@@ -114,6 +114,25 @@ AssertionConfiguration.Formatting.Clear();
 
 **Critical rule:** formatters only affect **display**, never **comparison**. Assertions always compare actual values. Domain types deserve their own formatters rather than relying on a potentially unhelpful `ToString()` override.
 
+### Formatting limits
+
+`ValueFormatterOptions` also bounds how much text a failure may carry, so a deep graph or a huge string cannot drown the message. Limits apply after formatters run and are configurable per scope or process-wide:
+
+```csharp
+using (var scope = new AssertionScope()) {
+    scope.Formatting.MaxDepth = 10;           // structural nesting depth
+    scope.Formatting.MaxLines = 100;          // rendered lines
+    scope.Formatting.MaxEnumerables = 100;    // items per enumerable
+    scope.Formatting.MaxStringLength = 8_000; // characters
+    scope.Formatting.UseLineBreaks = true;    // false collapses to one line
+    scope.Formatting.RespectRuntimeTypes = true; // opt-in structural display
+}
+```
+
+Defaults preserve the historical output: `MaxDepth` 10, `MaxLines` 100, `MaxEnumerables` 100, `MaxStringLength` 8,000, `UseLineBreaks` on, and `RespectRuntimeTypes` off. Truncation is never silent — the text ends with `…` and the hidden line/character count. Line endings are preserved by default; only `UseLineBreaks = false` collapses whitespace.
+
+`RespectRuntimeTypes` is the switch that changes collection display: with it on, an array renders as `[1, 2, 3]` (recursively, up to `MaxDepth` and `MaxEnumerables`, with `… (truncated)`, `… (max depth)`, and `… (cycle)` markers). With it off, the engine keeps calling `ToString()`, exactly as before. `Copy()` and `RestoreFrom()` carry formatters **and** limits, so `AssertionIsolation.Isolate()` restores the whole formatting configuration.
+
 Deliberate non-goal: this `IValueFormatter` contract (`CanFormat` + `Format`) is intentionally **not** compatible with the same-named interface in other fluent assertion libraries. Aligning them would break every existing formatter without adding capability.
 
 ## 9.4 Configuration and engine initializers
@@ -127,21 +146,23 @@ Deliberate non-goal: this `IValueFormatter` contract (`CanFormat` + `Format`) is
 
 ### Isolating ambient state
 
-Settings changed by a test should not leak into the next one. One line isolates all four ambient knobs — culture, clock, the global formatter registry, and the ambient equivalency template — and restores them on dispose, even when the scope exits through an exception:
+Settings changed by a test should not leak into the next one. One line isolates the ambient knobs — culture, clock, formatting (formatters and limits), the active scope's expectation, and the ambient equivalency template — and restores them on dispose, even when the scope exits through an exception:
 
 ```csharp
 using(AssertionIsolation.Isolate()) {
     AssertionCulture.Current = new CultureInfo("ar");
     AssertionClock.Current = new ManualClock(epoch);
     AssertionConfiguration.Formatting.AddFormatter(new MoneyFormatter());
+    AssertionConfiguration.Formatting.MaxLines = 20;
+    AssertionScope.Current?.WithExpectation("Expected the invoice");
     AssertionConfiguration.Equivalency.Modify(o => o.StrictOrdering = true);
 
     // ... a test that expects all of the above ...
 }
-// culture, clock, formatters, and equivalency are back to their pre-scope values.
+// culture, clock, formatting, the scope expectation, and equivalency are back to their pre-scope values.
 ```
 
-Nested scopes each restore their own snapshot, and the culture/clock/equivalency parts are per-async-flow (`AsyncLocal`), so parallel tests stay isolated. Two boundaries are deliberate: the formatter registry is process-wide (the scope prevents sequential leakage, but parallel tests that both mutate it still need coordination), and state outside this library — like the thread's `CultureInfo.CurrentCulture` — is not touched.
+Nested scopes each restore their own snapshot, and the culture/clock/expectation/equivalency parts are per-async-flow (`AsyncLocal`), so parallel tests stay isolated. Two boundaries are deliberate: the formatter registry is process-wide (the scope prevents sequential leakage, but parallel tests that both mutate it still need coordination), and state outside this library — like the thread's `CultureInfo.CurrentCulture` — is not touched.
 
 ### Assembly-level initializers
 
@@ -163,6 +184,29 @@ Initializers run **once per engine load**, before any tests run. Keep them fast 
 ### For custom assertion authors
 
 Custom assertion helpers can be marked with `[CustomAssertion]`, and custom assertion assemblies with `[CustomAssertionsAssembly]`, to clearly define assertion boundaries. Hosts and tooling consume these markers through `CustomAssertionDiscovery`: `FindMarkedAssemblies()` locates extension-only assemblies, `FindCustomAssertions(assembly)` validates their marked members (they must be public static), and `RunInitializers(assembly)` executes their engine setups — including assemblies loaded after the first assertion, which the automatic scan would otherwise miss. Day-to-day extension still goes through `AssertionScope` alone; the discovery API exists for composing those extensions.
+
+`AssertionsBase` is the supported SDK base for a custom assertion class. Derive from it, use `Expression` for the captured subject, and call `Fail` with the fully formatted message plus the optional `because` clause; `Fail` appends the reason and routes the failure to the active scope (structured failures keep the expression, actual, and expected values for `SoftAssertions`):
+
+```csharp
+public sealed class OrderAssertions(Order order, string? expression = null)
+    : AssertionsBase(expression, "order") {
+    public AndConstraint<OrderAssertions> BePaid(string? because = null, params object?[] becauseArgs) {
+        if(order.Status != "Paid") {
+            Fail($"Expected {Expression} to be paid, but found {FormatValue(order.Status)}.", because, becauseArgs);
+        }
+
+        return new(this);
+    }
+}
+```
+
+`FormatValue` formats with the invariant culture and the active formatting limits, so custom messages stay byte-stable. `AssertionScope.Current` observes the ambient collector when a helper needs to inspect or add pre-formatted failures. To rename the subject for a block, set an expectation on the scope; nested scopes inherit it without mutating the parent, and `ClearExpectation()` restores the default:
+
+```csharp
+using (new AssertionScope().WithExpectation("Expected order #42")) {
+    order.Should().BePaid(); // Expected order #42 to be paid, but found Pending.
+}
+```
 
 ## 9.5 Deterministic clocks: test time without sleeping
 

@@ -1673,8 +1673,26 @@
   <data name="MESSAGE_BECAUSE" xml:space="preserve">
     <value>because </value>
   </data>
+  <data name="MESSAGE_EXPECTED" xml:space="preserve">
+    <value>Expected </value>
+  </data>
   <data name="SCOPE_ASSERTION_FAILURES" xml:space="preserve">
     <value>{0} assertion failures:</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_LINES" xml:space="preserve">
+    <value>… ({0} more line(s))</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_CHARS" xml:space="preserve">
+    <value>… ({0} more char(s))</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_ITEMS" xml:space="preserve">
+    <value>… (truncated)</value>
+  </data>
+  <data name="FORMATTING_MAX_DEPTH" xml:space="preserve">
+    <value>… (max depth)</value>
+  </data>
+  <data name="FORMATTING_CYCLE" xml:space="preserve">
+    <value>… (cycle)</value>
   </data>
   <data name="ACTION_EVENTUALLY_SATISFY" xml:space="preserve">
     <value>Expected {0} to satisfy the condition within {1}, but the last value was {2}.</value>

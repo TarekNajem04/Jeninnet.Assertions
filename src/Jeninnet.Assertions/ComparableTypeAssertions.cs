@@ -27,7 +27,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The values are not equal.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> Be(T expected, string? because = null, params object?[] becauseArgs) {
         if(!EqualityComparer<T>.Default.Equals(Subject, expected)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -41,7 +41,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The values are equal.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> NotBe(T unexpected, string? because = null, params object?[] becauseArgs) {
         if(EqualityComparer<T>.Default.Equals(Subject, unexpected)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE, SubjectExpression, Format(unexpected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE, SubjectExpression, Format(unexpected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -72,7 +72,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The value is not ranked equally to <paramref name="expected"/>.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> BeRankedEquallyTo(T expected, string? because = null, params object?[] becauseArgs) {
         if(Subject.CompareTo(expected) != 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_RANKED_EQUALLY, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_RANKED_EQUALLY, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -86,7 +86,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The value is ranked equally to <paramref name="unexpected"/>.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> NotBeRankedEquallyTo(T unexpected, string? because = null, params object?[] becauseArgs) {
         if(Subject.CompareTo(unexpected) == 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE_RANKED_EQUALLY, SubjectExpression, Format(unexpected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE_RANKED_EQUALLY, SubjectExpression, Format(unexpected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -100,7 +100,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The value is less than or equal to <paramref name="expected"/>.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> BeGreaterThan(T expected, string? because = null, params object?[] becauseArgs) {
         if(Subject.CompareTo(expected) <= 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_GREATER_THAN, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_GREATER_THAN, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -114,7 +114,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The value is less than <paramref name="expected"/>.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> BeGreaterThanOrEqualTo(T expected, string? because = null, params object?[] becauseArgs) {
         if(Subject.CompareTo(expected) < 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_GREATER_THAN_OR_EQUAL, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_GREATER_THAN_OR_EQUAL, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -128,7 +128,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The value is greater than or equal to <paramref name="expected"/>.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> BeLessThan(T expected, string? because = null, params object?[] becauseArgs) {
         if(Subject.CompareTo(expected) >= 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_LESS_THAN, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_LESS_THAN, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -142,7 +142,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <exception cref="AssertionFailedException">The value is greater than <paramref name="expected"/>.</exception>
     public AndConstraint<ComparableTypeAssertions<T>> BeLessThanOrEqualTo(T expected, string? because = null, params object?[] becauseArgs) {
         if(Subject.CompareTo(expected) > 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_LESS_THAN_OR_EQUAL, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_LESS_THAN_OR_EQUAL, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -162,7 +162,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
         }
 
         if(Subject.CompareTo(minimum) < 0 || Subject.CompareTo(maximum) > 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_BETWEEN, SubjectExpression, Format(minimum), Format(maximum), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_BETWEEN, SubjectExpression, Format(minimum), Format(maximum), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -182,7 +182,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
         }
 
         if(Subject.CompareTo(minimum) >= 0 && Subject.CompareTo(maximum) <= 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE_BETWEEN, SubjectExpression, Format(minimum), Format(maximum), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE_BETWEEN, SubjectExpression, Format(minimum), Format(maximum), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -201,7 +201,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
         }
 
         if(!expected.Contains(Subject)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_ONE_OF, SubjectExpression, string.Join(", ", expected.Select(Format)), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE_ONE_OF, SubjectExpression, string.Join(", ", expected.Select(Format)), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -226,7 +226,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
         }
 
         if(!predicate.Compile().Invoke(Subject)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_MATCH, SubjectExpression, predicate), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_MATCH, SubjectExpression, predicate), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);

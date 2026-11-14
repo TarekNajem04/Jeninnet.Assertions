@@ -21,7 +21,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
     /// <exception cref="AssertionFailedException">The values are not equal.</exception>
     public new AndConstraint<NumericAssertions<T>> Be(T expected, string? because = null, params object?[] becauseArgs) {
         if(!EqualityComparer<T>.Default.Equals(Subject, expected)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_BE, SubjectExpression, Format(expected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -35,7 +35,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
     /// <exception cref="AssertionFailedException">The values are equal.</exception>
     public new AndConstraint<NumericAssertions<T>> NotBe(T unexpected, string? because = null, params object?[] becauseArgs) {
         if(EqualityComparer<T>.Default.Equals(Subject, unexpected)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE, SubjectExpression, Format(unexpected), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.COMPARABLE_NOT_BE, SubjectExpression, Format(unexpected), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -48,7 +48,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
     /// <exception cref="AssertionFailedException">The value is zero or negative.</exception>
     public AndConstraint<NumericAssertions<T>> BePositive(string? because = null, params object?[] becauseArgs) {
         if(NumericComparison.IsNaN(Subject) || Subject.CompareTo(default) <= 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_BE_POSITIVE, SubjectExpression, Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_BE_POSITIVE, SubjectExpression, Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -61,7 +61,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
     /// <exception cref="AssertionFailedException">The value is zero or positive.</exception>
     public AndConstraint<NumericAssertions<T>> BeNegative(string? because = null, params object?[] becauseArgs) {
         if(NumericComparison.IsNaN(Subject) || Subject.CompareTo(default) >= 0) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_BE_NEGATIVE, SubjectExpression, Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_BE_NEGATIVE, SubjectExpression, Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -102,7 +102,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
         }
 
         if(!NumericComparison.WithinPrecision(Subject, expected, precision)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_APPROXIMATE, SubjectExpression, Format(expected), Format(precision), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_APPROXIMATE, SubjectExpression, Format(expected), Format(precision), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -123,7 +123,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
         }
 
         if(NumericComparison.WithinPrecision(Subject, unexpected, precision)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_NOT_APPROXIMATE, SubjectExpression, Format(unexpected), Format(precision), Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_NOT_APPROXIMATE, SubjectExpression, Format(unexpected), Format(precision), Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -136,7 +136,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
     /// <exception cref="AssertionFailedException">The value is not NaN.</exception>
     public AndConstraint<NumericAssertions<T>> BeNaN(string? because = null, params object?[] becauseArgs) {
         if(!NumericComparison.IsNaN(Subject)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_BE_NAN, SubjectExpression, Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_BE_NAN, SubjectExpression, Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);
@@ -149,7 +149,7 @@ public class NumericAssertions<T>(T value, string? expression = null) : Comparab
     /// <exception cref="AssertionFailedException">The value is NaN.</exception>
     public AndConstraint<NumericAssertions<T>> NotBeNaN(string? because = null, params object?[] becauseArgs) {
         if(NumericComparison.IsNaN(Subject)) {
-            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_NOT_BE_NAN, SubjectExpression, Format(Subject)), because, becauseArgs));
+            AssertionScope.Fail(AssertionScope.AppendBecause(Strings.Format(StringKeys.NUMERIC_NOT_BE_NAN, SubjectExpression, Format(Subject)), because, becauseArgs), SubjectExpression);
         }
 
         return new(this);

@@ -161,6 +161,29 @@ AssertionConfiguration.Formatting.Clear();
 
 **قاعدة صارمة:** المنسِّقات تغيِّر **العرض فقط**، ولا تغيِّر **المقارنة** أبدًا. تقارن التوكيدات القيم الحقيقية دائمًا. عرض نوع النطاق (<code dir="ltr">Domain Type</code>) يخصُّه أن يكون له منسِّقه الخاص بدل الاعتماد على <code dir="ltr">ToString()</code> الافتراضي الذي غالبًا ما يكون غير واضح أو غير مفيد لرسالة الفشل. وهذه القاعدة هي الفرق بين أداة عرض وأداة تشويه: لو أثر المنسِّق في المقارنة لصار تغييره — وهو كود تشخيصي بحت — قادرًا على تغيير نتيجة اختبار، وذلك نوع من الاقتران لا يُغتفر في طبقة توكيدات.
 
+### حدود التنسيق
+
+يحدّ <code dir="ltr">ValueFormatterOptions</code> أيضًا من حجم النص الذي تحمله رسالة الفشل، حتى لا يغرق رسم بياني عميق أو نص ضخم الرسالة. تُطبَّق الحدود بعد تشغيل المنسِّقات، وتُضبط لكل نطاق أو على مستوى العملية:
+
+<div dir="ltr">
+
+```csharp
+using (var scope = new AssertionScope()) {
+    scope.Formatting.MaxDepth = 10;           // عمق التداخل البنيوي
+    scope.Formatting.MaxLines = 100;          // الأسطر المعروضة
+    scope.Formatting.MaxEnumerables = 100;    // العناصر لكل تعداد
+    scope.Formatting.MaxStringLength = 8_000; // الأحرف
+    scope.Formatting.UseLineBreaks = true;    // false يطوي النص في سطر واحد
+    scope.Formatting.RespectRuntimeTypes = true; // عرض بنيوي اختياري
+}
+```
+
+</div>
+
+تحافظ الافتراضات على المخرجات التاريخية: <code dir="ltr">MaxDepth</code> ‏10، و<code dir="ltr">MaxLines</code> ‏100، و<code dir="ltr">MaxEnumerables</code> ‏100، و<code dir="ltr">MaxStringLength</code> ‏8,000، و<code dir="ltr">UseLineBreaks</code> مفعّل، و<code dir="ltr">RespectRuntimeTypes</code> معطّل. والاقتطاع ليس صامتًا أبدًا: ينتهي النص بعلامة <code dir="ltr">…</code> وعدد الأسطر أو الأحرف المخفية. وتُحفظ نهايات الأسطر افتراضيًا؛ فقط <code dir="ltr">UseLineBreaks = false</code> يطوي المسافات.
+
+<code dir="ltr">RespectRuntimeTypes</code> هو المفتاح الذي يغيّر عرض المجموعات: عند تفعيله تُعرض المصفوفة كـ<code dir="ltr">[1, 2, 3]</code> (تعاوديًا، حتى <code dir="ltr">MaxDepth</code> و<code dir="ltr">MaxEnumerables</code>، مع علامات <code dir="ltr">… (truncated)</code> و<code dir="ltr">… (max depth)</code> و<code dir="ltr">… (cycle)</code>). وعند تعطيله يبقى المحرك يستدعي <code dir="ltr">ToString()</code> كما كان تمامًا. وتنقل <code dir="ltr">Copy()</code> و<code dir="ltr">RestoreFrom()</code> المنسِّقات **والحدود** معًا، لذا يعيد <code dir="ltr">AssertionIsolation.Isolate()</code> إعداد التنسيق كاملًا.
+
 هدف مستبعد عمدًا: عقد <code dir="ltr">IValueFormatter</code> هذا (<code dir="ltr">CanFormat</code> + <code dir="ltr">Format</code>) **غير متوافق** مع الواجهة التي تحمل الاسم نفسه في مكتبات التأكيدات الأخرى. توحيدهما سيكسر كل منسِّق موجود دون قدرة جديدة.
 
 ## ٩.٤ الإعدادات والمهيئات: افتراضات مرة واحدة
@@ -178,7 +201,7 @@ AssertionConfiguration.Formatting.Clear();
 
 ### عزل الحالة المحيطية
 
-ما تغيّره دورة اختبار لا يجوز أن يتسرب إلى التي تليها. سطر واحد يعزل المقابض المحيطية الأربعة — الثقافة والساعة وسجل المنسّقات العام وقالب التكافؤ المحيطي — ويعيدها عند الخروج، حتى لو خرج النطاق عبر استثناء:
+ما تغيّره دورة اختبار لا يجوز أن يتسرب إلى التي تليها. سطر واحد يعزل المقابض المحيطية — الثقافة والساعة والتنسيق (المنسّقات والحدود) وexpectation النطاق النشط وقالب التكافؤ المحيطي — ويعيدها عند الخروج، حتى لو خرج النطاق عبر استثناء:
 
 <div dir="ltr">
 
@@ -187,16 +210,18 @@ using(AssertionIsolation.Isolate()) {
     AssertionCulture.Current = new CultureInfo("ar");
     AssertionClock.Current = new ManualClock(epoch);
     AssertionConfiguration.Formatting.AddFormatter(new MoneyFormatter());
+    AssertionConfiguration.Formatting.MaxLines = 20;
+    AssertionScope.Current?.WithExpectation("Expected the invoice");
     AssertionConfiguration.Equivalency.Modify(o => o.StrictOrdering = true);
 
     // ... اختبار يتوقع كل ما سبق ...
 }
-// تعود الثقافة والساعة والمنسّقات والتكافؤ إلى قيمها قبل النطاق.
+// تعود الثقافة والساعة والتنسيق وexpectation النطاق والتكافؤ إلى قيمها قبل النطاق.
 ```
 
 </div>
 
-والنطاقات المتداخلة تعيد كلٌّ لقطته، وأجزاء الثقافة والساعة والتكافؤ لكل تدفق غير متزامن (<code dir="ltr">AsyncLocal</code>) فتظل الاختبارات المتوازية معزولة. وثمة حدّان مقصودان: سجل المنسّقات عام على مستوى العملية (يمنع النطاق التسرب المتسلسل، أما الاختبارات المتوازية التي تعدّله فيلزمها تنسيق خاص)، والحالة خارج مكتبتنا — كـ<code dir="ltr">CultureInfo.CurrentCulture</code> للخيط — لا تُلمَس.
+والنطاقات المتداخلة تعيد كلٌّ لقطته، وأجزاء الثقافة والساعة وexpectation والتكافؤ لكل تدفق غير متزامن (<code dir="ltr">AsyncLocal</code>) فتظل الاختبارات المتوازية معزولة. وثمة حدّان مقصودان: سجل المنسّقات عام على مستوى العملية (يمنع النطاق التسرب المتسلسل، أما الاختبارات المتوازية التي تعدّله فيلزمها تنسيق خاص)، والحالة خارج مكتبتنا — كـ<code dir="ltr">CultureInfo.CurrentCulture</code> للخيط — لا تُلمَس.
 
 وترك الحالة الخارجية دون لمس ليس تقصيرًا بل حدّ مسؤولية: المكتبة تحفظ ما تملكه، ولا تدّعي ملكية ما ليس لها؛ فمن يعزل <code dir="ltr">CurrentCulture</code> ثم يفاجأ بأن مكتبة توكيدات أعادتها إلى وضع آخر، سيفقد الثقة بكل ما تعزله. والاستثناء الوحيد المعلن — سجل المنسّقات المشترك — مسجَّل بصراحة في هذا الفصل، ويُعالج بالتزام المؤلِّف: اختبار يعدّل السجل عليه أن يعيده أو يتوقع عزلًا متسلسلًا فقط.
 
@@ -226,6 +251,37 @@ public static class TestSetup {
 لكتَّاب التوكيدات المخصَّصة، تستخدم المكتبة <code dir="ltr">[CustomAssertion]</code> (و<code dir="ltr">[CustomAssertionsAssembly]</code> للتجميعات) لتحديد حدود التوكيد بوضوح. وتستهلكها المضيفات والأدوات عبر <code dir="ltr">CustomAssertionDiscovery</code>: <code dir="ltr">FindMarkedAssemblies()</code> يحدِّد تجميعات التوسعة، و<code dir="ltr">FindCustomAssertions(assembly)</code> يتحقَّق من أعضائها الموسومة (يجب أن تكون static علنية)، و<code dir="ltr">RunInitializers(assembly)</code> ينفِّذ إعدادات محرِّكها — بما فيها التجميعات المحمَّلة بعد أول توكيد، التي يفوِّتها الفحص التلقائي. أما التوسعة اليومية فتبقى عبر <code dir="ltr">AssertionScope</code> وحده؛ وواجهة الاكتشاف لتركيب تلك التوسعات.
 
 والفكرة أن التوسعة تُصنِّف نفسها: تجميعة تحتوي توكيدات مخصَّصة تعلن ذلك، فيستطيع مضيف أن يجدها ويفحص عقدها ويشغّل مهيئتها دون أن يعرف أسماءها مسبقًا. وهذا ما يجعل مكتبة التوكيدات قابلة للامتداد من خارج ملحقها دون فتح باب الاكتشاف العشوائي في كل مكان.
+
+<code dir="ltr">AssertionsBase</code> هو الأساس المدعوم لصنف توكيد مخصَّص. اشتقّ منه، واستخدم <code dir="ltr">Expression</code> للتعبير الملتقط للموضوع، ونادِ <code dir="ltr">Fail</code> بالرسالة الكاملة مع سبب <code dir="ltr">because</code> الاختياري؛ يضيف <code dir="ltr">Fail</code> السبب ويوجّه الفشل إلى النطاق النشط (وتحتفظ الإخفاقات المهيكلة بالتعبير والقيمتين الفعلية والمتوقعة من أجل <code dir="ltr">SoftAssertions</code>):
+
+<div dir="ltr">
+
+```csharp
+public sealed class OrderAssertions(Order order, string? expression = null)
+    : AssertionsBase(expression, "order") {
+    public AndConstraint<OrderAssertions> BePaid(string? because = null, params object?[] becauseArgs) {
+        if(order.Status != "Paid") {
+            Fail($"Expected {Expression} to be paid, but found {FormatValue(order.Status)}.", because, becauseArgs);
+        }
+
+        return new(this);
+    }
+}
+```
+
+</div>
+
+يُنسِّق <code dir="ltr">FormatValue</code> بالثقافة الثابتة وبحدود التنسيق النشطة، فتبقى الرسائل المخصَّصة مستقرة بايتًا ببايت. ويُلاحظ <code dir="ltr">AssertionScope.Current</code> المجمِّع المحيط عندما يحتاج مساعد إلى فحص الإخفاقات أو إضافة رسالة منسَّقة مسبقًا. ولإعادة تسمية الموضوع داخل كتلة، اضبط expectation على النطاق؛ ترثه النطاقات المتداخلة دون تعديل الأب، ويعيد <code dir="ltr">ClearExpectation()</code> الافتراضي:
+
+<div dir="ltr">
+
+```csharp
+using (new AssertionScope().WithExpectation("Expected order #42")) {
+    order.Should().BePaid(); // Expected order #42 to be paid, but found Pending.
+}
+```
+
+</div>
 
 ## ٩.٥ ساعات حتمية: اختبر الوقت بلا نوم
 

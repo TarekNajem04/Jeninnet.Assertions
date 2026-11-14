@@ -130,8 +130,9 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
   ordered by edit distance and capped at three, across dictionary keys, JSON properties and paths, and
   string collections.
 - **One-line test isolation** — `using(AssertionIsolation.Isolate())` snapshots and restores culture, clock,
-  the global formatter registry, and the ambient equivalency template, so settings changed inside a test never
-  leak into the next; restoration survives exceptions and nested scopes.
+  the global formatter registry with its formatting limits, the active scope's expectation, and the ambient
+  equivalency template, so settings changed inside a test never leak into the next; restoration survives
+  exceptions and nested scopes.
 - **Soft assertions** — collect failures across many assertions and report them as a single exception via
   `new SoftAssertions().Collect()` … `ThenReport()`, with no mandatory `using` block; `Failures` exposes the
   structured breakdown (expression, category, actual/expected) and `ToReportJson()` serializes it for CI
@@ -147,7 +148,9 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
   (`Constant` or curved `Exponential`) so long waits back off instead of hammering the subject.
 - **Fully asynchronous** — `ThrowAsync`, `NotThrowAsync`, timeouts, plus synchronous `Throw`, `NotThrow`.
 - **Descriptive failures** — clear messages with invariant formatting, customizable via scoped or global value formatters.
-  Long or multiline strings append an invariant unified diff (`Be`, `BeEquivalentTo`) so the exact change is visible.
+  Formatting limits (`MaxDepth`, `MaxLines`, `MaxEnumerables`, `MaxStringLength`) keep huge values readable, and
+  `WithExpectation` lets custom assertions name the real subject. Long or multiline strings append an invariant
+  unified diff (`Be`, `BeEquivalentTo`) so the exact change is visible.
 - **Measured performance** — a tested invariant guarantees hot verbs (`Be`, `BeTrue`, `Contain`, `HaveCount`)
   allocate nothing for message formatting on the success path (56–128 B on .NET 10 Release) while failures stay
   diagnostic (1.1–52.6 KB), so rich messages never tax green tests.
@@ -431,6 +434,50 @@ flag.Should().BeTrue(); // المتوقع من flag أن يكون true، لكن 
 ```
 
 Arguments (values, counts, sizes) are always formatted invariantly, so messages stay byte-stable across machines; only the surrounding prose is translated. Unknown cultures fall back to English. Adding a language requires no code change: copy `src/.../Localization/Strings.resx` to `Strings.<culture>.resx`, translate the values, and the build produces the satellite assembly automatically. The `because` glue word and multi-failure scope headers are localized too.
+
+## Formatting limits and custom assertions
+
+Failure-message formatting is configurable per scope or globally. Defaults keep historical output:
+`MaxDepth` 10, `MaxLines` 100, `MaxEnumerables` 100, `MaxStringLength` 8,000. Truncation is explicit — a `…`
+marker plus the hidden count:
+
+```csharp
+using(var scope = new AssertionScope()) {
+    scope.Formatting.MaxLines = 20;
+    scope.Formatting.MaxStringLength = 2_000;
+    scope.Formatting.MaxEnumerables = 50;
+    scope.Formatting.RespectRuntimeTypes = true; // opt-in structural collection display
+
+    order.Should().BeEquivalentTo(expected);
+}
+```
+
+`UseLineBreaks = false` collapses multiline values to one line. `RespectRuntimeTypes` formats collections
+structurally (`[1, 2, 3]`) with `MaxDepth`/`MaxEnumerables`/cycle guards; it is off by default so existing
+messages stay unchanged. The same knobs live on `AssertionConfiguration.Formatting` for process-wide defaults.
+
+Custom assertion classes derive from `AssertionsBase`; `Expression` and `FormatValue` are the supported SDK
+surface, while `Fail` appends the `because` clause and routes to the active scope:
+
+```csharp
+public sealed class OrderAssertions(Order order, string? expression = null)
+    : AssertionsBase(expression, "order") {
+    public AndConstraint<OrderAssertions> BePaid(string? because = null, params object?[] becauseArgs) {
+        if(order.Status != "Paid") {
+            Fail($"Expected {Expression} to be paid, but found {FormatValue(order.Status)}.", because, becauseArgs);
+        }
+        return new(this);
+    }
+}
+
+using(new AssertionScope().WithExpectation("Expected order #42")) {
+    order.Should().BePaid(); // Expected order #42 to be paid, but found Pending.
+}
+```
+
+`WithExpectation` replaces the leading `Expected {expression}` phrase for the current scope (nested scopes
+inherit it without mutating the parent); `ClearExpectation()` restores the default. `AssertionIsolation.Isolate()`
+restores formatting options and the active scope's expectation along with the other ambient state.
 
 ## Snapshots
 

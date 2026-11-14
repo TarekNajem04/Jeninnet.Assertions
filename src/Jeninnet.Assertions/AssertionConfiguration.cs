@@ -8,7 +8,7 @@ namespace Jeninnet.Assertions;
 
 /// <summary>Process-wide assertion configuration. Set once at startup (ideally from an assembly initializer); read on every assertion.</summary>
 public static class AssertionConfiguration {
-    /// <summary>Gets the global value formatters consulted after scoped formatters.</summary>
+    /// <summary>Gets the global value formatters and formatting limits consulted after scoped options.</summary>
     public static ValueFormatterOptions Formatting { get; } = new();
 
     /// <summary>Gets the global equivalency defaults.</summary>

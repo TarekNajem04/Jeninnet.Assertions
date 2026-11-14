@@ -227,6 +227,96 @@ public class AssertionScopeTests {
         Assert.ThrowsExactly<ArgumentNullException>(act);
     }
 
+    [TestMethod]
+    public void Scope_WithExpectation_ReplacesTheSubjectPrefix() {
+        using var scope = new AssertionScope().WithExpectation("Expected order.Total");
+
+        const int total = 9;
+        total.Should().Be(10);
+
+        var failures = scope.Discard();
+        Assert.HasCount(1, failures);
+        Assert.AreEqual("Expected order.Total to be 10, but found 9.", failures[0]);
+    }
+
+    [TestMethod]
+    public void Scope_ClearExpectation_RestoresTheDefaultMessage() {
+        using var scope = new AssertionScope().WithExpectation("Expected order.Total");
+        scope.ClearExpectation();
+
+        const int total = 9;
+        total.Should().Be(10);
+
+        var failures = scope.Discard();
+        Assert.HasCount(1, failures);
+        Assert.AreEqual("Expected total to be 10, but found 9.", failures[0]);
+        Assert.IsNull(scope.Expectation);
+    }
+
+    [TestMethod]
+    public void Scope_WithNullExpectation_Throws() {
+        using var scope = new AssertionScope();
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => scope.WithExpectation(null!));
+    }
+
+    [TestMethod]
+    public void Scope_NestedScopes_InheritExpectationWithoutMutatingTheParent() {
+        using var outer = new AssertionScope().WithExpectation("Expected order.Total");
+        using(var inner = new AssertionScope()) {
+            Assert.AreEqual("Expected order.Total", inner.Expectation);
+
+            inner.WithExpectation("Expected order.Lines");
+            const int lines = 1;
+            lines.Should().Be(2);
+
+            var innerFailures = inner.Discard();
+            Assert.HasCount(1, innerFailures);
+            Assert.AreEqual("Expected order.Lines to be 2, but found 1.", innerFailures[0]);
+        }
+
+        Assert.AreEqual("Expected order.Total", outer.Expectation);
+
+        const int total = 9;
+        total.Should().Be(10);
+        var outerFailures = outer.Discard();
+        Assert.HasCount(1, outerFailures);
+        Assert.AreEqual("Expected order.Total to be 10, but found 9.", outerFailures[0]);
+    }
+
+    [TestMethod]
+    public void Scope_Expectation_AppliesToStructuredFailures() {
+        var soft = new SoftAssertions();
+        soft.Collect();
+        AssertionScope.Current!.WithExpectation("Expected order.Total");
+
+        const int total = 9;
+        total.Should().Be(10);
+
+        var failure = soft.Failures.Single();
+        Assert.AreEqual("Expected order.Total to be 10, but found 9.", failure.Message);
+        Assert.ThrowsExactly<AssertionFailedException>(soft.ThenReport);
+    }
+
+    [TestMethod]
+    public void Scope_WithExpectation_AppliesToArabicMessages() {
+        var before = AssertionCulture.Current;
+        try {
+            AssertionCulture.Current = new CultureInfo("ar");
+            using var scope = new AssertionScope().WithExpectation("المتوقع من order.Total");
+
+            const int total = 9;
+            total.Should().Be(10);
+
+            var failures = scope.Discard();
+            Assert.HasCount(1, failures);
+            Assert.AreEqual("المتوقع من order.Total أن يكون 10، لكن وُجد 9.", failures[0]);
+        }
+        finally {
+            AssertionCulture.Current = before;
+        }
+    }
+
     private sealed class RecordingAssertionStrategy : IAssertionStrategy {
         private readonly List<string> _messages = [];
 

@@ -68,8 +68,15 @@ internal static partial class StringKeys {
     internal const string EVENT_NOT_PROPERTY_CHANGE = "EVENT_NOT_PROPERTY_CHANGE";
 
     internal const string MESSAGE_BECAUSE = "MESSAGE_BECAUSE";
+    internal const string MESSAGE_EXPECTED = "MESSAGE_EXPECTED";
 
     internal const string SCOPE_ASSERTION_FAILURES = "SCOPE_ASSERTION_FAILURES";
+
+    internal const string FORMATTING_TRUNCATED_LINES = "FORMATTING_TRUNCATED_LINES";
+    internal const string FORMATTING_TRUNCATED_CHARS = "FORMATTING_TRUNCATED_CHARS";
+    internal const string FORMATTING_TRUNCATED_ITEMS = "FORMATTING_TRUNCATED_ITEMS";
+    internal const string FORMATTING_MAX_DEPTH = "FORMATTING_MAX_DEPTH";
+    internal const string FORMATTING_CYCLE = "FORMATTING_CYCLE";
 
     internal const string ACTION_EVENTUALLY_SATISFY = "ACTION_EVENTUALLY_SATISFY";
     internal const string ACTION_EVENTUALLY_SATISFY_ERROR = "ACTION_EVENTUALLY_SATISFY_ERROR";

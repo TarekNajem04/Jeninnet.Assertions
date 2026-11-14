@@ -127,6 +127,52 @@ public class ExtensibilityTests {
         // Marker-only fixture: the attribute presence is the assertion under test.
     }
 
+    [TestMethod]
+    public void CustomAssertion_Sdk_ReportsTheSubjectAndBecause() {
+        var assertions = new OrderAssertions(new Order("Pending"), "order");
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => {
+            assertions.BePaid("the invoice is due");
+        });
+
+        Assert.AreEqual("Expected order to be paid, but found Pending because the invoice is due.", ex.Message);
+    }
+
+    [TestMethod]
+    public void CustomAssertion_Sdk_UsesTheScopeExpectation() {
+        using var scope = new AssertionScope().WithExpectation("Expected order #42");
+        var assertions = new OrderAssertions(new Order("Pending"), "order");
+
+        assertions.BePaid();
+
+        var failures = scope.Discard();
+        Assert.HasCount(1, failures);
+        Assert.AreEqual("Expected order #42 to be paid, but found Pending.", failures[0]);
+    }
+
+    [TestMethod]
+    public void CustomAssertion_Sdk_Chains() {
+        var assertions = new OrderAssertions(new Order("Paid"), "order");
+
+        var constraint = assertions.BePaid();
+
+        Assert.AreSame(assertions, constraint.And);
+    }
+
+    private sealed class Order(string status) {
+        public string Status { get; } = status;
+    }
+
+    private sealed class OrderAssertions(Order order, string? expression = null) : AssertionsBase(expression, "order") {
+        public AndConstraint<OrderAssertions> BePaid(string? because = null, params object?[] becauseArgs) {
+            if(order.Status != "Paid") {
+                Fail($"Expected {Expression} to be paid, but found {FormatValue(order.Status)}.", because, becauseArgs);
+            }
+
+            return new(this);
+        }
+    }
+
     private sealed class Widget(string label) {
         public string Label { get; } = label;
     }

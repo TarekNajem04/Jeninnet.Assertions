@@ -9,6 +9,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Formatting limits on `ValueFormatterOptions`: `MaxDepth`, `MaxLines`, `MaxEnumerables`,
+  `MaxStringLength`, `UseLineBreaks`, and opt-in `RespectRuntimeTypes`. Limits truncate with an
+  explicit `…` marker and hidden count, preserve line endings by default, and guard structural
+  collection display against depth, item-count, and reference cycles. `Copy`/`RestoreFrom` carry
+  the limits alongside formatters.
+- Custom assertion SDK: `AssertionsBase.Expression` and `FormatValue` are now accessible to
+  derived assertion classes, `AssertionScope.WithExpectation`/`ClearExpectation`/`Expectation`
+  replace the leading subject phrase per scope (inherited by nested scopes, never mutating the
+  parent), and `AssertionIsolation.Isolate()` restores formatting options plus the active scope's
+  expectation.
 - URI assertions through `Uri.Should()`: absolute/relative kind, scheme, host, port, path,
   fragment, query parameters (with `Which` and exact values), and path-boundary `BeBaseOf`.
 - Custom comparable values: `Should()` now accepts any `IComparable<T>` and returns

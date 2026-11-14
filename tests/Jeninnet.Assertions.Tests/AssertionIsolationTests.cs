@@ -170,6 +170,45 @@ public class AssertionIsolationTests {
         }
     }
 
+    /// <summary>
+    /// Mutates the process-wide formatting options; excluded from parallel execution so it cannot race other
+    /// formatter tests (the registry itself is global by design).
+    /// </summary>
+    [TestMethod, DoNotParallelize]
+    public void FormattingOptions_RestoreTheProcessWideLimits() {
+        var originalLines = AssertionConfiguration.Formatting.MaxLines;
+        var originalTypes = AssertionConfiguration.Formatting.RespectRuntimeTypes;
+        try {
+            AssertionConfiguration.Formatting.MaxLines = 3;
+            AssertionConfiguration.Formatting.RespectRuntimeTypes = true;
+
+            using(AssertionIsolation.Isolate()) {
+                AssertionConfiguration.Formatting.MaxLines = 1;
+                AssertionConfiguration.Formatting.RespectRuntimeTypes = false;
+                Assert.AreEqual(1, AssertionConfiguration.Formatting.MaxLines);
+            }
+
+            Assert.AreEqual(3, AssertionConfiguration.Formatting.MaxLines);
+            Assert.IsTrue(AssertionConfiguration.Formatting.RespectRuntimeTypes);
+        }
+        finally {
+            AssertionConfiguration.Formatting.MaxLines = originalLines;
+            AssertionConfiguration.Formatting.RespectRuntimeTypes = originalTypes;
+        }
+    }
+
+    [TestMethod]
+    public void Expectation_RestoresOnDispose() {
+        using var scope = new AssertionScope().WithExpectation("Expected first");
+
+        using(AssertionIsolation.Isolate()) {
+            scope.WithExpectation("Expected second");
+            Assert.AreEqual("Expected second", scope.Expectation);
+        }
+
+        Assert.AreEqual("Expected first", scope.Expectation);
+    }
+
     private sealed class Basket(List<string> tags) {
         public List<string> Tags { get; } = tags;
     }

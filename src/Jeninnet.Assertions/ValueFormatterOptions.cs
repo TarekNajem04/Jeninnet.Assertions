@@ -6,12 +6,32 @@
 //
 namespace Jeninnet.Assertions;
 
-/// <summary>Holds an ordered set of <see cref="IValueFormatter"/> instances used when rendering failure messages.</summary>
+/// <summary>Holds the ordered value formatters and rendering limits used when producing failure messages.</summary>
 /// <remarks>Each <see cref="AssertionScope"/> owns an instance (nested scopes inherit a snapshot of the parent);
-/// <see cref="AssertionConfiguration.Formatting"/> holds the process-wide instance.</remarks>
+/// <see cref="AssertionConfiguration.Formatting"/> holds the process-wide instance. Limits are applied after
+/// formatters and never affect comparison.</remarks>
 public sealed class ValueFormatterOptions {
     private readonly List<IValueFormatter> _formatters = [];
     private readonly object _sync = new();
+
+    /// <summary>Gets or sets the maximum collection nesting depth used when <see cref="RespectRuntimeTypes"/> is enabled.</summary>
+    public int MaxDepth { get; set; } = 10;
+
+    /// <summary>Gets or sets the maximum number of rendered lines (zero or less disables the limit).</summary>
+    public int MaxLines { get; set; } = 100;
+
+    /// <summary>Gets or sets the maximum number of items rendered from one enumerable (zero or less disables the limit).</summary>
+    public int MaxEnumerables { get; set; } = 100;
+
+    /// <summary>Gets or sets the maximum rendered string length (zero or less disables the limit).</summary>
+    public int MaxStringLength { get; set; } = 8_000;
+
+    /// <summary>Gets or sets whether formatter output may span multiple lines.</summary>
+    public bool UseLineBreaks { get; set; } = true;
+
+    /// <summary>Gets or sets whether structured collection formatting uses runtime element shapes instead of <c>ToString()</c>.</summary>
+    /// <remarks>Defaults to <see langword="false"/> so existing messages keep their historical display.</remarks>
+    public bool RespectRuntimeTypes { get; set; }
 
     /// <summary>Adds a formatter. Earlier formatters win over later ones.</summary>
     /// <param name="formatter">The formatter to add.</param>
@@ -64,19 +84,37 @@ public sealed class ValueFormatterOptions {
         }
     }
 
-    /// <summary>Replaces the registered formatters with a previously captured snapshot (used by <see cref="AssertionIsolation"/>).</summary>
-    /// <param name="formatters">The snapshot to restore.</param>
-    internal void RestoreFrom(IReadOnlyList<IValueFormatter> formatters) {
+    /// <summary>Replaces the registered formatters and limits with a previously captured snapshot (used by <see cref="AssertionIsolation"/>).</summary>
+    /// <param name="options">The snapshot to restore.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="options"/> is <see langword="null"/>.</exception>
+    internal void RestoreFrom(ValueFormatterOptions options) {
+        if(options is null) {
+            throw new ArgumentNullException(nameof(options));
+        }
+
+        MaxDepth = options.MaxDepth;
+        MaxLines = options.MaxLines;
+        MaxEnumerables = options.MaxEnumerables;
+        MaxStringLength = options.MaxStringLength;
+        UseLineBreaks = options.UseLineBreaks;
+        RespectRuntimeTypes = options.RespectRuntimeTypes;
         lock(_sync) {
             _formatters.Clear();
-            _formatters.AddRange(formatters);
+            _formatters.AddRange(options.Snapshot());
         }
     }
 
-    /// <summary>Copies the registered formatters into a new instance.</summary>
+    /// <summary>Copies the formatters and limits into a new instance.</summary>
     /// <returns>The copy.</returns>
     internal ValueFormatterOptions Copy() {
-        var copy = new ValueFormatterOptions();
+        var copy = new ValueFormatterOptions {
+            MaxDepth = MaxDepth,
+            MaxLines = MaxLines,
+            MaxEnumerables = MaxEnumerables,
+            MaxStringLength = MaxStringLength,
+            UseLineBreaks = UseLineBreaks,
+            RespectRuntimeTypes = RespectRuntimeTypes,
+        };
         lock(_sync) {
             copy._formatters.AddRange(_formatters);
         }

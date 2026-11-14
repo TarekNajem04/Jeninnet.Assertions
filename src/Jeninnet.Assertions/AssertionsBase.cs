@@ -26,8 +26,15 @@ public interface IAssertions {
 public abstract class AssertionsBase(string? expression, string fallbackName) : IAssertions {
     private readonly string _expression = expression ?? fallbackName;
 
-    /// <summary>Gets the caller expression naming the subject under test (for extensions in this assembly).</summary>
-    internal string Expression => _expression;
+    /// <summary>Gets the caller expression naming the subject under test (for same-assembly extensions and custom assertion classes).</summary>
+    protected internal string Expression => _expression;
+
+    /// <summary>Formats a value invariantly and with the active scope's formatting limits.</summary>
+    /// <remarks>Use this from custom assertions instead of culture-sensitive interpolation so failure messages stay deterministic.</remarks>
+    /// <typeparam name="T">The value type.</typeparam>
+    /// <param name="value">The value to format for display.</param>
+    /// <returns>The invariant display text.</returns>
+    protected static string FormatValue<T>(T value) => AssertionScope.FormatInvariant(value);
 
     /// <summary>
     /// Reports an assertion failure by appending the <paramref name="because"/> reason to <paramref name="message"/>
