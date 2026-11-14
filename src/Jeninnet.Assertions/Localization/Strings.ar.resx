@@ -1037,6 +1037,36 @@
   <data name="DICT_HAVE_EXACTLY" xml:space="preserve">
     <value>المتوقع من {0} أن يحتوي {1} من العناصر، لكن وُجد {2}.</value>
   </data>
+  <data name="DICT_HAVE_MORE_THAN_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أكثر من {1} من العناصر، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_HAVE_MORE_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أكثر من {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_HAVE_AT_LEAST_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأقل {1} من العناصر، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_HAVE_AT_LEAST" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأقل {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_HAVE_FEWER_THAN_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أقل من {1} من العناصر، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_HAVE_FEWER_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي أقل من {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_HAVE_AT_MOST_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأكثر {1} من العناصر، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_HAVE_AT_MOST" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي على الأكثر {1} من العناصر، لكن وُجد {2}.</value>
+  </data>
+  <data name="DICT_CONTAIN_SINGLE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً واحداً بالضبط، لكن القاموس null.</value>
+  </data>
+  <data name="DICT_CONTAIN_SINGLE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي عنصراً واحداً بالضبط، لكن وُجد {1}.</value>
+  </data>
   <data name="DICT_BE_EMPTY_NULL" xml:space="preserve">
     <value>المتوقع من {0} أن يكون فارغاً، لكن القاموس null.</value>
   </data>

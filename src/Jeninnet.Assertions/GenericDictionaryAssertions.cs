@@ -6,13 +6,36 @@
 //
 namespace Jeninnet.Assertions;
 
-/// <summary>Provides assertion methods for verifying <see cref="IDictionary{TKey, TValue}"/> dictionaries.</summary>
+/// <summary>Provides assertion methods for verifying dictionaries and sequences of key/value pairs.</summary>
 /// <typeparam name="TKey">The type of keys in the dictionary.</typeparam>
 /// <typeparam name="TValue">The type of values in the dictionary.</typeparam>
-/// <param name="value">The dictionary to assert on.</param>
-/// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
-public partial class GenericDictionaryAssertions<TKey, TValue>(IDictionary<TKey, TValue>? value, string? expression = null) : AssertionsBase(expression, "dictionary") {
-    private readonly IDictionary<TKey, TValue>? _value = value;
+public partial class GenericDictionaryAssertions<TKey, TValue> : AssertionsBase {
+    private readonly IReadOnlyDictionary<TKey, TValue>? _value;
+
+    /// <summary>Creates assertions for a mutable dictionary.</summary>
+    /// <param name="value">The dictionary to assert on.</param>
+    /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
+    public GenericDictionaryAssertions(IDictionary<TKey, TValue>? value, string? expression = null)
+        : this(Adapt(value), expression) {
+    }
+
+    private GenericDictionaryAssertions(IReadOnlyDictionary<TKey, TValue>? value, string? expression)
+        : base(expression, "dictionary") {
+        _value = value;
+    }
+
+    /// <summary>Creates assertions for a sequence of key/value pairs, materializing it once.</summary>
+    /// <param name="value">The sequence to assert on.</param>
+    /// <param name="expression">The caller expression naming the subject under test.</param>
+    /// <returns>Assertions over a single materialized dictionary view.</returns>
+    internal static GenericDictionaryAssertions<TKey, TValue> FromPairs(IEnumerable<KeyValuePair<TKey, TValue>>? value, string? expression = null) =>
+        new(value is null ? null : Materialize(value), expression);
+
+    private static IReadOnlyDictionary<TKey, TValue>? Adapt(IDictionary<TKey, TValue>? value) =>
+        value is null ? null : value as IReadOnlyDictionary<TKey, TValue> ?? new DictionaryAdapter(value);
+
+    private static IReadOnlyDictionary<TKey, TValue> Materialize(IEnumerable<KeyValuePair<TKey, TValue>> value) =>
+        value as IReadOnlyDictionary<TKey, TValue> ?? new MaterializedPairsView(value);
 
     private static string Format<TItem>(TItem item) => item is null ? "<null>" : $"'{AssertionScope.FormatInvariant(item)}'";
 
@@ -168,4 +191,65 @@ public partial class GenericDictionaryAssertions<TKey, TValue>(IDictionary<TKey,
     }
 
     private static string JoinItems<TItem>(IEnumerable<TItem> items) => "[" + string.Join(", ", items.Select(static x => $"'{AssertionScope.FormatInvariant(x)}'")) + "]";
+
+    /// <summary>Adapts a mutable dictionary to the read-only view used by every assertion.</summary>
+    /// <param name="dictionary">The dictionary to wrap.</param>
+    private sealed class DictionaryAdapter(IDictionary<TKey, TValue> dictionary) : IReadOnlyDictionary<TKey, TValue> {
+        public int Count => dictionary.Count;
+
+        public IEnumerable<TKey> Keys => dictionary.Keys;
+
+        public IEnumerable<TValue> Values => dictionary.Values;
+
+        public TValue this[TKey key] => dictionary[key];
+
+        public bool ContainsKey(TKey key) => dictionary.ContainsKey(key);
+
+        public bool TryGetValue(TKey key, out TValue value) {
+            if(dictionary.TryGetValue(key, out var found)) {
+                value = found;
+                return true;
+            }
+
+            value = default!;
+            return false;
+        }
+
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() => dictionary.GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
+
+    /// <summary>Materializes a pair sequence once and exposes it as a read-only dictionary view.</summary>
+    /// <param name="pairs">The sequence to materialize.</param>
+    private sealed class MaterializedPairsView(IEnumerable<KeyValuePair<TKey, TValue>> pairs) : IReadOnlyDictionary<TKey, TValue> {
+        private readonly KeyValuePair<TKey, TValue>[] _items = [.. pairs];
+
+        public int Count => _items.Length;
+
+        public IEnumerable<TKey> Keys => _items.Select(static pair => pair.Key);
+
+        public IEnumerable<TValue> Values => _items.Select(static pair => pair.Value);
+
+        public TValue this[TKey key] =>
+            TryGetValue(key, out var value) ? value : throw new KeyNotFoundException($"The key '{AssertionScope.FormatInvariant(key)}' was not found.");
+
+        public bool ContainsKey(TKey key) => _items.Any(pair => EqualityComparer<TKey>.Default.Equals(pair.Key, key));
+
+        public bool TryGetValue(TKey key, out TValue value) {
+            var index = Array.FindIndex(_items, pair => EqualityComparer<TKey>.Default.Equals(pair.Key, key));
+            if(index < 0) {
+                value = default!;
+                return false;
+            }
+
+            value = _items[index].Value;
+            return true;
+        }
+
+        public IEnumerator<KeyValuePair<TKey, TValue>> GetEnumerator() =>
+            ((IEnumerable<KeyValuePair<TKey, TValue>>)_items).GetEnumerator();
+
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+    }
 }

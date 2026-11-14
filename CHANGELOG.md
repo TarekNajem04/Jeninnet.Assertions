@@ -16,6 +16,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- Dictionary assertions now accept `IReadOnlyDictionary<TKey,TValue>` implementations (including
+  immutable and frozen dictionaries) and any `IEnumerable<KeyValuePair<TKey,TValue>>` sequence.
+  Lazy pair sequences are materialized once, and `ContainSingle()` exposes the sole pair through
+  `Which`. Count bounds (`HaveCountGreaterThan`, `HaveCountGreaterThanOrEqualTo`,
+  `HaveCountLessThan`, `HaveCountLessThanOrEqualTo`) mirror collection assertions.
 - Reflection assertions now cover type kinds, names, generic parameters, identity, and
   inheritance shortcuts (`BeClass`, `BeRecord`, `BeImmutable`, `BeSameAs`, `BeAssignableFrom`,
   `BeSubclassOf`, `BeBaseOf`, `HaveName`, `HaveFullName`, `HaveNamespace`, `HaveBaseType`,

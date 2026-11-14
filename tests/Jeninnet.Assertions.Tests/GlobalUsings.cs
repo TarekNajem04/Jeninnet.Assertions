@@ -4,7 +4,10 @@
 // Repository: https://github.com/TarekNajem04/Jeninnet.Assertions/
 // Licensed under the MIT License.
 //
+global using System.Collections.Frozen;
 global using System.Collections.Generic;
+global using System.Collections.Immutable;
+global using System.Collections.ObjectModel;
 global using System.ComponentModel;
 global using System.Globalization;
 global using System.Linq.Expressions;

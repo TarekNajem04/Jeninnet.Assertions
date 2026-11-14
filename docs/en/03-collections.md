@@ -97,6 +97,20 @@ var price = prices.Should().ContainValue(1.20m).Which;
 
 `.Which` also works here, returning the matching value so you can continue asserting.
 
+The same vocabulary works for read-only dictionaries and pair projections:
+
+```csharp
+IReadOnlyDictionary<string, decimal> readOnly = prices;
+readOnly.Should().HaveCountGreaterThan(1).And.ContainKey("apple");
+
+var one = new Dictionary<string, decimal> { ["apple"] = 1.20m };
+var pair = one.Should().ContainSingle().Which;
+pair.Key.Should().Be("apple");
+pair.Value.Should().Be(1.20m);
+```
+
+Pair sequences are materialized once, so a lazy `Select`/`GroupBy` source is not re-enumerated by each assertion. Count bounds mirror collections: `HaveCountGreaterThan`, `HaveCountGreaterThanOrEqualTo`, `HaveCountLessThan`, and `HaveCountLessThanOrEqualTo`. A separate `WhoseValue` constraint is unnecessary: `ContainValue(...).Which` returns the value, and `ContainSingle().Which` returns the whole key/value pair.
+
 When a lookup fails because of a typo, the message suggests the nearest existing names (`Did you mean 'apple'?`, ordered by edit distance and capped at three) — dictionary keys, JSON properties and paths, and string collections all diagnose themselves.
 
 ## 3.7 Spans: `Span<T>` and `ReadOnlySpan<T>`

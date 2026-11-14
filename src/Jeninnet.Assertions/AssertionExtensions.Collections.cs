@@ -53,6 +53,22 @@ public static partial class AssertionExtensions {
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
     public static GenericDictionaryAssertions<TKey, TValue> Should<TKey, TValue>(this IDictionary<TKey, TValue>? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
+    /// <summary>Creates a <see cref="GenericDictionaryAssertions{TKey, TValue}"/> for a read-only dictionary or any sequence of key/value pairs.</summary>
+    /// <remarks>
+    /// This overload covers <see cref="IReadOnlyDictionary{TKey, TValue}"/> implementations such as
+    /// <c>ImmutableDictionary</c> and <c>FrozenDictionary</c>, plus projections that produce
+    /// <see cref="KeyValuePair{TKey, TValue}"/> sequences. Lazy sequences are materialized once in the
+    /// constructor so a single assertion never re-enumerates the source. A dedicated
+    /// <c>IReadOnlyDictionary</c> overload is deliberately omitted because it would be ambiguous with the
+    /// <c>IDictionary</c> overload for concrete types that implement both interfaces.
+    /// </remarks>
+    /// <typeparam name="TKey">The type of keys in the pairs.</typeparam>
+    /// <typeparam name="TValue">The type of values in the pairs.</typeparam>
+    /// <param name="value">The sequence of key/value pairs to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static GenericDictionaryAssertions<TKey, TValue> Should<TKey, TValue>(this IEnumerable<KeyValuePair<TKey, TValue>>? value, [CallerArgumentExpression(nameof(value))] string? expression = null) =>
+        GenericDictionaryAssertions<TKey, TValue>.FromPairs(value, expression);
+
     /// <summary>Creates an <see cref="ObjectAssertions{T}"/> for the given object.</summary>
     /// <param name="value">The object to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>

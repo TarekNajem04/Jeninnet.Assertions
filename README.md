@@ -244,8 +244,9 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <details>
 <summary><strong>Dictionaries</strong> · Should()</summary>
 
-- Lookups: `ContainKey(s)`, `ContainValue` (+`Which`), `ContainValues` (+`Which`), `Contain(key, value)`
-- Counts: (+`NotHaveCount`, `NotHaveSameCount`, `HaveSameCount`)
+- Entry points: mutable dictionaries, read-only dictionary implementations (including immutable and frozen dictionaries), and key/value-pair sequences (materialized once)
+- Lookups: `ContainKey(s)`, `ContainValue` (+`Which`), `ContainValues` (+`Which`), `Contain(key, value)`, `ContainSingle` (+`Which`)
+- Counts: `HaveCount`, `HaveCountGreaterThan`, `HaveCountGreaterThanOrEqualTo`, `HaveCountLessThan`, `HaveCountLessThanOrEqualTo` (+`NotHaveCount`, `NotHaveSameCount`, `HaveSameCount`)
 - Negatives: `NotContain` (key/pair/pairs/key+value), `NotContainValue(s)`
 - Equality: `Equal` / `NotEqual` / `BeEqualTo` / `NotBeEqualTo` (+pair-predicate overloads)
 - Sets: `BeSubsetOf` / `NotBeSubsetOf`, `BeSupersetOf`, `BeProperSubsetOf` / `SupersetOf`

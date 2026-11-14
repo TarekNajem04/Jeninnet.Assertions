@@ -125,6 +125,24 @@ var price = prices.Should().ContainValue(1.20m).Which;
 
 يعمل <code dir="ltr">.Which</code> هنا أيضًا لتمكين متابعة التوكيد. وللقاموس عقدان يجب الفصل بينهما عند الكتابة: الأسئلة عن المفاتيح، والأسئلة عن القيم، والأسئلة عن اقتران الاثنين معًا. <code dir="ltr">ContainKey</code> يفحص وجود المفتاح وحده، و<code dir="ltr">ContainValue</code> يبحث عن قيمة ما قيمتها كذا دون أن يهم اسم مفتاحها — وهذا سؤال مختلف منطقيًا، ولهذا يستحق توكيدًا منفصلًا حين يكون القصد «هل سُجِّل هذا السعر في مكان ما؟» لا «هل سعر التفاح كذا؟». أما <code dir="ltr">Contain(key, value)</code> فهو السؤال المركَّب، وهو الأكثر تعبيرًا عن نية قراءة الإعدادات: أن يكون للمفتاح بعينه قيمة بعينها.
 
+والمفردات نفسها تعمل مع القواميس للقراءة فقط وإسقاطات الأزواج:
+
+<div dir="ltr">
+
+```csharp
+IReadOnlyDictionary<string, decimal> readOnly = prices;
+readOnly.Should().HaveCountGreaterThan(1).And.ContainKey("apple");
+
+var one = new Dictionary<string, decimal> { ["apple"] = 1.20m };
+var pair = one.Should().ContainSingle().Which;
+pair.Key.Should().Be("apple");
+pair.Value.Should().Be(1.20m);
+```
+
+</div>
+
+تُجمع متتاليات الأزواج مرة واحدة، فلا يُعاد تعداد مصدر <code dir="ltr">Select</code> أو <code dir="ltr">GroupBy</code> الكسول مع كل توكيد. وتطابق حدود العدد حدود المجموعات: <code dir="ltr">HaveCountGreaterThan</code>، <code dir="ltr">HaveCountGreaterThanOrEqualTo</code>، <code dir="ltr">HaveCountLessThan</code>، و<code dir="ltr">HaveCountLessThanOrEqualTo</code>. ولا حاجة إلى قيد <code dir="ltr">WhoseValue</code> منفصل: <code dir="ltr">ContainValue(...).Which</code> يعيد القيمة، و<code dir="ltr">ContainSingle().Which</code> يعيد زوج المفتاح والقيمة كاملًا.
+
 وعند فشل البحث بسبب خطأ كتابي، تقترح الرسالة أقرب الأسماء الموجودة (<code dir="ltr">هل تقصد 'apple'؟</code>، مرتبة بالمسافة وبحدّ ثلاثة) — فمفاتيح القواميس وخصائص JSON ومساراتها والمجموعات النصية تشخِّص نفسها بنفسها. والقيمة هنا عملية بحتة: أكثر انكسارات الوحدات لا تأتي من منطق خاطئ، بل من مفتاحأُخطئ في رسمه — <code dir="ltr">"apple "</code> بمسافة في الآخر، أو <code dir="ltr">"Aplle"</code> بحرفين مقلوبين. اقتراح أقرب الأسماء يحوِّل رسالة «المفتاح غير موجود» إلى رسالة قابلة للتنفيذ، ويوفِّر عليك جولة بحث في الإعدادات.
 
 ## ٣.٧ النطاقات <code dir="ltr">Span&lt;T&gt;</code> و<code dir="ltr">ReadOnlySpan&lt;T&gt;</code>

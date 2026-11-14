@@ -1037,6 +1037,36 @@
   <data name="DICT_HAVE_EXACTLY" xml:space="preserve">
     <value>Expected {0} to contain {1} item(s), but found {2}.</value>
   </data>
+  <data name="DICT_HAVE_MORE_THAN_NULL" xml:space="preserve">
+    <value>Expected {0} to contain more than {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_HAVE_MORE_THAN" xml:space="preserve">
+    <value>Expected {0} to contain more than {1} item(s), but found {2}.</value>
+  </data>
+  <data name="DICT_HAVE_AT_LEAST_NULL" xml:space="preserve">
+    <value>Expected {0} to contain at least {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_HAVE_AT_LEAST" xml:space="preserve">
+    <value>Expected {0} to contain at least {1} item(s), but found {2}.</value>
+  </data>
+  <data name="DICT_HAVE_FEWER_THAN_NULL" xml:space="preserve">
+    <value>Expected {0} to contain fewer than {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_HAVE_FEWER_THAN" xml:space="preserve">
+    <value>Expected {0} to contain fewer than {1} item(s), but found {2}.</value>
+  </data>
+  <data name="DICT_HAVE_AT_MOST_NULL" xml:space="preserve">
+    <value>Expected {0} to contain at most {1} item(s), but dictionary is null.</value>
+  </data>
+  <data name="DICT_HAVE_AT_MOST" xml:space="preserve">
+    <value>Expected {0} to contain at most {1} item(s), but found {2}.</value>
+  </data>
+  <data name="DICT_CONTAIN_SINGLE_NULL" xml:space="preserve">
+    <value>Expected {0} to contain exactly one item, but dictionary is null.</value>
+  </data>
+  <data name="DICT_CONTAIN_SINGLE" xml:space="preserve">
+    <value>Expected {0} to contain exactly one item, but found {1}.</value>
+  </data>
   <data name="DICT_BE_EMPTY_NULL" xml:space="preserve">
     <value>Expected {0} to be empty, but dictionary is null.</value>
   </data>

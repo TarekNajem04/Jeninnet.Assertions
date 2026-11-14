@@ -251,6 +251,25 @@ public partial class LocalizationTests {
         var atKey = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().Contain("a", 2));
         Assert.AreEqual("المتوقع من scores أن تكون قيمته '2' عند المفتاح 'a'، لكن وُجد '1'.", atKey.Message);
 
+        var moreThan = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountGreaterThan(2));
+        Assert.AreEqual("المتوقع من scores أن يحتوي أكثر من 2 من العناصر، لكن وُجد 2.", moreThan.Message);
+
+        var atLeast = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountGreaterThanOrEqualTo(3));
+        Assert.AreEqual("المتوقع من scores أن يحتوي على الأقل 3 من العناصر، لكن وُجد 2.", atLeast.Message);
+
+        var fewerThan = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountLessThan(2));
+        Assert.AreEqual("المتوقع من scores أن يحتوي أقل من 2 من العناصر، لكن وُجد 2.", fewerThan.Message);
+
+        var atMost = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountLessThanOrEqualTo(1));
+        Assert.AreEqual("المتوقع من scores أن يحتوي على الأكثر 1 من العناصر، لكن وُجد 2.", atMost.Message);
+
+        var single = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().ContainSingle());
+        Assert.AreEqual("المتوقع من scores أن يحتوي عنصراً واحداً بالضبط، لكن وُجد 2.", single.Message);
+
+        IReadOnlyDictionary<string, int> readOnly = scores;
+        var readOnlyCount = Assert.ThrowsExactly<AssertionFailedException>(() => readOnly.Should().HaveCount(3));
+        Assert.AreEqual("المتوقع من readOnly أن يحتوي 3 من العناصر، لكن وُجد 2.", readOnlyCount.Message);
+
         var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().BeNull());
         Assert.AreEqual("المتوقع من scores أن يكون null، لكن وُجد 2 من العناصر.", beNull.Message);
 
@@ -278,6 +297,21 @@ public partial class LocalizationTests {
 
         var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotBeNull());
         Assert.AreEqual("المتوقع من missing ألا يكون null، لكن وُجد null.", notBeNull.Message);
+
+        var moreThanNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountGreaterThan(2));
+        Assert.AreEqual("المتوقع من missing أن يحتوي أكثر من 2 من العناصر، لكن القاموس null.", moreThanNull.Message);
+
+        var atLeastNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountGreaterThanOrEqualTo(2));
+        Assert.AreEqual("المتوقع من missing أن يحتوي على الأقل 2 من العناصر، لكن القاموس null.", atLeastNull.Message);
+
+        var fewerThanNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountLessThan(2));
+        Assert.AreEqual("المتوقع من missing أن يحتوي أقل من 2 من العناصر، لكن القاموس null.", fewerThanNull.Message);
+
+        var atMostNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountLessThanOrEqualTo(2));
+        Assert.AreEqual("المتوقع من missing أن يحتوي على الأكثر 2 من العناصر، لكن القاموس null.", atMostNull.Message);
+
+        var singleNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainSingle());
+        Assert.AreEqual("المتوقع من missing أن يحتوي عنصراً واحداً بالضبط، لكن القاموس null.", singleNull.Message);
     }
 
     [TestMethod]

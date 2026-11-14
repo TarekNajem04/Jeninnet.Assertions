@@ -121,6 +121,16 @@ internal static partial class StringKeys {
     internal const string DICT_NOT_BE_NULL = "DICT_NOT_BE_NULL";
     internal const string DICT_HAVE_EXACTLY_NULL = "DICT_HAVE_EXACTLY_NULL";
     internal const string DICT_HAVE_EXACTLY = "DICT_HAVE_EXACTLY";
+    internal const string DICT_HAVE_MORE_THAN_NULL = "DICT_HAVE_MORE_THAN_NULL";
+    internal const string DICT_HAVE_MORE_THAN = "DICT_HAVE_MORE_THAN";
+    internal const string DICT_HAVE_AT_LEAST_NULL = "DICT_HAVE_AT_LEAST_NULL";
+    internal const string DICT_HAVE_AT_LEAST = "DICT_HAVE_AT_LEAST";
+    internal const string DICT_HAVE_FEWER_THAN_NULL = "DICT_HAVE_FEWER_THAN_NULL";
+    internal const string DICT_HAVE_FEWER_THAN = "DICT_HAVE_FEWER_THAN";
+    internal const string DICT_HAVE_AT_MOST_NULL = "DICT_HAVE_AT_MOST_NULL";
+    internal const string DICT_HAVE_AT_MOST = "DICT_HAVE_AT_MOST";
+    internal const string DICT_CONTAIN_SINGLE_NULL = "DICT_CONTAIN_SINGLE_NULL";
+    internal const string DICT_CONTAIN_SINGLE = "DICT_CONTAIN_SINGLE";
     internal const string DICT_BE_EMPTY_NULL = "DICT_BE_EMPTY_NULL";
     internal const string DICT_BE_EMPTY = "DICT_BE_EMPTY";
     internal const string DICT_NOT_BE_EMPTY_NULL = "DICT_NOT_BE_EMPTY_NULL";
