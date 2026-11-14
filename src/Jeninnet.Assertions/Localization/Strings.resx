@@ -866,6 +866,48 @@
   <data name="TYPE_OFFENDER_BE_ABSTRACT" xml:space="preserve">
     <value>Expected {0} to be abstract, but it was not.</value>
   </data>
+  <data name="TYPE_BE_KIND" xml:space="preserve">
+    <value>Expected {0} to have kind {1}, but found {2}.</value>
+  </data>
+  <data name="TYPE_NOT_BE_KIND" xml:space="preserve">
+    <value>Expected {0} not to have kind {1}, but it was.</value>
+  </data>
+  <data name="TYPE_BE_SAME_AS" xml:space="preserve">
+    <value>Expected {0} to be the same instance as {1}, but it was not.</value>
+  </data>
+  <data name="TYPE_NOT_BE_SAME_AS" xml:space="preserve">
+    <value>Expected {0} not to be the same instance as {1}, but it was.</value>
+  </data>
+  <data name="TYPE_BE_ASSIGNABLE_FROM" xml:space="preserve">
+    <value>Expected {0} to be assignable from {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_BE_SUBCLASS_OF" xml:space="preserve">
+    <value>Expected {0} to be a subclass of {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_BE_BASE_OF" xml:space="preserve">
+    <value>Expected {0} to be a base type of {1}, but {2}.</value>
+  </data>
+  <data name="TYPE_HAVE_NAME" xml:space="preserve">
+    <value>Expected {0} to have name '{1}', but found '{2}'.</value>
+  </data>
+  <data name="TYPE_HAVE_FULL_NAME" xml:space="preserve">
+    <value>Expected {0} to have full name '{1}', but found '{2}'.</value>
+  </data>
+  <data name="TYPE_HAVE_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} to be in namespace '{1}', but found '{2}'.</value>
+  </data>
+  <data name="TYPE_HAVE_BASE_TYPE" xml:space="preserve">
+    <value>Expected {0} to have base type {1}, but found {2}.</value>
+  </data>
+  <data name="TYPE_HAVE_GENERIC_PARAMETER" xml:space="preserve">
+    <value>Expected {0} to have {1} generic parameter(s), but found {2}.</value>
+  </data>
+  <data name="TYPE_HAVE_GENERIC_PARAMETER_NAME" xml:space="preserve">
+    <value>Expected {0} to declare a generic parameter named '{1}', but it was not found.</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>Expected {0} not to be decorated with {1} matching the predicate, but it was.</value>
+  </data>
   <data name="METHOD_HAVE_RETURN_TYPE" xml:space="preserve">
     <value>Expected {0} to have return type {1}, but found {2}.</value>
   </data>
@@ -883,6 +925,12 @@
   </data>
   <data name="METHOD_HAVE_ACCESS_MODIFIER" xml:space="preserve">
     <value>Expected {0} to have {1} accessibility, but found {2}.</value>
+  </data>
+  <data name="PROPERTY_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} to be static, but it was not.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} not to be static, but it was.</value>
   </data>
   <data name="PROPERTY_BE_READABLE" xml:space="preserve">
     <value>Expected {0} to be readable, but {1}.</value>
@@ -916,6 +964,21 @@
   </data>
   <data name="CTOR_BE_PUBLIC" xml:space="preserve">
     <value>Expected {0} to be public, but {1}.</value>
+  </data>
+  <data name="CTOR_NOT_BE_PUBLIC" xml:space="preserve">
+    <value>Expected {0} not to be public, but it was.</value>
+  </data>
+  <data name="CTOR_BE_PRIVATE" xml:space="preserve">
+    <value>Expected {0} to be private, but {1}.</value>
+  </data>
+  <data name="CTOR_BE_PROTECTED" xml:space="preserve">
+    <value>Expected {0} to be protected, but {1}.</value>
+  </data>
+  <data name="CTOR_BE_INTERNAL" xml:space="preserve">
+    <value>Expected {0} to be internal, but {1}.</value>
+  </data>
+  <data name="CTOR_BE_STATIC" xml:space="preserve">
+    <value>Expected {0} to be a static constructor, but {1}.</value>
   </data>
   <data name="SELECTOR_HAVE_COUNT" xml:space="preserve">
     <value>Expected selected types to contain {0} item(s), but found {1}.</value>
@@ -2041,6 +2104,66 @@
   </data>
   <data name="MEMBER_NOT_BE_WRITABLE" xml:space="preserve">
     <value>Expected property '{0}' not to be writable, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_ABSTRACT" xml:space="preserve">
+    <value>Expected {0} to be abstract, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_ABSTRACT" xml:space="preserve">
+    <value>Expected {0} not to be abstract, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_OVERRIDE" xml:space="preserve">
+    <value>Expected {0} to be an override, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_OVERRIDE" xml:space="preserve">
+    <value>Expected {0} not to be an override, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_FINAL" xml:space="preserve">
+    <value>Expected {0} to be final (a sealed override), but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_FINAL" xml:space="preserve">
+    <value>Expected {0} not to be final, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_GENERIC" xml:space="preserve">
+    <value>Expected {0} to be generic, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_GENERIC" xml:space="preserve">
+    <value>Expected {0} not to be generic, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_EXTENSION" xml:space="preserve">
+    <value>Expected {0} to be an extension method, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_EXTENSION" xml:space="preserve">
+    <value>Expected {0} not to be an extension method, but it was.</value>
+  </data>
+  <data name="MEMBER_HAVE_PARAMETERS" xml:space="preserve">
+    <value>Expected {0} to have parameters ({1}), but found ({2}).</value>
+  </data>
+  <data name="MEMBER_BE_SAME_AS" xml:space="preserve">
+    <value>Expected {0} to be the same instance as {1}, but it was not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_SAME_AS" xml:space="preserve">
+    <value>Expected {0} not to be the same instance as {1}, but it was.</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_MATCH" xml:space="preserve">
+    <value>Expected {0} to be decorated with {1} matching the predicate, but it did not.</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED_MATCH" xml:space="preserve">
+    <value>Expected {0} not to be decorated with {1} matching the predicate, but it did.</value>
+  </data>
+  <data name="PROPERTY_BE_REQUIRED" xml:space="preserve">
+    <value>Expected {0} to be required, but it was not.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_REQUIRED" xml:space="preserve">
+    <value>Expected {0} not to be required, but it was.</value>
+  </data>
+  <data name="PROPERTY_BE_INIT_ONLY" xml:space="preserve">
+    <value>Expected {0} to be init-only, but it was not.</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_INIT_ONLY" xml:space="preserve">
+    <value>Expected {0} not to be init-only, but it was.</value>
+  </data>
+  <data name="PROPERTY_HAVE_INDEX_PARAMETERS" xml:space="preserve">
+    <value>Expected {0} to have index parameters ({1}), but found ({2}).</value>
   </data>
   <data name="URI_NULL" xml:space="preserve">
     <value>Expected {0} to be a URI, but found &lt;null&gt;.</value>

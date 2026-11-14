@@ -33,6 +33,26 @@ typeof(Order).Should().HaveAccessModifier(AccessModifier.Public);
 
 وكثيرًا ما يكون فحص الختم — <code dir="ltr">BeSealed()</code> — أهم سطر في الملف: النوع غير المختوم يُعلن ضمنا أن الوراثة منه مسموحة، وأن أي سلوك افتراضي فيه قابل للتبديل. فإن لم يكن ذلك مقصودًا معلنًا في التصميم، فيجب أن يحرسه توكيد، لأن السماح غير المقصود بالوراثة يُنشئ عقدًا لا يرضاه أحد.
 
+وشكل النوع وهويته جزء من العقد نفسه:
+
+<div dir="ltr">
+
+```csharp
+typeof(Order).Should().BeClass().And.NotBeInterface().And.NotBeEnum();
+typeof(Order).Should().BeRecord().And.BeImmutable();
+typeof(OrderCache<>).Should().BeGeneric().And.BeNested()
+    .And.HaveGenericParameter(1).And.HaveGenericParameter("T");
+typeof(Order).Should().BeSameAs(typeof(Order));
+typeof(Entity).Should().BeAssignableFrom<Order>();
+typeof(Order).Should().BeSubclassOf<Entity>().And.BeBaseOf<PriorityOrder>();
+typeof(Order).Should().HaveName("Order").And.HaveNamespace("Store.Orders");
+typeof(Order).Should().HaveBaseType(typeof(Entity));
+```
+
+</div>
+
+<code dir="ltr">BeRecord</code> يبحث عن أعضاء السجل المولّدة من المصرّف، و<code dir="ltr">BeImmutable</code> يعتبر الحالة العامة القابلة للتغيير مخالفة. كلاهما heuristic مقصود: يصف السطح العام لا التنفيذ الخاص، ولا يغني عن مراجعة النطاق.
+
 ## ٧.٢ توكيدات الأعضاء: الدوال والخصائص والمنشئات
 
 عندما نريد التحقُّق من عضو بعينه، نستخدم <code dir="ltr">HaveMethod()</code> أو <code dir="ltr">HaveProperty()</code> أو <code dir="ltr">HaveConstructor()</code>، ثم نواصل التفاصيل عبر <code dir="ltr">.Which</code>:
@@ -61,6 +81,26 @@ typeof(Order).Should().HaveConstructor().Which.Should().BePublic();
 بهذا نُمسك بتفاصيل التوقيع بدقة: اسم المعامل ونوعه، ونوع الإرجاع، وهل هو افتراضي أم ثابت، ومستوى الوصول. أي تغيير في إعادة الهيكلة سيُكسر الاختبار فورًا بدلًا من الظهور كخطأ في وقت التشغيل.
 
 القيمة الحقيقية لهذا الأسلوب في إعادة الهيكلة بوجه خاص. النوع العام للدالة لا يكفي عقدًا: نعرف أن <code dir="ltr">Total</code> موجودة، لكن هل معاملها ما زال <code dir="ltr">currency</code> من نوع <code dir="ltr">string</code>؟ هل ما زالت قابلة للتبديل في وراثة مخصَّصة، أم صارت مختومة صامتةً؟ القواعد التي لم تُكتب هي التي تُنسى عند أول ضغط تسليم، والاختبار البنيوي هو المكان الذي تُكتب فيه مرة واحدة وتُنسى بأمان.
+
+ولا تقف بيانات العضو عند التوقيع:
+
+<div dir="ltr">
+
+```csharp
+var save = typeof(OrderRepository).Should().HaveMethod("SaveAsync").Which;
+save.Should().BeOverride().And.NotBeFinal().And.HaveParameters([typeof(Order)]);
+save.Should().BeDecoratedWith<TransactionalAttribute>(static attribute => attribute.Required);
+
+var total = typeof(Order).Should().HaveProperty("Total").Which;
+total.Should().BeRequired().And.BeInitOnly().And.HaveIndexParameters([]);
+
+var constructor = typeof(Order).Should().HaveConstructor(typeof(Guid)).Which;
+constructor.Should().BeInternal().And.NotBePublic().And.HaveParameters([typeof(Guid)]);
+```
+
+</div>
+
+يبقى <code dir="ltr">Return&lt;T&gt;()</code> الفعل الرسمي لنوع الإرجاع. و<code dir="ltr">HaveParameters()</code> يفحص القائمة الموضعية الدقيقة، بينما يفحص <code dir="ltr">HaveParameter(name, type)</code> الاسم والنوع معاً.
 
 ### منع الأعضاء المحظورة
 

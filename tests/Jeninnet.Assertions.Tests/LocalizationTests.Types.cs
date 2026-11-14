@@ -167,6 +167,100 @@ public partial class LocalizationTests {
     }
 
     [TestMethod]
+    public void Arabic_ReflectionMetadataMessages() {
+        using var _ = new ArabicScope();
+
+        var kind = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(IWorker).Should().BeClass());
+        Assert.AreEqual("المتوقع من typeof(IWorker) أن يكون من النوع class، لكن وُجد interface.", kind.Message);
+
+        var name = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveName("Other"));
+        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يكون اسمه 'Other'، لكن وُجد 'SampleWidget'.", name.Message);
+
+        var sameAs = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().NotBeSameAs(typeof(SampleWidget)));
+        Assert.Contains("المتوقع من typeof(SampleWidget) ألا يكون نفس النسخة مثل", sameAs.Message);
+
+        var method = typeof(SampleWidget).Should().HaveMethod("Add").Which;
+        var abstractMethod = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().BeAbstract());
+        Assert.AreEqual("المتوقع من method أن يكون مجرداً، لكنه لم يكن.", abstractMethod.Message);
+
+        var property = typeof(SampleWidget).Should().HaveProperty("Name").Which;
+        var required = Assert.ThrowsExactly<AssertionFailedException>(() => property.Should().BeRequired());
+        Assert.AreEqual("المتوقع من property أن يكون مطلوباً (required)، لكنه لم يكن.", required.Message);
+
+        var constructor = typeof(SampleWidget).Should().HaveConstructor().Which;
+        var privateCtor = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().BePrivate());
+        Assert.AreEqual("المتوقع من constructor أن يكون خاصاً، لكن it was Public.", privateCtor.Message);
+
+        var staticCtor = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().BeStatic());
+        Assert.AreEqual("المتوقع من constructor أن يكون منشئاً ساكناً، لكن it was not.", staticCtor.Message);
+
+        var decorated = Assert.ThrowsExactly<AssertionFailedException>(
+            () => method.Should().BeDecoratedWith<GadgetAttribute>(static _ => true));
+        Assert.AreEqual("المتوقع من method أن يكون موسوماً بـ GadgetAttribute مطابقاً للشرط، لكنه لم يكن.", decorated.Message);
+    }
+
+    [TestMethod]
+    public void Arabic_ReflectionMetadataKeysAreTranslated() {
+        string[] keys = [
+            "TYPE_BE_KIND",
+            "TYPE_NOT_BE_KIND",
+            "TYPE_BE_SAME_AS",
+            "TYPE_NOT_BE_SAME_AS",
+            "TYPE_BE_ASSIGNABLE_FROM",
+            "TYPE_BE_SUBCLASS_OF",
+            "TYPE_BE_BASE_OF",
+            "TYPE_HAVE_NAME",
+            "TYPE_HAVE_FULL_NAME",
+            "TYPE_HAVE_NAMESPACE",
+            "TYPE_HAVE_BASE_TYPE",
+            "TYPE_HAVE_GENERIC_PARAMETER",
+            "TYPE_HAVE_GENERIC_PARAMETER_NAME",
+            "TYPE_NOT_BE_DECORATED_PREDICATE",
+            "MEMBER_BE_ABSTRACT",
+            "MEMBER_NOT_BE_ABSTRACT",
+            "MEMBER_BE_OVERRIDE",
+            "MEMBER_NOT_BE_OVERRIDE",
+            "MEMBER_BE_FINAL",
+            "MEMBER_NOT_BE_FINAL",
+            "MEMBER_BE_GENERIC",
+            "MEMBER_NOT_BE_GENERIC",
+            "MEMBER_BE_EXTENSION",
+            "MEMBER_NOT_BE_EXTENSION",
+            "MEMBER_HAVE_PARAMETERS",
+            "MEMBER_BE_SAME_AS",
+            "MEMBER_NOT_BE_SAME_AS",
+            "MEMBER_BE_DECORATED_MATCH",
+            "MEMBER_NOT_BE_DECORATED_MATCH",
+            "PROPERTY_BE_STATIC",
+            "PROPERTY_NOT_BE_STATIC",
+            "PROPERTY_BE_REQUIRED",
+            "PROPERTY_NOT_BE_REQUIRED",
+            "PROPERTY_BE_INIT_ONLY",
+            "PROPERTY_NOT_BE_INIT_ONLY",
+            "PROPERTY_HAVE_INDEX_PARAMETERS",
+            "CTOR_NOT_BE_PUBLIC",
+            "CTOR_BE_PRIVATE",
+            "CTOR_BE_PROTECTED",
+            "CTOR_BE_INTERNAL",
+            "CTOR_BE_STATIC",
+        ];
+
+        var previous = AssertionCulture.Current;
+        try {
+            AssertionCulture.Current = new CultureInfo("en");
+            var english = keys.ToDictionary(static key => key, AssertionCulture.GetMessage);
+
+            AssertionCulture.Current = new CultureInfo("ar");
+            foreach(var key in keys) {
+                Assert.AreNotEqual(english[key], AssertionCulture.GetMessage(key), key);
+            }
+        }
+        finally {
+            AssertionCulture.Current = previous;
+        }
+    }
+
+    [TestMethod]
     public void Arabic_TypeSelector() {
         using var _ = new ArabicScope();
 

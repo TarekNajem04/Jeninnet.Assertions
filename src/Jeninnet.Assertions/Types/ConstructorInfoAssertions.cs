@@ -9,7 +9,7 @@ namespace Jeninnet.Assertions.Types;
 /// <summary>Provides assertion methods for verifying <see cref="ConstructorInfo"/> metadata.</summary>
 /// <param name="value">The constructor to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
-public class ConstructorInfoAssertions(ConstructorInfo? value, string? expression = null) : AssertionsBase(expression, "constructor") {
+public partial class ConstructorInfoAssertions(ConstructorInfo? value, string? expression = null) : AssertionsBase(expression, "constructor") {
     private readonly ConstructorInfo? _value = value;
 
     /// <summary>Asserts that the constructor is <see langword="null"/>.</summary>
@@ -47,6 +47,14 @@ public class ConstructorInfoAssertions(ConstructorInfo? value, string? expressio
     /// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="type"/> is <see langword="null"/>.</exception>
     /// <exception cref="AssertionFailedException">The constructor is <see langword="null"/> or has no such parameter.</exception>
     public AndConstraint<ConstructorInfoAssertions> HaveParameter(string name, Type type, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        if(type is null) {
+            throw new ArgumentNullException(nameof(type));
+        }
+
         if(!MethodInfoAssertions.HasParameter(_value, name, type)) {
             Fail(Strings.Format(StringKeys.METHOD_HAVE_PARAMETER, Expression, name, type.Name), because, becauseArgs);
         }

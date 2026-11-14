@@ -320,9 +320,9 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <details>
 <summary><strong>Types &amp; assemblies</strong> · Should() / AllTypes.From()</summary>
 
-- Identity and hierarchy: identity (`Be`), interface implementation, base types, static/abstract/sealed, `Reference` / `NotReference`
-- Members: constructors (+default), indexers, conversion operators, explicit members, return types, async/virtual
-- Attributes and modifiers: attributes (+predicates), modifiers, `BeSignedWithPublicKey`
+- Identity and hierarchy: identity (`Be`, `BeSameAs`), kinds (`BeClass`, `BeInterface`, `BeEnum`, `BeDelegate`, `BeValueType`, `BeRecord`, `BeGeneric`, `BeNested`, `BeImmutable`), names (`HaveName`, `HaveFullName`, `HaveNamespace`), inheritance (`BeAssignableFrom`, `BeSubclassOf`, `BeBaseOf`, `HaveBaseType`, `HaveGenericParameter`), interface implementation, static/abstract/sealed, `Reference` / `NotReference`
+- Members: constructors (+default), indexers, conversion operators, explicit members, return types, async/virtual, method `BeAbstract` / `BeOverride` / `BeFinal` / `BeGeneric` / `BeExtension`, property `BeStatic` / `BeAbstract` / `BeOverride` / `BeRequired` / `BeInitOnly` / `HaveIndexParameters`, constructor access (`BePrivate`, `BeProtected`, `BeInternal`, `NotBePublic`) and `BeStatic`, `HaveParameters`
+- Attributes and modifiers: attributes (+predicates on types and members), modifiers, `BeSignedWithPublicKey`
 - Architecture selectors: kinds, namespaces, `ThatSatisfy`, unwrapping
 - Member selectors: `Methods()` / `Properties()` / `Types()` with accessibility, modifier, attribute, return-type filters and offender-reporting assertions
 - Member compatibility: method verbs `Be` / `NotBe(AccessModifier)`, decorated ±predicate, `NotBeAsync`, `NotBeVirtual`; property verbs decorated, `BeVirtual` / `NotBeVirtual`, `NotBeWritable`

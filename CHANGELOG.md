@@ -16,6 +16,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- Reflection assertions now cover type kinds, names, generic parameters, identity, and
+  inheritance shortcuts (`BeClass`, `BeRecord`, `BeImmutable`, `BeSameAs`, `BeAssignableFrom`,
+  `BeSubclassOf`, `BeBaseOf`, `HaveName`, `HaveFullName`, `HaveNamespace`, `HaveBaseType`,
+  `HaveGenericParameter`), plus member metadata: method abstract/override/final/generic/extension,
+  property static/abstract/override/required/init-only/index parameters, constructor
+  private/protected/internal/static access, exact `HaveParameters`, and predicate decorators
+  with identity checks on `MethodInfo`, `PropertyInfo`, and `ConstructorInfo`.
 
 ### Fixed
 

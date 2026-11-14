@@ -49,6 +49,20 @@ internal static partial class StringKeys {
     internal const string TYPE_NOT_BE_DECORATED_OR_INHERIT = "TYPE_NOT_BE_DECORATED_OR_INHERIT";
     internal const string TYPE_OFFENDER_BE_SEALED = "TYPE_OFFENDER_BE_SEALED";
     internal const string TYPE_OFFENDER_BE_ABSTRACT = "TYPE_OFFENDER_BE_ABSTRACT";
+    internal const string TYPE_BE_KIND = "TYPE_BE_KIND";
+    internal const string TYPE_NOT_BE_KIND = "TYPE_NOT_BE_KIND";
+    internal const string TYPE_BE_SAME_AS = "TYPE_BE_SAME_AS";
+    internal const string TYPE_NOT_BE_SAME_AS = "TYPE_NOT_BE_SAME_AS";
+    internal const string TYPE_BE_ASSIGNABLE_FROM = "TYPE_BE_ASSIGNABLE_FROM";
+    internal const string TYPE_BE_SUBCLASS_OF = "TYPE_BE_SUBCLASS_OF";
+    internal const string TYPE_BE_BASE_OF = "TYPE_BE_BASE_OF";
+    internal const string TYPE_HAVE_NAME = "TYPE_HAVE_NAME";
+    internal const string TYPE_HAVE_FULL_NAME = "TYPE_HAVE_FULL_NAME";
+    internal const string TYPE_HAVE_NAMESPACE = "TYPE_HAVE_NAMESPACE";
+    internal const string TYPE_HAVE_BASE_TYPE = "TYPE_HAVE_BASE_TYPE";
+    internal const string TYPE_HAVE_GENERIC_PARAMETER = "TYPE_HAVE_GENERIC_PARAMETER";
+    internal const string TYPE_HAVE_GENERIC_PARAMETER_NAME = "TYPE_HAVE_GENERIC_PARAMETER_NAME";
+    internal const string TYPE_NOT_BE_DECORATED_PREDICATE = "TYPE_NOT_BE_DECORATED_PREDICATE";
 
     internal const string METHOD_HAVE_RETURN_TYPE = "METHOD_HAVE_RETURN_TYPE";
     internal const string METHOD_HAVE_PARAMETER = "METHOD_HAVE_PARAMETER";
@@ -64,6 +78,8 @@ internal static partial class StringKeys {
     internal const string METHOD_RETURN_VOID = "METHOD_RETURN_VOID";
     internal const string METHOD_NOT_RETURN_VOID = "METHOD_NOT_RETURN_VOID";
 
+    internal const string PROPERTY_BE_STATIC = "PROPERTY_BE_STATIC";
+    internal const string PROPERTY_NOT_BE_STATIC = "PROPERTY_NOT_BE_STATIC";
     internal const string PROPERTY_BE_READABLE = "PROPERTY_BE_READABLE";
     internal const string PROPERTY_BE_WRITABLE = "PROPERTY_BE_WRITABLE";
     internal const string PROPERTY_HAVE_ACCESS_MODIFIER = "PROPERTY_HAVE_ACCESS_MODIFIER";
@@ -89,6 +105,11 @@ internal static partial class StringKeys {
 
     internal const string CTOR_BE_NULL = "CTOR_BE_NULL";
     internal const string CTOR_BE_PUBLIC = "CTOR_BE_PUBLIC";
+    internal const string CTOR_NOT_BE_PUBLIC = "CTOR_NOT_BE_PUBLIC";
+    internal const string CTOR_BE_PRIVATE = "CTOR_BE_PRIVATE";
+    internal const string CTOR_BE_PROTECTED = "CTOR_BE_PROTECTED";
+    internal const string CTOR_BE_INTERNAL = "CTOR_BE_INTERNAL";
+    internal const string CTOR_BE_STATIC = "CTOR_BE_STATIC";
 
     internal const string SELECTOR_HAVE_COUNT = "SELECTOR_HAVE_COUNT";
     internal const string SELECTOR_HAVE_METHOD = "SELECTOR_HAVE_METHOD";
@@ -127,6 +148,26 @@ internal static partial class StringKeys {
     internal const string MEMBER_NOT_BE_ASYNC = "MEMBER_NOT_BE_ASYNC";
     internal const string MEMBER_NOT_BE_VIRTUAL = "MEMBER_NOT_BE_VIRTUAL";
     internal const string MEMBER_NOT_BE_WRITABLE = "MEMBER_NOT_BE_WRITABLE";
+    internal const string MEMBER_BE_ABSTRACT = "MEMBER_BE_ABSTRACT";
+    internal const string MEMBER_NOT_BE_ABSTRACT = "MEMBER_NOT_BE_ABSTRACT";
+    internal const string MEMBER_BE_OVERRIDE = "MEMBER_BE_OVERRIDE";
+    internal const string MEMBER_NOT_BE_OVERRIDE = "MEMBER_NOT_BE_OVERRIDE";
+    internal const string MEMBER_BE_FINAL = "MEMBER_BE_FINAL";
+    internal const string MEMBER_NOT_BE_FINAL = "MEMBER_NOT_BE_FINAL";
+    internal const string MEMBER_BE_GENERIC = "MEMBER_BE_GENERIC";
+    internal const string MEMBER_NOT_BE_GENERIC = "MEMBER_NOT_BE_GENERIC";
+    internal const string MEMBER_BE_EXTENSION = "MEMBER_BE_EXTENSION";
+    internal const string MEMBER_NOT_BE_EXTENSION = "MEMBER_NOT_BE_EXTENSION";
+    internal const string MEMBER_HAVE_PARAMETERS = "MEMBER_HAVE_PARAMETERS";
+    internal const string MEMBER_BE_SAME_AS = "MEMBER_BE_SAME_AS";
+    internal const string MEMBER_NOT_BE_SAME_AS = "MEMBER_NOT_BE_SAME_AS";
+    internal const string MEMBER_BE_DECORATED_MATCH = "MEMBER_BE_DECORATED_MATCH";
+    internal const string MEMBER_NOT_BE_DECORATED_MATCH = "MEMBER_NOT_BE_DECORATED_MATCH";
+    internal const string PROPERTY_BE_REQUIRED = "PROPERTY_BE_REQUIRED";
+    internal const string PROPERTY_NOT_BE_REQUIRED = "PROPERTY_NOT_BE_REQUIRED";
+    internal const string PROPERTY_BE_INIT_ONLY = "PROPERTY_BE_INIT_ONLY";
+    internal const string PROPERTY_NOT_BE_INIT_ONLY = "PROPERTY_NOT_BE_INIT_ONLY";
+    internal const string PROPERTY_HAVE_INDEX_PARAMETERS = "PROPERTY_HAVE_INDEX_PARAMETERS";
 
     internal const string STREAM_BE_NULL = "STREAM_BE_NULL";
     internal const string STREAM_NOT_BE_NULL = "STREAM_NOT_BE_NULL";

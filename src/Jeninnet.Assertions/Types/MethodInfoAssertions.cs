@@ -9,7 +9,7 @@ namespace Jeninnet.Assertions.Types;
 /// <summary>Provides assertion methods for verifying <see cref="MethodInfo"/> metadata.</summary>
 /// <param name="value">The method to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
-public class MethodInfoAssertions(MethodInfo? value, string? expression = null) : AssertionsBase(expression, "method") {
+public partial class MethodInfoAssertions(MethodInfo? value, string? expression = null) : AssertionsBase(expression, "method") {
     private readonly MethodInfo? _value = value;
     private const string FOUND_NULL = "found null";
     private const string WAS_NOT = "it was not";
@@ -170,6 +170,14 @@ public class MethodInfoAssertions(MethodInfo? value, string? expression = null) 
     /// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="type"/> is <see langword="null"/>.</exception>
     /// <exception cref="AssertionFailedException">The method is <see langword="null"/> or has no such parameter.</exception>
     public AndConstraint<MethodInfoAssertions> HaveParameter(string name, Type type, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        if(type is null) {
+            throw new ArgumentNullException(nameof(type));
+        }
+
         if(!HasParameter(_value, name, type)) {
             Fail(Strings.Format(StringKeys.METHOD_HAVE_PARAMETER, Expression, name, type.Name), because, becauseArgs);
         }
@@ -244,28 +252,10 @@ public class MethodInfoAssertions(MethodInfo? value, string? expression = null) 
         return new(this);
     }
 
-    /// <summary>Gets the declared accessibility of a method (shared with property accessors).</summary>
-    /// <param name="method">The method to inspect.</param>
+    /// <summary>Gets the declared accessibility of a method or constructor (shared with property accessors and constructors).</summary>
+    /// <param name="method">The method or constructor to inspect.</param>
     /// <returns>The declared <see cref="AccessModifier"/>.</returns>
-    internal static AccessModifier GetAccessModifier(MethodInfo method) {
-        if(method.IsPublic) {
-            return AccessModifier.Public;
-        }
-
-        if(method.IsPrivate) {
-            return AccessModifier.Private;
-        }
-
-        if(method.IsFamilyOrAssembly) {
-            return AccessModifier.ProtectedInternal;
-        }
-
-        if(method.IsFamilyAndAssembly) {
-            return AccessModifier.PrivateProtected;
-        }
-
-        return method.IsFamily ? AccessModifier.Protected : AccessModifier.Internal;
-    }
+    internal static AccessModifier GetAccessModifier(MethodBase method) => ReflectionMetadata.GetAccessModifier(method);
 
     /// <summary>Determines whether a method or constructor declares a parameter with the given name and type (shared with constructor assertions).</summary>
     /// <param name="member">The method or constructor to inspect (may be <see langword="null"/>).</param>
@@ -273,15 +263,5 @@ public class MethodInfoAssertions(MethodInfo? value, string? expression = null) 
     /// <param name="type">The parameter type.</param>
     /// <returns><see langword="true"/> when a parameter matches both the name and the type.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="type"/> is <see langword="null"/>.</exception>
-    internal static bool HasParameter(MethodBase? member, string name, Type type) {
-        if(name is null) {
-            throw new ArgumentNullException(nameof(name));
-        }
-
-        if(type is null) {
-            throw new ArgumentNullException(nameof(type));
-        }
-
-        return member?.GetParameters().Any(parameter => string.Equals(parameter.Name, name, StringComparison.Ordinal) && parameter.ParameterType == type) == true;
-    }
+    internal static bool HasParameter(MethodBase? member, string name, Type type) => ReflectionMetadata.HasParameter(member, name, type);
 }

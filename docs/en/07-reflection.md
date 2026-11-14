@@ -21,6 +21,22 @@ The subtle difference: `BeDecoratedWith()` looks for the attribute on the curren
 
 Access modifiers are expressed via the explicit `AccessModifier` enum (`Public`, `Private`, `Protected`, `Internal`, `ProtectedInternal`, `PrivateProtected`), avoiding brittle string comparisons.
 
+A type's shape and identity are part of the same contract:
+
+```csharp
+typeof(Order).Should().BeClass().And.NotBeInterface().And.NotBeEnum();
+typeof(Order).Should().BeRecord().And.BeImmutable();
+typeof(OrderCache<>).Should().BeGeneric().And.BeNested()
+    .And.HaveGenericParameter(1).And.HaveGenericParameter("T");
+typeof(Order).Should().BeSameAs(typeof(Order));
+typeof(Entity).Should().BeAssignableFrom<Order>();
+typeof(Order).Should().BeSubclassOf<Entity>().And.BeBaseOf<PriorityOrder>();
+typeof(Order).Should().HaveName("Order").And.HaveNamespace("Store.Orders");
+typeof(Order).Should().HaveBaseType(typeof(Entity));
+```
+
+`BeRecord` looks for compiler-generated record members, while `BeImmutable` treats public mutable state as a violation. Both are deliberate heuristics: they describe the public surface, not private implementation, and they do not replace a domain review.
+
 ## 7.2 Members: methods, properties, constructors
 
 To inspect a specific member, use `HaveMethod()`, `HaveProperty()`, or `HaveConstructor()`, then drill into details with `.Which`:
@@ -43,6 +59,22 @@ typeof(Order).Should().HaveConstructor().Which.Should().BePublic();
 ```
 
 This pins signatures precisely: parameter names and types, return types, static/virtual modifiers, and access levels. Any refactoring that changes the contract will break the test immediately instead of surfacing as a runtime surprise.
+
+Member metadata goes beyond the signature:
+
+```csharp
+var save = typeof(OrderRepository).Should().HaveMethod("SaveAsync").Which;
+save.Should().BeOverride().And.NotBeFinal().And.HaveParameters([typeof(Order)]);
+save.Should().BeDecoratedWith<TransactionalAttribute>(static attribute => attribute.Required);
+
+var total = typeof(Order).Should().HaveProperty("Total").Which;
+total.Should().BeRequired().And.BeInitOnly().And.HaveIndexParameters([]);
+
+var constructor = typeof(Order).Should().HaveConstructor(typeof(Guid)).Which;
+constructor.Should().BeInternal().And.NotBePublic().And.HaveParameters([typeof(Guid)]);
+```
+
+`Return<T>()` remains the official return-type verb. `HaveParameters()` checks the exact positional list, while `HaveParameter(name, type)` checks the name and type together.
 
 ### Preventing forbidden members
 
