@@ -187,6 +187,8 @@ env.CreateFiles("one.txt", "two.txt");
 
 Everything lives under `env.Root` and is automatically cleaned up when disposed.
 
+Every path accepted by the environment is relative to `Root`. Absolute paths and `..` traversal outside the root are rejected before any file-system operation; a path such as `nested/../file.txt` is normalized to `Root/file.txt`.
+
 ### Simulating failure conditions
 
 Sometimes you need to test paths where files are locked or directories are inaccessible. The environment helpers simulate these cases without requiring admin privileges:

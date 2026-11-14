@@ -17,3 +17,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `BeApproximately`/`NotBeApproximately` no longer round `decimal` or 64-bit integers through
   `double`; `BigInteger` and 128-bit integers use exact arbitrary-precision differences.
   NaN never approximates a value, and equal infinities compare as approximately equal.
+
+### Security
+
+- `TestEnvironment` now rejects absolute paths and relative paths that escape `Root` before any
+  file-system operation; `CreateTree` and `CreateFiles` validate every path before creating entries.

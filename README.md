@@ -355,7 +355,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <summary><strong>IO</strong> · TestEnvironment</summary>
 
 - Entry: `TestEnvironment`
-- Isolated directories, files, trees, locks, inaccessible simulation
+- Isolated directories, files, trees, locks, inaccessible simulation, and root-contained relative paths
 
 </details>
 

@@ -275,6 +275,8 @@ env.CreateFiles("one.txt", "two.txt");
 
 كل شيء يُنشأ تحت <code dir="ltr">env.Root</code>، وكل شيء يُحذف تلقائيًا عند التخلص من <code dir="ltr">env</code>.
 
+كل مسار يقبله <code dir="ltr">TestEnvironment</code> نسبي إلى <code dir="ltr">Root</code>. تُرفض المسارات المطلقة والمسارات التي تخرج من الجذر عبر <code dir="ltr">..</code> قبل أي عملية على نظام الملفات؛ أما مسار مثل <code dir="ltr">nested/../file.txt</code> فيُطبَّع إلى <code dir="ltr">Root/file.txt</code>.
+
 ### محاكاة حالات الفشل
 
 نحتاج أحيانًا لاختبار ما يحدث حين يكون الملف مقفلًا أو المجلد غير قابل للوصول. هنا تساعد أدوات المحاكاة:

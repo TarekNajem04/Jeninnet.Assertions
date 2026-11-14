@@ -9,6 +9,13 @@ namespace Jeninnet.Assertions.IO;
 /// <summary>
 /// Represents a temporary test environment for file system operations, providing methods to create files and directories, including inaccessible ones, and ensuring cleanup after tests.
 /// </summary>
+/// <remarks>
+/// Every path accepted by this type is relative to <see cref="Root"/> and is normalized before use.
+/// Absolute paths, and relative paths that traverse outside the root, are rejected with
+/// <see cref="ArgumentException"/> before any file-system operation. Path comparison is
+/// case-insensitive on Windows and ordinal elsewhere (conservative on case-insensitive
+/// non-Windows volumes). Symbolic-link escapes are outside this check and are not resolved here.
+/// </remarks>
 public sealed class TestEnvironment : IDisposable {
     private readonly List<string> _createdFiles = [];
     private readonly List<string> _createdDirs = [];
@@ -22,9 +29,40 @@ public sealed class TestEnvironment : IDisposable {
     /// Initializes a new instance of the <see cref="TestEnvironment"/> class, creating a temporary root directory for testing purposes.
     /// </summary>
     public TestEnvironment() {
-        Root = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("n"));
+        Root = Path.GetFullPath(Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("n")));
         Directory.CreateDirectory(Root);
         _createdDirs.Add(Root);
+    }
+
+    /// <summary>Resolves a relative path below the environment root and rejects escapes.</summary>
+    /// <param name="relativePath">The relative path to resolve.</param>
+    /// <param name="parameterName">The caller parameter name used in guard exceptions.</param>
+    /// <returns>The normalized absolute path below <see cref="Root"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
+    private string ResolveInsideRoot(string relativePath, string parameterName) {
+        if(relativePath is null) {
+            throw new ArgumentNullException(parameterName);
+        }
+
+        if(Path.IsPathRooted(relativePath)) {
+            throw new ArgumentException("Path must be relative to the test environment root.", parameterName);
+        }
+
+        var root = Path.GetFullPath(Root);
+        var fullPath = Path.GetFullPath(Path.Combine(root, relativePath));
+        var comparison = RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+            ? StringComparison.OrdinalIgnoreCase
+            : StringComparison.Ordinal;
+        var rootPrefix = root[root.Length - 1] == Path.DirectorySeparatorChar
+            ? root
+            : root + Path.DirectorySeparatorChar;
+
+        if(!string.Equals(fullPath, root, comparison) && !fullPath.StartsWith(rootPrefix, comparison)) {
+            throw new ArgumentException("Path must stay inside the test environment root.", parameterName);
+        }
+
+        return fullPath;
     }
 
     /// <summary>
@@ -32,8 +70,10 @@ public sealed class TestEnvironment : IDisposable {
     /// </summary>
     /// <param name="relative">The relative path of the directory to create.</param>
     /// <returns>Return the full path of the created directory.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="relative"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relative"/> is absolute or escapes the root.</exception>
     public string CreateDirectory(string relative) {
-        var full = Path.Combine(Root, relative);
+        var full = ResolveInsideRoot(relative, nameof(relative));
         Directory.CreateDirectory(full);
         _createdDirs.Add(full);
         return full;
@@ -46,12 +86,9 @@ public sealed class TestEnvironment : IDisposable {
     /// <param name="contents">The contents to write to the file.</param>
     /// <returns>Return the full path of the created file.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
     public string CreateFile(string relativePath, string? contents = "") {
-        if(relativePath is null) {
-            throw new ArgumentNullException(nameof(relativePath));
-        }
-
-        var fullPath = Path.Combine(Root, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        var fullPath = ResolveInsideRoot(relativePath, nameof(relativePath));
         // Combined paths always have a directory; the operator is redundant on netstandard2.0
         // (unannotated reference assemblies) while modern targets ignore it.
         Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
@@ -65,28 +102,50 @@ public sealed class TestEnvironment : IDisposable {
     /// </summary>
     /// <param name="relativePaths">The relative paths of the files to create.</param>
     /// <exception cref="ArgumentNullException"><paramref name="relativePaths"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Any path is absolute or escapes the root; no file is created in that case.</exception>
     public void CreateFiles(params string[] relativePaths) {
         if(relativePaths is null) {
             throw new ArgumentNullException(nameof(relativePaths));
         }
 
-        foreach(var p in relativePaths) {
-            CreateFile(p);
+        // Validate every path before creating the first file, so an escaping path cannot
+        // leave a partially created set behind.
+        foreach(var relativePath in relativePaths) {
+            _ = ResolveInsideRoot(relativePath, nameof(relativePaths));
+        }
+
+        foreach(var relativePath in relativePaths) {
+            CreateFile(relativePath);
         }
     }
 
     /// <summary>
     /// Returns the absolute path by combining the test environment's root directory with the specified relative paths.
     /// </summary>
-    /// <param name="relative">The relative paths to combine with the root directory.</param>
-    /// <returns>The absolute path.</returns>
-    public string Abs(params string[] relative) => Path.Combine([Root, .. relative]);
+    /// <param name="relative">The relative path parts to combine with the root directory.</param>
+    /// <returns>The normalized absolute path below <see cref="Root"/>.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="relative"/> or one of its parts is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">A part is absolute or the combined path escapes the root.</exception>
+    public string Abs(params string[] relative) {
+        if(relative is null) {
+            throw new ArgumentNullException(nameof(relative));
+        }
+
+        if(relative.Any(static part => part is null)) {
+            throw new ArgumentNullException(nameof(relative));
+        }
+
+        var combined = relative.Length == 0 ? string.Empty : Path.Combine(relative);
+        return ResolveInsideRoot(combined, nameof(relative));
+    }
 
     /// <summary>
     /// Creates a directory at the specified relative path and sets it to be inaccessible by setting its attributes to ReadOnly and System.
     /// </summary>
     /// <param name="relativePath">The relative path of the directory to make inaccessible.</param>
     /// <returns>Return the full path of the created directory.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
     public string CreateInaccessibleDirectory(string relativePath) {
         var path = CreateDirectory(relativePath);
         SetInaccessibleDirectory(relativePath);
@@ -98,12 +157,9 @@ public sealed class TestEnvironment : IDisposable {
     /// </summary>
     /// <param name="relativePath">The relative path of the directory to make inaccessible.</param>
     /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
     public void SetInaccessible(string relativePath) {
-        if(relativePath is null) {
-            throw new ArgumentNullException(nameof(relativePath));
-        }
-
-        var target = Path.Combine(Root, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        var target = ResolveInsideRoot(relativePath, nameof(relativePath));
 
         if(!Directory.Exists(target)) {
             Directory.CreateDirectory(target);
@@ -122,8 +178,10 @@ public sealed class TestEnvironment : IDisposable {
     /// Sets the specified directory to be inaccessible by setting its attributes to ReadOnly and System.
     /// </summary>
     /// <param name="relativePath">The relative path of the directory to make inaccessible.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
     public void SetInaccessibleDirectory(string relativePath) {
-        var targetPath = Abs(relativePath);
+        var targetPath = ResolveInsideRoot(relativePath, nameof(relativePath));
 
         if(!Directory.Exists(targetPath)) {
             Directory.CreateDirectory(targetPath);
@@ -185,12 +243,9 @@ public sealed class TestEnvironment : IDisposable {
     /// <param name="contents">The contents to write to the file.</param>
     /// <returns>A FileStream for the created file.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
     public FileStream CreateLockedFile(string relativePath, string? contents = "") {
-        if(relativePath is null) {
-            throw new ArgumentNullException(nameof(relativePath));
-        }
-
-        var fullPath = Path.Combine(Root, relativePath.Replace('/', Path.DirectorySeparatorChar));
+        var fullPath = ResolveInsideRoot(relativePath, nameof(relativePath));
         // Combined paths always have a directory; the operator is redundant on netstandard2.0
         // (unannotated reference assemblies) while modern targets ignore it.
         Directory.CreateDirectory(Path.GetDirectoryName(fullPath)!);
@@ -214,13 +269,20 @@ public sealed class TestEnvironment : IDisposable {
     /// <param name="files">A dictionary where keys are relative paths and values are the contents for each file.</param>
     /// <returns>The root path of the created tree.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="files"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException">Any key is absolute or escapes the root; no entry is created in that case.</exception>
+    /// <remarks>All keys are validated before the first entry is created. Cleanup is handled by deleting the root recursively.</remarks>
     public string CreateTree(Dictionary<string, string?> files) {
         if(files is null) {
             throw new ArgumentNullException(nameof(files));
         }
 
+        var resolved = new List<KeyValuePair<string, string?>>(files.Count);
         foreach(var pair in files) {
-            var full = Path.Combine(Root, pair.Key);
+            resolved.Add(new KeyValuePair<string, string?>(ResolveInsideRoot(pair.Key, nameof(files)), pair.Value));
+        }
+
+        foreach(var pair in resolved) {
+            var full = pair.Key;
             // Combined paths always have a directory; the operator is redundant on netstandard2.0
             // (unannotated reference assemblies) while modern targets ignore it.
             var dir = Path.GetDirectoryName(full)!;
@@ -239,10 +301,12 @@ public sealed class TestEnvironment : IDisposable {
     /// <summary>
     /// Asserts that the specified directory is inaccessible by attempting to enumerate its contents.
     /// </summary>
-    /// <param name="relativePath">The relative path of the file to create.</param>
-    /// <exception cref="InvalidOperationException"></exception>
+    /// <param name="relativePath">The relative path of the directory to inspect.</param>
+    /// <exception cref="ArgumentNullException"><paramref name="relativePath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="relativePath"/> is absolute or escapes the root.</exception>
+    /// <exception cref="InvalidOperationException">The directory is still accessible.</exception>
     public void AssertDirectoryInaccessible(string relativePath) {
-        var target = Abs(relativePath);
+        var target = ResolveInsideRoot(relativePath, nameof(relativePath));
 
         try {
             _ = Directory.EnumerateFileSystemEntries(target).FirstOrDefault();
