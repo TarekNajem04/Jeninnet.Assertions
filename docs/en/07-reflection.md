@@ -126,6 +126,28 @@ AllTypes.From(typeof(Order).Assembly)
 
 Selectors compose naturally (`ThatDeriveFrom`, `ThatImplement`, `ThatAreInNamespace`, `ThatAreDecoratedWith`, etc.). The resulting assertions reuse the same vocabulary as single-type assertions (`BeSealed()`, `HaveCount()`, `HaveMethod()`, `HaveProperty()`, ...).
 
+### Dependency and cycle rules
+
+Shape rules are useful; relationship rules are where architecture actually lives. Selectors filter by assembly, visibility, nesting, generic/record/immutability shape, name, assignability, and dependencies (`ThatAreInAssembly`, `ThatArePublic`, `ThatAreInternal`, `ThatAreNested`, `ThatAreGeneric`, `ThatAreRecords`, `ThatAreImmutable`, `ThatHaveName*`, `ThatAreAssignableTo`/`ThatAreAssignableFrom`, `ThatHaveDependencyOn`/`ThatDoNotHaveDependencyOn`). The selector assertions add layer and cycle rules:
+
+```csharp
+var domain = AllTypes.From(typeof(Order).Assembly).ThatAreUnderNamespace("Store.Orders.Domain");
+
+domain.Should().NotDependOn("Store.Orders.Infrastructure");
+domain.Should().OnlyDependOn("Store.Orders.Domain", "System"); // no implicit BCL allowance
+domain.Should().NotDependOnAny("Store.Orders.Infrastructure", "System.Data");
+domain.Should().HaveNoCycles();
+
+AllTypes.From(typeof(Order).Assembly)
+    .ThatAreUnderNamespace("Store.Orders.Domain")
+    .Should().OnlyHavePublicMembers()
+    .And.NotExposeTypes(typeof(SqlConnection));
+```
+
+The dependency graph is reflection-level: base types, interfaces, generic arguments, fields, properties, method/constructor parameters and returns, events, and attribute type references. Method bodies and IL are deliberately **not** read, so a reference that exists only inside a method body is invisible to these rules (a separate IL package is future work). `HaveNoCycles` computes strongly connected components over the selected types and prints concrete paths, capped at ten cycles plus the remaining count. A direct self-typed field or property is a cycle; self-references through generic arguments or compiler-generated equality signatures are not.
+
+`OnlyHavePublicMembers` ignores private implementation details and reports internal/protected surface members. `NotExposeTypes` checks public fields, properties, events, methods, and constructors, including array element types, generic arguments, and generic constraints. The dependency and surface rules report up to ten offenders with reasons instead of only the first failure.
+
 This gives you true **architectural tests** that run in CI like any other test. They only demand attention when they break—and that's exactly when they save you from silent structural drift.
 
 ### Member selectors: methods and properties

@@ -94,6 +94,31 @@ internal static class ReflectionMetadata {
         && type != typeof(MulticastDelegate)
         && typeof(Delegate).IsAssignableFrom(type);
 
+    /// <summary>Checks whether a type is structurally immutable from its public surface.</summary>
+    /// <remarks>Heuristic: public instance fields must be readonly and public instance setters must be init-only
+    /// or absent. Inherited public state is included; private mutable state is ignored. Enums are treated as immutable;
+    /// interfaces, delegates, and static classes are not. This is a structural check, not a proof.</remarks>
+    /// <param name="type">The type to inspect.</param>
+    /// <returns><see langword="true"/> when public fields are readonly and public setters are init-only or absent.</returns>
+    internal static bool IsImmutable(Type type) {
+        if(type.IsEnum) {
+            return true;
+        }
+
+        if(type.IsInterface || IsDelegate(type) || (type.IsAbstract && type.IsSealed)) {
+            return false;
+        }
+
+        var fieldsAreReadOnly = type.GetFields(BindingFlags.Instance | BindingFlags.Public)
+            .All(static field => field.IsInitOnly || field.IsLiteral);
+        if(!fieldsAreReadOnly) {
+            return false;
+        }
+
+        return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
+            .All(static property => property.SetMethod is not { IsPublic: true } || IsInitOnly(property));
+    }
+
     /// <summary>Detects a record class or record struct from compiler-generated members.</summary>
     /// <remarks>Record classes expose <c>&lt;Clone&gt;$</c>; record structs expose a compiler-generated
     /// <c>PrintMembers</c>. Hand-written look-alikes can be misclassified.</remarks>

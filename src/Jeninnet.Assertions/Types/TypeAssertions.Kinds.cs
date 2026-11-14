@@ -447,22 +447,5 @@ public partial class TypeAssertions {
     /// <summary>Checks whether a type is structurally immutable from its public surface.</summary>
     /// <param name="type">The type to inspect.</param>
     /// <returns><see langword="true"/> when public fields are readonly and public setters are init-only or absent.</returns>
-    private static bool IsImmutable(Type type) {
-        if(type.IsEnum) {
-            return true;
-        }
-
-        if(type.IsInterface || ReflectionMetadata.IsDelegate(type) || (type.IsAbstract && type.IsSealed)) {
-            return false;
-        }
-
-        var fieldsAreReadOnly = type.GetFields(BindingFlags.Instance | BindingFlags.Public)
-            .All(static field => field.IsInitOnly || field.IsLiteral);
-        if(!fieldsAreReadOnly) {
-            return false;
-        }
-
-        return type.GetProperties(BindingFlags.Instance | BindingFlags.Public)
-            .All(static property => property.SetMethod is not { IsPublic: true } || ReflectionMetadata.IsInitOnly(property));
-    }
+    private static bool IsImmutable(Type type) => ReflectionMetadata.IsImmutable(type);
 }

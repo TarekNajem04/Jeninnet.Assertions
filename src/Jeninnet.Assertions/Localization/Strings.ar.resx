@@ -917,6 +917,60 @@
   <data name="TYPE_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
     <value>المتوقع من {0} ألا يكون موسوماً بـ {1} مطابقاً للشرط، لكنه كان.</value>
   </data>
+  <data name="ARCH_BE_PUBLIC" xml:space="preserve">
+    <value>المتوقع أن يكون كل نوع محدد عاماً، لكن {0} نوعاً ليس كذلك: {1}.</value>
+  </data>
+  <data name="ARCH_BE_INTERNAL" xml:space="preserve">
+    <value>المتوقع أن يكون كل نوع محدد داخلياً، لكن {0} نوعاً ليس كذلك: {1}.</value>
+  </data>
+  <data name="ARCH_BE_NESTED" xml:space="preserve">
+    <value>المتوقع أن يكون كل نوع محدد متداخلاً، لكن {0} نوعاً ليس كذلك: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_NESTED" xml:space="preserve">
+    <value>المتوقع ألا يكون أي نوع محدد متداخلاً، لكن {0} نوعاً متداخل: {1}.</value>
+  </data>
+  <data name="ARCH_BE_RECORD" xml:space="preserve">
+    <value>المتوقع أن يكون كل نوع محدد سجلاً (record)، لكن {0} نوعاً ليس كذلك: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_RECORD" xml:space="preserve">
+    <value>المتوقع ألا يكون أي نوع محدد سجلاً (record)، لكن {0} نوعاً سجل: {1}.</value>
+  </data>
+  <data name="ARCH_BE_IMMUTABLE" xml:space="preserve">
+    <value>المتوقع أن يكون كل نوع محدد غير قابل للتغيير، لكن {0} نوعاً يعرّض حالة عامة قابلة للتغيير: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_IMMUTABLE" xml:space="preserve">
+    <value>المتوقع ألا يكون أي نوع محدد غير قابل للتغيير، لكن {0} نوعاً كذلك: {1}.</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_STARTING_WITH" xml:space="preserve">
+    <value>المتوقع أن يبدأ اسم كل نوع محدد بـ'{0}'، لكن {1} نوعاً لا يبدأ بها: {2}.</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_ENDING_WITH" xml:space="preserve">
+    <value>المتوقع أن ينتهي اسم كل نوع محدد بـ'{0}'، لكن {1} نوعاً لا ينتهي بها: {2}.</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_MATCHING" xml:space="preserve">
+    <value>المتوقع أن يطابق اسم كل نوع محدد النمط '{0}'، لكن {1} نوعاً لا يطابقه: {2}.</value>
+  </data>
+  <data name="ARCH_NOT_DEPEND_ON" xml:space="preserve">
+    <value>المتوقع ألا يعتمد أي نوع محدد على '{0}'، لكن {1} نوعاً يعتمد عليه: {2}.</value>
+  </data>
+  <data name="ARCH_ONLY_DEPEND_ON" xml:space="preserve">
+    <value>المتوقع أن تعتمد الأنواع المحددة على [{0}] فقط، لكن {1} نوعاً له اعتماديات أخرى: {2}.</value>
+  </data>
+  <data name="ARCH_NOT_DEPEND_ON_ANY" xml:space="preserve">
+    <value>المتوقع ألا يعتمد أي نوع محدد على أي من [{0}]، لكن {1} نوعاً يعتمد عليها: {2}.</value>
+  </data>
+  <data name="ARCH_HAVE_NO_CYCLES" xml:space="preserve">
+    <value>المتوقع ألا تحتوي الأنواع المحددة على دورات اعتماد، لكن وُجدت {0} دورة: {1}.</value>
+  </data>
+  <data name="ARCH_MORE_OFFENDERS" xml:space="preserve">
+    <value>… و{0} أخرى</value>
+  </data>
+  <data name="ARCH_ONLY_PUBLIC_MEMBERS" xml:space="preserve">
+    <value>المتوقع أن يعرّض كل نوع محدد أعضاء عامة أو خاصة فقط، لكن {0} نوعاً لا يفعل: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_EXPOSE_TYPES" xml:space="preserve">
+    <value>المتوقع ألا تعرّض الأنواع المحددة أيًا من [{0}] في واجهتها العامة، لكن {1} نوعاً يفعل: {2}.</value>
+  </data>
   <data name="METHOD_HAVE_RETURN_TYPE" xml:space="preserve">
     <value>المتوقع من {0} أن يكون نوع إرجاعه {1}، لكن وُجد {2}.</value>
   </data>

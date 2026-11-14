@@ -7,7 +7,7 @@
 namespace Jeninnet.Assertions.Types;
 
 /// <summary>Filters a set of types down to an architecture-relevant subset. Each filter returns a new selector.</summary>
-public class TypeSelector : IEnumerable<Type> {
+public partial class TypeSelector : IEnumerable<Type> {
     private readonly Type[] _types;
 
     /// <summary>Creates a selector over <paramref name="types"/>.</summary>

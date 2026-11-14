@@ -164,6 +164,32 @@ AllTypes.From(typeof(Order).Assembly)
 
 تُركَّب المُرشِّحات معًا بطبيعية: <code dir="ltr">ThatDeriveFrom</code>، <code dir="ltr">ThatImplement</code>، <code dir="ltr">ThatAreInNamespace</code>، <code dir="ltr">ThatAreDecoratedWith</code> وغيرها. والنتيجة تستخدم نفس أفعال توكيد النوع المفرد: <code dir="ltr">BeSealed()</code>، <code dir="ltr">HaveCount()</code>، <code dir="ltr">HaveMethod()</code>، <code dir="ltr">HaveProperty()</code>...
 
+### قواعد الاعتماد والدورات
+
+قواعد الشكل مفيدة، لكن قواعد **العلاقة** هي مكان البنية الحقيقي. ترشّح المحددات حسب التجميع والظهور والتداخل والـ generic/records/عدم القابلية للتغيير والاسم وقابلية الإسناد والاعتماد (<code dir="ltr">ThatAreInAssembly</code>، <code dir="ltr">ThatArePublic</code>، <code dir="ltr">ThatAreInternal</code>، <code dir="ltr">ThatAreNested</code>، <code dir="ltr">ThatAreGeneric</code>، <code dir="ltr">ThatAreRecords</code>، <code dir="ltr">ThatAreImmutable</code>، <code dir="ltr">ThatHaveName*</code>، <code dir="ltr">ThatAreAssignableTo</code>/<code dir="ltr">ThatAreAssignableFrom</code>، <code dir="ltr">ThatHaveDependencyOn</code>/<code dir="ltr">ThatDoNotHaveDependencyOn</code>). وتضيف توكيدات المحدد قواعد الطبقات والدورات:
+
+<div dir="ltr">
+
+```csharp
+var domain = AllTypes.From(typeof(Order).Assembly).ThatAreUnderNamespace("Store.Orders.Domain");
+
+domain.Should().NotDependOn("Store.Orders.Infrastructure");
+domain.Should().OnlyDependOn("Store.Orders.Domain", "System"); // لا سماح ضمني بـBCL
+domain.Should().NotDependOnAny("Store.Orders.Infrastructure", "System.Data");
+domain.Should().HaveNoCycles();
+
+AllTypes.From(typeof(Order).Assembly)
+    .ThatAreUnderNamespace("Store.Orders.Domain")
+    .Should().OnlyHavePublicMembers()
+    .And.NotExposeTypes(typeof(SqlConnection));
+```
+
+</div>
+
+رسم الاعتماد انعكاسي: الأنواع الأساسية والواجهات ووسائط generic والحقول والخصائص ومعاملات/إرجاع التوابع والمهيئات والأحداث ومراجع أنواع السمات. أما أجسام التوابع وIL فتُترك **عمدًا** خارج القراءة، لذا يغيب عن هذه القواعد أي مرجع موجود داخل جسم تابع فقط (حزمة IL منفصلة عمل مستقبلي). ويحسب <code dir="ltr">HaveNoCycles</code> المكوّنات المتصلة بقوة بين الأنواع المحددة ويعرض مسارات ملموسة، بحد أقصى عشر دورات مع عدد الباقي. الحقل أو الخاصية ذاتية النوع المباشرة دورة، أما الإشارة الذاتية عبر وسائط generic أو تواقيع المساواة المولّدة فليست دورة.
+
+يتجاهل <code dir="ltr">OnlyHavePublicMembers</code> تفاصيل التنفيذ الخاصة ويعرض الأعضاء الداخلية/المحمية، ويفحص <code dir="ltr">NotExposeTypes</code> الحقول والخصائص والأحداث والتوابع والمهيئات العامة، بما فيها عناصر المصفوفات ووسائط generic وقيودها. وقواعد الاعتماد والسطح تعرض حتى عشرة منتهكين مع أسبابهم بدل أول فشل فقط.
+
 بهذا نحصل على **اختبارات بنيوية حقيقية** تعمل داخل <code dir="ltr">CI</code> كأي اختبار آخر. لا تُقرأ في المراجعة اليومية، وتظهر الحاجة إليها عند أول انحراف بنيوي: يتحول التغيير غير المقصود إلى فشل مرئي في اللحظة التي يُرتكب فيها بدل أن يتراكم بلا ملاحظة. ولاحظ أن عدّ الأنواع في مساحة أسماء ليس تحكُّمًا ميكانيكيًا: كل رقم زائد أو ناقص لهذا العدد هو قرار تصميم حدث في مكان ما، وإجباره على المرور عبر مراجعة واحدة هو وظيفة هذا التوكيد.
 
 ### محددات الأعضاء: التوابع والخصائص

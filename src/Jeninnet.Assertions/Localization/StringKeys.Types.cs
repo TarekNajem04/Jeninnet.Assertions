@@ -64,6 +64,25 @@ internal static partial class StringKeys {
     internal const string TYPE_HAVE_GENERIC_PARAMETER_NAME = "TYPE_HAVE_GENERIC_PARAMETER_NAME";
     internal const string TYPE_NOT_BE_DECORATED_PREDICATE = "TYPE_NOT_BE_DECORATED_PREDICATE";
 
+    internal const string ARCH_BE_PUBLIC = "ARCH_BE_PUBLIC";
+    internal const string ARCH_BE_INTERNAL = "ARCH_BE_INTERNAL";
+    internal const string ARCH_BE_NESTED = "ARCH_BE_NESTED";
+    internal const string ARCH_NOT_BE_NESTED = "ARCH_NOT_BE_NESTED";
+    internal const string ARCH_BE_RECORD = "ARCH_BE_RECORD";
+    internal const string ARCH_NOT_BE_RECORD = "ARCH_NOT_BE_RECORD";
+    internal const string ARCH_BE_IMMUTABLE = "ARCH_BE_IMMUTABLE";
+    internal const string ARCH_NOT_BE_IMMUTABLE = "ARCH_NOT_BE_IMMUTABLE";
+    internal const string ARCH_HAVE_NAME_STARTING_WITH = "ARCH_HAVE_NAME_STARTING_WITH";
+    internal const string ARCH_HAVE_NAME_ENDING_WITH = "ARCH_HAVE_NAME_ENDING_WITH";
+    internal const string ARCH_HAVE_NAME_MATCHING = "ARCH_HAVE_NAME_MATCHING";
+    internal const string ARCH_NOT_DEPEND_ON = "ARCH_NOT_DEPEND_ON";
+    internal const string ARCH_ONLY_DEPEND_ON = "ARCH_ONLY_DEPEND_ON";
+    internal const string ARCH_NOT_DEPEND_ON_ANY = "ARCH_NOT_DEPEND_ON_ANY";
+    internal const string ARCH_HAVE_NO_CYCLES = "ARCH_HAVE_NO_CYCLES";
+    internal const string ARCH_MORE_OFFENDERS = "ARCH_MORE_OFFENDERS";
+    internal const string ARCH_ONLY_PUBLIC_MEMBERS = "ARCH_ONLY_PUBLIC_MEMBERS";
+    internal const string ARCH_NOT_EXPOSE_TYPES = "ARCH_NOT_EXPOSE_TYPES";
+
     internal const string METHOD_HAVE_RETURN_TYPE = "METHOD_HAVE_RETURN_TYPE";
     internal const string METHOD_HAVE_PARAMETER = "METHOD_HAVE_PARAMETER";
     internal const string METHOD_BE_VIRTUAL = "METHOD_BE_VIRTUAL";

@@ -917,6 +917,60 @@
   <data name="TYPE_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
     <value>Expected {0} not to be decorated with {1} matching the predicate, but it was.</value>
   </data>
+  <data name="ARCH_BE_PUBLIC" xml:space="preserve">
+    <value>Expected every selected type to be public, but {0} type(s) are not: {1}.</value>
+  </data>
+  <data name="ARCH_BE_INTERNAL" xml:space="preserve">
+    <value>Expected every selected type to be internal, but {0} type(s) are not: {1}.</value>
+  </data>
+  <data name="ARCH_BE_NESTED" xml:space="preserve">
+    <value>Expected every selected type to be nested, but {0} type(s) are not: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_NESTED" xml:space="preserve">
+    <value>Expected no selected type to be nested, but {0} type(s) are: {1}.</value>
+  </data>
+  <data name="ARCH_BE_RECORD" xml:space="preserve">
+    <value>Expected every selected type to be a record, but {0} type(s) are not: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_RECORD" xml:space="preserve">
+    <value>Expected no selected type to be a record, but {0} type(s) are: {1}.</value>
+  </data>
+  <data name="ARCH_BE_IMMUTABLE" xml:space="preserve">
+    <value>Expected every selected type to be immutable, but {0} type(s) expose mutable public state: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_IMMUTABLE" xml:space="preserve">
+    <value>Expected no selected type to be immutable, but {0} type(s) are: {1}.</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_STARTING_WITH" xml:space="preserve">
+    <value>Expected every selected type name to start with '{0}', but {1} type(s) do not: {2}.</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_ENDING_WITH" xml:space="preserve">
+    <value>Expected every selected type name to end with '{0}', but {1} type(s) do not: {2}.</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_MATCHING" xml:space="preserve">
+    <value>Expected every selected type name to match '{0}', but {1} type(s) do not: {2}.</value>
+  </data>
+  <data name="ARCH_NOT_DEPEND_ON" xml:space="preserve">
+    <value>Expected no selected type to depend on '{0}', but {1} type(s) do: {2}.</value>
+  </data>
+  <data name="ARCH_ONLY_DEPEND_ON" xml:space="preserve">
+    <value>Expected selected types to depend only on [{0}], but {1} type(s) have other dependencies: {2}.</value>
+  </data>
+  <data name="ARCH_NOT_DEPEND_ON_ANY" xml:space="preserve">
+    <value>Expected no selected type to depend on any of [{0}], but {1} type(s) do: {2}.</value>
+  </data>
+  <data name="ARCH_HAVE_NO_CYCLES" xml:space="preserve">
+    <value>Expected the selected types to have no dependency cycles, but found {0} cycle(s): {1}.</value>
+  </data>
+  <data name="ARCH_MORE_OFFENDERS" xml:space="preserve">
+    <value>… and {0} more</value>
+  </data>
+  <data name="ARCH_ONLY_PUBLIC_MEMBERS" xml:space="preserve">
+    <value>Expected every selected type to expose only public or private members, but {0} type(s) do not: {1}.</value>
+  </data>
+  <data name="ARCH_NOT_EXPOSE_TYPES" xml:space="preserve">
+    <value>Expected selected types not to expose any of [{0}] in their public API, but {1} type(s) do: {2}.</value>
+  </data>
   <data name="METHOD_HAVE_RETURN_TYPE" xml:space="preserve">
     <value>Expected {0} to have return type {1}, but found {2}.</value>
   </data>

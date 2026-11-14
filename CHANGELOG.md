@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Architecture assertions v2: reflection-level dependency rules (`NotDependOn`, `OnlyDependOn`,
+  `NotDependOnAny`), `HaveNoCycles` with concrete cycle paths, public-surface rules
+  (`OnlyHavePublicMembers`, `NotExposeTypes`), namespace/name/access/record/immutability assertions,
+  and offender lists capped at ten with the remaining count. Selectors now filter by assembly,
+  visibility, nesting, generics, records, immutability, name patterns, assignability, and dependencies.
+  The graph covers base types, interfaces, generic arguments, members, constructors, events, and
+  attribute references; method bodies and IL remain out of scope for the core package.
 - Formatting limits on `ValueFormatterOptions`: `MaxDepth`, `MaxLines`, `MaxEnumerables`,
   `MaxStringLength`, `UseLineBreaks`, and opt-in `RespectRuntimeTypes`. Limits truncate with an
   explicit `…` marker and hidden count, preserve line endings by default, and guard structural
