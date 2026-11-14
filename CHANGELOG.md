@@ -16,6 +16,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- Snapshot engine v2 adds opt-in naming (`UseFileName`, `UseDirectory`, `UseMethodName`, `UseTypeName`,
+  `UseParameters`/`UseTextForParameters`), stable `UniqueFor*` suffixes, line-ending/whitespace tolerance,
+  JSON `SortProperties`/`IndentSize`, type/member scrubbers, and per-call `AutoVerify`, `DiffTool`, and
+  `DisableDiff`. `MatchSnapshot` now also covers `JsonNode`, `XDocument`, and `XElement`; JSON/XML
+  snapshots are LF-only, and repository attributes pin verified files to UTF-8/LF while ignoring received
+  files. Defaults remain exact and never auto-accept.
 - Task assertions now cover every terminal state without waiting: `BeCompleted`, `NotBeCompleted`,
   `BeCompletedSuccessfully`, `BeFaulted` (exposing the base exception through `Which`), and
   `BeCanceled`. `Task<T>` adds `HaveResult` (exact, predicate, and `Which`) and a successful

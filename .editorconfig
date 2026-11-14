@@ -501,3 +501,10 @@ dotnet_naming_rule.async_method_should_be_async_method.severity = none
 [src/Jeninnet.Assertions.Analyzer/**.cs]
 dotnet_diagnostic.S1192.severity = none
 dotnet_diagnostic.RS1038.severity = none
+
+[*.{received,verified}.{txt,json,xml}]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = false
+trim_trailing_whitespace = false
+indent_size = 2

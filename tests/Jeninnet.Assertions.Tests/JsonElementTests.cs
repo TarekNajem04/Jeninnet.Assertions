@@ -116,7 +116,8 @@ public class JsonElementTests {
         var verified = Path.Combine(directory, "payload.verified.json");
         var element = Element("""{"b":[2,3],"a":1}""");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => element.Should().MatchSnapshot("payload", directory));
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => element.Should().MatchSnapshot("payload", directory, static options => options.SortProperties()));
         Assert.Contains("no verified snapshot exists", ex.Message);
 
         const string expected = "{\n  \"a\": 1,\n  \"b\": [\n    2,\n    3\n  ]\n}";
@@ -124,7 +125,7 @@ public class JsonElementTests {
         Assert.DoesNotContain("\r", File.ReadAllText(received));
 
         File.Move(received, verified);
-        element.Should().MatchSnapshot("payload", directory);
+        element.Should().MatchSnapshot("payload", directory, static options => options.SortProperties());
         Assert.IsFalse(File.Exists(received));
     }
 }

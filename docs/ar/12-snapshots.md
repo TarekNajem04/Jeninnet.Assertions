@@ -28,6 +28,33 @@ order.Should().MatchSnapshot("order", directory, options =>
 
 </div>
 
+### التسمية والتسامح ولقطات البيانات
+
+تبقى التسمية الافتراضية مبنية على التعبير، والمقارنة تامة. ويمكن للمجموعات الكبيرة تفعيل تسمية ومقارنة أغنى:
+
+<div dir="ltr">
+
+```csharp
+node.Should().MatchSnapshot("payload", directory, options => options
+    .UseTypeName()
+    .UseMethodName()
+    .UseTextForParameters("v2")
+    .UniqueForOSPlatform()
+    .UniqueForTargetFramework()
+    .SortProperties()
+    .IndentSize(2)
+    .IgnoreLineEndingDifferences()
+    .AddScrubber(text => text.Replace("42", "<n>", StringComparison.Ordinal)));
+```
+
+</div>
+
+يبقى <code dir="ltr">UseDirectory</code> داخل مجلد اللقطات المُنجَز، ويجب أن يبقى <code dir="ltr">UseFileName</code> اسمًا مجردًا. ولا يعتمد <code dir="ltr">UseParameters</code> على إطار اختبار، لذا يُقرن بـ<code dir="ltr">UseTextForParameters</code> الصريح. لواحق <code dir="ltr">UniqueFor*</code> ثابتة (<code dir="ltr">_win</code>، <code dir="ltr">_net10.0</code>، <code dir="ltr">_x64</code>...) ومعطّلة افتراضيًا.
+
+يرتّب <code dir="ltr">SortProperties</code> مفاتيح JSON تعاوديًا، ويضبط <code dir="ltr">IndentSize</code> مسافة بادئة JSON/XML. أما <code dir="ltr">IgnoreLineEndingDifferences</code> و<code dir="ltr">IgnoreWhiteSpaceDifferences</code> فيخففان المقارنة فقط. وتُفعَّل scrubbers النوع/العضو عندما يطابق الجذر النوع أو يعرّض العضو؛ وهي تحوّل النص المسلسل لا عقد الرسم المفردة.
+
+وتوفر <code dir="ltr">JsonNode</code> و<code dir="ltr">JsonElement</code> و<code dir="ltr">XDocument</code> و<code dir="ltr">XElement</code> جميعها <code dir="ltr">MatchSnapshot</code>؛ وتُكتب ملفات JSON/XML بنهايات LF.
+
 ## 12.2 الوضع الآمن الافتراضي
 
 افتراضيًّا لا يقبل التوكيد أيّ شيء من تلقاء نفسه. حين يغيب ملف <code dir="ltr">.verified</code> يُكتب ملف <code dir="ltr">.received</code> ويفشل الاختبار، ويظهر المحتوى المستلم مباشرةً، والقبول يبقى إعادة تسمية تنفّذها بيدك. وحين يختلف المخرج يُكتب ملف <code dir="ltr">.received</code> أو يُحدَّث ويفشل الاختبار بفرق موحَّد، والقرار نفسه ينتظر مراجعتك للفرق. وحين يتطابقان تمامًا يمرّ الاختبار ويُحذف أي <code dir="ltr">.received</code> قديم، فيعود الزوج إلى حالة واحدة نظيفة.
@@ -64,6 +91,8 @@ JENINNET_SNAPSHOT_UPDATE=1 dotnet test
 
 بعد تحديثٍ جماعيٍّ، اقرأ الفرق قبل الالتزام. <code dir="ltr">JENINNET_SNAPSHOT_UPDATE</code> أداة إعادة تأسيس محلية، لا مفتاحًا لخط أنابيب أخضر. والقيمة بالضبط <code dir="ltr">1</code> هي جوهر الأمان: الرقم الواحد لا يأتي من متغيّر مفعَّل عمومًا، ولا من سلسلة عشوائية، فلا ينقلب الوضع الصارم إلى متسامح بغلطة إعداد واحدة.
 
+وللقطة واحدة، يعمل <code dir="ltr">AutoVerify()</code> كمعادل لكل استدعاء، وهو اختياري بالقدر نفسه ولا يُفعَّل ضمنًا. ويُخفي <code dir="ltr">DisableDiff()</code> الفرق الموحَّد داخل الرسالة، بينما يشغّل <code dir="ltr">DiffTool(path)</code> أداة فرق خارجية محدَّدة صراحةً مع مسارَي verified وreceived عند الاختلاف. لا تعمل أي أداة فرق افتراضيًا، وفشل تشغيلها لا يخفي فشل التوكيد أبدًا.
+
 ## 12.4 ما تخبرك به رسالة الفشل
 
 يحمل مسارا الفشل كل ما يلزم للقرار دون فتح الملفات:
@@ -77,7 +106,7 @@ JENINNET_SNAPSHOT_UPDATE=1 dotnet test
 
 ## 12.5 اللقطات في CI
 
-في خط الأنابيب لا يُضبط <code dir="ltr">JENINNET_SNAPSHOT_UPDATE</code> أبدًا: خطّ الأنابيب لا يقبل شيئًا؛ بل يبلّغ عن الاختلافات ليعالجها إنسان. وتُلتزم ملفات <code dir="ltr">*.verified.*</code> بصيغة <code dir="ltr">LF</code> — عبر <code dir="ltr">eol=lf</code> في <code dir="ltr">.gitattributes</code> — حتى تتطابق المقارنة بايتًا ببايت على أي نظام. ولا يُلتزم <code dir="ltr">*.received.*</code> أبدًا؛ فتعامل معه كمخرج بناء: تجاهله واتركه يُعاد إنشاؤه في التشغيلة الفاشلة التالية. ونقِّ المحتوى المتقلّب قبل التثبيت — GUIDs والطوابع الزمنية ومعرّفات الطلبات — عبر <code dir="ltr">Scrub()</code> ليلتقط المرجع العقدَ لا الضجيج.
+في خط الأنابيب لا يُضبط <code dir="ltr">JENINNET_SNAPSHOT_UPDATE</code> أبدًا: خطّ الأنابيب لا يقبل شيئًا؛ بل يبلّغ عن الاختلافات ليعالجها إنسان. وتُثبَّت ملفات <code dir="ltr">*.verified.{txt,json,xml}</code> على UTF-8/LF في <code dir="ltr">.gitattributes</code> وعلى UTF-8/LF بلا سطر أخير في <code dir="ltr">.editorconfig</code>، حتى تتطابق المقارنة بايتًا ببايت على أي نظام. ولا يُلتزم <code dir="ltr">*.received.*</code> أبدًا؛ فهو مُتجاهَل وموسوم <code dir="ltr">-text</code>، فتعامل معه كمخرج بناء واتركه يُعاد إنشاؤه في التشغيلة الفاشلة التالية. ونقِّ المحتوى المتقلّب قبل التثبيت — GUIDs والطوابع الزمنية ومعرّفات الطلبات — عبر <code dir="ltr">Scrub()</code> ليلتقط المرجع العقدَ لا الضجيج.
 
 ووراء كل سطر من هذه القواعد عطب معروف: اختلاف نهايات الأسطر يكسر اللقطة على نظام لم تعمل عليه من كتبها، وملف <code dir="ltr">.received</code> مُلتزَم يدخل التاريخ كأنه حجة، ومحتوى غير منقّى يجعل اللقطة تفشل بلا تغيير حقيقي ثم تُقبل بلا مراجعة حقيقية — وهي أسوأ نهاية تنتظر لقطة بدأت صارمة.
 

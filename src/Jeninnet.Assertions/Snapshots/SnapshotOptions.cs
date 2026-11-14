@@ -6,11 +6,16 @@
 //
 namespace Jeninnet.Assertions.Snapshots;
 
-/// <summary>Configures snapshot matching (explicit, opt-in text transformations).</summary>
-/// <remarks>Scrubbers run on the received text before comparison and before writing the <c>.received</c>
-/// file, so committed <c>.verified</c> files hold scrubbed content. Nothing is transformed by default.</remarks>
+/// <summary>Configures snapshot matching (explicit, opt-in naming, normalization, and review behavior).</summary>
+/// <remarks>
+/// Every option is opt-in. Scrubbers run before comparison and before writing <c>.received</c>, so committed
+/// <c>.verified</c> files hold scrubbed content. Naming options compose in this order: type, method, base name,
+/// parameter text, then unique suffixes. Nothing is transformed or auto-accepted by default.
+/// </remarks>
 public sealed class SnapshotOptions {
     private readonly List<Func<string, string>> _scrubbers = [];
+    private readonly List<(Type Type, Func<string, string> Scrubber)> _typeScrubbers = [];
+    private readonly List<(string Member, Func<string, string> Scrubber)> _memberScrubbers = [];
 
     /// <summary>Adds a transformation applied to received text (e.g. masking dates or identifiers).</summary>
     /// <param name="scrubber">The transformation (must not be <see langword="null"/>).</param>
@@ -25,6 +30,262 @@ public sealed class SnapshotOptions {
         return this;
     }
 
-    /// <summary>Gets the registered transformations in registration order.</summary>
+    /// <summary>Adds a transformation applied to received text (alias of <see cref="Scrub"/>).</summary>
+    /// <param name="scrubber">The transformation (must not be <see langword="null"/>).</param>
+    /// <returns>This instance for chaining.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="scrubber"/> is <see langword="null"/>.</exception>
+    public SnapshotOptions AddScrubber(Func<string, string> scrubber) => Scrub(scrubber);
+
+    /// <summary>Adds a scrubber applied when the snapshotted object is an instance of <paramref name="type"/>.</summary>
+    /// <remarks>The scrubber runs on the serialized text; it is not a per-node graph transform.</remarks>
+    /// <param name="type">The root runtime type that activates the scrubber.</param>
+    /// <param name="scrubber">The transformation (must not be <see langword="null"/>).</param>
+    /// <returns>This instance for chaining.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="type"/> or <paramref name="scrubber"/> is <see langword="null"/>.</exception>
+    public SnapshotOptions AddScrubberByType(Type type, Func<string, string> scrubber) {
+        if(type is null) {
+            throw new ArgumentNullException(nameof(type));
+        }
+
+        if(scrubber is null) {
+            throw new ArgumentNullException(nameof(scrubber));
+        }
+
+        _typeScrubbers.Add((type, scrubber));
+        return this;
+    }
+
+    /// <summary>Adds a scrubber applied when the snapshotted object exposes a member named <paramref name="memberName"/>.</summary>
+    /// <remarks>The scrubber runs on the serialized text; it is not a per-member graph transform.</remarks>
+    /// <param name="memberName">The member name that activates the scrubber.</param>
+    /// <param name="scrubber">The transformation (must not be <see langword="null"/>).</param>
+    /// <returns>This instance for chaining.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="memberName"/> or <paramref name="scrubber"/> is <see langword="null"/>.</exception>
+    public SnapshotOptions AddScrubberByMember(string memberName, Func<string, string> scrubber) {
+        if(memberName is null) {
+            throw new ArgumentNullException(nameof(memberName));
+        }
+
+        if(scrubber is null) {
+            throw new ArgumentNullException(nameof(scrubber));
+        }
+
+        _memberScrubbers.Add((memberName, scrubber));
+        return this;
+    }
+
+    /// <summary>Uses a relative subdirectory under the resolved snapshots directory.</summary>
+    /// <param name="directory">The relative subdirectory, or <see langword="null"/> to clear it.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseDirectory(string? directory) {
+        Directory = directory;
+        return this;
+    }
+
+    /// <summary>Overrides the snapshot base file name; it must remain a bare file name.</summary>
+    /// <param name="fileName">The base file name, or <see langword="null"/> to use the subject expression.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseFileName(string? fileName) {
+        FileName = fileName;
+        return this;
+    }
+
+    /// <summary>Prefixes the snapshot name with the calling test method name.</summary>
+    /// <param name="enabled">Whether the prefix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseMethodName(bool enabled = true) {
+        UseMethodNameEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Prefixes the snapshot name with the calling test type name.</summary>
+    /// <param name="enabled">Whether the prefix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseTypeName(bool enabled = true) {
+        UseTypeNameEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Includes the explicit <see cref="UseTextForParameters"/> text in the snapshot name.</summary>
+    /// <remarks>Without a test-framework dependency the library cannot infer test parameters; supply their text explicitly.</remarks>
+    /// <param name="enabled">Whether the parameter text is appended.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseParameters(bool enabled = true) {
+        UseParametersEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Sets the text appended when parameter naming is enabled (for example, <c>with-discount</c>).</summary>
+    /// <param name="text">The parameter text, or <see langword="null"/> to append nothing.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseTextForParameters(string? text) {
+        ParametersText = text;
+        return this;
+    }
+
+    /// <summary>Adds the caller assembly name suffix.</summary>
+    /// <param name="enabled">Whether the suffix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UniqueForAssembly(bool enabled = true) {
+        UniqueForAssemblyEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Adds a stable OS suffix (<c>_win</c>, <c>_linux</c>, or <c>_macos</c>).</summary>
+    /// <param name="enabled">Whether the suffix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UniqueForOSPlatform(bool enabled = true) {
+        UniqueForOSPlatformEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Adds a stable runtime suffix derived from <see cref="RuntimeInformation.FrameworkDescription"/>.</summary>
+    /// <param name="enabled">Whether the suffix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UniqueForRuntime(bool enabled = true) {
+        UniqueForRuntimeEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Adds the target framework suffix (<c>_net6.0</c>, <c>_net8.0</c>, <c>_net10.0</c>, or <c>_netstandard2.0</c>).</summary>
+    /// <param name="enabled">Whether the suffix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UniqueForTargetFramework(bool enabled = true) {
+        UniqueForTargetFrameworkEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Adds a stable process architecture suffix (<c>_x64</c>, <c>_x86</c>, <c>_arm64</c>, or <c>_arm</c>).</summary>
+    /// <param name="enabled">Whether the suffix is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UniqueForArchitecture(bool enabled = true) {
+        UniqueForArchitectureEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Ignores CRLF versus LF differences during comparison.</summary>
+    /// <param name="enabled">Whether line-ending differences are ignored.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions IgnoreLineEndingDifferences(bool enabled = true) {
+        IgnoreLineEndingDifferencesEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Collapses whitespace runs during comparison.</summary>
+    /// <param name="enabled">Whether whitespace-only differences are ignored.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions IgnoreWhiteSpaceDifferences(bool enabled = true) {
+        IgnoreWhiteSpaceDifferencesEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Sorts object keys recursively for JSON snapshots during comparison.</summary>
+    /// <param name="enabled">Whether JSON object keys are sorted.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions SortProperties(bool enabled = true) {
+        SortPropertiesEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Sets the indentation width used for JSON/XML snapshot content.</summary>
+    /// <param name="spaces">The number of leading spaces per level (zero or greater).</param>
+    /// <returns>This instance for chaining.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="spaces"/> is negative.</exception>
+    public SnapshotOptions IndentSize(int spaces) {
+        if(spaces < 0) {
+            throw new ArgumentOutOfRangeException(nameof(spaces), "Indent size must not be negative.");
+        }
+
+        IndentSizeValue = spaces;
+        return this;
+    }
+
+    /// <summary>Accepts the received content automatically for this snapshot only when explicitly enabled.</summary>
+    /// <remarks>This is per-call convenience equivalent to the process-wide <c>JENINNET_SNAPSHOT_UPDATE=1</c>; it is never on by default.</remarks>
+    /// <param name="enabled">Whether automatic acceptance is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions AutoVerify(bool enabled = true) {
+        AutoVerifyEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Starts the given diff executable on mismatch (verified and received paths are passed as arguments).</summary>
+    /// <remarks>Nothing is launched unless this option is set. Launch failures never hide the assertion failure.</remarks>
+    /// <param name="executablePath">The diff tool executable path, or <see langword="null"/> to disable it.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions DiffTool(string? executablePath) {
+        DiffToolPath = executablePath;
+        return this;
+    }
+
+    /// <summary>Suppresses the unified diff in mismatch messages.</summary>
+    /// <param name="enabled">Whether the diff is suppressed.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions DisableDiff(bool enabled = true) {
+        DisableDiffEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Gets the registered global transformations in registration order.</summary>
     internal IReadOnlyList<Func<string, string>> Scrubbers => _scrubbers;
+
+    /// <summary>Gets the type-activated transformations.</summary>
+    internal IReadOnlyList<(Type Type, Func<string, string> Scrubber)> TypeScrubbers => _typeScrubbers;
+
+    /// <summary>Gets the member-activated transformations.</summary>
+    internal IReadOnlyList<(string Member, Func<string, string> Scrubber)> MemberScrubbers => _memberScrubbers;
+
+    /// <summary>Gets the relative snapshot subdirectory, when configured.</summary>
+    internal string? Directory { get; private set; }
+
+    /// <summary>Gets the explicit base file name, when configured.</summary>
+    internal string? FileName { get; private set; }
+
+    /// <summary>Gets whether the caller method name prefixes the snapshot name.</summary>
+    internal bool UseMethodNameEnabled { get; private set; }
+
+    /// <summary>Gets whether the caller type name prefixes the snapshot name.</summary>
+    internal bool UseTypeNameEnabled { get; private set; }
+
+    /// <summary>Gets whether explicit parameter text is appended to the snapshot name.</summary>
+    internal bool UseParametersEnabled { get; private set; }
+
+    /// <summary>Gets the explicit parameter text.</summary>
+    internal string? ParametersText { get; private set; }
+
+    /// <summary>Gets whether the caller assembly suffix is enabled.</summary>
+    internal bool UniqueForAssemblyEnabled { get; private set; }
+
+    /// <summary>Gets whether the OS suffix is enabled.</summary>
+    internal bool UniqueForOSPlatformEnabled { get; private set; }
+
+    /// <summary>Gets whether the runtime suffix is enabled.</summary>
+    internal bool UniqueForRuntimeEnabled { get; private set; }
+
+    /// <summary>Gets whether the target-framework suffix is enabled.</summary>
+    internal bool UniqueForTargetFrameworkEnabled { get; private set; }
+
+    /// <summary>Gets whether the architecture suffix is enabled.</summary>
+    internal bool UniqueForArchitectureEnabled { get; private set; }
+
+    /// <summary>Gets whether CRLF/LF differences are ignored.</summary>
+    internal bool IgnoreLineEndingDifferencesEnabled { get; private set; }
+
+    /// <summary>Gets whether whitespace runs are collapsed for comparison.</summary>
+    internal bool IgnoreWhiteSpaceDifferencesEnabled { get; private set; }
+
+    /// <summary>Gets whether JSON object keys are sorted.</summary>
+    internal bool SortPropertiesEnabled { get; private set; }
+
+    /// <summary>Gets the configured indentation width.</summary>
+    internal int IndentSizeValue { get; private set; } = 2;
+
+    /// <summary>Gets whether this call auto-accepts the received content.</summary>
+    internal bool AutoVerifyEnabled { get; private set; }
+
+    /// <summary>Gets the configured diff tool path.</summary>
+    internal string? DiffToolPath { get; private set; }
+
+    /// <summary>Gets whether the unified diff is suppressed.</summary>
+    internal bool DisableDiffEnabled { get; private set; }
 }

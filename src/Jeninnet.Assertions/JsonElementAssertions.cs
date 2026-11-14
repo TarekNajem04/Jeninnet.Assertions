@@ -16,7 +16,6 @@ namespace Jeninnet.Assertions;
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
 public class JsonElementAssertions(JsonElement? value, string? expression = null) : AssertionsBase(expression, "JSON element") {
     private static readonly JsonElement _jsonNull = JsonSerializer.SerializeToElement<object?>(null);
-    private static readonly JsonSerializerOptions _snapshotOptions = new() { WriteIndented = true };
 
     private readonly JsonNode? _node = ParseNode(value, expression);
 
@@ -264,7 +263,8 @@ public class JsonElementAssertions(JsonElement? value, string? expression = null
         string? because = null,
         params object?[] becauseArgs) {
         var options = config?.Invoke(new SnapshotOptions()) ?? new SnapshotOptions();
-        Snapshot.Verify(SerializeDeterministic(_node), snapshotName, snapshotsDirectory, ".json", options, new(Expression, callerFilePath, because, becauseArgs));
+        var json = _node is null ? "null" : _node.ToJsonString(Snapshot.JsonOptions);
+        Snapshot.Verify(json.Replace("\r\n", "\n").Replace('\r', '\n'), snapshotName, snapshotsDirectory, ".json", options, new(Expression, callerFilePath, because, becauseArgs));
         return new(this);
     }
 
@@ -298,36 +298,4 @@ public class JsonElementAssertions(JsonElement? value, string? expression = null
         return document.RootElement.Clone();
     }
 
-    /// <summary>Serializes a node with sorted object keys, two-space indentation, and LF line endings.</summary>
-    /// <param name="node">The node to serialize.</param>
-    /// <returns>The deterministic JSON text.</returns>
-    private static string SerializeDeterministic(JsonNode? node) {
-        var sorted = SortKeys(node);
-        var text = sorted is null ? "null" : sorted.ToJsonString(_snapshotOptions);
-        return text.Replace("\r\n", "\n").Replace('\r', '\n');
-    }
-
-    /// <summary>Recursively rebuilds objects with ordinally sorted keys.</summary>
-    /// <param name="node">The node to sort.</param>
-    /// <returns>A sorted copy of the node.</returns>
-    private static JsonNode? SortKeys(JsonNode? node) {
-        switch(node) {
-            case JsonObject obj:
-                var sorted = new JsonObject();
-                foreach(var property in obj.OrderBy(static property => property.Key, StringComparer.Ordinal)) {
-                    sorted[property.Key] = SortKeys(property.Value);
-                }
-
-                return sorted;
-            case JsonArray array:
-                var copied = new JsonArray();
-                foreach(var item in array) {
-                    copied.Add(SortKeys(item));
-                }
-
-                return copied;
-            default:
-                return node?.DeepClone();
-        }
-    }
 }

@@ -9,7 +9,7 @@ namespace Jeninnet.Assertions.Xml;
 /// <summary>Provides assertion methods for verifying <see cref="XDocument"/> values.</summary>
 /// <param name="value">The document to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
-public class XDocumentAssertions(XDocument? value, string? expression = null) : AssertionsBase(expression, "XML") {
+public partial class XDocumentAssertions(XDocument? value, string? expression = null) : AssertionsBase(expression, "XML") {
     private readonly XDocument? _value = value;
 
     /// <summary>Asserts that the document is <see langword="null"/>.</summary>

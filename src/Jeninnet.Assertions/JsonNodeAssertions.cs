@@ -9,7 +9,7 @@ namespace Jeninnet.Assertions;
 /// <summary>Provides assertion methods for verifying <see cref="JsonNode"/> values (System.Text.Json).</summary>
 /// <param name="value">The JSON node to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
-public class JsonNodeAssertions(JsonNode? value, string? expression = null) : AssertionsBase(expression, "JSON") {
+public partial class JsonNodeAssertions(JsonNode? value, string? expression = null) : AssertionsBase(expression, "JSON") {
     private const int PREVIEW_LENGTH = 120;
     private const int AVAILABLE_NAMES_LIMIT = 10;
     private const int MAX_PATH_RESULTS = 1000;

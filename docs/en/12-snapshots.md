@@ -18,6 +18,29 @@ order.Should().MatchSnapshot("order", directory, options =>
     options.Scrub(s => s.Replace(orderId, "<id>")));      // object → order.verified.json
 ```
 
+### Naming, tolerance, and data snapshots
+
+Defaults keep the existing expression-based name and exact comparison. Larger suites can opt into richer naming and comparison:
+
+```csharp
+node.Should().MatchSnapshot("payload", directory, options => options
+    .UseTypeName()
+    .UseMethodName()
+    .UseTextForParameters("v2")
+    .UniqueForOSPlatform()
+    .UniqueForTargetFramework()
+    .SortProperties()
+    .IndentSize(2)
+    .IgnoreLineEndingDifferences()
+    .AddScrubber(text => text.Replace("42", "<n>", StringComparison.Ordinal)));
+```
+
+`UseDirectory` stays inside the resolved snapshots folder; `UseFileName` must remain a bare name. `UseParameters` has no test-framework dependency, so pair it with explicit `UseTextForParameters`. `UniqueFor*` suffixes are stable (`_win`, `_net10.0`, `_x64`, and so on) and are off by default.
+
+`SortProperties` sorts JSON object keys recursively; `IndentSize` adjusts JSON/XML indentation. `IgnoreLineEndingDifferences` and `IgnoreWhiteSpaceDifferences` relax comparison only. Type/member scrubbers activate when the snapshotted root matches the type or exposes the member; they transform the serialized text, not individual graph nodes.
+
+`JsonNode`, `JsonElement`, `XDocument`, and `XElement` all provide `MatchSnapshot`; JSON and XML files are written with LF endings.
+
 ## 12.2 The safe default
 
 By default the assertion never accepts anything on its own:
@@ -50,6 +73,8 @@ When `JENINNET_SNAPSHOT_UPDATE` is exactly `1`, every `MatchSnapshot()` promotes
 
 After a bulk update, read the diff before committing. `JENINNET_SNAPSHOT_UPDATE` is a local re-baselining tool, not a switch for a green pipeline.
 
+For a single assertion, `AutoVerify()` is the per-call equivalent and is equally opt-in; it is never enabled implicitly. `DisableDiff()` suppresses the inline unified diff, while `DiffTool(path)` launches an explicitly configured external diff executable with the verified and received paths on mismatch. No diff tool runs by default, and a failed launch never hides the assertion failure.
+
 ## 12.4 What the failure tells you
 
 Both failure paths carry everything needed to decide, without opening files:
@@ -62,8 +87,8 @@ You can append a reason with `because`, exactly like every other assertion, and 
 ## 12.5 Snapshots in CI
 
 - **Never set `JENINNET_SNAPSHOT_UPDATE` in CI.** A pipeline accepts nothing; it only reports mismatches for a human to resolve.
-- **Commit `*.verified.*` with `LF`.** Add `eol=lf` for these files in `.gitattributes` so a checkout on any OS compares byte-for-byte identically.
-- **Never commit `*.received.*`.** Treat it like build output: ignore it and let it be recreated on the next failing run.
+- **Commit `*.verified.*` with `LF`.** The repository already pinning `*.verified.{txt,json,xml}` to UTF-8/LF in `.gitattributes` keeps checkouts byte-identical on every OS; `.editorconfig` pins the same files to UTF-8/LF without a final newline.
+- **Never commit `*.received.*`.** `*.received.*` is ignored and marked `-text`; treat it like build output and let it be recreated on the next failing run.
 - **Scrub before you pin.** Mask volatile content (GUIDs, timestamps, request IDs) with `Scrub()` so the baseline captures the contract, not the noise.
 
 ## 12.6 Recap and exercise

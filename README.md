@@ -358,7 +358,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - JSON entry points for JsonNode, JsonElement, and JsonDocument
 - JSON objects/arrays, strings/numbers/booleans/null, UTC-local dates, `HaveProperty` / `NotHaveProperty`
 - JSON paths: `HaveJsonPath` / `HaveJsonPathValues` / `NotHaveJsonPath` (quoted names, wildcards, recursive descent, negative indexes)
-- JSON snapshots: `MatchSnapshot` (deterministic sorted-key JSON with LF)
+- JSON snapshots: `MatchSnapshot` (LF; opt-in `SortProperties` / `IndentSize`)
 
 </details>
 
@@ -440,7 +440,7 @@ Text and JSON values can be pinned against committed baselines:
 order.Should().MatchSnapshot(); // order.verified.txt next to the test source
 ```
 
-The snapshot name defaults to the subject expression (sanitized) and lives in `__snapshots__` beside the calling file unless a directory is passed. A missing baseline writes a `.received` file and fails with the received content inline — rename it to `.verified` to accept; a mismatch overwrites `.received` and shows a unified diff; a match deletes a stale `.received`. Nothing is ever auto-accepted; for bulk re-baselining, set `JENINNET_SNAPSHOT_UPDATE=1` for a single run to promote `.received` to `.verified` (opt-in only, exact value, reviewed in `git diff`). JSON serializes indented with LF endings on every machine; text compares byte-exact, so commit `*.verified.*` with `eol=lf` (e.g. in `.gitattributes`) to keep checkouts stable. Volatile content can be masked with explicit scrubbers: `MatchSnapshot("id", dir, o => o.Scrub(s => s.Replace("42", "<n>")))`. See [chapter 12](docs/en/12-snapshots.md) / [الفصل ١٢](docs/ar/12-snapshots.md).
+The snapshot name defaults to the subject expression (sanitized) and lives in `__snapshots__` beside the calling file unless a directory is passed. A missing baseline writes a `.received` file and fails with the received content inline — rename it to `.verified` to accept; a mismatch overwrites `.received` and shows a unified diff; a match deletes a stale `.received`. Nothing is ever auto-accepted; for bulk re-baselining, set `JENINNET_SNAPSHOT_UPDATE=1` for a single run to promote `.received` to `.verified` (opt-in only, exact value, reviewed in `git diff`). Opt-in naming (`UseMethodName`, `UseTypeName`, `UseTextForParameters`, `UseFileName`, `UseDirectory`), stable `UniqueFor*` suffixes, line-ending/whitespace tolerance, JSON `SortProperties`/`IndentSize`, and per-call `AutoVerify`/`DiffTool`/`DisableDiff` cover larger suites. JSON serializes indented with LF endings on every machine; text compares byte-exact unless tolerance is enabled, so commit `*.verified.*` with `eol=lf` and no final newline (rules are included in `.gitattributes`/`.editorconfig`). Volatile content can be masked with explicit scrubbers: `MatchSnapshot("id", dir, o => o.Scrub(s => s.Replace("42", "<n>")))`. See [chapter 12](docs/en/12-snapshots.md) / [الفصل ١٢](docs/ar/12-snapshots.md).
 
 ## Playground
 
