@@ -1178,6 +1178,93 @@
   <data name="OBJECT_SATISFY_ALL_CONDITIONS" xml:space="preserve">
     <value>المتوقع من {0} أن يحقق جميع الشروط، لكن فشلت الشروط التالية:{1}</value>
   </data>
+  <data name="FILE_EXIST" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موجوداً، لكن {1}.</value>
+  </data>
+  <data name="FILE_NOT_EXIST" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون موجوداً، لكنه وُجد.</value>
+  </data>
+  <data name="FILE_REQUIRE_EXISTS" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون موجوداً، لكن {1}.</value>
+  </data>
+  <data name="FILE_HAVE_NAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون اسمه '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_FULL_NAME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مساره الكامل '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_EXTENSION" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون امتداده '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_DIRECTORY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون في المجلد '{1}'، لكن وُجد '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="FILE_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون طوله {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH_GREATER_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله أكبر من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH_LESS_THAN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون طوله أقل من {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="FILE_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1} بايت.</value>
+  </data>
+  <data name="FILE_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكنه كان.</value>
+  </data>
+  <data name="FILE_BE_READ_ONLY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون للقراءة فقط، لكنه لم يكن.</value>
+  </data>
+  <data name="FILE_NOT_BE_READ_ONLY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون للقراءة فقط، لكنه كان.</value>
+  </data>
+  <data name="FILE_BE_HIDDEN" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مخفياً، لكنه لم يكن.</value>
+  </data>
+  <data name="FILE_NOT_BE_HIDDEN" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون مخفياً، لكنه كان.</value>
+  </data>
+  <data name="FILE_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي السمة {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="FILE_NOT_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>المتوقع من {0} ألا يحتوي السمة {1}، لكنها كانت موجودة.</value>
+  </data>
+  <data name="FILE_HAVE_CREATION_TIME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون وقت إنشائه ضمن {1} من {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="FILE_HAVE_LAST_WRITE_TIME" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون وقت آخر كتابة ضمن {1} من {2}، لكن وُجد {3}.</value>
+  </data>
+  <data name="FILE_BE_PARENT_OF" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون مجلداً أباً لـ {1}، لكنه لم يكن.</value>
+  </data>
+  <data name="FILE_ACCESS_DENIED" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلاً للوصول، لكن الوصول رُفض.</value>
+  </data>
+  <data name="DIRECTORY_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون فارغاً، لكن وُجد {1} عنصراً.</value>
+  </data>
+  <data name="DIRECTORY_NOT_BE_EMPTY" xml:space="preserve">
+    <value>المتوقع من {0} ألا يكون فارغاً، لكنه كان.</value>
+  </data>
+  <data name="DIRECTORY_CONTAIN_FILE" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي الملف '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="DIRECTORY_CONTAIN_DIRECTORY" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي المجلد '{1}'، لكنه لم يُعثر عليه.</value>
+  </data>
+  <data name="DIRECTORY_HAVE_FILE_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} ملفاً، لكن وُجد {2}.</value>
+  </data>
+  <data name="DIRECTORY_HAVE_DIRECTORY_COUNT" xml:space="preserve">
+    <value>المتوقع من {0} أن يحتوي {1} مجلداً، لكن وُجد {2}.</value>
+  </data>
   <data name="STREAM_BE_NULL" xml:space="preserve">
     <value>المتوقع من {0} أن يكون null، لكنه لم يكن null.</value>
   </data>

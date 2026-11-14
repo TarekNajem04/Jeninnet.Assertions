@@ -1178,6 +1178,93 @@
   <data name="OBJECT_SATISFY_ALL_CONDITIONS" xml:space="preserve">
     <value>Expected {0} to satisfy all conditions, but the following failed:{1}</value>
   </data>
+  <data name="FILE_EXIST" xml:space="preserve">
+    <value>Expected {0} to exist, but {1}.</value>
+  </data>
+  <data name="FILE_NOT_EXIST" xml:space="preserve">
+    <value>Expected {0} not to exist, but it was found.</value>
+  </data>
+  <data name="FILE_REQUIRE_EXISTS" xml:space="preserve">
+    <value>Expected {0} to exist, but {1}.</value>
+  </data>
+  <data name="FILE_HAVE_NAME" xml:space="preserve">
+    <value>Expected {0} to have name '{1}', but found '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_FULL_NAME" xml:space="preserve">
+    <value>Expected {0} to have full name '{1}', but found '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_EXTENSION" xml:space="preserve">
+    <value>Expected {0} to have extension '{1}', but found '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_DIRECTORY" xml:space="preserve">
+    <value>Expected {0} to be in directory '{1}', but found '{2}'.</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH" xml:space="preserve">
+    <value>Expected {0} to have length {1}, but found {2}.</value>
+  </data>
+  <data name="FILE_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>Expected {0} not to have length {1}, but found {2}.</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH_GREATER_THAN" xml:space="preserve">
+    <value>Expected {0} to have length greater than {1}, but found {2}.</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH_LESS_THAN" xml:space="preserve">
+    <value>Expected {0} to have length less than {1}, but found {2}.</value>
+  </data>
+  <data name="FILE_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1} byte(s).</value>
+  </data>
+  <data name="FILE_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but it was.</value>
+  </data>
+  <data name="FILE_BE_READ_ONLY" xml:space="preserve">
+    <value>Expected {0} to be read-only, but it was not.</value>
+  </data>
+  <data name="FILE_NOT_BE_READ_ONLY" xml:space="preserve">
+    <value>Expected {0} not to be read-only, but it was.</value>
+  </data>
+  <data name="FILE_BE_HIDDEN" xml:space="preserve">
+    <value>Expected {0} to be hidden, but it was not.</value>
+  </data>
+  <data name="FILE_NOT_BE_HIDDEN" xml:space="preserve">
+    <value>Expected {0} not to be hidden, but it was.</value>
+  </data>
+  <data name="FILE_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>Expected {0} to have attribute {1}, but found {2}.</value>
+  </data>
+  <data name="FILE_NOT_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>Expected {0} not to have attribute {1}, but it was present.</value>
+  </data>
+  <data name="FILE_HAVE_CREATION_TIME" xml:space="preserve">
+    <value>Expected {0} to have creation time within {1} of {2}, but found {3}.</value>
+  </data>
+  <data name="FILE_HAVE_LAST_WRITE_TIME" xml:space="preserve">
+    <value>Expected {0} to have last write time within {1} of {2}, but found {3}.</value>
+  </data>
+  <data name="FILE_BE_PARENT_OF" xml:space="preserve">
+    <value>Expected {0} to be a parent directory of {1}, but it was not.</value>
+  </data>
+  <data name="FILE_ACCESS_DENIED" xml:space="preserve">
+    <value>Expected {0} to be accessible, but access was denied.</value>
+  </data>
+  <data name="DIRECTORY_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} to be empty, but found {1} item(s).</value>
+  </data>
+  <data name="DIRECTORY_NOT_BE_EMPTY" xml:space="preserve">
+    <value>Expected {0} not to be empty, but it was.</value>
+  </data>
+  <data name="DIRECTORY_CONTAIN_FILE" xml:space="preserve">
+    <value>Expected {0} to contain file '{1}', but it was not found.</value>
+  </data>
+  <data name="DIRECTORY_CONTAIN_DIRECTORY" xml:space="preserve">
+    <value>Expected {0} to contain directory '{1}', but it was not found.</value>
+  </data>
+  <data name="DIRECTORY_HAVE_FILE_COUNT" xml:space="preserve">
+    <value>Expected {0} to contain {1} file(s), but found {2}.</value>
+  </data>
+  <data name="DIRECTORY_HAVE_DIRECTORY_COUNT" xml:space="preserve">
+    <value>Expected {0} to contain {1} directory(ies), but found {2}.</value>
+  </data>
   <data name="STREAM_BE_NULL" xml:space="preserve">
     <value>Expected {0} to be null, but it was not null.</value>
   </data>

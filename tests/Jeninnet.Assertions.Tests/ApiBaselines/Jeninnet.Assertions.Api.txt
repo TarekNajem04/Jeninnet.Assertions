@@ -68,6 +68,8 @@ type Jeninnet.Assertions.AssertionExtensions
   method static Jeninnet.Assertions.GenericDictionaryAssertions<TKey,TValue> Should<TKey,TValue>(System.Collections.Generic.IEnumerable<System.Collections.Generic.KeyValuePair<TKey,TValue>>, System.String)
   method static Jeninnet.Assertions.GuidAssertions Should(System.Guid, System.String)
   method static Jeninnet.Assertions.HttpResponseMessageAssertions Should(System.Net.Http.HttpResponseMessage, System.String)
+  method static Jeninnet.Assertions.IO.DirectoryInfoAssertions Should(System.IO.DirectoryInfo, System.String)
+  method static Jeninnet.Assertions.IO.FileInfoAssertions Should(System.IO.FileInfo, System.String)
   method static Jeninnet.Assertions.JsonNodeAssertions Should(System.Text.Json.Nodes.JsonNode, System.String)
   method static Jeninnet.Assertions.MatchAssertions Should(System.Text.RegularExpressions.Match, System.String)
   method static Jeninnet.Assertions.NullableBooleanAssertions Should(System.Nullable<System.Boolean>, System.String)
@@ -913,6 +915,38 @@ type Jeninnet.Assertions.IAssertions
 type Jeninnet.Assertions.IClock
   property System.DateTimeOffset Now { get; }
   property System.DateTimeOffset UtcNow { get; }
+type Jeninnet.Assertions.IO.DirectoryInfoAssertions
+  ctor(System.IO.DirectoryInfo, System.String)
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.DirectoryInfoAssertions> BeEmpty(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.DirectoryInfoAssertions> ContainDirectory(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.DirectoryInfoAssertions> ContainFile(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.DirectoryInfoAssertions> HaveDirectoryCount(System.Int32, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.DirectoryInfoAssertions> HaveFileCount(System.Int32, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.DirectoryInfoAssertions> NotBeEmpty(System.String, System.Object[])
+type Jeninnet.Assertions.IO.FileInfoAssertions
+  ctor(System.IO.FileInfo, System.String)
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> BeEmpty(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> HaveDirectory(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> HaveExtension(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> HaveLength(System.Int64, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> HaveLengthGreaterThan(System.Int64, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> HaveLengthLessThan(System.Int64, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> NotBeEmpty(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.IO.FileInfoAssertions> NotHaveLength(System.Int64, System.String, System.Object[])
+type Jeninnet.Assertions.IO.FileSystemInfoAssertions<T,TAssertions>
+  method Jeninnet.Assertions.AndConstraint<TAssertions> BeHidden(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> BeParentOf(System.IO.FileSystemInfo, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> BeReadOnly(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> Exist(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> HaveAttribute(System.IO.FileAttributes, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> HaveCreationTime(System.DateTime, System.TimeSpan, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> HaveFullName(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> HaveLastWriteTime(System.DateTime, System.TimeSpan, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> HaveName(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> NotBeHidden(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> NotBeReadOnly(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> NotExist(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<TAssertions> NotHaveAttribute(System.IO.FileAttributes, System.String, System.Object[])
 type Jeninnet.Assertions.IO.InaccessibleDirectorySimulator
   method static System.String CreateLockedDir(Jeninnet.Assertions.IO.TestEnvironment, System.String, System.IO.FileStream&)
   method static System.String CreatePseudoInaccessibleDir(Jeninnet.Assertions.IO.TestEnvironment, System.String)

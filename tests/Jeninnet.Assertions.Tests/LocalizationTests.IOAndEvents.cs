@@ -8,6 +8,28 @@ namespace Jeninnet.Assertions.Tests;
 
 public partial class LocalizationTests {
     [TestMethod]
+    public void Arabic_FileSystem() {
+        using var _ = new ArabicScope();
+        using var environment = new TestEnvironment();
+
+        var file = new FileInfo(environment.CreateFile("a.txt", "abc"));
+        var length = Assert.ThrowsExactly<AssertionFailedException>(() => file.Should().HaveLength(5));
+        Assert.AreEqual("المتوقع من file أن يكون طوله 5، لكن وُجد 3.", length.Message);
+
+        var directory = new DirectoryInfo(environment.CreateDirectory("dir"));
+        environment.CreateFile("dir/a.txt", "a");
+        var empty = Assert.ThrowsExactly<AssertionFailedException>(() => directory.Should().BeEmpty());
+        Assert.AreEqual("المتوقع من directory أن يكون فارغاً، لكن وُجد 1 عنصراً.", empty.Message);
+
+        var contain = Assert.ThrowsExactly<AssertionFailedException>(() => directory.Should().ContainFile("missing.txt"));
+        Assert.AreEqual("المتوقع من directory أن يحتوي الملف 'missing.txt'، لكنه لم يُعثر عليه.", contain.Message);
+
+        var missing = new FileInfo(environment.Abs("missing.txt"));
+        var exist = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Exist());
+        Assert.AreEqual("المتوقع من missing أن يكون موجوداً، لكن it was not found.", exist.Message);
+    }
+
+    [TestMethod]
     public void Arabic_Stream() {
         using var _ = new ArabicScope();
 

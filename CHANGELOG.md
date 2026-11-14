@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   and predicates for domain value types.
 - Numeric assertions now cover `Half`, `Int128`, `UInt128`, `BigInteger`, and native-sized
   integers (`nint`/`nuint`) on target frameworks that expose them, plus `BeZero`/`NotBeZero`.
+- File-system assertions for `FileInfo` and `DirectoryInfo`: existence, names/full paths/extensions,
+  file-length bounds, empty checks, attributes, UTC timestamps with tolerance, path-boundary parent
+  checks, directory contents, and top-level file/directory counts. Missing subjects fail with a clear
+  existence message instead of `FileNotFoundException`/`IOException`.
 - JSON assertions now accept `JsonElement` and `JsonDocument` in addition to `JsonNode`, with
   object/array kind checks, scalar values, deep equivalency, properties, paths, and deterministic
   snapshots (`MatchSnapshot` sorts object keys ordinally). Disposed documents fail with a clear message.

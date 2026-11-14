@@ -37,6 +37,16 @@ public static partial class AssertionExtensions {
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
     public static StreamAssertions Should(this Stream? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
+    /// <summary>Creates a <see cref="FileInfoAssertions"/> for the given file.</summary>
+    /// <param name="value">The file to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static FileInfoAssertions Should(this FileInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates a <see cref="DirectoryInfoAssertions"/> for the given directory.</summary>
+    /// <param name="value">The directory to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static DirectoryInfoAssertions Should(this DirectoryInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
     /// <summary>Creates a <see cref="BufferedStreamAssertions"/> for the given buffered stream.</summary>
     /// <param name="value">The buffered stream to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>

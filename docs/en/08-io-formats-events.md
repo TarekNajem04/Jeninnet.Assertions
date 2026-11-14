@@ -209,6 +209,25 @@ Everything lives under `env.Root` and is automatically cleaned up when disposed.
 
 Every path accepted by the environment is relative to `Root`. Absolute paths and `..` traversal outside the root are rejected before any file-system operation; a path such as `nested/../file.txt` is normalized to `Root/file.txt`.
 
+### Asserting files and directories
+
+`TestEnvironment` creates the fixtures; `FileInfo` and `DirectoryInfo` assertions describe the expected result without manual `File.Exists` calls:
+
+```csharp
+var file = new FileInfo(env.CreateFile("inbox/order.json", "{\"id\":1}"));
+file.Should().Exist()
+    .And.HaveExtension(".json")
+    .And.HaveLength(8)
+    .And.HaveDirectory(env.Abs("inbox"));
+
+var inbox = new DirectoryInfo(env.Abs("inbox"));
+inbox.Should().ContainFile("order.json")
+    .And.HaveFileCount(1)
+    .And.BeParentOf(file);
+```
+
+Directory contents and counts are top-level by default. Timestamps compare in UTC and require an explicit tolerance because file-system precision varies; local values are converted and unspecified values are treated as UTC. `ReadOnly` and `Hidden` are Windows attributes: the runtime may derive `ReadOnly` from Unix permissions, while `Hidden` is not inferred from a leading dot. Missing subjects fail with an existence message instead of `FileNotFoundException`.
+
 ### Simulating failure conditions
 
 Sometimes you need to test paths where files are locked or directories are inaccessible. The environment helpers simulate these cases without requiring admin privileges:

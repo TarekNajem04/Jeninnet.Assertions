@@ -372,6 +372,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 
 - Entry: `TestEnvironment`
 - Isolated directories, files, trees, locks, inaccessible simulation, and root-contained relative paths
+- FileInfo / DirectoryInfo assertions: `Exist` / `NotExist`, names and paths, length bounds, empty checks, attributes, UTC timestamps, parent relationships, contents, and top-level counts
 
 </details>
 

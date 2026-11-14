@@ -305,6 +305,29 @@ env.CreateFiles("one.txt", "two.txt");
 
 كل مسار يقبله <code dir="ltr">TestEnvironment</code> نسبي إلى <code dir="ltr">Root</code>. تُرفض المسارات المطلقة والمسارات التي تخرج من الجذر عبر <code dir="ltr">..</code> قبل أي عملية على نظام الملفات؛ أما مسار مثل <code dir="ltr">nested/../file.txt</code> فيُطبَّع إلى <code dir="ltr">Root/file.txt</code>.
 
+### توكيد الملفات والمجلدات
+
+يُنشئ <code dir="ltr">TestEnvironment</code> العناصر، وتصف توكيدات <code dir="ltr">FileInfo</code> و<code dir="ltr">DirectoryInfo</code> النتيجة المتوقعة دون استدعاءات <code dir="ltr">File.Exists</code> يدوية:
+
+<div dir="ltr">
+
+```csharp
+var file = new FileInfo(env.CreateFile("inbox/order.json", "{\"id\":1}"));
+file.Should().Exist()
+    .And.HaveExtension(".json")
+    .And.HaveLength(8)
+    .And.HaveDirectory(env.Abs("inbox"));
+
+var inbox = new DirectoryInfo(env.Abs("inbox"));
+inbox.Should().ContainFile("order.json")
+    .And.HaveFileCount(1)
+    .And.BeParentOf(file);
+```
+
+</div>
+
+محتوى المجلد وعدّاده على المستوى الأعلى افتراضيًا. وتُقارن الأوقات بتوقيت UTC وتتطلب هامش تسامح صريحًا لأن دقة نظام الملفات تتفاوت؛ تُحوَّل القيم المحلية وتُعامل القيم غير المحددة كـUTC. و<code dir="ltr">ReadOnly</code> و<code dir="ltr">Hidden</code> سمتان في Windows: قد يستنتج وقت التشغيل <code dir="ltr">ReadOnly</code> من صلاحيات Unix، بينما لا يُستنتج <code dir="ltr">Hidden</code> من نقطة البداية في الاسم. والعناصر المفقودة تفشل برسالة وجود واضحة بدل <code dir="ltr">FileNotFoundException</code>.
+
 ### محاكاة حالات الفشل
 
 نحتاج أحيانًا لاختبار ما يحدث حين يكون الملف مقفلًا أو المجلد غير قابل للوصول. هنا تساعد أدوات المحاكاة:
