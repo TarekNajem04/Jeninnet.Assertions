@@ -9,6 +9,7 @@ namespace Jeninnet.Assertions.Types;
 /// <summary>Provides assertion methods for verifying <see cref="Assembly"/> metadata.</summary>
 /// <param name="value">The assembly to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.ASSEMBLY_METADATA)]
 public class AssemblyAssertions(Assembly? value, string? expression = null) : AssertionsBase(expression, "assembly") {
     private readonly Assembly? _value = value;
 

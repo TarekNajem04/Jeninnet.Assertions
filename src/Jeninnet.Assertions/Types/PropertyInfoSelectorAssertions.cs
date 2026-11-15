@@ -8,6 +8,7 @@ namespace Jeninnet.Assertions.Types;
 
 /// <summary>Provides assertion methods that must hold for every property in a <see cref="PropertyInfoSelector"/> selection.</summary>
 /// <param name="properties">The selected properties.</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public class PropertyInfoSelectorAssertions(PropertyInfo[] properties) {
     private readonly PropertyInfo[] _properties = properties ?? throw new ArgumentNullException(nameof(properties));
 

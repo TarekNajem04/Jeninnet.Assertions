@@ -20,6 +20,7 @@ public static class EquivalencyEvaluation {
     /// <param name="expected">The expected object graph.</param>
     /// <param name="configure">Optional equivalency configuration (exclusions, tolerances, ordering, custom steps).</param>
     /// <returns>The evaluation result (never a thrown failure for graph differences).</returns>
+    [RequiresUnreferencedCode(TrimmingMessages.EQUIVALENCY)]
     public static EquivalencyEvaluationResult Evaluate<TExpectation>(
         object? actual,
         TExpectation? expected,

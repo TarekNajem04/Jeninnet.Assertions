@@ -282,6 +282,8 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The node does not hold <paramref name="expected"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SERIALIZATION)]
+    [RequiresDynamicCode(TrimmingMessages.DYNAMIC_SERIALIZATION)]
     public AndConstraint<JsonNodeAssertions> HaveValue<T>(T? expected, string? because = null, params object?[] becauseArgs) {
         var expectedNode = JsonValue.Create(expected);
         if(!JsonNode.DeepEquals(_value, expectedNode)) {

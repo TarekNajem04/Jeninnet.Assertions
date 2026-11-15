@@ -8,6 +8,7 @@ namespace Jeninnet.Assertions.Types;
 
 /// <summary>Provides assertion methods that must hold for every type in a <see cref="TypeSelector"/> selection.</summary>
 /// <param name="types">The selected types.</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public partial class TypeSelectorAssertions(Type[] types) {
     private readonly Type[] _types = types ?? throw new ArgumentNullException(nameof(types));
     private const string EMPTY_NAMESPACE_MESSAGE = "Namespace name must not be empty.";

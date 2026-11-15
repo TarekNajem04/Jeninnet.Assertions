@@ -20,6 +20,8 @@ public sealed class EventMonitor : IDisposable, IMonitor<OccurredEvent> {
     /// <summary>Creates a monitor that attaches to every public instance event of <paramref name="source"/>.</summary>
     /// <param name="source">The event source to observe.</param>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EVENT_MONITORING)]
+    [RequiresDynamicCode(TrimmingMessages.EVENT_MONITORING)]
     public EventMonitor(object source)
         : this(source, null) {
     }
@@ -28,6 +30,8 @@ public sealed class EventMonitor : IDisposable, IMonitor<OccurredEvent> {
     /// <param name="source">The event source to observe.</param>
     /// <param name="options">The attach behavior (a <see langword="null"/> value selects the defaults).</param>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EVENT_MONITORING)]
+    [RequiresDynamicCode(TrimmingMessages.EVENT_MONITORING)]
     public EventMonitor(object source, EventMonitorOptions? options) {
         if(source is null) {
             throw new ArgumentNullException(nameof(source));
@@ -116,6 +120,8 @@ public sealed class EventMonitor : IDisposable, IMonitor<OccurredEvent> {
     /// <summary>Builds a compiled delegate that records every raised event of one event into this monitor.</summary>
     /// <param name="event">The event metadata to attach to.</param>
     /// <returns>A handler matching the event's delegate type that forwards sender and args to <see cref="Record"/>.</returns>
+    [RequiresUnreferencedCode(TrimmingMessages.EVENT_MONITORING)]
+    [RequiresDynamicCode(TrimmingMessages.EVENT_MONITORING)]
     private Delegate BuildHandler(EventInfo @event) {
         // The operators assert non-null reflection results; netstandard2.0 reference assemblies are
         // unannotated, so the operators stay valid there while modern targets ignore them.

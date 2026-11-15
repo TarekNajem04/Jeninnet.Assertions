@@ -78,6 +78,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The graphs differ.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EQUIVALENCY)]
     public AndConstraint<ObjectAssertions<T>> BeEquivalentTo<TExpectation>(
         TExpectation expectation,
         Func<SelfReferenceEquivalencyOptions<TExpectation>, SelfReferenceEquivalencyOptions<TExpectation>>? config = null,
@@ -125,6 +126,8 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="ArgumentException">The snapshot name is empty or unsafe.</exception>
     /// <exception cref="AssertionFailedException">No verified snapshot exists, or the content differs (a <c>.received</c> file is written for review).</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SNAPSHOT)]
+    [RequiresDynamicCode(TrimmingMessages.DYNAMIC_SERIALIZATION)]
     public AndConstraint<ObjectAssertions<T>> MatchSnapshot(
         string? snapshotName = null,
         string? snapshotsDirectory = null,
@@ -280,6 +283,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The graphs are equivalent.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EQUIVALENCY)]
     public AndConstraint<ObjectAssertions<T>> NotBeEquivalentTo<TExpectation>(
         TExpectation unexpected,
         Func<SelfReferenceEquivalencyOptions<TExpectation>, SelfReferenceEquivalencyOptions<TExpectation>>? config = null,
@@ -300,6 +304,7 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">Serialization fails, or the round-tripped graph differs.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SERIALIZATION)]
     public AndConstraint<ObjectAssertions<T>> BeXmlSerializable(string? because = null, params object?[] becauseArgs) {
         T? roundTripped;
         try {
@@ -330,6 +335,8 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">Serialization fails, or the round-tripped graph differs.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SERIALIZATION)]
+    [RequiresDynamicCode(TrimmingMessages.DYNAMIC_SERIALIZATION)]
     public AndConstraint<ObjectAssertions<T>> BeJsonSerializable(string? because = null, params object?[] becauseArgs) {
         T? roundTripped;
         try {
@@ -351,6 +358,8 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">Serialization fails, or the round-tripped graph differs.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SERIALIZATION)]
+    [RequiresDynamicCode(TrimmingMessages.DYNAMIC_SERIALIZATION)]
     public AndConstraint<ObjectAssertions<T>> BeDataContractSerializable(string? because = null, params object?[] becauseArgs) {
         T? roundTripped;
         try {

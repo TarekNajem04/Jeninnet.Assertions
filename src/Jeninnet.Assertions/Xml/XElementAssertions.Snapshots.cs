@@ -18,6 +18,7 @@ public partial class XElementAssertions {
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="ArgumentException">The snapshot name or directory is unsafe.</exception>
     /// <exception cref="AssertionFailedException">No verified snapshot exists, or the content differs.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SNAPSHOT)]
     public AndConstraint<XElementAssertions> MatchSnapshot(
         string? snapshotName = null,
         string? snapshotsDirectory = null,

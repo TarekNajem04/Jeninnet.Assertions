@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Trimming/NativeAOT readiness: public reflection paths now carry `RequiresUnreferencedCode`,
+  `RequiresDynamicCode`, or `DynamicallyAccessedMembers` annotations; always-throwing failure helpers
+  use `DoesNotReturn`; the reflection-free verb surface is covered by a NativeAOT/trimmed sample that
+  publishes and runs successfully. AOT-safety matrix documented in chapter 9 and the README.
 - Localization expansion: complete Spanish (`es`) and German (`de`) satellite resources, a committed
   `qps-ploc` pseudo-locale for detecting hardcoded messages, a `scripts/docs/check-localization.ps1`
   completeness gate (missing/extra/empty keys, with the French reference satellite explicitly

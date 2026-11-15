@@ -13,6 +13,7 @@ public partial class TypeSelector : IEnumerable<Type> {
     /// <summary>Creates a selector over <paramref name="types"/>.</summary>
     /// <param name="types">The candidate types.</param>
     /// <exception cref="ArgumentNullException"><paramref name="types"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public TypeSelector(IEnumerable<Type> types) {
         if(types is null) {
             throw new ArgumentNullException(nameof(types));
@@ -282,5 +283,6 @@ public partial class TypeSelector : IEnumerable<Type> {
 
     /// <summary>Creates assertions over the selected types.</summary>
     /// <returns>A <see cref="TypeSelectorAssertions"/> for the selected types.</returns>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public TypeSelectorAssertions Should() => new([.. _types]);
 }

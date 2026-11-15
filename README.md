@@ -555,6 +555,17 @@ Consumer template (`consumers/`) as its running example.
 
 Production code references only the .NET base class library (plus `System.Text.Json` / `System.Xml.XDocument` on `netstandard2.0`). The package carries no test-framework dependency, so it can be used from MSTest, xUnit, NUnit, or any other test runner.
 
+## NativeAOT and trimming
+
+The reflection-free surface — values, strings, collections, dictionaries, numerics, time, actions/async, HTTP, IO, scopes, culture, formatters, validators, and CI reports — is trimming/NativeAOT-safe. The repository ships a smoke-test sample:
+
+```powershell
+dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c Release -p:TrimSample=true
+dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c Release -p:AotSample=true
+```
+
+Reflection-based families are explicitly annotated instead of silently failing: type/member/assembly assertions and `AllTypes`/`TypeSelector` request preserved metadata, equivalency requires unreferenced code, event monitoring additionally compiles delegates at runtime, and object/JSON/XML snapshots plus serialization assertions additionally require dynamic code where runtime-type serialization is involved. The library does **not** set `IsAotCompatible=true` while those linker suggestions remain; the sample sets it to prove the safe surface stays warning-free. See [chapter 9](docs/en/09-engine-room.md#96-trimming-and-nativeaot) / [الفصل ٩](docs/ar/09-engine-room.md) for the full matrix.
+
 ## Framework Adapters (optional)
 
 The core package throws its own `AssertionFailedException`, which some reporters classify as an error rather than a test failure. Optional adapter packages translate that failure into the framework's native assertion exception while preserving the message and inner exception; every other exception propagates untouched. Nothing is detected or rewritten automatically.

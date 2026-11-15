@@ -228,7 +228,31 @@ finally {
 
 `IClock` exposes `Now` (local) and `UtcNow`; the `DateTime` verbs pick `UtcNow` for `DateTimeKind.Utc` values and `Now` otherwise, while the `DateTimeOffset` verbs use `Now`. Like scopes and culture, `AssertionClock.Current` is isolated per async flow (`AsyncLocal`), so parallel tests never see each other's clock. `SystemClock.Instance` is used when nothing is injected.
 
-## 9.6 Recap and exercise
+## 9.6 Trimming and NativeAOT
+
+The reflection-free core is safe under trimming and NativeAOT. The repository ships `samples/Jeninnet.Assertions.Aot`, a console smoke test that exercises `Be`, `BeTrue`, `Contain`, `HaveCount`, and `Throw`, publishes both trimmed and NativeAOT, and runs successfully:
+
+```powershell
+dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c Release -p:TrimSample=true
+dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c Release -p:AotSample=true
+```
+
+| Surface | Trimming/NativeAOT | Notes |
+|---|---|---|
+| Values, strings, collections, dictionaries, numerics, time, actions/async, HTTP, IO, streams | Safe | No reflection over arbitrary type metadata. |
+| Scopes, culture, formatters, validators, CI reports | Safe | Formatting is invariant and deterministic. |
+| Type/member/assembly assertions, `AllTypes`, `TypeSelector` | `RequiresUnreferencedCode` | Preserve inspected types/members, or use non-reflection assertions. |
+| Equivalency (`BeEquivalentTo`, `EquivalencyEvaluation.Evaluate`) | `RequiresUnreferencedCode` | Reflective member walk; no dynamic code generation. |
+| Event monitoring | `RequiresUnreferencedCode` + `RequiresDynamicCode` | Reflects events and compiles delegate accessors. |
+| Snapshots (`MatchSnapshot`) | `RequiresUnreferencedCode` | Caller stack metadata; object snapshots additionally need dynamic JSON serialization. |
+| `BeJsonSerializable` / `BeDataContractSerializable` / object `MatchSnapshot` | `RequiresUnreferencedCode` + `RequiresDynamicCode` | Use source-generated JSON contracts for NativeAOT. |
+| `BeXmlSerializable` | `RequiresUnreferencedCode` | `XmlSerializer` needs member metadata. |
+| `JsonNode.HaveValue<T>` | `RequiresUnreferencedCode` + `RequiresDynamicCode` | Arbitrary scalar conversion. |
+| `CustomAssertionDiscovery` | `RequiresUnreferencedCode` | Scans assemblies and members. |
+
+The library deliberately does **not** set `IsAotCompatible=true`: doing so would turn the remaining linker suggestions for the reflection-heavy families into build errors. The annotations are on the public entry points, so an AOT consumer gets an explicit warning and can either preserve metadata (`DynamicallyAccessedMembers`) or suppress at the call site with a documented reason. The sample itself sets `IsAotCompatible=true` to prove the safe surface stays warning-free.
+
+## 9.7 Recap and exercise
 
 **Recap:**
 

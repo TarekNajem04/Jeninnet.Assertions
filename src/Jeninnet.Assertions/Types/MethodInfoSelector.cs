@@ -15,6 +15,7 @@ public class MethodInfoSelector : IEnumerable<MethodInfo> {
     /// <summary>Creates a selector over the declared methods of <paramref name="type"/>.</summary>
     /// <param name="type">The type whose declared methods are selected.</param>
     /// <exception cref="ArgumentNullException"><paramref name="type"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public MethodInfoSelector(Type type)
         : this([type ?? throw new ArgumentNullException(nameof(type))]) {
     }
@@ -23,6 +24,7 @@ public class MethodInfoSelector : IEnumerable<MethodInfo> {
     /// <param name="types">The types whose declared methods are selected.</param>
     /// <exception cref="ArgumentNullException"><paramref name="types"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="types"/> contains <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public MethodInfoSelector(IEnumerable<Type> types) {
         if(types is null) {
             throw new ArgumentNullException(nameof(types));

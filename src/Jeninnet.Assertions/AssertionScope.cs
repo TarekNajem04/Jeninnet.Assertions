@@ -165,7 +165,7 @@ public sealed class AssertionScope : IDisposable {
     internal static void Fail(string message, Exception? innerException = null) {
         var scope = _current.Value;
         if(scope is null) {
-            throw new AssertionFailedException(message, innerException);
+            ThrowFailure(message, innerException);
         }
 
         scope._assertionStrategy.HandleFailure(scope.ApplyExpectation(message, null));
@@ -182,7 +182,7 @@ public sealed class AssertionScope : IDisposable {
     internal static void Fail(string message, string? expression, Exception? innerException = null) {
         var scope = _current.Value;
         if(scope is null) {
-            throw new AssertionFailedException(message, innerException);
+            ThrowFailure(message, innerException);
         }
 
         scope._assertionStrategy.HandleFailure(scope.ApplyExpectation(message, expression));
@@ -201,7 +201,7 @@ public sealed class AssertionScope : IDisposable {
     internal static void Fail(AssertionFailure failure, Exception? innerException = null) {
         var scope = _current.Value;
         if(scope is null) {
-            throw new AssertionFailedException(failure.Message, innerException);
+            ThrowFailure(failure.Message, innerException);
         }
 
         var message = scope.ApplyExpectation(failure.Message, failure.Expression);
@@ -387,11 +387,18 @@ public sealed class AssertionScope : IDisposable {
         }
 
         if(failures.Length == 1) {
-            throw new AssertionFailedException(WithTracing(failures[0], _tracing.ToString()));
+            ThrowFailure(WithTracing(failures[0], _tracing.ToString()), null);
         }
 
-        throw new AssertionFailedException(BuildAggregateMessage(failures, _tracing.ToString()));
+        ThrowFailure(BuildAggregateMessage(failures, _tracing.ToString()), null);
     }
+
+    /// <summary>Throws an <see cref="AssertionFailedException"/>; never returns.</summary>
+    /// <param name="message">The fully formatted failure message.</param>
+    /// <param name="innerException">The optional underlying exception.</param>
+    [DoesNotReturn]
+    private static void ThrowFailure(string message, Exception? innerException) =>
+        throw new AssertionFailedException(message, innerException);
 
     /// <summary>Appends diagnostic tracing to a single failure message when tracing was recorded.</summary>
     /// <param name="failure">The failure message.</param>

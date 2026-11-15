@@ -18,6 +18,7 @@ public static class AllTypes {
     /// <returns>A <see cref="TypeSelector"/> over all types.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="assemblies"/> is <see langword="null"/> or contains <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException">No assembly was provided.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.ASSEMBLY_METADATA)]
     public static TypeSelector From(params Assembly[] assemblies) {
         if(assemblies is null) {
             throw new ArgumentNullException(nameof(assemblies));

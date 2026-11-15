@@ -25,7 +25,7 @@ public static class FailureReport {
         Validate(failures);
         var array = new JsonArray();
         foreach(var failure in failures) {
-            array.Add(new JsonObject {
+            Add(array, new JsonObject {
                 ["expression"] = failure.Expression,
                 ["category"] = failure.Category,
                 ["message"] = failure.Message,
@@ -56,7 +56,7 @@ public static class FailureReport {
                 continue;
             }
 
-            rules.Add(new JsonObject {
+            Add(rules, new JsonObject {
                 ["id"] = failure.RuleId,
                 ["name"] = failure.Category,
                 ["shortDescription"] = new JsonObject { ["text"] = failure.Category },
@@ -79,28 +79,29 @@ public static class FailureReport {
 
             if(Located(failure, includeLine: false) is { } location) {
                 var locations = new JsonArray();
-                locations.Add(location);
+                Add(locations, location);
                 result["locations"] = locations;
             }
 
-            results.Add(result);
+            Add(results, result);
         }
+
+        var runs = new JsonArray();
+        Add(runs, new JsonObject {
+            ["tool"] = new JsonObject {
+                ["driver"] = new JsonObject {
+                    ["name"] = "Jeninnet.Assertions",
+                    ["informationUri"] = "https://github.com/TarekNajem04/Jeninnet.Assertions",
+                    ["rules"] = rules,
+                },
+            },
+            ["results"] = results,
+        });
 
         var root = new JsonObject {
             ["$schema"] = "https://json.schemastore.org/sarif-2.1.0.json",
             ["version"] = "2.1.0",
-            ["runs"] = new JsonArray {
-                new JsonObject {
-                    ["tool"] = new JsonObject {
-                        ["driver"] = new JsonObject {
-                            ["name"] = "Jeninnet.Assertions",
-                            ["informationUri"] = "https://github.com/TarekNajem04/Jeninnet.Assertions",
-                            ["rules"] = rules,
-                        },
-                    },
-                    ["results"] = results,
-                },
-            },
+            ["runs"] = runs,
         };
 
         return ReportEscaping.NormalizeLineEndings(root.ToJsonString(_indentedJson));
@@ -217,6 +218,11 @@ public static class FailureReport {
             _ => throw new ArgumentOutOfRangeException(nameof(format), format, "Unknown assertion report format."),
         };
     }
+
+    /// <summary>Adds a node through the non-generic <see cref="JsonArray"/> contract (AOT-safe).</summary>
+    /// <param name="array">The target array.</param>
+    /// <param name="node">The node to add.</param>
+    private static void Add(JsonArray array, JsonNode node) => ((IList<JsonNode?>)array).Add(node);
 
     /// <summary>Validates the failure list argument.</summary>
     /// <param name="failures">The failures to validate.</param>

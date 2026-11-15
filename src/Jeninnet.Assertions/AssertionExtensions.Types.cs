@@ -10,26 +10,31 @@ public static partial class AssertionExtensions {
     /// <summary>Creates a <see cref="TypeAssertions"/> for the given type.</summary>
     /// <param name="value">The type to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public static TypeAssertions Should(this Type? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
     /// <summary>Creates an <see cref="AssemblyAssertions"/> for the given assembly.</summary>
     /// <param name="value">The assembly to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    [RequiresUnreferencedCode(TrimmingMessages.ASSEMBLY_METADATA)]
     public static AssemblyAssertions Should(this Assembly? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
     /// <summary>Creates a <see cref="MethodInfoAssertions"/> for the given method.</summary>
     /// <param name="value">The method to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public static MethodInfoAssertions Should(this MethodInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
     /// <summary>Creates a <see cref="PropertyInfoAssertions"/> for the given property.</summary>
     /// <param name="value">The property to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public static PropertyInfoAssertions Should(this PropertyInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
     /// <summary>Creates a <see cref="ConstructorInfoAssertions"/> for the given constructor.</summary>
     /// <param name="value">The constructor to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public static ConstructorInfoAssertions Should(this ConstructorInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
     /// <summary>Creates a <see cref="StreamAssertions"/> for the given stream.</summary>

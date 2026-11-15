@@ -9,6 +9,7 @@ namespace Jeninnet.Assertions.Types;
 /// <summary>Provides assertion methods for verifying <see cref="MethodInfo"/> metadata.</summary>
 /// <param name="value">The method to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public partial class MethodInfoAssertions(MethodInfo? value, string? expression = null) : AssertionsBase(expression, "method") {
     private readonly MethodInfo? _value = value;
     private const string FOUND_NULL = "found null";

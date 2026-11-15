@@ -55,6 +55,7 @@ public class ComparableTypeAssertions<T>(T value, string? expression = null) whe
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The graphs differ.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EQUIVALENCY)]
     public AndConstraint<ComparableTypeAssertions<T>> BeEquivalentTo<TExpectation>(
         TExpectation expectation,
         Func<SelfReferenceEquivalencyOptions<TExpectation>, SelfReferenceEquivalencyOptions<TExpectation>>? config = null,

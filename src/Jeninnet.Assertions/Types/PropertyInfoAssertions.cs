@@ -9,6 +9,7 @@ namespace Jeninnet.Assertions.Types;
 /// <summary>Provides assertion methods for verifying <see cref="PropertyInfo"/> metadata.</summary>
 /// <param name="value">The property to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public partial class PropertyInfoAssertions(PropertyInfo? value, string? expression = null) : AssertionsBase(expression, "property") {
     private readonly PropertyInfo? _value = value;
     private const string FOUND_NULL = "found null";

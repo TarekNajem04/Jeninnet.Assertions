@@ -12,6 +12,8 @@ public static partial class AssertionExtensions {
     /// <param name="options">The attach behavior (a <see langword="null"/> value selects the defaults).</param>
     /// <returns>An <see cref="EventMonitor"/> recording the raised events (dispose to detach).</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EVENT_MONITORING)]
+    [RequiresDynamicCode(TrimmingMessages.EVENT_MONITORING)]
     public static EventMonitor Monitor(this object? source, EventMonitorOptions? options = null) =>
         new(source ?? throw new ArgumentNullException(nameof(source)), options);
 
@@ -22,6 +24,8 @@ public static partial class AssertionExtensions {
     /// <param name="options">The attach behavior (a <see langword="null"/> value selects the defaults).</param>
     /// <returns>An <see cref="EventMonitor"/> recording the raised events (dispose to detach).</returns>
     /// <exception cref="ArgumentNullException"><paramref name="source"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.EVENT_MONITORING)]
+    [RequiresDynamicCode(TrimmingMessages.EVENT_MONITORING)]
     public static EventMonitor Monitor<T>(this T? source, EventMonitorOptions? options = null) =>
         new((object?)source ?? throw new ArgumentNullException(nameof(source)), options);
 

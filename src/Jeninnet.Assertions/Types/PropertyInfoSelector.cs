@@ -15,6 +15,7 @@ public class PropertyInfoSelector : IEnumerable<PropertyInfo> {
     /// <summary>Creates a selector over the declared properties of <paramref name="type"/>.</summary>
     /// <param name="type">The type whose declared properties are selected.</param>
     /// <exception cref="ArgumentNullException"><paramref name="type"/> is <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public PropertyInfoSelector(Type type)
         : this([type ?? throw new ArgumentNullException(nameof(type))]) {
     }
@@ -23,6 +24,7 @@ public class PropertyInfoSelector : IEnumerable<PropertyInfo> {
     /// <param name="types">The types whose declared properties are selected.</param>
     /// <exception cref="ArgumentNullException"><paramref name="types"/> is <see langword="null"/>.</exception>
     /// <exception cref="ArgumentException"><paramref name="types"/> contains <see langword="null"/>.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public PropertyInfoSelector(IEnumerable<Type> types) {
         if(types is null) {
             throw new ArgumentNullException(nameof(types));

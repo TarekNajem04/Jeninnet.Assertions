@@ -17,6 +17,7 @@ public partial class StringAssertions {
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="ArgumentException">The snapshot name is empty or unsafe.</exception>
     /// <exception cref="AssertionFailedException">No verified snapshot exists, or the content differs (a <c>.received</c> file is written for review).</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SNAPSHOT)]
     public AndConstraint<StringAssertions> MatchSnapshot(
         string? snapshotName = null,
         string? snapshotsDirectory = null,

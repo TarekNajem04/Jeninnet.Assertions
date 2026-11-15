@@ -8,6 +8,7 @@ namespace Jeninnet.Assertions.Types;
 
 /// <summary>Provides assertion methods that must hold for every method in a <see cref="MethodInfoSelector"/> selection.</summary>
 /// <param name="methods">The selected methods.</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public class MethodInfoSelectorAssertions(MethodInfo[] methods) {
     private readonly MethodInfo[] _methods = methods ?? throw new ArgumentNullException(nameof(methods));
 

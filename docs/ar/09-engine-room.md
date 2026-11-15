@@ -311,7 +311,35 @@ finally {
 
 وقاعدة اختيار <code dir="ltr">UtcNow</code>/<code dir="ltr">Now</code> تتبع نوع القيمة لا مزاج الكاتب: القيمة المحلية تحمل دلالة محلية فتقارن بساعة محلية، والقيمة المؤطَّرة بـUTC تقارن بساعة UTC، فلا تبتلع منطقة زمنية يظن أحدهم أنها فُحصت وهي لم تُفحص.
 
-## ٩.٦ خلاصة وتمرين
+## ٩.٦ التشذيب وNativeAOT
+
+النواة الخالية من الانعكاس آمنة تحت التشذيب وNativeAOT. يشحن المستودع عينة <code dir="ltr">samples/Jeninnet.Assertions.Aot</code>، وهي تطبيق وحدة تحكم يمارس <code dir="ltr">Be</code> و<code dir="ltr">BeTrue</code> و<code dir="ltr">Contain</code> و<code dir="ltr">HaveCount</code> و<code dir="ltr">Throw</code>، ويُنشر مشذَّبًا وNativeAOT ويعمل بنجاح:
+
+<div dir="ltr">
+
+```powershell
+dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c Release -p:TrimSample=true
+dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c Release -p:AotSample=true
+```
+
+</div>
+
+| السطح | التشذيب/NativeAOT | ملاحظات |
+|---|---|---|
+| القيم والنصوص والمجموعات والقواميس والأرقام والوقت والأفعال/async وHTTP وIO والتدفقات | آمن | لا انعكاس على بيانات أنواع عشوائية. |
+| النطاقات والثقافة والمنسّقات والمدققات وتقارير CI | آمن | التنسيق ثابت وحتمي. |
+| توكيدات الأنواع/الأعضاء/التجميعات و<code dir="ltr">AllTypes</code> و<code dir="ltr">TypeSelector</code> | <code dir="ltr">RequiresUnreferencedCode</code> | حافظ على الأنواع/الأعضاء المفحوصة أو استخدم توكيدات بلا انعكاس. |
+| التكافؤ (<code dir="ltr">BeEquivalentTo</code> و<code dir="ltr">EquivalencyEvaluation.Evaluate</code>) | <code dir="ltr">RequiresUnreferencedCode</code> | مرور انعكاسي على الأعضاء؛ بلا توليد كود ديناميكي. |
+| مراقبة الأحداث | <code dir="ltr">RequiresUnreferencedCode</code> + <code dir="ltr">RequiresDynamicCode</code> | انعكاس على الأحداث وترجمة accessors. |
+| اللقطات (<code dir="ltr">MatchSnapshot</code>) | <code dir="ltr">RequiresUnreferencedCode</code> | بيانات إطار الاستدعاء؛ ولقطات الكائنات تحتاج أيضًا تسلسل JSON ديناميكيًا. |
+| <code dir="ltr">BeJsonSerializable</code> / <code dir="ltr">BeDataContractSerializable</code> / لقطة الكائن | <code dir="ltr">RequiresUnreferencedCode</code> + <code dir="ltr">RequiresDynamicCode</code> | استخدم عقود JSON المولَّدة للمصدر مع NativeAOT. |
+| <code dir="ltr">BeXmlSerializable</code> | <code dir="ltr">RequiresUnreferencedCode</code> | يحتاج <code dir="ltr">XmlSerializer</code> بيانات الأعضاء. |
+| <code dir="ltr">JsonNode.HaveValue&lt;T&gt;</code> | <code dir="ltr">RequiresUnreferencedCode</code> + <code dir="ltr">RequiresDynamicCode</code> | تحويل قيمي عشوائي. |
+| <code dir="ltr">CustomAssertionDiscovery</code> | <code dir="ltr">RequiresUnreferencedCode</code> | يفحص التجميعات والأعضاء. |
+
+المكتبة **لا** تضبط <code dir="ltr">IsAotCompatible=true</code> عمدًا: فعل ذلك سيحوّل اقتراحات الرابط المتبقية للعائلات الانعكاسية إلى أخطاء بناء. والسمات موضوعة على نقاط الدخول العامة، فيرى مستخدم AOT تحذيرًا صريحًا ويستطيع إما حفظ البيانات (<code dir="ltr">DynamicallyAccessedMembers</code>) أو الكبت في موقع الاستدعاء بسبب موثَّق. أما العينة نفسها فتضبط <code dir="ltr">IsAotCompatible=true</code> لإثبات أن السطح الآمن يبقى بلا تحذيرات.
+
+## ٩.٧ خلاصة وتمرين
 
 **الخلاصة:**
 

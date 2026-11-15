@@ -128,6 +128,7 @@
     </Folder>
 
     <Folder Name="/samples/">
+        <Project Path="samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj" />
         <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Core/Jeninnet.Assertions.FrameworkZoo.Core.csproj" />
         <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Expecto.Tests/Jeninnet.Assertions.FrameworkZoo.Expecto.Tests.fsproj" />
         <Project Path="samples/Jeninnet.Assertions.FrameworkZoo/Jeninnet.Assertions.FrameworkZoo.Fixie.Tests/Jeninnet.Assertions.FrameworkZoo.Fixie.Tests.csproj" />

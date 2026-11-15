@@ -17,6 +17,7 @@ namespace Jeninnet.Assertions;
 public static class CustomAssertionDiscovery {
     /// <summary>Finds loaded assemblies marked with <see cref="CustomAssertionsAssemblyAttribute"/>.</summary>
     /// <returns>The marked assemblies, ordered by full name.</returns>
+    [RequiresUnreferencedCode(TrimmingMessages.DISCOVERY)]
     public static IReadOnlyList<Assembly> FindMarkedAssemblies() {
         var marked = AppDomain.CurrentDomain.GetAssemblies().Where(IsMarked).ToList();
         marked.Sort(static (left, right) => string.CompareOrdinal(left.FullName, right.FullName));
@@ -28,6 +29,7 @@ public static class CustomAssertionDiscovery {
     /// <returns>The marked methods, ordered by declaring type and name.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="assembly"/> is <see langword="null"/>.</exception>
     /// <exception cref="InvalidOperationException">A marked method is not public static.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.DISCOVERY)]
     public static IReadOnlyList<MethodInfo> FindCustomAssertions(Assembly assembly) {
         if(assembly is null) {
             throw new ArgumentNullException(nameof(assembly));
@@ -61,6 +63,7 @@ public static class CustomAssertionDiscovery {
     /// <returns>The number of setups that ran.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="assembly"/> is <see langword="null"/>.</exception>
     /// <exception cref="InvalidOperationException">An initializer reference is invalid.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.DISCOVERY)]
     public static int RunInitializers(Assembly assembly) {
         if(assembly is null) {
             throw new ArgumentNullException(nameof(assembly));
@@ -85,6 +88,7 @@ public static class CustomAssertionDiscovery {
     /// <summary>Returns the types of an assembly, tolerating partially loadable assemblies.</summary>
     /// <param name="assembly">The assembly to inspect.</param>
     /// <returns>All loadable types, or only those that loaded when a <see cref="ReflectionTypeLoadException"/> occurs.</returns>
+    [RequiresUnreferencedCode(TrimmingMessages.DISCOVERY)]
     private static List<Type> LoadableTypes(Assembly assembly) {
         try {
             return [.. assembly.GetTypes()];

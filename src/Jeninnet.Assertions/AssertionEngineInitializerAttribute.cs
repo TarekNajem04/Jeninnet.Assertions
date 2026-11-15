@@ -18,7 +18,7 @@ public sealed class AssertionEngineInitializerAttribute : Attribute {
     /// <param name="initializerType">The type declaring the setup method.</param>
     /// <param name="methodName">The name of the static parameterless void setup method.</param>
     /// <exception cref="ArgumentNullException"><paramref name="initializerType"/> or <paramref name="methodName"/> is <see langword="null"/>.</exception>
-    public AssertionEngineInitializerAttribute(Type initializerType, string methodName) {
+    public AssertionEngineInitializerAttribute([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)] Type initializerType, string methodName) {
         if(initializerType is null) {
             throw new ArgumentNullException(nameof(initializerType));
         }
@@ -32,6 +32,7 @@ public sealed class AssertionEngineInitializerAttribute : Attribute {
     }
 
     /// <summary>Gets the type declaring the setup method.</summary>
+    [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicMethods)]
     public Type InitializerType { get; }
 
     /// <summary>Gets the name of the static parameterless void setup method.</summary>

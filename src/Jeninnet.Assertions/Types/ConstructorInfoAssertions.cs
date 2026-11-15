@@ -9,6 +9,7 @@ namespace Jeninnet.Assertions.Types;
 /// <summary>Provides assertion methods for verifying <see cref="ConstructorInfo"/> metadata.</summary>
 /// <param name="value">The constructor to assert on.</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
+[method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public partial class ConstructorInfoAssertions(ConstructorInfo? value, string? expression = null) : AssertionsBase(expression, "constructor") {
     private readonly ConstructorInfo? _value = value;
 

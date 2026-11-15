@@ -15,7 +15,14 @@ namespace Jeninnet.Assertions;
 /// <param name="value">The JSON element to assert on (a <see langword="null"/> value represents a missing document).</param>
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
 public class JsonElementAssertions(JsonElement? value, string? expression = null) : AssertionsBase(expression, "JSON element") {
-    private static readonly JsonElement _jsonNull = JsonSerializer.SerializeToElement<object?>(null);
+    private static readonly JsonElement _jsonNull = CreateNullElement();
+
+    /// <summary>Creates a JSON <c>null</c> element without runtime serialization.</summary>
+    /// <returns>The cloned null element.</returns>
+    private static JsonElement CreateNullElement() {
+        using var document = JsonDocument.Parse("null");
+        return document.RootElement.Clone();
+    }
 
     private readonly JsonNode? _node = ParseNode(value, expression);
 
@@ -255,6 +262,7 @@ public class JsonElementAssertions(JsonElement? value, string? expression = null
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="ArgumentException">The snapshot name is empty or unsafe.</exception>
     /// <exception cref="AssertionFailedException">No verified snapshot exists, or the content differs.</exception>
+    [RequiresUnreferencedCode(TrimmingMessages.SNAPSHOT)]
     public AndConstraint<JsonElementAssertions> MatchSnapshot(
         string? snapshotName = null,
         string? snapshotsDirectory = null,
