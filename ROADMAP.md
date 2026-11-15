@@ -23,6 +23,15 @@
 - Performance: publish allocation and throughput benchmarks for the hot verbs and keep the success path allocation-free.
 - Community: open source-code contributions with coding standards, a review process, and a contributor program.
 
+## Explicitly out of scope
+
+- **`DataSet` / `DataTable` / `DataRow` / `DataColumn` assertions.** This is a schema-sized surface
+  (constraints, relations, row states, `DBNull`, culture, and four TFMs) and it is reflection/AOT-heavy.
+  It is not part of the core package. If concrete demand appears, an optional `Jeninnet.Assertions.Data`
+  package can be considered, starting with table/column names, row count, and cell access. Until then,
+  assert the `DataSet`/`DataTable` APIs directly or project rows into typed objects and use the core
+  assertions.
+
 ## Principles
 
 - No breaking changes without a major version and a migration note.
