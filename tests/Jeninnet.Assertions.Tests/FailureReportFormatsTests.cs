@@ -116,6 +116,13 @@ public class FailureReportFormatsTests {
     }
 
     [TestMethod]
+    public void GitHubAnnotations_UsesWarningLevelForWarningSeverity() {
+        var failure = new AssertionFailure("value", "BoolAssertions", "message", severity: "warning");
+
+        Assert.AreEqual("::warning::message", FailureReport.ToGitHubAnnotations([failure]));
+    }
+
+    [TestMethod]
     public void GitHubAnnotations_WithoutFile_UsesPlainErrorAndJoinsWithoutTrailingNewline() {
         var first = new AssertionFailure("first", "BoolAssertions", "first", line: 5);
         var second = new AssertionFailure("second", "BoolAssertions", "second");
