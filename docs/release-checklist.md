@@ -29,7 +29,7 @@ explicitly approved step (`nuget-publish.yml`), and no task may bump `<Version>`
 
 - [ ] `dotnet pack src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release --output artifacts/packages` succeeds.
 - [ ] `pwsh scripts/release/verify-package.ps1` succeeds.
-- [ ] The package contains `lib/netstandard2.0`, `lib/net6.0`, `lib/net8.0`, and `lib/net10.0` assemblies with XML docs.
+- [ ] The package contains `lib/netstandard2.0`, `lib/net6.0`, `lib/net8.0`, `lib/net10.0`, and `lib/net11.0` assemblies with XML docs.
 - [ ] `README.md`, `icon.png`, and the MIT license expression are present in the package.
 - [ ] The nuspec carries `repository type="git"`, the repository URL, and the current commit hash.
 - [ ] The sibling `.snupkg` contains a PDB for every TFM, and no source, test, or local scratch files leak into either archive.

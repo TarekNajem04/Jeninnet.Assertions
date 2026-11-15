@@ -14,7 +14,11 @@ public sealed class EventMonitor : IDisposable, IMonitor<OccurredEvent> {
     private readonly object _source;
     private readonly List<(EventInfo Event, Delegate Handler)> _handlers = [];
     private readonly List<OccurredEvent> _events = [];
+#if NET9_0_OR_GREATER
+    private readonly Lock _lock = new();
+#else
     private readonly object _lock = new();
+#endif
     private bool _disposed;
 
     /// <summary>Creates a monitor that attaches to every public instance event of <paramref name="source"/>.</summary>

@@ -58,9 +58,13 @@ internal static partial class EquivalencyEngine {
             }
 
             if(subject is decimal subjectDecimal) {
+                // .NET 11 converts double-to-decimal using the exact binary expansion, so 0.01d
+                // would become 0.0100000000000000002081668171m. Round-trip through the shortest
+                // representation to keep the tolerance the caller actually wrote.
+                var decimalTolerance = ToDecimalTolerance(numericTolerance.Value);
                 var difference = Math.Abs(subjectDecimal - (decimal)expectation);
-                within = difference <= (decimal)numericTolerance.Value;
-                note = within ? string.Empty : ToleranceNote(difference, (decimal)numericTolerance.Value);
+                within = difference <= decimalTolerance;
+                note = within ? string.Empty : ToleranceNote(difference, decimalTolerance);
                 return true;
             }
 
@@ -93,6 +97,12 @@ internal static partial class EquivalencyEngine {
         /// <returns>The diagnostic sentence (invariant formatting; never localized).</returns>
         private static string ToleranceNote(object difference, object tolerance) =>
             $" The difference {AssertionScope.FormatInvariant(difference)} exceeds the allowed tolerance {AssertionScope.FormatInvariant(tolerance)}.";
+
+        /// <summary>Converts a double tolerance to the decimal the caller wrote, not its binary expansion.</summary>
+        /// <param name="value">The tolerance supplied through <c>WithNumericTolerance</c>.</param>
+        /// <returns>The shortest round-trippable decimal representation.</returns>
+        private static decimal ToDecimalTolerance(double value) =>
+            decimal.Parse(value.ToString("R", CultureInfo.InvariantCulture), CultureInfo.InvariantCulture);
 
         /// <summary>Returns a new path extended with one segment, leaving the parent untouched.</summary>
         /// <param name="path">The parent path.</param>

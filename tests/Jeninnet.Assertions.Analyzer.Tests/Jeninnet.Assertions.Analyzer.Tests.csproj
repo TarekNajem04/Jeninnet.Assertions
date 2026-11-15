@@ -3,9 +3,9 @@
     <PropertyGroup>
         <IsPackable>false</IsPackable>
         <IsTestProject>true</IsTestProject>
-        <!-- net9.0 (not the repo-default net10.0): the MSTest 4.3.3 runner needs a net9.0+ host, and Net90
-             reference assemblies then unify cleanly with the net9.0 MSTest and net8.0 library assets. -->
-        <TargetFramework>net9.0</TargetFramework>
+        <!-- net10.0: System.Composition 11 dropped net9.0 support; the Roslyn testing host is not
+             yet stable on net11.0, so this project stays one runtime behind the suite. -->
+        <TargetFramework>net10.0</TargetFramework>
         <!-- NU1701: the analyzer test harness pulls Microsoft.Composition (netfx-only) for its MEF test host;
              test-only restore shim, verified working by the passing harness tests below. -->
         <NoWarn>$(NoWarn);NU1701</NoWarn>
@@ -25,7 +25,8 @@
         <PackageReference Include="System.Composition.AttributedModel" />
         <PackageReference Include="MSTest.TestFramework" />
         <PackageReference Include="coverlet.collector" PrivateAssets="all" />
-        <PackageReference Include="System.Text.Json" />
+        <!-- Test-host only: overrides the vulnerable 9.0.6 transitive dependency. -->
+        <PackageReference Include="System.Security.Cryptography.Pkcs" />
     </ItemGroup>
 
     <ItemGroup>

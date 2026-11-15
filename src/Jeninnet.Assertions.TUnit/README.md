@@ -11,7 +11,7 @@ rather than errors.
 dotnet add package Jeninnet.Assertions.TUnit
 ```
 
-The adapter targets `net8.0` and `net10.0`, and pulls the core `Jeninnet.Assertions` package and
+The adapter targets `net8.0`, `net10.0`, and `net11.0`, and pulls the core `Jeninnet.Assertions` package and
 the TUnit assertion types automatically. It does not reference the TUnit test host or
 Microsoft.Testing.Platform runtime.
 

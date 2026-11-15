@@ -30,7 +30,7 @@ Useful switches:
 pwsh scripts/parity/compare.ps1 -Refresh
 
 # Reflect a built assembly instead of the committed API baseline.
-pwsh scripts/parity/compare.ps1 -OurAssembly src/Jeninnet.Assertions/bin/Release/net10.0/Jeninnet.Assertions.dll
+pwsh scripts/parity/compare.ps1 -OurAssembly src/Jeninnet.Assertions/bin/Release/net11.0/Jeninnet.Assertions.dll
 
 # Suppress progress output.
 pwsh scripts/parity/compare.ps1 -Quiet

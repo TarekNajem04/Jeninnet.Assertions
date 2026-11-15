@@ -12,7 +12,11 @@ namespace Jeninnet.Assertions;
 /// formatters and never affect comparison.</remarks>
 public sealed class ValueFormatterOptions {
     private readonly List<IValueFormatter> _formatters = [];
+#if NET9_0_OR_GREATER
+    private readonly Lock _sync = new();
+#else
     private readonly object _sync = new();
+#endif
 
     /// <summary>Gets or sets the maximum collection nesting depth used when <see cref="RespectRuntimeTypes"/> is enabled.</summary>
     public int MaxDepth { get; set; } = 10;

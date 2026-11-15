@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup Label="Target frameworks">
-        <TargetFrameworks>net8.0;net10.0</TargetFrameworks>
+        <TargetFrameworks>net8.0;net10.0;net11.0</TargetFrameworks>
         <!-- Clear the repo-wide single TargetFramework so cross-targeting dispatch runs. -->
         <TargetFramework Condition="'$(TargetFrameworks)' != ''"></TargetFramework>
         <!-- Multi-targeting requires per-framework output folders (overrides the single-TFM repo default). -->

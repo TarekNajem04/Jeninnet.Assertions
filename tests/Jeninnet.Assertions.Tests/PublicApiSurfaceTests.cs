@@ -55,7 +55,7 @@ public class PublicApiSurfaceTests {
         }
 
         foreach(var assemblyName in _packableAssemblies) {
-            var lines = new[] { $"// Public API baseline for {assemblyName} (net10.0)." }.Concat(DumpAssembly(assemblyName));
+            var lines = new[] { $"// Public API baseline for {assemblyName} (net11.0)." }.Concat(DumpAssembly(assemblyName));
             Directory.CreateDirectory(BaselineDirectory);
             File.WriteAllLines(Path.Combine(BaselineDirectory, assemblyName + ".Api.txt"), lines);
         }

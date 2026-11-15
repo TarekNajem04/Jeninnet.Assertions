@@ -186,6 +186,17 @@ public class EquivalencyExtensibilityTests {
     }
 
     [TestMethod]
+    public void FullDump_RendersDictionariesAndEnumerables() {
+        var actual = new DumpGraph { Map = new() { ["a"] = 1 }, Items = [1, 2] };
+        var expected = new DumpGraph { Map = new() { ["a"] = 2 }, Items = [1, 3] };
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => actual.Should().BeEquivalentTo(expected, static o => o.WithFullDump()));
+
+        Assert.Contains("[a]: 1", ex.Message);
+        Assert.Contains("[0]: 1", ex.Message);
+    }
+
+    [TestMethod]
     public void FullDump_MarksCyclesInsteadOfOverflowing() {
         var actual = new Node("a");
         actual.Next = actual;
@@ -337,6 +348,11 @@ public class EquivalencyExtensibilityTests {
 
     private sealed class Shipment(string town) {
         public string Town { get; } = town;
+    }
+
+    private sealed class DumpGraph {
+        public Dictionary<string, int> Map { get; init; } = [];
+        public List<int> Items { get; init; } = [];
     }
 
     private sealed class Node(string label) {

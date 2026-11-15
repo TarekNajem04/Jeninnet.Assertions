@@ -1,4 +1,4 @@
-// Public API baseline for Jeninnet.Assertions (net10.0).
+// Public API baseline for Jeninnet.Assertions (net11.0).
 type Jeninnet.Assertions.ActionAssertions
   ctor(System.Action, System.String)
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.ActionAssertions> AllocateAtMost(System.Int64, System.String, System.Object[])

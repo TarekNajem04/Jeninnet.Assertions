@@ -14,7 +14,11 @@ namespace Jeninnet.Assertions.Equivalency;
 /// </remarks>
 public sealed class EquivalencyPlan {
     private readonly List<IEquivalencyStep> _steps = [];
+#if NET9_0_OR_GREATER
+    private readonly Lock _sync = new();
+#else
     private readonly object _sync = new();
+#endif
 
     /// <summary>Gets a snapshot of the steps in evaluation order.</summary>
     /// <returns>The steps in evaluation order.</returns>

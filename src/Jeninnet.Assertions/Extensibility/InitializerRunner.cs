@@ -8,7 +8,11 @@ namespace Jeninnet.Assertions.Extensibility;
 
 /// <summary>Runs assembly-level <see cref="AssertionEngineInitializerAttribute"/> setups once before the first assertion.</summary>
 internal static class InitializerRunner {
+#if NET9_0_OR_GREATER
+    private static readonly Lock _sync = new();
+#else
     private static readonly object _sync = new();
+#endif
     private static volatile bool _initialized;
 
     /// <summary>Runs pending initializers exactly once (later calls are no-ops, including re-entrant ones).</summary>

@@ -9,7 +9,11 @@ namespace Jeninnet.Assertions.Snapshots;
 /// <summary>Resolves snapshot file names and directories from caller context and options.</summary>
 internal static class SnapshotNaming {
     private static readonly Dictionary<string, string> _projectDirectories = new(PathComparer);
+#if NET9_0_OR_GREATER
+    private static readonly Lock _projectDirectoriesLock = new();
+#else
     private static readonly object _projectDirectoriesLock = new();
+#endif
     /// <summary>Resolves the snapshot base name and appends configured prefixes/suffixes.</summary>
     /// <param name="snapshotName">The explicit name supplied to the assertion, when any.</param>
     /// <param name="options">The snapshot options.</param>
@@ -273,9 +277,11 @@ internal static class SnapshotNaming {
     }
 
     /// <summary>Returns the compile-time target framework suffix.</summary>
-    /// <returns><c>netstandard2.0</c>, <c>net6.0</c>, <c>net8.0</c>, or <c>net10.0</c>.</returns>
+    /// <returns><c>netstandard2.0</c>, <c>net6.0</c>, <c>net8.0</c>, <c>net10.0</c>, or <c>net11.0</c>.</returns>
     private static string TargetFrameworkSuffix() =>
-#if NET10_0
+#if NET11_0_OR_GREATER
+        "net11.0";
+#elif NET10_0
         "net10.0";
 #elif NET8_0
         "net8.0";

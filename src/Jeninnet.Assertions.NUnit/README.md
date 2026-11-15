@@ -11,9 +11,9 @@ errors.
 dotnet add package Jeninnet.Assertions.NUnit
 ```
 
-The adapter targets `net6.0`, `net8.0`, and `net10.0`, and pulls the core `Jeninnet.Assertions`
+The adapter targets `net6.0`, `net8.0`, `net10.0`, and `net11.0`, and pulls the core `Jeninnet.Assertions`
 package automatically. The `net6.0` target compiles against NUnit 4.3.2 because NUnit 5 dropped
-`net6.0`; `net8.0` and `net10.0` compile against the current NUnit 5 line. Both versions expose the
+`net6.0`; `net8.0`, `net10.0`, and `net11.0` compile against the current NUnit 5 line. Both versions expose the
 same `AssertionException` type.
 
 ## Usage

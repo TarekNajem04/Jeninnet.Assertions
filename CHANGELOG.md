@@ -7,6 +7,32 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.2.0.0] - 2026-11-15
+
+### Added
+
+- .NET 11 (`net11.0`) assets for the core package and every framework adapter; the solution now
+  builds with the .NET 11 SDK and C# 15.
+- `UniqueForTargetFramework` emits `_net11.0` on the new target.
+
+### Changed
+
+- Lock fields use `System.Threading.Lock` on .NET 9+ and `object` on older targets.
+- Duplicated failure-message literals are named constants.
+- The public `AssertionFailure` constructor keeps its ten-field shape for API compatibility and
+  carries a documented analyzer suppression.
+
+### Fixed
+
+- Decimal numeric tolerances keep the value the caller wrote. .NET 11 converts `double` to
+  `decimal` through the exact binary expansion, so `0.01d` no longer renders as
+  `0.0100000000000000002081668171` in failure messages.
+- Timeout races cancel their delay timer as soon as the observed task wins, so a completed
+  assertion does not leave a pending timer behind.
+- Polling clamps a computed pause to zero when the remaining budget elapses between the timeout
+  check and the wait, so slow runners no longer see `ArgumentOutOfRangeException` from
+  `Task.Delay`.
+
 ## [1.1.0.0] - 2026-11-15
 
 ### Added

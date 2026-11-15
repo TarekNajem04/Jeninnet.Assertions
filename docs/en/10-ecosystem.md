@@ -120,7 +120,7 @@ The syntax deliberately stays close to the established fluent assertion vocabula
 
 **Which target should I use for my tests?**
 
-The library supports `netstandard2.0;net6.0;net8.0;net10.0`. New tests are best written for `net10.0` (like this repository's tests, which use MSTest). You can use it with any of the supported targets.
+The library supports `netstandard2.0;net6.0;net8.0;net10.0;net11.0`. New tests are best written for `net11.0` (like this repository's tests, which use MSTest). You can use it with any of the supported targets.
 
 **Is this library meant for production code?**
 

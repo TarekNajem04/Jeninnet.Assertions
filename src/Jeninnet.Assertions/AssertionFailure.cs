@@ -30,7 +30,7 @@ namespace Jeninnet.Assertions;
 /// <param name="line">The one-based source line, when known.</param>
 /// <param name="column">The one-based source column, when known.</param>
 /// <exception cref="ArgumentNullException"><paramref name="expression"/>, <paramref name="category"/> or <paramref name="message"/> is <see langword="null"/>.</exception>
-public sealed class AssertionFailure(
+public sealed class AssertionFailure( // NOSONAR: public immutable report DTO; splitting the 10-field constructor would break callers.
     string expression,
     string category,
     string message,

@@ -27,7 +27,11 @@ public interface ITraceWriter {
 /// <remarks>Every recorded line is indented two spaces per nesting level.</remarks>
 public sealed class StringBuilderTraceWriter : ITraceWriter {
     private readonly StringBuilder _builder = new();
+#if NET9_0_OR_GREATER
+    private readonly Lock _sync = new();
+#else
     private readonly object _sync = new();
+#endif
     private int _depth = 1;
 
     /// <inheritdoc/>

@@ -1,8 +1,8 @@
 <Project>
 
     <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <LangVersion>14.0</LangVersion>
+        <TargetFramework>net11.0</TargetFramework>
+        <LangVersion>15.0</LangVersion>
 
         <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
         <ImplicitUsings>enable</ImplicitUsings>
@@ -50,14 +50,14 @@
     </PropertyGroup>
 
     <!--
-        Standalone product version: all projects share the single 4-part 1.1.0.0 version; bump it
+        Standalone product version: all projects share the single 4-part 1.2.0.0 version; bump it
         and tag the repository with the matching v*.*.*.* tag (nuget-publish.yml verifies equality).
         ProjectName == AssemblyName == RootNamespace == PackageId == Version.
     -->
     <PropertyGroup>
-        <Version>1.1.0.0</Version>
-        <AssemblyVersion>1.1.0.0</AssemblyVersion>
-        <FileVersion>1.1.0.0</FileVersion>
+        <Version>1.2.0.0</Version>
+        <AssemblyVersion>1.2.0.0</AssemblyVersion>
+        <FileVersion>1.2.0.0</FileVersion>
         <PackageVersion>$(Version)</PackageVersion>
     </PropertyGroup>
 

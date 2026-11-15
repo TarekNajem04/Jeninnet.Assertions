@@ -15,7 +15,7 @@ A fluent, framework-agnostic assertion library for .NET, providing expressive va
 
 This repository contains the **standalone** `Jeninnet.Assertions` package. It has been separated from the `Jeninnet.Localization` repository so it can build, test, and publish independently.
 
-Targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`.
+Targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`, `net11.0`.
 
 **Documentation:** [English book](https://tareknajem04.github.io/Jeninnet.Assertions/) · [API reference](https://tareknajem04.github.io/Jeninnet.Assertions/api/toc.html) · [العربية](https://tareknajem04.github.io/Jeninnet.Assertions/ar/00-index.html)
 
@@ -118,7 +118,7 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
 |---|---|---|
 | API stability | The committed public-API baseline (`tests/.../ApiBaselines`) matches the built assemblies exactly — any accidental public addition, removal, or signature change fails the suite. | `PublicApiSurface_MatchesCommittedBaseline` |
 | Third-party deps | The library has zero third-party runtime dependencies (only BCL shims on old TFMs) and references none of MSTest, xUnit, or NUnit. | `IndependenceTests` |
-| Target frameworks | The badge TFMs come straight from the library csproj `TargetFrameworks`: netstandard2.0 · net6.0 · net8.0 · net10.0, all four built in Release. | `dotnet build … -c Release` |
+| Target frameworks | The badge TFMs come straight from the library csproj `TargetFrameworks`: netstandard2.0 · net6.0 · net8.0 · net10.0 · net11.0, all built in Release. | `dotnet build … -c Release` |
 | Performance invariant | Hot verbs allocate nothing for message formatting on the success path (56–128 B in `PerformanceInvariantTests`, 656 B inside an `AssertionScope`) while failures format full diagnostics (1.2–2.2 KB for the measured scalar verbs), so a formatted success path cannot slip in unmeasured. | `PerformanceInvariantTests` |
 
 ## Features
@@ -559,7 +559,7 @@ The snapshot name defaults to the subject expression (sanitized) and lives in `_
 ## Playground
 
 A runnable tour of the four ideas above — fluent style, the multi-failure report, snapshots, and the
-deterministic clock — lives in `samples/Jeninnet.Assertions.Playground` (net10.0, no test runner):
+deterministic clock — lives in `samples/Jeninnet.Assertions.Playground` (net11.0, no test runner):
 
 ```shell
 dotnet run --project samples/Jeninnet.Assertions.Playground
@@ -664,7 +664,7 @@ TUnitAssertions.That(() => order.Should().Be("shipped"));
 await XunitAssertions.ThatAsync(() => action.Should().NotThrowAsync());
 ```
 
-Each adapter keeps the core framework-agnostic: reference only the package for the runner you use. The `NUnit` adapter compiles against NUnit 4.3.2 on `net6.0` (NUnit 5 dropped that TFM) and the current NUnit 5 line on `net8.0`/`net10.0`; both expose the same exception type.
+Each adapter keeps the core framework-agnostic: reference only the package for the runner you use. The `NUnit` adapter compiles against NUnit 4.3.2 on `net6.0` (NUnit 5 dropped that TFM) and the current NUnit 5 line on `net8.0`/`net10.0`/`net11.0`; both expose the same exception type.
 
 ## Roslyn Analyzer (optional)
 

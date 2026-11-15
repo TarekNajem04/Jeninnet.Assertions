@@ -260,12 +260,14 @@ public static class FailureReport {
         return new JsonObject { ["physicalLocation"] = physical };
     }
 
+    private const string WARNING_LEVEL = "warning";
+
     /// <summary>Normalizes a severity to a SARIF level.</summary>
     /// <param name="severity">The failure severity.</param>
     /// <returns><c>error</c>, <c>warning</c>, <c>note</c>, or <c>none</c>.</returns>
     private static string SarifLevel(string severity) =>
         severity.Trim().ToLowerInvariant() switch {
-            "warning" => "warning",
+            WARNING_LEVEL => WARNING_LEVEL,
             "note" or "info" => "note",
             "none" => "none",
             _ => "error",
@@ -276,7 +278,7 @@ public static class FailureReport {
     /// <returns><c>error</c>, <c>warning</c>, or <c>notice</c>.</returns>
     private static string GitHubLevel(string severity) =>
         severity.Trim().ToLowerInvariant() switch {
-            "warning" => "warning",
+            WARNING_LEVEL => WARNING_LEVEL,
             "note" or "notice" or "info" => "notice",
             _ => "error",
         };

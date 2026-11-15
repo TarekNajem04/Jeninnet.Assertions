@@ -7,6 +7,8 @@
 namespace Jeninnet.Assertions.Types;
 
 public partial class TypeAssertions {
+    private const string NULL_LITERAL = "<null>";
+
     /// <summary>Asserts that the type is a class.</summary>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
@@ -270,7 +272,7 @@ public partial class TypeAssertions {
         }
 
         if(!string.Equals(_value?.Name, expected, StringComparison.Ordinal)) {
-            Fail(Strings.Format(StringKeys.TYPE_HAVE_NAME, Expression, expected, _value?.Name ?? "<null>"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.TYPE_HAVE_NAME, Expression, expected, _value?.Name ?? NULL_LITERAL), because, becauseArgs);
         }
 
         return new(this);
@@ -289,7 +291,7 @@ public partial class TypeAssertions {
         }
 
         if(!string.Equals(_value?.FullName, expected, StringComparison.Ordinal)) {
-            Fail(Strings.Format(StringKeys.TYPE_HAVE_FULL_NAME, Expression, expected, _value?.FullName ?? "<null>"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.TYPE_HAVE_FULL_NAME, Expression, expected, _value?.FullName ?? NULL_LITERAL), because, becauseArgs);
         }
 
         return new(this);
@@ -303,7 +305,7 @@ public partial class TypeAssertions {
     /// <exception cref="AssertionFailedException">The type is <see langword="null"/> or lives in another namespace.</exception>
     public AndConstraint<TypeAssertions> HaveNamespace(string? expected, string? because = null, params object?[] becauseArgs) {
         if(!string.Equals(_value?.Namespace, expected, StringComparison.Ordinal)) {
-            Fail(Strings.Format(StringKeys.TYPE_HAVE_NAMESPACE, Expression, expected ?? "<null>", _value?.Namespace ?? "<null>"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.TYPE_HAVE_NAMESPACE, Expression, expected ?? NULL_LITERAL, _value?.Namespace ?? NULL_LITERAL), because, becauseArgs);
         }
 
         return new(this);
@@ -418,7 +420,7 @@ public partial class TypeAssertions {
     /// <returns>A short kind name, or <c>&lt;null&gt;</c>.</returns>
     private static string KindOf(Type? type) {
         if(type is null) {
-            return "<null>";
+            return NULL_LITERAL;
         }
 
         if(type.IsEnum) {

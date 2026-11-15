@@ -244,7 +244,7 @@ public class SnapshotTests {
         Assert.ThrowsExactly<AssertionFailedException>(() => order.Should().MatchSnapshot("unique", directory, static options => options.UniqueForOSPlatform()));
         Assert.IsTrue(File.Exists(expectedOs));
 
-        var expectedTfm = Path.Combine(directory, "unique_net10.0.received.txt");
+        var expectedTfm = Path.Combine(directory, "unique_net11.0.received.txt");
         Assert.ThrowsExactly<AssertionFailedException>(() => order.Should().MatchSnapshot("unique", directory, static options => options.UniqueForTargetFramework()));
         Assert.IsTrue(File.Exists(expectedTfm));
 
