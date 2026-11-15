@@ -197,6 +197,16 @@ public class EquivalencyExtensibilityTests {
     }
 
     [TestMethod]
+    public void FullDump_ReportsMembersThatThrow() {
+        var actual = new ThrowingDumpGraph { Value = 1 };
+        var expected = new ThrowingDumpGraph { Value = 2 };
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => actual.Should().BeEquivalentTo(expected, static o => o.WithFullDump().Excluding(x => x.Throwing)));
+
+        Assert.Contains("<threw TargetInvocationException>", ex.Message);
+    }
+
+    [TestMethod]
     public void FullDump_MarksCyclesInsteadOfOverflowing() {
         var actual = new Node("a");
         actual.Next = actual;
@@ -353,6 +363,11 @@ public class EquivalencyExtensibilityTests {
     private sealed class DumpGraph {
         public Dictionary<string, int> Map { get; init; } = [];
         public List<int> Items { get; init; } = [];
+    }
+
+    private sealed class ThrowingDumpGraph {
+        public int Value { get; init; }
+        public string Throwing => Value > 0 ? throw new InvalidOperationException("boom") : "safe";
     }
 
     private sealed class Node(string label) {
