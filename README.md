@@ -101,8 +101,8 @@ This library is **MIT licensed** and depends on no test framework: nothing from 
 is required to use it, so it can be adopted inside any test project, commercial or not. It is designed
 in the spirit of existing assertion libraries such as FluentAssertions and others, while keeping its own
 identity, vocabulary, and implementation. The assertion list below is the authoritative list of what it
-provides, and the book carries an explicit migration map
-([chapter 10](docs/en/10-ecosystem.md) / [الفصل ١٠](docs/ar/10-ecosystem.md)).
+provides, and the book carries explicit migration maps for FluentAssertions, AwesomeAssertions, Shouldly, and
+NFluent ([chapter 10](docs/en/10-ecosystem.md) / [playbook](docs/en/10-migration.md); [الفصل ١٠](docs/ar/10-ecosystem.md) / [الدليل](docs/ar/10-migration.md)).
 
 ## Reliability (generated badges)
 
@@ -555,6 +555,17 @@ Consumer template (`consumers/`) as its running example.
 ## Framework Independence
 
 Production code references only the .NET base class library (plus `System.Text.Json` / `System.Xml.XDocument` on `netstandard2.0`). The package carries no test-framework dependency, so it can be used from MSTest, xUnit, NUnit, or any other test runner.
+
+## Migrating from another assertion library
+
+The optional analyzer rewrites MSTest, xUnit, and NUnit calls mechanically. Other libraries use the manual maps in the migration playbook ([English](docs/en/10-migration.md) / [العربية](docs/ar/10-migration.md)):
+
+| From | Start with | Review before committing |
+|---|---|---|
+| [Shouldly](docs/en/10-migration.md#5-coming-from-shouldly) | `ShouldBe`/`ShouldThrow`/… → `Should().Be`/`Throw`/… | `ShouldMatch` is regex (use `MatchRegex`); approved-file tools need `MatchSnapshot` semantics. |
+| [NFluent](docs/en/10-migration.md#6-coming-from-nfluent) | `Check.That(x).*` → `x.Should().*` | Ordered versus unordered collection verbs; `.Which` exists only on verbs that return it. |
+| [AwesomeAssertions](docs/en/10-migration.md#7-coming-from-awesomeassertions-or-fluentassertions) | FA 7-style API → `Should()` | AA 9 renamed namespaces/assembly; there is no class-level `[CustomAssertions]`. |
+| [FluentAssertions 7](docs/en/10-migration.md#7-coming-from-awesomeassertions-or-fluentassertions) | FA 7-style API → `Should()` | FA 8+ uses a different license; verify it before copying any code. |
 
 ## NativeAOT and trimming
 

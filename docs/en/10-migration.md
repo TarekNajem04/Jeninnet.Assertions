@@ -1,6 +1,6 @@
 # Migration Playbook — From Classic Asserts to `Should()`
 
-This playbook is the companion to [Chapter 10](10-ecosystem.md). It walks the optional Roslyn analyzer (`Jeninnet.Assertions.Analyzer`) through every framework it understands, shows the exact rewrite it produces, and lists what it deliberately leaves for you. The intent is a mechanical, reviewable migration — not a blind rewrite.
+This playbook is the companion to [Chapter 10](10-ecosystem.md). It walks the optional Roslyn analyzer (`Jeninnet.Assertions.Analyzer`) through every framework it understands, shows the exact rewrite it produces, and lists what it deliberately leaves for you. The intent is a mechanical, reviewable migration — not a blind rewrite. The later sections map Shouldly, NFluent, and AwesomeAssertions/FluentAssertions by hand, including the shapes that must not be translated one-to-one.
 
 ## 1. Turn the analyzer on
 
@@ -108,11 +108,82 @@ The analyzer only offers a fix when the generated call is guaranteed to compile 
 
 For those, migrate by hand so the intent stays explicit.
 
-## 5. After the rewrite
+## 5. Coming from Shouldly
+
+Shouldly exposes assertions as extension methods on the subject (`ShouldBe`, `ShouldThrow`, …), so most of the migration is a rename onto `Should().*`. Shouldly is BSD-3-Clause; the table maps intent, not every overload.
+
+| Shouldly | Jeninnet | Notes |
+|---|---|---|
+| `value.ShouldBe(x)` | `value.Should().Be(x)` | Value and reference equality follow the subject type. |
+| `value.ShouldNotBe(x)` | `value.Should().NotBe(x)` | |
+| `value.ShouldBeNull()` / `ShouldNotBeNull()` | `value.Should().BeNull()` / `NotBeNull()` | |
+| `value.ShouldBeTrue()` / `ShouldBeFalse()` | `value.Should().BeTrue()` / `BeFalse()` | |
+| `value.ShouldBeOfType<T>()` | `value.Should().BeOfType<T>()` | Use `BeAssignableTo<T>()` when derived types are acceptable. |
+| `value.ShouldBeAssignableTo<T>()` | `value.Should().BeAssignableTo<T>()` | |
+| `value.ShouldBeOneOf(a, b)` | `value.Should().BeOneOf([a, b])` | `ObjectAssertions.BeOneOf` takes a sequence; string assertions also have a `params` overload. |
+| `value.ShouldBeInRange(a, b)` | `value.Should().BeInRange(a, b)` | Available where the subject is comparable. |
+| `value.ShouldBeCloseTo(x, tolerance)` | `value.Should().BeApproximately(x, tolerance)` | `tolerance` is the maximum absolute difference, not a number of decimal places. |
+| `value.ShouldMatch(regex)` | `value.Should().MatchRegex(regex)` | Shouldly matches a regex; `Match` is wildcard matching, so do not substitute it. |
+| `action.ShouldThrow<T>()` | `action.Should().Throw<T>()` | `Throw` accepts derived exceptions; use `ThrowExactly<T>()` for the exact type. |
+| `action.ShouldNotThrow()` | `action.Should().NotThrow()` | |
+| `task.ShouldCompleteIn(timeout)` | `await task.Should().CompleteWithinAsync(timeout)` | The Jeninnet verb is asynchronous. |
+| `value.ShouldMatchApproved()` | `value.Should().MatchSnapshot()` | Different approval semantics; review the snapshot section instead of translating one-to-one. |
+| `DynamicShould...` | No counterpart | Assert on `dynamic` values explicitly so the expected type is visible. |
+
+## 6. Coming from NFluent
+
+NFluent centers on `Check.That(subject).*`; replace the root with `subject.Should()` and keep the verb. NFluent is Apache-2.0.
+
+| NFluent | Jeninnet | Notes |
+|---|---|---|
+| `Check.That(x).IsEqualTo(y)` | `x.Should().Be(y)` | |
+| `Check.That(x).IsNotEqualTo(y)` | `x.Should().NotBe(y)` | |
+| `Check.That(x).IsNull()` | `x.Should().BeNull()` | |
+| `Check.That(x).IsInstanceOf<T>()` | `x.Should().BeOfType<T>()` | Use `BeAssignableTo<T>()` when derived types are acceptable. |
+| `Check.That(x).IsGreaterThan(y)` | `x.Should().BeGreaterThan(y)` | |
+| `Check.That(x).IsInRange(a, b)` | `x.Should().BeInRange(a, b)` | |
+| `Check.That(x).Contains(...)` | `x.Should().Contain(...)` | Works for strings and collections; dictionaries use `ContainKey`/`ContainValue`. |
+| `Check.That(x).ContainsExactly(...)` | `x.Should().Equal(...)` | `Equal` keeps order; use `BeEquivalentTo` only when order is irrelevant. |
+| `Check.That(x).IsOnlyMadeOf(...)` | `x.Should().OnlyContain(item => allowed.Contains(item))` | If the exact multiset is the contract, use `BeEquivalentTo`; `OnlyContain` keeps the membership meaning. |
+| `Check.That(x).IsInAscendingOrder()` | `x.Should().BeInAscendingOrder()` | |
+| `Check.That(x).HasSize(n)` | `x.Should().HaveCount(n)` | |
+| `Check.That(x).IsEmpty()` | `x.Should().BeEmpty()` | |
+| `Check.That(code).Throws<T>()` | `code.Should().Throw<T>()` | Use `ThrowExactly<T>()` when the exact type is the contract. |
+| `Check.That(code).LastsLessThan(ms)` | `Action action = code; action.ExecutionTime().Should().BeLessThan(...)` | Measure the action explicitly; no timing is hidden in a verb. |
+| `Check.That(x).Which` | `.Which` where the verb returns it, otherwise `.And` | Chaining shape depends on the verb's return type. |
+| `Check.ThatEnum(e)` | `e.Should()` | Enum assertions expose the enum-specific verbs. |
+| `Check.That(x).Extracting(...)` | `x.Select(...).Should()` | Or use the keyed `OnlyHaveUniqueItems(selector)` when uniqueness is the intent. |
+
+## 7. Coming from AwesomeAssertions or FluentAssertions
+
+AwesomeAssertions (AA) is a community fork of FluentAssertions (FA). AA is Apache-2.0. FA 7.x and earlier are also Apache-2.0; FA 8 and later use the Xceed Community License — free for non-commercial use, with commercial use requiring a paid Xceed license. Jeninnet is MIT and independent of both.
+
+The AA API follows FA 7.x closely, so the FA-oriented migration material in [Chapter 10](10-ecosystem.md) still applies. The mechanical differences are:
+
+- **Package and namespace.** AA 8.x was a drop-in that kept the `FluentAssertions` namespace and assembly name. AA 9 renamed both to `AwesomeAssertions`. In either case, replace the `using` with `using Jeninnet.Assertions;`.
+- **Extension metadata.** AA has `[CustomAssertion]` on methods, `[CustomAssertions]` on classes, and `[CustomAssertionsAssembly]` on assemblies. Jeninnet has `[CustomAssertion]` and `[CustomAssertionsAssembly]`; there is no class-level equivalent yet, so mark each custom method.
+- **Parameter metadata.** Jeninnet's current surface does not include a dedicated `ParameterInfo` assertion family; assert the `ParameterInfo` properties you need with the value verbs.
+- **Jeninnet-specific areas.** Localization, the deterministic clock, IO test infrastructure, allocation assertions, and snapshot v2 have no FA/AA counterpart to migrate from.
+- **Licensing.** Keep the license of the library you remove in review notes: Shouldly BSD-3-Clause, NFluent and AA Apache-2.0, FA 7.x and earlier Apache-2.0, FA 8+ Xceed Community/commercial, Jeninnet MIT.
+
+## 8. What is never a one-to-one rewrite
+
+Some shapes look mechanical but change meaning when translated. Migrate them by hand and keep the original intent in the test.
+
+| Pattern | Why it is not automatic | Alternative |
+|---|---|---|
+| `ShouldMatchApproved` / `Verify` | Approval tools snapshot files and naming differently, and often auto-accept on first run. | `MatchSnapshot` with an explicit verified file; review the diff. |
+| `DynamicShould...` | `dynamic` calls bind at runtime, so no static rewrite is provable. | Assert on typed locals or explicit `object` casts. |
+| Tolerance, comparer, culture, and `StringComparison` overloads | The fluent verb may select a different comparison. | Choose `BeApproximately`, `Contain(..., StringComparison...)`, or an explicit comparer, then review the result. |
+| NFluent `Which` and composite constraints | The result type and short-circuit behavior differ. | Use `.Which` only when the Jeninnet verb returns it; otherwise split the assertions. |
+| NUnit constraint chains (`Is.GreaterThan`, `Has.Count`, …) | Constraints compose differently from fluent calls. | Write the equivalent verb sequence explicitly. |
+| AA class-level `[CustomAssertions]` | Jeninnet has no class-level attribute. | Mark each custom method with `[CustomAssertion]`, or the assembly with `[CustomAssertionsAssembly]`. |
+| FA 8+ packages | The license is not a code difference. | Decide the license before migrating; do not copy FA 8 source into an MIT project. |
+| `Assert.That(..., Is.Unique)` and set-based membership | Set semantics and multiplicity are easy to mix up. | `OnlyHaveUniqueItems()` for uniqueness; `OnlyContain` for membership; `BeEquivalentTo` for an exact multiset. |
+
+## 9. After the rewrite
 
 1. **Build** — the code fix only proposes what compiles, but your local `using`s and overloads are authoritative.
 2. **Run the tests** — the fluent message is richer, not identical; snapshot-free tests should stay green.
 3. **Read the new messages** — if a failure is unclear, add a `because` reason: `actual.Should().Be(expected, "the total must match the order")`.
 4. **Delete the old framework reference** once a project has no remaining `Assert` calls.
-
-Legacy migration from other assertion libraries (same verbs, renamed a few) is covered separately in [Chapter 10](10-ecosystem.md).

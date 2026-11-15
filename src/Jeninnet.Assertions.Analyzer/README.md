@@ -48,6 +48,26 @@ Safety rules worth knowing:
 - Dictionary `Contains` is left manual (needs `ContainKey`/`ContainValue`).
 - Snapshot tools (`ShouldMatchApproved`, `Verify`) are intentionally not converted (different semantics).
 
+## Migrating from other assertion libraries
+
+The analyzer only rewrites calls from MSTest, xUnit, and NUnit. Shouldly, NFluent, AwesomeAssertions, and
+FluentAssertions use the manual maps in the
+[migration playbook](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/docs/en/10-migration.md)
+([العربية](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/docs/ar/10-migration.md)).
+
+The analyzer stays silent for these shapes; migrate them by hand:
+
+| Pattern | Why it stays manual | Jeninnet alternative |
+|---|---|---|
+| Equality with tolerance, comparer, or culture | The fluent verb may select a different comparison. | `BeApproximately`, an explicit comparer, or a culture-aware assertion with review. |
+| `ShouldMatchApproved` / `Verify` | Approval-file naming and acceptance differ. | `MatchSnapshot` with a committed verified file. |
+| `Assert.Throws` with a complex `WithMessage` | Message wildcards and exception wrapping differ. | `Throw<T>().WithMessage(...)` after checking the contract. |
+| NUnit constraints beyond `Is.EqualTo`/`Is.True`/`Is.False`/`Is.Null` | Constraints compose differently from fluent calls. | Write the equivalent verb sequence explicitly. |
+| `DynamicShould...` | `dynamic` binds at runtime, so no static rewrite is provable. | Explicit assertions on typed locals. |
+| `Assert.That(..., Is.Unique)` | Set semantics and multiplicity are easy to mix up. | `OnlyHaveUniqueItems()`; use `BeEquivalentTo` only for exact multisets. |
+| AwesomeAssertions class-level `[CustomAssertions]` | Jeninnet has no class-level equivalent. | `[CustomAssertion]` per method or `[CustomAssertionsAssembly]` per assembly. |
+| FluentAssertions 8+ packages | The difference is licensing, not code. | Decide the license before any migration; do not copy FA 8 source into an MIT project. |
+
 ## License
 
 MIT — see [LICENSE](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/LICENSE).

@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Migration guides for Shouldly, NFluent, and AwesomeAssertions/FluentAssertions in the migration
+  playbook (English + Arabic), including the exact license differences (Shouldly BSD-3-Clause,
+  NFluent/AA Apache-2.0, FA 7.x Apache-2.0 vs FA 8+ Xceed Community/commercial), a table of shapes
+  that are never a one-to-one rewrite, and links from the README and analyzer README.
 - Performance and release hardening: a BenchmarkDotNet project covering hot success/failure verbs,
   `AssertionScope` aggregation, equivalency on small and 500-object graphs, and snapshot verification;
   expanded allocation invariants (`AssertionScope`, equivalency, `ExecutionTime`); a package-verification

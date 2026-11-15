@@ -2,7 +2,7 @@
 
 # دليل الهجرة — من التوكيدات الكلاسيكية إلى <code dir="ltr">Should()</code>
 
-هذا الدليل رفيق [الفصل 10](10-ecosystem.md). يشرح محلِّل Roslyn الاختياري (<code dir="ltr">Jeninnet.Assertions.Analyzer</code>) عبر كل إطار يفهمه، ويُظهر إعادة الكتابة التي ينتجها، ويسرد ما يتركه للتحويل اليدوي. والمقصود هجرة تُنفَّذ اقتراحًا اقتراحًا ويمكن مراجعة كل فرق فيها، لا استبدالًا جماعيًّا يتعذّر تتبّعه.
+هذا الدليل رفيق [الفصل 10](10-ecosystem.md). يشرح محلِّل Roslyn الاختياري (<code dir="ltr">Jeninnet.Assertions.Analyzer</code>) عبر كل إطار يفهمه، ويُظهر إعادة الكتابة التي ينتجها، ويسرد ما يتركه للتحويل اليدوي. والمقصود هجرة تُنفَّذ اقتراحًا اقتراحًا ويمكن مراجعة كل فرق فيها، لا استبدالًا جماعيًّا يتعذّر تتبّعه. أما الأقسام اللاحقة فتعيّن Shouldly وNFluent وAwesomeAssertions/FluentAssertions يدويًّا، بما في ذلك الأشكال التي لا يجوز ترجمتها واحدًا لواحد.
 
 وشرطا كل اقتراح واضحان: أن يترجم الكود الناتج، وأن تكون دلالته هي دلالة الأصل. والشرط الأول وحده لا يكفي؛ فالتحويل الذي يترجم ويغيّر الدلالة يعبر فحص البناء ثم يظهر أثره بعد الالتزام: توكيد ينجح لأنه يقارن أوسع مما كان الأصل يقارنه، أو يفشل عند أول قيمة حدّية كانت القاعدة القديمة تعالجها علاجًا آخر. ولهذا اقتصرت الاقتراحات على صيغ محدَّدة يمكن إثبات تكافؤها واحدةً واحدة، وما لا يمكن إثباته لا يُقترح فيه شيء ويحوَّل يدويًّا مع مراجعة.
 
@@ -118,14 +118,85 @@ dotnet add package Jeninnet.Assertions.Analyzer
 
 والقائمة السابقة ليست ثغرات في المحلِّل، بل تعيين لحدود الأمان فيه. كل بند منها حالة يبدو فيها التحويل المباشر صحيحًا وهو يغيّر الدلالة: <code dir="ltr">Assert.AreEqual(5.0, value, 0.1)</code> يقارن بسماحية معلنة، ونقله إلى <code dir="ltr">Be</code> يحوّله إلى مقارنة صارمة تفشل عند أول انحراف كان الأصل يقبله. و<code dir="ltr">ignoreCase</code> يثبت قرارًا لغويًّا لا يستطيع المحلِّل استنتاجه من الوسيطين، فيمتنع عن الاقتراح وإن كان النقل الحرفي ممكنًا. وفي الحالتين يكون التحويل اليدوي هو الموضع الذي تبقى فيه الدلالة الأصلية موثقة وقابلة للمراجعة.
 
-## 5. بعد إعادة الكتابة
+## 5. القدوم من Shouldly
+
+يعرض Shouldly توكيداته كامتدادات على الموضوع (<code dir="ltr">ShouldBe</code> و<code dir="ltr">ShouldThrow</code> …)، فمعظم الهجرة إعادة تسمية إلى <code dir="ltr">Should().*</code>. وShouldly بترخيص BSD-3-Clause؛ والجدول يعيّن القصد لا كل حمولة.
+
+| Shouldly | Jeninnet | ملاحظات |
+|---|---|---|
+| <code dir="ltr">value.ShouldBe(x)</code> | <code dir="ltr">value.Should().Be(x)</code> | مساواة القيمة والمرجع تتبع نوع الموضوع. |
+| <code dir="ltr">value.ShouldNotBe(x)</code> | <code dir="ltr">value.Should().NotBe(x)</code> | |
+| <code dir="ltr">value.ShouldBeNull()</code> / <code dir="ltr">ShouldNotBeNull()</code> | <code dir="ltr">value.Should().BeNull()</code> / <code dir="ltr">NotBeNull()</code> | |
+| <code dir="ltr">value.ShouldBeTrue()</code> / <code dir="ltr">ShouldBeFalse()</code> | <code dir="ltr">value.Should().BeTrue()</code> / <code dir="ltr">BeFalse()</code> | |
+| <code dir="ltr">value.ShouldBeOfType&lt;T&gt;()</code> | <code dir="ltr">value.Should().BeOfType&lt;T&gt;()</code> | استخدم <code dir="ltr">BeAssignableTo&lt;T&gt;()</code> عندما تُقبل الأنواع المشتقة. |
+| <code dir="ltr">value.ShouldBeAssignableTo&lt;T&gt;()</code> | <code dir="ltr">value.Should().BeAssignableTo&lt;T&gt;()</code> | |
+| <code dir="ltr">value.ShouldBeOneOf(a, b)</code> | <code dir="ltr">value.Should().BeOneOf([a, b])</code> | <code dir="ltr">ObjectAssertions.BeOneOf</code> يأخذ تسلسلًا؛ ولتوكيدات النصوص حمولة <code dir="ltr">params</code> أيضًا. |
+| <code dir="ltr">value.ShouldBeInRange(a, b)</code> | <code dir="ltr">value.Should().BeInRange(a, b)</code> | متاح حيث يكون الموضوع قابلًا للمقارنة. |
+| <code dir="ltr">value.ShouldBeCloseTo(x, tolerance)</code> | <code dir="ltr">value.Should().BeApproximately(x, tolerance)</code> | <code dir="ltr">tolerance</code> هو أقصى فرق مطلق، لا عدد منازل عشرية. |
+| <code dir="ltr">value.ShouldMatch(regex)</code> | <code dir="ltr">value.Should().MatchRegex(regex)</code> | Shouldly يطابق تعبيرًا نمطيًّا؛ و<code dir="ltr">Match</code> مطابقة wildcard، فلا تستبدله بها. |
+| <code dir="ltr">action.ShouldThrow&lt;T&gt;()</code> | <code dir="ltr">action.Should().Throw&lt;T&gt;()</code> | <code dir="ltr">Throw</code> يقبل الاستثناءات المشتقة؛ استخدم <code dir="ltr">ThrowExactly&lt;T&gt;()</code> للنوع الدقيق. |
+| <code dir="ltr">action.ShouldNotThrow()</code> | <code dir="ltr">action.Should().NotThrow()</code> | |
+| <code dir="ltr">task.ShouldCompleteIn(timeout)</code> | <code dir="ltr">await task.Should().CompleteWithinAsync(timeout)</code> | الفعل في Jeninnet غير متزامن. |
+| <code dir="ltr">value.ShouldMatchApproved()</code> | <code dir="ltr">value.Should().MatchSnapshot()</code> | دلالات الاعتماد مختلفة؛ راجع قسم اللقطات بدل ترجمة واحد لواحد. |
+| <code dir="ltr">DynamicShould...</code> | لا مقابل | وكِّد على قيم <code dir="ltr">dynamic</code> صراحةً حتى يظهر النوع المتوقع. |
+
+## 6. القدوم من NFluent
+
+يتمركز NFluent حول <code dir="ltr">Check.That(subject).*</code>؛ استبدل الجذر بـ<code dir="ltr">subject.Should()</code> واحتفظ بالفعل. وNFluent بترخيص Apache-2.0.
+
+| NFluent | Jeninnet | ملاحظات |
+|---|---|---|
+| <code dir="ltr">Check.That(x).IsEqualTo(y)</code> | <code dir="ltr">x.Should().Be(y)</code> | |
+| <code dir="ltr">Check.That(x).IsNotEqualTo(y)</code> | <code dir="ltr">x.Should().NotBe(y)</code> | |
+| <code dir="ltr">Check.That(x).IsNull()</code> | <code dir="ltr">x.Should().BeNull()</code> | |
+| <code dir="ltr">Check.That(x).IsInstanceOf&lt;T&gt;()</code> | <code dir="ltr">x.Should().BeOfType&lt;T&gt;()</code> | استخدم <code dir="ltr">BeAssignableTo&lt;T&gt;()</code> عندما تُقبل الأنواع المشتقة. |
+| <code dir="ltr">Check.That(x).IsGreaterThan(y)</code> | <code dir="ltr">x.Should().BeGreaterThan(y)</code> | |
+| <code dir="ltr">Check.That(x).IsInRange(a, b)</code> | <code dir="ltr">x.Should().BeInRange(a, b)</code> | |
+| <code dir="ltr">Check.That(x).Contains(...)</code> | <code dir="ltr">x.Should().Contain(...)</code> | يعمل للنصوص والمجموعات؛ والقواميس تستخدم <code dir="ltr">ContainKey</code>/<code dir="ltr">ContainValue</code>. |
+| <code dir="ltr">Check.That(x).ContainsExactly(...)</code> | <code dir="ltr">x.Should().Equal(...)</code> | <code dir="ltr">Equal</code> يحافظ على الترتيب؛ استخدم <code dir="ltr">BeEquivalentTo</code> فقط عندما لا يهم الترتيب. |
+| <code dir="ltr">Check.That(x).IsOnlyMadeOf(...)</code> | <code dir="ltr">x.Should().OnlyContain(item =&gt; allowed.Contains(item))</code> | إن كان التعدد الدقيق هو العقد فاستخدم <code dir="ltr">BeEquivalentTo</code>؛ و<code dir="ltr">OnlyContain</code> يحفظ معنى العضوية. |
+| <code dir="ltr">Check.That(x).IsInAscendingOrder()</code> | <code dir="ltr">x.Should().BeInAscendingOrder()</code> | |
+| <code dir="ltr">Check.That(x).HasSize(n)</code> | <code dir="ltr">x.Should().HaveCount(n)</code> | |
+| <code dir="ltr">Check.That(x).IsEmpty()</code> | <code dir="ltr">x.Should().BeEmpty()</code> | |
+| <code dir="ltr">Check.That(code).Throws&lt;T&gt;()</code> | <code dir="ltr">code.Should().Throw&lt;T&gt;()</code> | استخدم <code dir="ltr">ThrowExactly&lt;T&gt;()</code> عندما يكون النوع الدقيق هو العقد. |
+| <code dir="ltr">Check.That(code).LastsLessThan(ms)</code> | <code dir="ltr">Action action = code; action.ExecutionTime().Should().BeLessThan(...)</code> | قِس الفعل صراحةً؛ لا زمن مخفيًّا داخل فعل. |
+| <code dir="ltr">Check.That(x).Which</code> | <code dir="ltr">.Which</code> حيث يعيده الفعل، وإلا <code dir="ltr">.And</code> | شكل التسلسل يعتمد على نوع إرجاع الفعل. |
+| <code dir="ltr">Check.ThatEnum(e)</code> | <code dir="ltr">e.Should()</code> | توكيدات التعداد تعرض أفعاله المخصصة. |
+| <code dir="ltr">Check.That(x).Extracting(...)</code> | <code dir="ltr">x.Select(...).Should()</code> | أو استخدم <code dir="ltr">OnlyHaveUniqueItems(selector)</code> بالمفتاح عندما يكون القصد التفرّد. |
+
+## 7. القدوم من AwesomeAssertions أو FluentAssertions
+
+AwesomeAssertions (AA) شوكة مجتمعية من FluentAssertions (FA). وAA بترخيص Apache-2.0. أما FA 7.x وما قبلها فبترخيص Apache-2.0 أيضًا؛ وFA 8 وما بعدها تستخدم Xceed Community License — مجانية للاستخدام غير التجاري، ويتطلب الاستخدام التجاري ترخيصًا مدفوعًا من Xceed. وJeninnet بترخيص MIT ومستقلة عن كلتيهما.
+
+تتبع واجهة AA إصدار FA 7.x عن قرب، فتنطبق مادة الهجرة الموجّهة إلى FA في [الفصل 10](10-ecosystem.md). والفروق الميكانيكية هي:
+
+- **الحزمة ومساحة الأسماء.** كان AA 8.x بديلًا مباشرًا يحتفظ بمساحة اسم <code dir="ltr">FluentAssertions</code> واسم التجميع نفسه. أما AA 9 فغيّر كليهما إلى <code dir="ltr">AwesomeAssertions</code>. في الحالتين استبدل <code dir="ltr">using</code> بـ<code dir="ltr">using Jeninnet.Assertions;</code>.
+- **بيانات الامتداد.** يملك AA <code dir="ltr">[CustomAssertion]</code> على الطرق، و<code dir="ltr">[CustomAssertions]</code> على الأصناف، و<code dir="ltr">[CustomAssertionsAssembly]</code> على التجميعات. ويملك Jeninnet <code dir="ltr">[CustomAssertion]</code> و<code dir="ltr">[CustomAssertionsAssembly]</code>؛ ولا يوجد مقابل على مستوى الصنف بعد، فوسم كل طريقة مخصصة.
+- **بيانات المعاملات.** لا يتضمن سطح Jeninnet الحالي عائلة توكيدات مخصصة لـ<code dir="ltr">ParameterInfo</code>؛ وكِّد خصائص <code dir="ltr">ParameterInfo</code> التي تحتاجها بأفعال القيم.
+- **مناطق خاصة بـJeninnet.** التوطين والساعة الحتمية وبنية IO وتوكيدات التخصيص ولقطات v2 لا مقابل لها في FA/AA للهجرة منها.
+- **الترخيص.** احفظ ترخيص المكتبة التي تزيلها في ملاحظات المراجعة: Shouldly BSD-3-Clause، وNFluent وAA Apache-2.0، وFA 7.x وما قبلها Apache-2.0، وFA 8+ Xceed Community/تجاري، وJeninnet MIT.
+
+## 8. ما لا يُحوَّل واحدًا لواحد أبدًا
+
+بعض الأشكال تبدو ميكانيكية لكنها تغيّر المعنى عند ترجمتها. حوّلها يدويًّا واحفظ القصد الأصلي في الاختبار.
+
+| النمط | لماذا لا يُحوَّل تلقائيًّا | البديل |
+|---|---|---|
+| <code dir="ltr">ShouldMatchApproved</code> / <code dir="ltr">Verify</code> | أدوات الاعتماد تُسمّي الملفات وتلتقطها بطريقة مختلفة، وغالبًا تقبل أول تشغيل تلقائيًّا. | <code dir="ltr">MatchSnapshot</code> بملف verified صريح، مع مراجعة الفرق. |
+| <code dir="ltr">DynamicShould...</code> | استدعاءات <code dir="ltr">dynamic</code> تُربط وقت التشغيل، فلا يمكن إثبات تحويل ساكن. | وكِّد على متغيرات محلية نوعية أو تحويلات <code dir="ltr">object</code> صريحة. |
+| حمولات السماحية والمقارن والثقافة و<code dir="ltr">StringComparison</code> | قد يختار الفعل الانسيابي مقارنة مختلفة. | اختر <code dir="ltr">BeApproximately</code> أو <code dir="ltr">Contain(..., StringComparison...)</code> أو مقارنًا صريحًا، ثم راجع النتيجة. |
+| سلاسل <code dir="ltr">Which</code> والقيود المركبة في NFluent | نوع النتيجة وسلوك الاختصار مختلفان. | استخدم <code dir="ltr">.Which</code> فقط عندما يعيده فعل Jeninnet؛ وإلا فقسّم التوكيدات. |
+| سلاسل قيود NUnit (<code dir="ltr">Is.GreaterThan</code> و<code dir="ltr">Has.Count</code> …) | القيود تُركَّب بطريقة مختلفة عن الاستدعاءات الانسيابية. | اكتب تسلسل الأفعال المكافئ صراحةً. |
+| <code dir="ltr">[CustomAssertions]</code> على مستوى الصنف في AA | لا يملك Jeninnet سمة على مستوى الصنف. | ضع <code dir="ltr">[CustomAssertion]</code> على كل طريقة مخصصة، أو <code dir="ltr">[CustomAssertionsAssembly]</code> على التجميع. |
+| حزم FA 8+ | الترخيص ليس فرق كود. | احسم الترخيص قبل الهجرة؛ ولا تنسخ مصدر FA 8 إلى مشروع MIT. |
+| <code dir="ltr">Assert.That(..., Is.Unique)</code> والعضوية المبنية على المجموعات | دلالات المجموعة والتعدد يسهل الخلط بينهما. | <code dir="ltr">OnlyHaveUniqueItems()</code> للتفرّد، و<code dir="ltr">OnlyContain</code> للعضوية، و<code dir="ltr">BeEquivalentTo</code> للتعدد الدقيق. |
+
+## 9. بعد إعادة الكتابة
 
 1. **ابنِ** — لا يقترح الإصلاح إلا ما يُترجَم، لكن <code dir="ltr">usings</code> والحمولات المحلية هي المرجع.
 2. **شغِّل الاختبارات** — الرسالة الانسيابية أغنى وليست مطابقة؛ والاختبارات الخالية من اللقطات تبقى خضراء.
 3. **اقرأ الرسائل الجديدة** — إن غمض فشلٌ، أضِف سببًا <code dir="ltr">because</code>: <code dir="ltr">actual.Should().Be(expected, "the total must match the order")</code>.
 4. **احذف مرجع الإطار القديم** متى خلا مشروع من استدعاءات <code dir="ltr">Assert</code> المتبقية.
-
-أما الهجرة من مكتبات تأكيدات أخرى (نفس الأفعال مع أسماء قليلة متغيّرة) فمغطّاة على حدة في [الفصل 10](10-ecosystem.md).
 
 وبعد اكتمال التحويل لا يُغلق الملف عند آخر استبدال: راجع رسالة فشل واحدة على الأقل من الاختبارات المحوَّلة، وقارن ما تقوله بما كانت تقوله الرسالة القديمة؛ فإن كانت أقل تفصيلًا في موضع مهم، أضِف <code dir="ltr">because</code> هناك مرة واحدة فيبقى تفسير التوقّع موثقًا في الرسالة نفسها. وأجّل حذف مرجع الإطار القديم إلى أن يخلو المشروع من استدعاءات <code dir="ltr">Assert</code> المتبقية، حتى تبقى كل مرحلة قابلة للرجوع إليها إن ظهر ما يستدعي المراجعة.
 
