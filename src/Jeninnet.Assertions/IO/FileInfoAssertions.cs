@@ -11,6 +11,8 @@ namespace Jeninnet.Assertions.IO;
 /// <param name="expression">The caller expression naming the subject under test.</param>
 public sealed class FileInfoAssertions(FileInfo? value, string? expression = null)
     : FileSystemInfoAssertions<FileInfo, FileInfoAssertions>(value, expression, "file") {
+    private const string NEGATIVE_LENGTH_MESSAGE = "Length must not be negative.";
+
     /// <summary>Asserts that the file extension equals <paramref name="expected"/>, with or without a leading dot.</summary>
     /// <remarks>Comparison follows path rules: case-insensitive on Windows, ordinal elsewhere.</remarks>
     /// <param name="expected">The expected extension, for example <c>.txt</c> or <c>txt</c>; an empty string expects no extension.</param>
@@ -69,7 +71,7 @@ public sealed class FileInfoAssertions(FileInfo? value, string? expression = nul
     /// <exception cref="AssertionFailedException">The file is missing or has another length.</exception>
     public AndConstraint<FileInfoAssertions> HaveLength(long expected, string? because = null, params object?[] becauseArgs) {
         if(expected < 0) {
-            throw new ArgumentOutOfRangeException(nameof(expected), "Length must not be negative.");
+            throw new ArgumentOutOfRangeException(nameof(expected), NEGATIVE_LENGTH_MESSAGE);
         }
 
         if(!EnsureExists(because, becauseArgs)) {
@@ -92,7 +94,7 @@ public sealed class FileInfoAssertions(FileInfo? value, string? expression = nul
     /// <exception cref="AssertionFailedException">The file is missing or has that length.</exception>
     public AndConstraint<FileInfoAssertions> NotHaveLength(long unexpected, string? because = null, params object?[] becauseArgs) {
         if(unexpected < 0) {
-            throw new ArgumentOutOfRangeException(nameof(unexpected), "Length must not be negative.");
+            throw new ArgumentOutOfRangeException(nameof(unexpected), NEGATIVE_LENGTH_MESSAGE);
         }
 
         if(!EnsureExists(because, becauseArgs)) {
@@ -115,7 +117,7 @@ public sealed class FileInfoAssertions(FileInfo? value, string? expression = nul
     /// <exception cref="AssertionFailedException">The file is missing or too short.</exception>
     public AndConstraint<FileInfoAssertions> HaveLengthGreaterThan(long expected, string? because = null, params object?[] becauseArgs) {
         if(expected < 0) {
-            throw new ArgumentOutOfRangeException(nameof(expected), "Length must not be negative.");
+            throw new ArgumentOutOfRangeException(nameof(expected), NEGATIVE_LENGTH_MESSAGE);
         }
 
         if(!EnsureExists(because, becauseArgs)) {
@@ -138,7 +140,7 @@ public sealed class FileInfoAssertions(FileInfo? value, string? expression = nul
     /// <exception cref="AssertionFailedException">The file is missing or too long.</exception>
     public AndConstraint<FileInfoAssertions> HaveLengthLessThan(long expected, string? because = null, params object?[] becauseArgs) {
         if(expected < 0) {
-            throw new ArgumentOutOfRangeException(nameof(expected), "Length must not be negative.");
+            throw new ArgumentOutOfRangeException(nameof(expected), NEGATIVE_LENGTH_MESSAGE);
         }
 
         if(!EnsureExists(because, becauseArgs)) {

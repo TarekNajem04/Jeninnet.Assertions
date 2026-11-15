@@ -27,7 +27,7 @@ param(
 
 Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-$targetFrameworks = @('netstandard2.0', 'net6.0', 'net8.0', 'net10.0')
+$targetFrameworks = @('netstandard2.0', 'net6.0', 'net8.0', 'net10.0', 'net11.0')
 $failures = [System.Collections.Generic.List[string]]::new()
 
 function Add-Failure([string]$Message) {
@@ -153,7 +153,7 @@ if ($null -ne $nuspecText) {
 
         $groups = @($metadata.dependencies.group)
         $groupFrameworks = @($groups | ForEach-Object { $_.targetFramework } | Sort-Object)
-        $expectedFrameworks = @('net10.0', 'net6.0', 'net8.0', '.NETStandard2.0') | Sort-Object
+        $expectedFrameworks = @('net11.0', 'net10.0', 'net6.0', 'net8.0', '.NETStandard2.0') | Sort-Object
         if (($groupFrameworks -join ';') -ne ($expectedFrameworks -join ';')) {
             Add-Failure "Nuspec dependency groups '$($groupFrameworks -join ', ')' do not match the four target frameworks."
         }

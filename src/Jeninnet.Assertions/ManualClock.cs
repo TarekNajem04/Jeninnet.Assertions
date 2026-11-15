@@ -19,7 +19,11 @@ namespace Jeninnet.Assertions;
 /// The offset used when reporting <see cref="Now"/>, or <see langword="null"/> to reuse <paramref name="utcNow"/>'s offset.
 /// </param>
 public sealed class ManualClock(DateTimeOffset utcNow, TimeSpan? localOffset = null) : IClock {
+#if NET9_0_OR_GREATER
+    private readonly Lock _sync = new();
+#else
     private readonly object _sync = new();
+#endif
     private readonly TimeSpan _localOffset = localOffset ?? utcNow.Offset;
     private DateTimeOffset _utcNow = utcNow;
 

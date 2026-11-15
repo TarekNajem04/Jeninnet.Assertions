@@ -112,12 +112,12 @@ internal static partial class EquivalencyEngine {
             builder.Append(type.Name).Append(" {");
             ancestors.Add(value);
             foreach(System.Collections.DictionaryEntry entry in dictionary) {
-                builder.AppendLine().Append(new string(' ', (depth + 1) * 2)).Append('[').Append(Truncate(AssertionScope.FormatInvariant(entry.Key))).Append("]: ");
+                builder.AppendLine().Append(' ', (depth + 1) * 2).Append('[').Append(Truncate(AssertionScope.FormatInvariant(entry.Key))).Append("]: ");
                 DumpInto(builder, entry.Value, depth + 1, ancestors, remaining - 1);
             }
 
             ancestors.RemoveAt(ancestors.Count - 1);
-            builder.AppendLine().Append(new string(' ', depth * 2)).Append('}');
+            builder.AppendLine().Append(' ', depth * 2).Append('}');
             return;
         }
 
@@ -126,13 +126,13 @@ internal static partial class EquivalencyEngine {
             ancestors.Add(value);
             var index = 0;
             foreach(var item in items) {
-                builder.AppendLine().Append(new string(' ', (depth + 1) * 2)).Append('[').Append(AssertionScope.FormatInvariant(index)).Append("]: ");
+                builder.AppendLine().Append(' ', (depth + 1) * 2).Append('[').Append(AssertionScope.FormatInvariant(index)).Append("]: ");
                 DumpInto(builder, item, depth + 1, ancestors, remaining - 1);
                 index++;
             }
 
             ancestors.RemoveAt(ancestors.Count - 1);
-            builder.AppendLine().Append(new string(' ', depth * 2)).Append(']');
+            builder.AppendLine().Append(' ', depth * 2).Append(']');
             return;
         }
 
@@ -144,16 +144,16 @@ internal static partial class EquivalencyEngine {
                 memberValue = member.GetValue(value);
             }
             catch(Exception ex) {
-                builder.AppendLine().Append(new string(' ', (depth + 1) * 2)).Append(member.Name).Append(": <threw ").Append(ex.GetType().Name).Append('>');
+                builder.AppendLine().Append(' ', (depth + 1) * 2).Append(member.Name).Append(": <threw ").Append(ex.GetType().Name).Append('>');
                 continue;
             }
 
-            builder.AppendLine().Append(new string(' ', (depth + 1) * 2)).Append(member.Name).Append(": ");
+            builder.AppendLine().Append(' ', (depth + 1) * 2).Append(member.Name).Append(": ");
             DumpInto(builder, memberValue, depth + 1, ancestors, remaining - 1);
         }
 
         ancestors.RemoveAt(ancestors.Count - 1);
-        builder.AppendLine().Append(new string(' ', depth * 2)).Append('}');
+        builder.AppendLine().Append(' ', depth * 2).Append('}');
     }
 
     /// <summary>Lists the public instance properties and fields a dump should render for a type, sorted by name.</summary>

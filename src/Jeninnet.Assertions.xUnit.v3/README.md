@@ -10,7 +10,7 @@ failures as `Xunit.Sdk.XunitException` so xUnit reports them as test failures ra
 dotnet add package Jeninnet.Assertions.xUnit.v3
 ```
 
-The adapter targets `net8.0` and `net10.0`, and pulls the core `Jeninnet.Assertions` package and
+The adapter targets `net8.0`, `net10.0`, and `net11.0`, and pulls the core `Jeninnet.Assertions` package and
 `xunit.v3.assert` automatically. xUnit v2 lives in the separate
 `Jeninnet.Assertions.xUnit` package.
 

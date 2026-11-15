@@ -12,7 +12,7 @@ Add the package to your test project (or any project where you want to write ass
 dotnet add package Jeninnet.Assertions
 ```
 
-This is a single MIT-licensed package with zero test-framework dependencies. It works with MSTest, xUnit, NUnit, or even a plain console application. It multi-targets `netstandard2.0;net6.0;net8.0;net10.0` (HTTP assertions require `net6.0+` only).
+This is a single MIT-licensed package with zero test-framework dependencies. It works with MSTest, xUnit, NUnit, or even a plain console application. It multi-targets `netstandard2.0;net6.0;net8.0;net10.0;net11.0` (HTTP assertions require `net6.0+` only).
 
 The lack of framework coupling is intentional. The library depends only on the BCL (with `System.Text.Json` and `System.Xml.XDocument` for `netstandard2.0`), so it won't pull test framework dependencies into your projects.
 

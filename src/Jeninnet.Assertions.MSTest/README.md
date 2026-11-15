@@ -11,7 +11,7 @@ errors.
 dotnet add package Jeninnet.Assertions.MSTest
 ```
 
-The adapter targets `net6.0`, `net8.0`, and `net10.0`, and pulls the core `Jeninnet.Assertions`
+The adapter targets `net6.0`, `net8.0`, `net10.0`, and `net11.0`, and pulls the core `Jeninnet.Assertions`
 package automatically. Nothing is detected or rewritten: you opt in by wrapping the assertion.
 
 ## Usage

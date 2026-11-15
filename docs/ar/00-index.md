@@ -27,7 +27,7 @@
 - **الفصل ١١**: مُدقِّقات الإنتاج: نفس أفعال <code dir="ltr">Should()</code> تجمع نتيجة بدل أن ترمي.
 - **الفصل ١٢**: اللقطات بعمق: سير عمل <code dir="ltr">.verified</code>/<code dir="ltr">.received</code>، وأدلة كل فشل، ومفتاح التحديث المتعمَّد.
 
-الأمثلة في هذا الكتاب تستند إلى <code dir="ltr">net10.0</code>. تدعم المكتبة الأهداف التالية: <code dir="ltr">netstandard2.0;net6.0;net8.0;net10.0</code>. ملاحظة: توكيدات HTTP تتطلب <code dir="ltr">net6.0</code> فأحدث فقط.
+الأمثلة في هذا الكتاب تستند إلى <code dir="ltr">net11.0</code>. تدعم المكتبة الأهداف التالية: <code dir="ltr">netstandard2.0;net6.0;net8.0;net10.0;net11.0</code>. ملاحظة: توكيدات HTTP تتطلب <code dir="ltr">net6.0</code> فأحدث فقط.
 
 ## المحتويات
 

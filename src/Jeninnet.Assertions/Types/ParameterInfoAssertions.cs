@@ -11,6 +11,7 @@ namespace Jeninnet.Assertions.Types;
 /// <param name="expression">The caller expression naming the subject under test (captured by <c>Should()</c>).</param>
 [method: RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
 public sealed class ParameterInfoAssertions(ParameterInfo? value, string? expression = null) : AssertionsBase(expression, "parameter") {
+    private const string NULL_LITERAL = "<null>";
     private readonly ParameterInfo? _value = value;
 
     /// <summary>Asserts that the parameter is <see langword="null"/>.</summary>
@@ -56,7 +57,7 @@ public sealed class ParameterInfoAssertions(ParameterInfo? value, string? expres
         }
 
         if(!string.Equals(subject.Name, expected, StringComparison.Ordinal)) {
-            Fail(Strings.Format(StringKeys.PARAMETER_BE_NAMED, Expression, expected, subject.Name ?? "<null>"), because, becauseArgs);
+            Fail(Strings.Format(StringKeys.PARAMETER_BE_NAMED, Expression, expected, subject.Name ?? NULL_LITERAL), because, becauseArgs);
         }
 
         return new(this);
@@ -399,9 +400,9 @@ public sealed class ParameterInfoAssertions(ParameterInfo? value, string? expres
         value.IsDefined(typeof(ParamArrayAttribute), inherit: false);
 
     private static string Format(ParameterInfo? value) =>
-        value is null ? "<null>" : $"{value.ParameterType.Name} {value.Name ?? "<return>"}";
+        value is null ? NULL_LITERAL : $"{value.ParameterType.Name} {value.Name ?? "<return>"}";
 
-    private static string Format(Type? value) => value is null ? "<null>" : value.Name;
+    private static string Format(Type? value) => value is null ? NULL_LITERAL : value.Name;
 
-    private static string FormatDefault(object? value) => value is null ? "<null>" : FormatValue(value);
+    private static string FormatDefault(object? value) => value is null ? NULL_LITERAL : FormatValue(value);
 }

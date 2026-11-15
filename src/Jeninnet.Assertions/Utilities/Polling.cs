@@ -81,7 +81,15 @@ internal static class Polling {
             }
         }
 
-        var completed = await Task.WhenAny(task, Task.Delay(timeout));
+#pragma warning disable CA2027 // netstandard2.0 has no Task.WaitAsync; the delay is canceled as soon as the race settles.
+        using var timeoutCancellation = new CancellationTokenSource();
+        var completed = await Task.WhenAny(task, Task.Delay(timeout, timeoutCancellation.Token));
+#if NET8_0_OR_GREATER
+        await timeoutCancellation.CancelAsync().ConfigureAwait(false);
+#else
+        timeoutCancellation.Cancel();
+#endif
+#pragma warning restore CA2027
         if(!ReferenceEquals(completed, task)) {
             return new ThrowAttempt(true, null);
         }

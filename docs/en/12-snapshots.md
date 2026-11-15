@@ -43,7 +43,7 @@ node.Should().MatchSnapshot("payload", directory, options => options
 
 `IgnoreJsonProperty("$.metadata.timestamp")` removes one property path before scrubbing and comparison; `IgnoreMembersNamed("etag", "timestamp")` removes matching property names at every depth. Only property paths are supported (no array indexes or wildcards). A missing path or name is a no-op, and invalid JSON is left unchanged. `UseProjectRelativeDirectory()` resolves the default folder from the nearest `*.csproj` as `<projectDir>/__snapshots__`; without a project file it falls back to the caller-relative folder, and an explicit snapshots directory always wins. Project lookups are cached per caller directory.
 
-`UseDirectory` stays inside the resolved snapshots folder; `UseFileName` must remain a bare name. `UseParameters` has no test-framework dependency, so pair it with explicit `UseTextForParameters`. `UniqueFor*` suffixes are stable (`_win`, `_net10.0`, `_x64`, and so on) and are off by default.
+`UseDirectory` stays inside the resolved snapshots folder; `UseFileName` must remain a bare name. `UseParameters` has no test-framework dependency, so pair it with explicit `UseTextForParameters`. `UniqueFor*` suffixes are stable (`_win`, `_net11.0`, `_x64`, and so on) and are off by default.
 
 `SortProperties` sorts JSON object keys recursively; `IndentSize` adjusts JSON/XML indentation. `IgnoreLineEndingDifferences` and `IgnoreWhiteSpaceDifferences` relax comparison only. Type/member scrubbers activate when the snapshotted root matches the type or exposes the member; they transform the serialized text, not individual graph nodes.
 

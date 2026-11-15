@@ -181,7 +181,7 @@ public sealed class SnapshotOptions {
         return this;
     }
 
-    /// <summary>Adds the target framework suffix (<c>_net6.0</c>, <c>_net8.0</c>, <c>_net10.0</c>, or <c>_netstandard2.0</c>).</summary>
+    /// <summary>Adds the target framework suffix (<c>_net6.0</c>, <c>_net8.0</c>, <c>_net10.0</c>, <c>_net11.0</c>, or <c>_netstandard2.0</c>).</summary>
     /// <param name="enabled">Whether the suffix is enabled.</param>
     /// <returns>This instance for chaining.</returns>
     public SnapshotOptions UniqueForTargetFramework(bool enabled = true) {

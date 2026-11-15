@@ -11,7 +11,7 @@
   <path d="M84 84 L94 94 L112 72" fill="none" stroke="#FFFFFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
   <text x="148" y="104" font-family="Segoe UI, Arial, sans-serif" font-size="54" font-weight="bold" fill="#FFFFFF">Jeninnet.Assertions</text>
   <text x="148" y="146" font-family="Segoe UI, Arial, sans-serif" font-size="25" fill="#9AA4B2">The diagnostic surface of your test suite.</text>
-  <text x="64" y="192" font-family="Consolas, 'Courier New', monospace" font-size="21" fill="#8B949E">MIT · netstandard2.0 – net10.0 · zero third-party dependencies</text>
+  <text x="64" y="192" font-family="Consolas, 'Courier New', monospace" font-size="21" fill="#8B949E">MIT · netstandard2.0 – net11.0 · zero third-party dependencies</text>
   <rect x="64" y="232" width="1072" height="336" rx="14" fill="#0D1117" stroke="#30363D" stroke-width="2"/>
   <line x1="66" y1="284" x2="1134" y2="284" stroke="#30363D" stroke-width="2"/>
   <circle cx="96" cy="258" r="7" fill="#F85149"/>

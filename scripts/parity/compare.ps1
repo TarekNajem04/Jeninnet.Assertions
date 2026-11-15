@@ -41,7 +41,7 @@
   pwsh scripts/parity/compare.ps1
 
 .EXAMPLE
-  pwsh scripts/parity/compare.ps1 -Refresh -OurAssembly src/Jeninnet.Assertions/bin/Release/net10.0/Jeninnet.Assertions.dll
+  pwsh scripts/parity/compare.ps1 -Refresh -OurAssembly src/Jeninnet.Assertions/bin/Release/net11.0/Jeninnet.Assertions.dll
 #>
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'Refresh', Justification = 'Used by helper functions through script scope.')]
 [Diagnostics.CodeAnalysis.SuppressMessageAttribute('PSReviewUnusedParameter', 'Quiet', Justification = 'Used by helper functions through script scope.')]
@@ -178,7 +178,7 @@ function Get-TargetAssembly {
         throw "No lib/ folder in $PackageDirectory"
     }
 
-    $preferredFrameworks = @('net10.0', 'net9.0', 'net8.0', 'net6.0', 'netstandard2.1', 'netstandard2.0')
+    $preferredFrameworks = @('net11.0', 'net10.0', 'net9.0', 'net8.0', 'net6.0', 'netstandard2.1', 'netstandard2.0')
     $frameworkDirectory = $null
     foreach($framework in $preferredFrameworks) {
         $candidate = Get-ChildItem -LiteralPath $libDirectory -Directory | Where-Object { $_.Name -eq $framework } | Select-Object -First 1

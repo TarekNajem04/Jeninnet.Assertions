@@ -61,7 +61,15 @@ internal static class ConcurrencyStress {
         }
 
         var all = Task.WhenAll(tasks);
-        var winner = await Task.WhenAny(all, Task.Delay(timeout)).ConfigureAwait(false);
+#pragma warning disable CA2027 // netstandard2.0 has no Task.WaitAsync; the delay is canceled as soon as the race settles.
+        using var timeoutCancellation = new CancellationTokenSource();
+        var winner = await Task.WhenAny(all, Task.Delay(timeout, timeoutCancellation.Token)).ConfigureAwait(false);
+#if NET8_0_OR_GREATER
+        await timeoutCancellation.CancelAsync().ConfigureAwait(false);
+#else
+        timeoutCancellation.Cancel();
+#endif
+#pragma warning restore CA2027
         if(winner != all) {
             return new ConcurrencyStressResult(failures, tasks.Count(static task => !task.IsCompleted));
         }
