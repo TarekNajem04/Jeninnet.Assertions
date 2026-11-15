@@ -62,8 +62,16 @@ public class EventMonitorAssertions(EventMonitor monitor, string? expression = n
             throw new ArgumentNullException(nameof(eventName));
         }
 
-        RaiseTimes(eventName, Exactly.Once(), because, becauseArgs);
-        return Raise(eventName, because, becauseArgs);
+        var matches = _monitor.GetRecordingFor(eventName);
+        if(matches.Count == 1) {
+            return new OccurredEventAssertions(this, matches[0], $"event '{eventName}'");
+        }
+
+        Fail(Strings.Format(StringKeys.EVENT_RAISE_TIMES, Expression, eventName, Exactly.Once().Expectation, AssertionScope.FormatInvariant(matches.Count)), because, becauseArgs);
+        var fallback = matches.Count > 0
+            ? matches[0]
+            : new OccurredEvent(eventName, null, [], AssertionClock.Current.UtcNow.UtcDateTime);
+        return new OccurredEventAssertions(this, fallback, $"event '{eventName}'");
     }
 
     /// <summary>Asserts that <paramref name="eventName"/> was raised as often as <paramref name="occurrence"/> requires.</summary>

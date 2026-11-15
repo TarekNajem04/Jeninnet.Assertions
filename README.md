@@ -369,7 +369,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Identity: `BeNull` / `NotBeNull`, `BeNamed` / `NotBeNamed`, `BeOfType<T>` / `BeOfType(Type)` (+negatives)
 - Contract: `BeOptional` / `BeRequired`, `HaveDefaultValue` / `NotHaveDefaultValue`, `HavePosition` / `NotHavePosition`
 - Modifiers: `BeOut`, `BeIn`, `BeRef`, `BeParams` (+negatives)
-- Attributes: `BeDecoratedWith<TAttribute>` / `NotBeDecoratedWith<TAttribute>`
+- Attributes: `BeDecoratedWith<TAttribute>` (+`Which`) / `NotBeDecoratedWith<TAttribute>`
 - `HaveDefaultValue(null)` succeeds only for an explicit null default, not for a parameter without one
 
 </details>

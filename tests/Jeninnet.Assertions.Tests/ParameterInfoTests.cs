@@ -152,6 +152,7 @@ public class ParameterInfoTests {
         var plain = GetParameter(nameof(PlainParameters), 0);
 
         decorated.Should().BeDecoratedWith<MarkerAttribute>();
+        decorated.Should().BeDecoratedWith<MarkerAttribute>().Which.Should().BeOfType<MarkerAttribute>();
         plain.Should().NotBeDecoratedWith<MarkerAttribute>();
 
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => plain.Should().BeDecoratedWith<MarkerAttribute>());

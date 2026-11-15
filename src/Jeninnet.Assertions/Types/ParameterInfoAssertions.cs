@@ -321,22 +321,24 @@ public sealed class ParameterInfoAssertions(ParameterInfo? value, string? expres
         return new(this);
     }
 
-    /// <summary>Asserts that the parameter is decorated with <typeparamref name="TAttribute"/>.</summary>
+    /// <summary>Asserts that the parameter is decorated with <typeparamref name="TAttribute"/> and exposes the first matching attribute.</summary>
     /// <typeparam name="TAttribute">The expected attribute type.</typeparam>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
-    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <returns>An <see cref="AndWhichConstraint{TParent, T}"/> wrapping the first matching attribute.</returns>
     /// <exception cref="AssertionFailedException">The attribute is absent.</exception>
-    public AndConstraint<ParameterInfoAssertions> BeDecoratedWith<TAttribute>(string? because = null, params object?[] becauseArgs) where TAttribute : Attribute {
+    public AndWhichConstraint<ParameterInfoAssertions, TAttribute> BeDecoratedWith<TAttribute>(string? because = null, params object?[] becauseArgs) where TAttribute : Attribute {
         if(!TryGetSubject(out var subject, because, becauseArgs)) {
-            return new(this);
+            return new(this, null!);
         }
 
-        if(!subject.IsDefined(typeof(TAttribute), inherit: false)) {
+        var attribute = subject.GetCustomAttributes(typeof(TAttribute), inherit: false).OfType<TAttribute>().FirstOrDefault();
+        if(attribute is null) {
             Fail(Strings.Format(StringKeys.PARAMETER_BE_DECORATED, Expression, typeof(TAttribute).Name), because, becauseArgs);
+            return new(this, null!);
         }
 
-        return new(this);
+        return new(this, attribute);
     }
 
     /// <summary>Asserts that the parameter is not decorated with <typeparamref name="TAttribute"/>.</summary>

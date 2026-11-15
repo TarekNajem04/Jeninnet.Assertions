@@ -26,7 +26,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   enumerates the source exactly once.
 - `char` assertions (`Be` / `NotBe`, Unicode categories, casing, ASCII, with negatives) and
   `ParameterInfo` assertions (name, exact type, optional/required, explicit default values,
-  `out`/`ref`/`in`/`params`, position, attributes, null handling), both localized and covered by
+  `out`/`ref`/`in`/`params`, position, attributes (+`Which`), null handling), both localized and covered by
   tests; the `ParameterInfo` entry point carries `RequiresUnreferencedCode`.
 - Migration guides for Shouldly, NFluent, and AwesomeAssertions/FluentAssertions in the migration
   playbook (English + Arabic), including the exact license differences (Shouldly BSD-3-Clause,
@@ -150,5 +150,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Security
 
+- `TestEnvironment` no longer interpolates file-system paths into a `chmod` command line. It uses
+  `File.SetUnixFileMode` on .NET 7+, `ProcessStartInfo.ArgumentList` on .NET 6, and a safely escaped
+  argument only on the `netstandard2.0` fallback, preventing argument injection through hostile paths.
 - `TestEnvironment` now rejects absolute paths and relative paths that escape `Root` before any
   file-system operation; `CreateTree` and `CreateFiles` validate every path before creating entries.

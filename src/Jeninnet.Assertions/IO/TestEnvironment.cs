@@ -187,17 +187,8 @@ public sealed class TestEnvironment : IDisposable {
             Directory.CreateDirectory(targetPath);
         }
 
-        if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-            try {
-                var process = Process.Start("/usr/bin/chmod", $"000 \"{targetPath}\"");
-                process?.WaitForExit();
-                if(process?.ExitCode == 0) {
-                    return;
-                }
-            }
-            catch {
-                /* Ignore failures to set attributes, as this is just a test environment setup. */
-            }
+        if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows) && TrySetUnixPermissions(targetPath, "000")) {
+            return;
         }
 
         try {
@@ -344,13 +335,12 @@ public sealed class TestEnvironment : IDisposable {
 
     /// <summary>Clears read-only and hidden attributes across a directory tree so cleanup can delete it.</summary>
     /// <param name="path">The root path whose entries are reset (best effort; failures are ignored).</param>
-    /// <remarks>On non-Windows platforms it also restores <c>755</c> permissions via <c>chmod</c>.</remarks>
+    /// <remarks>On non-Windows platforms it restores <c>755</c> permissions through the native API, with a safely escaped <c>chmod</c> fallback.</remarks>
     private static void ResetAttributesRecursive(string path) {
         foreach(var entry in Directory.EnumerateFileSystemEntries(path, "*", SearchOption.AllDirectories)) {
             try {
                 if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-                    var process = Process.Start("/usr/bin/chmod", $"755 \"{entry}\"");
-                    process?.WaitForExit();
+                    _ = TrySetUnixPermissions(entry, "755");
                 }
 
                 File.SetAttributes(entry, FileAttributes.Normal);
@@ -362,8 +352,7 @@ public sealed class TestEnvironment : IDisposable {
 
         try {
             if(!RuntimeInformation.IsOSPlatform(OSPlatform.Windows)) {
-                var process = Process.Start("/usr/bin/chmod", $"755 \"{path}\"");
-                process?.WaitForExit();
+                _ = TrySetUnixPermissions(path, "755");
             }
 
             File.SetAttributes(path, FileAttributes.Normal);
@@ -372,4 +361,61 @@ public sealed class TestEnvironment : IDisposable {
             /* Ignore failures to reset attributes, as this is just a cleanup operation. */
         }
     }
+
+    /// <summary>Applies Unix permissions natively where available, falling back to a safely-escaped <c>chmod</c> invocation.</summary>
+    /// <param name="path">The file or directory path.</param>
+    /// <param name="octalMode">The supported mode: <c>000</c> or <c>755</c>.</param>
+    /// <returns><see langword="true"/> when the mode was applied; otherwise <see langword="false"/>.</returns>
+    private static bool TrySetUnixPermissions(string path, string octalMode) {
+#if NET7_0_OR_GREATER
+        if(!OperatingSystem.IsWindows()) {
+            try {
+                var mode = octalMode == "000"
+                    ? UnixFileMode.None
+                    : UnixFileMode.UserRead | UnixFileMode.UserWrite | UnixFileMode.UserExecute
+                      | UnixFileMode.GroupRead | UnixFileMode.GroupExecute
+                      | UnixFileMode.OtherRead | UnixFileMode.OtherExecute;
+                File.SetUnixFileMode(path, mode);
+                return true;
+            }
+            catch {
+                // Fall through to chmod for file systems that reject the managed API.
+            }
+        }
+#endif
+
+#if NET6_0_OR_GREATER
+        if(OperatingSystem.IsWindows()) {
+            return false;
+        }
+#endif
+
+        try {
+            var startInfo = new ProcessStartInfo("/usr/bin/chmod") { UseShellExecute = false };
+#if NET6_0_OR_GREATER
+            startInfo.ArgumentList.Add(octalMode);
+            startInfo.ArgumentList.Add(path);
+#else
+            startInfo.Arguments = octalMode + " " + QuoteUnixArgument(path);
+#endif
+            using var process = Process.Start(startInfo);
+            if(process is null) {
+                return false;
+            }
+
+            process.WaitForExit();
+            return process.ExitCode == 0;
+        }
+        catch {
+            return false;
+        }
+    }
+
+#if NETSTANDARD2_0
+    /// <summary>Quotes one Unix process argument so a path cannot inject additional <c>chmod</c> arguments.</summary>
+    /// <param name="value">The raw argument.</param>
+    /// <returns>The escaped, double-quoted argument.</returns>
+    private static string QuoteUnixArgument(string value) =>
+        "\"" + value.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+#endif
 }

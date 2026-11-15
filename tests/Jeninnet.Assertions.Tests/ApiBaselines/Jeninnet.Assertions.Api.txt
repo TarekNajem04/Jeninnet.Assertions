@@ -1867,7 +1867,6 @@ type Jeninnet.Assertions.Types.MethodInfoSelectorAssertions
   property System.Collections.Generic.IEnumerable<System.Reflection.MethodInfo> SubjectMethods { get; }
 type Jeninnet.Assertions.Types.ParameterInfoAssertions
   ctor(System.Reflection.ParameterInfo, System.String)
-  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> BeDecoratedWith<TAttribute>(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> BeIn(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> BeNamed(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> BeNull(System.String, System.Object[])
@@ -1891,6 +1890,7 @@ type Jeninnet.Assertions.Types.ParameterInfoAssertions
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> NotBeRef(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> NotHaveDefaultValue(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions> NotHavePosition(System.Int32, System.String, System.Object[])
+  method Jeninnet.Assertions.AndWhichConstraint<Jeninnet.Assertions.Types.ParameterInfoAssertions,TAttribute> BeDecoratedWith<TAttribute>(System.String, System.Object[])
 type Jeninnet.Assertions.Types.PropertyInfoAssertions
   ctor(System.Reflection.PropertyInfo, System.String)
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.PropertyInfoAssertions> BeAbstract(System.String, System.Object[])

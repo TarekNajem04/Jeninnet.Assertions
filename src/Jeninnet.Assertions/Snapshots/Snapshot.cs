@@ -115,14 +115,27 @@ internal static class Snapshot {
         try {
             var startInfo = new ProcessStartInfo(executablePath) {
                 UseShellExecute = false,
-                Arguments = $"\"{verifiedPath}\" \"{receivedPath}\"",
             };
+#if NET6_0_OR_GREATER
+            startInfo.ArgumentList.Add(verifiedPath);
+            startInfo.ArgumentList.Add(receivedPath);
+#else
+            startInfo.Arguments = QuoteArgument(verifiedPath) + " " + QuoteArgument(receivedPath);
+#endif
             using var process = Process.Start(startInfo);
         }
         catch(Exception) {
             // The diff tool is a convenience; a missing or failing executable must not hide the snapshot failure.
         }
     }
+
+#if NETSTANDARD2_0
+    /// <summary>Quotes one process argument so a snapshot path cannot inject extra diff-tool arguments.</summary>
+    /// <param name="value">The raw argument.</param>
+    /// <returns>The escaped, double-quoted argument.</returns>
+    private static string QuoteArgument(string value) =>
+        "\"" + value.Replace("\\", "\\\\").Replace("\"", "\\\"") + "\"";
+#endif
 }
 
 /// <summary>The caller context of one snapshot verification: the subject expression, the calling source file, and the <c>because</c> clause.</summary>
