@@ -9,6 +9,21 @@ namespace Jeninnet.Assertions.Tests;
 [TestClass]
 public class SnapshotTests {
     [TestMethod]
+    public void Options_RejectNullArguments() {
+        var options = new SnapshotOptions();
+        string[] namesWithNull = [null!];
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.Scrub(null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.AddScrubber(null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.AddScrubberByType(null!, static text => text));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.AddScrubberByType(typeof(object), null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.AddScrubberByMember(null!, static text => text));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.AddScrubberByMember("member", null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.IgnoreMembersNamed(namesWithNull));
+        Assert.ThrowsExactly<ArgumentOutOfRangeException>(() => options.IndentSize(-1));
+    }
+
+    [TestMethod]
     public void MatchSnapshot_PassForMatchingBaseline() {
         using var environment = new TestEnvironment();
         var directory = environment.CreateDirectory("snaps");
