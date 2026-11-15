@@ -60,9 +60,8 @@ internal sealed class TypeDependencyGraph {
         var selected = new HashSet<Type>(nodes);
         var adjacency = new Dictionary<Type, Type[]>(nodes.Length);
         foreach(var node in nodes) {
-            adjacency[node] = _dependencies[node].Where(selected.Contains)
-                .OrderBy(static type => type.FullName, StringComparer.Ordinal)
-                .ToArray();
+            adjacency[node] = [.. _dependencies[node].Where(selected.Contains)
+                .OrderBy(static type => type.FullName, StringComparer.Ordinal)];
         }
 
         var order = BuildFinishOrder(nodes, adjacency);

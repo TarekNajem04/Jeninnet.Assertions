@@ -495,6 +495,9 @@ dotnet_diagnostic.IDE0130.severity = none
 # RCS1154: the polyfill enum mirrors the BCL member order; sorting by value would diverge from
 # the contract it reproduces.
 dotnet_diagnostic.RCS1154.severity = none
+# RCS1157: PublicConstructors = 3 mirrors the BCL enum, where bit 2 is intentionally unnamed;
+# adding a name for it would diverge from the polyfilled contract.
+dotnet_diagnostic.RCS1157.severity = none
 
 # IDE0130: peer benchmark files intentionally use a root namespace so AwesomeAssertions'
 # Should() extension does not collide with Jeninnet's enclosing-namespace Should().

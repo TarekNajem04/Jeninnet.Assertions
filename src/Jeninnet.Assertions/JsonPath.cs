@@ -90,19 +90,27 @@ internal static class JsonPath {
         var segments = new List<JsonPathSegment>();
         var position = 1;
         while(position < path.Length) {
-            if(path[position] == '.') {
-                position++;
-                position = position < path.Length && path[position] == '.'
-                    ? ParseRecursive(path, position + 1, segments)
-                    : ParseProperty(path, position, segments);
-            } else if(path[position] == '[') {
-                position = ParseBracket(path, position, segments);
-            } else {
-                throw Malformed(path, position, $"unexpected character '{path[position]}'");
-            }
+            position = path[position] switch {
+                '.' => ParseAfterDot(path, position, segments),
+                '[' => ParseBracket(path, position, segments),
+                _ => throw Malformed(path, position, $"unexpected character '{path[position]}'"),
+            };
         }
 
         return segments;
+    }
+
+    /// <summary>Parses the segment after a single dot, including recursive descent after two dots.</summary>
+    /// <param name="path">The full path.</param>
+    /// <param name="position">The position of the dot.</param>
+    /// <param name="segments">The segment list to extend.</param>
+    /// <returns>The position after the parsed segment.</returns>
+    /// <exception cref="ArgumentException">The property name is missing.</exception>
+    private static int ParseAfterDot(string path, int position, List<JsonPathSegment> segments) {
+        position++;
+        return position < path.Length && path[position] == '.'
+            ? ParseRecursive(path, position + 1, segments)
+            : ParseProperty(path, position, segments);
     }
 
     /// <summary>Parses a normal property after a single dot.</summary>
