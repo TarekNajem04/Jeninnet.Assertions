@@ -43,14 +43,25 @@ Once the project reaches a stable baseline, external code contributions will be 
 
 ```text
 src/
-    Jeninnet.Assertions
-    Jeninnet.Assertions.MSTest
-    Jeninnet.Assertions.Analyzer
+    Jeninnet.Assertions                 # core package
+    Jeninnet.Assertions.MSTest          # optional adapter
+    Jeninnet.Assertions.NUnit           # optional adapter
+    Jeninnet.Assertions.TUnit           # optional adapter
+    Jeninnet.Assertions.xUnit           # optional adapter (v2)
+    Jeninnet.Assertions.xUnit.v3        # optional adapter (v3)
+    Jeninnet.Assertions.Analyzer        # optional Roslyn analyzer
 
 tests/
     Jeninnet.Assertions.Tests
     Jeninnet.Assertions.MSTest.Tests
+    Jeninnet.Assertions.NUnit.Tests
+    Jeninnet.Assertions.TUnit.Tests
+    Jeninnet.Assertions.xUnit.Tests
+    Jeninnet.Assertions.xUnit.v3.Tests
     Jeninnet.Assertions.Analyzer.Tests
+
+benchmarks/
+    Jeninnet.Assertions.Benchmarks      # advisory BenchmarkDotNet suite
 
 consumers/
     Jeninnet.Assertions.Consumer
@@ -59,6 +70,7 @@ consumers/
 samples/
     Jeninnet.Assertions.Playground
     Jeninnet.Assertions.FrameworkZoo
+    Jeninnet.Assertions.Aot             # trimmed/NativeAOT smoke test
 
 docs/
 ```
@@ -67,27 +79,30 @@ docs/
 
 The architecture emphasizes:
 
-* Framework independence: the core package never depends on MSTest, xUnit, or NUnit
-* A fluent, discoverable assertion surface with consistent verbs and chaining
-* Deterministic failure messages: localized prose with invariant value formatting
-* Extensibility through value formatters, equivalency steps, and custom assertions
-* Measured performance, with an allocation-free success path for hot verbs
-* Long-term API stability enforced by a committed public-API baseline
+* Framework independence: the core package never depends on MSTest, xUnit, NUnit, or TUnit; adapters are separate opt-in packages
+* A fluent, discoverable assertion surface with consistent verbs, overloads, and chaining (`And`/`Which`)
+* Deterministic failure messages: localized prose with invariant value formatting, and a clock that can be pinned per test
+* Extensibility through value formatters, equivalency steps, custom assertions, and engine initializers
+* Measured performance, with an allocation-stable success path for hot verbs and an advisory benchmark suite
+* NativeAOT/trimming honesty: reflection-heavy families are annotated; the reflection-free surface is covered by a trimmed/NativeAOT smoke sample
+* Long-term API stability enforced by a committed public-API baseline and package validation
 
-When evaluating proposals, maintainability and long-term API stability are generally preferred over short-term convenience.
+When evaluating proposals, maintainability and long-term API stability are generally preferred over short-term convenience. Do not add DI containers, database layers, or application hosting to a library that does not need them.
 
 ## Development Standards
 
 The project follows modern .NET engineering practices including:
 
-* Automated CI validation
-* Static analysis and quality gates
-* Package validation
-* Public API surface baselines
-* Cross-platform testing
-* Release verification procedures
+* Automated CI validation across Windows, Linux, and macOS
+* Static analysis and analyzer triage with zero unexplained warnings
+* Deterministic formatting (`dotnet format --verify-no-changes`)
+* Package validation and artifact inspection (assets, symbols, metadata, dependency hygiene)
+* Public API surface baselines and intentional-change review
+* Documentation parity, README claims, and localization gates
+* Trimmed/NativeAOT smoke tests and advisory benchmarks
+* Release verification procedures in `docs/release-checklist.md`
 
-Any future code contributions will be expected to satisfy these requirements.
+Contributions are expected to satisfy these requirements; a green build alone is not sufficient evidence.
 
 ## Translation Guide
 
