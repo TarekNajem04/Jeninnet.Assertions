@@ -2787,4 +2787,13 @@
   <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
     <value>Es wurde erwartet, dass {0} keine aufgezeichneten Ereignisse hat, aber es wurden {1} gefunden.</value>
   </data>
+  <data name="STRING_BE_PARSABLE" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} mit dem Wert {1} in {2} analysierbar ist, aber es konnte nicht analysiert werden: {3}.</value>
+  </data>
+  <data name="STRING_NOT_BE_PARSABLE" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} mit dem Wert {1} nicht in {2} analysierbar ist, aber es war.</value>
+  </data>
+  <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} in {1} analysierbar ist, aber es war null.</value>
+  </data>
 </root>

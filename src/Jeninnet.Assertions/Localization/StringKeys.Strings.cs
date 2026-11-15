@@ -9,6 +9,9 @@ namespace Jeninnet.Assertions.Localization;
 internal static partial class StringKeys {
     internal const string STRING_BE = "STRING_BE";
     internal const string STRING_NOT_BE = "STRING_NOT_BE";
+    internal const string STRING_BE_PARSABLE = "STRING_BE_PARSABLE";
+    internal const string STRING_BE_PARSABLE_NULL = "STRING_BE_PARSABLE_NULL";
+    internal const string STRING_NOT_BE_PARSABLE = "STRING_NOT_BE_PARSABLE";
     internal const string STRING_BE_EQUIVALENT = "STRING_BE_EQUIVALENT";
     internal const string STRING_NOT_BE_EQUIVALENT = "STRING_NOT_BE_EQUIVALENT";
     internal const string STRING_BE_ONE_OF = "STRING_BE_ONE_OF";

@@ -1604,6 +1604,8 @@ type Jeninnet.Assertions.StringAssertions
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotBeNull(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotBeNullOrEmpty(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotBeNullOrWhiteSpace(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotBeParsableInto<T>(System.IFormatProvider, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotBeParsableInto<T>(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotBeUpperCased(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotContain(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> NotContainAll(System.String[])
@@ -1629,6 +1631,8 @@ type Jeninnet.Assertions.StringAssertions
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> StartWithEquivalentOf(System.String, System.Func<Jeninnet.Assertions.StringEquivalencyOptions,Jeninnet.Assertions.StringEquivalencyOptions>, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringAssertions> StartWithEquivalentOf(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndWhichConstraint<Jeninnet.Assertions.StringAssertions,System.String> ContainLine(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndWhichConstraint<Jeninnet.Assertions.StringAssertions,T> BeParsableInto<T>(System.IFormatProvider, System.String, System.Object[])
+  method Jeninnet.Assertions.AndWhichConstraint<Jeninnet.Assertions.StringAssertions,T> BeParsableInto<T>(System.String, System.Object[])
 type Jeninnet.Assertions.StringCollectionAssertions
   ctor(System.Collections.Generic.IEnumerable<System.String>, System.String)
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.StringCollectionAssertions> AllBe(System.String, System.Func<Jeninnet.Assertions.Equivalency.SelfReferenceEquivalencyOptions<System.String>,Jeninnet.Assertions.Equivalency.SelfReferenceEquivalencyOptions<System.String>>, System.String, System.Object[])

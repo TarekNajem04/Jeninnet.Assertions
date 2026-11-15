@@ -2786,4 +2786,13 @@
   <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
     <value>المتوقع ألا يكون لدى {0} أحداث مسجلة، لكن وُجد {1}.</value>
   </data>
+  <data name="STRING_BE_PARSABLE" xml:space="preserve">
+    <value>المتوقع من {0} بالقيمة {1} أن يكون قابلًا للتحليل إلى {2}، لكن تعذّر تحليله: {3}.</value>
+  </data>
+  <data name="STRING_NOT_BE_PARSABLE" xml:space="preserve">
+    <value>المتوقع من {0} بالقيمة {1} ألا يكون قابلًا للتحليل إلى {2}، لكنه كان كذلك.</value>
+  </data>
+  <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
+    <value>المتوقع من {0} أن يكون قابلًا للتحليل إلى {1}، لكنه كان null.</value>
+  </data>
 </root>

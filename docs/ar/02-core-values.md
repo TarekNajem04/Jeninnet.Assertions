@@ -225,6 +225,23 @@ logLine.Should().HaveGroupCount(3);
 
 المطابقة الفاشلة أو <code dir="ltr">null</code> تفشل هذه الأفعال برسالة مخصَّصة، والمجموعة التي لم تشارك (مجموعة اختيارية غير مطابَقة) تُحتسب نصًا فارغًا، والاسم غير الموجود يسرد أسماء المجموعات المتاحة. هذه التفاصيل الثلاثة تحسم أكثر ما يُربك عند فحص السجلات: لا سؤال «هل طابق النمط؟» وحده، بل أي مجموعة التقطت أي قيمة. فحين تتوقَّع <code dir="ltr">date</code> وتحصل على نص فارغ، فذلك يعني أن الجزء الاختياري لم يُطابَق أصلًا، وأن التعبير النمطي نفسه يحتاج مراجعة، لا أن النظام أعاد قيمة خاطئة.
 
+### تحليل النصوص إلى قيم
+
+حين يكون النص مدخلًا لمُحلِّل، يؤكد <code dir="ltr">BeParsableInto&lt;T&gt;</code> أنه يُحلَّل إلى نوع يطبّق <code dir="ltr">IParsable&lt;T&gt;</code> ويعرض القيمة الناتجة عبر <code dir="ltr">Which</code> (يتطلب net8.0+):
+
+<div dir="ltr">
+
+```csharp
+var port = "8080".Should().BeParsableInto<int>().Which;
+var price = "1.234,56".Should().BeParsableInto<decimal>(CultureInfo.GetCultureInfo("de-DE")).Which;
+
+"not-a-number".Should().NotBeParsableInto<int>();
+```
+
+</div>
+
+الـoverload بلا provider يحلّل باستخدام <code dir="ltr">CultureInfo.InvariantCulture</code>، فلا تعتمد النتيجة على ثقافة الجهاز الحالية؛ ومرِّر <code dir="ltr">IFormatProvider</code> حين تستخدم المدخلات تنسيقًا آخر. موضوع <code dir="ltr">null</code> يفشل في <code dir="ltr">BeParsableInto</code> وينجح في <code dir="ltr">NotBeParsableInto</code>، وفشل التحليل يتحول إلى فشل توكيد يذكر النوع الهدف وسببًا مختصرًا بدل تسريب استثناءات المحلّل.
+
 ## ٢.٥ المحارف: الحروف والأرقام وفئات Unicode
 
 للحرف <code dir="ltr">char</code> توكيداته الخاصة، فلا يُحوَّل <code dir="ltr">'a'.Should()</code> إلى <code dir="ltr">object</code>:

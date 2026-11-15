@@ -165,6 +165,19 @@ logLine.Should().HaveGroupCount(3);
 
 A failed or `null` match fails these verbs with a dedicated message, a capture group that did not participate (an unmatched optional group) counts as the empty string, and a name that does not exist lists the available group names.
 
+### Parsing strings into values
+
+When a string is the input to a parser, `BeParsableInto<T>` asserts that it parses into a type implementing `IParsable<T>` and exposes the parsed value through `Which` (net8.0+):
+
+```csharp
+var port = "8080".Should().BeParsableInto<int>().Which;
+var price = "1.234,56".Should().BeParsableInto<decimal>(CultureInfo.GetCultureInfo("de-DE")).Which;
+
+"not-a-number".Should().NotBeParsableInto<int>();
+```
+
+The overload without a provider parses with `CultureInfo.InvariantCulture`, so results do not depend on the machine's current culture; pass an `IFormatProvider` when the input uses another format. A `null` subject fails `BeParsableInto` and passes `NotBeParsableInto`, and parse failures become assertion failures with the target type and a short reason instead of leaking parser exceptions.
+
 ## 2.5 Characters: letters, digits, and Unicode categories
 
 `char` has its own assertions, so `'a'.Should()` does not box to `object`:

@@ -2788,4 +2788,13 @@
   <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
     <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñó ŕéçóŕðéð éṽéñţš, ƀúţ ƒóúñð {1}. !!]</value>
   </data>
+  <data name="STRING_BE_PARSABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ŵíţĥ ṽáļúé {1} ţó ƀé þáŕšáƀļé íñţó {2}, ƀúţ íţ çóúļð ñóţ ƀé þáŕšéð: {3}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_PARSABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ŵíţĥ ṽáļúé {1} ñóţ ţó ƀé þáŕšáƀļé íñţó {2}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé þáŕšáƀļé íñţó {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
 </root>

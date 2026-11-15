@@ -232,6 +232,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Lines: `ContainLine` + `Which`, `HaveLineCount`
 - Patterns: `Match`, `MatchRegex`
 - Equivalency: `BeEquivalentTo`, `*EquivalentOf` (+options)
+- Parsing: `BeParsableInto<T>` (+`Which`) / `NotBeParsableInto<T>` (net8.0+, invariant by default)
 
 </details>
 

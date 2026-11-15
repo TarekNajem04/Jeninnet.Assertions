@@ -15,6 +15,8 @@ true.Should().BeTrue();
 subject.Should().Contain("tua");
 int[] numbers = [1, 2, 3];
 numbers.Should().HaveCount(3);
+"42".Should().BeParsableInto<int>().Which.Should().Be(42);
+"abc".Should().NotBeParsableInto<int>();
 
 Action action = () => throw new InvalidOperationException("boom");
 action.Should().Throw<InvalidOperationException>();

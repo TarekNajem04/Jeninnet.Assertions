@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- String parsing assertions: `BeParsableInto<T>` (+`Which`) and `NotBeParsableInto<T>` for types implementing
+  `IParsable<T>` (net8.0+), with an `IFormatProvider` overload; the provider-less overload parses with the
+  invariant culture. A `null` subject fails positive assertions and passes negative ones, and parser
+  exceptions become assertion failures with the target type and a shortened reason. Localized in
+  en/ar/es/de/qps-ploc.
 - Event monitoring depth: `RaiseOnce` (+`Which`) and `RaiseTimes` with every occurrence constraint,
   `HaveRecordedEvents` (+`Which`) / `HaveNoRecordedEvents`, deterministic `OccurredEvent.Timestamp`
   from `AssertionClock`, and `EventMonitorOptions.IncludingEvents`/`ExcludingEvents` filters applied
