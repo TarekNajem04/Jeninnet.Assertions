@@ -492,6 +492,27 @@ using(new AssertionScope().WithExpectation("Expected order #42")) {
 inherit it without mutating the parent); `ClearExpectation()` restores the default. `AssertionIsolation.Isolate()`
 restores formatting options and the active scope's expectation along with the other ambient state.
 
+## CI reports
+
+`AssertionResult` and `SoftAssertions` expose the same structured failures in several CI-friendly formats:
+
+```csharp
+var result = AssertionResult.Create(() => {
+    order.Total.Should().BeGreaterThan(0);
+    order.Customer.Should().NotBeNull();
+});
+
+File.WriteAllText("report.sarif", result.ToReport(AssertionReportFormat.Sarif));
+File.WriteAllText("report.xml", result.ToReport(AssertionReportFormat.JUnitXml));
+Console.WriteLine(result.ToReport(AssertionReportFormat.GitHubAnnotations));
+File.WriteAllText("report.md", result.ToReport(AssertionReportFormat.Markdown));
+```
+
+`Json`, `Sarif`, `JUnitXml`, `GitHubAnnotations`, and `Markdown` are supported; `ToReportJson()` remains the
+original compact JSON shape. Reports are deterministic (no timestamps, LF line endings), escape XML/Markdown/GitHub
+metacharacters, and include a SARIF location only when `AssertionFailure` carries `File`/`Line`/`Column`.
+Reports never scrub values automatically — keep sensitive data out of messages and actual/expected values.
+
 ## Snapshots
 
 Text and JSON values can be pinned against committed baselines:

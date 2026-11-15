@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- CI report formats for `AssertionResult` and `SoftAssertions`: `ToReport(AssertionReportFormat)` emits
+  SARIF 2.1.0, JUnit XML, GitHub Actions annotations, or Markdown alongside the existing JSON.
+  `AssertionFailure` now accepts optional `RuleId`, `Severity`, `File`, `Line`, and `Column` metadata
+  (defaults: category/error/no location) for rule IDs and annotations; reports are deterministic,
+  escape format-specific metacharacters, omit invented locations, and leave value scrubbing to callers.
+  The original `ToReportJson()` shape is unchanged.
 - Optional framework adapters now cover xUnit v2 (`Jeninnet.Assertions.xUnit`), xUnit v3
   (`Jeninnet.Assertions.xUnit.v3`), NUnit 4/5 (`Jeninnet.Assertions.NUnit`), and TUnit
   (`Jeninnet.Assertions.TUnit`), each preserving the `AssertionFailedException` message and inner

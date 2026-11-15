@@ -207,7 +207,17 @@ public sealed class AssertionScope : IDisposable {
         var message = scope.ApplyExpectation(failure.Message, failure.Expression);
         var effective = string.Equals(message, failure.Message, StringComparison.Ordinal)
             ? failure
-            : new AssertionFailure(failure.Expression, failure.Category, message, failure.Actual, failure.Expected);
+            : new AssertionFailure(
+                failure.Expression,
+                failure.Category,
+                message,
+                failure.Actual,
+                failure.Expected,
+                failure.RuleId,
+                failure.Severity,
+                failure.File,
+                failure.Line,
+                failure.Column);
         if(scope._assertionStrategy is CollectingAssertionStrategy collector) {
             collector.AddFailure(effective);
         } else {

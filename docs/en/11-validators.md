@@ -59,6 +59,19 @@ Two arrows point back from a validator result into the rest of the library:
 - `result.ToReportJson()` serializes the failures (`count` plus a `failures` array) for logs, dashboards, or CI attachments. The JSON shape matches `SoftAssertions.ToReportJson()`.
 - `result.ThrowIfFailed()` rethrows the collected failures as one `AssertionFailedException`, so a validator can also double as a test assertion — same aggregate report as a scope.
 
+### CI report formats
+
+The same failure list can be emitted in formats that CI systems consume directly:
+
+```csharp
+File.WriteAllText("report.sarif", result.ToReport(AssertionReportFormat.Sarif));
+File.WriteAllText("report.xml", result.ToReport(AssertionReportFormat.JUnitXml));
+File.WriteAllText("report.md", result.ToReport(AssertionReportFormat.Markdown));
+Console.WriteLine(result.ToReport(AssertionReportFormat.GitHubAnnotations));
+```
+
+`Json`, `Sarif` (2.1.0), `JUnitXml`, `GitHubAnnotations`, and `Markdown` are available on both `AssertionResult` and `SoftAssertions`. Reports are deterministic (no timestamps, LF line endings), escape XML/Markdown/GitHub metacharacters, and include a SARIF location only when an `AssertionFailure` carries `File`/`Line`/`Column`. `ToReportJson()` keeps its original compact shape. Reports never scrub values automatically: keep sensitive data out of messages and actual/expected values.
+
 ## 11.4 Graph verdicts without throwing
 
 When the check is one object-graph comparison, `EquivalencyEvaluation.Evaluate` returns the verdict directly — same engine and difference texts as `BeEquivalentTo`, never a thrown failure:

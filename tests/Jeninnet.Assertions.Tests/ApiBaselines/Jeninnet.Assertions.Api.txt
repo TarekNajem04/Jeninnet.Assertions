@@ -149,14 +149,28 @@ type Jeninnet.Assertions.AssertionFailedException
   ctor(System.String, System.Exception)
 type Jeninnet.Assertions.AssertionFailure
   ctor(System.String, System.String, System.String, System.String, System.String)
+  ctor(System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.String, System.Nullable<System.Int32>, System.Nullable<System.Int32>)
+  property System.Nullable<System.Int32> Column { get; }
+  property System.Nullable<System.Int32> Line { get; }
   property System.String Actual { get; }
   property System.String Category { get; }
   property System.String Expected { get; }
   property System.String Expression { get; }
+  property System.String File { get; }
   property System.String Message { get; }
+  property System.String RuleId { get; }
+  property System.String Severity { get; }
 type Jeninnet.Assertions.AssertionIsolation
   method static System.IDisposable Isolate()
+type Jeninnet.Assertions.AssertionReportFormat
+  field System.Int32 value__
+  field const Jeninnet.Assertions.AssertionReportFormat GitHubAnnotations
+  field const Jeninnet.Assertions.AssertionReportFormat JUnitXml
+  field const Jeninnet.Assertions.AssertionReportFormat Json
+  field const Jeninnet.Assertions.AssertionReportFormat Markdown
+  field const Jeninnet.Assertions.AssertionReportFormat Sarif
 type Jeninnet.Assertions.AssertionResult
+  method System.String ToReport(Jeninnet.Assertions.AssertionReportFormat)
   method System.String ToReportJson()
   method System.Void ThrowIfFailed()
   method static Jeninnet.Assertions.AssertionResult Create(System.Action)
@@ -751,6 +765,13 @@ type Jeninnet.Assertions.Extensions.PathExtensions
   method static System.Boolean EndWithPath(System.String, System.String)
 type Jeninnet.Assertions.Extensions.TestEnvironmentExtensions
   method static System.Void CreateDeepDirectoryTree(Jeninnet.Assertions.IO.TestEnvironment, System.Int32, System.String, System.String, System.Int32)
+type Jeninnet.Assertions.FailureReport
+  method static System.String ToGitHubAnnotations(System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.AssertionFailure>)
+  method static System.String ToJUnitXml(System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.AssertionFailure>)
+  method static System.String ToJson(System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.AssertionFailure>)
+  method static System.String ToMarkdown(System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.AssertionFailure>)
+  method static System.String ToReport(System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.AssertionFailure>, Jeninnet.Assertions.AssertionReportFormat)
+  method static System.String ToSarif(System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.AssertionFailure>)
 type Jeninnet.Assertions.FluentActions
   method static System.Action Enumerating<T>(System.Func<System.Collections.Generic.IEnumerable<T>>)
   method static System.Action Invoking(System.Action)
@@ -1387,6 +1408,7 @@ type Jeninnet.Assertions.Snapshots.SnapshotOptions
 type Jeninnet.Assertions.SoftAssertions
   ctor()
   method Jeninnet.Assertions.SoftAssertions Collect()
+  method System.String ToReport(Jeninnet.Assertions.AssertionReportFormat)
   method System.String ToReportJson()
   method System.Void ThenReport()
   method override System.Void Dispose()

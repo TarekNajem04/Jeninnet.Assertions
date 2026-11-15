@@ -59,6 +59,12 @@ public sealed class SoftAssertions : IDisposable {
     /// </example>
     public string ToReportJson() => FailureReport.ToJson(Failures);
 
+    /// <summary>Serializes the failures collected so far in <paramref name="format"/> for CI ingestion.</summary>
+    /// <param name="format">The target report format.</param>
+    /// <returns>The report text.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="format"/> is not a defined report format.</exception>
+    public string ToReport(AssertionReportFormat format) => FailureReport.ToReport(Failures, format);
+
     /// <summary>
     /// Starts collecting failures instead of throwing on the first one. Calling while already collecting is
     /// a no-op; calling after a report starts a fresh collection.

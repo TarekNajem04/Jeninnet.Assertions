@@ -103,6 +103,12 @@ public sealed class AssertionResult {
     /// <returns>A compact JSON document with a <c>count</c> and a <c>failures</c> array.</returns>
     public string ToReportJson() => FailureReport.ToJson(_failures);
 
+    /// <summary>Serializes the collected failures in <paramref name="format"/> for CI ingestion.</summary>
+    /// <param name="format">The target report format.</param>
+    /// <returns>The report text.</returns>
+    /// <exception cref="ArgumentOutOfRangeException"><paramref name="format"/> is not a defined report format.</exception>
+    public string ToReport(AssertionReportFormat format) => FailureReport.ToReport(_failures, format);
+
     /// <summary>
     /// Throws a single <see cref="AssertionFailedException"/> aggregating the collected failures, exactly like
     /// <see cref="SoftAssertions.ThenReport"/>; a no-op on a successful result. Ideal for turning a validator

@@ -87,6 +87,23 @@ foreach (var failure in result.Failures) {
 
 والمساران يعبِّران عن نمطين مختلفين لاستهلاك النتيجة نفسها: <code dir="ltr">ToReportJson</code> يسلّم الصورة لمن يراقب، و<code dir="ltr">ThrowIfFailed</code> يسلّمها لمن يحكم. ووحدتهما في الشكل — نفس JSON — ليست مصادفة؛ فهي تعني أن لوحة المؤشرات التي تقرأ نتائج الاختبارات تقرأ نتائج الإنتاج بالقراءة ذاتها.
 
+### صيغ تقارير CI
+
+يمكن إخراج قائمة الإخفاقات نفسها بصيغ تستهلكها أنظمة CI مباشرة:
+
+<div dir="ltr">
+
+```csharp
+File.WriteAllText("report.sarif", result.ToReport(AssertionReportFormat.Sarif));
+File.WriteAllText("report.xml", result.ToReport(AssertionReportFormat.JUnitXml));
+File.WriteAllText("report.md", result.ToReport(AssertionReportFormat.Markdown));
+Console.WriteLine(result.ToReport(AssertionReportFormat.GitHubAnnotations));
+```
+
+</div>
+
+تتوفر <code dir="ltr">Json</code> و<code dir="ltr">Sarif</code> (2.1.0) و<code dir="ltr">JUnitXml</code> و<code dir="ltr">GitHubAnnotations</code> و<code dir="ltr">Markdown</code> على <code dir="ltr">AssertionResult</code> و<code dir="ltr">SoftAssertions</code> معًا. والتقارير حتمية (بلا طوابع زمنية، بنهايات LF)، وتهرب محارف XML/Markdown/GitHub، ولا تضيف موقع SARIF إلا عندما يحمل <code dir="ltr">AssertionFailure</code> حقول <code dir="ltr">File</code>/<code dir="ltr">Line</code>/<code dir="ltr">Column</code>. ويحتفظ <code dir="ltr">ToReportJson()</code> بشكله المدمج الأصلي. ولا تنقّي التقارير القيم تلقائيًا: أبقِ البيانات الحساسة خارج الرسائل والقيم الفعلية/المتوقعة.
+
 ## 11.4 أحكام الرسوم بلا رمي
 
 حين يكون الفحص مقارنة رسم كائني واحد، يعيد <code dir="ltr">EquivalencyEvaluation.Evaluate</code> الحكم مباشرة — بالمحرك نفسه ونصوص الفروق نفسها التي يطبعها <code dir="ltr">BeEquivalentTo</code>، وبلا أي رمي:
