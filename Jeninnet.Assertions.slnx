@@ -48,6 +48,9 @@
         <File Path="scripts/format/format.schema.json" />
         <File Path="scripts/format/README.md" />
     </Folder>
+    <Folder Name="/scripts/release/">
+        <File Path="scripts/release/verify-package.ps1" />
+    </Folder>
     <Folder Name="/scripts/sonar/">
         <File Path="scripts/sonar/preview.ps1" />
         <File Path="scripts/sonar/README.md" />
@@ -125,6 +128,10 @@
         <Project Path="tests/Jeninnet.Assertions.Tests/Jeninnet.Assertions.Tests.csproj" />
         <Project Path="tests/Jeninnet.Assertions.xUnit.Tests/Jeninnet.Assertions.xUnit.Tests.csproj" />
         <Project Path="tests/Jeninnet.Assertions.xUnit.v3.Tests/Jeninnet.Assertions.xUnit.v3.Tests.csproj" />
+    </Folder>
+
+    <Folder Name="/benchmarks/">
+        <Project Path="benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj" />
     </Folder>
 
     <Folder Name="/samples/">

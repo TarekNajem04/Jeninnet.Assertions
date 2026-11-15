@@ -175,7 +175,8 @@ jobs:
         run: |
           dotnet pack src/Jeninnet.Assertions/Jeninnet.Assertions.csproj \
             -c Release \
-            /p:EnablePackageValidation=true
+            /p:EnablePackageValidation=true \
+            --output artifacts/packages
 
           dotnet pack src/Jeninnet.Assertions.MSTest/Jeninnet.Assertions.MSTest.csproj \
             -c Release \
@@ -184,3 +185,6 @@ jobs:
           dotnet pack src/Jeninnet.Assertions.Analyzer/Jeninnet.Assertions.Analyzer.csproj \
             -c Release \
             /p:EnablePackageValidation=true
+
+      - name: Verify package contents and symbols
+        run: pwsh scripts/release/verify-package.ps1

@@ -117,7 +117,7 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
 | API stability | The committed public-API baseline (`tests/.../ApiBaselines`) matches the built assemblies exactly — any accidental public addition, removal, or signature change fails the suite. | `PublicApiSurface_MatchesCommittedBaseline` |
 | Third-party deps | The library has zero third-party runtime dependencies (only BCL shims on old TFMs) and references none of MSTest, xUnit, or NUnit. | `IndependenceTests` |
 | Target frameworks | The badge TFMs come straight from the library csproj `TargetFrameworks`: netstandard2.0 · net6.0 · net8.0 · net10.0, all four built in Release. | `dotnet build … -c Release` |
-| Performance invariant | Hot verbs allocate nothing for message formatting on the success path (56–128 B on .NET 10 Release) while failures stay diagnostic (1.1–52.6 KB), so a formatted success path cannot slip in unmeasured. | `PerformanceInvariantTests` |
+| Performance invariant | Hot verbs allocate nothing for message formatting on the success path (56–128 B in `PerformanceInvariantTests`, 656 B inside an `AssertionScope`) while failures format full diagnostics (1.2–2.2 KB for the measured scalar verbs), so a formatted success path cannot slip in unmeasured. | `PerformanceInvariantTests` |
 
 ## Features
 
@@ -163,8 +163,9 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
   `WithExpectation` lets custom assertions name the real subject. Long or multiline strings append an invariant
   unified diff (`Be`, `BeEquivalentTo`) so the exact change is visible.
 - **Measured performance** — a tested invariant guarantees hot verbs (`Be`, `BeTrue`, `Contain`, `HaveCount`)
-  allocate nothing for message formatting on the success path (56–128 B on .NET 10 Release) while failures stay
-  diagnostic (1.1–52.6 KB), so rich messages never tax green tests.
+  allocate only 56–128 B for the success path (656 B inside an `AssertionScope`) on .NET 10 Release, while failures
+  pay for full diagnostics (1.2–2.2 KB for the measured scalar verbs); published BenchmarkDotNet numbers and a
+  weekly advisory workflow keep the larger picture honest, so rich messages never tax green tests.
 - **Extensible** — custom formatters, global configuration, assembly-level engine initializers,
   custom equivalency steps/plans/rules, and marker discovery for extension assemblies.
 - **Architecture as assertions** — reflection-level layer rules (`NotDependOn`, `OnlyDependOn`,
@@ -566,6 +567,28 @@ dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c
 
 Reflection-based families are explicitly annotated instead of silently failing: type/member/assembly assertions and `AllTypes`/`TypeSelector` request preserved metadata, equivalency requires unreferenced code, event monitoring additionally compiles delegates at runtime, and object/JSON/XML snapshots plus serialization assertions additionally require dynamic code where runtime-type serialization is involved. The library does **not** set `IsAotCompatible=true` while those linker suggestions remain; the sample sets it to prove the safe surface stays warning-free. See [chapter 9](docs/en/09-engine-room.md#96-trimming-and-nativeaot) / [الفصل ٩](docs/ar/09-engine-room.md) for the full matrix.
 
+## Performance
+
+Green tests should stay cheap, so the success path formats no failure message. `PerformanceInvariantTests` enforces that with allocation thresholds (never wall-clock bounds), and `benchmarks/Jeninnet.Assertions.Benchmarks` publishes repeatable BenchmarkDotNet measurements:
+
+| Scenario | Mean | Allocated |
+|---|---:|---:|
+| `Be` (int) success / failure | 3.0 ns / 2.5 μs | 32 B / 664 B |
+| `Be` (string) success / failure | 3.3 ns / 3.5 μs | 32 B / 1,160 B |
+| `BeTrue` success / failure | 3.9 ns / 2.5 μs | 32 B / 592 B |
+| `HaveCount` success | 25.4 ns | 104 B |
+| `AssertionScope` success / 10 failures | 103–119 ns / 3.0 μs | 488 B / 5,496 B |
+| `BeEquivalentTo` small graph / 500 objects | 1.9 μs / 1.1 ms | 3.66 KB / 2.25 MB |
+| `MatchSnapshot` + scrubber (file IO) | 330 μs | 14.9 KB |
+
+Measured on Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cores), .NET SDK 10.0.404, .NET 10.0.15, X64 RyuJIT, BenchmarkDotNet 0.15.8, 3 warmup + 5 iterations. Treat them as order-of-magnitude. Run them yourself with:
+
+```powershell
+dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj -c Release -- --filter '*' --exporters github
+```
+
+The weekly **Benchmarks** workflow runs the same command on Linux and Windows and uploads the artifacts; it is advisory and does not block pull requests. See [chapter 9](docs/en/09-engine-room.md#97-performance-and-release-verification) for the full table and the package-verification contract.
+
 ## Framework Adapters (optional)
 
 The core package throws its own `AssertionFailedException`, which some reporters classify as an error rather than a test failure. Optional adapter packages translate that failure into the framework's native assertion exception while preserving the message and inner exception; every other exception propagates untouched. Nothing is detected or rewritten automatically.
@@ -610,6 +633,7 @@ Suggestions appear only when the generated code is guaranteed to compile (verifi
 ```
 src/Jeninnet.Assertions/       # the library (packable)
 tests/Jeninnet.Assertions.Tests/  # dedicated tests
+benchmarks/Jeninnet.Assertions.Benchmarks/  # BenchmarkDotNet measurements (not in the PR path)
 consumers/Jeninnet.Assertions.Consumer/  # independent package consumer
 consumers/Jeninnet.Assertions.Consumer.Tests/  # MSTest suite driving the consumer
 samples/Jeninnet.Assertions.Playground/  # runnable tour (dotnet run)
@@ -631,6 +655,21 @@ Docs gates — run before touching docs/README:
 pwsh scripts/docs/check-doc-parity.ps1      # en/ar heading structure is a mirror, chapter by chapter
 pwsh scripts/docs/check-readme-claims.ps1   # every backticked identifier in "Available Assertions" is real API
 ```
+
+Release verification (pack, then check assets, metadata, and symbols):
+
+```shell
+dotnet pack src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release --output artifacts/packages
+pwsh scripts/release/verify-package.ps1
+```
+
+Benchmarks are advisory and run outside the PR path:
+
+```shell
+dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj -c Release -- --filter '*' --exporters github
+```
+
+See [docs/release-checklist.md](docs/release-checklist.md) for the full pre-release sequence.
 
 ## License
 

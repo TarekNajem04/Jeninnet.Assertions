@@ -339,7 +339,53 @@ dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c
 
 المكتبة **لا** تضبط <code dir="ltr">IsAotCompatible=true</code> عمدًا: فعل ذلك سيحوّل اقتراحات الرابط المتبقية للعائلات الانعكاسية إلى أخطاء بناء. والسمات موضوعة على نقاط الدخول العامة، فيرى مستخدم AOT تحذيرًا صريحًا ويستطيع إما حفظ البيانات (<code dir="ltr">DynamicallyAccessedMembers</code>) أو الكبت في موقع الاستدعاء بسبب موثَّق. أما العينة نفسها فتضبط <code dir="ltr">IsAotCompatible=true</code> لإثبات أن السطح الآمن يبقى بلا تحذيرات.
 
-## ٩.٧ خلاصة وتمرين
+## ٩.٧ الأداء والتحقق من الإصدار
+
+مسار النجاح مصمَّم ليبقى رخيصًا: الأفعال الساخنة تلتقط تعبير الموضوع وتقارن، لكنها لا تنسّق رسالة إلا عند الفشل. يثبّت <code dir="ltr">PerformanceInvariantTests</code> ذلك بحدود تخصيص (لا بحدود زمن الجدار)، وينشر مشروع <code dir="ltr">benchmarks/Jeninnet.Assertions.Benchmarks</code> قياسات قابلة للتكرار:
+
+<div dir="ltr">
+
+```powershell
+dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj -c Release -- --filter '*' --exporters github
+```
+
+</div>
+
+يشغّل سير عمل <code dir="ltr">Benchmarks</code> الأسبوعي الأمر نفسه على Linux وWindows ويرفع <code dir="ltr">BenchmarkDotNet.Artifacts</code>؛ وهو استشاري ولا يمنع دمج أي طلب.
+
+قيس على Windows 11، معالج Intel Core i7-8850H (2.60 GHz، 6 أنوية فعلية/12 منطقية)، .NET SDK 10.0.404، .NET 10.0.15، X64 RyuJIT، BenchmarkDotNet 0.15.8، 3 تسخينات + 5 تكرارات. تعامل مع الأرقام كرتبة حجم لا كمقارنة بين أجهزة:
+
+| السيناريو | المتوسط | المخصَّص |
+|---|---:|---:|
+| <code dir="ltr">Be</code> (int) نجاح / فشل | 3.0 ns / 2.5 μs | 32 B / 664 B |
+| <code dir="ltr">Be</code> (string) نجاح / فشل | 3.3 ns / 3.5 μs | 32 B / 1,160 B |
+| <code dir="ltr">BeTrue</code> نجاح / فشل | 3.9 ns / 2.5 μs | 32 B / 592 B |
+| <code dir="ltr">Contain</code> (string) نجاح | 14.5 ns | 32 B |
+| <code dir="ltr">Contain</code> (collection) نجاح | 10.8 ns | 32 B |
+| <code dir="ltr">HaveCount</code> نجاح | 25.4 ns | 104 B |
+| <code dir="ltr">Throw</code> نجاح | 2.2 μs | 416 B |
+| <code dir="ltr">AssertionScope</code> نجاح | 103–119 ns | 488 B |
+| <code dir="ltr">AssertionScope</code> مع 1 / 10 إخفاقات | 455 ns / 3.0 μs | 1,056 B / 5,496 B |
+| <code dir="ltr">BeEquivalentTo</code> رسم صغير | 1.9 μs | 3.66 KB |
+| <code dir="ltr">BeEquivalentTo</code> 500 كائنًا | 1.1 ms | 2.25 MB |
+| <code dir="ltr">MatchSnapshot</code> + scrubber (IO ملفات) | 330 μs | 14.9 KB |
+
+زمن اللقطة مذكور سطرًا منفصلًا عمدًا: فهي تنفّذ IO ملفات وليست فعلًا ساخنًا.
+
+ويُتحقق من مسار الإصدار دون نشر:
+
+<div dir="ltr">
+
+```powershell
+dotnet pack src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release --output artifacts/packages
+pwsh scripts/release/verify-package.ps1
+```
+
+</div>
+
+يفحص السكربت تجميعات <code dir="ltr">lib/&lt;tfm&gt;</code> الأربعة مع وثائق XML، وREADME/الأيقونة، وترخيص MIT وبصمة commit في nuspec، وغياب اعتماديات أطر الاختبار، ووجود PDBs في <code dir="ltr">.snupkg</code> المرافق، وعدم تسرّب أي ملفات مصدر أو اختبار أو private إلى أي من الأرشيفين. ويسرد <code dir="ltr">docs/release-checklist.md</code> تسلسل ما قبل الإصدار الكامل؛ وتشغّل مهمة CI <code dir="ltr">package-validation</code> التحقق نفسه.
+
+## ٩.٨ خلاصة وتمرين
 
 **الخلاصة:**
 
@@ -348,6 +394,7 @@ dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c
 - **المنسِّقات تغيِّر العرض لا المقارنة.** سجِّلها عامًّا أو ضمن النطاق لعرض أنواع النطاق بوضوح.
 - **ارفع الافتراضات إلى التكوين.** استخدم <code dir="ltr">AssertionConfiguration</code> والمهيئات على مستوى التجميع (<code dir="ltr">AssertionEngineInitializer</code>) بدل التكرار في كل اختبار.
 - **احقن ساعة للتوكيدات الزمنية.** <code dir="ltr">AssertionClock.Current</code> (معزولة لكل تدفق) تجعل حدود النوافذ حتمية بلا نوم.
+- **اقِس التخصيص لا زمن الجدار في الاختبارات.** مسار النجاح لا ينسّق شيئًا؛ والقياسات تنشر رتبة الحجم، والحزمة تُفحص قبل الإصدار.
 
 **تمرين:**
 

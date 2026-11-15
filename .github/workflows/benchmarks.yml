@@ -1,0 +1,72 @@
+name: Benchmarks
+
+on:
+  workflow_dispatch:
+
+  schedule:
+    # Weekly, Monday 04:00 UTC. Benchmarks are advisory: they never block a PR.
+    - cron: '0 4 * * 1'
+
+permissions:
+  contents: read
+
+env:
+  DOTNET_SKIP_FIRST_TIME_EXPERIENCE: true
+  DOTNET_NOLOGO: true
+  DOTNET_CLI_TELEMETRY_OPTOUT: true
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
+concurrency:
+  group: benchmarks-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  benchmarks:
+
+    name: BenchmarkDotNet (${{ matrix.os }})
+
+    runs-on: ${{ matrix.os }}
+
+    timeout-minutes: 60
+
+    strategy:
+      fail-fast: false
+
+      matrix:
+        os:
+          - ubuntu-latest
+          - windows-latest
+
+    steps:
+
+      - name: Checkout
+        uses: actions/checkout@v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup .NET
+        uses: actions/setup-dotnet@v6.1.0
+        with:
+          global-json-file: global.json
+
+      - name: Restore benchmarks
+        run: dotnet restore benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj
+
+      - name: Run benchmarks
+        shell: pwsh
+        run: >
+          dotnet run
+          --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj
+          --configuration Release
+          --no-restore
+          --
+          --filter '*'
+          --exporters github
+
+      - name: Upload benchmark results
+        uses: actions/upload-artifact@v7.0.2
+        with:
+          name: benchmark-results-${{ matrix.os }}-${{ github.run_id }}
+          path: BenchmarkDotNet.Artifacts
+          retention-days: 30

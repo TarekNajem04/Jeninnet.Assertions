@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Performance and release hardening: a BenchmarkDotNet project covering hot success/failure verbs,
+  `AssertionScope` aggregation, equivalency on small and 500-object graphs, and snapshot verification;
+  expanded allocation invariants (`AssertionScope`, equivalency, `ExecutionTime`); a package-verification
+  script for TFMs, XML docs, README/icon, nuspec repository commit, symbols, and dependency hygiene; a
+  weekly advisory `Benchmarks` workflow; published measurements in the README and chapter 9; and
+  `docs/release-checklist.md`.
 - Trimming/NativeAOT readiness: public reflection paths now carry `RequiresUnreferencedCode`,
   `RequiresDynamicCode`, or `DynamicallyAccessedMembers` annotations; always-throwing failure helpers
   use `DoesNotReturn`; the reflection-free verb surface is covered by a NativeAOT/trimmed sample that

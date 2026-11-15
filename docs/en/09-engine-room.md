@@ -252,7 +252,45 @@ dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c
 
 The library deliberately does **not** set `IsAotCompatible=true`: doing so would turn the remaining linker suggestions for the reflection-heavy families into build errors. The annotations are on the public entry points, so an AOT consumer gets an explicit warning and can either preserve metadata (`DynamicallyAccessedMembers`) or suppress at the call site with a documented reason. The sample itself sets `IsAotCompatible=true` to prove the safe surface stays warning-free.
 
-## 9.7 Recap and exercise
+## 9.7 Performance and release verification
+
+The success path is designed to stay cheap: hot verbs capture the subject expression and compare, but format a message only when they fail. `PerformanceInvariantTests` locks that in with allocation thresholds (never wall-clock bounds), and the `benchmarks/Jeninnet.Assertions.Benchmarks` project publishes repeatable timings:
+
+```powershell
+dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj -c Release -- --filter '*' --exporters github
+```
+
+The weekly `Benchmarks` workflow runs the same command on Linux and Windows and uploads `BenchmarkDotNet.Artifacts`; it is advisory and never blocks a pull request.
+
+Measured on Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cores), .NET SDK 10.0.404, .NET 10.0.15, X64 RyuJIT, BenchmarkDotNet 0.15.8, 3 warmup + 5 iterations. Treat the numbers as order-of-magnitude, not a cross-machine comparison:
+
+| Scenario | Mean | Allocated |
+|---|---:|---:|
+| `Be` (int) success / failure | 3.0 ns / 2.5 μs | 32 B / 664 B |
+| `Be` (string) success / failure | 3.3 ns / 3.5 μs | 32 B / 1,160 B |
+| `BeTrue` success / failure | 3.9 ns / 2.5 μs | 32 B / 592 B |
+| `Contain` (string) success | 14.5 ns | 32 B |
+| `Contain` (collection) success | 10.8 ns | 32 B |
+| `HaveCount` success | 25.4 ns | 104 B |
+| `Throw` success | 2.2 μs | 416 B |
+| `AssertionScope` success | 103–119 ns | 488 B |
+| `AssertionScope` with 1 / 10 failures | 455 ns / 3.0 μs | 1,056 B / 5,496 B |
+| `BeEquivalentTo` small graph | 1.9 μs | 3.66 KB |
+| `BeEquivalentTo` 500 objects | 1.1 ms | 2.25 MB |
+| `MatchSnapshot` + scrubber (file IO) | 330 μs | 14.9 KB |
+
+Snapshot timing is deliberately included as a separate line: it performs file IO and is not a hot verb.
+
+The release path is verified without publishing:
+
+```powershell
+dotnet pack src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release --output artifacts/packages
+pwsh scripts/release/verify-package.ps1
+```
+
+The script checks the four `lib/<tfm>` assemblies with their XML docs, README/icon, the MIT license and repository commit in the nuspec, the absence of test-framework dependencies, PDBs in the sibling `.snupkg`, and that no source, test, or private files leak into either archive. `docs/release-checklist.md` lists the full pre-release sequence; the CI `package-validation` job runs the same verification.
+
+## 9.8 Recap and exercise
 
 **Recap:**
 
@@ -261,6 +299,7 @@ The library deliberately does **not** set `IsAotCompatible=true`: doing so would
 - **Formatters change display, not comparison.** Register per-scope or globally for clean domain-type rendering.
 - **Lift defaults to configuration.** Use `AssertionConfiguration` and assembly-level `AssertionEngineInitializer` to avoid repetition.
 - **Inject a clock for time-relative assertions.** `AssertionClock.Current` (isolated per async flow) makes window boundaries deterministic without sleeps.
+- **Measure allocations, not wall time, in tests.** The success path formats nothing; benchmarks publish the order of magnitude, and the package is verified before release.
 
 **Exercise:**
 

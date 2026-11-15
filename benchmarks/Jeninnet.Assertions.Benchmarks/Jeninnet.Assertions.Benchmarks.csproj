@@ -1,0 +1,18 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <IsPackable>false</IsPackable>
+        <!-- BenchmarkDotNet invokes public instance methods through reflection, so they cannot be static. -->
+        <NoWarn>$(NoWarn);CA1822;S2325</NoWarn>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <PackageReference Include="BenchmarkDotNet" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+    </ItemGroup>
+
+</Project>
