@@ -32,6 +32,7 @@
     <PackageVersion Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="5.9.0" />
     <PackageVersion Include="System.Collections.Immutable" Version="10.0.14" />
     <PackageVersion Include="System.Composition.AttributedModel" Version="11.0.0" />
+    <PackageVersion Include="System.Security.Cryptography.Pkcs" Version="11.0.0" />
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
     <PackageVersion Include="System.Text.Json" Version="10.0.14" />
     <PackageVersion Include="System.Xml.XDocument" Version="4.3.0" />

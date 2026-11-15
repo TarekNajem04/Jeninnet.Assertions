@@ -72,7 +72,7 @@ internal static class UseShouldVerifier {
 
     private sealed class ShouldAnalyzerTest : CSharpAnalyzerTest<UseShouldAnalyzer, DefaultVerifier> {
         public ShouldAnalyzerTest() {
-            ReferenceAssemblies = ReferenceAssemblies.Net.Net90;
+            ReferenceAssemblies = ReferenceAssemblies.Net.Net100;
             TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(typeof(Assert).Assembly.Location));
             TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(typeof(BoolAssertions).Assembly.Location));
         }
@@ -80,7 +80,7 @@ internal static class UseShouldVerifier {
 
     private sealed class ShouldCodeFixTest : CSharpCodeFixTest<UseShouldAnalyzer, UseShouldCodeFixProvider, DefaultVerifier> {
         public ShouldCodeFixTest() {
-            ReferenceAssemblies = ReferenceAssemblies.Net.Net90;
+            ReferenceAssemblies = ReferenceAssemblies.Net.Net100;
             TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(typeof(Assert).Assembly.Location));
             TestState.AdditionalReferences.Add(MetadataReference.CreateFromFile(typeof(BoolAssertions).Assembly.Location));
         }
