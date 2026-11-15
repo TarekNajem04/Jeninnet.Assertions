@@ -54,6 +54,12 @@ public class XmlTests {
     }
 
     [TestMethod]
+    public void XElement_BeEquivalentTo_RejectsNullConfiguration() {
+        var element = XElement.Parse("<root/>");
+        Assert.ThrowsExactly<ArgumentNullException>(() => element.Should().BeEquivalentTo(element, config: null!));
+    }
+
+    [TestMethod]
     public void XDocument_BeEquivalentTo() {
         var first = XDocument.Parse(CATALOG);
         var second = XDocument.Parse(CATALOG);

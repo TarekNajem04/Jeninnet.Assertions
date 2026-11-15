@@ -30,6 +30,10 @@ public class ComparableTests {
 
     private sealed class AmountDerived(decimal amount) : AmountBase(amount);
 
+    private sealed class ComparableProxy : IComparable<Money> {
+        public int CompareTo(Money other) => 0;
+    }
+
     [TestMethod]
     public void Should_KeepsConcreteNumericAndValueOverloads() {
         var intAssertions = 1.Should();
@@ -101,5 +105,11 @@ public class ComparableTests {
     public void NullComparable_ThrowsArgumentNullException() {
         IComparable<Money>? comparable = null;
         Assert.ThrowsExactly<ArgumentNullException>(() => comparable!.Should());
+    }
+
+    [TestMethod]
+    public void Should_RejectsAComparableThatIsNotTheTargetType() {
+        IComparable<Money> proxy = new ComparableProxy();
+        Assert.ThrowsExactly<ArgumentException>(() => proxy.Should());
     }
 }

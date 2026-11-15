@@ -99,12 +99,27 @@ public class ArchitectureTests {
         selector.ThatHaveDependencyOn(nameof(InfrastructureFixtures.SqlConnection)).Should().HaveCount(2);
         selector.ThatHaveDependencyOn(typeof(InfrastructureFixtures.SqlConnection).FullName!).Should().HaveCount(2);
         selector.ThatDoNotHaveDependencyOn(InfrastructureNamespace).Should().HaveCount(2);
+        new TypeSelector([typeof(DomainFixtures.Order)])
+            .ThatHaveDependencyOn(typeof(IReadOnlyList<>).FullName!).Should().HaveCount(1);
         new TypeSelector([typeof(DomainFixtures.MethodOnlyLeak)])
             .ThatHaveDependencyOn(InfrastructureNamespace).Should().HaveCount(0);
 
         Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatHaveDependencyOn(null!));
         Assert.ThrowsExactly<ArgumentException>(() => selector.ThatHaveDependencyOn("  "));
         Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatDoNotHaveDependencyOn(null!));
+    }
+
+    [TestMethod]
+    public void Selectors_RejectNullArchitectureArguments() {
+        var selection = new TypeSelector([typeof(DomainFixtures.Order)]).Should();
+        Type[] exposedWithNull = [null!];
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => selection.HaveNameStartingWith(null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => selection.HaveNameMatching(null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => selection.NotDependOn((Type)null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => selection.NotExposeTypes(exposedWithNull));
+        Assert.ThrowsExactly<ArgumentNullException>(() => new TypeSelector([typeof(object)]).ThatAreInAssembly(null!));
+        Assert.ThrowsExactly<ArgumentNullException>(() => new TypeSelector([typeof(object)]).ThatAreNotInAssembly(null!));
     }
 
     [TestMethod]
