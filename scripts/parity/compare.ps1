@@ -13,7 +13,7 @@
   -OurAssembly to reflect a built assembly instead.
 
   This is a measurement tool, not a build or test dependency. Outputs are written
-  under private/parity/ (gitignored).
+  under artifacts/parity/ (gitignored).
 
 .PARAMETER VersionsFile
   JSON file containing pinned package versions and probe subjects.
@@ -22,7 +22,7 @@
   Committed public-API baseline used when -OurAssembly is not supplied.
 
 .PARAMETER OutputDirectory
-  Directory for report.md and report.json. Defaults to <repo>/private/parity.
+  Directory for report.md and report.json. Defaults to <repo>/artifacts/parity.
 
 .PARAMETER OurAssembly
   Optional path to a built Jeninnet.Assertions.dll. When supplied, the tool reflects
@@ -49,7 +49,7 @@
 param(
     [string]$VersionsFile = (Join-Path $PSScriptRoot 'peer-versions.json'),
     [string]$BaselinePath = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path 'tests\Jeninnet.Assertions.Tests\ApiBaselines\Jeninnet.Assertions.Api.txt'),
-    [string]$OutputDirectory = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path 'private\parity'),
+    [string]$OutputDirectory = (Join-Path (Resolve-Path (Join-Path $PSScriptRoot '..\..')).Path 'artifacts\parity'),
     [string]$OurAssembly,
     [switch]$Refresh,
     [switch]$Quiet

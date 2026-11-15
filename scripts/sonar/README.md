@@ -64,7 +64,7 @@ $env:SONAR_TOKEN_LOCAL = "<local token>"
 # Only print the issues and Quality Gate currently stored on the server
 .\scripts\sonar\preview.ps1 -FetchIssues
 
-# Write the open issues to a working file (default: private/sonar-issues.txt)
+# Write the open issues to a working file (default: artifacts/sonar-issues.txt)
 .\scripts\sonar\preview.ps1 -FetchIssues -ExportIssues
 
 # ... or to an explicit path
@@ -83,7 +83,7 @@ $env:SONAR_TOKEN_LOCAL = "<local token>"
 - `-ExportIssues` writes one line per issue in the
   `<file>(<line>): <rule> [<severity>/<type>] <message>` shape plus a per-rule summary, so the
   list can be worked through offline (like a VS Error List export). The default path is
-  `private/sonar-issues.txt`.
+  `artifacts/sonar-issues.txt`.
 - Coverage requires `coverlet.collector` (referenced by the test project) and the
   `tests/Jeninnet.Assertions.Tests/.runsettings` file; the script passes both to
   `dotnet test`.

@@ -17,11 +17,11 @@ not a build or test dependency.
 pwsh scripts/parity/compare.ps1
 ```
 
-The first run downloads packages into `private/parity/packages/`, extracts them into
-`private/parity/extracted/`, and writes:
+The first run downloads packages into `artifacts/parity/packages/`, extracts them into
+`artifacts/parity/extracted/`, and writes:
 
-- `private/parity/report.md` — human-readable report.
-- `private/parity/report.json` — machine-readable report.
+- `artifacts/parity/report.md` — human-readable report.
+- `artifacts/parity/report.json` — machine-readable report.
 
 Useful switches:
 
@@ -59,8 +59,7 @@ All paths are resolved from the repository root unless an absolute path is suppl
 - **Subject keys are type names, not full signatures.** `Nullable<T>` collapses all
   nullable value types into one key; that is intentional for a high-level matrix.
 - **Shouldly and NFluent use different entry points.** Their `Should()` rows are
-  empty by design because they expose `ShouldBe...` and `Check.That`. Read their
-  sections in `private/docs/peer-comparison-2026-11.md`.
+  empty by design because they expose `ShouldBe...` and `Check.That`.
 - **Generic catch-all subjects** such as `Should<T>(this T)` are grouped under `<T>`
   and are not a parity signal by themselves.
 - **Dependency lists** cover every nuspec group, not only the reflected TFM.
@@ -92,6 +91,6 @@ as honest as the versions it names.
 
 - Packages are reflected, never executed.
 - No package is added to `src/`; the harness does not affect the shipped library.
-- Outputs live under `private/` (gitignored) and are not published.
+- Outputs live under `artifacts/` (gitignored) and are not published.
 - The script is not part of CI. If it ever becomes a gate, it should run in an
   isolated, network-enabled job with pinned packages and a reviewed report.

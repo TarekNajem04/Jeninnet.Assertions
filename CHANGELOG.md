@@ -152,7 +152,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `BeSubclassOf`, `BeBaseOf`, `HaveName`, `HaveFullName`, `HaveNamespace`, `HaveBaseType`,
   `HaveGenericParameter`), plus member metadata: method abstract/override/final/generic/extension,
   property static/abstract/override/required/init-only/index parameters, constructor
-  private/protected/internal/static access, exact `HaveParameters`, and predicate decorators
+  private, protected, internal, and static access, exact `HaveParameters`, and predicate decorators
   with identity checks on `MethodInfo`, `PropertyInfo`, and `ConstructorInfo`.
 
 ### Changed

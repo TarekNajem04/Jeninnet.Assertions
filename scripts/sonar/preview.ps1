@@ -45,7 +45,7 @@
 
 .PARAMETER ExportIssues
     Writes the fetched open issues to a text file so the list can be worked through
-    offline (default path: private/sonar-issues.txt). Combine with -FetchIssues for a
+    offline (default path: artifacts/sonar-issues.txt). Combine with -FetchIssues for a
     read-only export.
 
 .PARAMETER ExportPath
@@ -78,7 +78,7 @@
 .EXAMPLE
     .\preview.ps1 -FetchIssues -ExportIssues
 
-    Lists the open issues and writes them to private/sonar-issues.txt (read-only).
+    Lists the open issues and writes them to artifacts/sonar-issues.txt (read-only).
 
 .EXAMPLE
     .\preview.ps1
@@ -371,7 +371,7 @@ function Export-IssueList {
     $repositoryRoot = Find-RepositoryRoot -StartPath $PSScriptRoot
 
     $path = if ([string]::IsNullOrWhiteSpace($ExportPath)) {
-        Join-Path $repositoryRoot "private\sonar-issues.txt"
+        Join-Path $repositoryRoot "artifacts\sonar-issues.txt"
     }
     else {
         $ExportPath
@@ -751,10 +751,10 @@ try {
         "/d:sonar.cs.opencover.reportsPaths=**/coverage.opencover.xml",
         # src/tooling/**: the CLI executable is validated end-to-end out-of-process (ParityToolTests),
         # so it carries no in-process coverage; it stays fully analyzed for issues.
-        "/d:sonar.coverage.exclusions=**/*.ps1,**/*.md,docs/**,scripts/**,.github/**,assets/**,badges/**,private/**,src/tooling/**",
+        "/d:sonar.coverage.exclusions=**/*.ps1,**/*.md,docs/**,scripts/**,.github/**,assets/**,badges/**,artifacts/**,src/tooling/**",
         "/d:sonar.scm.provider=git",
         "/d:sonar.scm.forceReloadAll=true",
-        "/d:sonar.exclusions=samples/**,docs/**,scripts/**,.github/**,assets/**,badges/**,private/**,**/*.ps1,**/*.md,src/**[Bb]enchmarks/**,**/bin/**,**/obj/**,**/TestResults/**",
+        "/d:sonar.exclusions=samples/**,docs/**,scripts/**,.github/**,assets/**,badges/**,artifacts/**,**/*.ps1,**/*.md,src/**[Bb]enchmarks/**,**/bin/**,**/obj/**,**/TestResults/**",
         "/d:sonar.test.exclusions=tests/**"
     )
 

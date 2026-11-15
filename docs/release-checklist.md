@@ -9,7 +9,7 @@ explicitly approved step (`nuget-publish.yml`), and no task may bump `<Version>`
 - [ ] `dotnet build src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release` ends with `0 Error(s)` for all four TFMs.
 - [ ] `dotnet test tests/Jeninnet.Assertions.Tests/Jeninnet.Assertions.Tests.csproj -c Release` ends with `Failed: 0`.
 - [ ] `pwsh scripts/docs/check-doc-parity.ps1`, `check-readme-claims.ps1`, and `check-localization.ps1` are green.
-- [ ] The analyzer audit (temporary IDE severities per `private/AGENTS.md` §4) reports no IDE/CA/S/RCS diagnostics.
+- [ ] The analyzer audit (temporary IDE severities with `EnforceCodeStyleInBuild`, then reverted) reports no IDE/CA/S/RCS diagnostics.
 
 ## 2. Public API and documentation
 
@@ -32,7 +32,7 @@ explicitly approved step (`nuget-publish.yml`), and no task may bump `<Version>`
 - [ ] The package contains `lib/netstandard2.0`, `lib/net6.0`, `lib/net8.0`, and `lib/net10.0` assemblies with XML docs.
 - [ ] `README.md`, `icon.png`, and the MIT license expression are present in the package.
 - [ ] The nuspec carries `repository type="git"`, the repository URL, and the current commit hash.
-- [ ] The sibling `.snupkg` contains a PDB for every TFM, and no source, test, or `private/` files leak into either archive.
+- [ ] The sibling `.snupkg` contains a PDB for every TFM, and no source, test, or local scratch files leak into either archive.
 - [ ] No test-framework dependency (MSTest, xUnit, NUnit, TUnit) appears in the dependency groups.
 
 ## 5. CI gates
