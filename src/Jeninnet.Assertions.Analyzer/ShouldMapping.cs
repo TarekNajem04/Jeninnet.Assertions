@@ -406,7 +406,7 @@ internal static class ShouldMapping {
     /// <summary>Determines whether an assertion result is discarded by an expression statement (or an awaited statement).</summary>
     /// <param name="invocation">The assertion invocation.</param>
     /// <returns><see langword="true"/> when the caller does not consume the assertion result.</returns>
-    private static bool IsResultDiscarded(InvocationExpressionSyntax invocation) =>
+    internal static bool IsResultDiscarded(InvocationExpressionSyntax invocation) =>
         invocation.Parent is ExpressionStatementSyntax
         || invocation.Parent is AwaitExpressionSyntax { Parent: ExpressionStatementSyntax };
 
@@ -824,7 +824,7 @@ internal static class ShouldMapping {
     /// <param name="requiresAwait">Whether the replacement targets an async verb and needs a <c>Func&lt;Task&gt;</c> receiver.</param>
     /// <returns><see langword="true"/> only when <c>Should()</c> binds but the target method does not;
     /// an unresolvable <c>Should()</c> (e.g. missing using) is inconclusive and trusts the type rules.</returns>
-    private static bool IsProvenUncompilable(SemanticModel semanticModel, InvocationExpressionSyntax invocation, ExpressionSyntax actual, string target, ExpressionSyntax? expected, TypeSyntax? typeArgument = null, bool requiresAwait = false) {
+    internal static bool IsProvenUncompilable(SemanticModel semanticModel, InvocationExpressionSyntax invocation, ExpressionSyntax actual, string target, ExpressionSyntax? expected, TypeSyntax? typeArgument = null, bool requiresAwait = false) {
         var shouldCall = SyntaxFactory.InvocationExpression(
             SyntaxFactory.MemberAccessExpression(SyntaxKind.SimpleMemberAccessExpression, AsReceiver(actual, requiresAwait), SyntaxFactory.IdentifierName("Should")));
         if(semanticModel.GetSpeculativeSymbolInfo(invocation.SpanStart, shouldCall, SpeculativeBindingOption.BindAsExpression).Symbol is not IMethodSymbol) {

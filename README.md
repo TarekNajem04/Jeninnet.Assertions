@@ -666,7 +666,7 @@ Each adapter keeps the core framework-agnostic: reference only the package for t
 
 ## Roslyn Analyzer (optional)
 
-The optional `Jeninnet.Assertions.Analyzer` package suggests fluent assertions over convertible MSTest, xUnit, and NUnit calls, with code fixes (targets `netstandard2.0`, loads in every Roslyn host). Rule IDs use the `JNA` prefix (Jeninnet Assertions):
+The optional `Jeninnet.Assertions.Analyzer` package suggests fluent assertions over convertible MSTest, xUnit, NUnit, Shouldly, and NFluent calls, with code fixes (targets `netstandard2.0`, loads in every Roslyn host). Rule IDs use the `JNA` prefix (Jeninnet Assertions):
 
 | ID | Severity | Converts |
 |---|---|---|
@@ -677,8 +677,10 @@ The optional `Jeninnet.Assertions.Analyzer` package suggests fluent assertions o
 | `JNA1005` | Info | Exception assertions in statement position (`Throws`, `ThrowsAsync`, `ThrowsException`) → `Throw` / `ThrowExactly` and async variants |
 | `JNA1006` | Info | Type assertions in statement position (`IsInstanceOfType`, `IsType`, `IsAssignableFrom`) → `BeOfType` / `BeAssignableTo` |
 | `JNA1007` | Info | `Assert.True/False(task.IsCompleted)` → `BeCompleted` / `NotBeCompleted` |
+| `JNA2001` | Info | Simple Shouldly verbs (`ShouldBe`, `ShouldNotBe`, `ShouldBeNull`, `ShouldBeTrue`, `ShouldContain`, `ShouldBeEmpty`, `ShouldThrow`/`ShouldNotThrow`) → `Be` / `NotBe` / `BeNull` / `BeTrue` / `Contain` / `BeEmpty` / `Throw` / `NotThrow` |
+| `JNA2002` | Info | Simple NFluent chains (`Check.That(x).IsEqualTo`, `IsTrue`, `Contains`, `HasSize`, `Check.ThatCode(code).Throws<T>`, …) → `Be` / `BeTrue` / `Contain` / `HaveCount` / `Throw` |
 
-Suggestions appear only when the generated code is guaranteed to compile (verified by speculative binding); `message:` becomes `because:`. Info severity never breaks `TreatWarningsAsErrors` builds. Requires the core package alongside (pulled automatically). See the [migration playbook](docs/en/10-migration.md) ([العربية](docs/ar/10-migration.md)) for the full before/after cheat sheet and what is deliberately left manual.
+Suggestions appear only when the generated code is guaranteed to compile (verified by speculative binding); `message:` becomes `because:`. Peer conversions stay statement-only and skip tolerance, comparer, culture, custom-message, chained-result, approval-snapshot, and `dynamic` shapes. Info severity never breaks `TreatWarningsAsErrors` builds. Requires the core package alongside (pulled automatically). See the [migration playbook](docs/en/10-migration.md) ([العربية](docs/ar/10-migration.md)) for the full before/after cheat sheet and what is deliberately left manual.
 
 ## Repository Layout
 

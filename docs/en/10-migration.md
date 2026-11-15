@@ -10,7 +10,7 @@ The analyzer ships as a separate, `netstandard2.0` package that loads in every R
 dotnet add package Jeninnet.Assertions.Analyzer
 ```
 
-It reports seven `Info` diagnostics and offers a code fix for each (the `JNA` prefix stands for Jeninnet Assertions):
+It reports nine `Info` diagnostics and offers a code fix for each (the `JNA` prefix stands for Jeninnet Assertions):
 
 - **`JNA1001`** — equality: `Assert.AreEqual` / `AreNotEqual`, xUnit `Assert.Equal` / `NotEqual`, NUnit `Assert.That(actual, Is.EqualTo(...))`.
 - **`JNA1002`** — conditions: `Assert.IsTrue` / `IsFalse` / `IsNull` / `IsNotNull`, xUnit `Assert.True` / `False` / `Null` / `NotNull`, NUnit `Assert.That(actual, Is.True / False / Null / Not.Null)`.
@@ -19,6 +19,8 @@ It reports seven `Info` diagnostics and offers a code fix for each (the `JNA` pr
 - **`JNA1005`** — exceptions: `Assert.Throws` / `ThrowsAsync` / `ThrowsException` / `ThrowsExceptionAsync` in statement position.
 - **`JNA1006`** — types: `Assert.IsInstanceOfType` / `IsType` / `IsAssignableFrom` in statement position.
 - **`JNA1007`** — task state: `Assert.True(task.IsCompleted)` / `Assert.False(task.IsCompleted)`.
+- **`JNA2001`** — simple Shouldly verbs: `ShouldBe`, `ShouldNotBe`, `ShouldBeNull`/`ShouldNotBeNull`, `ShouldBeTrue`/`ShouldBeFalse`, `ShouldContain`/`ShouldNotContain`, `ShouldBeEmpty`/`ShouldNotBeEmpty`, and statement-position `ShouldThrow<T>`/`ShouldNotThrow`.
+- **`JNA2002`** — simple NFluent chains: `Check.That(x).IsEqualTo`/`IsNotEqualTo`/`IsNull`/`IsNotNull`/`IsTrue`/`IsFalse`/`Contains`/`IsEmpty`/`IsNotEmpty`/`HasSize`, and `Check.ThatCode(code).Throws<T>`, all in statement position.
 
 `Info` never fails a build, so the migration is always your decision.
 
@@ -103,6 +105,8 @@ The analyzer only offers a fix when the generated call is guaranteed to compile 
 - **Plain `Exception`** — `Assert.Throws<Exception>` is left manual because the intended exception contract is unclear.
 - **Dictionary containment** — dictionary `Contains` needs `ContainKey`/`ContainValue`, so it is not mapped to `Contain`.
 - **Snapshot tools** — `ShouldMatchApproved`/`Verify` have different approval semantics and are never converted.
+- **Peer chaining and composite shapes** — `Check.That(x).IsEqualTo(y).And...`, NFluent `Which` chains, and Shouldly `ShouldBeOneOf`/`ShouldBeOfType<T>` are left manual because overload selection, result type, or short-circuit behavior changes.
+- **Peer custom messages and tolerances** — Shouldly/NFluent message, tolerance, comparer, and culture overloads are not rewritten; add `because:` only after reviewing the contract.
 - **Literal receivers** — `Assert.AreEqual("a", "b")` has no subject expression to anchor `Should()`.
 - **Value-returning asserts** — conversions that would need to change a value's type are never proposed.
 
@@ -111,6 +115,8 @@ For those, migrate by hand so the intent stays explicit.
 ## 5. Coming from Shouldly
 
 Shouldly exposes assertions as extension methods on the subject (`ShouldBe`, `ShouldThrow`, …), so most of the migration is a rename onto `Should().*`. Shouldly is BSD-3-Clause; the table maps intent, not every overload.
+
+`JNA2001` automates the simple subset: equality, null/boolean, containment, emptiness, and statement-position `ShouldThrow<T>`/`ShouldNotThrow`. It leaves `ShouldBeOneOf`, `ShouldBeOfType<T>`, tolerance/comparer/culture overloads, custom messages, `ShouldMatchApproved`, and `DynamicShould` manual.
 
 | Shouldly | Jeninnet | Notes |
 |---|---|---|
@@ -133,6 +139,8 @@ Shouldly exposes assertions as extension methods on the subject (`ShouldBe`, `Sh
 ## 6. Coming from NFluent
 
 NFluent centers on `Check.That(subject).*`; replace the root with `subject.Should()` and keep the verb. NFluent is Apache-2.0.
+
+`JNA2002` automates the simple statement forms: equality, null/boolean, string/collection containment, emptiness, `HasSize`, and `Check.ThatCode(...).Throws<T>`. Composite chains (`.And...`), `Which`, tolerance/comparer/culture overloads, and custom messages stay manual.
 
 | NFluent | Jeninnet | Notes |
 |---|---|---|

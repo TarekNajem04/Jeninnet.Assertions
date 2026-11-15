@@ -39,6 +39,14 @@ public sealed class UseShouldAnalyzer : DiagnosticAnalyzer {
     /// <remarks>The <c>JNA</c> prefix stands for Jeninnet Assertions.</remarks>
     public const string TASK_STATE_ID = "JNA1007";
 
+    /// <summary>Diagnostic ID for Shouldly conversions (<c>ShouldBe</c>, <c>ShouldThrow</c>, …).</summary>
+    /// <remarks>The <c>JNA2xxx</c> range is reserved for peer assertion libraries.</remarks>
+    public const string SHOULDLY_ID = "JNA2001";
+
+    /// <summary>Diagnostic ID for NFluent conversions (<c>Check.That(...).IsEqualTo</c>, …).</summary>
+    /// <remarks>The <c>JNA2xxx</c> range is reserved for peer assertion libraries.</remarks>
+    public const string NFLUENT_ID = "JNA2002";
+
     private static readonly DiagnosticDescriptor _areEqualRule = new(
         ARE_EQUAL_ID,
         "Use Should().Be() instead of classic equality assertions",
@@ -102,9 +110,27 @@ public sealed class UseShouldAnalyzer : DiagnosticAnalyzer {
         isEnabledByDefault: true,
         description: "Fluent task-state assertions name the expected state directly and produce richer failure messages.");
 
+    private static readonly DiagnosticDescriptor _shouldlyRule = new(
+        SHOULDLY_ID,
+        "Use Should() instead of Shouldly assertions",
+        "Use '{0}' instead of '{1}'",
+        "Testing",
+        DiagnosticSeverity.Info,
+        isEnabledByDefault: true,
+        description: "Fluent Should() assertions produce richer failure messages than Shouldly assertions.");
+
+    private static readonly DiagnosticDescriptor _nfluentRule = new(
+        NFLUENT_ID,
+        "Use Should() instead of NFluent assertions",
+        "Use '{0}' instead of '{1}'",
+        "Testing",
+        DiagnosticSeverity.Info,
+        isEnabledByDefault: true,
+        description: "Fluent Should() assertions produce richer failure messages than NFluent assertions.");
+
     /// <inheritdoc />
     public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
-        [_areEqualRule, _isConditionRule, _stringRule, _collectionRule, _exceptionRule, _typeRule, _taskRule];
+        [_areEqualRule, _isConditionRule, _stringRule, _collectionRule, _exceptionRule, _typeRule, _taskRule, _shouldlyRule, _nfluentRule];
 
     /// <inheritdoc />
     public override void Initialize(AnalysisContext context) {
@@ -130,28 +156,22 @@ public sealed class UseShouldAnalyzer : DiagnosticAnalyzer {
             return;
         }
 
-        if(context.SemanticModel.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol method
-            || !ShouldMapping.IsSupportedAssert(method.ContainingType)) {
+        if(context.SemanticModel.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol method) {
             return;
         }
 
-        var replacement = Map(context.SemanticModel, invocation, method, context.CancellationToken, out var rule);
-        if(replacement is not null) {
-            context.ReportDiagnostic(Diagnostic.Create(rule, invocation.GetLocation(), replacement.TargetMethod, methodName));
+        ShouldMapping.Replacement? replacement;
+        if(ShouldMapping.IsSupportedAssert(method.ContainingType)) {
+            replacement = ShouldMapping.TryMap(context.SemanticModel, invocation, method, context.CancellationToken);
+        } else if(PeerAssertionMapping.IsSupportedPeer(method.ContainingType)) {
+            replacement = PeerAssertionMapping.TryMap(context.SemanticModel, invocation, method, context.CancellationToken);
+        } else {
+            return;
         }
-    }
 
-    /// <summary>Routes a supported assertion invocation to the matching mapping and diagnostic rule.</summary>
-    /// <param name="semanticModel">The semantic model for the invocation.</param>
-    /// <param name="invocation">The assertion call.</param>
-    /// <param name="method">The bound assertion method.</param>
-    /// <param name="cancellationToken">Cancels the analysis.</param>
-    /// <param name="rule">The diagnostic rule to report when a replacement is produced.</param>
-    /// <returns>The planned replacement, or <see langword="null"/> when no safe conversion exists.</returns>
-    private static ShouldMapping.Replacement? Map(SemanticModel semanticModel, InvocationExpressionSyntax invocation, IMethodSymbol method, CancellationToken cancellationToken, out DiagnosticDescriptor rule) {
-        var replacement = ShouldMapping.TryMap(semanticModel, invocation, method, cancellationToken);
-        rule = RuleFor(replacement?.DiagnosticId ?? ARE_EQUAL_ID);
-        return replacement;
+        if(replacement is not null) {
+            context.ReportDiagnostic(Diagnostic.Create(RuleFor(replacement.DiagnosticId), invocation.GetLocation(), replacement.TargetMethod, methodName));
+        }
     }
 
     /// <summary>Resolves the diagnostic descriptor for a replacement rule ID.</summary>
@@ -164,6 +184,8 @@ public sealed class UseShouldAnalyzer : DiagnosticAnalyzer {
             EXCEPTION_ASSERTION_ID => _exceptionRule,
             TYPE_ASSERTION_ID => _typeRule,
             TASK_STATE_ID => _taskRule,
+            SHOULDLY_ID => _shouldlyRule,
+            NFLUENT_ID => _nfluentRule,
             IS_CONDITION_ID => _isConditionRule,
             _ => _areEqualRule,
         };

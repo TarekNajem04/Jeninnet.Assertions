@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Analyzer peer migration: `JNA2001` and `JNA2002` rewrite simple Shouldly and NFluent assertions
+  (equality, null/boolean, containment, emptiness, NFluent `HasSize`, and statement-position throws)
+  with the same speculative binding and Fix All machinery. Tolerance, comparer, culture,
+  custom-message, chained-result, approval-snapshot, and `dynamic` shapes remain manual.
 - Snapshot workflow depth: `ScrubMachineName`/`ScrubUserName`/`ScrubGuid` convenience scrubbers
   (applied after explicit scrubbers), structural JSON projection via `IgnoreJsonProperty`/
   `IgnoreMembersNamed`, and `UseProjectRelativeDirectory` with nearest-project lookup, caller-relative

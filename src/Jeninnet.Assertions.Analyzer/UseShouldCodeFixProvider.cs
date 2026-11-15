@@ -18,6 +18,8 @@ public sealed class UseShouldCodeFixProvider : CodeFixProvider {
         UseShouldAnalyzer.EXCEPTION_ASSERTION_ID,
         UseShouldAnalyzer.TYPE_ASSERTION_ID,
         UseShouldAnalyzer.TASK_STATE_ID,
+        UseShouldAnalyzer.SHOULDLY_ID,
+        UseShouldAnalyzer.NFLUENT_ID,
     ];
 
     /// <inheritdoc />
@@ -31,12 +33,19 @@ public sealed class UseShouldCodeFixProvider : CodeFixProvider {
         }
 
         var semanticModel = await context.Document.GetSemanticModelAsync(context.CancellationToken);
-        if(semanticModel?.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol method
-            || !ShouldMapping.IsSupportedAssert(method.ContainingType)) {
+        if(semanticModel?.GetSymbolInfo(invocation, context.CancellationToken).Symbol is not IMethodSymbol method) {
             return;
         }
 
-        var replacement = ShouldMapping.TryMap(semanticModel, invocation, method, context.CancellationToken);
+        ShouldMapping.Replacement? replacement;
+        if(ShouldMapping.IsSupportedAssert(method.ContainingType)) {
+            replacement = ShouldMapping.TryMap(semanticModel, invocation, method, context.CancellationToken);
+        } else if(PeerAssertionMapping.IsSupportedPeer(method.ContainingType)) {
+            replacement = PeerAssertionMapping.TryMap(semanticModel, invocation, method, context.CancellationToken);
+        } else {
+            return;
+        }
+
         if(replacement is null) {
             return;
         }

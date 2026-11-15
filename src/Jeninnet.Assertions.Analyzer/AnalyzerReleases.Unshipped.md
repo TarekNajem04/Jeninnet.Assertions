@@ -12,3 +12,5 @@ JNA1004 | Testing | Info | UseShouldAnalyzer
 JNA1005 | Testing | Info | UseShouldAnalyzer
 JNA1006 | Testing | Info | UseShouldAnalyzer
 JNA1007 | Testing | Info | UseShouldAnalyzer
+JNA2001 | Testing | Info | UseShouldAnalyzer
+JNA2002 | Testing | Info | UseShouldAnalyzer

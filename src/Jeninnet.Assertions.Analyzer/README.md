@@ -1,7 +1,7 @@
 # Jeninnet.Assertions.Analyzer
 
 Roslyn analyzer with code fixes that suggests fluent `Should()` assertions over convertible
-MSTest, xUnit, and NUnit calls, easing migration to
+MSTest, xUnit, NUnit, Shouldly, and NFluent calls, easing migration to
 [Jeninnet.Assertions](https://github.com/TarekNajem04/Jeninnet.Assertions).
 
 ## Installation
@@ -32,6 +32,8 @@ Rule IDs use the `JNA` prefix (Jeninnet Assertions).
 | `JNA1005` | Info | MSTest `Assert.Throws`/`ThrowsException`[Async], xUnit/NUnit `Assert.Throws`/`ThrowsAsync` in statement position → `Throw`/`ThrowExactly` and async variants |
 | `JNA1006` | Info | MSTest `Assert.IsInstanceOfType`, xUnit `Assert.IsType`/`IsAssignableFrom`, NUnit `Assert.IsInstanceOf`/`IsAssignableFrom` in statement position → `BeOfType` / `BeAssignableTo` (and negatives) |
 | `JNA1007` | Info | `Assert.True(task.IsCompleted)` / `Assert.False(task.IsCompleted)` → `BeCompleted` / `NotBeCompleted` |
+| `JNA2001` | Info | Simple Shouldly verbs: `ShouldBe`, `ShouldNotBe`, `ShouldBeNull`/`ShouldNotBeNull`, `ShouldBeTrue`/`ShouldBeFalse`, `ShouldContain`/`ShouldNotContain`, `ShouldBeEmpty`/`ShouldNotBeEmpty`, `ShouldThrow<T>`/`ShouldNotThrow` → `Be`, `NotBe`, `BeNull`, `BeTrue`, `Contain`, `BeEmpty`, `Throw`, `NotThrow` |
+| `JNA2002` | Info | Simple NFluent chains: `Check.That(x).IsEqualTo`/`IsNotEqualTo`/`IsNull`/`IsNotNull`/`IsTrue`/`IsFalse`/`Contains`/`IsEmpty`/`IsNotEmpty`/`HasSize`, and `Check.ThatCode(code).Throws<T>` → `Be`, `NotBe`, `BeNull`, `BeTrue`, `Contain`, `BeEmpty`, `HaveCount`, `Throw` |
 
 Suggestions appear only when the generated code is guaranteed to compile (verified by speculative
 binding); a `message:` argument becomes `because:`. Info severity never breaks
@@ -40,9 +42,11 @@ binding); a `message:` argument becomes `because:`. Info severity never breaks
 Safety rules worth knowing:
 
 - Tolerance, comparer, culture, and `StringComparison` overloads are left manual.
+- Shouldly and NFluent conversions require a simple call shape: no custom-message overloads, tolerance/comparer arguments, chained `Check.That(...).IsEqualTo(...).And...`, or consumed assertion results. Approval snapshots and `DynamicShould` remain manual.
 - Exception and type assertions are converted only in statement position: the framework call returns the
   exception/typed value, while the fluent call returns an assertion object. Exact-throw frameworks
-  (xUnit/NUnit `Throws`, MSTest `ThrowsException`) map to `ThrowExactly`; MSTest `Throws` keeps its
+  (xUnit/NUnit `Throws`, MSTest `ThrowsException`) map to `ThrowExactly`; Shouldly `ShouldThrow` and
+  NFluent `Throws` map to `Throw` (derived exceptions remain acceptable); MSTest `Throws` keeps its
   non-strict semantics with `Throw`.
 - `Assert.Single` and `Assert.IsType`/`IsAssignableFrom` are skipped when their result is consumed.
 - Dictionary `Contains` is left manual (needs `ContainKey`/`ContainValue`).
@@ -50,8 +54,10 @@ Safety rules worth knowing:
 
 ## Migrating from other assertion libraries
 
-The analyzer only rewrites calls from MSTest, xUnit, and NUnit. Shouldly, NFluent, AwesomeAssertions, and
-FluentAssertions use the manual maps in the
+The analyzer rewrites simple calls from MSTest, xUnit, and NUnit (`JNA1001`–`JNA1007`), plus simple
+Shouldly (`JNA2001`) and NFluent (`JNA2002`) shapes: equality, null/boolean, containment, emptiness,
+NFluent size, and statement-position throw. AwesomeAssertions and FluentAssertions still use the manual
+maps in the
 [migration playbook](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/docs/en/10-migration.md)
 ([العربية](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/docs/ar/10-migration.md)).
 
@@ -60,9 +66,11 @@ The analyzer stays silent for these shapes; migrate them by hand:
 | Pattern | Why it stays manual | Jeninnet alternative |
 |---|---|---|
 | Equality with tolerance, comparer, or culture | The fluent verb may select a different comparison. | `BeApproximately`, an explicit comparer, or a culture-aware assertion with review. |
+| Custom-message overloads | The argument position and message semantics differ between libraries. | Add `because:` explicitly after reviewing the migration. |
 | `ShouldMatchApproved` / `Verify` | Approval-file naming and acceptance differ. | `MatchSnapshot` with a committed verified file. |
 | `Assert.Throws` with a complex `WithMessage` | Message wildcards and exception wrapping differ. | `Throw<T>().WithMessage(...)` after checking the contract. |
 | NUnit constraints beyond `Is.EqualTo`/`Is.True`/`Is.False`/`Is.Null` | Constraints compose differently from fluent calls. | Write the equivalent verb sequence explicitly. |
+| `ShouldBeOneOf`, `ShouldBeOfType<T>`, chained `Check.That(...).IsEqualTo(...).And...` | Overload selection, result type, or short-circuit behavior changes. | Write the target verb sequence explicitly. |
 | `DynamicShould...` | `dynamic` binds at runtime, so no static rewrite is provable. | Explicit assertions on typed locals. |
 | `Assert.That(..., Is.Unique)` | Set semantics and multiplicity are easy to mix up. | `OnlyHaveUniqueItems()`; use `BeEquivalentTo` only for exact multisets. |
 | AwesomeAssertions class-level `[CustomAssertions]` | Jeninnet has no class-level equivalent. | `[CustomAssertion]` per method or `[CustomAssertionsAssembly]` per assembly. |

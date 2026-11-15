@@ -18,7 +18,7 @@ dotnet add package Jeninnet.Assertions.Analyzer
 
 </div>
 
-يبلِّغ عن سبعة تشخيصات بمستوى <code dir="ltr">Info</code> ويقدّم إصلاحًا لكلٍّ منها (البادئة <code dir="ltr">JNA</code> تعني Jeninnet Assertions):
+يبلِّغ عن تسعة تشخيصات بمستوى <code dir="ltr">Info</code> ويقدّم إصلاحًا لكلٍّ منها (البادئة <code dir="ltr">JNA</code> تعني Jeninnet Assertions):
 
 - **<code dir="ltr">JNA1001</code>** — المساواة: <code dir="ltr">Assert.AreEqual</code> / <code dir="ltr">AreNotEqual</code>، وxUnit <code dir="ltr">Assert.Equal</code> / <code dir="ltr">NotEqual</code>، وNUnit <code dir="ltr">Assert.That(actual, Is.EqualTo(...))</code>.
 - **<code dir="ltr">JNA1002</code>** — الشروط: <code dir="ltr">Assert.IsTrue</code> / <code dir="ltr">IsFalse</code> / <code dir="ltr">IsNull</code> / <code dir="ltr">IsNotNull</code>، وxUnit <code dir="ltr">Assert.True</code> / <code dir="ltr">False</code> / <code dir="ltr">Null</code> / <code dir="ltr">NotNull</code>، وNUnit <code dir="ltr">Assert.That(actual, Is.True / False / Null / Not.Null)</code>.
@@ -27,6 +27,8 @@ dotnet add package Jeninnet.Assertions.Analyzer
 - **<code dir="ltr">JNA1005</code>** — الاستثناءات: <code dir="ltr">Assert.Throws</code> / <code dir="ltr">ThrowsAsync</code> / <code dir="ltr">ThrowsException</code> / <code dir="ltr">ThrowsExceptionAsync</code> في موضع العبارة.
 - **<code dir="ltr">JNA1006</code>** — الأنواع: <code dir="ltr">Assert.IsInstanceOfType</code> / <code dir="ltr">IsType</code> / <code dir="ltr">IsAssignableFrom</code> في موضع العبارة.
 - **<code dir="ltr">JNA1007</code>** — حالة المهمة: <code dir="ltr">Assert.True(task.IsCompleted)</code> / <code dir="ltr">Assert.False(task.IsCompleted)</code>.
+- **<code dir="ltr">JNA2001</code>** — أفعال Shouldly البسيطة: <code dir="ltr">ShouldBe</code> و<code dir="ltr">ShouldNotBe</code> و<code dir="ltr">ShouldBeNull</code>/<code dir="ltr">ShouldNotBeNull</code> و<code dir="ltr">ShouldBeTrue</code>/<code dir="ltr">ShouldBeFalse</code> و<code dir="ltr">ShouldContain</code>/<code dir="ltr">ShouldNotContain</code> و<code dir="ltr">ShouldBeEmpty</code>/<code dir="ltr">ShouldNotBeEmpty</code>، و<code dir="ltr">ShouldThrow&lt;T&gt;</code>/<code dir="ltr">ShouldNotThrow</code> في موضع العبارة.
+- **<code dir="ltr">JNA2002</code>** — سلاسل NFluent البسيطة: <code dir="ltr">Check.That(x).IsEqualTo</code>/<code dir="ltr">IsNotEqualTo</code>/<code dir="ltr">IsNull</code>/<code dir="ltr">IsNotNull</code>/<code dir="ltr">IsTrue</code>/<code dir="ltr">IsFalse</code>/<code dir="ltr">Contains</code>/<code dir="ltr">IsEmpty</code>/<code dir="ltr">IsNotEmpty</code>/<code dir="ltr">HasSize</code>، و<code dir="ltr">Check.ThatCode(code).Throws&lt;T&gt;</code>، كلها في موضع العبارة.
 
 المستوى <code dir="ltr">Info</code> لا يُفشل البناء أبدًا، فالهجرة قرارك دائمًا.
 
@@ -111,6 +113,8 @@ dotnet add package Jeninnet.Assertions.Analyzer
 - **<code dir="ltr">Exception</code> المجرّد** — يبقى <code dir="ltr">Assert.Throws&lt;Exception&gt;</code> يدويًّا لأن عقد الاستثناء المقصود غامض.
 - **احتواء القواميس** — يحتاج <code dir="ltr">Contains</code> في القاموس إلى <code dir="ltr">ContainKey</code>/<code dir="ltr">ContainValue</code>، لذا لا يُحوَّل إلى <code dir="ltr">Contain</code>.
 - **أدوات اللقطات** — لـ<code dir="ltr">ShouldMatchApproved</code>/<code dir="ltr">Verify</code> دلالات اعتماد مختلفة ولا تُحوَّل أبدًا.
+- **سلاسل النظراء والقيود المركّبة** — تُترك <code dir="ltr">Check.That(x).IsEqualTo(y).And...</code> وسلاسل <code dir="ltr">Which</code> و<code dir="ltr">ShouldBeOneOf</code>/<code dir="ltr">ShouldBeOfType&lt;T&gt;</code> يدوية لأن اختيار الحمولة أو نوع النتيجة أو سلوك الاختصار يتغيّر.
+- **رسائل وسماحات النظراء** — لا تُعاد كتابة حمولات الرسالة/السماحية/المقارن/الثقافة في Shouldly/NFluent؛ أضف <code dir="ltr">because:</code> بعد مراجعة العقد.
 - **المستقبِلات الحرفية** — <code dir="ltr">Assert.AreEqual("a", "b")</code> لا تملك تعبير موضوع لربط <code dir="ltr">Should()</code> به.
 - **التوكيدات مُرجِعة القيمة** — لا تُقترح تحويلات تقتضي تغيير نوع قيمة.
 
@@ -121,6 +125,8 @@ dotnet add package Jeninnet.Assertions.Analyzer
 ## 5. القدوم من Shouldly
 
 يعرض Shouldly توكيداته كامتدادات على الموضوع (<code dir="ltr">ShouldBe</code> و<code dir="ltr">ShouldThrow</code> …)، فمعظم الهجرة إعادة تسمية إلى <code dir="ltr">Should().*</code>. وShouldly بترخيص BSD-3-Clause؛ والجدول يعيّن القصد لا كل حمولة.
+
+يؤتمت <code dir="ltr">JNA2001</code> المجموعة البسيطة: المساواة، وnull/boolean، والاحتواء، والفراغ، و<code dir="ltr">ShouldThrow&lt;T&gt;</code>/<code dir="ltr">ShouldNotThrow</code> في موضع العبارة. ويترك <code dir="ltr">ShouldBeOneOf</code> و<code dir="ltr">ShouldBeOfType&lt;T&gt;</code> وحمولات السماحية/المقارن/الثقافة والرسائل المخصّصة و<code dir="ltr">ShouldMatchApproved</code> و<code dir="ltr">DynamicShould</code> يدوية.
 
 | Shouldly | Jeninnet | ملاحظات |
 |---|---|---|
@@ -143,6 +149,8 @@ dotnet add package Jeninnet.Assertions.Analyzer
 ## 6. القدوم من NFluent
 
 يتمركز NFluent حول <code dir="ltr">Check.That(subject).*</code>؛ استبدل الجذر بـ<code dir="ltr">subject.Should()</code> واحتفظ بالفعل. وNFluent بترخيص Apache-2.0.
+
+يؤتمت <code dir="ltr">JNA2002</code> الصيغ البسيطة في موضع العبارة: المساواة، وnull/boolean، واحتواء النص/المجموعة، والفراغ، و<code dir="ltr">HasSize</code>، و<code dir="ltr">Check.ThatCode(...).Throws&lt;T&gt;</code>. أما السلاسل المركّبة (<code dir="ltr">.And...</code>) و<code dir="ltr">Which</code> وحمولات السماحية/المقارن/الثقافة والرسائل المخصّصة فتبقى يدوية.
 
 | NFluent | Jeninnet | ملاحظات |
 |---|---|---|
