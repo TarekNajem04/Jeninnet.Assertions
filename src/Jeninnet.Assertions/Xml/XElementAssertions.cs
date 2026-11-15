@@ -72,9 +72,29 @@ public partial class XElementAssertions(XElement? value, string? expression = nu
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The elements are not deeply equivalent.</exception>
-    public AndConstraint<XElementAssertions> BeEquivalentTo(XElement? expected, string? because = null, params object?[] becauseArgs) {
-        if(!XNode.DeepEquals(_value, expected)) {
-            Fail(Strings.Format(StringKeys.XML_BE_EQUIVALENT, Expression, _value, expected), because, becauseArgs);
+    public AndConstraint<XElementAssertions> BeEquivalentTo(XElement? expected, string? because = null, params object?[] becauseArgs) =>
+        AssertEquivalent(expected, new XmlEquivalencyOptions(), because, becauseArgs);
+
+    /// <summary>Asserts that the element is structurally equivalent to <paramref name="expected"/> under <paramref name="config"/>.</summary>
+    /// <param name="expected">The expected element.</param>
+    /// <param name="config">The equivalency configuration (element order, whitespace, comments).</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="config"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The elements differ.</exception>
+    public AndConstraint<XElementAssertions> BeEquivalentTo(XElement? expected, Func<XmlEquivalencyOptions, XmlEquivalencyOptions> config, string? because = null, params object?[] becauseArgs) {
+        if(config is null) {
+            throw new ArgumentNullException(nameof(config));
+        }
+
+        return AssertEquivalent(expected, config(new XmlEquivalencyOptions()), because, becauseArgs);
+    }
+
+    private AndConstraint<XElementAssertions> AssertEquivalent(XElement? expected, XmlEquivalencyOptions options, string? because, object?[] becauseArgs) {
+        var differences = XmlEquivalency.Compare(_value, expected, options);
+        if(differences.Count > 0) {
+            Fail(Strings.Format(StringKeys.XML_BE_EQUIVALENT_DIFF, Expression, AssertionScope.FormatInvariant(differences.Count), XmlEquivalency.Format(differences)), because, becauseArgs);
         }
 
         return new(this);
@@ -87,7 +107,7 @@ public partial class XElementAssertions(XElement? value, string? expression = nu
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The elements are deeply equivalent.</exception>
     public AndConstraint<XElementAssertions> NotBeEquivalentTo(XElement? unexpected, string? because = null, params object?[] becauseArgs) {
-        if(XNode.DeepEquals(_value, unexpected)) {
+        if(XmlEquivalency.Compare(_value, unexpected, new XmlEquivalencyOptions()).Count == 0) {
             Fail(Strings.Format(StringKeys.XML_NOT_BE_EQUIVALENT, Expression, _value, unexpected), because, becauseArgs);
         }
 

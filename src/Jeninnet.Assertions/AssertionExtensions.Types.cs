@@ -82,4 +82,9 @@ public static partial class AssertionExtensions {
     /// <param name="value">The node to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
     public static XmlNodeAssertions Should(this XmlNode? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
+    /// <summary>Creates an <see cref="XmlElementAssertions"/> for the given classic XML element.</summary>
+    /// <param name="value">The element to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static XmlElementAssertions Should(this XmlElement? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 }

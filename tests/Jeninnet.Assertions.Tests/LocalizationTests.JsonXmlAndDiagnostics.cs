@@ -107,7 +107,7 @@ public partial class LocalizationTests {
         Assert.AreEqual("المتوقع من item أن تكون قيمته 'other'، لكن وُجد 'text'.", value.Message);
 
         var equivalent = Assert.ThrowsExactly<AssertionFailedException>(() => item.Should().BeEquivalentTo(XElement.Parse("<item>other</item>")));
-        Assert.AreEqual("المتوقع من item أن يكون مكافئاً، لكن وُجد <item id=\"1\">text</item> بدل <item>other</item>.", equivalent.Message);
+        Assert.AreEqual("المتوقع أن يكون item مكافئًا للـ XML المتوقع، لكن وُجد 2 اختلاف/اختلافات: 1. /item/@id: المتوقع <مفقود>, وُجد '1'; 2. /item/text(): المتوقع 'other', وُجد 'text'", equivalent.Message);
 
         XElement? missingElement = null;
         var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingElement.Should().NotBeNull());

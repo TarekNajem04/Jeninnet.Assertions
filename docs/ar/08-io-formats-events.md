@@ -58,7 +58,7 @@ buffered.Should().HaveBufferSize(8192);
 
 ### XML
 
-لدعم كلًا من <code dir="ltr">System.Xml.XmlNode</code> وLINQ-to-XML (<code dir="ltr">XDocument</code>، <code dir="ltr">XElement</code>، <code dir="ltr">XAttribute</code>)، تتوفَّر توكيدات متناسقة:
+لدعم كلًا من <code dir="ltr">System.Xml.XmlNode</code> وLINQ-to-XML (<code dir="ltr">XDocument</code>، <code dir="ltr">XElement</code>، <code dir="ltr">XAttribute</code>)، تتوفَّر توكيدات متناسقة، وللنوع الكلاسيكي <code dir="ltr">XmlElement</code> حمولة <code dir="ltr">Should()</code> مستقلة:
 
 <div dir="ltr">
 
@@ -67,10 +67,10 @@ doc.Should().HaveRoot("invoice").Which
     .Should().HaveElement("total").Which
     .Should().HaveValue("42.00");
 
-element.Should().HaveAttribute("currency").Which
-    .Should().HaveValue("USD");
-
-element.Should().HaveAttributeWithValue("currency", "USD");
+XmlElement root = doc.DocumentElement!;
+root.Should().HaveName("invoice").And.HaveNamespace("urn:example");
+root.Should().HaveAttributeWithValue("currency", "USD");
+root.Should().HaveElement("total").Which.Should().HaveInnerText("42.00");
 ```
 
 </div>
@@ -93,17 +93,22 @@ element.Should().NotHaveInnerText("0.00");
 
 </div>
 
-للمستندات الكاملة، الأفضل مقارنة البنية لا النص:
+للمستندات الكاملة، الأفضل مقارنة البنية لا النص. تُقارن السمات كخريطة غير مرتَّبة، وتبقى الفراغات وترتيب العناصر والتعليقات ذات دلالة إلا إذا خُفِّفت:
 
 <div dir="ltr">
 
 ```csharp
 doc.Should().BeEquivalentTo(expectedDoc);
+
+doc.Should().BeEquivalentTo(expectedDoc, options => options
+    .IgnoringWhitespace()
+    .IgnoringComments()
+    .IgnoringElementOrder());
 ```
 
 </div>
 
-هذا يتجاهل الفروق غير ذات الصلة مثل ترتيب السمات أو فراغات التنسيق.
+وتسمّي الإخفاقات أول المسارات المختلفة (مثل <code dir="ltr">/root/orders[2]/@id</code>) بدل طبع المستندين كاملين.
 
 وهذا هو الفرق بين قراءة XML كنص وقراءته كبنية: النص يتأثر بأشياء لا تعني أحدًا — ترتيب السمات، وفراغات السطر، وتغليف العنصر في ذاته — فتتساقط الاختبارات مع كل إعادة تنسيق. أما المقارنة البنيوية فتفحص القرابة الدلالية؛ ومعها يصبح <code dir="ltr">Which</code> على <code dir="ltr">HaveElement()</code> و<code dir="ltr">HaveAttribute()</code> هو التنقل الطبيعي: تُمسك العقدة مرةً، ثم تُوكَّد قيمتها، فيبقى الاختبار جملة واحدة تقرؤها من أولها إلى آخرها.
 

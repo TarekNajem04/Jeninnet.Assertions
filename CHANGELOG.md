@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Classic `XmlElement` assertions (`BeNull`/`NotBeNull`, `HaveName`, `HaveNamespace`,
+  `HaveAttribute`/`HaveAttributeWithValue`/`NotHaveAttribute`, `HaveElement` (+occurrence,
+  `Which`), `HaveElementWithValue`, `HaveInnerText`, structural `BeEquivalentTo`) and
+  `XDocument` root attribute/value/namespace verbs. XML equivalency now reports simplified
+  XPath paths (`/root/orders[2]/@id`) and supports `XmlEquivalencyOptions`
+  (`IgnoringAttributeOrder`, `IgnoringElementOrder`, `IgnoringWhitespace`, `IgnoringComments`).
 - `IAsyncEnumerable<T>` parity: `AllAsync` / `AnyAsync` (early stop), `ContainSingleAsync`
   (+predicate, `Which`), `OnlyHaveUniqueItemsAsync`, `ContainInConsecutiveOrderAsync`,
   `NotContainInOrderAsync`, count bounds (`>`, `>=`, `<`, `<=`), and

@@ -2763,4 +2763,22 @@
   <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
     <value>Es wurde erwartet, dass das Element am Index {0} von {1} sein Prädikat erfüllt, aber es tat es nicht.</value>
   </data>
+  <data name="XML_HAVE_NAME" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} den Namen &apos;{1}&apos; hat, aber &apos;{2}&apos; wurde gefunden.</value>
+  </data>
+  <data name="XML_HAVE_NAMESPACE" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} den Namespace &apos;{1}&apos; hat, aber &apos;{2}&apos; wurde gefunden.</value>
+  </data>
+  <data name="XML_BE_EQUIVALENT_DIFF" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} dem erwarteten XML entspricht, aber es wurden {1} Unterschied(e) gefunden: {2}</value>
+  </data>
+  <data name="XML_DIFF_EXPECTED" xml:space="preserve">
+    <value>erwartet</value>
+  </data>
+  <data name="XML_DIFF_FOUND" xml:space="preserve">
+    <value>gefunden</value>
+  </data>
+  <data name="XML_DIFF_MISSING" xml:space="preserve">
+    <value>&lt;fehlt&gt;</value>
+  </data>
 </root>

@@ -33,6 +33,7 @@ global using Jeninnet.Assertions.Tests.LocalizationFixtures;
 global using Jeninnet.Assertions.Tests.SelectorFixtures;
 global using Jeninnet.Assertions.Types;
 global using Jeninnet.Assertions.Utilities;
+global using Jeninnet.Assertions.Xml;
 global using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 [assembly: AssertionEngineInitializer(typeof(Jeninnet.Assertions.Tests.TestInitializer), nameof(Jeninnet.Assertions.Tests.TestInitializer.Initialize))]

@@ -77,6 +77,140 @@ public partial class XDocumentAssertions(XDocument? value, string? expression = 
         return new WhichConstraint<XElement>(root);
     }
 
+    /// <summary>Asserts that the root element carries an attribute named <paramref name="name"/> and exposes it.</summary>
+    /// <param name="name">The attribute name.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>A <see cref="WhichConstraint{T}"/> wrapping the attribute.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The document has no root or the attribute is absent.</exception>
+    public WhichConstraint<XAttribute> HaveAttribute(string name, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        var attribute = _value?.Root?.Attribute(name);
+        if(attribute is null) {
+            throw new AssertionFailedException(AssertionScope.AppendBecause(Strings.Format(StringKeys.XML_HAVE_ATTRIBUTE, Expression, name), because, becauseArgs));
+        }
+
+        return new WhichConstraint<XAttribute>(attribute);
+    }
+
+    /// <summary>Asserts that the root element carries an attribute named <paramref name="name"/> and exposes it.</summary>
+    /// <param name="name">The qualified attribute name.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>A <see cref="WhichConstraint{T}"/> wrapping the attribute.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The document has no root or the attribute is absent.</exception>
+    public WhichConstraint<XAttribute> HaveAttribute(XName name, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        var attribute = _value?.Root?.Attribute(name);
+        if(attribute is null) {
+            throw new AssertionFailedException(AssertionScope.AppendBecause(Strings.Format(StringKeys.XML_HAVE_ATTRIBUTE, Expression, name), because, becauseArgs));
+        }
+
+        return new WhichConstraint<XAttribute>(attribute);
+    }
+
+    /// <summary>Asserts that the root element carries an attribute named <paramref name="name"/> with value <paramref name="expected"/>.</summary>
+    /// <param name="name">The attribute name.</param>
+    /// <param name="expected">The expected attribute value.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The attribute is missing or its value differs.</exception>
+    public AndConstraint<XDocumentAssertions> HaveAttributeWithValue(string name, string? expected, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        return HaveAttributeWithValue(XNamespace.None + name, name, expected, because, becauseArgs);
+    }
+
+    /// <summary>Asserts that the root element carries an attribute named <paramref name="name"/> with value <paramref name="expected"/>.</summary>
+    /// <param name="name">The qualified attribute name.</param>
+    /// <param name="expected">The expected attribute value.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The attribute is missing or its value differs.</exception>
+    public AndConstraint<XDocumentAssertions> HaveAttributeWithValue(XName name, string? expected, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        return HaveAttributeWithValue(name, name.ToString(), expected, because, becauseArgs);
+    }
+
+    /// <summary>Asserts that the root element does not carry an attribute named <paramref name="name"/>.</summary>
+    /// <param name="name">The attribute name that must be absent.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="name"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The attribute is present.</exception>
+    public AndConstraint<XDocumentAssertions> NotHaveAttribute(string name, string? because = null, params object?[] becauseArgs) {
+        if(name is null) {
+            throw new ArgumentNullException(nameof(name));
+        }
+
+        if(_value?.Root?.Attribute(name) is not null) {
+            Fail(Strings.Format(StringKeys.XML_NOT_HAVE_ATTRIBUTE, Expression, name), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    /// <summary>Asserts that the root element value equals <paramref name="expected"/> using ordinal comparison.</summary>
+    /// <param name="expected">The expected root value.</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">The document has no root or its value differs.</exception>
+    public AndConstraint<XDocumentAssertions> HaveValue(string? expected, string? because = null, params object?[] becauseArgs) {
+        if(_value?.Root is null || !string.Equals(_value.Root.Value, expected, StringComparison.Ordinal)) {
+            Fail(Strings.Format(StringKeys.XML_HAVE_VALUE, Expression, expected, _value?.Root?.Value), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    /// <summary>Asserts that the root element namespace URI equals <paramref name="expected"/>.</summary>
+    /// <param name="expected">The expected namespace URI (an empty string for no namespace).</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">The document has no root or the namespace differs.</exception>
+    public AndConstraint<XDocumentAssertions> HaveNamespace(string expected, string? because = null, params object?[] becauseArgs) {
+        if(expected is null) {
+            throw new ArgumentNullException(nameof(expected));
+        }
+
+        if(_value?.Root is null || !string.Equals(_value.Root.Name.NamespaceName, expected, StringComparison.Ordinal)) {
+            Fail(Strings.Format(StringKeys.XML_HAVE_NAMESPACE, Expression, expected, _value?.Root?.Name.NamespaceName ?? "<null>"), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    private AndConstraint<XDocumentAssertions> HaveAttributeWithValue(XName name, string displayName, string? expected, string? because, object?[]? becauseArgs) {
+        var actual = _value?.Root?.Attribute(name)?.Value;
+        if(actual is null) {
+            Fail(Strings.Format(StringKeys.XML_HAVE_ATTRIBUTE, Expression, displayName), because, becauseArgs);
+        } else if(!string.Equals(actual, expected, StringComparison.Ordinal)) {
+            Fail(Strings.Format(StringKeys.XML_HAVE_ATTRIBUTE_WITH_VALUE, Expression, displayName, expected, actual), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
     /// <summary>Asserts that the document contains a descendant element named <paramref name="name"/> and exposes the first match for further assertions.</summary>
     /// <param name="name">The element name to search for (root included).</param>
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
@@ -339,9 +473,29 @@ public partial class XDocumentAssertions(XDocument? value, string? expression = 
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The documents are not deeply equivalent.</exception>
-    public AndConstraint<XDocumentAssertions> BeEquivalentTo(XDocument? expected, string? because = null, params object?[] becauseArgs) {
-        if(!XNode.DeepEquals(_value, expected)) {
-            Fail(Strings.Format(StringKeys.XML_BE_EQUIVALENT, Expression, _value, expected), because, becauseArgs);
+    public AndConstraint<XDocumentAssertions> BeEquivalentTo(XDocument? expected, string? because = null, params object?[] becauseArgs) =>
+        AssertEquivalent(expected, new XmlEquivalencyOptions(), because, becauseArgs);
+
+    /// <summary>Asserts that the document is structurally equivalent to <paramref name="expected"/> under <paramref name="config"/>.</summary>
+    /// <param name="expected">The expected document.</param>
+    /// <param name="config">The equivalency configuration (element order, whitespace, comments).</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="config"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The documents differ.</exception>
+    public AndConstraint<XDocumentAssertions> BeEquivalentTo(XDocument? expected, Func<XmlEquivalencyOptions, XmlEquivalencyOptions> config, string? because = null, params object?[] becauseArgs) {
+        if(config is null) {
+            throw new ArgumentNullException(nameof(config));
+        }
+
+        return AssertEquivalent(expected, config(new XmlEquivalencyOptions()), because, becauseArgs);
+    }
+
+    private AndConstraint<XDocumentAssertions> AssertEquivalent(XDocument? expected, XmlEquivalencyOptions options, string? because, object?[] becauseArgs) {
+        var differences = XmlEquivalency.Compare(_value?.Root, expected?.Root, options);
+        if(differences.Count > 0) {
+            Fail(Strings.Format(StringKeys.XML_BE_EQUIVALENT_DIFF, Expression, AssertionScope.FormatInvariant(differences.Count), XmlEquivalency.Format(differences)), because, becauseArgs);
         }
 
         return new(this);
@@ -354,7 +508,7 @@ public partial class XDocumentAssertions(XDocument? value, string? expression = 
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
     /// <exception cref="AssertionFailedException">The documents are deeply equivalent.</exception>
     public AndConstraint<XDocumentAssertions> NotBeEquivalentTo(XDocument? unexpected, string? because = null, params object?[] becauseArgs) {
-        if(XNode.DeepEquals(_value, unexpected)) {
+        if(XmlEquivalency.Compare(_value?.Root, unexpected?.Root, new XmlEquivalencyOptions()).Count == 0) {
             Fail(Strings.Format(StringKeys.XML_NOT_BE_EQUIVALENT, Expression, _value, unexpected), because, becauseArgs);
         }
 

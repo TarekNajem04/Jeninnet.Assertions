@@ -71,6 +71,13 @@ internal static partial class StringKeys {
     internal const string XML_NOT_BE_EQUIVALENT = "XML_NOT_BE_EQUIVALENT";
     internal const string XML_HAVE_ROOT = "XML_HAVE_ROOT";
 
+    internal const string XML_HAVE_NAME = "XML_HAVE_NAME";
+    internal const string XML_HAVE_NAMESPACE = "XML_HAVE_NAMESPACE";
+    internal const string XML_BE_EQUIVALENT_DIFF = "XML_BE_EQUIVALENT_DIFF";
+    internal const string XML_DIFF_EXPECTED = "XML_DIFF_EXPECTED";
+    internal const string XML_DIFF_FOUND = "XML_DIFF_FOUND";
+    internal const string XML_DIFF_MISSING = "XML_DIFF_MISSING";
+
     internal const string SNAPSHOT_MISSING_BASELINE = "SNAPSHOT_MISSING_BASELINE";
     internal const string SNAPSHOT_MISMATCH = "SNAPSHOT_MISMATCH";
     internal const string SNAPSHOT_RECEIVED_PREVIEW = "SNAPSHOT_RECEIVED_PREVIEW";

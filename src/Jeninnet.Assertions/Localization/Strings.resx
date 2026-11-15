@@ -2762,4 +2762,22 @@
   <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
     <value>Expected the item at index {0} of {1} to satisfy its predicate, but it did not.</value>
   </data>
+  <data name="XML_HAVE_NAME" xml:space="preserve">
+    <value>Expected {0} to have name &apos;{1}&apos;, but found &apos;{2}&apos;.</value>
+  </data>
+  <data name="XML_HAVE_NAMESPACE" xml:space="preserve">
+    <value>Expected {0} to have namespace &apos;{1}&apos;, but found &apos;{2}&apos;.</value>
+  </data>
+  <data name="XML_BE_EQUIVALENT_DIFF" xml:space="preserve">
+    <value>Expected {0} to be equivalent to the expected XML, but found {1} difference(s): {2}</value>
+  </data>
+  <data name="XML_DIFF_EXPECTED" xml:space="preserve">
+    <value>expected</value>
+  </data>
+  <data name="XML_DIFF_FOUND" xml:space="preserve">
+    <value>found</value>
+  </data>
+  <data name="XML_DIFF_MISSING" xml:space="preserve">
+    <value>&lt;missing&gt;</value>
+  </data>
 </root>

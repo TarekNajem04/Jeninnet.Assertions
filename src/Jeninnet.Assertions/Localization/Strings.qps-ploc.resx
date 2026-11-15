@@ -2764,4 +2764,22 @@
   <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
     <value>[!! Éẋþéçţéð ţĥé íţéɱ áţ íñðéẋ {0} óƒ {1} ţó šáţíšƒý íţš þŕéðíçáţé, ƀúţ íţ ðíð ñóţ. !!]</value>
   </data>
+  <data name="XML_HAVE_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñáɱé &apos;{1}&apos;, ƀúţ ƒóúñð &apos;{2}&apos;. !!]</value>
+  </data>
+  <data name="XML_HAVE_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñáɱéšþáçé &apos;{1}&apos;, ƀúţ ƒóúñð &apos;{2}&apos;. !!]</value>
+  </data>
+  <data name="XML_BE_EQUIVALENT_DIFF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éqúíṽáļéñţ ţó ţĥé éẋþéçţéð ẊṀĻ, ƀúţ ƒóúñð {1} ðíƒƒéŕéñçé(š): {2} !!]</value>
+  </data>
+  <data name="XML_DIFF_EXPECTED" xml:space="preserve">
+    <value>[!! éẋþéçţéð !!]</value>
+  </data>
+  <data name="XML_DIFF_FOUND" xml:space="preserve">
+    <value>[!! ƒóúñð !!]</value>
+  </data>
+  <data name="XML_DIFF_MISSING" xml:space="preserve">
+    <value>[!! &lt;ɱíššíñĝ&gt; !!]</value>
+  </data>
 </root>

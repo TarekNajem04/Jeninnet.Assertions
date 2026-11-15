@@ -35,17 +35,17 @@ For `BufferedStream`, you can also assert buffer size when that's part of the be
 
 ### XML
 
-Both `System.Xml.XmlNode` and LINQ-to-XML (`XDocument`, `XElement`, `XAttribute`) are supported with a consistent vocabulary:
+Both `System.Xml.XmlNode` and LINQ-to-XML (`XDocument`, `XElement`, `XAttribute`) are supported with a consistent vocabulary, and classic `XmlElement` has its own `Should()` overload:
 
 ```csharp
 doc.Should().HaveRoot("invoice").Which
     .Should().HaveElement("total").Which
     .Should().HaveValue("42.00");
 
-element.Should().HaveAttribute("currency").Which
-    .Should().HaveValue("USD");
-
-element.Should().HaveAttributeWithValue("currency", "USD");
+XmlElement root = doc.DocumentElement!;
+root.Should().HaveName("invoice").And.HaveNamespace("urn:example");
+root.Should().HaveAttributeWithValue("currency", "USD");
+root.Should().HaveElement("total").Which.Should().HaveInnerText("42.00");
 ```
 
 `HaveElement()` and `HaveAttribute()` return `.Which`, letting you navigate and assert in one fluent chain instead of breaking it into separate lookups. Qualified `XName` overloads match namespaces exactly:
@@ -62,13 +62,18 @@ element.Should().HaveInnerText("42.00");
 element.Should().NotHaveInnerText("0.00");
 ```
 
-For full documents, compare structurally rather than as raw text:
+For full documents, compare structurally rather than as raw text. Attributes are compared as an unordered map; whitespace, element order, and comments stay significant unless relaxed:
 
 ```csharp
 doc.Should().BeEquivalentTo(expectedDoc);
+
+doc.Should().BeEquivalentTo(expectedDoc, options => options
+    .IgnoringWhitespace()
+    .IgnoringComments()
+    .IgnoringElementOrder());
 ```
 
-This ignores irrelevant differences like attribute ordering or whitespace formatting.
+Failures name the first differing paths (for example `/root/orders[2]/@id`) instead of dumping both documents.
 
 ### JSON
 
