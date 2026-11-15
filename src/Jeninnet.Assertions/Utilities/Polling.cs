@@ -29,7 +29,7 @@ internal static class Polling {
 
             var remaining = timeout - stopwatch.Elapsed;
             var delay = backoff.DelayFor(attempt++);
-            Thread.Sleep(remaining < delay ? remaining : delay);
+            Thread.Sleep(ClampPause(remaining, delay));
         }
     }
 
@@ -54,7 +54,7 @@ internal static class Polling {
 
             var remaining = timeout - stopwatch.Elapsed;
             var delay = backoff.DelayFor(attempt++);
-            await Task.Delay(remaining < delay ? remaining : delay);
+            await Task.Delay(ClampPause(remaining, delay));
         }
     }
 
@@ -135,7 +135,7 @@ internal static class Polling {
 
             var remaining = timeout - stopwatch.Elapsed;
             var delay = backoff.DelayFor(attempt++);
-            Thread.Sleep(remaining < delay ? remaining : delay);
+            Thread.Sleep(ClampPause(remaining, delay));
         }
     }
 
@@ -177,8 +177,20 @@ internal static class Polling {
 
             var remaining = timeout - stopwatch.Elapsed;
             var delay = backoff.DelayFor(attempt++);
-            await Task.Delay(remaining < delay ? remaining : delay, cancellationToken);
+            await Task.Delay(ClampPause(remaining, delay), cancellationToken);
         }
+    }
+
+    /// <summary>Clamps a computed pause to zero when the remaining budget has already elapsed.</summary>
+    /// <param name="remaining">The time left in the overall budget.</param>
+    /// <param name="delay">The configured backoff delay.</param>
+    /// <returns>A non-negative pause no longer than either input.</returns>
+    private static TimeSpan ClampPause(TimeSpan remaining, TimeSpan delay) {
+        if(remaining >= delay) {
+            return delay;
+        }
+
+        return remaining > TimeSpan.Zero ? remaining : TimeSpan.Zero;
     }
 }
 

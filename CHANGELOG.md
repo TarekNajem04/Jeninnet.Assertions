@@ -29,6 +29,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `0.0100000000000000002081668171` in failure messages.
 - Timeout races cancel their delay timer as soon as the observed task wins, so a completed
   assertion does not leave a pending timer behind.
+- Polling clamps a computed pause to zero when the remaining budget elapses between the timeout
+  check and the wait, so slow runners no longer see `ArgumentOutOfRangeException` from
+  `Task.Delay`.
 
 ## [1.1.0.0] - 2026-11-15
 
