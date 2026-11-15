@@ -13,6 +13,7 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\..\src\Jeninnet.Assertions\Jeninnet.Assertions.csproj" />
+        <ProjectReference Include="..\..\..\src\Jeninnet.Assertions.NUnit\Jeninnet.Assertions.NUnit.csproj" />
         <ProjectReference Include="..\Jeninnet.Assertions.FrameworkZoo.Core\Jeninnet.Assertions.FrameworkZoo.Core.csproj" />
     </ItemGroup>
 

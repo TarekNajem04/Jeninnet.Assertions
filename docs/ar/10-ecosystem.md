@@ -1,20 +1,28 @@
 <div dir="rtl">
 
-# الفصل ١٠ — النظام البيئي: محوِّل MSTest والمحلِّل وقالب Consumer والهجرة
+# الفصل ١٠ — النظام البيئي: محوّلات الأطر والمحلِّل وقالب Consumer والهجرة
 
 المكتبة وحدها لا تكفي. الفريق يحتاج إلى ثلاثة أمور عملية: كيف نتعامل مع تقارير إطار الاختبار؟ كيف نُحوِّل آلاف استدعاءات التوكيدات القديمة؟ ومن أين يبدأ مبرمج جديد؟
 
-يُغطي هذا الفصل الأطراف المحيطة بالمكتبة: محوِّل صريح لإطار MSTest، ومحلِّل Roslyn ذكي لا يقترح إلا ما يُمكن ترجمته بأمان، وقالب <code dir="ltr">Consumer</code> كنموذج يُنسَخ، وخريطة هجرة شبه آلية من مكتبات تأكيدات أخرى.
+يُغطي هذا الفصل الأطراف المحيطة بالمكتبة: محوّلات صريحة لأطر الاختبار، ومحلِّل Roslyn ذكي لا يقترح إلا ما يُمكن ترجمته بأمان، وقالب <code dir="ltr">Consumer</code> كنموذج يُنسَخ، وخريطة هجرة شبه آلية من مكتبات تأكيدات أخرى.
 
 الهدف المشترك: **حدود صريحة، لا سحر خفي**.
 
 وكل قطعة من هذه القطع حزمة مستقلة عن الأساس، والاختيار هنا مقصود: مكتبة التوكيدات نفسها لا تعرف إطار اختبار، وحزمة المحوِّل لا تُسطَّب إلا لمن يعمل بـMSTest، والمحلِّل لا يدخل مشروعًا لم يرغبه صاحبه. ثمن هذا الانفصال أنك تختار ما تحتاجه بيدك؛ ومكسبه أن اعتمادك على المكتبة لا يسحب معه اعتمادًا على إطار اختبار أو محلِّل أو محلول تغليف لا تريده. وفي الفريق الواحد يظل بالإمكان أن يعمل اثنان بإطارين مختلفين على المكتبة ذاتها بلا أن يعرف أحدهما أن الآخر غيّر أدواته.
 
-## ١٠.١ محوِّل MSTest: تغليف صريح لا اكتشاف تلقائي
+## ١٠.١ محوّلات الأطر: تغليف صريح لا اكتشاف تلقائي
 
-ترمي الحزمة الأساسية استثناءً خاصًا بها <code dir="ltr">AssertionFailedException</code>. بعض مراسلي MSTest يصنِّفونه على أنه **خطأ** (<code dir="ltr">Error</code>) بدلًا من **فشل** (<code dir="ltr">Failed</code>)، ما يُفقد تمييزًا مهمًا في التقارير.
+ترمي الحزمة الأساسية استثناءً خاصًا بها <code dir="ltr">AssertionFailedException</code>. بعض المراسلين يصنِّفونه على أنه **خطأ** (<code dir="ltr">Error</code>) بدلًا من **فشل** (<code dir="ltr">Failed</code>)، ما يُفقد تمييزًا مهمًا في التقارير. تحل حزم المحوّلات الاختيارية ذلك صراحةً: كلٌّ منها يحوّل <code dir="ltr">AssertionFailedException</code> فقط إلى استثناء الإطار الأصلي مع الحفاظ على الرسالة والاستثناء الداخلي.
 
-لحل هذه المشكلة، توجد حزمة اختيارية: <code dir="ltr">Jeninnet.Assertions.MSTest</code> (متاحة للأهداف <code dir="ltr">net6.0</code> فأحدث). تستخدمها صراحةً هكذا:
+| الحزمة | الإطار | الأهداف |
+|---|---|---|
+| <code dir="ltr">Jeninnet.Assertions.MSTest</code> | MSTest | <code dir="ltr">net6.0+</code> |
+| <code dir="ltr">Jeninnet.Assertions.xUnit</code> | xUnit v2 | <code dir="ltr">net6.0+</code> |
+| <code dir="ltr">Jeninnet.Assertions.xUnit.v3</code> | xUnit v3 | <code dir="ltr">net8.0+</code> |
+| <code dir="ltr">Jeninnet.Assertions.NUnit</code> | NUnit 4/5 | <code dir="ltr">net6.0+</code> |
+| <code dir="ltr">Jeninnet.Assertions.TUnit</code> | TUnit | <code dir="ltr">net8.0+</code> |
+
+### MSTest
 
 <div dir="ltr">
 
@@ -27,9 +35,56 @@ await MSTestAssertions.ThatAsync(() => action.Should().NotThrowAsync());
 
 </div>
 
-تُغلِّف هذه الاستدعاءات التوكيد فترمي <code dir="ltr">AssertFailedException</code> الخاص بـMSTest بدل الاستثناء الداخلي، مع الاحتفاظ بالرسالة والاستثناء الداخلي كما هو. أي خطأ آخر يمرُّ دون تعديل.
+تظهر الإخفاقات كـ<code dir="ltr">AssertFailedException</code> الخاص بـMSTest.
 
-**لماذا صريحًا؟** لأن الحزمة الأساسية يجب أن تبقى مستقلة عن أي إطار، وأي اندماج خفي يناقض ذلك. تغليف كل موقع استدعاء يجعل القرار ظاهرًا في الكود الذي يعتمد عليه، ويمنح المحوِّلات المستقبلية — لـxUnit أو NUnit إن وُجدت — نمطًا واحدًا تتبعه بدلًا من أنماط متفرقة.
+### xUnit (v2 and v3)
+
+<div dir="ltr">
+
+```csharp
+using Jeninnet.Assertions.Xunit;
+using Jeninnet.Assertions.Xunit.V3;
+
+XunitAssertions.That(() => order.Should().Be("shipped"));       // xUnit v2
+XunitV3Assertions.That(() => order.Should().Be("shipped"));     // xUnit v3
+await XunitV3Assertions.ThatAsync(() => action.Should().NotThrowAsync());
+```
+
+</div>
+
+يستهدف المحوّلان تجميعَي توكيد مختلفين في xUnit، لذا هما حزمتان ومساحتا أسماء منفصلتان يمكن أن تتعايشا أثناء هجرة تدريجية. وكلاهما يعرض <code dir="ltr">Xunit.Sdk.XunitException</code>.
+
+### NUnit
+
+<div dir="ltr">
+
+```csharp
+using Jeninnet.Assertions.NUnit;
+
+NUnitAssertions.That(() => order.Should().Be("shipped"));
+await NUnitAssertions.ThatAsync(() => action.Should().NotThrowAsync());
+```
+
+</div>
+
+تظهر الإخفاقات كـ<code dir="ltr">NUnit.Framework.AssertionException</code>. ويدعم المحوّل NUnit 4 و5؛ ويُبنى هدف <code dir="ltr">net6.0</code> مقابل NUnit 4.3.2 لأن NUnit 5 أسقط هذا الهدف.
+
+### TUnit
+
+<div dir="ltr">
+
+```csharp
+using Jeninnet.Assertions.TUnit;
+
+TUnitAssertions.That(() => order.Should().Be("shipped"));
+await TUnitAssertions.ThatAsync(() => action.Should().NotThrowAsync());
+```
+
+</div>
+
+تظهر الإخفاقات كـ<code dir="ltr">TUnit.Assertions.Exceptions.AssertionException</code>.
+
+**لماذا صريحًا؟** لأن الحزمة الأساسية يجب أن تبقى مستقلة عن أي إطار، وأي اندماج خفي يناقض ذلك. تغليف كل موقع استدعاء يجعل القرار ظاهرًا في الكود الذي يعتمد عليه، وتتبع كل المحوّلات نمطًا واحدًا بدلًا من أنماط متفرقة. وتُختبر المحوّلات عبر عينات <code dir="ltr">FrameworkZoo</code> ومشاريع اختبار مخصَّصة؛ أما النواة فلا تشير إلى أي إطار اختبار.
 
 ## ١٠.٢ محلِّل Roslyn: اقتراح آمن فقط
 

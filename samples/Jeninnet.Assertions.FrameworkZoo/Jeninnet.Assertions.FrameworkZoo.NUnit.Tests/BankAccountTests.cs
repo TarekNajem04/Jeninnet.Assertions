@@ -1,5 +1,6 @@
 ﻿using Jeninnet.Assertions;
 using Jeninnet.Assertions.FrameworkZoo.Core;
+using Jeninnet.Assertions.NUnit;
 using NUnit.Framework;
 
 namespace Jeninnet.Assertions.FrameworkZoo.NUnit.Tests;
@@ -46,4 +47,8 @@ public class BankAccountTests {
     [Test]
     public void The_balance_is_compared_structurally() =>
         _account.Should().BeEquivalentTo(new { Balance = 100m });
+
+    [Test]
+    public void The_adapter_surfaces_jeninnet_assertions_as_nunit_outcomes() =>
+        NUnitAssertions.That(() => _account.Balance.Should().Be(100m));
 }

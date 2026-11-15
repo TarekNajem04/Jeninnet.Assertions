@@ -17,6 +17,10 @@ env:
   PROJECTS: >-
     src/Jeninnet.Assertions/Jeninnet.Assertions.csproj
     src/Jeninnet.Assertions.MSTest/Jeninnet.Assertions.MSTest.csproj
+    src/Jeninnet.Assertions.NUnit/Jeninnet.Assertions.NUnit.csproj
+    src/Jeninnet.Assertions.TUnit/Jeninnet.Assertions.TUnit.csproj
+    src/Jeninnet.Assertions.xUnit/Jeninnet.Assertions.xUnit.csproj
+    src/Jeninnet.Assertions.xUnit.v3/Jeninnet.Assertions.xUnit.v3.csproj
     src/Jeninnet.Assertions.Analyzer/Jeninnet.Assertions.Analyzer.csproj
 
 concurrency:

@@ -532,16 +532,28 @@ Consumer template (`consumers/`) as its running example.
 
 Production code references only the .NET base class library (plus `System.Text.Json` / `System.Xml.XDocument` on `netstandard2.0`). The package carries no test-framework dependency, so it can be used from MSTest, xUnit, NUnit, or any other test runner.
 
-## MSTest Integration (optional)
+## Framework Adapters (optional)
 
-The core package throws its own `AssertionFailedException`, which some MSTest reporters classify as an error rather than a test failure. If you want MSTest-native outcomes, reference the optional `Jeninnet.Assertions.MSTest` package (`net6.0+`) and wrap assertions explicitly — nothing is detected or rewritten automatically:
+The core package throws its own `AssertionFailedException`, which some reporters classify as an error rather than a test failure. Optional adapter packages translate that failure into the framework's native assertion exception while preserving the message and inner exception; every other exception propagates untouched. Nothing is detected or rewritten automatically.
+
+| Package | Framework | TFMs | Failure exception |
+|---|---|---|---|
+| `Jeninnet.Assertions.MSTest` | MSTest | net6.0+ | `AssertFailedException` |
+| `Jeninnet.Assertions.xUnit` | xUnit v2 | net6.0+ | `Xunit.Sdk.XunitException` |
+| `Jeninnet.Assertions.xUnit.v3` | xUnit v3 | net8.0+ | `Xunit.Sdk.XunitException` |
+| `Jeninnet.Assertions.NUnit` | NUnit 4/5 | net6.0+ | `NUnit.Framework.AssertionException` |
+| `Jeninnet.Assertions.TUnit` | TUnit | net8.0+ | `TUnit.Assertions.Exceptions.AssertionException` |
 
 ```csharp
 MSTestAssertions.That(() => order.Should().Be("shipped"));
-await MSTestAssertions.ThatAsync(() => action.Should().NotThrowAsync());
+XunitAssertions.That(() => order.Should().Be("shipped"));
+XunitV3Assertions.That(() => order.Should().Be("shipped"));
+NUnitAssertions.That(() => order.Should().Be("shipped"));
+TUnitAssertions.That(() => order.Should().Be("shipped"));
+await XunitAssertions.ThatAsync(() => action.Should().NotThrowAsync());
 ```
 
-Failures surface as MSTest `AssertFailedException` with the message and inner exception preserved; all other exceptions propagate untouched. xUnit/NUnit adapters follow the same pattern on demand.
+Each adapter keeps the core framework-agnostic: reference only the package for the runner you use. The `NUnit` adapter compiles against NUnit 4.3.2 on `net6.0` (NUnit 5 dropped that TFM) and the current NUnit 5 line on `net8.0`/`net10.0`; both expose the same exception type.
 
 ## Roslyn Analyzer (optional)
 

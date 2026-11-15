@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Optional framework adapters now cover xUnit v2 (`Jeninnet.Assertions.xUnit`), xUnit v3
+  (`Jeninnet.Assertions.xUnit.v3`), NUnit 4/5 (`Jeninnet.Assertions.NUnit`), and TUnit
+  (`Jeninnet.Assertions.TUnit`), each preserving the `AssertionFailedException` message and inner
+  exception while surfacing the runner's native assertion exception. The adapters follow the
+  existing explicit `That`/`ThatAsync` pattern, keep the core framework-agnostic, and are exercised
+  by dedicated tests and `FrameworkZoo` samples.
 - Roslyn analyzer expansion: new `JNA1003`–`JNA1007` rules cover string assertions, collection
   emptiness/single/containment, exception assertions (`Throw`/`ThrowExactly` with exact-throw
   semantics preserved), type assertions (`BeOfType`/`BeAssignableTo`), and `task.IsCompleted`

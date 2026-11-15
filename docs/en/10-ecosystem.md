@@ -1,16 +1,24 @@
-# Chapter 10 — The Ecosystem: MSTest Adapter, Analyzer, Consumer Template, and Migration
+# Chapter 10 — The Ecosystem: Framework Adapters, Analyzer, Consumer Template, and Migration
 
 The library alone isn't enough. Teams need practical answers to three questions: How do we integrate with our test framework's reporting? How do we convert thousands of legacy assertion calls? Where does a new developer start?
 
-This chapter covers the surrounding pieces: a deliberate MSTest adapter, a Roslyn analyzer that only suggests safe conversions, a copyable `Consumer` template, and a nearly-mechanical migration map from other assertion libraries.
+This chapter covers the surrounding pieces: deliberate framework adapters, a Roslyn analyzer that only suggests safe conversions, a copyable `Consumer` template, and a nearly-mechanical migration map from other assertion libraries.
 
 The common thread is **explicit boundaries, no hidden magic**.
 
-## 10.1 MSTest adapter (optional)
+## 10.1 Framework adapters (optional)
 
-The core package throws its own `AssertionFailedException`. Some MSTest reporters classify it as an **error** rather than a **failure**, which loses an important distinction in test reports.
+The core package throws its own `AssertionFailedException`. Some runners classify it as an **error** rather than a **failure**, which loses an important distinction in test reports. Optional adapter packages solve that explicitly, each translating only `AssertionFailedException` into the framework's native assertion exception while preserving the message and inner exception.
 
-The optional `Jeninnet.Assertions.MSTest` package (`net6.0+`) solves this explicitly:
+| Package | Framework | TFMs |
+|---|---|---|
+| `Jeninnet.Assertions.MSTest` | MSTest | `net6.0+` |
+| `Jeninnet.Assertions.xUnit` | xUnit v2 | `net6.0+` |
+| `Jeninnet.Assertions.xUnit.v3` | xUnit v3 | `net8.0+` |
+| `Jeninnet.Assertions.NUnit` | NUnit 4/5 | `net6.0+` |
+| `Jeninnet.Assertions.TUnit` | TUnit | `net8.0+` |
+
+### MSTest
 
 ```csharp
 using Jeninnet.Assertions.MSTest;
@@ -19,9 +27,44 @@ MSTestAssertions.That(() => order.Should().Be("shipped"));
 await MSTestAssertions.ThatAsync(() => action.Should().NotThrowAsync());
 ```
 
-This wraps the assertions so failures surface as MSTest's `AssertFailedException` while preserving the message and inner exception. Non-failure exceptions propagate untouched.
+Failures surface as MSTest's `AssertFailedException`.
 
-**Why explicit?** Because the core package must stay framework-agnostic, and a silent integration would contradict that. Wrapping at each call site makes the choice visible in the code that depends on it, and it gives future adapters — for xUnit or NUnit, should they exist — one pattern to follow instead of several.
+### xUnit (v2 and v3)
+
+```csharp
+using Jeninnet.Assertions.Xunit;
+using Jeninnet.Assertions.Xunit.V3;
+
+XunitAssertions.That(() => order.Should().Be("shipped"));       // xUnit v2
+XunitV3Assertions.That(() => order.Should().Be("shipped"));     // xUnit v3
+await XunitV3Assertions.ThatAsync(() => action.Should().NotThrowAsync());
+```
+
+The two adapters target different xUnit assertion assemblies, so they are separate packages and namespaces and can coexist during a staged migration. Both surface `Xunit.Sdk.XunitException`.
+
+### NUnit
+
+```csharp
+using Jeninnet.Assertions.NUnit;
+
+NUnitAssertions.That(() => order.Should().Be("shipped"));
+await NUnitAssertions.ThatAsync(() => action.Should().NotThrowAsync());
+```
+
+Failures surface as `NUnit.Framework.AssertionException`. The adapter supports NUnit 4 and 5; the `net6.0` target compiles against NUnit 4.3.2 because NUnit 5 dropped that TFM.
+
+### TUnit
+
+```csharp
+using Jeninnet.Assertions.TUnit;
+
+TUnitAssertions.That(() => order.Should().Be("shipped"));
+await TUnitAssertions.ThatAsync(() => action.Should().NotThrowAsync());
+```
+
+Failures surface as `TUnit.Assertions.Exceptions.AssertionException`.
+
+**Why explicit?** Because the core package must stay framework-agnostic, and a silent integration would contradict that. Wrapping at each call site makes the choice visible in the code that depends on it, and every adapter follows one pattern instead of several. The adapters are exercised by the `FrameworkZoo` samples and by dedicated test projects; the core never references a test framework.
 
 ## 10.2 Roslyn analyzer (optional)
 

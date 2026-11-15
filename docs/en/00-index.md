@@ -19,7 +19,7 @@ This book is not meant to be read in one sitting. Each chapter stands on its own
 - **Chapter 6:** Structural assertions: when to compare by shape rather than identity, and when to freeze outputs with snapshots.
 - **Chapters 7–8:** Beyond the code: reflection and architectural rules, then streams, formats, HTTP, events, and I/O.
 - **Chapter 9:** The engine room: assertion scopes, culture, value formatting, and configuration.
-- **Chapter 10:** The ecosystem: the MSTest adapter, Roslyn analyzer, the Consumer template, and migration from other assertion libraries.
+- **Chapter 10:** The ecosystem: framework adapters, Roslyn analyzer, the Consumer template, and migration from other assertion libraries.
 - **Chapter 11:** Production validators: the same `Should()` verbs, collecting a result instead of throwing.
 - **Chapter 12:** Snapshots in depth: the `.verified`/`.received` workflow, the evidence in each failure, and the deliberate update switch.
 
@@ -38,7 +38,7 @@ Code samples target `net10.0`. The library multi-targets `netstandard2.0;net6.0;
 | 7 | Reflection: Types, Members, and Architectural Rules | [07-reflection.md](07-reflection.md) |
 | 8 | The Outside World: Streams, XML, JSON, HTTP, Events, and I/O | [08-io-formats-events.md](08-io-formats-events.md) |
 | 9 | The Engine Room: Scopes, Culture, Formatting, and Configuration | [09-engine-room.md](09-engine-room.md) |
-| 10 | The Ecosystem: MSTest Adapter, Analyzer, Consumer Template, and Migration | [10-ecosystem.md](10-ecosystem.md) |
+| 10 | The Ecosystem: Framework Adapters, Analyzer, Consumer Template, and Migration | [10-ecosystem.md](10-ecosystem.md) |
 | 11 | Validators: Assertions Without Throwing | [11-validators.md](11-validators.md) |
 | 12 | Snapshots: Frozen Outputs You Review On Purpose | [12-snapshots.md](12-snapshots.md) |
 

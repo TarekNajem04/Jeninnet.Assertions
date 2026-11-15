@@ -110,13 +110,21 @@
     <Folder Name="/src/">
         <Project Path="src/Jeninnet.Assertions.Analyzer/Jeninnet.Assertions.Analyzer.csproj" />
         <Project Path="src/Jeninnet.Assertions.MSTest/Jeninnet.Assertions.MSTest.csproj" />
+        <Project Path="src/Jeninnet.Assertions.NUnit/Jeninnet.Assertions.NUnit.csproj" />
+        <Project Path="src/Jeninnet.Assertions.TUnit/Jeninnet.Assertions.TUnit.csproj" />
+        <Project Path="src/Jeninnet.Assertions.xUnit/Jeninnet.Assertions.xUnit.csproj" />
+        <Project Path="src/Jeninnet.Assertions.xUnit.v3/Jeninnet.Assertions.xUnit.v3.csproj" />
         <Project Path="src/Jeninnet.Assertions/Jeninnet.Assertions.csproj" />
     </Folder>
     
     <Folder Name="/tests/">
         <Project Path="tests/Jeninnet.Assertions.Analyzer.Tests/Jeninnet.Assertions.Analyzer.Tests.csproj" />
         <Project Path="tests/Jeninnet.Assertions.MSTest.Tests/Jeninnet.Assertions.MSTest.Tests.csproj" />
+        <Project Path="tests/Jeninnet.Assertions.NUnit.Tests/Jeninnet.Assertions.NUnit.Tests.csproj" />
+        <Project Path="tests/Jeninnet.Assertions.TUnit.Tests/Jeninnet.Assertions.TUnit.Tests.csproj" />
         <Project Path="tests/Jeninnet.Assertions.Tests/Jeninnet.Assertions.Tests.csproj" />
+        <Project Path="tests/Jeninnet.Assertions.xUnit.Tests/Jeninnet.Assertions.xUnit.Tests.csproj" />
+        <Project Path="tests/Jeninnet.Assertions.xUnit.v3.Tests/Jeninnet.Assertions.xUnit.v3.Tests.csproj" />
     </Folder>
 
     <Folder Name="/samples/">
