@@ -32,8 +32,16 @@ node.Should().MatchSnapshot("payload", directory, options => options
     .SortProperties()
     .IndentSize(2)
     .IgnoreLineEndingDifferences()
+    .IgnoreJsonProperty("$.metadata.timestamp")
+    .IgnoreMembersNamed("etag")
+    .ScrubMachineName()
+    .ScrubGuid()
     .AddScrubber(text => text.Replace("42", "<n>", StringComparison.Ordinal)));
 ```
+
+`ScrubMachineName()` replaces the current machine name with `<machine>`, `ScrubUserName()` replaces the user name with `<user>`, and `ScrubGuid()` replaces hyphenated GUIDs with `<guid>`. These convenience scrubbers run after explicitly registered scrubbers, in the fixed order machine, user, GUID, so an explicit transformation always sees the original text first.
+
+`IgnoreJsonProperty("$.metadata.timestamp")` removes one property path before scrubbing and comparison; `IgnoreMembersNamed("etag", "timestamp")` removes matching property names at every depth. Only property paths are supported (no array indexes or wildcards). A missing path or name is a no-op, and invalid JSON is left unchanged. `UseProjectRelativeDirectory()` resolves the default folder from the nearest `*.csproj` as `<projectDir>/__snapshots__`; without a project file it falls back to the caller-relative folder, and an explicit snapshots directory always wins. Project lookups are cached per caller directory.
 
 `UseDirectory` stays inside the resolved snapshots folder; `UseFileName` must remain a bare name. `UseParameters` has no test-framework dependency, so pair it with explicit `UseTextForParameters`. `UniqueFor*` suffixes are stable (`_win`, `_net10.0`, `_x64`, and so on) and are off by default.
 

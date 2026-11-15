@@ -73,6 +73,85 @@ internal static class SnapshotComparison {
         return result;
     }
 
+    /// <summary>Removes configured JSON properties from serialized content before scrubbing and comparison.</summary>
+    /// <remarks>Only <c>.json</c> content is projected. A path that does not exist is a no-op; invalid JSON and
+    /// non-JSON content are returned unchanged. Projection runs before global scrubbers.</remarks>
+    /// <param name="text">The serialized text.</param>
+    /// <param name="options">The snapshot options.</param>
+    /// <param name="fileExtension">The snapshot extension, including the dot.</param>
+    /// <returns>The projected JSON, or <paramref name="text"/> when no projection applies.</returns>
+    internal static string ApplyJsonProjections(string text, SnapshotOptions options, string fileExtension) {
+        if(!IsExtension(fileExtension, ".json")
+            || (options.IgnoredJsonPaths.Count == 0 && options.IgnoredMemberNames.Count == 0)) {
+            return text;
+        }
+
+        try {
+            var node = JsonNode.Parse(text);
+            if(node is null) {
+                return text;
+            }
+
+            foreach(var path in options.IgnoredJsonPaths) {
+                RemovePath(node, path);
+            }
+
+            if(options.IgnoredMemberNames.Count != 0) {
+                RemoveMembers(node, options.IgnoredMemberNames);
+            }
+
+            return node.ToJsonString(_indentedJson);
+        }
+        catch(JsonException) {
+            return text;
+        }
+    }
+
+    /// <summary>Removes one property path from a JSON node; missing segments are ignored.</summary>
+    /// <param name="node">The root node.</param>
+    /// <param name="path">The property segments to walk.</param>
+    private static void RemovePath(JsonNode? node, string[] path) {
+        var current = node;
+        for(var index = 0; index < path.Length; index++) {
+            if(current is not JsonObject obj || !obj.TryGetPropertyValue(path[index], out var child)) {
+                return;
+            }
+
+            if(index == path.Length - 1) {
+                obj.Remove(path[index]);
+                return;
+            }
+
+            current = child;
+        }
+    }
+
+    /// <summary>Removes matching property names recursively from objects and arrays.</summary>
+    /// <param name="node">The node to inspect.</param>
+    /// <param name="names">The property names to remove.</param>
+    private static void RemoveMembers(JsonNode? node, IReadOnlyCollection<string> names) {
+        switch(node) {
+            case JsonObject obj:
+                foreach(var name in names) {
+                    obj.Remove(name);
+                }
+
+                foreach(var property in obj) {
+                    RemoveMembers(property.Value, names);
+                }
+
+                break;
+            case JsonArray array:
+                foreach(var item in array) {
+                    RemoveMembers(item, names);
+                }
+
+                break;
+            default:
+                break;
+        }
+    }
+
     /// <summary>Determines whether a file extension matches, case-insensitively.</summary>
     /// <param name="actual">The actual extension.</param>
     /// <param name="expected">The expected extension.</param>

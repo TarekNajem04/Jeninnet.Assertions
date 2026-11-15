@@ -28,6 +28,7 @@ global using Jeninnet.Assertions.Events;
 global using Jeninnet.Assertions.Extensions;
 global using Jeninnet.Assertions.IO;
 global using Jeninnet.Assertions.Localization;
+global using Jeninnet.Assertions.Snapshots;
 global using Jeninnet.Assertions.Tests.EquivalencyFixtures;
 global using Jeninnet.Assertions.Tests.LocalizationFixtures;
 global using Jeninnet.Assertions.Tests.SelectorFixtures;

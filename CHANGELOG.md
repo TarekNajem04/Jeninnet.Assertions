@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Snapshot workflow depth: `ScrubMachineName`/`ScrubUserName`/`ScrubGuid` convenience scrubbers
+  (applied after explicit scrubbers), structural JSON projection via `IgnoreJsonProperty`/
+  `IgnoreMembersNamed`, and `UseProjectRelativeDirectory` with nearest-project lookup, caller-relative
+  fallback, and per-directory caching. No new dependency.
 - Architecture layer direction: positive `DependOn`/`DependOnAny`, reverse `OnlyBeDependedOnBy`/
   `NotBeDependedOnBy`, and `ArchitectureLayer`/`FollowLayers` with longest-prefix assignment,
   same-layer allowance, optional framework checks via `ArchitectureLayer.FrameworkLayerName`, and

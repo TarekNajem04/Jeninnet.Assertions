@@ -359,6 +359,119 @@ public class SnapshotTests {
         document.Should().MatchSnapshot("document", directory);
     }
 
+    [TestMethod]
+    public void MatchSnapshot_ConvenienceScrubbers_MaskMachineUserAndGuid() {
+        using var environment = new TestEnvironment();
+        var directory = environment.CreateDirectory("snaps");
+        var guid = Guid.NewGuid();
+        var subject = $"machine={Environment.MachineName};user={Environment.UserName};id={guid:D};upper={guid.ToString("D").ToUpperInvariant()}";
+
+        subject.Should().MatchSnapshot("scrub", directory,
+            static options => options.ScrubMachineName().ScrubUserName().ScrubGuid().AutoVerify());
+
+        var verified = File.ReadAllText(Path.Combine(directory, "scrub.verified.txt"));
+        Assert.AreEqual("machine=<machine>;user=<user>;id=<guid>;upper=<guid>", verified);
+    }
+
+    [TestMethod]
+    public void MatchSnapshot_ConvenienceScrubbers_RunAfterExplicitScrubbers() {
+        using var environment = new TestEnvironment();
+        var directory = environment.CreateDirectory("snaps");
+        var subject = $"host={Environment.MachineName}";
+
+        subject.Should().MatchSnapshot("order", directory,
+            static options => options
+                .Scrub(text => text.Replace(Environment.MachineName, "custom"))
+                .ScrubMachineName()
+                .AutoVerify());
+
+        Assert.AreEqual("host=custom", File.ReadAllText(Path.Combine(directory, "order.verified.txt")));
+    }
+
+    [TestMethod]
+    public void MatchSnapshot_IgnoresJsonPropertyPaths() {
+        using var environment = new TestEnvironment();
+        var directory = environment.CreateDirectory("snaps");
+        File.WriteAllText(Path.Combine(directory, "ignored.verified.json"),
+            "{\n  \"metadata\": {\n    \"id\": 1\n  },\n  \"name\": \"a\"\n}");
+
+        var value = new { metadata = new { timestamp = "new", id = 1 }, name = "a" };
+        value.Should().MatchSnapshot("ignored", directory, static options => options.IgnoreJsonProperty("$.metadata.timestamp"));
+
+        Assert.IsFalse(File.Exists(Path.Combine(directory, "ignored.received.json")));
+    }
+
+    [TestMethod]
+    public void MatchSnapshot_IgnoresMemberNamesAtEveryDepth() {
+        using var environment = new TestEnvironment();
+        var directory = environment.CreateDirectory("snaps");
+        File.WriteAllText(Path.Combine(directory, "names.verified.json"),
+            "{\n  \"id\": \"new\",\n  \"nested\": {\n    \"id\": 2\n  }\n}");
+
+        var value = new { id = "new", nested = new { timestamp = "volatile", id = 2 } };
+        value.Should().MatchSnapshot("names", directory, static options => options.IgnoreMembersNamed("timestamp"));
+
+        Assert.IsFalse(File.Exists(Path.Combine(directory, "names.received.json")));
+    }
+
+    [TestMethod]
+    public void MatchSnapshot_MissingIgnoredPath_IsANoOp() {
+        using var environment = new TestEnvironment();
+        var directory = environment.CreateDirectory("snaps");
+        File.WriteAllText(Path.Combine(directory, "missing.verified.json"), "{\n  \"value\": 1\n}");
+
+        var value = new { value = 2 };
+        Assert.ThrowsExactly<AssertionFailedException>(
+            () => value.Should().MatchSnapshot("missing", directory, static options => options.IgnoreJsonProperty("$.absent.path")));
+        Assert.IsTrue(File.Exists(Path.Combine(directory, "missing.received.json")));
+    }
+
+    [TestMethod]
+    public void SnapshotOptions_ValidateJsonProjectionArguments() {
+        var options = new SnapshotOptions();
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.IgnoreJsonProperty(null!));
+        Assert.ThrowsExactly<ArgumentException>(() => options.IgnoreJsonProperty("  "));
+        Assert.ThrowsExactly<ArgumentException>(() => options.IgnoreJsonProperty("$"));
+        Assert.ThrowsExactly<ArgumentException>(() => options.IgnoreJsonProperty("$.a..b"));
+        Assert.ThrowsExactly<ArgumentException>(() => options.IgnoreJsonProperty("$.a[0]"));
+        Assert.ThrowsExactly<ArgumentNullException>(() => options.IgnoreMembersNamed(null!));
+        Assert.ThrowsExactly<ArgumentException>(() => options.IgnoreMembersNamed());
+        Assert.ThrowsExactly<ArgumentException>(() => options.IgnoreMembersNamed("timestamp", " "));
+    }
+
+    [TestMethod]
+    public void MatchSnapshot_UseProjectRelativeDirectory_FindsProjectAndFallsBack() {
+        using var environment = new TestEnvironment();
+        var project = environment.CreateDirectory("project");
+        File.WriteAllText(Path.Combine(project, "sample.csproj"), "<Project />");
+        var sourceDirectory = Path.Combine(project, "src");
+        Directory.CreateDirectory(sourceDirectory);
+        var fakeSource = Path.Combine(sourceDirectory, "SampleTests.cs");
+        const string subject = "ready";
+
+        // S3236 waived: the test deliberately exercises caller-path inference with a controlled path.
+#pragma warning disable S3236
+        subject.Should().MatchSnapshot("relative", null,
+            static options => options.UseProjectRelativeDirectory().AutoVerify(), fakeSource);
+        Assert.IsTrue(File.Exists(Path.Combine(project, "__snapshots__", "relative.verified.txt")));
+        Assert.IsFalse(File.Exists(Path.Combine(sourceDirectory, "__snapshots__", "relative.verified.txt")));
+
+        var fallback = environment.CreateDirectory("fallback");
+        var fallbackSourceDirectory = Path.Combine(fallback, "src");
+        Directory.CreateDirectory(fallbackSourceDirectory);
+        var fallbackSource = Path.Combine(fallbackSourceDirectory, "FallbackTests.cs");
+        subject.Should().MatchSnapshot("fallback", null,
+            static options => options.UseProjectRelativeDirectory().AutoVerify(), fallbackSource);
+        Assert.IsTrue(File.Exists(Path.Combine(fallbackSourceDirectory, "__snapshots__", "fallback.verified.txt")));
+
+        var explicitDirectory = environment.CreateDirectory("explicit");
+        subject.Should().MatchSnapshot("explicit", explicitDirectory,
+            static options => options.UseProjectRelativeDirectory().AutoVerify(), fakeSource);
+        Assert.IsTrue(File.Exists(Path.Combine(explicitDirectory, "explicit.verified.txt")));
+#pragma warning restore S3236
+    }
+
     private sealed record ScrubTarget(string Name);
 
     [TestMethod, DoNotParallelize]

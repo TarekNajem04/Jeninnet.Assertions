@@ -13,9 +13,16 @@ namespace Jeninnet.Assertions.Snapshots;
 /// parameter text, then unique suffixes. Nothing is transformed or auto-accepted by default.
 /// </remarks>
 public sealed class SnapshotOptions {
+    private static readonly Regex _guidPattern = new(
+        "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}",
+        RegexOptions.CultureInvariant,
+        TimeSpan.FromSeconds(1));
+
     private readonly List<Func<string, string>> _scrubbers = [];
     private readonly List<(Type Type, Func<string, string> Scrubber)> _typeScrubbers = [];
     private readonly List<(string Member, Func<string, string> Scrubber)> _memberScrubbers = [];
+    private readonly List<string[]> _ignoredJsonPaths = [];
+    private readonly HashSet<string> _ignoredMemberNames = new(StringComparer.Ordinal);
 
     /// <summary>Adds a transformation applied to received text (e.g. masking dates or identifiers).</summary>
     /// <param name="scrubber">The transformation (must not be <see langword="null"/>).</param>
@@ -35,6 +42,33 @@ public sealed class SnapshotOptions {
     /// <returns>This instance for chaining.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="scrubber"/> is <see langword="null"/>.</exception>
     public SnapshotOptions AddScrubber(Func<string, string> scrubber) => Scrub(scrubber);
+
+    /// <summary>Replaces every occurrence of <see cref="Environment.MachineName"/> with <c>&lt;machine&gt;</c>.</summary>
+    /// <remarks>Convenience scrubbers run after explicitly registered scrubbers, in the order machine, user, GUID.</remarks>
+    /// <param name="enabled">Whether the scrubber is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions ScrubMachineName(bool enabled = true) {
+        ScrubMachineNameEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Replaces every occurrence of <see cref="Environment.UserName"/> with <c>&lt;user&gt;</c>.</summary>
+    /// <remarks>Convenience scrubbers run after explicitly registered scrubbers, in the order machine, user, GUID.</remarks>
+    /// <param name="enabled">Whether the scrubber is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions ScrubUserName(bool enabled = true) {
+        ScrubUserNameEnabled = enabled;
+        return this;
+    }
+
+    /// <summary>Replaces every hyphenated GUID with <c>&lt;guid&gt;</c>.</summary>
+    /// <remarks>Convenience scrubbers run after explicitly registered scrubbers, in the order machine, user, GUID.</remarks>
+    /// <param name="enabled">Whether the scrubber is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions ScrubGuid(bool enabled = true) {
+        ScrubGuidEnabled = enabled;
+        return this;
+    }
 
     /// <summary>Adds a scrubber applied when the snapshotted object is an instance of <paramref name="type"/>.</summary>
     /// <remarks>The scrubber runs on the serialized text; it is not a per-node graph transform.</remarks>
@@ -187,6 +221,65 @@ public sealed class SnapshotOptions {
         return this;
     }
 
+    /// <summary>Removes a property path from JSON snapshots before scrubbing and comparison.</summary>
+    /// <remarks>
+    /// Only property paths are supported (for example <c>$.metadata.timestamp</c> or <c>metadata.timestamp</c>);
+    /// array indexes and wildcards are rejected. A path that does not exist is a no-op. Invalid JSON is left
+    /// unchanged. Projection runs after serialization and before scrubbers.
+    /// </remarks>
+    /// <param name="jsonPath">The property path to remove.</param>
+    /// <returns>This instance for chaining.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="jsonPath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="jsonPath"/> is blank, targets no property, or contains array syntax.</exception>
+    public SnapshotOptions IgnoreJsonProperty(string jsonPath) {
+        _ignoredJsonPaths.Add(ParseJsonPath(jsonPath));
+        return this;
+    }
+
+    /// <summary>Removes every JSON property with one of the given names at any depth.</summary>
+    /// <remarks>Names are matched ordinally; paths and nested arrays are traversed. Missing names are a no-op.</remarks>
+    /// <param name="names">The property names to remove.</param>
+    /// <returns>This instance for chaining.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="names"/> or one of its entries is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="names"/> is empty or contains a blank name.</exception>
+    public SnapshotOptions IgnoreMembersNamed(params string[] names) {
+        if(names is null) {
+            throw new ArgumentNullException(nameof(names));
+        }
+
+        if(names.Length == 0) {
+            throw new ArgumentException("At least one member name must be provided.", nameof(names));
+        }
+
+        foreach(var name in names) {
+            if(name is null) {
+                throw new ArgumentNullException(nameof(names));
+            }
+
+            var trimmed = name.Trim();
+            if(trimmed.Length == 0) {
+                throw new ArgumentException("Member names must not be empty.", nameof(names));
+            }
+
+            _ignoredMemberNames.Add(trimmed);
+        }
+
+        return this;
+    }
+
+    /// <summary>Resolves the default snapshots directory relative to the nearest project file instead of the caller file.</summary>
+    /// <remarks>
+    /// When enabled and no explicit snapshots directory is passed, the library searches upward from the caller file
+    /// for the first <c>*.csproj</c> and uses <c>&lt;projectDir&gt;/__snapshots__</c>. If no project file is found,
+    /// the caller-relative default is used. An explicit directory always wins. Results are cached per caller directory.
+    /// </remarks>
+    /// <param name="enabled">Whether project-relative resolution is enabled.</param>
+    /// <returns>This instance for chaining.</returns>
+    public SnapshotOptions UseProjectRelativeDirectory(bool enabled = true) {
+        UseProjectRelativeDirectoryEnabled = enabled;
+        return this;
+    }
+
     /// <summary>Sets the indentation width used for JSON/XML snapshot content.</summary>
     /// <param name="spaces">The number of leading spaces per level (zero or greater).</param>
     /// <returns>This instance for chaining.</returns>
@@ -228,6 +321,24 @@ public sealed class SnapshotOptions {
 
     /// <summary>Gets the registered global transformations in registration order.</summary>
     internal IReadOnlyList<Func<string, string>> Scrubbers => _scrubbers;
+
+    /// <summary>Gets whether the machine-name convenience scrubber is enabled.</summary>
+    internal bool ScrubMachineNameEnabled { get; private set; }
+
+    /// <summary>Gets whether the user-name convenience scrubber is enabled.</summary>
+    internal bool ScrubUserNameEnabled { get; private set; }
+
+    /// <summary>Gets whether the GUID convenience scrubber is enabled.</summary>
+    internal bool ScrubGuidEnabled { get; private set; }
+
+    /// <summary>Gets the configured JSON property paths to remove.</summary>
+    internal IReadOnlyList<string[]> IgnoredJsonPaths => _ignoredJsonPaths;
+
+    /// <summary>Gets the JSON property names to remove at any depth.</summary>
+    internal IReadOnlyCollection<string> IgnoredMemberNames => _ignoredMemberNames;
+
+    /// <summary>Gets whether the default snapshots directory is resolved relative to the nearest project file.</summary>
+    internal bool UseProjectRelativeDirectoryEnabled { get; private set; }
 
     /// <summary>Gets the type-activated transformations.</summary>
     internal IReadOnlyList<(Type Type, Func<string, string> Scrubber)> TypeScrubbers => _typeScrubbers;
@@ -288,4 +399,43 @@ public sealed class SnapshotOptions {
 
     /// <summary>Gets whether the unified diff is suppressed.</summary>
     internal bool DisableDiffEnabled { get; private set; }
+
+    /// <summary>Replaces every hyphenated GUID with <c>&lt;guid&gt;</c>.</summary>
+    /// <param name="text">The text to scrub.</param>
+    /// <returns>The scrubbed text.</returns>
+    internal static string ScrubGuids(string text) => _guidPattern.Replace(text, "<guid>");
+
+    /// <summary>Parses a property-only JSON path into its segments.</summary>
+    /// <param name="jsonPath">The path to parse.</param>
+    /// <returns>The property segments.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="jsonPath"/> is <see langword="null"/>.</exception>
+    /// <exception cref="ArgumentException"><paramref name="jsonPath"/> is blank, targets no property, or contains array syntax.</exception>
+    private static string[] ParseJsonPath(string jsonPath) {
+        if(jsonPath is null) {
+            throw new ArgumentNullException(nameof(jsonPath));
+        }
+
+        var trimmed = jsonPath.Trim();
+        if(trimmed.Length > 0 && trimmed[0] == '$') {
+            trimmed = trimmed.Substring(1).Trim();
+            if(trimmed.Length > 0 && trimmed[0] == '.') {
+                trimmed = trimmed.Substring(1).Trim();
+            }
+        }
+
+        if(trimmed.Length == 0) {
+            throw new ArgumentException("The JSON path must target at least one property.", nameof(jsonPath));
+        }
+
+        if(trimmed.IndexOf('[') >= 0 || trimmed.IndexOf(']') >= 0) {
+            throw new ArgumentException("Only property paths are supported; array indexes and wildcards are not.", nameof(jsonPath));
+        }
+
+        var segments = trimmed.Split('.').Select(static segment => segment.Trim()).ToArray();
+        if(segments.Any(static segment => segment.Length == 0)) {
+            throw new ArgumentException("The JSON path contains an empty property segment.", nameof(jsonPath));
+        }
+
+        return segments;
+    }
 }

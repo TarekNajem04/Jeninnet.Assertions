@@ -49,9 +49,21 @@ internal static class Snapshot {
         var directory = SnapshotNaming.ResolveDirectory(snapshotsDirectory, context.CallerFilePath, options);
         Directory.CreateDirectory(directory);
 
-        var received = receivedText;
+        var received = SnapshotComparison.ApplyJsonProjections(receivedText, options, fileExtension);
         foreach(var scrubber in options.Scrubbers) {
             received = scrubber(received);
+        }
+
+        if(options.ScrubMachineNameEnabled) {
+            received = received.Replace(Environment.MachineName, "<machine>");
+        }
+
+        if(options.ScrubUserNameEnabled) {
+            received = received.Replace(Environment.UserName, "<user>");
+        }
+
+        if(options.ScrubGuidEnabled) {
+            received = SnapshotOptions.ScrubGuids(received);
         }
 
         var stored = SnapshotComparison.FormatForStorage(received, options, fileExtension);

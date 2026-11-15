@@ -139,7 +139,8 @@ public class ObjectAssertions<T>(T? value, string? expression = null) : Assertio
         var json = _value is null ? "null" : JsonSerializer.Serialize(_value, _value.GetType(), Snapshot.JsonOptions);
         // System.Text.Json emits Environment.NewLine; normalize so snapshots are byte-identical on every machine.
         // Text snapshots stay exact (see Snapshot docs); only generator output is normalized here.
-        var scrubbed = SnapshotComparison.ApplyObjectScrubbers(json, _value, options);
+        var projected = SnapshotComparison.ApplyJsonProjections(json, options, ".json");
+        var scrubbed = SnapshotComparison.ApplyObjectScrubbers(projected, _value, options);
         Snapshot.Verify(scrubbed.Replace("\r\n", "\n").Replace('\r', '\n'), snapshotName, snapshotsDirectory, ".json", options, new(Expression, callerFilePath, because, becauseArgs));
         return new(this);
     }

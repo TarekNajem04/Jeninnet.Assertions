@@ -44,10 +44,18 @@ node.Should().MatchSnapshot("payload", directory, options => options
     .SortProperties()
     .IndentSize(2)
     .IgnoreLineEndingDifferences()
+    .IgnoreJsonProperty("$.metadata.timestamp")
+    .IgnoreMembersNamed("etag")
+    .ScrubMachineName()
+    .ScrubGuid()
     .AddScrubber(text => text.Replace("42", "<n>", StringComparison.Ordinal)));
 ```
 
 </div>
+
+يستبدل <code dir="ltr">ScrubMachineName()</code> اسم الجهاز الحالي بـ<code dir="ltr">&lt;machine&gt;</code>، ويستبدل <code dir="ltr">ScrubUserName()</code> اسم المستخدم بـ<code dir="ltr">&lt;user&gt;</code>، ويستبدل <code dir="ltr">ScrubGuid()</code> كل GUID بصيغة شرطية بـ<code dir="ltr">&lt;guid&gt;</code>. وتُطبَّق هذه الاختصارات **بعد** scrubbers المسجَّلة صراحةً، بالترتيب الثابت: الجهاز ثم المستخدم ثم GUID، فيرى التحويل الصريح النص الأصلي أولًا.
+
+يحذف <code dir="ltr">IgnoreJsonProperty("$.metadata.timestamp")</code> مسار خاصية واحدًا قبل التنظيف والمقارنة؛ ويحذف <code dir="ltr">IgnoreMembersNamed("etag", "timestamp")</code> الأسماء المطابقة في كل المستويات. المسارات الخاصة بالخصائص فقط مدعومة (لا فهارس مصفوفات ولا wildcards). المسار أو الاسم غير الموجود لا يغيّر شيئًا، وJSON غير الصالح يُترك كما هو. ويحلّ <code dir="ltr">UseProjectRelativeDirectory()</code> المجلد الافتراضي من أقرب <code dir="ltr">*.csproj</code> إلى <code dir="ltr">&lt;projectDir&gt;/__snapshots__</code>؛ ومع غياب ملف المشروع يرجع إلى المجلد النسبي للملف المستدعي، والمجلد الصريح يتقدّم دائمًا. وتُخزَّن نتائج البحث عن المشروع مؤقتًا لكل مجلد مستدعٍ.
 
 يبقى <code dir="ltr">UseDirectory</code> داخل مجلد اللقطات المُنجَز، ويجب أن يبقى <code dir="ltr">UseFileName</code> اسمًا مجردًا. ولا يعتمد <code dir="ltr">UseParameters</code> على إطار اختبار، لذا يُقرن بـ<code dir="ltr">UseTextForParameters</code> الصريح. لواحق <code dir="ltr">UniqueFor*</code> ثابتة (<code dir="ltr">_win</code>، <code dir="ltr">_net10.0</code>، <code dir="ltr">_x64</code>...) ومعطّلة افتراضيًا.
 

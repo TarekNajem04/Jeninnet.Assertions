@@ -8,6 +8,8 @@ namespace Jeninnet.Assertions.Snapshots;
 
 /// <summary>Resolves snapshot file names and directories from caller context and options.</summary>
 internal static class SnapshotNaming {
+    private static readonly Dictionary<string, string> _projectDirectories = new(PathComparer);
+    private static readonly object _projectDirectoriesLock = new();
     /// <summary>Resolves the snapshot base name and appends configured prefixes/suffixes.</summary>
     /// <param name="snapshotName">The explicit name supplied to the assertion, when any.</param>
     /// <param name="options">The snapshot options.</param>
@@ -46,7 +48,7 @@ internal static class SnapshotNaming {
     /// <returns>The resolved directory.</returns>
     /// <exception cref="ArgumentException">The caller path is unavailable or the configured subdirectory escapes its base.</exception>
     internal static string ResolveDirectory(string? snapshotsDirectory, string? callerFilePath, SnapshotOptions options) {
-        var baseDirectory = ResolveBaseDirectory(snapshotsDirectory, callerFilePath);
+        var baseDirectory = ResolveBaseDirectory(snapshotsDirectory, callerFilePath, options);
         if(options.Directory is null) {
             return baseDirectory;
         }
@@ -68,22 +70,63 @@ internal static class SnapshotNaming {
         return combined;
     }
 
-    /// <summary>Resolves the base directory: the explicit value or <c>__snapshots__</c> beside the caller file.</summary>
+    /// <summary>Resolves the base directory: the explicit value, the nearest project folder, or <c>__snapshots__</c> beside the caller file.</summary>
     /// <param name="snapshotsDirectory">The explicit directory, when supplied.</param>
     /// <param name="callerFilePath">The caller source file.</param>
+    /// <param name="options">The snapshot options.</param>
     /// <returns>The base directory.</returns>
     /// <exception cref="ArgumentException"><paramref name="snapshotsDirectory"/> is absent and the caller path is unavailable.</exception>
-    private static string ResolveBaseDirectory(string? snapshotsDirectory, string? callerFilePath) {
+    private static string ResolveBaseDirectory(string? snapshotsDirectory, string? callerFilePath, SnapshotOptions options) {
         if(snapshotsDirectory is not null) {
             return snapshotsDirectory;
         }
 
         var baseDirectory = !string.IsNullOrEmpty(callerFilePath) ? Path.GetDirectoryName(callerFilePath) : null;
-        if(string.IsNullOrEmpty(baseDirectory)) {
+        if(baseDirectory is null || baseDirectory.Length == 0) {
             throw new ArgumentException("Pass snapshotsDirectory explicitly when the caller file path is unavailable.", nameof(callerFilePath));
         }
 
+        if(options.UseProjectRelativeDirectoryEnabled) {
+            var projectDirectory = FindProjectDirectory(baseDirectory);
+            if(projectDirectory is not null) {
+                return Path.Combine(projectDirectory, "__snapshots__");
+            }
+        }
+
         return Path.Combine(baseDirectory, "__snapshots__");
+    }
+
+    /// <summary>Finds the nearest directory containing a C# project file, caching the result per start directory.</summary>
+    /// <param name="startDirectory">The directory to start the upward search from.</param>
+    /// <returns>The project directory, or <see langword="null"/> when none was found.</returns>
+    private static string? FindProjectDirectory(string startDirectory) {
+        var start = Path.GetFullPath(startDirectory);
+        lock(_projectDirectoriesLock) {
+            if(_projectDirectories.TryGetValue(start, out var cached)) {
+                return cached.Length == 0 ? null : cached;
+            }
+
+            var directory = new DirectoryInfo(start);
+            while(directory is not null) {
+                try {
+                    if(directory.EnumerateFiles("*.csproj", SearchOption.TopDirectoryOnly).Any()) {
+                        _projectDirectories[start] = directory.FullName;
+                        return directory.FullName;
+                    }
+                }
+                catch(IOException) {
+                    // An unreadable directory cannot contain the project; keep walking upward.
+                }
+                catch(UnauthorizedAccessException) {
+                    // The same fallback applies when the search hits an inaccessible directory.
+                }
+
+                directory = directory.Parent;
+            }
+
+            _projectDirectories[start] = string.Empty;
+            return null;
+        }
     }
 
     /// <summary>Validates a caller-supplied snapshot name as a bare, valid file name.</summary>
@@ -185,6 +228,10 @@ internal static class SnapshotNaming {
     /// <summary>Gets the platform comparison for paths.</summary>
     private static StringComparison PathComparison =>
         RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? StringComparison.OrdinalIgnoreCase : StringComparison.Ordinal;
+
+    /// <summary>Gets the platform comparer for cached project paths.</summary>
+    private static StringComparer PathComparer =>
+        RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal;
 
     /// <summary>Returns the stable OS suffix.</summary>
     /// <returns><c>win</c>, <c>linux</c>, <c>macos</c>, or a sanitized description.</returns>
