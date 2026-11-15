@@ -24,6 +24,29 @@ public class XmlTests {
     }
 
     [TestMethod]
+    public void XDocument_HaveElement_OccurrenceMessagesCoverEveryConstraint() {
+        var two = XDocument.Parse("<root><child/><child/></root>");
+        var one = XDocument.Parse("<root><child/></root>");
+        var four = XDocument.Parse("<root><child/><child/><child/><child/></root>");
+
+        var once = Assert.ThrowsExactly<AssertionFailedException>(() => two.Should().HaveElement("child", Exactly.Once()));
+        Assert.Contains("child", once.Message);
+
+        var exactlyTwice = Assert.ThrowsExactly<AssertionFailedException>(() => one.Should().HaveElement("child", Exactly.Twice()));
+        Assert.Contains("child", exactlyTwice.Message);
+
+        var atLeastThrice = Assert.ThrowsExactly<AssertionFailedException>(() => two.Should().HaveElement("child", AtLeast.Thrice()));
+        Assert.Contains("child", atLeastThrice.Message);
+
+        var atMostOnce = Assert.ThrowsExactly<AssertionFailedException>(() => two.Should().HaveElement("child", AtMost.Once()));
+        Assert.Contains("child", atMostOnce.Message);
+
+        var between = Assert.ThrowsExactly<AssertionFailedException>(
+            () => four.Should().HaveElement("child", new OccurrenceConstraint(1, 3, "between once and thrice")));
+        Assert.Contains("child", between.Message);
+    }
+
+    [TestMethod]
     public void XElement_ValueAndAttribute() {
         var doc = XDocument.Parse(CATALOG);
         doc.Should().HaveElement("child").Which.Should().HaveValue("text").And.HaveAttributeWithValue("id", "1");
