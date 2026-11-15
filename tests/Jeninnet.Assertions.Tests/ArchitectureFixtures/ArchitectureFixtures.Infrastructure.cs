@@ -4,9 +4,9 @@
 // Repository: https://github.com/TarekNajem04/Jeninnet.Assertions/
 // Licensed under the MIT License.
 //
-namespace Jeninnet.Assertions.Tests.ArchitectureFixtures.Infrastructure;
-
 using Domain = Jeninnet.Assertions.Tests.ArchitectureFixtures.Domain;
+
+namespace Jeninnet.Assertions.Tests.ArchitectureFixtures.Infrastructure;
 
 [AttributeUsage(AttributeTargets.Class)]
 public sealed class InfrastructureMarkerAttribute(Type type) : Attribute {

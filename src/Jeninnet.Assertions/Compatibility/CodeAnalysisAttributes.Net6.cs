@@ -8,6 +8,7 @@
 namespace System.Diagnostics.CodeAnalysis;
 
 /// <summary>Polyfill for the AOT analyzer attribute that is internal on .NET 6.</summary>
+/// <param name="message">The explanation for the requirement.</param>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
 internal sealed class RequiresDynamicCodeAttribute(string message) : Attribute {
     /// <summary>Gets the explanation for the requirement.</summary>

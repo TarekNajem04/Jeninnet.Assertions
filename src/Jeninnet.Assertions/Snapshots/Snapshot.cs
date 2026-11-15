@@ -136,9 +136,11 @@ internal static class Snapshot {
 #endif
             using var process = Process.Start(startInfo);
         }
+#pragma warning disable RCS1075 // The diff tool is best-effort; a launch failure must not hide the snapshot assertion.
         catch(Exception) {
             // The diff tool is a convenience; a missing or failing executable must not hide the snapshot failure.
         }
+#pragma warning restore RCS1075
     }
 
 #if NETSTANDARD2_0

@@ -130,25 +130,18 @@ internal static class SnapshotComparison {
     /// <param name="node">The node to inspect.</param>
     /// <param name="names">The property names to remove.</param>
     private static void RemoveMembers(JsonNode? node, IReadOnlyCollection<string> names) {
-        switch(node) {
-            case JsonObject obj:
-                foreach(var name in names) {
-                    obj.Remove(name);
-                }
+        if(node is JsonObject obj) {
+            foreach(var name in names) {
+                obj.Remove(name);
+            }
 
-                foreach(var property in obj) {
-                    RemoveMembers(property.Value, names);
-                }
-
-                break;
-            case JsonArray array:
-                foreach(var item in array) {
-                    RemoveMembers(item, names);
-                }
-
-                break;
-            default:
-                break;
+            foreach(var property in obj) {
+                RemoveMembers(property.Value, names);
+            }
+        } else if(node is JsonArray array) {
+            foreach(var item in array) {
+                RemoveMembers(item, names);
+            }
         }
     }
 

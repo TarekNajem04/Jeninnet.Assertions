@@ -65,7 +65,7 @@ public class StringParsingTests {
 
     [TestMethod]
     public void BeParsableInto_HandlesNullAndBecause() {
-        string? subject = null;
+        const string? subject = null;
         var nullEx = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().BeParsableInto<int>());
         Assert.Contains("but it was null", nullEx.Message);
         subject.Should().NotBeParsableInto<int>();

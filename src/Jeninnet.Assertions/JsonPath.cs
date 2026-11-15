@@ -8,10 +8,10 @@ namespace Jeninnet.Assertions;
 
 /// <summary>The kind of navigation performed by one mini JSON path segment.</summary>
 internal enum JsonPathSegmentKind {
-    Property,
-    Element,
-    Wildcard,
-    RecursiveProperty,
+    Property = 0,
+    Element = 1,
+    Wildcard = 2,
+    RecursiveProperty = 3,
 }
 
 /// <summary>A single navigation step of a mini JSON path.</summary>
@@ -92,11 +92,9 @@ internal static class JsonPath {
         while(position < path.Length) {
             if(path[position] == '.') {
                 position++;
-                if(position < path.Length && path[position] == '.') {
-                    position = ParseRecursive(path, position + 1, segments);
-                } else {
-                    position = ParseProperty(path, position, segments);
-                }
+                position = position < path.Length && path[position] == '.'
+                    ? ParseRecursive(path, position + 1, segments)
+                    : ParseProperty(path, position, segments);
             } else if(path[position] == '[') {
                 position = ParseBracket(path, position, segments);
             } else {
@@ -112,6 +110,7 @@ internal static class JsonPath {
     /// <param name="position">The position after the dot.</param>
     /// <param name="segments">The segment list to extend.</param>
     /// <returns>The position after the property name.</returns>
+    /// <exception cref="ArgumentException">The property name is missing.</exception>
     private static int ParseProperty(string path, int position, List<JsonPathSegment> segments) {
         if(position < path.Length && path[position] == '*') {
             segments.Add(JsonPathSegment.Wildcard());
@@ -136,6 +135,7 @@ internal static class JsonPath {
     /// <param name="position">The position after the second dot.</param>
     /// <param name="segments">The segment list to extend.</param>
     /// <returns>The position after the property name.</returns>
+    /// <exception cref="ArgumentException">The recursive property name is missing or a recursive wildcard is used.</exception>
     private static int ParseRecursive(string path, int position, List<JsonPathSegment> segments) {
         if(position >= path.Length) {
             throw Malformed(path, position, "a property name is required after '..'");
@@ -169,6 +169,7 @@ internal static class JsonPath {
     /// <param name="position">The position of the opening bracket.</param>
     /// <param name="segments">The segment list to extend.</param>
     /// <returns>The position after the closing bracket.</returns>
+    /// <exception cref="ArgumentException">The bracket segment is malformed.</exception>
     private static int ParseBracket(string path, int position, List<JsonPathSegment> segments) {
         var content = position + 1;
         if(content < path.Length && path[content] == '*') {
@@ -209,6 +210,7 @@ internal static class JsonPath {
     /// <param name="path">The full path.</param>
     /// <param name="position">The position of the opening quote.</param>
     /// <returns>The unescaped name and the position after the closing bracket.</returns>
+    /// <exception cref="ArgumentException">The quoted name or its closing bracket is malformed.</exception>
     private static (string Name, int Next) ParseQuotedName(string path, int position) {
         var quote = path[position];
         position++;

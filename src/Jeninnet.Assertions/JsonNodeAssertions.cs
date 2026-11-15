@@ -465,6 +465,7 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
     /// <param name="reason">The localized failure reason when resolution fails.</param>
     /// <param name="suggestion">A "did you mean" suggestion for a missing property, or an empty string.</param>
     /// <returns><see langword="true"/> when every segment resolved.</returns>
+    /// <exception cref="InvalidOperationException">The parsed segment kind is not supported.</exception>
     private bool TryResolvePath(IReadOnlyList<JsonPathSegment> segments, out JsonNode? node, out string reason, out string suggestion) {
         node = _value;
         reason = string.Empty;
@@ -509,6 +510,7 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
                             next.Add(child);
                         }
                     }
+
                     break;
                 case JsonPathSegmentKind.Element:
                     foreach(var node in current) {
@@ -521,6 +523,7 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
                             next.Add(array[index]);
                         }
                     }
+
                     break;
                 case JsonPathSegmentKind.Wildcard:
                     foreach(var node in current) {
@@ -533,11 +536,13 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
                                 break;
                         }
                     }
+
                     break;
                 case JsonPathSegmentKind.RecursiveProperty:
                     foreach(var node in current) {
                         CollectRecursive(node, segment.Name!, next);
                     }
+
                     break;
             }
 
@@ -565,8 +570,7 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
         var stack = new Stack<JsonNode?>();
         stack.Push(node);
         while(stack.Count > 0 && results.Count <= MAX_PATH_RESULTS) {
-            var current = stack.Pop();
-            switch(current) {
+            switch(stack.Pop()) {
                 case JsonObject obj:
                     if(obj.TryGetPropertyValue(name, out var matched)) {
                         results.Add(matched);
@@ -575,11 +579,13 @@ public partial class JsonNodeAssertions(JsonNode? value, string? expression = nu
                     foreach(var descendant in obj.Select(static property => property.Value).Reverse()) {
                         stack.Push(descendant);
                     }
+
                     break;
                 case JsonArray array:
                     for(var index = array.Count - 1; index >= 0; index--) {
                         stack.Push(array[index]);
                     }
+
                     break;
             }
         }

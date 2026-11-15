@@ -40,7 +40,5 @@ public sealed class OrderWithQuote {
 public sealed class AttributedLeak;
 
 public static class MethodOnlyLeak {
-    public static void Connect() {
-        _ = new Infrastructure.SqlConnection("server=.;database=orders");
-    }
+    public static void Connect() => _ = new Infrastructure.SqlConnection("server=.;database=orders");
 }

@@ -486,6 +486,26 @@ dotnet_diagnostic.MSTEST0049.severity = none
 # statements out would delete the behavior under test.
 dotnet_diagnostic.MSTEST0051.severity = none
 
+#### Namespace/folder exemptions ####
+
+# IDE0130: compatibility shims must keep BCL namespaces (System.*) even though they live in
+# the Compatibility folder; moving them would change the assembly's public type identity.
+[src/Jeninnet.Assertions/Compatibility/**.cs]
+dotnet_diagnostic.IDE0130.severity = none
+# RCS1154: the polyfill enum mirrors the BCL member order; sorting by value would diverge from
+# the contract it reproduces.
+dotnet_diagnostic.RCS1154.severity = none
+
+# IDE0130: peer benchmark files intentionally use a root namespace so AwesomeAssertions'
+# Should() extension does not collide with Jeninnet's enclosing-namespace Should().
+[benchmarks/Jeninnet.Assertions.Benchmarks/Peer*.cs]
+dotnet_diagnostic.IDE0130.severity = none
+
+# IDE0130: architecture fixtures encode layer namespaces while grouped in one fixtures folder;
+# the folder is organizational, the namespace is the architecture under test.
+[tests/Jeninnet.Assertions.Tests/ArchitectureFixtures/**.cs]
+dotnet_diagnostic.IDE0130.severity = none
+
 # The consumer template's MSTest suite follows the same behavioral-sentence naming convention
 # (same rationale as [tests/**.cs] above).
 [consumers/**.Tests/**.cs]

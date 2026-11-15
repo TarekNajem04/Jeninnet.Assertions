@@ -222,7 +222,9 @@ public static class FailureReport {
     /// <summary>Adds a node through the non-generic <see cref="JsonArray"/> contract (AOT-safe).</summary>
     /// <param name="array">The target array.</param>
     /// <param name="node">The node to add.</param>
+#pragma warning disable RCS1151 // The cast selects IList<JsonNode?> deliberately; JsonArray.Add would break the AOT-safe path.
     private static void Add(JsonArray array, JsonNode node) => ((IList<JsonNode?>)array).Add(node);
+#pragma warning restore RCS1151
 
     /// <summary>Validates the failure list argument.</summary>
     /// <param name="failures">The failures to validate.</param>

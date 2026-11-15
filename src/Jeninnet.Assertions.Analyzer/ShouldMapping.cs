@@ -276,12 +276,12 @@ internal static class ShouldMapping {
 
         var isMstest = method.ContainingType.ContainingNamespace?.ToDisplayString() == MSTEST_ASSERT_NAMESPACE;
         var exact = method.Name is "ThrowsException" or "ThrowsExceptionAsync" || !isMstest;
-        string target;
-        if(exact) {
-            target = isAsync ? "ThrowExactlyAsync" : "ThrowExactly";
-        } else {
-            target = isAsync ? "ThrowAsync" : "Throw";
-        }
+        var target = (exact, isAsync) switch {
+            (true, true) => "ThrowExactlyAsync",
+            (true, false) => "ThrowExactly",
+            (false, true) => "ThrowAsync",
+            _ => "Throw",
+        };
         var typeSyntax = SyntaxFactory.ParseTypeName(exceptionType.ToMinimalDisplayString(semanticModel, invocation.SpanStart));
         if(IsProvenUncompilable(semanticModel, invocation, arguments[0].Expression, target, null, typeSyntax, isAsync)) {
             return null;
@@ -302,7 +302,7 @@ internal static class ShouldMapping {
             return null;
         }
 
-        ITypeSymbol? expectedType = method.TypeArguments.Length > 0 ? method.TypeArguments[0] : null;
+        var expectedType = method.TypeArguments.Length > 0 ? method.TypeArguments[0] : null;
         if(expectedType is null) {
             if(arguments.Count < 2 || arguments[1].Expression is not TypeOfExpressionSyntax typeOf) {
                 return null;
@@ -317,12 +317,12 @@ internal static class ShouldMapping {
 
         var isNegated = method.Name is "IsNotInstanceOfType" or "IsNotType" or "IsNotExactInstanceOfType" or "IsNotInstanceOf";
         var isExact = method.Name is "IsType" or "IsNotType" or "IsExactInstanceOfType" or "IsNotExactInstanceOfType";
-        string target;
-        if(isExact) {
-            target = isNegated ? "NotBeOfType" : "BeOfType";
-        } else {
-            target = isNegated ? "NotBeAssignableTo" : "BeAssignableTo";
-        }
+        var target = (isExact, isNegated) switch {
+            (true, true) => "NotBeOfType",
+            (true, false) => "BeOfType",
+            (false, true) => "NotBeAssignableTo",
+            _ => "BeAssignableTo",
+        };
         var typeSyntax = SyntaxFactory.ParseTypeName(expectedType.ToMinimalDisplayString(semanticModel, invocation.SpanStart));
         var messageIndex = method.TypeArguments.Length > 0 ? 1 : 2;
         var because = NamedArgument(arguments, "message")
@@ -408,7 +408,7 @@ internal static class ShouldMapping {
     /// <returns><see langword="true"/> when the caller does not consume the assertion result.</returns>
     internal static bool IsResultDiscarded(InvocationExpressionSyntax invocation) =>
         invocation.Parent is ExpressionStatementSyntax
-        || invocation.Parent is AwaitExpressionSyntax { Parent: ExpressionStatementSyntax };
+            or AwaitExpressionSyntax { Parent: ExpressionStatementSyntax };
 
     /// <summary>Maps a classic equality invocation (<c>Assert.AreEqual</c> family) to its fluent replacement.</summary>
     /// <param name="semanticModel">The semantic model for the invocation.</param>

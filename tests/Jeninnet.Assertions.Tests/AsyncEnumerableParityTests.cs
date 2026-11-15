@@ -122,7 +122,7 @@ public class AsyncEnumerableParityTests {
             async item => { await Task.Yield(); visited.Add(item * 10); },
         ]);
 
-        CollectionAssert.AreEqual(_visited, visited);
+        Assert.AreSequenceEqual(_visited, visited);
 
         var mismatch = Sequence(1, 2, 3);
         var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(() => mismatch.Should().SatisfyRespectivelyAsync([
@@ -156,7 +156,7 @@ public class AsyncEnumerableParityTests {
         var items = Sequence(1, 2);
         await Assert.ThrowsExactlyAsync<OperationCanceledException>(() => items.Should().AllAsync(static _ => true, token));
         await Assert.ThrowsExactlyAsync<OperationCanceledException>(() => items.Should().AnyAsync(static _ => true, token));
-        await Assert.ThrowsExactlyAsync<OperationCanceledException>(async () => { _ = await items.Should().ContainSingleAsync(token); });
+        await Assert.ThrowsExactlyAsync<OperationCanceledException>(async () => await items.Should().ContainSingleAsync(token));
         await Assert.ThrowsExactlyAsync<OperationCanceledException>(() => items.Should().OnlyHaveUniqueItemsAsync(token));
         await Assert.ThrowsExactlyAsync<OperationCanceledException>(() => items.Should().ContainInConsecutiveOrderAsync([1, 2], token));
         await Assert.ThrowsExactlyAsync<OperationCanceledException>(() => items.Should().NotContainInOrderAsync([1, 2], token));
@@ -169,7 +169,7 @@ public class AsyncEnumerableParityTests {
     public async Task NewVerbs_EnumerateTheSourceExactlyOnce() {
         await AssertSingleEnumeration(static source => source.Should().AllAsync(static _ => true));
         await AssertSingleEnumeration(static source => source.Should().AnyAsync(static _ => true));
-        await AssertSingleEnumeration(async source => { _ = await source.Should().ContainSingleAsync(); });
+        await AssertSingleEnumeration(async source => await source.Should().ContainSingleAsync());
         await AssertSingleEnumeration(static source => source.Should().OnlyHaveUniqueItemsAsync());
         await AssertSingleEnumeration(static source => source.Should().ContainInConsecutiveOrderAsync([1]));
         await AssertSingleEnumeration(static source => source.Should().NotContainInOrderAsync([9]));
@@ -177,7 +177,7 @@ public class AsyncEnumerableParityTests {
         await AssertSingleEnumeration(static source => source.Should().HaveCountGreaterThanOrEqualToAsync(1));
         await AssertSingleEnumeration(static source => source.Should().HaveCountLessThanAsync(2));
         await AssertSingleEnumeration(static source => source.Should().HaveCountLessThanOrEqualToAsync(1));
-        await AssertSingleEnumeration(async source => { _ = await source.Should().ContainSingleAsync(static item => item == 1); });
+        await AssertSingleEnumeration(async source => await source.Should().ContainSingleAsync(static item => item == 1));
         await AssertSingleEnumeration(static source => source.Should().SatisfyRespectivelyAsync([static _ => Task.CompletedTask]));
         await AssertSingleEnumeration(static source => source.Should().SatisfyAsync([static _ => Task.FromResult(true)]));
     }

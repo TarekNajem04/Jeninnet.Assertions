@@ -263,13 +263,12 @@ public sealed class AssertionScope : IDisposable {
     /// <param name="message">The failure message.</param>
     /// <param name="startIndex">The index in <paramref name="message"/> where the remainder begins.</param>
     /// <returns>The expectation followed by the message remainder.</returns>
-    private static string PrependExpectation(string expectation, string message, int startIndex) {
+    private static string PrependExpectation(string expectation, string message, int startIndex) =>
 #if NETSTANDARD2_0
-        return expectation + message.Substring(startIndex);
+        expectation + message.Substring(startIndex);
 #else
-        return string.Concat(expectation, message.AsSpan(startIndex));
+        string.Concat(expectation, message.AsSpan(startIndex));
 #endif
-    }
 
     /// <summary>Determines whether an expression match ends at a natural phrase boundary.</summary>
     /// <param name="message">The failure message being inspected.</param>
@@ -396,6 +395,7 @@ public sealed class AssertionScope : IDisposable {
     /// <summary>Throws an <see cref="AssertionFailedException"/>; never returns.</summary>
     /// <param name="message">The fully formatted failure message.</param>
     /// <param name="innerException">The optional underlying exception.</param>
+    /// <exception cref="AssertionFailedException">Always thrown.</exception>
     [DoesNotReturn]
     private static void ThrowFailure(string message, Exception? innerException) =>
         throw new AssertionFailedException(message, innerException);

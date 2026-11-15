@@ -305,5 +305,4 @@ public class JsonElementAssertions(JsonElement? value, string? expression = null
         using var document = JsonDocument.Parse(node.ToJsonString());
         return document.RootElement.Clone();
     }
-
 }

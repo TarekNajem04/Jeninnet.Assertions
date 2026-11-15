@@ -71,11 +71,8 @@ public class FileSystemAssertionsTests {
     }
 
     [TestMethod]
+    [OSCondition(OperatingSystems.Windows)]
     public void File_Attributes() {
-        if(!OperatingSystem.IsWindows()) {
-            Assert.Inconclusive("FileAttributes semantics are platform-specific; this suite covers Windows.");
-        }
-
         using var environment = new TestEnvironment();
         var path = environment.CreateFile("attributes.txt", "x");
         var file = new FileInfo(path);

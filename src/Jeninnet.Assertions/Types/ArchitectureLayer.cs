@@ -7,32 +7,26 @@
 namespace Jeninnet.Assertions.Types;
 
 /// <summary>Describes a named namespace layer and the other layers it may depend on.</summary>
+/// <param name="name">The unique layer name used by <see cref="DependsOn"/> and in failure messages.</param>
+/// <param name="namespacePrefix">The namespace prefix that assigns types to this layer.</param>
 /// <remarks>
 /// Layer membership is prefix-based: a type belongs to a layer when its namespace equals
 /// <see cref="NamespacePrefix"/> or starts with <c>NamespacePrefix + "."</c>. When prefixes overlap,
 /// the longest matching prefix wins. A layer with no <see cref="DependsOn"/> calls may depend only on itself.
 /// </remarks>
-public sealed class ArchitectureLayer {
+/// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="namespacePrefix"/> is <see langword="null"/>.</exception>
+/// <exception cref="ArgumentException"><paramref name="name"/> or <paramref name="namespacePrefix"/> is empty or whitespace.</exception>
+public sealed class ArchitectureLayer(string name, string namespacePrefix) {
     /// <summary>Gets the reserved layer name used for framework dependencies when <c>includingFrameworkDependencies</c> is enabled.</summary>
     public static string FrameworkLayerName => "Framework";
 
     private readonly HashSet<string> _dependencies = new(StringComparer.Ordinal);
 
-    /// <summary>Creates a layer with a name and a namespace prefix.</summary>
-    /// <param name="name">The unique layer name used by <see cref="DependsOn"/> and in failure messages.</param>
-    /// <param name="namespacePrefix">The namespace prefix that assigns types to this layer.</param>
-    /// <exception cref="ArgumentNullException"><paramref name="name"/> or <paramref name="namespacePrefix"/> is <see langword="null"/>.</exception>
-    /// <exception cref="ArgumentException"><paramref name="name"/> or <paramref name="namespacePrefix"/> is empty or whitespace.</exception>
-    public ArchitectureLayer(string name, string namespacePrefix) {
-        Name = Validate(name, nameof(name), "The layer name must not be empty.");
-        NamespacePrefix = Validate(namespacePrefix, nameof(namespacePrefix), "The namespace prefix must not be empty.");
-    }
-
     /// <summary>Gets the unique layer name.</summary>
-    public string Name { get; }
+    public string Name { get; } = Validate(name, nameof(name), "The layer name must not be empty.");
 
     /// <summary>Gets the namespace prefix that assigns types to this layer.</summary>
-    public string NamespacePrefix { get; }
+    public string NamespacePrefix { get; } = Validate(namespacePrefix, nameof(namespacePrefix), "The namespace prefix must not be empty.");
 
     /// <summary>Gets the layer names this layer may depend on.</summary>
     internal IReadOnlyCollection<string> Dependencies => _dependencies;

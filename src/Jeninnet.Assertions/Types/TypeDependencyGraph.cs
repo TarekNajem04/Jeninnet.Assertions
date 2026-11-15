@@ -37,9 +37,7 @@ internal sealed class TypeDependencyGraph {
                 continue;
             }
 
-            dependencies[type] = Collect(type)
-                .OrderBy(static dependency => dependency.FullName, StringComparer.Ordinal)
-                .ToArray();
+            dependencies[type] = [.. Collect(type).OrderBy(static dependency => dependency.FullName, StringComparer.Ordinal)];
         }
 
         return new TypeDependencyGraph(dependencies);
@@ -50,7 +48,7 @@ internal sealed class TypeDependencyGraph {
     /// <returns>The external dependencies in ordinal full-name order, or an empty list when the type is not part of the graph.</returns>
     internal IReadOnlyList<Type> DependenciesOf(Type type) =>
         _dependencies.TryGetValue(type, out var dependencies)
-            ? dependencies.Where(dependency => dependency != type).ToArray()
+            ? [.. dependencies.Where(dependency => dependency != type)]
             : [];
 
     /// <summary>Finds dependency cycles among the selected types.</summary>

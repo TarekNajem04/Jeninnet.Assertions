@@ -187,6 +187,7 @@ public partial class XDocumentAssertions(XDocument? value, string? expression = 
     /// <param name="because">The reason for the assertion, appended to the failure message.</param>
     /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
     /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="expected"/> is <see langword="null"/>.</exception>
     /// <exception cref="AssertionFailedException">The document has no root or the namespace differs.</exception>
     public AndConstraint<XDocumentAssertions> HaveNamespace(string expected, string? because = null, params object?[] becauseArgs) {
         if(expected is null) {

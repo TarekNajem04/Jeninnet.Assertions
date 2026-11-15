@@ -198,12 +198,12 @@ public partial class TypeSelectorAssertions {
         }
 
         var byName = layers.ToDictionary(static layer => layer.Name, StringComparer.Ordinal);
-        var unknown = layers
+        var (unknownLayer, unknownDependency) = layers
             .SelectMany(static layer => layer.Dependencies.Select(dependency => (Layer: layer.Name, Dependency: dependency)))
             .FirstOrDefault(pair => !byName.ContainsKey(pair.Dependency)
                 && !string.Equals(pair.Dependency, ArchitectureLayer.FrameworkLayerName, StringComparison.Ordinal));
-        if(unknown.Layer is not null) {
-            throw new ArgumentException($"Layer '{unknown.Layer}' declares an unknown dependency on '{unknown.Dependency}'.", nameof(layers));
+        if(unknownLayer is not null) {
+            throw new ArgumentException($"Layer '{unknownLayer}' declares an unknown dependency on '{unknownDependency}'.", nameof(layers));
         }
 
         var graph = TypeDependencyGraph.Build(_types);

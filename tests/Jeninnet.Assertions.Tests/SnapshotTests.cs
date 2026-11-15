@@ -239,6 +239,7 @@ public class SnapshotTests {
         } else if(OperatingSystem.IsMacOS()) {
             osSuffix = "macos";
         }
+
         var expectedOs = Path.Combine(directory, $"unique_{osSuffix}.received.txt");
         Assert.ThrowsExactly<AssertionFailedException>(() => order.Should().MatchSnapshot("unique", directory, static options => options.UniqueForOSPlatform()));
         Assert.IsTrue(File.Exists(expectedOs));

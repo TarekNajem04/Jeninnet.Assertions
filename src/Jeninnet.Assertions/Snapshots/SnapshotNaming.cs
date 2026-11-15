@@ -82,7 +82,11 @@ internal static class SnapshotNaming {
         }
 
         var baseDirectory = !string.IsNullOrEmpty(callerFilePath) ? Path.GetDirectoryName(callerFilePath) : null;
-        if(baseDirectory is null || baseDirectory.Length == 0) {
+        if(baseDirectory is null) {
+            throw new ArgumentException("Pass snapshotsDirectory explicitly when the caller file path is unavailable.", nameof(callerFilePath));
+        }
+
+        if(baseDirectory.Length == 0) {
             throw new ArgumentException("Pass snapshotsDirectory explicitly when the caller file path is unavailable.", nameof(callerFilePath));
         }
 
@@ -270,17 +274,16 @@ internal static class SnapshotNaming {
 
     /// <summary>Returns the compile-time target framework suffix.</summary>
     /// <returns><c>netstandard2.0</c>, <c>net6.0</c>, <c>net8.0</c>, or <c>net10.0</c>.</returns>
-    private static string TargetFrameworkSuffix() {
+    private static string TargetFrameworkSuffix() =>
 #if NET10_0
-        return "net10.0";
+        "net10.0";
 #elif NET8_0
-        return "net8.0";
+        "net8.0";
 #elif NET6_0
-        return "net6.0";
+        "net6.0";
 #else
-        return "netstandard2.0";
+        "netstandard2.0";
 #endif
-    }
 
     /// <summary>Returns the process architecture suffix.</summary>
     /// <returns><c>x64</c>, <c>x86</c>, <c>arm64</c>, <c>arm</c>, or a sanitized architecture name.</returns>

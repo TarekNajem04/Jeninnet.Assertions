@@ -32,13 +32,13 @@ public class ComparableTests {
 
     [TestMethod]
     public void Should_KeepsConcreteNumericAndValueOverloads() {
-        NumericAssertions<int> intAssertions = 1.Should();
-        NumericAssertions<long> longAssertions = 1L.Should();
-        NumericAssertions<decimal> decimalAssertions = 1m.Should();
-        NumericAssertions<double> doubleAssertions = 1.0.Should();
-        StringAssertions stringAssertions = "text".Should();
-        DateTimeAssertions dateTimeAssertions = DateTime.UnixEpoch.Should();
-        GuidAssertions guidAssertions = Guid.Empty.Should();
+        var intAssertions = 1.Should();
+        var longAssertions = 1L.Should();
+        var decimalAssertions = 1m.Should();
+        var doubleAssertions = 1.0.Should();
+        var stringAssertions = "text".Should();
+        var dateTimeAssertions = DateTime.UnixEpoch.Should();
+        var guidAssertions = Guid.Empty.Should();
 
         intAssertions.Be(1);
         longAssertions.Be(1L);
@@ -51,7 +51,7 @@ public class ComparableTests {
 
     [TestMethod]
     public void Should_ReturnsComparableAssertionsForDomainStruct() {
-        ComparableTypeAssertions<Money> assertions = new Money(10m).Should();
+        var assertions = new Money(10m).Should();
 
         assertions.BeGreaterThan(new Money(5m));
         assertions.Be(new Money(10m));
@@ -64,7 +64,7 @@ public class ComparableTests {
 
     [TestMethod]
     public void Should_ReturnsComparableAssertionsForDomainClass() {
-        ComparableTypeAssertions<Version> assertions = new Version("1.2.3").Should();
+        var assertions = new Version("1.2.3").Should();
 
         assertions.BeGreaterThan(new Version("1.2.2"));
         assertions.BeLessThan(new Version("1.3.0"));

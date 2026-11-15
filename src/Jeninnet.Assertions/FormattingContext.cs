@@ -49,6 +49,7 @@ internal static class FormattingContext {
     /// <param name="maxLines">The maximum number of lines to keep (positive).</param>
     /// <returns>The original text when it fits; otherwise the prefix followed by the truncation marker.</returns>
     private static string TruncateLines(string text, int maxLines) {
+#pragma warning disable RCS1239 // CRLF pairs advance the index inside the loop; a for-loop update triggers S127.
         var total = 1;
         var cutIndex = -1;
         var index = 0;
@@ -72,6 +73,7 @@ internal static class FormattingContext {
 
             index++;
         }
+#pragma warning restore RCS1239
 
         if(text.Length != 0 && (text[text.Length - 1] == '\n' || text[text.Length - 1] == '\r')) {
             total--;
@@ -132,7 +134,7 @@ internal static class FormattingContext {
             return $"\"{text}\"";
         }
 
-        return item is IEnumerable nested && item is not string
+        return item is IEnumerable nested and not string
             ? FormatEnumerable(nested, options, depth, visited)
             : string.Format(CultureInfo.InvariantCulture, "{0}", item);
     }

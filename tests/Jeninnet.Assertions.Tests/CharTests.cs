@@ -10,14 +10,14 @@ namespace Jeninnet.Assertions.Tests;
 public class CharTests {
     [TestMethod]
     public void Be_SucceedsForEqualCharacter() {
-        var subject = 'a';
+        const char subject = 'a';
 
         subject.Should().Be('a');
     }
 
     [TestMethod]
     public void Be_FailsWithExpectedAndActualCharacter() {
-        var subject = 'a';
+        const char subject = 'a';
 
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().Be('b'));
 
@@ -26,7 +26,7 @@ public class CharTests {
 
     [TestMethod]
     public void Be_FormatsControlCharactersAsEscapes() {
-        var subject = '\n';
+        const char subject = '\n';
 
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().Be('x'));
 
@@ -35,7 +35,7 @@ public class CharTests {
 
     [TestMethod]
     public void NotBe_SucceedsAndFails() {
-        var subject = 'a';
+        const char subject = 'a';
 
         subject.Should().NotBe('b');
 
@@ -126,7 +126,7 @@ public class CharTests {
 
     [TestMethod]
     public void CategoryVerbs_AppendBecauseReason() {
-        var subject = 'a';
+        const char subject = 'a';
 
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().BeDigit("because {0}", "the code is numeric"));
 
@@ -136,7 +136,7 @@ public class CharTests {
     [TestMethod]
     public void CategoryVerbs_AreLocalizedInArabic() {
         using var _ = new CultureScope("ar");
-        var subject = 'a';
+        const char subject = 'a';
 
         var ex = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().BeDigit());
 

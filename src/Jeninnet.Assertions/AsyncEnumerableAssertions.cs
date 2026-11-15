@@ -473,6 +473,7 @@ public class AsyncEnumerableAssertions<T>(IAsyncEnumerable<T>? value, string? ex
         if(count is null) {
             return new(this);
         }
+
         if(count.Value <= expected) {
             Fail(Strings.Format(StringKeys.ASYNC_ENUM_COUNT_GREATER_THAN, Expression, AssertionScope.FormatInvariant(expected), AssertionScope.FormatInvariant(count.Value)), because, becauseArgs);
         }
@@ -493,6 +494,7 @@ public class AsyncEnumerableAssertions<T>(IAsyncEnumerable<T>? value, string? ex
         if(count is null) {
             return new(this);
         }
+
         if(count.Value < expected) {
             Fail(Strings.Format(StringKeys.ASYNC_ENUM_COUNT_GREATER_THAN_OR_EQUAL, Expression, AssertionScope.FormatInvariant(expected), AssertionScope.FormatInvariant(count.Value)), because, becauseArgs);
         }
@@ -513,6 +515,7 @@ public class AsyncEnumerableAssertions<T>(IAsyncEnumerable<T>? value, string? ex
         if(count is null) {
             return new(this);
         }
+
         if(count.Value >= expected) {
             Fail(Strings.Format(StringKeys.ASYNC_ENUM_COUNT_LESS_THAN, Expression, AssertionScope.FormatInvariant(expected), AssertionScope.FormatInvariant(count.Value)), because, becauseArgs);
         }
@@ -533,6 +536,7 @@ public class AsyncEnumerableAssertions<T>(IAsyncEnumerable<T>? value, string? ex
         if(count is null) {
             return new(this);
         }
+
         if(count.Value > expected) {
             Fail(Strings.Format(StringKeys.ASYNC_ENUM_COUNT_LESS_THAN_OR_EQUAL, Expression, AssertionScope.FormatInvariant(expected), AssertionScope.FormatInvariant(count.Value)), because, becauseArgs);
         }

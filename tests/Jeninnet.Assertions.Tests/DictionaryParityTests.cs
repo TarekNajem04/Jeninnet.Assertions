@@ -24,12 +24,12 @@ public class DictionaryParityTests {
     [TestMethod]
     public void OverloadResolution_KeepsDictionaryAndReadOnlyDictionaryOnTheMutableEntryPoint() {
         var scores = Scores();
-        GenericDictionaryAssertions<string, int> mutable = scores.Should();
-        GenericDictionaryAssertions<string, int> readOnly = new ReadOnlyDictionary<string, int>(scores).Should();
-        GenericDictionaryAssertions<string, int> readOnlyInterface = ((IReadOnlyDictionary<string, int>)scores).Should();
-        GenericDictionaryAssertions<string, int> pairs = ((IEnumerable<KeyValuePair<string, int>>)scores).Should();
+        var mutable = scores.Should();
+        var readOnly = new ReadOnlyDictionary<string, int>(scores).Should();
+        var readOnlyInterface = ((IReadOnlyDictionary<string, int>)scores).Should();
+        var pairs = ((IEnumerable<KeyValuePair<string, int>>)scores).Should();
         var list = new List<KeyValuePair<string, int>>(scores);
-        GenericDictionaryAssertions<string, int> listAssertions = list.Should();
+        var listAssertions = list.Should();
 
         mutable.HaveCount(2).And.ContainKey("a");
         readOnly.ContainKey("a").And.NotContainKey("z");
@@ -54,12 +54,10 @@ public class DictionaryParityTests {
 
     [TestMethod]
     public void ImmutableAndFrozenDictionaries_WorkThroughReadOnlyViews() {
-        var immutable = ImmutableDictionary.CreateRange(Scores());
-        IReadOnlyDictionary<string, int> immutableView = immutable;
+        IReadOnlyDictionary<string, int> immutableView = ImmutableDictionary.CreateRange(Scores());
         immutableView.Should().HaveCount(2).And.ContainKey("a").And.Contain("b", 2);
 
-        var frozen = Scores().ToFrozenDictionary();
-        IReadOnlyDictionary<string, int> frozenView = frozen;
+        IReadOnlyDictionary<string, int> frozenView = Scores().ToFrozenDictionary();
         frozenView.Should().HaveCount(2).And.ContainKey("b").And.NotContainKey("z");
         frozenView.Should().ContainValue(1).Which.Should().Be(1);
     }

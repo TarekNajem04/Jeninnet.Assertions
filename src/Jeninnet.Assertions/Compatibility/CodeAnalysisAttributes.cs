@@ -12,6 +12,7 @@ namespace System.Diagnostics.CodeAnalysis;
 internal sealed class DoesNotReturnAttribute : Attribute;
 
 /// <summary>Polyfill for the trimming analyzer attribute unavailable on .NET Standard 2.0.</summary>
+/// <param name="message">The explanation for the requirement.</param>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
 internal sealed class RequiresUnreferencedCodeAttribute(string message) : Attribute {
     /// <summary>Gets the explanation for the requirement.</summary>
@@ -22,6 +23,7 @@ internal sealed class RequiresUnreferencedCodeAttribute(string message) : Attrib
 }
 
 /// <summary>Polyfill for the AOT analyzer attribute unavailable on .NET Standard 2.0.</summary>
+/// <param name="message">The explanation for the requirement.</param>
 [AttributeUsage(AttributeTargets.Method | AttributeTargets.Constructor, Inherited = false)]
 internal sealed class RequiresDynamicCodeAttribute(string message) : Attribute {
     /// <summary>Gets the explanation for the requirement.</summary>
@@ -32,6 +34,7 @@ internal sealed class RequiresDynamicCodeAttribute(string message) : Attribute {
 }
 
 /// <summary>Polyfill for the trimming analyzer attribute unavailable on .NET Standard 2.0.</summary>
+/// <param name="memberTypes">The member kinds that must be preserved.</param>
 [AttributeUsage(
     AttributeTargets.Field | AttributeTargets.ReturnValue | AttributeTargets.GenericParameter |
     AttributeTargets.Parameter | AttributeTargets.Property | AttributeTargets.Method | AttributeTargets.Class |
@@ -43,7 +46,10 @@ internal sealed class DynamicallyAccessedMembersAttribute(DynamicallyAccessedMem
 }
 
 /// <summary>Polyfill for the trimming analyzer member kinds unavailable on .NET Standard 2.0.</summary>
+#pragma warning disable S4070 // Mirrors the BCL [Flags] enum; the analyzer flags the polyfill because it is never used as flags here.
+[Flags]
 internal enum DynamicallyAccessedMemberTypes {
+#pragma warning restore S4070
     /// <summary>No members are required.</summary>
     None = 0,
     /// <summary>Public parameterless constructors.</summary>

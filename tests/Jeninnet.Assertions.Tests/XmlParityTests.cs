@@ -16,7 +16,7 @@ public class XmlParityTests {
         var document = new XmlDocument();
         document.LoadXml(PREFIXED);
 
-        XmlElement element = document.DocumentElement!;
+        var element = document.DocumentElement!;
         XmlNode node = element;
 
         Assert.IsInstanceOfType<XmlElementAssertions>(element.Should());
@@ -96,9 +96,9 @@ public class XmlParityTests {
     [TestMethod]
     public void XmlElement_BeEquivalentTo_ReportsElementAndNamespaceDifferences() {
         var actual = new XmlDocument();
-        actual.LoadXml("""<root><other /></root>""");
+        actual.LoadXml("<root><other /></root>");
         var expected = new XmlDocument();
-        expected.LoadXml("""<root><child /></root>""");
+        expected.LoadXml("<root><child /></root>");
 
         var elementEx = Assert.ThrowsExactly<AssertionFailedException>(() => actual.DocumentElement!.Should().BeEquivalentTo(expected.DocumentElement));
         Assert.Contains("/root/other", elementEx.Message);
@@ -115,7 +115,7 @@ public class XmlParityTests {
 
     [TestMethod]
     public void XElement_EquivalencyOptions_RelaxWhitespaceOrderAndComments() {
-        var compact = XElement.Parse("""<root><a>1</a><b>2</b></root>""");
+        var compact = XElement.Parse("<root><a>1</a><b>2</b></root>");
         var formatted = XElement.Parse("""
             <root>
               <!-- note -->
@@ -131,7 +131,7 @@ public class XmlParityTests {
             .IgnoringWhitespace()
             .IgnoringComments());
 
-        var reversed = XElement.Parse("""<root><b>2</b><a>1</a></root>""");
+        var reversed = XElement.Parse("<root><b>2</b><a>1</a></root>");
         var order = Assert.ThrowsExactly<AssertionFailedException>(() => compact.Should().BeEquivalentTo(reversed));
         Assert.Contains("/root/a", order.Message);
 

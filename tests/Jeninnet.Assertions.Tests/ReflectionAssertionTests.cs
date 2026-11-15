@@ -99,10 +99,8 @@ public class ReflectionAssertionTests {
 
     private readonly record struct Point(int X, int Y);
 
-    private sealed class ImmutableClass {
-        public ImmutableClass(string name) => Name = name;
-
-        public string Name { get; }
+    private sealed class ImmutableClass(string name) {
+        public string Name { get; } = name;
     }
 
     private sealed class MutableClass {
@@ -114,7 +112,7 @@ public class ReflectionAssertionTests {
     }
 
     private enum Color {
-        Red,
+        Red = 0,
     }
 
     private delegate void Callback();
@@ -207,7 +205,7 @@ public class ReflectionAssertionTests {
         typeof(Person).Should().BeSameAs(typeof(Person)).And.NotBeSameAs(typeof(Point));
         typeof(Person).Should().HaveName("Person");
         typeof(Person).Should().HaveFullName(typeof(Person).FullName!);
-        typeof(Person).Should().HaveNamespace(typeof(Person).Namespace!);
+        typeof(Person).Should().HaveNamespace(typeof(Person).Namespace);
 
         var sameAs = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(Person).Should().BeSameAs(typeof(Point)));
         Assert.Contains("to be the same instance as", sameAs.Message);

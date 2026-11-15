@@ -4,13 +4,13 @@
 // Repository: https://github.com/TarekNajem04/Jeninnet.Assertions/
 // Licensed under the MIT License.
 //
-namespace Jeninnet.Assertions.Tests;
-
 using ApplicationFixtures = Jeninnet.Assertions.Tests.ArchitectureFixtures.Application;
 using CycleFixtures = Jeninnet.Assertions.Tests.ArchitectureFixtures.Cycles;
 using DomainFixtures = Jeninnet.Assertions.Tests.ArchitectureFixtures.Domain;
 using InfrastructureFixtures = Jeninnet.Assertions.Tests.ArchitectureFixtures.Infrastructure;
 using ShapeFixtures = Jeninnet.Assertions.Tests.ArchitectureFixtures.Shapes;
+
+namespace Jeninnet.Assertions.Tests;
 
 [TestClass]
 public class ArchitectureTests {

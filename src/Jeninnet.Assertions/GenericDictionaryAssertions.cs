@@ -20,9 +20,7 @@ public partial class GenericDictionaryAssertions<TKey, TValue> : AssertionsBase 
     }
 
     private GenericDictionaryAssertions(IReadOnlyDictionary<TKey, TValue>? value, string? expression)
-        : base(expression, "dictionary") {
-        _value = value;
-    }
+        : base(expression, "dictionary") => _value = value;
 
     /// <summary>Creates assertions for a sequence of key/value pairs, materializing it once.</summary>
     /// <param name="value">The sequence to assert on.</param>

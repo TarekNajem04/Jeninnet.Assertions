@@ -304,7 +304,7 @@ public abstract class FileSystemInfoAssertions<T, TAssertions>(T? value, string?
         }
 
         try {
-            entries = directory.EnumerateFileSystemInfos().ToArray();
+            entries = [.. directory.EnumerateFileSystemInfos()];
             return true;
         }
         catch(UnauthorizedAccessException) {

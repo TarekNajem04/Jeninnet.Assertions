@@ -131,9 +131,7 @@ public class ExtensibilityTests {
     public void CustomAssertion_Sdk_ReportsTheSubjectAndBecause() {
         var assertions = new OrderAssertions(new Order("Pending"), "order");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => {
-            assertions.BePaid("the invoice is due");
-        });
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => assertions.BePaid("the invoice is due"));
 
         Assert.AreEqual("Expected order to be paid, but found Pending because the invoice is due.", ex.Message);
     }

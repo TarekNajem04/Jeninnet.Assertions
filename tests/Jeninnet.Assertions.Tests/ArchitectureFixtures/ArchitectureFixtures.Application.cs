@@ -4,9 +4,9 @@
 // Repository: https://github.com/TarekNajem04/Jeninnet.Assertions/
 // Licensed under the MIT License.
 //
-namespace Jeninnet.Assertions.Tests.ArchitectureFixtures.Application;
-
 using Domain = Jeninnet.Assertions.Tests.ArchitectureFixtures.Domain;
+
+namespace Jeninnet.Assertions.Tests.ArchitectureFixtures.Application;
 
 public sealed class OrderService(Domain.IOrderRepository repository) {
     public Domain.Order? Find(Guid id) => repository.Find(id);
