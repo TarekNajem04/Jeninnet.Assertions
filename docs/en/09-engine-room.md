@@ -80,7 +80,7 @@ var template = AssertionCulture.GetMessage("BOOLEAN_BE_TRUE");       // localize
 var message = AssertionCulture.FormatMessage("BOOLEAN_BE_TRUE", "flag"); // invariant formatting
 ```
 
-English is the neutral resource; Arabic (`ar`), Spanish (`es`), and German (`de`) ship complete. French (`fr`) is a partial reference satellite that demonstrates per-key fallback for the entries it does not translate. `qps-ploc` is a committed pseudo-localization used to detect hardcoded text. The completion gate is `pwsh scripts/docs/check-localization.ps1`; it fails on missing/extra/empty keys (the French reference satellite is explicitly allowlisted as partial), and [CONTRIBUTING.md](../../CONTRIBUTING.md#translation-guide) carries the translator guide.
+English is the neutral resource; Arabic (`ar`), Spanish (`es`), and German (`de`) ship complete. French (`fr`) is a partial reference satellite that demonstrates per-key fallback for the entries it does not translate. `qps-ploc` is a committed pseudo-localization used to detect hardcoded text. The completion gate is `pwsh scripts/docs/check-localization.ps1`; it fails on missing/extra/empty keys (the French reference satellite is explicitly allowlisted as partial), and [CONTRIBUTING.md](https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/CONTRIBUTING.md#translation-guide) carries the translator guide.
 
 ## 9.3 Formatters: Teach the library how to display your types
 

@@ -113,7 +113,7 @@ var message = AssertionCulture.FormatMessage("BOOLEAN_BE_TRUE", "flag"); // تن
 
 </div>
 
-الإنجليزية هي المورد المحايد؛ والعربية (<code dir="ltr">ar</code>) والإسبانية (<code dir="ltr">es</code>) والألمانية (<code dir="ltr">de</code>) تُشحن كاملة. والفرنسية (<code dir="ltr">fr</code>) قمر مرجعي جزئي يوضِّح الرجوع للنص الإنجليزي لكل مفتاح غير مترجم. و<code dir="ltr">qps-ploc</code> توطين شبهي مُلتزَم لكشف النصوص المضمنة. بوابة الاكتمال هي <code dir="ltr">pwsh scripts/docs/check-localization.ps1</code>؛ تفشل عند مفتاح ناقص/زائد/فارغ (وقمر الفرنسية مسموح به صراحةً كجزئي)، ودليل المترجم في <a href="../../CONTRIBUTING.md#translation-guide">CONTRIBUTING.md</a>.
+الإنجليزية هي المورد المحايد؛ والعربية (<code dir="ltr">ar</code>) والإسبانية (<code dir="ltr">es</code>) والألمانية (<code dir="ltr">de</code>) تُشحن كاملة. والفرنسية (<code dir="ltr">fr</code>) قمر مرجعي جزئي يوضِّح الرجوع للنص الإنجليزي لكل مفتاح غير مترجم. و<code dir="ltr">qps-ploc</code> توطين شبهي مُلتزَم لكشف النصوص المضمنة. بوابة الاكتمال هي <code dir="ltr">pwsh scripts/docs/check-localization.ps1</code>؛ تفشل عند مفتاح ناقص/زائد/فارغ (وقمر الفرنسية مسموح به صراحةً كجزئي)، ودليل المترجم في <a href="https://github.com/TarekNajem04/Jeninnet.Assertions/blob/main/CONTRIBUTING.md#translation-guide">CONTRIBUTING.md</a>.
 
 ## ٩.٣ تنسيق القيم: علِّم المكتبة كيف تُظهر أنواعك
 
