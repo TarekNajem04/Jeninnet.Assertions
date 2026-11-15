@@ -2795,4 +2795,19 @@
   <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
     <value>Se esperaba que {0} se pudiera analizar como {1}, pero era null.</value>
   </data>
+  <data name="ARCH_DEPEND_ON" xml:space="preserve">
+    <value>Se esperaba que cada tipo seleccionado dependiera de &apos;{0}&apos;, pero {1} tipo(s) no lo hacen: {2}.</value>
+  </data>
+  <data name="ARCH_DEPEND_ON_ANY" xml:space="preserve">
+    <value>Se esperaba que cada tipo seleccionado dependiera de al menos uno de [{0}], pero {1} tipo(s) no dependen de ninguno: {2}.</value>
+  </data>
+  <data name="ARCH_ONLY_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>Se esperaba que los tipos seleccionados solo recibieran dependencias de [{0}], pero se encontraron {1} dependencia(s) no permitida(s): {2}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>Se esperaba que ningún tipo de &apos;{0}&apos; dependiera de los tipos seleccionados, pero {1} dependencia(s) coinciden: {2}.</value>
+  </data>
+  <data name="ARCH_FOLLOW_LAYERS" xml:space="preserve">
+    <value>Se esperaba que los tipos seleccionados siguieran las dependencias de capas declaradas, pero se encontraron {0} infracción(es): {1}.</value>
+  </data>
 </root>

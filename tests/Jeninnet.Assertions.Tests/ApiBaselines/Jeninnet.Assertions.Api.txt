@@ -1755,6 +1755,12 @@ type Jeninnet.Assertions.Types.AccessModifier
   field const Jeninnet.Assertions.Types.AccessModifier Public
 type Jeninnet.Assertions.Types.AllTypes
   method static Jeninnet.Assertions.Types.TypeSelector From(System.Reflection.Assembly[])
+type Jeninnet.Assertions.Types.ArchitectureLayer
+  ctor(System.String, System.String)
+  method Jeninnet.Assertions.Types.ArchitectureLayer DependsOn(System.String[])
+  property System.String Name { get; }
+  property System.String NamespacePrefix { get; }
+  property static System.String FrameworkLayerName { get; }
 type Jeninnet.Assertions.Types.AssemblyAssertions
   ctor(System.Reflection.Assembly, System.String)
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.AssemblyAssertions> BeNull(System.String, System.Object[])
@@ -2131,6 +2137,12 @@ type Jeninnet.Assertions.Types.TypeSelectorAssertions
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> BeRecord(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> BeSealed(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> BeUnderNamespace(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> DependOn(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> DependOn(System.Type, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> DependOnAny(System.String[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> DependOnAny(System.String[], System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> FollowLayers(Jeninnet.Assertions.Types.ArchitectureLayer[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> FollowLayers(Jeninnet.Assertions.Types.ArchitectureLayer[], System.Boolean, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> HaveCount(System.Int32, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> HaveMethod(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> HaveNameEndingWith(System.String, System.String, System.Object[])
@@ -2140,6 +2152,7 @@ type Jeninnet.Assertions.Types.TypeSelectorAssertions
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> HaveProperty(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotBeDecoratedWith<TAttribute>(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotBeDecoratedWithOrInherit<TAttribute>(System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotBeDependedOnBy(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotBeImmutable(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotBeInNamespace(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotBeNested(System.String, System.Object[])
@@ -2152,6 +2165,8 @@ type Jeninnet.Assertions.Types.TypeSelectorAssertions
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotDependOnAny(System.String[], System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotExposeTypes(System.Type[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> NotExposeTypes(System.Type[], System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> OnlyBeDependedOnBy(System.String[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> OnlyBeDependedOnBy(System.String[], System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> OnlyDependOn(System.String[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> OnlyDependOn(System.String[], System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Types.TypeSelectorAssertions> OnlyHavePublicMembers(System.String, System.Object[])

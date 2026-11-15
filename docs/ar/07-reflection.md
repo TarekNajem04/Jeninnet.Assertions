@@ -203,12 +203,30 @@ domain.Should().NotDependOnAny("Store.Orders.Infrastructure", "System.Data");
 domain.Should().HaveNoCycles();
 
 AllTypes.From(typeof(Order).Assembly)
+    .ThatAreUnderNamespace("Store.Orders.Application")
+    .Should().DependOn("Store.Orders.Domain");
+AllTypes.From(typeof(Order).Assembly)
+    .ThatAreUnderNamespace("Store.Orders.Application")
+    .Should().DependOnAny("Store.Orders.Domain", "Store.Orders.Abstractions");
+domain.Should().OnlyBeDependedOnBy("Store.Orders.Application", "Store.Orders.Infrastructure");
+domain.Should().NotBeDependedOnBy("Store.Orders.Infrastructure");
+
+var layers = new[] {
+    new ArchitectureLayer("Domain", "Store.Orders.Domain"),
+    new ArchitectureLayer("Application", "Store.Orders.Application").DependsOn("Domain"),
+    new ArchitectureLayer("Infrastructure", "Store.Orders.Infrastructure").DependsOn("Domain"),
+};
+AllTypes.From(typeof(Order).Assembly).Should().FollowLayers(layers);
+
+AllTypes.From(typeof(Order).Assembly)
     .ThatAreUnderNamespace("Store.Orders.Domain")
     .Should().OnlyHavePublicMembers()
     .And.NotExposeTypes(typeof(SqlConnection));
 ```
 
 </div>
+
+تُغلق القواعد الموجبة الاتجاه الآخر: <code dir="ltr">DependOn</code> يشترط أن يملك كل نوع محدد الاعتماد، و<code dir="ltr">DependOnAny</code> يقبل واحدًا من عدة أهداف، و<code dir="ltr">OnlyBeDependedOnBy</code> يدقّق الاعتمادات الواردة، و<code dir="ltr">NotBeDependedOnBy</code> يمنع مصدرًا محددًا مع تجاهل الاعتمادات الداخلية ضمن التحديد. ويمسح الاتجاه الوارد تجميعات الأنواع المحددة، ويستبعد الأنواع المولّدة والمحددة نفسها، ولا يرى تجميعات لم تُحمَّل. أما <code dir="ltr">FollowLayers</code> فيسند كل نوع إلى أطول prefix مطابق، ويسمح بالاعتماد داخل الطبقة، ويشترط إعلان <code dir="ltr">DependsOn</code> للاعتماد بين طبقتين، ويتجاهل الأنواع خارج كل الطبقات. وتُتجاهل مساحات إطار العمل افتراضيًا؛ وللفحص، فعّل <code dir="ltr">includingFrameworkDependencies</code> وأعلن <code dir="ltr">ArchitectureLayer.FrameworkLayerName</code>.
 
 رسم الاعتماد انعكاسي: الأنواع الأساسية والواجهات ووسائط generic والحقول والخصائص ومعاملات/إرجاع التوابع والمهيئات والأحداث ومراجع أنواع السمات. أما أجسام التوابع وIL فتُترك **عمدًا** خارج القراءة، لذا يغيب عن هذه القواعد أي مرجع موجود داخل جسم تابع فقط (حزمة IL منفصلة عمل مستقبلي). ويحسب <code dir="ltr">HaveNoCycles</code> المكوّنات المتصلة بقوة بين الأنواع المحددة ويعرض مسارات ملموسة، بحد أقصى عشر دورات مع عدد الباقي. الحقل أو الخاصية ذاتية النوع المباشرة دورة، أما الإشارة الذاتية عبر وسائط generic أو تواقيع المساواة المولّدة فليست دورة.
 

@@ -76,7 +76,12 @@ internal static partial class StringKeys {
     internal const string ARCH_HAVE_NAME_ENDING_WITH = "ARCH_HAVE_NAME_ENDING_WITH";
     internal const string ARCH_HAVE_NAME_MATCHING = "ARCH_HAVE_NAME_MATCHING";
     internal const string ARCH_NOT_DEPEND_ON = "ARCH_NOT_DEPEND_ON";
+    internal const string ARCH_DEPEND_ON = "ARCH_DEPEND_ON";
+    internal const string ARCH_DEPEND_ON_ANY = "ARCH_DEPEND_ON_ANY";
     internal const string ARCH_ONLY_DEPEND_ON = "ARCH_ONLY_DEPEND_ON";
+    internal const string ARCH_ONLY_BE_DEPENDED_ON_BY = "ARCH_ONLY_BE_DEPENDED_ON_BY";
+    internal const string ARCH_NOT_BE_DEPENDED_ON_BY = "ARCH_NOT_BE_DEPENDED_ON_BY";
+    internal const string ARCH_FOLLOW_LAYERS = "ARCH_FOLLOW_LAYERS";
     internal const string ARCH_NOT_DEPEND_ON_ANY = "ARCH_NOT_DEPEND_ON_ANY";
     internal const string ARCH_HAVE_NO_CYCLES = "ARCH_HAVE_NO_CYCLES";
     internal const string ARCH_MORE_OFFENDERS = "ARCH_MORE_OFFENDERS";

@@ -18,6 +18,8 @@ public class ArchitectureTests {
 
     private static string InfrastructureNamespace => typeof(InfrastructureFixtures.SqlConnection).Namespace!;
 
+    private static string ApplicationNamespace => typeof(ApplicationFixtures.OrderService).Namespace!;
+
     private static string ShapesNamespace => typeof(ShapeFixtures.PublicSurface).Namespace!;
 
     [TestMethod]
@@ -165,6 +167,165 @@ public class ArchitectureTests {
         Assert.ThrowsExactly<ArgumentNullException>(() => selection.Should().NotDependOnAny((string[])null!));
         Assert.ThrowsExactly<ArgumentException>(() => selection.Should().NotDependOnAny());
         Assert.ThrowsExactly<ArgumentException>(() => selection.Should().NotDependOnAny("  "));
+    }
+
+    [TestMethod]
+    public void DependOn_RequiresEveryTypeToHaveTheDependency() {
+        new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().DependOn(DomainNamespace);
+        new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().DependOn(typeof(DomainFixtures.IOrderRepository));
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn(InfrastructureNamespace));
+        Assert.Contains("do not", ex.Message);
+        Assert.Contains("Order", ex.Message);
+
+        Assert.ThrowsExactly<ArgumentNullException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn((string)null!));
+        Assert.ThrowsExactly<ArgumentException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn("  "));
+        Assert.ThrowsExactly<ArgumentNullException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn((Type)null!));
+    }
+
+    [TestMethod]
+    public void DependOnAny_RequiresAtLeastOneTarget() {
+        new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().DependOnAny(DomainNamespace, "No.Such.Namespace");
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny(InfrastructureNamespace, "No.Such.Namespace"));
+        Assert.Contains("at least one", ex.Message);
+        Assert.Contains("Order", ex.Message);
+
+        Assert.ThrowsExactly<ArgumentNullException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny((string[])null!));
+        Assert.ThrowsExactly<ArgumentException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny());
+        Assert.ThrowsExactly<ArgumentException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny("  "));
+    }
+
+    [TestMethod]
+    public void OnlyBeDependedOnBy_ChecksIncomingSources() {
+        var order = new TypeSelector([typeof(DomainFixtures.Order)]);
+
+        order.Should().OnlyBeDependedOnBy(ApplicationNamespace, InfrastructureNamespace, DomainNamespace);
+        order.Should().OnlyBeDependedOnBy([ApplicationNamespace, InfrastructureNamespace, DomainNamespace], "the domain is the bottom layer");
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => order.Should().OnlyBeDependedOnBy(ApplicationNamespace, InfrastructureNamespace));
+        Assert.Contains("only by", ex.Message);
+        Assert.Contains("IOrderRepository", ex.Message);
+        Assert.Contains("Quote", ex.Message);
+        Assert.DoesNotContain("OrderService", ex.Message);
+        Assert.DoesNotContain("SqlOrderRepository", ex.Message);
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => order.Should().OnlyBeDependedOnBy((string[])null!));
+        Assert.ThrowsExactly<ArgumentException>(() => order.Should().OnlyBeDependedOnBy());
+        Assert.ThrowsExactly<ArgumentException>(() => order.Should().OnlyBeDependedOnBy("  "));
+    }
+
+    [TestMethod]
+    public void NotBeDependedOnBy_MatchesSourcesAndIgnoresInternalDependencies() {
+        new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy("No.Such.Namespace");
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy(ApplicationNamespace));
+        Assert.Contains("OrderService", ex.Message);
+
+        var internalSelection = new TypeSelector([typeof(DomainFixtures.IOrderRepository), typeof(InfrastructureFixtures.SqlOrderRepository)]);
+        internalSelection.Should().NotBeDependedOnBy(DomainNamespace);
+
+        Assert.ThrowsExactly<ArgumentNullException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy(null!));
+        Assert.ThrowsExactly<ArgumentException>(
+            () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy("  "));
+    }
+
+    [TestMethod]
+    public void FollowLayers_AcceptsDeclaredDirectionAndRejectsReverse() {
+        var domain = new ArchitectureLayer("Domain", DomainNamespace);
+        var application = new ArchitectureLayer("Application", ApplicationNamespace).DependsOn("Domain");
+        var infrastructure = new ArchitectureLayer("Infrastructure", InfrastructureNamespace).DependsOn("Domain");
+        var selection = new TypeSelector([
+            typeof(DomainFixtures.Order),
+            typeof(DomainFixtures.OrderLine),
+            typeof(DomainFixtures.Money),
+            typeof(DomainFixtures.IOrderRepository),
+            typeof(ApplicationFixtures.OrderService),
+            typeof(ApplicationFixtures.PricingService),
+            typeof(InfrastructureFixtures.SqlConnection),
+            typeof(InfrastructureFixtures.SqlOrderRepository),
+        ]);
+
+        selection.Should().FollowLayers(domain, application, infrastructure);
+
+        var reversed = new ArchitectureLayer("Application", ApplicationNamespace);
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => selection.Should().FollowLayers(domain, reversed, infrastructure));
+        Assert.Contains("Application -> Domain", ex.Message);
+        Assert.Contains("OrderService", ex.Message);
+    }
+
+    [TestMethod]
+    public void FollowLayers_UsesTheLongestMatchingNamespacePrefix() {
+        var domain = new ArchitectureLayer("Domain", DomainNamespace);
+        var sales = new ArchitectureLayer("Sales", typeof(DomainFixtures.Sales.Quote).Namespace!).DependsOn("Domain");
+        var selection = new TypeSelector([typeof(DomainFixtures.OrderWithQuote), typeof(DomainFixtures.Sales.Quote)]);
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => selection.Should().FollowLayers(domain, sales));
+        Assert.Contains("Domain -> Sales", ex.Message);
+        Assert.Contains("OrderWithQuote", ex.Message);
+
+        new TypeSelector([typeof(DomainFixtures.Sales.Quote)]).Should().FollowLayers(domain, sales);
+    }
+
+    [TestMethod]
+    public void FollowLayers_IgnoresFrameworkNamespacesByDefault() {
+        var shapes = new ArchitectureLayer("Shapes", ShapesNamespace);
+        var selection = new TypeSelector([typeof(ShapeFixtures.PublicSurface)]);
+
+        selection.Should().FollowLayers(shapes);
+
+        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+            () => selection.Should().FollowLayers([shapes], includingFrameworkDependencies: true));
+        Assert.Contains("Shapes -> Framework", ex.Message);
+
+        var frameworkAware = new ArchitectureLayer("Shapes", ShapesNamespace).DependsOn(ArchitectureLayer.FrameworkLayerName);
+        selection.Should().FollowLayers([frameworkAware], includingFrameworkDependencies: true);
+    }
+
+    [TestMethod]
+    public void FollowLayers_ValidatesLayerDefinitions() {
+        var selection = new TypeSelector([typeof(DomainFixtures.Order)]);
+
+        Assert.ThrowsExactly<ArgumentNullException>(() => selection.Should().FollowLayers((ArchitectureLayer[])null!));
+        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers());
+        ArchitectureLayer[] layersWithNull = [null!];
+        Assert.ThrowsExactly<ArgumentNullException>(() => selection.Should().FollowLayers(layersWithNull));
+        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers(
+            new ArchitectureLayer("A", DomainNamespace),
+            new ArchitectureLayer("A", ApplicationNamespace)));
+        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers(
+            new ArchitectureLayer("A", DomainNamespace),
+            new ArchitectureLayer("B", DomainNamespace)));
+        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers(
+            new ArchitectureLayer("A", DomainNamespace).DependsOn("Missing")));
+    }
+
+    [TestMethod]
+    public void ArchitectureLayer_ValidatesNamePrefixAndDependencies() {
+        Assert.ThrowsExactly<ArgumentNullException>(() => new ArchitectureLayer(null!, DomainNamespace));
+        Assert.ThrowsExactly<ArgumentException>(() => new ArchitectureLayer(" ", DomainNamespace));
+        Assert.ThrowsExactly<ArgumentNullException>(() => new ArchitectureLayer("Domain", null!));
+        Assert.ThrowsExactly<ArgumentException>(() => new ArchitectureLayer("Domain", "  "));
+
+        var layer = new ArchitectureLayer(" Domain ", " " + DomainNamespace + " ");
+        Assert.AreEqual("Domain", layer.Name);
+        Assert.AreEqual(DomainNamespace, layer.NamespacePrefix);
+        Assert.AreSame(layer, layer.DependsOn("Application"));
+        Assert.ThrowsExactly<ArgumentNullException>(() => layer.DependsOn((string[])null!));
+        Assert.ThrowsExactly<ArgumentException>(() => layer.DependsOn());
+        Assert.ThrowsExactly<ArgumentException>(() => layer.DependsOn(" "));
     }
 
     [TestMethod]

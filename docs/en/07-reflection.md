@@ -159,10 +159,28 @@ domain.Should().NotDependOnAny("Store.Orders.Infrastructure", "System.Data");
 domain.Should().HaveNoCycles();
 
 AllTypes.From(typeof(Order).Assembly)
+    .ThatAreUnderNamespace("Store.Orders.Application")
+    .Should().DependOn("Store.Orders.Domain");
+AllTypes.From(typeof(Order).Assembly)
+    .ThatAreUnderNamespace("Store.Orders.Application")
+    .Should().DependOnAny("Store.Orders.Domain", "Store.Orders.Abstractions");
+domain.Should().OnlyBeDependedOnBy("Store.Orders.Application", "Store.Orders.Infrastructure");
+domain.Should().NotBeDependedOnBy("Store.Orders.Infrastructure");
+
+var layers = new[] {
+    new ArchitectureLayer("Domain", "Store.Orders.Domain"),
+    new ArchitectureLayer("Application", "Store.Orders.Application").DependsOn("Domain"),
+    new ArchitectureLayer("Infrastructure", "Store.Orders.Infrastructure").DependsOn("Domain"),
+};
+AllTypes.From(typeof(Order).Assembly).Should().FollowLayers(layers);
+
+AllTypes.From(typeof(Order).Assembly)
     .ThatAreUnderNamespace("Store.Orders.Domain")
     .Should().OnlyHavePublicMembers()
     .And.NotExposeTypes(typeof(SqlConnection));
 ```
+
+The positive rules close the other direction: `DependOn` requires every selected type to have the dependency, `DependOnAny` accepts one of several targets, `OnlyBeDependedOnBy` audits incoming edges, and `NotBeDependedOnBy` forbids a source while ignoring dependencies inside the selection. Incoming scans cover the assemblies of the selected types, exclude compiler-generated types and the selection itself, and cannot see assemblies that were never loaded. `FollowLayers` assigns each type to the longest matching namespace prefix, allows same-layer edges, requires a `DependsOn` declaration for cross-layer edges, and ignores types outside every layer. Framework namespaces are ignored by default; enable `includingFrameworkDependencies` and declare `ArchitectureLayer.FrameworkLayerName` to check them.
 
 The dependency graph is reflection-level: base types, interfaces, generic arguments, fields, properties, method/constructor parameters and returns, events, and attribute type references. Method bodies and IL are deliberately **not** read, so a reference that exists only inside a method body is invisible to these rules (a separate IL package is future work). `HaveNoCycles` computes strongly connected components over the selected types and prints concrete paths, capped at ten cycles plus the remaining count. A direct self-typed field or property is a cycle; self-references through generic arguments or compiler-generated equality signatures are not.
 

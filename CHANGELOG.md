@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Architecture layer direction: positive `DependOn`/`DependOnAny`, reverse `OnlyBeDependedOnBy`/
+  `NotBeDependedOnBy`, and `ArchitectureLayer`/`FollowLayers` with longest-prefix assignment,
+  same-layer allowance, optional framework checks via `ArchitectureLayer.FrameworkLayerName`, and
+  offender lists capped at ten. Localized in en/ar/es/de/qps-ploc.
 - Peer performance benchmarks: `benchmarks/Jeninnet.Assertions.Benchmarks` now measures
   AwesomeAssertions 9.6.0, Shouldly 4.3.0, and NFluent 3.1.0 on identical hot verbs and scope
   scenarios, with published mean/allocation tables for success and failure and explicit notes where

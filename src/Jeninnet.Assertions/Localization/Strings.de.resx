@@ -2796,4 +2796,19 @@
   <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
     <value>Es wurde erwartet, dass {0} in {1} analysierbar ist, aber es war null.</value>
   </data>
+  <data name="ARCH_DEPEND_ON" xml:space="preserve">
+    <value>Es wurde erwartet, dass jeder ausgewählte Typ von &apos;{0}&apos; abhängt, aber {1} Typ(en) tun das nicht: {2}.</value>
+  </data>
+  <data name="ARCH_DEPEND_ON_ANY" xml:space="preserve">
+    <value>Es wurde erwartet, dass jeder ausgewählte Typ von mindestens einem von [{0}] abhängt, aber {1} Typ(en) hängen von keinem ab: {2}.</value>
+  </data>
+  <data name="ARCH_ONLY_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>Es wurde erwartet, dass ausgewählte Typen nur von [{0}] abhängen, aber es wurden {1} unzulässige Abhängigkeit(en) gefunden: {2}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>Es wurde erwartet, dass kein Typ aus &apos;{0}&apos; von den ausgewählten Typen abhängt, aber {1} Abhängigkeit(en) stimmen überein: {2}.</value>
+  </data>
+  <data name="ARCH_FOLLOW_LAYERS" xml:space="preserve">
+    <value>Es wurde erwartet, dass die ausgewählten Typen den deklarierten Schichtabhängigkeiten folgen, aber es wurden {0} Verstoß/Verstöße gefunden: {1}.</value>
+  </data>
 </root>

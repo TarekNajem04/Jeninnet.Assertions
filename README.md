@@ -169,8 +169,10 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
 - **Extensible** — custom formatters, global configuration, assembly-level engine initializers,
   custom equivalency steps/plans/rules, and marker discovery for extension assemblies.
 - **Architecture as assertions** — reflection-level layer rules (`NotDependOn`, `OnlyDependOn`,
-  `NotDependOnAny`), cycle detection with concrete paths, public-surface checks (`OnlyHavePublicMembers`,
-  `NotExposeTypes`), and selectors for assembly, visibility, nesting, names, generics, records, and immutability.
+  `NotDependOnAny`, positive `DependOn`/`DependOnAny`, reverse `OnlyBeDependedOnBy`/`NotBeDependedOnBy`),
+  `ArchitectureLayer`/`FollowLayers` direction checks, cycle detection with concrete paths, public-surface
+  checks (`OnlyHavePublicMembers`, `NotExposeTypes`), and selectors for assembly, visibility, nesting, names,
+  generics, records, and immutability.
 - **IO test infrastructure** — isolated test directories and inaccessible-directory simulation.
 
 ## Available Assertions
@@ -358,7 +360,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Members: constructors (+default), indexers, conversion operators, explicit members, return types, async/virtual, method `BeAbstract` / `BeOverride` / `BeFinal` / `BeGeneric` / `BeExtension`, property `BeStatic` / `BeAbstract` / `BeOverride` / `BeRequired` / `BeInitOnly` / `HaveIndexParameters`, constructor access (`BePrivate`, `BeProtected`, `BeInternal`, `NotBePublic`) and `BeStatic`, `HaveParameters`
 - Attributes and modifiers: attributes (+predicates on types and members), modifiers, `BeSignedWithPublicKey`
 - Architecture selectors: kinds, namespaces, `ThatSatisfy`, unwrapping, assembly/visibility/nesting, generic/record/immutability, names (`ThatHaveName*`), assignability, and dependency filters
-- Architecture rules: layer dependencies (`NotDependOn`, `OnlyDependOn`, `NotDependOnAny`), `HaveNoCycles` with concrete paths, `OnlyHavePublicMembers`, `NotExposeTypes`, namespace/name/access assertions, and offender lists capped at ten with the remaining count
+- Architecture rules: layer dependencies (`NotDependOn`, `OnlyDependOn`, `NotDependOnAny`, positive `DependOn`/`DependOnAny`, reverse `OnlyBeDependedOnBy`/`NotBeDependedOnBy`), `ArchitectureLayer`/`FollowLayers` direction checks, `HaveNoCycles` with concrete paths, `OnlyHavePublicMembers`, `NotExposeTypes`, namespace/name/access assertions, and offender lists capped at ten with the remaining count
 - Member selectors: `Methods()` / `Properties()` / `Types()` with accessibility, modifier, attribute, return-type filters and offender-reporting assertions
 - Member compatibility: method verbs `Be` / `NotBe(AccessModifier)`, decorated ±predicate, `NotBeAsync`, `NotBeVirtual`; property verbs decorated, `BeVirtual` / `NotBeVirtual`, `NotBeWritable`
 

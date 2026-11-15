@@ -32,6 +32,10 @@ public sealed class LeakyOrder {
     public Infrastructure.SqlConnection? Connection { get; set; }
 }
 
+public sealed class OrderWithQuote {
+    public Sales.Quote? Quote { get; set; }
+}
+
 [Infrastructure.InfrastructureMarker(typeof(Infrastructure.SqlConnection))]
 public sealed class AttributedLeak;
 

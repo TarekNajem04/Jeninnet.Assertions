@@ -2795,4 +2795,19 @@
   <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
     <value>Expected {0} to be parsable into {1}, but it was null.</value>
   </data>
+  <data name="ARCH_DEPEND_ON" xml:space="preserve">
+    <value>Expected every selected type to depend on &apos;{0}&apos;, but {1} type(s) do not: {2}.</value>
+  </data>
+  <data name="ARCH_DEPEND_ON_ANY" xml:space="preserve">
+    <value>Expected every selected type to depend on at least one of [{0}], but {1} type(s) do not: {2}.</value>
+  </data>
+  <data name="ARCH_ONLY_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>Expected selected types to be depended on only by [{0}], but found {1} disallowed dependenc(ies): {2}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>Expected no type from &apos;{0}&apos; to depend on the selected types, but found {1} matching dependenc(ies): {2}.</value>
+  </data>
+  <data name="ARCH_FOLLOW_LAYERS" xml:space="preserve">
+    <value>Expected selected types to follow the declared layer dependencies, but found {0} violation(s): {1}.</value>
+  </data>
 </root>

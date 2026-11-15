@@ -2795,4 +2795,19 @@
   <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
     <value>المتوقع من {0} أن يكون قابلًا للتحليل إلى {1}، لكنه كان null.</value>
   </data>
+  <data name="ARCH_DEPEND_ON" xml:space="preserve">
+    <value>المتوقع أن يعتمد كل نوع محدد على &apos;{0}&apos;، لكن {1} نوع/أنواع لا تعتمد عليه: {2}.</value>
+  </data>
+  <data name="ARCH_DEPEND_ON_ANY" xml:space="preserve">
+    <value>المتوقع أن يعتمد كل نوع محدد على واحد على الأقل من [{0}]، لكن {1} نوع/أنواع لا تعتمد على أي منها: {2}.</value>
+  </data>
+  <data name="ARCH_ONLY_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>المتوقع ألا تعتمد الأنواع المحددة إلا على مصادر ضمن [{0}]، لكن وُجد {1} اعتماد/اعتمادات غير مسموحة: {2}.</value>
+  </data>
+  <data name="ARCH_NOT_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>المتوقع ألا يعتمد أي نوع من &apos;{0}&apos; على الأنواع المحددة، لكن وُجد {1} اعتماد/اعتمادات مطابقة: {2}.</value>
+  </data>
+  <data name="ARCH_FOLLOW_LAYERS" xml:space="preserve">
+    <value>المتوقع أن تتبع الأنواع المحددة اعتماديات الطبقات المعلنة، لكن وُجد {0} مخالفة/مخالفات: {1}.</value>
+  </data>
 </root>

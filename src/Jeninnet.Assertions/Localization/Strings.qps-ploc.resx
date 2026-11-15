@@ -2797,4 +2797,19 @@
   <data name="STRING_BE_PARSABLE_NULL" xml:space="preserve">
     <value>[!! Éẋþéçţéð {0} ţó ƀé þáŕšáƀļé íñţó {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
   </data>
+  <data name="ARCH_DEPEND_ON" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ðéþéñð óñ &apos;{0}&apos;, ƀúţ {1} ţýþé(š) ðó ñóţ: {2}. !!]</value>
+  </data>
+  <data name="ARCH_DEPEND_ON_ANY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ðéþéñð óñ áţ ļéášţ óñé óƒ [{0}], ƀúţ {1} ţýþé(š) ðó ñóţ: {2}. !!]</value>
+  </data>
+  <data name="ARCH_ONLY_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð šéļéçţéð ţýþéš ţó ƀé ðéþéñðéð óñ óñļý ƀý [{0}], ƀúţ ƒóúñð {1} ðíšáļļóŵéð ðéþéñðéñç(íéš): {2}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_BE_DEPENDED_ON_BY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ñó ţýþé ƒŕóɱ &apos;{0}&apos; ţó ðéþéñð óñ ţĥé šéļéçţéð ţýþéš, ƀúţ ƒóúñð {1} ɱáţçĥíñĝ ðéþéñðéñç(íéš): {2}. !!]</value>
+  </data>
+  <data name="ARCH_FOLLOW_LAYERS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð šéļéçţéð ţýþéš ţó ƒóļļóŵ ţĥé ðéçļáŕéð ļáýéŕ ðéþéñðéñçíéš, ƀúţ ƒóúñð {0} ṽíóļáţíóñ(š): {1}. !!]</value>
+  </data>
 </root>
