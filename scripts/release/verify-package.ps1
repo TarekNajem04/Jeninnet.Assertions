@@ -71,6 +71,11 @@ if (-not (Test-Path $PackageDirectory)) {
 }
 
 $packages = @(Get-ChildItem $PackageDirectory -File -Filter "$PackageId.*.nupkg" |
+    Where-Object {
+        # Match only the exact package ID followed by a numeric version. A plain wildcard
+        # also matches sibling packages such as Jeninnet.Assertions.MSTest.1.1.0.nupkg.
+        $_.Name -match ('^' + [regex]::Escape($PackageId) + '\.\d+(\.\d+){1,3}\.nupkg$')
+    } |
     Where-Object { $_.Name -notlike '*.snupkg' } |
     Sort-Object LastWriteTime -Descending)
 if ($Version) {

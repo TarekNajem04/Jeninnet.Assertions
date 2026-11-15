@@ -136,7 +136,7 @@ Failure messages live in `src/Jeninnet.Assertions/Localization/`. Adding a langu
 - **No unreviewed machine translation.** A native or fluent reviewer should approve the file before release.
 - Translate the `because` glue (`MESSAGE_BECAUSE`) and the scope header (`SCOPE_ASSERTION_FAILURES`); they are user-facing text.
 - Guard exceptions (`ArgumentNullException` and friends) stay in English by design.
-- `Strings.qps-ploc.resx` is a commit-time pseudo-localization used to detect hardcoded text; it is shipped as a testing aid and is not a user language.
+- `Strings.qps-Ploc.resx` is a commit-time pseudo-localization used to detect hardcoded text; it is shipped as a testing aid and is not a user language.
 
 ## Future Contributor Program
 

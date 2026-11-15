@@ -21,8 +21,9 @@ mono_crash.*
 [Dd]ebugPublic/
 [Rr]elease/
 [Rr]eleases/
-# Release-process scripts are source, not build output.
+# Release-process scripts and notes are source, not build output.
 !scripts/release/
+!docs/releases/
 x64/
 x86/
 [Ww][Ii][Nn]32/

@@ -17,6 +17,8 @@ This repository contains the **standalone** `Jeninnet.Assertions` package. It ha
 
 Targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`.
 
+**Documentation:** [English book](https://tareknajem04.github.io/Jeninnet.Assertions/) · [API reference](https://tareknajem04.github.io/Jeninnet.Assertions/api/toc.html) · [العربية](https://tareknajem04.github.io/Jeninnet.Assertions/ar/00-index.html)
+
 ## See it in action
 
 One test that pins the clock, batches independent failures, and treats architecture as an assertion — the library itself references no test framework, so this body runs unchanged under xUnit, NUnit, MSTest, or a plain console check:
