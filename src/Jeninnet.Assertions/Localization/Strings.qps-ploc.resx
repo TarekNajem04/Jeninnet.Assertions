@@ -2611,4 +2611,115 @@
   <data name="URI_BASE_REQUIRES_ABSOLUTE" xml:space="preserve">
     <value>[!! Éẋþéçţéð {0} ţó ƀé áñ áƀšóļúţé ƀášé ÚŔÍ, ƀúţ íţ íš ŕéļáţíṽé. !!]</value>
   </data>
+  <data name="CHAR_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="CHAR_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="CHAR_BE_CATEGORY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="CHAR_NOT_BE_CATEGORY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_LETTER" xml:space="preserve">
+    <value>[!! á ļéţţéŕ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_DIGIT" xml:space="preserve">
+    <value>[!! á ðíĝíţ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_LETTER_OR_DIGIT" xml:space="preserve">
+    <value>[!! á ļéţţéŕ óŕ ðíĝíţ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_WHITESPACE" xml:space="preserve">
+    <value>[!! ŵĥíţéšþáçé !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_PUNCTUATION" xml:space="preserve">
+    <value>[!! þúñçţúáţíóñ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_SYMBOL" xml:space="preserve">
+    <value>[!! á šýɱƀóļ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_CONTROL" xml:space="preserve">
+    <value>[!! á çóñţŕóļ çĥáŕáçţéŕ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_SURROGATE" xml:space="preserve">
+    <value>[!! á šúŕŕóĝáţé !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_UPPER" xml:space="preserve">
+    <value>[!! áñ úþþéŕçášé ļéţţéŕ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_LOWER" xml:space="preserve">
+    <value>[!! á ļóŵéŕçášé ļéţţéŕ !!]</value>
+  </data>
+  <data name="CHAR_CATEGORY_ASCII" xml:space="preserve">
+    <value>[!! áñ ÁŠÇÍÍ çĥáŕáçţéŕ !!]</value>
+  </data>
+  <data name="PARAMETER_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ. !!]</value>
+  </data>
+  <data name="PARAMETER_IS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéƒéŕ ţó á þáŕáɱéţéŕ, ƀúţ ƒóúñð &lt;ñúļļ&gt;. !!]</value>
+  </data>
+  <data name="PARAMETER_BE_NAMED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñáɱéð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_NAMED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñáɱéð {1}, ƀúţ íţ íš. !!]</value>
+  </data>
+  <data name="PARAMETER_BE_OF_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óƒ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_OF_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé óƒ ţýþé {1}, ƀúţ íţ íš. !!]</value>
+  </data>
+  <data name="PARAMETER_BE_OPTIONAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óþţíóñáļ, ƀúţ íţ íš ŕéqúíŕéð. !!]</value>
+  </data>
+  <data name="PARAMETER_BE_REQUIRED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéqúíŕéð, ƀúţ íţ íš óþţíóñáļ. !!]</value>
+  </data>
+  <data name="PARAMETER_HAVE_DEFAULT_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ðéƒáúļţ ṽáļúé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PARAMETER_HAVE_NO_DEFAULT_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ðéƒáúļţ ṽáļúé {1}, ƀúţ íţ ĥáš ñó ðéƒáúļţ ṽáļúé. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_HAVE_DEFAULT_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé á ðéƒáúļţ ṽáļúé, ƀúţ íţ ĥáš {1}. !!]</value>
+  </data>
+  <data name="PARAMETER_HAVE_POSITION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áţ þóšíţíóñ {1}, ƀúţ ƒóúñð þóšíţíóñ {2}. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_HAVE_POSITION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áţ þóšíţíóñ {1}, ƀúţ íţ íš. !!]</value>
+  </data>
+  <data name="PARAMETER_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ íš ñóţ. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ íš. !!]</value>
+  </data>
+  <data name="PARAMETER_BE_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þáŕáɱéţéŕ ŵíţĥ ţĥé {1} ɱóðíƒíéŕ, ƀúţ íţ íš ñóţ. !!]</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á þáŕáɱéţéŕ ŵíţĥ ţĥé {1} ɱóðíƒíéŕ, ƀúţ íţ íš. !!]</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_OUT" xml:space="preserve">
+    <value>[!! óúţ !!]</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_IN" xml:space="preserve">
+    <value>[!! íñ !!]</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_REF" xml:space="preserve">
+    <value>[!! ŕéƒ !!]</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
+    <value>[!! þáŕáɱš !!]</value>
+  </data>
 </root>

@@ -34,12 +34,12 @@
 | #   | الفصل                                                     | الملف                                                      |
 | --- | --------------------------------------------------------- | ---------------------------------------------------------- |
 | 1   | الخطوات الأولى: التثبيت والتوكيد وقراءة الفشل             | [01-first-steps.md](01-first-steps.md)                     |
-| 2   | القيم الأساسية: bool وobject والأرقام والنصوص             | [02-core-values.md](02-core-values.md)                     |
+| 2   | القيم الأساسية: bool وchar وobject والأرقام والنصوص             | [02-core-values.md](02-core-values.md)                     |
 | 3   | المجموعات والقواميس والنطاقات                             | [03-collections.md](03-collections.md)                     |
 | 4   | الوقت والهوية: التواريخ وGuid والتعدادات                  | [04-time-and-identity.md](04-time-and-identity.md)         |
 | 5   | الأفعال وغير المتزامن: الاستثناءات والانتظار والميزانيات  | [05-actions-async.md](05-actions-async.md)                 |
 | 6   | الشكل لا الهوية: التكافؤ واللقطات                         | [06-equivalency-snapshots.md](06-equivalency-snapshots.md) |
-| 7   | الانعكاس: الأنواع والأعضاء وقواعد البنية                  | [07-reflection.md](07-reflection.md)                       |
+| 7   | الانعكاس: الأنواع والأعضاء والمعاملات وقواعد البنية                  | [07-reflection.md](07-reflection.md)                       |
 | 8   | العالم الخارجي: التدفقات وXML وJSON وHTTP والأحداث وIO    | [08-io-formats-events.md](08-io-formats-events.md)         |
 | 9   | غرفة المحرك: النطاقات والثقافة والمنسقات والإعدادات       | [09-engine-room.md](09-engine-room.md)                     |
 | 10  | النظام البيئي: محولات الأطر والمحلل وقالب Consumer والهجرة | [10-ecosystem.md](10-ecosystem.md)                         |

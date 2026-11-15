@@ -186,6 +186,16 @@ Expand any group to see its verbs; every backticked identifier is verified again
 </details>
 
 <details>
+<summary><strong>char</strong> · Should()</summary>
+
+- Equality: `Be`, `NotBe`
+- Unicode categories (+negatives): `BeLetter`, `BeDigit`, `BeLetterOrDigit`, `BeWhiteSpace`, `BePunctuation`, `BeSymbol`, `BeControl`, `BeSurrogate`
+- Casing and range: `BeUpper`, `BeLower`, `BeAscii` (+negatives)
+- Non-ASCII letters and digits work; control and surrogate values are rendered as `\uXXXX` escapes in failure messages
+
+</details>
+
+<details>
 <summary><strong>object</strong> · Should()</summary>
 
 - Identity and shape: `Be`, `NotBe`, `BeSameAs`, `BeOfType`, `BeAssignableTo`, `Match`, `BeOneOf`
@@ -349,6 +359,17 @@ Expand any group to see its verbs; every backticked identifier is verified again
 - Architecture rules: layer dependencies (`NotDependOn`, `OnlyDependOn`, `NotDependOnAny`), `HaveNoCycles` with concrete paths, `OnlyHavePublicMembers`, `NotExposeTypes`, namespace/name/access assertions, and offender lists capped at ten with the remaining count
 - Member selectors: `Methods()` / `Properties()` / `Types()` with accessibility, modifier, attribute, return-type filters and offender-reporting assertions
 - Member compatibility: method verbs `Be` / `NotBe(AccessModifier)`, decorated ±predicate, `NotBeAsync`, `NotBeVirtual`; property verbs decorated, `BeVirtual` / `NotBeVirtual`, `NotBeWritable`
+
+</details>
+
+<details>
+<summary><strong>ParameterInfo</strong> · Should()</summary>
+
+- Identity: `BeNull` / `NotBeNull`, `BeNamed` / `NotBeNamed`, `BeOfType<T>` / `BeOfType(Type)` (+negatives)
+- Contract: `BeOptional` / `BeRequired`, `HaveDefaultValue` / `NotHaveDefaultValue`, `HavePosition` / `NotHavePosition`
+- Modifiers: `BeOut`, `BeIn`, `BeRef`, `BeParams` (+negatives)
+- Attributes: `BeDecoratedWith<TAttribute>` / `NotBeDecoratedWith<TAttribute>`
+- `HaveDefaultValue(null)` succeeds only for an explicit null default, not for a parameter without one
 
 </details>
 

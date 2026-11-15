@@ -87,9 +87,29 @@ typeof(Order).Should().NotHaveProperty("PasswordHash");
 
 This is exactly how you prevent "temporary" public members from becoming permanent by adoption. If a member shouldn't exist by contract, assert it doesn't.
 
-Behavior note: if the type, `MethodInfo`, `PropertyInfo`, `ConstructorInfo`, or `Assembly` in question is `null`, positive assertions fail while negative assertions pass. In other words, absence means `NotHave*` passes safely—the correct behavior.
+Behavior note: if the type, `MethodInfo`, `PropertyInfo`, `ConstructorInfo`, `ParameterInfo`, or `Assembly` in question is `null`, positive assertions fail while negative assertions pass. In other words, absence means `NotHave*` passes safely—the correct behavior.
 
-## 7.3 Assembly-level and architectural rules
+## 7.3 Parameter metadata: asserting `ParameterInfo`
+
+A method exposes its parameters as `ParameterInfo`; assert that metadata directly instead of unpacking `GetParameters()` in every test:
+
+```csharp
+var parameter = typeof(OrderService).GetMethod(nameof(OrderService.Create))!.GetParameters()[0];
+parameter.Should().BeNamed("orderId").And.BeOfType<Guid>();
+parameter.Should().BeRequired().And.NotHaveDefaultValue();
+parameter.Should().HavePosition(0);
+```
+
+The verbs are grouped by metadata:
+
+- Identity: `BeNull` / `NotBeNull`, `BeNamed` / `NotBeNamed`, and exact-type `BeOfType<T>` / `BeOfType(Type)` with their negatives. `BeOfType` compares `ParameterType` exactly; use the value assertions for a runtime type check.
+- Contract: `BeOptional` checks `ParameterInfo.IsOptional` (not merely “has a default”), `BeRequired` is its inverse, `HaveDefaultValue` / `NotHaveDefaultValue` distinguish an explicit `null` default from no default, and `HavePosition` / `NotHavePosition` cover the zero-based position (the return parameter is `-1`).
+- Modifiers: `BeOut`, `BeIn`, `BeRef`, and `BeParams` read `ParameterAttributes` and `ParamArrayAttribute`; `ref`, `out`, and `in` all have a by-ref parameter type, so the modifier verbs check the flags rather than the type alone.
+- Attributes: `BeDecoratedWith<TAttribute>` / `NotBeDecoratedWith<TAttribute>` read the parameter's custom attributes.
+
+`ParameterInfo` inspection is reflection: the `Should()` entry point carries `RequiresUnreferencedCode`, so trimming/AOT consumers get an explicit warning before relying on preserved metadata (see [section 9.6](09-engine-room.md#96-trimming-and-nativeaot)).
+
+## 7.4 Assembly-level and architectural rules
 
 Moving from a single type to the entire assembly lets you enforce design rules at the boundary level.
 
@@ -171,13 +191,14 @@ typeof(OrderService).Types().Should().HaveCount(2);
 
 Property filters cover accessibility (any accessor counts), static/virtual/abstract, read-only/write-only/writable, `OfType<T>`, attributes, and a single `ThatSatisfy()` predicate—there is deliberately no separate `Where()`. Filters are methods (not properties), matching this library's `TypeSelector` style rather than a mixed property/method style.
 
-## 7.4 Recap and exercise
+## 7.5 Recap and exercise
 
 **Recap:**
 
 - **Turn conventions into executable assertions.** Any architectural rule worth stating is worth asserting.
 - **Go from type to member via `.Which`.** To pin signatures, access levels, modifiers, and mutability.
 - **Use negation to protect contracts.** `NotHaveMethod()` prevents "temporary" members from becoming permanent.
+- **Assert parameter metadata directly.** `ParameterInfo` verbs keep names, types, modifiers, defaults, and attributes readable instead of fragile `GetParameters()` indexes.
 - **Enforce rules at scale with `AllTypes.From()`.** Apply collective rules across your entire assembly in one go.
 
 **Exercise:**

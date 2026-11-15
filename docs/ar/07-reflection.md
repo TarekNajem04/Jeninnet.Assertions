@@ -117,9 +117,33 @@ typeof(Order).Should().NotHaveProperty("PasswordHash");
 
 هذا بالضبط ما يمنع "الدالة المؤقتة" من البقاء خفية. يحمي العقد المقصود قبل أن يبدأ أحدهم باستدعائها. والمشكلة في العضو المؤقت أنه لا يتقادم بالسكوت؛ يتقادم بالاستعمال: كل مستدعٍ جديد يمثّل تصويتًا على إبقائه، وبعد فترة لا يعرف أحد كُتب ولماذا. التوكيد السالب يقطع هذا المسار في أوله.
 
-قاعدة سلوك: لو كان النوع أو <code dir="ltr">MethodInfo</code> أو <code dir="ltr">PropertyInfo</code> أو <code dir="ltr">ConstructorInfo</code> أو <code dir="ltr">Assembly</code> الناتج <code dir="ltr">null</code>، فإن التوكيد الموجب يفشل، أما التوكيد السالب فينجح. أي: غياب العضو يعني أن <code dir="ltr">NotHave*</code> يمرّ بأمان — وهو السلوك الصحيح تمامًا: لا يمكنك أن تثبت عدم قابلية تغيير عنصر غير موجود، ولا معنى لرفض نفيٍ يخصُّ غيابًا هو الحالة المطلوبة أصلًا.
+قاعدة سلوك: لو كان النوع أو <code dir="ltr">MethodInfo</code> أو <code dir="ltr">PropertyInfo</code> أو <code dir="ltr">ConstructorInfo</code> أو <code dir="ltr">ParameterInfo</code> أو <code dir="ltr">Assembly</code> الناتج <code dir="ltr">null</code>، فإن التوكيد الموجب يفشل، أما التوكيد السالب فينجح. أي: غياب العضو يعني أن <code dir="ltr">NotHave*</code> يمرّ بأمان — وهو السلوك الصحيح تمامًا: لا يمكنك أن تثبت عدم قابلية تغيير عنصر غير موجود، ولا معنى لرفض نفيٍ يخصُّ غيابًا هو الحالة المطلوبة أصلًا.
 
-## ٧.٣ قواعد البنية على مستوى التجميع
+## ٧.٣ بيانات المعاملات: توكيد <code dir="ltr">ParameterInfo</code>
+
+تُعرِّض الدالة معاملاتها كـ<code dir="ltr">ParameterInfo</code>؛ وكِّد هذه البيانات مباشرة بدل تفكيك <code dir="ltr">GetParameters()</code> في كل اختبار:
+
+<div dir="ltr">
+
+```csharp
+var parameter = typeof(OrderService).GetMethod(nameof(OrderService.Create))!.GetParameters()[0];
+parameter.Should().BeNamed("orderId").And.BeOfType<Guid>();
+parameter.Should().BeRequired().And.NotHaveDefaultValue();
+parameter.Should().HavePosition(0);
+```
+
+</div>
+
+تنتظم الأفعال حسب البيانات:
+
+- الهوية: <code dir="ltr">BeNull</code> / <code dir="ltr">NotBeNull</code>، و<code dir="ltr">BeNamed</code> / <code dir="ltr">NotBeNamed</code>، والنوع الدقيق <code dir="ltr">BeOfType&lt;T&gt;</code> / <code dir="ltr">BeOfType(Type)</code> مع نفيهما. يقارن <code dir="ltr">BeOfType</code> خاصية <code dir="ltr">ParameterType</code> مقارنة تامة؛ واستخدم توكيدات القيم لفحص النوع وقت التشغيل.
+- العقد: يفحص <code dir="ltr">BeOptional</code> خاصية <code dir="ltr">ParameterInfo.IsOptional</code> (لا مجرد وجود قيمة افتراضية)، و<code dir="ltr">BeRequired</code> عكسها، ويميّز <code dir="ltr">HaveDefaultValue</code> / <code dir="ltr">NotHaveDefaultValue</code> بين قيمة افتراضية صريحة <code dir="ltr">null</code> وغياب القيمة الافتراضية، ويغطي <code dir="ltr">HavePosition</code> / <code dir="ltr">NotHavePosition</code> الموضع الصفري (معامل الإرجاع <code dir="ltr">-1</code>).
+- المعدِّلات: يقرأ <code dir="ltr">BeOut</code> و<code dir="ltr">BeIn</code> و<code dir="ltr">BeRef</code> و<code dir="ltr">BeParams</code> من <code dir="ltr">ParameterAttributes</code> و<code dir="ltr">ParamArrayAttribute</code>؛ فـ<code dir="ltr">ref</code> و<code dir="ltr">out</code> و<code dir="ltr">in</code> كلها نوع معامل بالمرجع، لذا تفحص أفعال المعدِّل الرايات لا النوع وحده.
+- السمات: يقرأ <code dir="ltr">BeDecoratedWith&lt;TAttribute&gt;</code> / <code dir="ltr">NotBeDecoratedWith&lt;TAttribute&gt;</code> السمات المخصَّصة للمعامل.
+
+فحص <code dir="ltr">ParameterInfo</code> انعكاسي: نقطة الدخول <code dir="ltr">Should()</code> تحمل <code dir="ltr">RequiresUnreferencedCode</code>، فيرى مستهلك التشذيب/AOT تحذيرًا صريحًا قبل الاعتماد على بيانات محفوظة (انظر [القسم ٩.٦](09-engine-room.md)).
+
+## ٧.٤ قواعد البنية على مستوى التجميع
 
 ننتقل الآن من نوع واحد إلى **كل الأنواع** في التجميع. هذا مثالي لحفظ قواعد التصميم على مستوى النطاق.
 
@@ -225,13 +249,14 @@ typeof(OrderService).Types().Should().HaveCount(2);
 
 وقاعدة «المرشّح تابع لا خاصية» اختيار اتساق لا تفصيل أسلوبي: سطح واحد الشكل يُسهل التعلُّم والاكتشاف، ويُبقي الأخطاء المتفاوتة بعيدة عن بنية الـAPI نفسها.
 
-## ٧.٤ خلاصة وتمرين
+## ٧.٥ خلاصة وتمرين
 
 **الخلاصة:**
 
 - **حوِّل القواعد الشفهية إلى توكيدات.** كل اتفاقية بنيوية تستحق سطرًا تنفيذيًا.
 - **انتقل من النوع إلى العضو عبر <code dir="ltr">.Which</code>.** لتفاصيل التوقيع ومستوى الوصول والسكونية.
 - **استخدم النفي لحماية العقد.** <code dir="ltr">NotHaveMethod()</code> يمنع الأعضاء "المؤقتة" قبل أن تُصبح دائمة بالاستعمال.
+- **وكِّد بيانات المعاملات مباشرة.** أفعال <code dir="ltr">ParameterInfo</code> تحفظ الأسماء والأنواع والمعدِّلات والقيم الافتراضية والسمات بدل فهارس <code dir="ltr">GetParameters()</code> الهشّة.
 - **ارفع المستوى إلى التجميع.** <code dir="ltr">AllTypes.From()</code> يفرض قواعد على كل الأنواع دفعة واحدة.
 - **افحص ما يراه المستهلك فعلًا.** <code dir="ltr">BeDecoratedWithOrInherit()</code> و<code dir="ltr">DefineType()</code> يقرآن الحقيقة البنيوية، لا نية الكاتب.
 

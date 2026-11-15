@@ -225,7 +225,27 @@ logLine.Should().HaveGroupCount(3);
 
 المطابقة الفاشلة أو <code dir="ltr">null</code> تفشل هذه الأفعال برسالة مخصَّصة، والمجموعة التي لم تشارك (مجموعة اختيارية غير مطابَقة) تُحتسب نصًا فارغًا، والاسم غير الموجود يسرد أسماء المجموعات المتاحة. هذه التفاصيل الثلاثة تحسم أكثر ما يُربك عند فحص السجلات: لا سؤال «هل طابق النمط؟» وحده، بل أي مجموعة التقطت أي قيمة. فحين تتوقَّع <code dir="ltr">date</code> وتحصل على نص فارغ، فذلك يعني أن الجزء الاختياري لم يُطابَق أصلًا، وأن التعبير النمطي نفسه يحتاج مراجعة، لا أن النظام أعاد قيمة خاطئة.
 
-## ٢.٥ التحقُّق من عدة شروط مستقلة
+## ٢.٥ المحارف: الحروف والأرقام وفئات Unicode
+
+للحرف <code dir="ltr">char</code> توكيداته الخاصة، فلا يُحوَّل <code dir="ltr">'a'.Should()</code> إلى <code dir="ltr">object</code>:
+
+<div dir="ltr">
+
+```csharp
+var separator = ',';
+separator.Should().BePunctuation();
+separator.Should().NotBeLetterOrDigit();
+
+'A'.Should().BeUpper();
+'ع'.Should().BeLetter();
+'\u0001'.Should().BeControl();
+```
+
+</div>
+
+تطابق أفعال الفئات مساعدات <code dir="ltr">char.Is*</code>: <code dir="ltr">BeLetter</code> و<code dir="ltr">BeDigit</code> و<code dir="ltr">BeLetterOrDigit</code> و<code dir="ltr">BeWhiteSpace</code> و<code dir="ltr">BePunctuation</code> و<code dir="ltr">BeSymbol</code> و<code dir="ltr">BeControl</code> و<code dir="ltr">BeSurrogate</code>، إضافة إلى <code dir="ltr">BeUpper</code> و<code dir="ltr">BeLower</code> و<code dir="ltr">BeAscii</code> (النطاق <code dir="ltr">U+0000</code>–<code dir="ltr">U+007F</code>). ولكل فعل مقابل <code dir="ltr">NotBe…</code>، ويقارن <code dir="ltr">Be</code>/<code dir="ltr">NotBe</code> المحرف نفسه. وتستخدم الترقيم والرموز <code dir="ltr">char.GetUnicodeCategory</code>، فالترقيم ليس محصورًا في ASCII. وتعرض رسائل الفشل وحدات التحكم والبدائل بصيغة <code dir="ltr">\uXXXX</code> حفاظًا على ثبات مخرَج الطرفية.
+
+## ٢.٦ التحقُّق من عدة شروط مستقلة
 
 أحيانًا يلزم أن تُرضي قيمة واحدة عدة قواعد مستقلة. بدلًا من التوقُّف عند أول فشل، يقرأ <code dir="ltr">SatisfyAllConditions()</code> كل الإخفاقات دفعة واحدة:
 
@@ -254,7 +274,7 @@ Expected value to satisfy all conditions, but the following failed:
 
 مفيد خصوصًا عند تشخيص شروط مسبقة معقَّدة في مسار واحد: بدل أن تُصلح الشرط الأول لتكتشف الثاني ثم الثالث، ترى الشروط الثلاثة في تقرير واحد مرقَّم بالترتيب. ويجدر التمييز بينه وبين <code dir="ltr">AssertionScope</code> الذي سنراه لاحقًا: هنا الشروط تُكتب في استدعاء واحد على قيمة واحدة، وهناك نطاق مستقل يجمع ما يُكتب داخله على قيم مختلفة. وأيًّا كان الأسلوب، احصر الاستخدام في الفحوص **المستقلة** — أما الفحوص التابعة فيجب أن تبقى متسلسلة حتى لا يتحوَّل التقرير إلى سلسلة أصداء لفشل واحد.
 
-## ٢.٦ خلاصة وتمرين
+## ٢.٧ خلاصة وتمرين
 
 **الخلاصة:**
 
@@ -262,6 +282,7 @@ Expected value to satisfy all conditions, but the following failed:
 - <code dir="ltr">Be()</code> يقارن بالقيمة، <code dir="ltr">BeSameAs()</code> يقارن بالهوية المرجعية. <code dir="ltr">BeOfType()</code> يضمن النوع الفعلي.
 - للأنواع القابلة لـ<code dir="ltr">null</code> نبدأ بـ<code dir="ltr">BeNull()</code>/<code dir="ltr">NotBeNull()</code> قبل توكيدات القيمة.
 - للنصوص نستخدم سلمًا واضحًا: المساواة، والطول، وبداية/نهاية، واحتواء، ومطابقة نمط.
+- توكيدات <code dir="ltr">char</code> تغطي فئات Unicode وحالة الأحرف وASCII دون boxing.
 - <code dir="ltr">SatisfyAllConditions()</code> يجمع كل الإخفاقات المستقلة بدل التوقُّف عند الأول.
 
 **تمرين:**

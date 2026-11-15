@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `char` assertions (`Be` / `NotBe`, Unicode categories, casing, ASCII, with negatives) and
+  `ParameterInfo` assertions (name, exact type, optional/required, explicit default values,
+  `out`/`ref`/`in`/`params`, position, attributes, null handling), both localized and covered by
+  tests; the `ParameterInfo` entry point carries `RequiresUnreferencedCode`.
 - Migration guides for Shouldly, NFluent, and AwesomeAssertions/FluentAssertions in the migration
   playbook (English + Arabic), including the exact license differences (Shouldly BSD-3-Clause,
   NFluent/AA Apache-2.0, FA 7.x Apache-2.0 vs FA 8+ Xceed Community/commercial), a table of shapes

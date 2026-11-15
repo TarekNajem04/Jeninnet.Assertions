@@ -13,3 +13,18 @@ namespace Jeninnet.Assertions.Tests.LocalizationFixtures;
 #pragma warning disable S2094, CA1852
 internal class LonelyWidget;
 #pragma warning restore S2094, CA1852
+
+/// <summary>Sets <see cref="AssertionCulture.Current"/> for the duration of a test and restores it on dispose.</summary>
+internal sealed class CultureScope : IDisposable {
+    private readonly CultureInfo _previous;
+
+    /// <summary>Creates a scope pinned to <paramref name="culture"/>.</summary>
+    /// <param name="culture">The culture name, for example <c>ar</c> or <c>qps-ploc</c>.</param>
+    internal CultureScope(string culture) {
+        _previous = AssertionCulture.Current;
+        AssertionCulture.Current = CultureInfo.GetCultureInfo(culture);
+    }
+
+    /// <summary>Restores the previous assertion culture.</summary>
+    public void Dispose() => AssertionCulture.Current = _previous;
+}

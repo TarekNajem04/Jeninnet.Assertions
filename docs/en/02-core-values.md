@@ -165,7 +165,23 @@ logLine.Should().HaveGroupCount(3);
 
 A failed or `null` match fails these verbs with a dedicated message, a capture group that did not participate (an unmatched optional group) counts as the empty string, and a name that does not exist lists the available group names.
 
-## 2.5 Checking multiple independent conditions
+## 2.5 Characters: letters, digits, and Unicode categories
+
+`char` has its own assertions, so `'a'.Should()` does not box to `object`:
+
+```csharp
+var separator = ',';
+separator.Should().BePunctuation();
+separator.Should().NotBeLetterOrDigit();
+
+'A'.Should().BeUpper();
+'ع'.Should().BeLetter();
+'\u0001'.Should().BeControl();
+```
+
+The category verbs mirror the `char.Is*` helpers: `BeLetter`, `BeDigit`, `BeLetterOrDigit`, `BeWhiteSpace`, `BePunctuation`, `BeSymbol`, `BeControl`, `BeSurrogate`, plus `BeUpper`, `BeLower`, and `BeAscii` (`U+0000`–`U+007F`). Each has a `NotBe…` counterpart, and `Be`/`NotBe` compare the character itself. Punctuation and symbols use `char.GetUnicodeCategory`, so Unicode punctuation is not limited to ASCII. Failure messages render control and surrogate code units as `\uXXXX` escapes, keeping terminal output stable.
+
+## 2.6 Checking multiple independent conditions
 
 Sometimes one value needs to satisfy several independent rules. Instead of stopping at the first failure, `SatisfyAllConditions()` reports every failure at once:
 
@@ -186,7 +202,7 @@ Expected value to satisfy all conditions, but the following failed:
 
 This is especially useful when diagnosing complex preconditions in one pass. Only use it for independent checks—dependent checks should remain sequential.
 
-## 2.6 Recap and exercise
+## 2.7 Recap and exercise
 
 **Recap:**
 
@@ -194,6 +210,7 @@ This is especially useful when diagnosing complex preconditions in one pass. Onl
 - `Be()` compares by value; `BeSameAs()` compares by reference identity. `BeOfType()` enforces the exact runtime type.
 - For nullable types, start with `BeNull()`/`NotBeNull()` before asserting values.
 - String assertions can be composed naturally. Long comparisons show a unified diff on failure.
+- `char` assertions cover Unicode categories, casing, and ASCII without boxing.
 - `SatisfyAllConditions()` collects all independent failures instead of stopping at the first.
 
 **Exercise:**

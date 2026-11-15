@@ -241,7 +241,7 @@ dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c
 |---|---|---|
 | Values, strings, collections, dictionaries, numerics, time, actions/async, HTTP, IO, streams | Safe | No reflection over arbitrary type metadata. |
 | Scopes, culture, formatters, validators, CI reports | Safe | Formatting is invariant and deterministic. |
-| Type/member/assembly assertions, `AllTypes`, `TypeSelector` | `RequiresUnreferencedCode` | Preserve inspected types/members, or use non-reflection assertions. |
+| Type/member/assembly/parameter assertions, `AllTypes`, `TypeSelector` | `RequiresUnreferencedCode` | Preserve inspected types/members, or use non-reflection assertions. |
 | Equivalency (`BeEquivalentTo`, `EquivalencyEvaluation.Evaluate`) | `RequiresUnreferencedCode` | Reflective member walk; no dynamic code generation. |
 | Event monitoring | `RequiresUnreferencedCode` + `RequiresDynamicCode` | Reflects events and compiles delegate accessors. |
 | Snapshots (`MatchSnapshot`) | `RequiresUnreferencedCode` | Caller stack metadata; object snapshots additionally need dynamic JSON serialization. |

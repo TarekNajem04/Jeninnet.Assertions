@@ -25,6 +25,11 @@ public static partial class AssertionExtensions {
     /// <param name="expression">The captured caller expression naming the subject under test.</param>
     public static NullableBooleanAssertions Should(this bool? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
+    /// <summary>Creates a <see cref="CharAssertions"/> for the given character.</summary>
+    /// <param name="value">The character to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    public static CharAssertions Should(this char value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
     /// <summary>Creates a <see cref="NumericAssertions{T}"/> for the given value. (Concrete numeric overloads keep overload resolution unambiguous with enums.)</summary>
     /// <param name="value">The value to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>

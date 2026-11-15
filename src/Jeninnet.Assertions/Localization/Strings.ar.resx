@@ -2609,4 +2609,115 @@
   <data name="URI_BASE_REQUIRES_ABSOLUTE" xml:space="preserve">
     <value>المتوقع من {0} أن يكون عنوان URI مطلقاً للأساس، لكنه نسبي.</value>
   </data>
+  <data name="CHAR_BE" xml:space="preserve">
+    <value>المتوقع أن يكون {0} هو {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="CHAR_NOT_BE" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} هو {1}، لكنه وجد.</value>
+  </data>
+  <data name="CHAR_BE_CATEGORY" xml:space="preserve">
+    <value>المتوقع أن يكون {0} {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="CHAR_NOT_BE_CATEGORY" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} {1}، لكنه كذلك.</value>
+  </data>
+  <data name="CHAR_CATEGORY_LETTER" xml:space="preserve">
+    <value>حرفًا</value>
+  </data>
+  <data name="CHAR_CATEGORY_DIGIT" xml:space="preserve">
+    <value>رقمًا</value>
+  </data>
+  <data name="CHAR_CATEGORY_LETTER_OR_DIGIT" xml:space="preserve">
+    <value>حرفًا أو رقمًا</value>
+  </data>
+  <data name="CHAR_CATEGORY_WHITESPACE" xml:space="preserve">
+    <value>مسافة بيضاء</value>
+  </data>
+  <data name="CHAR_CATEGORY_PUNCTUATION" xml:space="preserve">
+    <value>علامة ترقيم</value>
+  </data>
+  <data name="CHAR_CATEGORY_SYMBOL" xml:space="preserve">
+    <value>رمزًا</value>
+  </data>
+  <data name="CHAR_CATEGORY_CONTROL" xml:space="preserve">
+    <value>محرف تحكم</value>
+  </data>
+  <data name="CHAR_CATEGORY_SURROGATE" xml:space="preserve">
+    <value>محرفًا بديلًا (surrogate)</value>
+  </data>
+  <data name="CHAR_CATEGORY_UPPER" xml:space="preserve">
+    <value>حرفًا كبيرًا</value>
+  </data>
+  <data name="CHAR_CATEGORY_LOWER" xml:space="preserve">
+    <value>حرفًا صغيرًا</value>
+  </data>
+  <data name="CHAR_CATEGORY_ASCII" xml:space="preserve">
+    <value>محرف ASCII</value>
+  </data>
+  <data name="PARAMETER_BE_NULL" xml:space="preserve">
+    <value>المتوقع أن يكون {0} null، لكن وُجد {1}.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_NULL" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} null.</value>
+  </data>
+  <data name="PARAMETER_IS_NULL" xml:space="preserve">
+    <value>المتوقع أن يشير {0} إلى معامل، لكن وُجد &lt;null&gt;.</value>
+  </data>
+  <data name="PARAMETER_BE_NAMED" xml:space="preserve">
+    <value>المتوقع أن يكون {0} باسم {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_NAMED" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} باسم {1}، لكنه كذلك.</value>
+  </data>
+  <data name="PARAMETER_BE_OF_TYPE" xml:space="preserve">
+    <value>المتوقع أن يكون {0} من النوع {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_OF_TYPE" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} من النوع {1}، لكنه كذلك.</value>
+  </data>
+  <data name="PARAMETER_BE_OPTIONAL" xml:space="preserve">
+    <value>المتوقع أن يكون {0} اختياريًّا، لكنه إلزامي.</value>
+  </data>
+  <data name="PARAMETER_BE_REQUIRED" xml:space="preserve">
+    <value>المتوقع أن يكون {0} إلزاميًّا، لكنه اختياري.</value>
+  </data>
+  <data name="PARAMETER_HAVE_DEFAULT_VALUE" xml:space="preserve">
+    <value>المتوقع أن يملك {0} القيمة الافتراضية {1}، لكن وُجد {2}.</value>
+  </data>
+  <data name="PARAMETER_HAVE_NO_DEFAULT_VALUE" xml:space="preserve">
+    <value>المتوقع أن يملك {0} القيمة الافتراضية {1}، لكن ليس له قيمة افتراضية.</value>
+  </data>
+  <data name="PARAMETER_NOT_HAVE_DEFAULT_VALUE" xml:space="preserve">
+    <value>المتوقع ألا يملك {0} قيمة افتراضية، لكن لديه {1}.</value>
+  </data>
+  <data name="PARAMETER_HAVE_POSITION" xml:space="preserve">
+    <value>المتوقع أن يكون {0} في الموضع {1}، لكن وُجد الموضع {2}.</value>
+  </data>
+  <data name="PARAMETER_NOT_HAVE_POSITION" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} في الموضع {1}، لكنه كذلك.</value>
+  </data>
+  <data name="PARAMETER_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع أن يكون {0} موسومًا بـ{1}، لكنه ليس كذلك.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} موسومًا بـ{1}، لكنه كذلك.</value>
+  </data>
+  <data name="PARAMETER_BE_MODIFIER" xml:space="preserve">
+    <value>المتوقع أن يكون {0} معاملًا بمعدِّل {1}، لكنه ليس كذلك.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_MODIFIER" xml:space="preserve">
+    <value>المتوقع ألا يكون {0} معاملًا بمعدِّل {1}، لكنه كذلك.</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_OUT" xml:space="preserve">
+    <value>out</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_IN" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_REF" xml:space="preserve">
+    <value>ref</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
+    <value>params</value>
+  </data>
 </root>

@@ -328,7 +328,7 @@ dotnet publish samples/Jeninnet.Assertions.Aot/Jeninnet.Assertions.Aot.csproj -c
 |---|---|---|
 | القيم والنصوص والمجموعات والقواميس والأرقام والوقت والأفعال/async وHTTP وIO والتدفقات | آمن | لا انعكاس على بيانات أنواع عشوائية. |
 | النطاقات والثقافة والمنسّقات والمدققات وتقارير CI | آمن | التنسيق ثابت وحتمي. |
-| توكيدات الأنواع/الأعضاء/التجميعات و<code dir="ltr">AllTypes</code> و<code dir="ltr">TypeSelector</code> | <code dir="ltr">RequiresUnreferencedCode</code> | حافظ على الأنواع/الأعضاء المفحوصة أو استخدم توكيدات بلا انعكاس. |
+| توكيدات الأنواع/الأعضاء/التجميعات/المعاملات و<code dir="ltr">AllTypes</code> و<code dir="ltr">TypeSelector</code> | <code dir="ltr">RequiresUnreferencedCode</code> | حافظ على الأنواع/الأعضاء المفحوصة أو استخدم توكيدات بلا انعكاس. |
 | التكافؤ (<code dir="ltr">BeEquivalentTo</code> و<code dir="ltr">EquivalencyEvaluation.Evaluate</code>) | <code dir="ltr">RequiresUnreferencedCode</code> | مرور انعكاسي على الأعضاء؛ بلا توليد كود ديناميكي. |
 | مراقبة الأحداث | <code dir="ltr">RequiresUnreferencedCode</code> + <code dir="ltr">RequiresDynamicCode</code> | انعكاس على الأحداث وترجمة accessors. |
 | اللقطات (<code dir="ltr">MatchSnapshot</code>) | <code dir="ltr">RequiresUnreferencedCode</code> | بيانات إطار الاستدعاء؛ ولقطات الكائنات تحتاج أيضًا تسلسل JSON ديناميكيًا. |

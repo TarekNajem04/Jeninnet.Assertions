@@ -30,12 +30,12 @@ Code samples target `net10.0`. The library multi-targets `netstandard2.0;net6.0;
 | # | Chapter | File |
 |---|---|---|
 | 1 | First Steps: Installation, Your First Assertion, and Reading Failures | [01-first-steps.md](01-first-steps.md) |
-| 2 | Core Values: `bool`, `object`, Numbers, and Strings | [02-core-values.md](02-core-values.md) |
+| 2 | Core Values: `bool`, `char`, `object`, Numbers, and Strings | [02-core-values.md](02-core-values.md) |
 | 3 | Collections, Dictionaries, and Spans | [03-collections.md](03-collections.md) |
 | 4 | Time and Identity: Dates, `Guid`, and Enums | [04-time-and-identity.md](04-time-and-identity.md) |
 | 5 | Actions and Async: Exceptions, Waiting, and Budgets | [05-actions-async.md](05-actions-async.md) |
 | 6 | Shape, Not Identity: Equivalency and Snapshots | [06-equivalency-snapshots.md](06-equivalency-snapshots.md) |
-| 7 | Reflection: Types, Members, and Architectural Rules | [07-reflection.md](07-reflection.md) |
+| 7 | Reflection: Types, Members, Parameters, and Architectural Rules | [07-reflection.md](07-reflection.md) |
 | 8 | The Outside World: Streams, XML, JSON, HTTP, Events, and I/O | [08-io-formats-events.md](08-io-formats-events.md) |
 | 9 | The Engine Room: Scopes, Culture, Formatting, and Configuration | [09-engine-room.md](09-engine-room.md) |
 | 10 | The Ecosystem: Framework Adapters, Analyzer, Consumer Template, and Migration | [10-ecosystem.md](10-ecosystem.md) |

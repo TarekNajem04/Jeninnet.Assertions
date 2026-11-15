@@ -212,4 +212,27 @@ internal static partial class StringKeys {
     internal const string BUFFERED_HAVE_SIZE_NULL = "BUFFERED_HAVE_SIZE_NULL";
     internal const string BUFFERED_HAVE_SIZE = "BUFFERED_HAVE_SIZE";
     internal const string BUFFERED_NOT_HAVE_SIZE = "BUFFERED_NOT_HAVE_SIZE";
+
+    internal const string PARAMETER_BE_NULL = "PARAMETER_BE_NULL";
+    internal const string PARAMETER_NOT_BE_NULL = "PARAMETER_NOT_BE_NULL";
+    internal const string PARAMETER_IS_NULL = "PARAMETER_IS_NULL";
+    internal const string PARAMETER_BE_NAMED = "PARAMETER_BE_NAMED";
+    internal const string PARAMETER_NOT_BE_NAMED = "PARAMETER_NOT_BE_NAMED";
+    internal const string PARAMETER_BE_OF_TYPE = "PARAMETER_BE_OF_TYPE";
+    internal const string PARAMETER_NOT_BE_OF_TYPE = "PARAMETER_NOT_BE_OF_TYPE";
+    internal const string PARAMETER_BE_OPTIONAL = "PARAMETER_BE_OPTIONAL";
+    internal const string PARAMETER_BE_REQUIRED = "PARAMETER_BE_REQUIRED";
+    internal const string PARAMETER_HAVE_DEFAULT_VALUE = "PARAMETER_HAVE_DEFAULT_VALUE";
+    internal const string PARAMETER_HAVE_NO_DEFAULT_VALUE = "PARAMETER_HAVE_NO_DEFAULT_VALUE";
+    internal const string PARAMETER_NOT_HAVE_DEFAULT_VALUE = "PARAMETER_NOT_HAVE_DEFAULT_VALUE";
+    internal const string PARAMETER_HAVE_POSITION = "PARAMETER_HAVE_POSITION";
+    internal const string PARAMETER_NOT_HAVE_POSITION = "PARAMETER_NOT_HAVE_POSITION";
+    internal const string PARAMETER_BE_DECORATED = "PARAMETER_BE_DECORATED";
+    internal const string PARAMETER_NOT_BE_DECORATED = "PARAMETER_NOT_BE_DECORATED";
+    internal const string PARAMETER_BE_MODIFIER = "PARAMETER_BE_MODIFIER";
+    internal const string PARAMETER_NOT_BE_MODIFIER = "PARAMETER_NOT_BE_MODIFIER";
+    internal const string PARAMETER_MODIFIER_OUT = "PARAMETER_MODIFIER_OUT";
+    internal const string PARAMETER_MODIFIER_IN = "PARAMETER_MODIFIER_IN";
+    internal const string PARAMETER_MODIFIER_REF = "PARAMETER_MODIFIER_REF";
+    internal const string PARAMETER_MODIFIER_PARAMS = "PARAMETER_MODIFIER_PARAMS";
 }

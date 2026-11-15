@@ -37,6 +37,12 @@ public static partial class AssertionExtensions {
     [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
     public static ConstructorInfoAssertions Should(this ConstructorInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
 
+    /// <summary>Creates a <see cref="ParameterInfoAssertions"/> for the given parameter.</summary>
+    /// <param name="value">The parameter to assert on.</param>
+    /// <param name="expression">The captured caller expression naming the subject under test.</param>
+    [RequiresUnreferencedCode(TrimmingMessages.TYPE_METADATA)]
+    public static ParameterInfoAssertions Should(this ParameterInfo? value, [CallerArgumentExpression(nameof(value))] string? expression = null) => new(value, expression);
+
     /// <summary>Creates a <see cref="StreamAssertions"/> for the given stream.</summary>
     /// <param name="value">The stream to assert on.</param>
     /// <param name="expression">The captured caller expression naming the subject under test.</param>

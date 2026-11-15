@@ -2609,4 +2609,115 @@
   <data name="URI_BASE_REQUIRES_ABSOLUTE" xml:space="preserve">
     <value>Se esperaba que {0} fuera una URI base absoluta, pero es relativa.</value>
   </data>
+  <data name="CHAR_BE" xml:space="preserve">
+    <value>Se esperaba que {0} fuera {1}, pero se encontró {2}.</value>
+  </data>
+  <data name="CHAR_NOT_BE" xml:space="preserve">
+    <value>Se esperaba que {0} no fuera {1}, pero lo es.</value>
+  </data>
+  <data name="CHAR_BE_CATEGORY" xml:space="preserve">
+    <value>Se esperaba que {0} fuera {1}, pero se encontró {2}.</value>
+  </data>
+  <data name="CHAR_NOT_BE_CATEGORY" xml:space="preserve">
+    <value>Se esperaba que {0} no fuera {1}, pero lo es.</value>
+  </data>
+  <data name="CHAR_CATEGORY_LETTER" xml:space="preserve">
+    <value>una letra</value>
+  </data>
+  <data name="CHAR_CATEGORY_DIGIT" xml:space="preserve">
+    <value>un dígito</value>
+  </data>
+  <data name="CHAR_CATEGORY_LETTER_OR_DIGIT" xml:space="preserve">
+    <value>una letra o un dígito</value>
+  </data>
+  <data name="CHAR_CATEGORY_WHITESPACE" xml:space="preserve">
+    <value>un espacio en blanco</value>
+  </data>
+  <data name="CHAR_CATEGORY_PUNCTUATION" xml:space="preserve">
+    <value>puntuación</value>
+  </data>
+  <data name="CHAR_CATEGORY_SYMBOL" xml:space="preserve">
+    <value>un símbolo</value>
+  </data>
+  <data name="CHAR_CATEGORY_CONTROL" xml:space="preserve">
+    <value>un carácter de control</value>
+  </data>
+  <data name="CHAR_CATEGORY_SURROGATE" xml:space="preserve">
+    <value>un sustituto (surrogate)</value>
+  </data>
+  <data name="CHAR_CATEGORY_UPPER" xml:space="preserve">
+    <value>una letra mayúscula</value>
+  </data>
+  <data name="CHAR_CATEGORY_LOWER" xml:space="preserve">
+    <value>una letra minúscula</value>
+  </data>
+  <data name="CHAR_CATEGORY_ASCII" xml:space="preserve">
+    <value>un carácter ASCII</value>
+  </data>
+  <data name="PARAMETER_BE_NULL" xml:space="preserve">
+    <value>Se esperaba que {0} fuera null, pero se encontró {1}.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_NULL" xml:space="preserve">
+    <value>Se esperaba que {0} no fuera null.</value>
+  </data>
+  <data name="PARAMETER_IS_NULL" xml:space="preserve">
+    <value>Se esperaba que {0} referenciara un parámetro, pero se encontró &lt;null&gt;.</value>
+  </data>
+  <data name="PARAMETER_BE_NAMED" xml:space="preserve">
+    <value>Se esperaba que {0} se llamara {1}, pero se encontró {2}.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_NAMED" xml:space="preserve">
+    <value>Se esperaba que {0} no se llamara {1}, pero sí se llama así.</value>
+  </data>
+  <data name="PARAMETER_BE_OF_TYPE" xml:space="preserve">
+    <value>Se esperaba que {0} fuera de tipo {1}, pero se encontró {2}.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_OF_TYPE" xml:space="preserve">
+    <value>Se esperaba que {0} no fuera de tipo {1}, pero lo es.</value>
+  </data>
+  <data name="PARAMETER_BE_OPTIONAL" xml:space="preserve">
+    <value>Se esperaba que {0} fuera opcional, pero es obligatorio.</value>
+  </data>
+  <data name="PARAMETER_BE_REQUIRED" xml:space="preserve">
+    <value>Se esperaba que {0} fuera obligatorio, pero es opcional.</value>
+  </data>
+  <data name="PARAMETER_HAVE_DEFAULT_VALUE" xml:space="preserve">
+    <value>Se esperaba que {0} tuviera el valor predeterminado {1}, pero se encontró {2}.</value>
+  </data>
+  <data name="PARAMETER_HAVE_NO_DEFAULT_VALUE" xml:space="preserve">
+    <value>Se esperaba que {0} tuviera el valor predeterminado {1}, pero no tiene valor predeterminado.</value>
+  </data>
+  <data name="PARAMETER_NOT_HAVE_DEFAULT_VALUE" xml:space="preserve">
+    <value>Se esperaba que {0} no tuviera un valor predeterminado, pero tiene {1}.</value>
+  </data>
+  <data name="PARAMETER_HAVE_POSITION" xml:space="preserve">
+    <value>Se esperaba que {0} estuviera en la posición {1}, pero se encontró la posición {2}.</value>
+  </data>
+  <data name="PARAMETER_NOT_HAVE_POSITION" xml:space="preserve">
+    <value>Se esperaba que {0} no estuviera en la posición {1}, pero lo está.</value>
+  </data>
+  <data name="PARAMETER_BE_DECORATED" xml:space="preserve">
+    <value>Se esperaba que {0} estuviera decorado con {1}, pero no lo está.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>Se esperaba que {0} no estuviera decorado con {1}, pero lo está.</value>
+  </data>
+  <data name="PARAMETER_BE_MODIFIER" xml:space="preserve">
+    <value>Se esperaba que {0} fuera un parámetro con el modificador {1}, pero no lo es.</value>
+  </data>
+  <data name="PARAMETER_NOT_BE_MODIFIER" xml:space="preserve">
+    <value>Se esperaba que {0} no fuera un parámetro con el modificador {1}, pero lo es.</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_OUT" xml:space="preserve">
+    <value>out</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_IN" xml:space="preserve">
+    <value>in</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_REF" xml:space="preserve">
+    <value>ref</value>
+  </data>
+  <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
+    <value>params</value>
+  </data>
 </root>
