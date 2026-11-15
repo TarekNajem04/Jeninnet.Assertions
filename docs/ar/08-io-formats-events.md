@@ -274,6 +274,11 @@ monitor.Should().Raise("OrderShipped")
 monitor.Should().Raise("OrderShipped")
     .WithSender(publisher)
     .And.WithArgs<OrderShippedArgs>(static args => args.OrderId == 42);
+
+monitor.Should().RaiseOnce("OrderShipped").Which.Sender.Should().BeSameAs(publisher);
+monitor.Should().RaiseTimes("OrderShipped", Exactly.Once());
+monitor.Should().HaveRecordedEvents().Which.Should().HaveCount(1);
+monitor.Should().HaveNoRecordedEvents(); // بعد Clear()
 ```
 
 </div>
@@ -289,12 +294,17 @@ monitor.Should().NotRaisePropertyChangeFor("Discount");
 
 </div>
 
-والمراقِب نفسه قابل للفحص عبر العقد العام <code dir="ltr">IMonitor&lt;OccurredEvent&gt;</code> (وهي <code dir="ltr">Subject</code> و<code dir="ltr">MonitoredEvents</code> و<code dir="ltr">GetRecordingFor(name)</code> و<code dir="ltr">Clear()</code>)، ويسمّي <code dir="ltr">Monitor&lt;T&gt;()</code> المصدر سكونياً. أما المصادر التي ترمي موصِّلات اشتراكها فتفشل سريعًا افتراضيًا؛ واختر <code dir="ltr">EventMonitorOptions.IgnoringEventAccessorExceptions()</code> لتخطّي تلك الأحداث بدلًا من ذلك:
+والمراقِب نفسه قابل للفحص عبر العقد العام <code dir="ltr">IMonitor&lt;OccurredEvent&gt;</code> (وهي <code dir="ltr">Subject</code> و<code dir="ltr">MonitoredEvents</code> و<code dir="ltr">GetRecordingFor(name)</code> و<code dir="ltr">Clear()</code>)، ويعرض <code dir="ltr">monitor.Should().HaveRecordedEvents().Which</code> لقطة للقراءة فقط صالحة لتوكيدات المجموعات. ويسمّي <code dir="ltr">Monitor&lt;T&gt;()</code> المصدر سكونياً. ويُؤخذ <code dir="ltr">OccurredEvent.Timestamp</code> من <code dir="ltr">AssertionClock.Current.UtcNow</code>، فتثبيت <code dir="ltr">ManualClock</code> يجعل الطوابع الزمنية حتمية أيضًا.
+
+أما المصادر التي ترمي موصِّلات اشتراكها فتفشل سريعًا افتراضيًا؛ واختر <code dir="ltr">EventMonitorOptions.IgnoringEventAccessorExceptions()</code> لتخطّي تلك الأحداث. وتُرشِّح <code dir="ltr">IncludingEvents</code>/<code dir="ltr">ExcludingEvents</code> عند الاشتراك لا عند التسجيل:
 
 <div dir="ltr">
 
 ```csharp
-using var monitor = publisher.Monitor(new EventMonitorOptions().IgnoringEventAccessorExceptions());
+var options = new EventMonitorOptions()
+    .IncludingEvents("OrderShipped", "OrderCancelled")
+    .ExcludingEvents("OrderCancelled");
+using var monitor = publisher.Monitor(options);
 ```
 
 </div>

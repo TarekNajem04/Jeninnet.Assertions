@@ -2782,4 +2782,10 @@
   <data name="XML_DIFF_MISSING" xml:space="preserve">
     <value>[!! &lt;ɱíššíñĝ&gt; !!]</value>
   </data>
+  <data name="EVENT_RAISE_TIMES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕáíšé éṽéñţ &apos;{1}&apos; {2}, ƀúţ íţ ŵáš ŕáíšéð {3} ţíɱé(š). !!]</value>
+  </data>
+  <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñó ŕéçóŕðéð éṽéñţš, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
 </root>

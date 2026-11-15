@@ -744,13 +744,19 @@ type Jeninnet.Assertions.Events.EventMonitor
   property System.Object Subject { get; }
 type Jeninnet.Assertions.Events.EventMonitorAssertions
   ctor(Jeninnet.Assertions.Events.EventMonitor, System.String)
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Events.EventMonitorAssertions> HaveNoRecordedEvents(System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Events.EventMonitorAssertions> NotRaise(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Events.EventMonitorAssertions> NotRaisePropertyChangeFor(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.AndConstraint<Jeninnet.Assertions.Events.EventMonitorAssertions> RaiseTimes(System.String, Jeninnet.Assertions.OccurrenceConstraint, System.String, System.Object[])
   method Jeninnet.Assertions.Events.OccurredEventAssertions Raise(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.Events.OccurredEventAssertions RaiseOnce(System.String, System.String, System.Object[])
   method Jeninnet.Assertions.Events.OccurredEventAssertions RaisePropertyChangeFor(System.String, System.String, System.Object[])
+  method Jeninnet.Assertions.WhichConstraint<System.Collections.Generic.IReadOnlyList<Jeninnet.Assertions.Events.OccurredEvent>> HaveRecordedEvents()
 type Jeninnet.Assertions.Events.EventMonitorOptions
   ctor()
+  method Jeninnet.Assertions.Events.EventMonitorOptions ExcludingEvents(System.String[])
   method Jeninnet.Assertions.Events.EventMonitorOptions IgnoringEventAccessorExceptions()
+  method Jeninnet.Assertions.Events.EventMonitorOptions IncludingEvents(System.String[])
   property System.Boolean IgnoreEventAccessorExceptions { get; }
 type Jeninnet.Assertions.Events.IMonitor<T>
   method abstract System.Collections.Generic.IReadOnlyList<T> GetRecordingFor(System.String)

@@ -2781,4 +2781,10 @@
   <data name="XML_DIFF_MISSING" xml:space="preserve">
     <value>&lt;fehlt&gt;</value>
   </data>
+  <data name="EVENT_RAISE_TIMES" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} das Ereignis &apos;{1}&apos; {2} auslöst, aber es wurde {3} Mal ausgelöst.</value>
+  </data>
+  <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
+    <value>Es wurde erwartet, dass {0} keine aufgezeichneten Ereignisse hat, aber es wurden {1} gefunden.</value>
+  </data>
 </root>

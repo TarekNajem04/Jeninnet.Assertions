@@ -2780,4 +2780,10 @@
   <data name="XML_DIFF_MISSING" xml:space="preserve">
     <value>&lt;faltante&gt;</value>
   </data>
+  <data name="EVENT_RAISE_TIMES" xml:space="preserve">
+    <value>Se esperaba que {0} generara el evento &apos;{1}&apos; {2}, pero se generó {3} vez/veces.</value>
+  </data>
+  <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
+    <value>Se esperaba que {0} no tuviera eventos registrados, pero se encontraron {1}.</value>
+  </data>
 </root>

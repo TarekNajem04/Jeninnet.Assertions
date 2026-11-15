@@ -2780,4 +2780,10 @@
   <data name="XML_DIFF_MISSING" xml:space="preserve">
     <value>&lt;missing&gt;</value>
   </data>
+  <data name="EVENT_RAISE_TIMES" xml:space="preserve">
+    <value>Expected {0} to raise event &apos;{1}&apos; {2}, but it was raised {3} time(s).</value>
+  </data>
+  <data name="EVENT_HAVE_NO_RECORDED" xml:space="preserve">
+    <value>Expected {0} to have no recorded events, but found {1}.</value>
+  </data>
 </root>

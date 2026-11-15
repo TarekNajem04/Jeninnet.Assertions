@@ -9,6 +9,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Event monitoring depth: `RaiseOnce` (+`Which`) and `RaiseTimes` with every occurrence constraint,
+  `HaveRecordedEvents` (+`Which`) / `HaveNoRecordedEvents`, deterministic `OccurredEvent.Timestamp`
+  from `AssertionClock`, and `EventMonitorOptions.IncludingEvents`/`ExcludingEvents` filters applied
+  at subscription.
 - Classic `XmlElement` assertions (`BeNull`/`NotBeNull`, `HaveName`, `HaveNamespace`,
   `HaveAttribute`/`HaveAttributeWithValue`/`NotHaveAttribute`, `HaveElement` (+occurrence,
   `Which`), `HaveElementWithValue`, `HaveInnerText`, structural `BeEquivalentTo`) and

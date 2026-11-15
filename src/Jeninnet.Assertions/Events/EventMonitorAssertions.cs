@@ -50,6 +50,61 @@ public class EventMonitorAssertions(EventMonitor monitor, string? expression = n
         return new(this);
     }
 
+    /// <summary>Asserts that <paramref name="eventName"/> was raised exactly once and exposes the occurrence.</summary>
+    /// <param name="eventName">The event name (case-sensitive).</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="OccurredEventAssertions"/> wrapping the single occurrence.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="eventName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The event was raised zero or multiple times.</exception>
+    public OccurredEventAssertions RaiseOnce(string eventName, string? because = null, params object?[] becauseArgs) {
+        if(eventName is null) {
+            throw new ArgumentNullException(nameof(eventName));
+        }
+
+        RaiseTimes(eventName, Exactly.Once(), because, becauseArgs);
+        return Raise(eventName, because, becauseArgs);
+    }
+
+    /// <summary>Asserts that <paramref name="eventName"/> was raised as often as <paramref name="occurrence"/> requires.</summary>
+    /// <param name="eventName">The event name (case-sensitive).</param>
+    /// <param name="occurrence">The expected occurrence constraint (e.g. <c>AtLeast.Once()</c>).</param>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="ArgumentNullException"><paramref name="eventName"/> is <see langword="null"/>.</exception>
+    /// <exception cref="AssertionFailedException">The actual raise count does not satisfy <paramref name="occurrence"/>.</exception>
+    public AndConstraint<EventMonitorAssertions> RaiseTimes(string eventName, OccurrenceConstraint occurrence, string? because = null, params object?[] becauseArgs) {
+        if(eventName is null) {
+            throw new ArgumentNullException(nameof(eventName));
+        }
+
+        var count = _monitor.GetRecordingFor(eventName).Count;
+        if(!occurrence.Matches(count)) {
+            Fail(Strings.Format(StringKeys.EVENT_RAISE_TIMES, Expression, eventName, occurrence.Expectation, AssertionScope.FormatInvariant(count)), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
+    /// <summary>Exposes a snapshot of every recorded event, in observation order.</summary>
+    /// <returns>A <see cref="WhichConstraint{T}"/> wrapping the snapshot.</returns>
+    public WhichConstraint<IReadOnlyList<OccurredEvent>> HaveRecordedEvents() => new(_monitor.OccurredEvents);
+
+    /// <summary>Asserts that the monitor has recorded no events at all.</summary>
+    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
+    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <returns>An <see cref="AndConstraint{TParent}"/> for chaining further assertions.</returns>
+    /// <exception cref="AssertionFailedException">At least one event was recorded.</exception>
+    public AndConstraint<EventMonitorAssertions> HaveNoRecordedEvents(string? because = null, params object?[] becauseArgs) {
+        var count = _monitor.OccurredEvents.Count;
+        if(count != 0) {
+            Fail(Strings.Format(StringKeys.EVENT_HAVE_NO_RECORDED, Expression, AssertionScope.FormatInvariant(count)), because, becauseArgs);
+        }
+
+        return new(this);
+    }
+
     /// <summary>Asserts that the <c>PropertyChanged</c> event was raised for <paramref name="propertyName"/> and exposes the first occurrence.</summary>
     /// <remarks>The match is a literal, ordinal comparison against <see cref="PropertyChangedEventArgs.PropertyName"/>.</remarks>
     /// <param name="propertyName">The property name to look for (case-sensitive).</param>

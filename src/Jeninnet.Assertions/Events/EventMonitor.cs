@@ -40,6 +40,10 @@ public sealed class EventMonitor : IDisposable, IMonitor<OccurredEvent> {
         _source = source;
 
         foreach(var @event in source.GetType().GetEvents(BindingFlags.Public | BindingFlags.Instance)) {
+            if(options?.ShouldMonitor(@event) == false) {
+                continue;
+            }
+
             Delegate handler;
             try {
                 handler = BuildHandler(@event);
@@ -113,7 +117,7 @@ public sealed class EventMonitor : IDisposable, IMonitor<OccurredEvent> {
         var sender = args.Length > 0 ? args[0] : null;
         object?[] payload = args.Length > 1 ? [.. args.Skip(1)] : [];
         lock(_lock) {
-            _events.Add(new OccurredEvent(eventName, sender, payload, DateTime.UtcNow));
+            _events.Add(new OccurredEvent(eventName, sender, payload, AssertionClock.Current.UtcNow.UtcDateTime));
         }
     }
 

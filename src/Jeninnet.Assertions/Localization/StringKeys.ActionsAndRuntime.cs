@@ -80,6 +80,8 @@ internal static partial class StringKeys {
     internal const string EVENT_WITH_ARGS = "EVENT_WITH_ARGS";
     internal const string EVENT_PROPERTY_CHANGE = "EVENT_PROPERTY_CHANGE";
     internal const string EVENT_NOT_PROPERTY_CHANGE = "EVENT_NOT_PROPERTY_CHANGE";
+    internal const string EVENT_RAISE_TIMES = "EVENT_RAISE_TIMES";
+    internal const string EVENT_HAVE_NO_RECORDED = "EVENT_HAVE_NO_RECORDED";
 
     internal const string MESSAGE_BECAUSE = "MESSAGE_BECAUSE";
     internal const string MESSAGE_EXPECTED = "MESSAGE_EXPECTED";

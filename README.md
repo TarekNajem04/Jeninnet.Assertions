@@ -408,9 +408,10 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <details>
 <summary><strong>Events</strong> · Monitor() / Monitor&lt;T&gt;()</summary>
 
-- `Raise` (+`Which`), `NotRaise`, `WithSender`, `WithArgs`
-- `RaisePropertyChangeFor` / `NotRaisePropertyChangeFor`
-- `IMonitor<T>` recordings, `EventMonitorOptions`
+- `Raise` (+`Which`), `RaiseOnce` (+`Which`), `RaiseTimes` with all occurrence constraints, `NotRaise`
+- `WithSender`, `WithArgs`, `RaisePropertyChangeFor` / `NotRaisePropertyChangeFor`
+- `HaveRecordedEvents` (+`Which`), `HaveNoRecordedEvents`, `IMonitor<T>` recordings
+- `EventMonitorOptions` includes/excludes events at subscription; `OccurredEvent.Timestamp` follows `AssertionClock`
 
 </details>
 

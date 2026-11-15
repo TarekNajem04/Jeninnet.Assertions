@@ -191,6 +191,11 @@ monitor.Should().Raise("OrderShipped")
 monitor.Should().Raise("OrderShipped")
     .WithSender(publisher)
     .And.WithArgs<OrderShippedArgs>(static args => args.OrderId == 42);
+
+monitor.Should().RaiseOnce("OrderShipped").Which.Sender.Should().BeSameAs(publisher);
+monitor.Should().RaiseTimes("OrderShipped", Exactly.Once());
+monitor.Should().HaveRecordedEvents().Which.Should().HaveCount(1);
+monitor.Should().HaveNoRecordedEvents(); // after Clear()
 ```
 
 `WithArgs()` also takes one predicate per argument (`WithArgs(p1, p2)`); the predicate count must match the argument count. For `INotifyPropertyChanged` sources there is a shortcut (the property-name match is literal and case-sensitive):
@@ -200,10 +205,15 @@ monitor.Should().RaisePropertyChangeFor("Total");
 monitor.Should().NotRaisePropertyChangeFor("Discount");
 ```
 
-The monitor itself is inspectable through the public `IMonitor<OccurredEvent>` contract (`Subject`, `MonitoredEvents`, `GetRecordingFor(name)`, `Clear()`), and `Monitor<T>()` names the source statically. Sources with throwing subscription accessors fail fast by default; opt into `EventMonitorOptions.IgnoringEventAccessorExceptions()` to skip those events instead:
+The monitor itself is inspectable through the public `IMonitor<OccurredEvent>` contract (`Subject`, `MonitoredEvents`, `GetRecordingFor(name)`, `Clear()`), and `monitor.Should().HaveRecordedEvents().Which` exposes a read-only snapshot for collection assertions. `Monitor<T>()` names the source statically. `OccurredEvent.Timestamp` is taken from `AssertionClock.Current.UtcNow`, so pinning a `ManualClock` makes recorded timestamps deterministic too.
+
+Sources with throwing subscription accessors fail fast by default; opt into `EventMonitorOptions.IgnoringEventAccessorExceptions()` to skip those events instead. `IncludingEvents`/`ExcludingEvents` filter at subscription time (not at recording time):
 
 ```csharp
-using var monitor = publisher.Monitor(new EventMonitorOptions().IgnoringEventAccessorExceptions());
+var options = new EventMonitorOptions()
+    .IncludingEvents("OrderShipped", "OrderCancelled")
+    .ExcludingEvents("OrderCancelled");
+using var monitor = publisher.Monitor(options);
 ```
 
 Equally important is asserting **what must not fire**:
