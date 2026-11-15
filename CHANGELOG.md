@@ -133,6 +133,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   private/protected/internal/static access, exact `HaveParameters`, and predicate decorators
   with identity checks on `MethodInfo`, `PropertyInfo`, and `ConstructorInfo`.
 
+### Changed
+
+- `OccurredEvent.Timestamp` now comes from `AssertionClock.Current.UtcNow` instead of
+  `DateTime.UtcNow`; pin a `ManualClock` when event timestamps must be deterministic.
+- XML equivalence for `XDocument`, `XElement`, and classic `XmlElement` is structural: attributes
+  are unordered, while element order, whitespace, and comments remain significant unless
+  `XmlEquivalencyOptions` relaxes them. Failures report simplified XPath paths instead of dumping
+  both documents.
+
 ### Fixed
 
 - `BeApproximately`/`NotBeApproximately` no longer round `decimal` or 64-bit integers through

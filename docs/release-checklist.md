@@ -45,7 +45,8 @@ explicitly approved step (`nuget-publish.yml`), and no task may bump `<Version>`
 ## 6. Publishing (only after explicit approval)
 
 - [ ] `Directory.Build.props` `<Version>` matches the release tag `v<version>` (four-part comparison is allowed).
-- [ ] Pushing the tag triggers `nuget-publish.yml`, which re-runs build, tests, package validation, and uploads the `.nupkg`/`.snupkg` files to nuget.org.
+- [ ] Pushing the tag triggers `nuget-publish.yml`, which re-runs build, tests, package validation,
+      `verify-package.ps1`, and uploads the `.nupkg`/`.snupkg` files to nuget.org.
 - [ ] Symbols ride along with the package push; do not push `.snupkg` files in a separate step.
 - [ ] The GitHub release is created from the same tag and includes the packed artifacts.
 

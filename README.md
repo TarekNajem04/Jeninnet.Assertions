@@ -396,7 +396,7 @@ Expand any group to see its verbs; every backticked identifier is verified again
 
 - Elements, attributes, namespaces, values, inner text, occurrence constraints
 - Classic `XmlElement` has its own `Should()` (name, namespace, attributes/elements with `Which`, inner text, structural equivalence)
-- `Be` / `NotBe` (elements and attributes), deep equivalency (+`Which`), `NotBeEquivalentTo`
+- `Be` / `NotBe` (elements and attributes), structural equivalency, `NotBeEquivalentTo`
 - Structural XML equivalency reports simplified XPath paths (`/root/orders[2]/@id`) and supports `IgnoringAttributeOrder`, `IgnoringElementOrder`, `IgnoringWhitespace`, and `IgnoringComments`
 - JSON entry points for JsonNode, JsonElement, and JsonDocument
 - JSON objects/arrays, strings/numbers/booleans/null, UTC-local dates, `HaveProperty` / `NotHaveProperty`

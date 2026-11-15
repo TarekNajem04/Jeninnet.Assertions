@@ -162,7 +162,7 @@ The AA API follows FA 7.x closely, so the FA-oriented migration material in [Cha
 
 - **Package and namespace.** AA 8.x was a drop-in that kept the `FluentAssertions` namespace and assembly name. AA 9 renamed both to `AwesomeAssertions`. In either case, replace the `using` with `using Jeninnet.Assertions;`.
 - **Extension metadata.** AA has `[CustomAssertion]` on methods, `[CustomAssertions]` on classes, and `[CustomAssertionsAssembly]` on assemblies. Jeninnet has `[CustomAssertion]` and `[CustomAssertionsAssembly]`; there is no class-level equivalent yet, so mark each custom method.
-- **Parameter metadata.** Jeninnet's current surface does not include a dedicated `ParameterInfo` assertion family; assert the `ParameterInfo` properties you need with the value verbs.
+- **Parameter metadata.** Jeninnet exposes `ParameterInfo.Should()` with name, exact type, optional/required, default value, `out`/`ref`/`in`/`params`, position, and attribute verbs. AA's attribute-only `ParameterInfoAssertions` maps directly for decoration checks; the broader metadata verbs are Jeninnet-specific.
 - **Jeninnet-specific areas.** Localization, the deterministic clock, IO test infrastructure, allocation assertions, and snapshot v2 have no FA/AA counterpart to migrate from.
 - **Licensing.** Keep the license of the library you remove in review notes: Shouldly BSD-3-Clause, NFluent and AA Apache-2.0, FA 7.x and earlier Apache-2.0, FA 8+ Xceed Community/commercial, Jeninnet MIT.
 

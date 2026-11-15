@@ -136,6 +136,9 @@ jobs:
               --output ${{ env.PACKAGES_DIR }}
           done
 
+      - name: Verify package contents and symbols
+        run: pwsh scripts/release/verify-package.ps1
+
       # ---------------------------------------------------------
       # 7) Upload and Publish
       # ---------------------------------------------------------

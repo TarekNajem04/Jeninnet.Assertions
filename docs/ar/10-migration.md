@@ -172,7 +172,7 @@ AwesomeAssertions (AA) شوكة مجتمعية من FluentAssertions (FA). وAA 
 
 - **الحزمة ومساحة الأسماء.** كان AA 8.x بديلًا مباشرًا يحتفظ بمساحة اسم <code dir="ltr">FluentAssertions</code> واسم التجميع نفسه. أما AA 9 فغيّر كليهما إلى <code dir="ltr">AwesomeAssertions</code>. في الحالتين استبدل <code dir="ltr">using</code> بـ<code dir="ltr">using Jeninnet.Assertions;</code>.
 - **بيانات الامتداد.** يملك AA <code dir="ltr">[CustomAssertion]</code> على الطرق، و<code dir="ltr">[CustomAssertions]</code> على الأصناف، و<code dir="ltr">[CustomAssertionsAssembly]</code> على التجميعات. ويملك Jeninnet <code dir="ltr">[CustomAssertion]</code> و<code dir="ltr">[CustomAssertionsAssembly]</code>؛ ولا يوجد مقابل على مستوى الصنف بعد، فوسم كل طريقة مخصصة.
-- **بيانات المعاملات.** لا يتضمن سطح Jeninnet الحالي عائلة توكيدات مخصصة لـ<code dir="ltr">ParameterInfo</code>؛ وكِّد خصائص <code dir="ltr">ParameterInfo</code> التي تحتاجها بأفعال القيم.
+- **بيانات المعاملات.** يعرض Jeninnet <code dir="ltr">ParameterInfo.Should()</code> بأفعال الاسم والنوع الدقيق والاختياري/الإلزامي والقيمة الافتراضية و<code dir="ltr">out</code>/<code dir="ltr">ref</code>/<code dir="ltr">in</code>/<code dir="ltr">params</code> والموضع والسمات. وتُقابل <code dir="ltr">ParameterInfoAssertions</code> في AA (التي تقتصر على السمات) مباشرةً لفحوص التزيين، أما أفعال البيانات الأوسع فهي خاصة بـJeninnet.
 - **مناطق خاصة بـJeninnet.** التوطين والساعة الحتمية وبنية IO وتوكيدات التخصيص ولقطات v2 لا مقابل لها في FA/AA للهجرة منها.
 - **الترخيص.** احفظ ترخيص المكتبة التي تزيلها في ملاحظات المراجعة: Shouldly BSD-3-Clause، وNFluent وAA Apache-2.0، وFA 7.x وما قبلها Apache-2.0، وFA 8+ Xceed Community/تجاري، وJeninnet MIT.
 
