@@ -77,6 +77,18 @@ public class StringParsingTests {
     }
 
     [TestMethod]
+    public void BeParsableInto_InsideScopeReturnsDefaultAndCollectsFailures() {
+        using var scope = new AssertionScope();
+
+        var invalid = "abc".Should().BeParsableInto<int>();
+        var missing = ((string)null!).Should().BeParsableInto<int>();
+
+        Assert.AreEqual(0, invalid.Which);
+        Assert.AreEqual(0, missing.Which);
+        Assert.AreEqual(2, scope.Discard().Length);
+    }
+
+    [TestMethod]
     public void BeParsableInto_IsLocalizedInArabic() {
         using var _ = new CultureScope("ar");
 

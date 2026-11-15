@@ -96,6 +96,8 @@ public class ArchitectureTests {
         ]);
 
         selector.ThatHaveDependencyOn(InfrastructureNamespace).Should().HaveCount(2);
+        selector.ThatHaveDependencyOn(nameof(InfrastructureFixtures.SqlConnection)).Should().HaveCount(2);
+        selector.ThatHaveDependencyOn(typeof(InfrastructureFixtures.SqlConnection).FullName!).Should().HaveCount(2);
         selector.ThatDoNotHaveDependencyOn(InfrastructureNamespace).Should().HaveCount(2);
         new TypeSelector([typeof(DomainFixtures.MethodOnlyLeak)])
             .ThatHaveDependencyOn(InfrastructureNamespace).Should().HaveCount(0);

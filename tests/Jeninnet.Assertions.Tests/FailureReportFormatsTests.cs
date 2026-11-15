@@ -116,6 +116,21 @@ public class FailureReportFormatsTests {
     }
 
     [TestMethod]
+    public void SeverityNames_NormalizeToSarifAndGitHubLevels() {
+        var note = new AssertionFailure("value", "BoolAssertions", "message", severity: "note");
+        var none = new AssertionFailure("value", "BoolAssertions", "message", severity: "none");
+        var info = new AssertionFailure("value", "BoolAssertions", "message", severity: "info");
+
+        using var sarifNote = JsonDocument.Parse(FailureReport.ToSarif([note]));
+        Assert.AreEqual("note", sarifNote.RootElement.GetProperty("runs")[0].GetProperty("results")[0].GetProperty("level").GetString());
+
+        using var sarifNone = JsonDocument.Parse(FailureReport.ToSarif([none]));
+        Assert.AreEqual("none", sarifNone.RootElement.GetProperty("runs")[0].GetProperty("results")[0].GetProperty("level").GetString());
+
+        Assert.AreEqual("::notice::message", FailureReport.ToGitHubAnnotations([info]));
+    }
+
+    [TestMethod]
     public void GitHubAnnotations_UsesWarningLevelForWarningSeverity() {
         var failure = new AssertionFailure("value", "BoolAssertions", "message", severity: "warning");
 
