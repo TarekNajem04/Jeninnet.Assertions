@@ -263,10 +263,11 @@ Expand any group to see its verbs; every backticked identifier is verified again
 <details>
 <summary><strong>Async sequences</strong> · Should() (net6.0+)</summary>
 
-- `BeEmptyAsync` / `NotBeEmptyAsync`, `HaveCountAsync`
-- `ContainAsync` / `NotContainAsync` (index diagnostics), `ContainInOrderAsync` (search-window diagnostics)
-- `BeEquivalentToAsync` (multiset), `CompleteAsync` (full drain with `Which`)
-- Every verb is cancellation-token-aware
+- `BeEmptyAsync` / `NotBeEmptyAsync`, `HaveCountAsync`, and count bounds (`HaveCountGreaterThanAsync`, `HaveCountGreaterThanOrEqualToAsync`, `HaveCountLessThanAsync`, `HaveCountLessThanOrEqualToAsync`)
+- `AllAsync` / `AnyAsync` (early stop), `ContainSingleAsync` (+predicate, `Which`), `OnlyHaveUniqueItemsAsync`
+- `ContainAsync` / `NotContainAsync` (index diagnostics), `ContainInOrderAsync` / `NotContainInOrderAsync`, `ContainInConsecutiveOrderAsync` (contiguous window)
+- `BeEquivalentToAsync` (multiset), `SatisfyRespectivelyAsync` / `SatisfyAsync` (one awaited inspector/predicate per item), `CompleteAsync` (full drain with `Which`)
+- Every verb is cancellation-token-aware and enumerates the source once
 
 </details>
 

@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- `IAsyncEnumerable<T>` parity: `AllAsync` / `AnyAsync` (early stop), `ContainSingleAsync`
+  (+predicate, `Which`), `OnlyHaveUniqueItemsAsync`, `ContainInConsecutiveOrderAsync`,
+  `NotContainInOrderAsync`, count bounds (`>`, `>=`, `<`, `<=`), and
+  `SatisfyRespectivelyAsync` / `SatisfyAsync`; every verb is cancellation-aware and
+  enumerates the source exactly once.
 - `char` assertions (`Be` / `NotBe`, Unicode categories, casing, ASCII, with negatives) and
   `ParameterInfo` assertions (name, exact type, optional/required, explicit default values,
   `out`/`ref`/`in`/`params`, position, attributes, null handling), both localized and covered by

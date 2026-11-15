@@ -168,11 +168,28 @@ await stream.Should().HaveCountAsync(3);
 await stream.Should().ContainAsync(item);
 await stream.Should().NotContainAsync(item);                 // يسمّي الإخفاق الفهرس
 await stream.Should().ContainInOrderAsync([first, third]);   // تسمح بفجوات؛ ويسمّي الإخفاق نافذة البحث
+await stream.Should().NotContainInOrderAsync([first, third]); // يفشل عند وجود التتابع المرتّب
+await stream.Should().ContainInConsecutiveOrderAsync([a, b]); // نافذة متتالية
 await stream.Should().BeEquivalentToAsync([a, b, a]);        // مجموعة متعددة: يُتجاهل الترتيب وتُحتسب التكرارات
+await stream.Should().AllAsync(item => item > 0);            // يتوقف عند أول عنصر مخالف
+await stream.Should().AnyAsync(item => item.IsSpecial);      // يتوقف عند أول مطابقة
+var only = (await stream.Should().ContainSingleAsync()).Which;
+await stream.Should().OnlyHaveUniqueItemsAsync();            // يسمّي العنصر المكرر وفهرسه
+await stream.Should().HaveCountGreaterThanAsync(2);          // وأيضًا >= و< و<=
+await stream.Should().SatisfyRespectivelyAsync([             // مفتش منتظَر واحد لكل عنصر
+    item => IsValidAsync(item),
+    item => IsPersistedAsync(item),
+]);
+await stream.Should().SatisfyAsync([                         // محمول منتظَر واحد لكل عنصر
+    item => Task.FromResult(item.Id > 0),
+    item => Task.FromResult(item.Name.Length > 0),
+]);
 var items = (await stream.Should().CompleteAsync()).Which;   // استنزاف مرة واحدة وكشف العناصر
 ```
 
 </div>
+
+تعدّد العائلة المصدر مرة واحدة لكل فعل. تتوقف <code dir="ltr">AllAsync</code>/<code dir="ltr">AnyAsync</code> مبكرًا؛ وتستهلك أفعال العدّ والتفرد والنافذة والمفتشات المصدر مرة واحدة وتسمّي العنصر أو الفهرس المخالف. وتتطلب <code dir="ltr">SatisfyRespectivelyAsync</code>/<code dir="ltr">SatisfyAsync</code> مفتشًا/محمولًا واحدًا لكل عنصر، وتنتظرها بالترتيب، وتفحص الرمز قبل كل واحد.
 
 رمز ملغى قبل التوكيد يرمي <code dir="ltr">OperationCanceledException</code> فورًا — فالإلغاء لا يُبتلع في إخفاق أبدًا. وفحوص العدّ والتكافؤ تستنزف التسلسل كاملًا، لذا المصادر اللانهائية خارج النطاق (قرار مقصود). والأهم أن دلالات هذه العائلة تحفظ نفس درجات الصرامة التي رأيتها في فصل المجموعات — الترتيب لا يُشترط في التكافؤ، والتكرار يُحتسب، و<code dir="ltr">ContainInOrder</code> تسمح بالفجوات — فقط بوعي غير متزامن: كل فحص يمرر الرمز إلى المنبع حتى يتوقف السحب عند أول طلب إلغاء، ويسمّي موضع الانحراف بالفهرس كي لا تتحول تسلسلة بعشرات العناصر إلى مقارنة عمياء.
 

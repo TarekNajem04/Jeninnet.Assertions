@@ -2722,4 +2722,46 @@
   <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
     <value>[!! þáŕáɱš !!]</value>
   </data>
+  <data name="ASYNC_ENUM_ALL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý íţéɱ óƒ {0} ţó šáţíšƒý ţĥé þŕéðíçáţé, ƀúţ íţéɱ áţ íñðéẋ {1} ðíð ñóţ. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_ANY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ļéášţ óñé íţéɱ šáţíšƒýíñĝ ţĥé þŕéðíçáţé, ƀúţ ñóñé ðíð. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ á šíñĝļé íţéɱ, ƀúţ íţ ŵáš éɱþţý. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ á šíñĝļé íţéɱ šáţíšƒýíñĝ ţĥé þŕéðíçáţé, ƀúţ ñóñé ðíð. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ á šíñĝļé íţéɱ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ á šíñĝļé íţéɱ šáţíšƒýíñĝ ţĥé þŕéðíçáţé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_ONLY_UNIQUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ óñļý úñíqúé íţéɱš, ƀúţ &apos;{1}&apos; ŵáš ŕéþéáţéð áţ íñðéẋ {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_CONSECUTIVE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ţĥé íţéɱš [{1}] íñ çóñšéçúţíṽé óŕðéŕ, ƀúţ ţĥéý ŵéŕé ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ţĥé íţéɱš [{1}] íñ óŕðéŕ, ƀúţ ţĥéý ŵéŕé ƒóúñð. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱóŕé ţĥáñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţ ļéášţ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƒéŵéŕ ţĥáñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţ ɱóšţ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ţĥé íţéɱ áţ íñðéẋ {0} óƒ {1} ţó šáţíšƒý íţš þŕéðíçáţé, ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
 </root>

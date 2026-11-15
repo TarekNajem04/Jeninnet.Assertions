@@ -2720,4 +2720,46 @@
   <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
     <value>params</value>
   </data>
+  <data name="ASYNC_ENUM_ALL" xml:space="preserve">
+    <value>Expected every item of {0} to satisfy the predicate, but item at index {1} did not.</value>
+  </data>
+  <data name="ASYNC_ENUM_ANY" xml:space="preserve">
+    <value>Expected {0} to contain at least one item satisfying the predicate, but none did.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE" xml:space="preserve">
+    <value>Expected {0} to contain a single item, but it was empty.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE_PREDICATE" xml:space="preserve">
+    <value>Expected {0} to contain a single item satisfying the predicate, but none did.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY" xml:space="preserve">
+    <value>Expected {0} to contain a single item, but found {1}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY_PREDICATE" xml:space="preserve">
+    <value>Expected {0} to contain a single item satisfying the predicate, but found {1}.</value>
+  </data>
+  <data name="ASYNC_ENUM_ONLY_UNIQUE" xml:space="preserve">
+    <value>Expected {0} to contain only unique items, but &apos;{1}&apos; was repeated at index {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_CONSECUTIVE" xml:space="preserve">
+    <value>Expected {0} to contain the items [{1}] in consecutive order, but they were not found.</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>Expected {0} not to contain the items [{1}] in order, but they were found.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN" xml:space="preserve">
+    <value>Expected {0} to have more than {1} item(s), but found {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to have at least {1} item(s), but found {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN" xml:space="preserve">
+    <value>Expected {0} to have fewer than {1} item(s), but found {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Expected {0} to have at most {1} item(s), but found {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
+    <value>Expected the item at index {0} of {1} to satisfy its predicate, but it did not.</value>
+  </data>
 </root>

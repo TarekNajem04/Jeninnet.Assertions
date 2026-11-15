@@ -2720,4 +2720,46 @@
   <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
     <value>params</value>
   </data>
+  <data name="ASYNC_ENUM_ALL" xml:space="preserve">
+    <value>المتوقع أن يحقق كل عنصر في {0} الشرط، لكن العنصر عند الفهرس {1} لم يحققه.</value>
+  </data>
+  <data name="ASYNC_ENUM_ANY" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على عنصر واحد على الأقل يحقق الشرط، لكن لا شيء حققه.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على عنصر واحد، لكنه كان فارغًا.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE_PREDICATE" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على عنصر واحد يحقق الشرط، لكن لا شيء حققه.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على عنصر واحد، لكن وُجد {1}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY_PREDICATE" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على عنصر واحد يحقق الشرط، لكن وُجد {1}.</value>
+  </data>
+  <data name="ASYNC_ENUM_ONLY_UNIQUE" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على عناصر فريدة فقط، لكن &apos;{1}&apos; تكرر عند الفهرس {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_CONSECUTIVE" xml:space="preserve">
+    <value>المتوقع أن يحتوي {0} على العناصر [{1}] بترتيب متتالٍ، لكنها لم توجد.</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>المتوقع ألا يحتوي {0} على العناصر [{1}] بالترتيب، لكنها وُجدت.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN" xml:space="preserve">
+    <value>المتوقع أن يملك {0} أكثر من {1} عنصرًا، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع أن يملك {0} {1} عنصرًا على الأقل، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN" xml:space="preserve">
+    <value>المتوقع أن يملك {0} أقل من {1} عنصرًا، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>المتوقع أن يملك {0} {1} عنصرًا على الأكثر، لكن وُجد {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
+    <value>المتوقع أن يحقق العنصر عند الفهرس {0} في {1} الشرط الخاص به، لكنه لم يحققه.</value>
+  </data>
 </root>

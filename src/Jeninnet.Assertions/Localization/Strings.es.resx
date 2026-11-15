@@ -2720,4 +2720,46 @@
   <data name="PARAMETER_MODIFIER_PARAMS" xml:space="preserve">
     <value>params</value>
   </data>
+  <data name="ASYNC_ENUM_ALL" xml:space="preserve">
+    <value>Se esperaba que cada elemento de {0} cumpliera el predicado, pero el elemento del índice {1} no lo hizo.</value>
+  </data>
+  <data name="ASYNC_ENUM_ANY" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera al menos un elemento que cumpliera el predicado, pero ninguno lo hizo.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera un solo elemento, pero estaba vacío.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_NONE_PREDICATE" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera un solo elemento que cumpliera el predicado, pero ninguno lo hizo.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera un solo elemento, pero se encontraron {1}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_SINGLE_MANY_PREDICATE" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera un solo elemento que cumpliera el predicado, pero se encontraron {1}.</value>
+  </data>
+  <data name="ASYNC_ENUM_ONLY_UNIQUE" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera solo elementos únicos, pero &apos;{1}&apos; se repitió en el índice {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_CONSECUTIVE" xml:space="preserve">
+    <value>Se esperaba que {0} contuviera los elementos [{1}] en orden consecutivo, pero no se encontraron.</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>Se esperaba que {0} no contuviera los elementos [{1}] en orden, pero se encontraron.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN" xml:space="preserve">
+    <value>Se esperaba que {0} tuviera más de {1} elemento(s), pero se encontraron {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Se esperaba que {0} tuviera al menos {1} elemento(s), pero se encontraron {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN" xml:space="preserve">
+    <value>Se esperaba que {0} tuviera menos de {1} elemento(s), pero se encontraron {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_COUNT_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>Se esperaba que {0} tuviera como máximo {1} elemento(s), pero se encontraron {2}.</value>
+  </data>
+  <data name="ASYNC_ENUM_SATISFY_PREDICATE" xml:space="preserve">
+    <value>Se esperaba que el elemento del índice {0} de {1} cumpliera su predicado, pero no lo hizo.</value>
+  </data>
 </root>

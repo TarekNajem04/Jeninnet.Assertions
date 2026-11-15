@@ -126,9 +126,26 @@ await stream.Should().HaveCountAsync(3);
 await stream.Should().ContainAsync(item);
 await stream.Should().NotContainAsync(item);                 // failure names the index
 await stream.Should().ContainInOrderAsync([first, third]);   // gaps allowed; failure names the search window
+await stream.Should().NotContainInOrderAsync([first, third]); // fails when the ordered subsequence is present
+await stream.Should().ContainInConsecutiveOrderAsync([a, b]); // contiguous window
 await stream.Should().BeEquivalentToAsync([a, b, a]);        // multiset: order ignored, duplicates counted
+await stream.Should().AllAsync(item => item > 0);            // stops at the first failing item
+await stream.Should().AnyAsync(item => item.IsSpecial);      // stops at the first match
+var only = (await stream.Should().ContainSingleAsync()).Which;
+await stream.Should().OnlyHaveUniqueItemsAsync();            // names the repeated item and index
+await stream.Should().HaveCountGreaterThanAsync(2);          // also >=, <, <=
+await stream.Should().SatisfyRespectivelyAsync([             // one awaited inspector per item
+    item => IsValidAsync(item),
+    item => IsPersistedAsync(item),
+]);
+await stream.Should().SatisfyAsync([                         // one awaited predicate per item
+    item => Task.FromResult(item.Id > 0),
+    item => Task.FromResult(item.Name.Length > 0),
+]);
 var items = (await stream.Should().CompleteAsync()).Which;   // drains once and exposes the items
 ```
+
+The family enumerates the source exactly once per verb. `AllAsync`/`AnyAsync` stop early; the count, single, uniqueness, window, and inspector verbs consume the source once and report the offending item/index. `SatisfyRespectivelyAsync` and `SatisfyAsync` require one inspector/predicate per item, await them in order, and check the token before each one.
 
 A token already canceled before the assertion throws `OperationCanceledException` immediately — cancellation is never swallowed into a failure. Count and equivalence checks drain the sequence, so infinite sources are out of scope (deliberate).
 
