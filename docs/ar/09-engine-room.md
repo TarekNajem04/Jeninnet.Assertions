@@ -357,18 +357,37 @@ dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertio
 
 | السيناريو | المتوسط | المخصَّص |
 |---|---:|---:|
-| <code dir="ltr">Be</code> (int) نجاح / فشل | 3.0 ns / 2.5 μs | 32 B / 664 B |
-| <code dir="ltr">Be</code> (string) نجاح / فشل | 3.3 ns / 3.5 μs | 32 B / 1,160 B |
-| <code dir="ltr">BeTrue</code> نجاح / فشل | 3.9 ns / 2.5 μs | 32 B / 592 B |
-| <code dir="ltr">Contain</code> (string) نجاح | 14.5 ns | 32 B |
-| <code dir="ltr">Contain</code> (collection) نجاح | 10.8 ns | 32 B |
-| <code dir="ltr">HaveCount</code> نجاح | 25.4 ns | 104 B |
-| <code dir="ltr">Throw</code> نجاح | 2.2 μs | 416 B |
-| <code dir="ltr">AssertionScope</code> نجاح | 103–119 ns | 488 B |
-| <code dir="ltr">AssertionScope</code> مع 1 / 10 إخفاقات | 455 ns / 3.0 μs | 1,056 B / 5,496 B |
+| <code dir="ltr">Be</code> (int) نجاح / فشل | 4.3 ns / 2.8 μs | 32 B / 664 B |
+| <code dir="ltr">Be</code> (string) نجاح / فشل | 5.0 ns / 3.2 μs | 32 B / 1,160 B |
+| <code dir="ltr">BeTrue</code> نجاح / فشل | 4.0 ns / 2.5 μs | 32 B / 592 B |
+| <code dir="ltr">Contain</code> (string) نجاح | 14.7 ns | 32 B |
+| <code dir="ltr">Contain</code> (collection) نجاح | 10.9 ns | 32 B |
+| <code dir="ltr">HaveCount</code> نجاح | 24.4 ns | 104 B |
+| <code dir="ltr">Throw</code> نجاح | 2.4 μs | 416 B |
+| <code dir="ltr">AssertionScope</code> نجاح | 116–120 ns | 488 B |
+| <code dir="ltr">AssertionScope</code> مع 1 / 10 إخفاقات | 522 ns / 3.4 μs | 1,056 B / 5,496 B |
 | <code dir="ltr">BeEquivalentTo</code> رسم صغير | 1.9 μs | 3.66 KB |
 | <code dir="ltr">BeEquivalentTo</code> 500 كائنًا | 1.1 ms | 2.25 MB |
 | <code dir="ltr">MatchSnapshot</code> + scrubber (IO ملفات) | 330 μs | 14.9 KB |
+
+قيست مقارنة النظراء في الجلسة نفسها. كل خلية تعني **المتوسط / المخصَّص**:
+
+| السيناريو | Jeninnet | AwesomeAssertions 9.6 | Shouldly 4.3 | NFluent 3.1 |
+|---|---:|---:|---:|---:|
+| <code dir="ltr">Be</code> (int) نجاح | **4.3 ns / 32 B** | 139.7 ns / 808 B | 60.5 ns / 304 B | 155.1 ns / 800 B |
+| <code dir="ltr">Be</code> (int) فشل | **2.8 μs / 664 B** | 139.4 μs / 38.9 KB | 170.2 μs / 41.7 KB | 5.8 μs / 5.4 KB |
+| <code dir="ltr">Be</code> (string) نجاح | **5.0 ns / 32 B** | 154.0 ns / 888 B | 719.0 ns / 992 B | 947.5 ns / 1,856 B |
+| <code dir="ltr">Be</code> (string) فشل | **3.2 μs / 1.16 KB** | 175.5 μs / 42.2 KB | 185.6 μs / 67.0 KB | 7.4 μs / 8.6 KB |
+| <code dir="ltr">BeTrue</code> نجاح | 4.0 ns / 32 B | 121.0 ns / 664 B | **0.9 ns / 0 B** | 89.9 ns / 568 B |
+| <code dir="ltr">Contain</code> (string) نجاح | **14.7 ns / 32 B** | 114.3 ns / 624 B | 31.2 ns / 96 B | 359.5 ns / 1,112 B |
+| <code dir="ltr">HaveCount</code> نجاح | **24.4 ns / 104 B** | 186.9 ns / 1,048 B | 61.8 ns / 304 B | 262.4 ns / 896 B |
+| <code dir="ltr">AssertionScope</code> نجاح | **116 ns / 488 B** | 360 ns / 1,480 B | 125 ns / 496 B¹ | 471 ns / 1,880 B² |
+| <code dir="ltr">AssertionScope</code> فشل | **522 ns / 1.06 KB** | 128.5 μs / 44.9 KB | 515.2 μs / 136.2 KB | 6.4 μs / 5.4 KB² |
+
+¹ لا يملك Shouldly نطاق تجميع؛ يستخدم الصف <code dir="ltr">ShouldSatisfyAllConditions</code> الذي ينفّذ الشرطين ويجمع الإخفاقات.
+² لا يملك NFluent نطاق تجميع؛ يقيس الصف استدعاءَي <code dir="ltr">Check.That</code> متتاليين بفشل سريع، فليس مطابقًا دلاليًا مباشرًا.
+
+في هذا التشغيل كان Jeninnet الأقل متوسطًا وتخصيصًا في معظم السيناريوهات. الاستثناء هو <code dir="ltr">ShouldBeTrue</code> لدى Shouldly (0.9 ns بلا تخصيص) مقابل 4.0 ns لدينا. الفشل يهيمن عليه تنسيق الرسالة في كل المكتبات؛ والأرقام رتبة حجم لا حكم بين أجهزة. صفوف <code dir="ltr">Throw</code> والتكافؤ واللقطات من تشغيل المحرك السابق؛ جدول النظراء من تشغيل 2026-11-15.
 
 زمن اللقطة مذكور سطرًا منفصلًا عمدًا: فهي تنفّذ IO ملفات وليست فعلًا ساخنًا.
 

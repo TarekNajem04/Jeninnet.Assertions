@@ -9,6 +9,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Peer performance benchmarks: `benchmarks/Jeninnet.Assertions.Benchmarks` now measures
+  AwesomeAssertions 9.6.0, Shouldly 4.3.0, and NFluent 3.1.0 on identical hot verbs and scope
+  scenarios, with published mean/allocation tables for success and failure and explicit notes where
+  scope semantics differ. Package references stay in the benchmark project; no core dependency or
+  public API changed.
 - String parsing assertions: `BeParsableInto<T>` (+`Which`) and `NotBeParsableInto<T>` for types implementing
   `IParsable<T>` (net8.0+), with an `IFormatProvider` overload; the provider-less overload parses with the
   invariant culture. A `null` subject fails positive assertions and passes negative ones, and parser

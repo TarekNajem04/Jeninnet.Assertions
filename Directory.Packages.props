@@ -35,5 +35,9 @@
     <PackageVersion Include="SonarAnalyzer.CSharp" Version="10.35.0.4138" />
     <PackageVersion Include="System.Text.Json" Version="10.0.14" />
     <PackageVersion Include="System.Xml.XDocument" Version="4.3.0" />
+    <!-- Peer benchmark packages: referenced only by benchmarks/Jeninnet.Assertions.Benchmarks, never by src/. -->
+    <PackageVersion Include="AwesomeAssertions" Version="9.6.0" />
+    <PackageVersion Include="Shouldly" Version="4.3.0" />
+    <PackageVersion Include="NFluent" Version="3.1.0" />
   </ItemGroup>
 </Project>

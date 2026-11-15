@@ -266,18 +266,37 @@ Measured on Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cor
 
 | Scenario | Mean | Allocated |
 |---|---:|---:|
-| `Be` (int) success / failure | 3.0 ns / 2.5 μs | 32 B / 664 B |
-| `Be` (string) success / failure | 3.3 ns / 3.5 μs | 32 B / 1,160 B |
-| `BeTrue` success / failure | 3.9 ns / 2.5 μs | 32 B / 592 B |
-| `Contain` (string) success | 14.5 ns | 32 B |
-| `Contain` (collection) success | 10.8 ns | 32 B |
-| `HaveCount` success | 25.4 ns | 104 B |
-| `Throw` success | 2.2 μs | 416 B |
-| `AssertionScope` success | 103–119 ns | 488 B |
-| `AssertionScope` with 1 / 10 failures | 455 ns / 3.0 μs | 1,056 B / 5,496 B |
+| `Be` (int) success / failure | 4.3 ns / 2.8 μs | 32 B / 664 B |
+| `Be` (string) success / failure | 5.0 ns / 3.2 μs | 32 B / 1,160 B |
+| `BeTrue` success / failure | 4.0 ns / 2.5 μs | 32 B / 592 B |
+| `Contain` (string) success | 14.7 ns | 32 B |
+| `Contain` (collection) success | 10.9 ns | 32 B |
+| `HaveCount` success | 24.4 ns | 104 B |
+| `Throw` success | 2.4 μs | 416 B |
+| `AssertionScope` success | 116–120 ns | 488 B |
+| `AssertionScope` with 1 / 10 failures | 522 ns / 3.4 μs | 1,056 B / 5,496 B |
 | `BeEquivalentTo` small graph | 1.9 μs | 3.66 KB |
 | `BeEquivalentTo` 500 objects | 1.1 ms | 2.25 MB |
 | `MatchSnapshot` + scrubber (file IO) | 330 μs | 14.9 KB |
+
+The peer comparison was measured in the same session. Each cell is **mean / allocated**:
+
+| Scenario | Jeninnet | AwesomeAssertions 9.6 | Shouldly 4.3 | NFluent 3.1 |
+|---|---:|---:|---:|---:|
+| `Be` (int) success | **4.3 ns / 32 B** | 139.7 ns / 808 B | 60.5 ns / 304 B | 155.1 ns / 800 B |
+| `Be` (int) failure | **2.8 μs / 664 B** | 139.4 μs / 38.9 KB | 170.2 μs / 41.7 KB | 5.8 μs / 5.4 KB |
+| `Be` (string) success | **5.0 ns / 32 B** | 154.0 ns / 888 B | 719.0 ns / 992 B | 947.5 ns / 1,856 B |
+| `Be` (string) failure | **3.2 μs / 1.16 KB** | 175.5 μs / 42.2 KB | 185.6 μs / 67.0 KB | 7.4 μs / 8.6 KB |
+| `BeTrue` success | 4.0 ns / 32 B | 121.0 ns / 664 B | **0.9 ns / 0 B** | 89.9 ns / 568 B |
+| `Contain` (string) success | **14.7 ns / 32 B** | 114.3 ns / 624 B | 31.2 ns / 96 B | 359.5 ns / 1,112 B |
+| `HaveCount` success | **24.4 ns / 104 B** | 186.9 ns / 1,048 B | 61.8 ns / 304 B | 262.4 ns / 896 B |
+| `AssertionScope` success | **116 ns / 488 B** | 360 ns / 1,480 B | 125 ns / 496 B¹ | 471 ns / 1,880 B² |
+| `AssertionScope` failure | **522 ns / 1.06 KB** | 128.5 μs / 44.9 KB | 515.2 μs / 136.2 KB | 6.4 μs / 5.4 KB² |
+
+¹ Shouldly has no aggregating scope; the row uses `ShouldSatisfyAllConditions`, which evaluates both conditions and aggregates failures.
+² NFluent has no aggregating scope; the row measures two sequential fail-fast `Check.That` statements, so it is not a direct semantic match.
+
+In this run Jeninnet had the lowest mean and allocation in most scenarios. The exception is Shouldly's allocation-free `ShouldBeTrue` (0.9 ns), which is faster than Jeninnet's 4.0 ns. Failures are dominated by message formatting in every library; the numbers are order-of-magnitude, not a cross-machine verdict. `Throw`, equivalency, and snapshot rows are from the earlier engine run; the peer table is the 2026-11-15 run.
 
 Snapshot timing is deliberately included as a separate line: it performs file IO and is not a hot verb.
 
