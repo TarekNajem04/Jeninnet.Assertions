@@ -69,7 +69,7 @@ src/Jeninnet.Assertions/Localization/Strings.resx
 → src/Jeninnet.Assertions/Localization/Strings.<culture>.resx
 ```
 
-2. Translate the `<value>` entries. Translate any subset — untranslated keys fall back to the neutral English text automatically, so a satellite can grow over time. Keep the `{0}`, `{1}`, … placeholders and leave formatted values (`true`, numbers, dates) untouched, so failure messages stay byte-comparable.
+2. Translate the `<value>` entries. Shipped languages must be key-complete; `check-localization.ps1` enforces missing/extra/empty keys (the French reference satellite is explicitly allowlisted as partial). Keep the `{0}`, `{1}`, … placeholders and leave formatted values (`true`, numbers, dates) untouched, so failure messages stay byte-comparable.
 3. Build. The SDK emits the satellite assembly (`Strings.<culture>.resources.dll`) with no further wiring.
 
 Read translated templates for custom reporting through the public reader:
@@ -80,7 +80,7 @@ var template = AssertionCulture.GetMessage("BOOLEAN_BE_TRUE");       // localize
 var message = AssertionCulture.FormatMessage("BOOLEAN_BE_TRUE", "flag"); // invariant formatting
 ```
 
-English is the neutral resource; Arabic (`ar`) ships complete, and French (`fr`) is a partial reference satellite that demonstrates per-key fallback for the entries it does not translate.
+English is the neutral resource; Arabic (`ar`), Spanish (`es`), and German (`de`) ship complete. French (`fr`) is a partial reference satellite that demonstrates per-key fallback for the entries it does not translate. `qps-ploc` is a committed pseudo-localization used to detect hardcoded text. The completion gate is `pwsh scripts/docs/check-localization.ps1`; it fails on missing/extra/empty keys (the French reference satellite is explicitly allowlisted as partial), and [CONTRIBUTING.md](../../CONTRIBUTING.md#translation-guide) carries the translator guide.
 
 ## 9.3 Formatters: Teach the library how to display your types
 

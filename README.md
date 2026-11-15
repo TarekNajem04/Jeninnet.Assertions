@@ -128,8 +128,10 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
   pluggable failure routing (`AssertionScope(IAssertionStrategy)`) and a `Given(selector)` chain
   (`ForCondition`/`Given`/`FailWith`) for conditional multi-step checks.
 - **Localization as a product** — `AssertionCulture.Current` selects the failure-message language (English
-  neutral, Arabic complete, French reference satellite); a public `AssertionCulture.GetMessage`/`FormatMessage`
-  reader exposes localized templates, and new languages are drop-in `.resx` files with per-key English fallback.
+  neutral, Arabic/Spanish/German complete, French reference satellite, `qps-ploc` pseudo-locale for
+  hardcoded-text detection); a public `AssertionCulture.GetMessage`/`FormatMessage` reader exposes
+  localized templates, new languages are drop-in `.resx` files with per-key English fallback, and
+  `scripts/docs/check-localization.ps1` enforces key completeness.
 - **Deterministic clocks** — `AssertionClock.Current` injects an `IClock` (default `SystemClock`) into every
   time-relative verb (`BeWithin`, `BeLessThan`, `BeMoreThan`, `BeAtLeast`), so boundary tests are exact and
   sleep-free; a ready-made `ManualClock` covers the common case (advance/set, thread-safe) and
@@ -446,7 +448,7 @@ AssertionCulture.Current = new CultureInfo("ar");
 flag.Should().BeTrue(); // المتوقع من flag أن يكون true، لكن وُجد false.
 ```
 
-Arguments (values, counts, sizes) are always formatted invariantly, so messages stay byte-stable across machines; only the surrounding prose is translated. Unknown cultures fall back to English. Adding a language requires no code change: copy `src/.../Localization/Strings.resx` to `Strings.<culture>.resx`, translate the values, and the build produces the satellite assembly automatically. The `because` glue word and multi-failure scope headers are localized too.
+Arguments (values, counts, sizes) are always formatted invariantly, so messages stay byte-stable across machines; only the surrounding prose is translated. Arabic (`ar`), Spanish (`es`), and German (`de`) ship complete; French (`fr`) is a partial reference satellite and `qps-ploc` is a committed pseudo-locale for detecting hardcoded text. Fallback is automatic (`es-ES` → `es` → English, `ar-EG` → `ar` → English). Adding a language requires no code change: copy `src/.../Localization/Strings.resx` to `Strings.<culture>.resx`, translate the values, and run `pwsh scripts/docs/check-localization.ps1`; the [translation guide](CONTRIBUTING.md#translation-guide) lists the rules and terminology. The `because` glue word and multi-failure scope headers are localized too.
 
 ## Formatting limits and custom assertions
 

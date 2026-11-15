@@ -54,7 +54,7 @@
   <data name="NUMERIC_APPROXIMATE" xml:space="preserve">
     <value>Attendu que {0} soit proche de {1} (±{2}), mais trouvé {3}.</value>
   </data>
-  <data name="NUMERIC_NOT_BE_APPROXIMATE" xml:space="preserve">
+  <data name="NUMERIC_NOT_APPROXIMATE" xml:space="preserve">
     <value>Attendu que {0} ne soit pas proche de {1} (±{2}), mais trouvé {3}.</value>
   </data>
   <data name="NUMERIC_BE_NAN" xml:space="preserve">

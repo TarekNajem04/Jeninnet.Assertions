@@ -89,6 +89,40 @@ The project follows modern .NET engineering practices including:
 
 Any future code contributions will be expected to satisfy these requirements.
 
+## Translation Guide
+
+Failure messages live in `src/Jeninnet.Assertions/Localization/`. Adding a language requires **no code change**:
+
+1. Copy `Strings.resx` to `Strings.<culture>.resx` (for example `Strings.es.resx`).
+2. Translate only the `<value>` text. Keep every `<data name="...">` key exactly as-is.
+3. Preserve every placeholder exactly: `{0}`, `{1}`, … including order and braces.
+4. Do not translate parameter names, member/type names, or technical tokens inside placeholders. Code-like literals such as `null`, `true`/`false`, `NaN`, `JSON`, `XML`, `HTTP`, and `URI` normally stay unchanged.
+5. Run the completion gate:
+
+   ```powershell
+   pwsh scripts/docs/check-localization.ps1
+   ```
+
+   It reports `culture, missing, extra, empty` and fails on missing/extra keys or empty values. The French reference satellite is intentionally partial and is allowlisted; every other language must be complete.
+6. Run the full test suite. Fallback is automatic: `es-ES` → `es` → English, `ar-EG` → `ar` → English, and so on.
+
+### Terminology
+
+| English | Arabic | Spanish | German |
+|---|---|---|---|
+| assertion | توكيد | aserción | Assertion |
+| expected | المتوقع | esperado | erwartet |
+| actual | الفعلي | real | tatsächlich |
+| because | لأن | porque | weil |
+| scope | نطاق | ámbito | Bereich |
+
+### Rules
+
+- **No unreviewed machine translation.** A native or fluent reviewer should approve the file before release.
+- Translate the `because` glue (`MESSAGE_BECAUSE`) and the scope header (`SCOPE_ASSERTION_FAILURES`); they are user-facing text.
+- Guard exceptions (`ArgumentNullException` and friends) stay in English by design.
+- `Strings.qps-ploc.resx` is a commit-time pseudo-localization used to detect hardcoded text; it is shipped as a testing aid and is not a user language.
+
 ## Future Contributor Program
 
 External source-code contributions are planned for a future phase of the project.

@@ -73,6 +73,10 @@ jobs:
         shell: pwsh
         run: pwsh scripts/docs/check-doc-parity.ps1
 
+      - name: Check localization completeness
+        shell: pwsh
+        run: pwsh scripts/docs/check-localization.ps1
+
       - name: Check README claims
         shell: pwsh
         run: pwsh scripts/docs/check-readme-claims.ps1

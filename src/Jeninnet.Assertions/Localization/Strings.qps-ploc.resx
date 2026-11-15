@@ -1,0 +1,2614 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    to represent .NET resources.
+
+    The particular data format is defined as follows:
+
+    <xsd:schema> ... </xsd:schema>
+    <resheader name="resmimetype"> ... </resheader>
+    <resheader name="version"> ... </resheader>
+    <resheader name="reader"> ... </resheader>
+    <resheader name="writer"> ... </resheader>
+    <assembly alias="System.Windows.Forms" name="System.Windows.Forms, ..." />
+    <data name="myObject"> ... </data>
+    <data name="myString"> ... </data>
+    <data name="myBlob"> ... </data>
+  -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţŕúé, ƀúţ ƒóúñð ƒáļšé. !!]</value>
+  </data>
+  <data name="BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƒáļšé, ƀúţ ƒóúñð ţŕúé. !!]</value>
+  </data>
+  <data name="BOOLEAN_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="BOOLEAN_IMPLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó íɱþļý {1}, ƀúţ {2} ðóéš ñóţ íɱþļý {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_TRUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţŕúé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_TRUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ţŕúé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_FALSE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƒáļšé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_FALSE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ƒáļšé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_BOOLEAN_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="NUMERIC_BE_POSITIVE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé þóšíţíṽé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NUMERIC_BE_NEGATIVE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñéĝáţíṽé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NUMERIC_APPROXIMATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áþþŕóẋíɱáţé {1} (±{2}), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="NUMERIC_NOT_APPROXIMATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó áþþŕóẋíɱáţé {1} (±{2}), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="NUMERIC_BE_NAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ÑáÑ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NUMERIC_NOT_BE_NAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ÑáÑ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝŕéáţéŕ ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝŕéáţéŕ ţĥáñ óŕ éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ óŕ éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_BETWEEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƀéţŵééñ {1} áñð {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ƀéţŵééñ {1} áñð {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_ONE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñé óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ '{1}', ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="NULLABLE_NUMERIC_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_BE_ONE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñé óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ íţ ŵáš ñóţ ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_BE_EMPTY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ íţ ŵáš éɱþţý. !!]</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ óŕ ŵĥíţéšþáçé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_WHITESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ óŕ ŵĥíţéšþáçé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_HAVE_LENGTH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_HAVE_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð {2} ŵíţĥ ļéñĝţĥ {3}. !!]</value>
+  </data>
+  <data name="STRING_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð {2} ŵíţĥ ļéñĝţĥ {1}. !!]</value>
+  </data>
+  <data name="STRING_BE_UPPER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé úþþéŕ çášéð, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_UPPER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé úþþéŕ çášéð, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_BE_LOWER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļóŵéŕ çášéð, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_LOWER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ļóŵéŕ çášéð, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_TIMES_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} {2}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_TIMES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_ALL_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áļļ óƒ ţĥé ĝíṽéñ šţŕíñĝš, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_ALL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ áļļ óƒ ţĥé ĝíṽéñ šţŕíñĝš, ƀúţ áļļ óƒ ţĥéɱ ŵéŕé ƒóúñð. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_ANY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ļéášţ óñé óƒ {1}, {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_ANY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ áñý óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éǫúíṽáļéñţ óƒ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_TIMES_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éǫúíṽáļéñţ óƒ {1} {2}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_EQUIVALENT_TIMES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éǫúíṽáļéñţ óƒ {1} {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_START_WITH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_START_WITH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_START_WITH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó šţáŕţ ŵíţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_START_WITH_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_START_WITH_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_START_WITH_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó šţáŕţ ŵíţĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_END_WITH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_END_WITH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_END_WITH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éñð ŵíţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_END_WITH_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_END_WITH_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_END_WITH_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éñð ŵíţĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ {1}, {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ɱáţçĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_MATCH_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ éǫúíṽáļéñţ óƒ {1}, {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_MATCH_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ɱáţçĥ éǫúíṽáļéñţ óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ ŕéĝéẋ {1}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_MATCH_REGEX" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ ŕéĝéẋ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_TIMES_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ ŕéĝéẋ {1} {2}, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_MATCH_REGEX_TIMES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ ŕéĝéẋ {1} {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="STRING_NOT_MATCH_REGEX" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ɱáţçĥ ŕéĝéẋ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_MORE_THAN_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ɱóŕé ţĥáñ {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_MORE_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ɱóŕé ţĥáñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_LEAST_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ļéášţ {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_LEAST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ļéášţ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_FEWER_THAN_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ƒéŵéŕ ţĥáñ {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_FEWER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ƒéŵéŕ ţĥáñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_MOST_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ɱóšţ {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_AT_MOST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ɱóšţ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ţĥé šáɱé çóúñţ áš ţĥé éẋþéçţéð çóļļéçţíóñ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="STRING_COLLECTION_ALL_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áļļ íţéɱš ƀé '{1}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_COLLECTION_ALL_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áļļ íţéɱš ƀé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="STRING_COLLECTION_CONTAIN_MATCH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ ɱáţçĥíñĝ '{1}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_COLLECTION_CONTAIN_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ ɱáţçĥíñĝ '{1}', ƀúţ ñóñé ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="STRING_COLLECTION_NOT_CONTAIN_MATCH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ñó íţéɱ ɱáţçĥíñĝ '{1}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_COLLECTION_NOT_CONTAIN_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ñó íţéɱ ɱáţçĥíñĝ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_PREDICATE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_PREDICATE_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ ñóñé ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ITEM_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ '{1}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ITEM_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ONLY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ óñļý ɱáţçĥíñĝ íţéɱš, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ONLY_OFFENDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ óñļý ɱáţçĥíñĝ íţéɱš, ƀúţ ƒóúñð '{1}'. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_SINGLE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éẋáçţļý óñé íţéɱ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_SINGLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éẋáçţļý óñé íţéɱ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUAL_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_START_WITH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_END_WITH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_IN_ORDER_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ íţéɱš íñ óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_IN_ORDER_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ '{1}' íñ óŕðéŕ, ƀúţ íţ ŵáš ñóţ ƒóúñð íñ šéǫúéñçé. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ñóñ-ñúļļ ášýñç šéǫúéñçé, ƀúţ íţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ íţ ŵáš éɱþţý. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_HAVE_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_NOT_CONTAIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ '{1}', ƀúţ ƒóúñð íţ áţ íñðéẋ {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_CONTAIN_IN_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ '{1}' íñ óŕðéŕ, ƀúţ íţ ŵáš ñóţ ƒóúñð áţ óŕ áƒţéŕ íñðéẋ {2}. !!]</value>
+  </data>
+  <data name="ASYNC_ENUM_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ ţó ţĥé éẋþéçţéð íţéɱš, ƀúţ ñó ɱáţçĥ ŵáš ƒóúñð ƒóŕ '{1}'. !!]</value>
+  </data>
+  <data name="MATCH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúççéššƒúļ ɱáţçĥ, ƀúţ ţĥé ɱáţçĥ íš ñúļļ. !!]</value>
+  </data>
+  <data name="MATCH_SUCCEED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúççéššƒúļ ɱáţçĥ, ƀúţ íţ ƒáíļéð. !!]</value>
+  </data>
+  <data name="MATCH_HAVE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="MATCH_HAVE_VALUE_FAILED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ '{1}', ƀúţ ţĥé ɱáţçĥ ƒáíļéð. !!]</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĝŕóúþ '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĝŕóúþ '{1}', ƀúţ íţ ðóéš ñóţ éẋíšţ (áṽáíļáƀļé: {2}). !!]</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_FAILED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĝŕóúþ '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ţĥé ɱáţçĥ ƒáíļéð. !!]</value>
+  </data>
+  <data name="MATCH_HAVE_GROUP_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} ĝŕóúþ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_ASCENDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ášçéñðíñĝ óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_DESCENDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ðéšçéñðíñĝ óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_SUBSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúƀšéţ óƒ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_INTERSECT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó íñţéŕšéçţ ŵíţĥ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_INTERSECT_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó íñţéŕšéçţ ŵíţĥ {1}, ƀúţ ñó çóɱɱóñ íţéɱš ŵéŕé ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ íţ ŵáš éɱþţý. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ óŕ éɱþţý, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL_OR_EMPTY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ óŕ éɱþţý, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ óŕ éɱþţý, ƀúţ íţ ŵáš éɱþţý. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_PREDICATE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ çóñţáíñ áñ íţéɱ ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_PREDICATE_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ çóñţáíñ áñ íţéɱ ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ óñé ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ITEM_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ çóñţáíñ '{1}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ITEM_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ çóñţáíñ '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_SUBSET_CHECK_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ţĥé šúƀšéţ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ţĥé šáɱé çóúñţ ({1}) áš ţĥé éẋþéçţéð çóļļéçţíóñ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUIVALENT_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ íñ ţĥé šáɱé óŕðéŕ, ƀúţ íţéɱ áţ íñðéẋ {1} ŵáš '{2}' íñšţéáð óƒ '{3}'. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUIVALENT_CARDINALITY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ, ƀúţ íţéɱ '{1}' ŵáš ƒóúñð {2} ţíɱé(š); éẋþéçţéð {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUAL_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ ƒóúñð {2} íţéɱ(š) íñšţéáð óƒ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUAL_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ íţéɱ áţ íñðéẋ {2} ŵáš '{3}' íñšţéáð óƒ '{4}'. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áþþŕóẋíɱáţéļý éǫúáļ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áþþŕóẋíɱáţéļý éǫúáļ {1}, ƀúţ ƒóúñð {2} íţéɱ(š) íñšţéáð óƒ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_EQUAL_APPROXIMATELY_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áþþŕóẋíɱáţéļý éǫúáļ {1}, ƀúţ íţéɱ áţ íñðéẋ {2} ŵáš '{3}' íñšţéáð óƒ '{4}' ŵíţĥ þŕéçíšíóñ '{5}'. !!]</value>
+  </data>
+  <data name="COLLECTION_START_WITH_SHORT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ {1}, ƀúţ ƒóúñð óñļý {2} íţéɱ(š). !!]</value>
+  </data>
+  <data name="COLLECTION_START_WITH_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šţáŕţ ŵíţĥ {1}, ƀúţ íţéɱ áţ íñðéẋ {2} ŵáš '{3}'. !!]</value>
+  </data>
+  <data name="COLLECTION_END_WITH_SHORT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ {1}, ƀúţ ƒóúñð óñļý {2} íţéɱ(š). !!]</value>
+  </data>
+  <data name="COLLECTION_END_WITH_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éñð ŵíţĥ {1}, ƀúţ íţéɱ áţ íñðéẋ {2} ŵáš '{3}'. !!]</value>
+  </data>
+  <data name="COLLECTION_ASCENDING_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ášçéñðíñĝ óŕðéŕ, ƀúţ ƒóúñð '{1}' áƒţéŕ '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_DESCENDING_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ðéšçéñðíñĝ óŕðéŕ, ƀúţ ƒóúñð '{1}' áƒţéŕ '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_THEN_ASCENDING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥéñ ƀé íñ ášçéñðíñĝ óŕðéŕ, ƀúţ ƒóúñð '{1}' áƒţéŕ '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_THEN_DESCENDING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥéñ ƀé íñ ðéšçéñðíñĝ óŕðéŕ, ƀúţ ƒóúñð '{1}' áƒţéŕ '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="DICT_ASCENDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ášçéñðíñĝ óŕðéŕ, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_DESCENDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ðéšçéñðíñĝ óŕðéŕ, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúƀšéţ óƒ {1}, ƀúţ ƒóúñð '{2}' óúţšíðé óƒ íţ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_SUPERSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúþéŕšéţ óƒ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_SUPERSET" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúþéŕšéţ óƒ {1}, ƀúţ '{2}' ŵáš ɱíššíñĝ ƒŕóɱ íţ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUBSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúƀšéţ óƒ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUBSET_SAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúƀšéţ óƒ {1}, ƀúţ ţĥéý çóñţáíñ ţĥé šáɱé íţéɱš. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUPERSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúþéŕšéţ óƒ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_BE_PROPER_SUPERSET_SAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúþéŕšéţ óƒ {1}, ƀúţ ţĥéý çóñţáíñ ţĥé šáɱé íţéɱš. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_COUNT_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé á çóúñţ šáţíšƒýíñĝ '{1}', ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ éǫúíṽáļéñţ ţó {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ éǫúíṽáļéñţ ţó {1}, ƀúţ ñóñé ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ áñ íţéɱ éǫúíṽáļéñţ ţó {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ áñ íţéɱ éǫúíṽáļéñţ ţó {1}, ƀúţ ƒóúñð óñé. !!]</value>
+  </data>
+  <data name="COLLECTION_SUBSET_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ šúƀšéţ íţéɱ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_INTERSECT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ íñţéŕšéçţ ŵíţĥ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_INTERSECT_SHARED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ íñţéŕšéçţ ŵíţĥ {1}, ƀúţ ƒóúñð šĥáŕéð íţéɱ '{2}'. !!]</value>
+  </data>
+  <data name="COLLECTION_ONLY_UNIQUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ óñļý úñíǫúé íţéɱš, ƀúţ ƒóúñð ðúþļíçáţé '{1}'. !!]</value>
+  </data>
+  <data name="COLLECTION_ONLY_UNIQUE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ óñļý úñíǫúé íţéɱš, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_NULLS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ñó ñúļļ íţéɱš, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_NULLS_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ñó ñúļļ íţéɱš, ƀúţ ƒóúñð ñúļļ áţ íñðéẋ {1}. !!]</value>
+  </data>
+  <data name="COLLECTION_CONSECUTIVE_ORDER_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íñ çóñšéçúţíṽé óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONSECUTIVE_ORDER_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íñ çóñšéçúţíṽé óŕðéŕ, ƀúţ ţĥé šéǫúéñçé ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' áţ íñðéẋ {2}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_SHORT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' áţ íñðéẋ {2}, ƀúţ ƒóúñð óñļý {3} íţéɱ(š). !!]</value>
+  </data>
+  <data name="COLLECTION_ELEMENT_AT_MISMATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' áţ íñðéẋ {2}, ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="ACTION_THROW_WRONG" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ {1}, ƀúţ {2} ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_THROW_NONE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ {1}, ƀúţ ñó éẋçéþţíóñ ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_NOT_HONORED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥóñóŕ çáñçéļļáţíóñ, ƀúţ íţ çóɱþļéţéð ŵíţĥóúţ ţĥŕóŵíñĝ ÓþéŕáţíóñÇáñçéļéðÉẋçéþţíóñ. !!]</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_WRONG_TOKEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥóñóŕ çáñçéļļáţíóñ, ƀúţ íţ ţĥŕéŵ ÓþéŕáţíóñÇáñçéļéðÉẋçéþţíóñ ŵíţĥ á ðíƒƒéŕéñţ çáñçéļļáţíóñ ţóķéñ. !!]</value>
+  </data>
+  <data name="ACTION_HONOR_CANCELLATION_WRONG_EXCEPTION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥóñóŕ çáñçéļļáţíóñ, ƀúţ íţ ţĥŕéŵ {1} íñšţéáð óƒ ÓþéŕáţíóñÇáñçéļéðÉẋçéþţíóñ. !!]</value>
+  </data>
+  <data name="ACTION_COMPLETE_DESPITE_CANCELLATION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóɱþļéţé ðéšþíţé çáñçéļļáţíóñ, ƀúţ íţ ŵáš çáñçéļéð. !!]</value>
+  </data>
+  <data name="ACTION_COMPLETE_DESPITE_CANCELLATION_THREW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóɱþļéţé ðéšþíţé çáñçéļļáţíóñ, ƀúţ íţ ţĥŕéŵ {1}. !!]</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_FAILURES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţĥŕéáð-šáƒé, ƀúţ {1} óƒ {2} çóþíéš ƒáíļéð: !!]</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_ENTRY" xml:space="preserve">
+    <value>[!! {0}. {1} (çóþíéš: {2}). !!]</value>
+  </data>
+  <data name="ACTION_THREAD_SAFE_TIMEOUT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţĥŕéáð-šáƒé, ƀúţ {1} óƒ {2} çóþíéš ðíð ñóţ çóɱþļéţé ŵíţĥíñ {3} (á ðéáðļóçķ óŕ áñ úñƀóúñðéð ŵáíţ). !!]</value>
+  </data>
+  <data name="ACTION_THROW_EXACTLY_WRONG" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ éẋáçţļý {1}, ƀúţ {2} ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_THROW_EXACTLY_NONE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ éẋáçţļý {1}, ƀúţ ñó éẋçéþţíóñ ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_NOT_THROW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ţĥŕóŵ, ƀúţ {1} ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_NOT_THROW_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ţĥŕóŵ ŵíţĥíñ {1}, ƀúţ {2} ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_NONE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ {1} ŵíţĥíñ {2}, ƀúţ ñó éẋçéþţíóñ ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_WRONG" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ {1} ŵíţĥíñ {2}, ƀúţ {3} ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="ACTION_THROW_WITHIN_TIMEOUT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ţĥŕóŵ {1} ŵíţĥíñ {2}, ƀúţ íţ ðíð ñóţ çóɱþļéţé íñ ţíɱé. !!]</value>
+  </data>
+  <data name="ACTION_SUCCEED_WITHIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šúççééð ŵíţĥíñ {1}, ƀúţ íţ ķéþţ ƒáíļíñĝ: {2}. !!]</value>
+  </data>
+  <data name="ACTION_ALLOCATE_AT_MOST_THREW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áļļóçáţé áţ ɱóšţ {1}, ƀúţ íţ ţĥŕéŵ {2}. !!]</value>
+  </data>
+  <data name="ACTION_ALLOCATE_AT_MOST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áļļóçáţé áţ ɱóšţ {1}, ƀúţ áļļóçáţéð {2}. !!]</value>
+  </data>
+  <data name="ACTION_ALLOCATE_LESS_THAN_THREW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áļļóçáţé ļéšš ţĥáñ {1}, ƀúţ íţ ţĥŕéŵ {2}. !!]</value>
+  </data>
+  <data name="ACTION_ALLOCATE_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó áļļóçáţé ļéšš ţĥáñ {1}, ƀúţ áļļóçáţéð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_SAME_DATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñ ţĥé šáɱé ðáţé áš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_SAME_DATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé óñ ţĥé šáɱé ðáţé áš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƀéƒóŕé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ƀéƒóŕé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_ON_OR_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñ óŕ ƀéƒóŕé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áƒţéŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áƒţéŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_ON_OR_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñ óŕ áƒţéŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_CLOSE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé çļóšé ţó {1} (±{2}), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_CLOSE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé çļóšé ţó {1} (±{2}), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_YEAR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ýéáŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_MONTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱóñţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_DAY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ðáý {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_HOUR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĥóúŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_MINUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱíñúţé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_SECOND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šéçóñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_MILLISECOND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱíļļíšéçóñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="TIMESPAN_BE_POSITIVE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé þóšíţíṽé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TIMESPAN_BE_NEGATIVE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñéĝáţíṽé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TIMESPAN_BE_GREATER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝŕéáţéŕ ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝŕéáţéŕ ţĥáñ óŕ éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_BE_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ óŕ éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_HAVE_DAYS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ðáýš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_HAVE_HOURS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĥóúŕš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_HAVE_MINUTES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱíñúţéš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_HAVE_SECONDS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šéçóñðš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_HAVE_MILLISECONDS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱíļļíšéçóñðš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TIMESPAN_HAVE_TICKS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ţíçķš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_METHOD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱéţĥóð '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þŕóþéŕţý '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_CONSTRUCTOR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñšţŕúçţóŕ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_METHOD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ɱéţĥóð '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé þŕóþéŕţý '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_BE_SEALED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šéáļéð, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_SEALED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé šéáļéð, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_BE_ABSTRACT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áƀšţŕáçţ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_ABSTRACT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áƀšţŕáçţ, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áššíĝñáƀļé ţó {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áššíĝñáƀļé ţó {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1} óŕ íñĥéŕíţ íţ, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} áççéššíƀíļíţý, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_SEALED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šéáļéð, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_ABSTRACT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áƀšţŕáçţ, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="TYPE_BE_KIND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ķíñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_KIND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ķíñð {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_BE_SAME_AS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţĥé šáɱé íñšţáñçé áš {1}, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_SAME_AS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ţĥé šáɱé íñšţáñçé áš {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_BE_ASSIGNABLE_FROM" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áššíĝñáƀļé ƒŕóɱ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_BE_SUBCLASS_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúƀçļášš óƒ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_BE_BASE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ƀášé ţýþé óƒ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñáɱé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_FULL_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƒúļļ ñáɱé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ñáɱéšþáçé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_BASE_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƀášé ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_GENERIC_PARAMETER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} ĝéñéŕíç þáŕáɱéţéŕ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_GENERIC_PARAMETER_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ðéçļáŕé á ĝéñéŕíç þáŕáɱéţéŕ ñáɱéð '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1} ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="ARCH_BE_PUBLIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ƀé þúƀļíç, ƀúţ {0} ţýþé(š) áŕé ñóţ: {1}. !!]</value>
+  </data>
+  <data name="ARCH_BE_INTERNAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ƀé íñţéŕñáļ, ƀúţ {0} ţýþé(š) áŕé ñóţ: {1}. !!]</value>
+  </data>
+  <data name="ARCH_BE_NESTED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ƀé ñéšţéð, ƀúţ {0} ţýþé(š) áŕé ñóţ: {1}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_BE_NESTED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ñó šéļéçţéð ţýþé ţó ƀé ñéšţéð, ƀúţ {0} ţýþé(š) áŕé: {1}. !!]</value>
+  </data>
+  <data name="ARCH_BE_RECORD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ƀé á ŕéçóŕð, ƀúţ {0} ţýþé(š) áŕé ñóţ: {1}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_BE_RECORD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ñó šéļéçţéð ţýþé ţó ƀé á ŕéçóŕð, ƀúţ {0} ţýþé(š) áŕé: {1}. !!]</value>
+  </data>
+  <data name="ARCH_BE_IMMUTABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó ƀé íɱɱúţáƀļé, ƀúţ {0} ţýþé(š) éẋþóšé ɱúţáƀļé þúƀļíç šţáţé: {1}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_BE_IMMUTABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ñó šéļéçţéð ţýþé ţó ƀé íɱɱúţáƀļé, ƀúţ {0} ţýþé(š) áŕé: {1}. !!]</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_STARTING_WITH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ñáɱé ţó šţáŕţ ŵíţĥ '{0}', ƀúţ {1} ţýþé(š) ðó ñóţ: {2}. !!]</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_ENDING_WITH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ñáɱé ţó éñð ŵíţĥ '{0}', ƀúţ {1} ţýþé(š) ðó ñóţ: {2}. !!]</value>
+  </data>
+  <data name="ARCH_HAVE_NAME_MATCHING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ñáɱé ţó ɱáţçĥ '{0}', ƀúţ {1} ţýþé(š) ðó ñóţ: {2}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_DEPEND_ON" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ñó šéļéçţéð ţýþé ţó ðéþéñð óñ '{0}', ƀúţ {1} ţýþé(š) ðó: {2}. !!]</value>
+  </data>
+  <data name="ARCH_ONLY_DEPEND_ON" xml:space="preserve">
+    <value>[!! Éẋþéçţéð šéļéçţéð ţýþéš ţó ðéþéñð óñļý óñ [{0}], ƀúţ {1} ţýþé(š) ĥáṽé óţĥéŕ ðéþéñðéñçíéš: {2}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_DEPEND_ON_ANY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ñó šéļéçţéð ţýþé ţó ðéþéñð óñ áñý óƒ [{0}], ƀúţ {1} ţýþé(š) ðó: {2}. !!]</value>
+  </data>
+  <data name="ARCH_HAVE_NO_CYCLES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ţĥé šéļéçţéð ţýþéš ţó ĥáṽé ñó ðéþéñðéñçý çýçļéš, ƀúţ ƒóúñð {0} çýçļé(š): {1}. !!]</value>
+  </data>
+  <data name="ARCH_MORE_OFFENDERS" xml:space="preserve">
+    <value>[!! … áñð {0} ɱóŕé !!]</value>
+  </data>
+  <data name="ARCH_ONLY_PUBLIC_MEMBERS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éṽéŕý šéļéçţéð ţýþé ţó éẋþóšé óñļý þúƀļíç óŕ þŕíṽáţé ɱéɱƀéŕš, ƀúţ {0} ţýþé(š) ðó ñóţ: {1}. !!]</value>
+  </data>
+  <data name="ARCH_NOT_EXPOSE_TYPES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð šéļéçţéð ţýþéš ñóţ ţó éẋþóšé áñý óƒ [{0}] íñ ţĥéíŕ þúƀļíç ÁÞÍ, ƀúţ {1} ţýþé(š) ðó: {2}. !!]</value>
+  </data>
+  <data name="METHOD_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ŕéţúŕñ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="METHOD_HAVE_PARAMETER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þáŕáɱéţéŕ '{1}' óƒ ţýþé {2}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="METHOD_BE_VIRTUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ṽíŕţúáļ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="METHOD_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šţáţíç, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="METHOD_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="METHOD_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} áççéššíƀíļíţý, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šţáţíç, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé šţáţíç, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_READABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéáðáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_WRITABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵŕíţáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} áççéššíƀíļíţý, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASSEMBLY_DEFINE_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ðéƒíñé ţýþé '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="ASSEMBLY_NOT_DEFINE_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ðéƒíñé ţýþé '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="ASSEMBLY_REFERENCE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéƒéŕéñçé áššéɱƀļý '{1}', ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="ASSEMBLY_REFERENCE_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéƒéŕéñçé áššéɱƀļý '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="ASSEMBLY_NOT_REFERENCE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ŕéƒéŕéñçé áššéɱƀļý '{1}', ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="ASSEMBLY_NOT_REFERENCE_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ŕéƒéŕéñçé áššéɱƀļý '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="CTOR_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ íţ ŵáš ñóţ ñúļļ. !!]</value>
+  </data>
+  <data name="CTOR_BE_PUBLIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé þúƀļíç, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="CTOR_NOT_BE_PUBLIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé þúƀļíç, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="CTOR_BE_PRIVATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé þŕíṽáţé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="CTOR_BE_PROTECTED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé þŕóţéçţéð, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="CTOR_BE_INTERNAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñţéŕñáļ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="CTOR_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šţáţíç çóñšţŕúçţóŕ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="SELECTOR_HAVE_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð šéļéçţéð ţýþéš ţó çóñţáíñ {0} íţéɱ(š), ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="SELECTOR_HAVE_METHOD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ɱéţĥóð '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="SELECTOR_HAVE_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þŕóþéŕţý '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_GREATER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝŕéáţéŕ ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝŕéáţéŕ ţĥáñ óŕ éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ óŕ éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_BETWEEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƀéţŵééñ {1} áñð {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE_BETWEEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ƀéţŵééñ {1} áñð {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_ONE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñé óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ '{1}', ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="COMPARABLE_BE_RANKED_EQUALLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕáñķéð éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COMPARABLE_NOT_BE_RANKED_EQUALLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŕáñķéð éǫúáļ ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="DICT_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_HAVE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_HAVE_MORE_THAN_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ɱóŕé ţĥáñ {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_HAVE_MORE_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ɱóŕé ţĥáñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_HAVE_AT_LEAST_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ļéášţ {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_HAVE_AT_LEAST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ļéášţ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_HAVE_FEWER_THAN_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ƒéŵéŕ ţĥáñ {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_HAVE_FEWER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ƒéŵéŕ ţĥáñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_HAVE_AT_MOST_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ɱóšţ {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_HAVE_AT_MOST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áţ ɱóšţ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_SINGLE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éẋáçţļý óñé íţéɱ, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_SINGLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ éẋáçţļý óñé íţéɱ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="DICT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="DICT_NOT_BE_EMPTY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ íţ ŵáš éɱþţý. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_KEY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ķéý {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_KEY_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ķéý {1}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="SUGGESTION_SINGLE" xml:space="preserve">
+    <value>[!! Ðíð ýóú ɱéáñ '{0}'? !!]</value>
+  </data>
+  <data name="SUGGESTION_MULTIPLE" xml:space="preserve">
+    <value>[!! Ðíð ýóú ɱéáñ óñé óƒ {0}? !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ķéý {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ķéý {1}, ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_KEYS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ţĥé ĝíṽéñ ķéýš, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEYS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ţĥé ĝíṽéñ ķéýš, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_VALUE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ṽáļúé {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_CONTAIN_VALUE_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ṽáļúé {1}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="DICT_HAVE_VALUE_AT_KEY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ṽáļúé {1} áţ ķéý {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="EQUIVALENCE_DETAIL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="OBJECT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé '{1}', ƀúţ ĝóţ '{2}'. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="OBJECT_BE_ONE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñé óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_BE_XML_SERIALIZABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ẊṀĻ-šéŕíáļížáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="OBJECT_BE_JSON_SERIALIZABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĴŠÓÑ-šéŕíáļížáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="OBJECT_BE_DATA_CONTRACT_SERIALIZABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðáţá-çóñţŕáçţ-šéŕíáļížáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="SPAN_BE_STRING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_BE_SAME_INSTANCE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţĥé šáɱé íñšţáñçé áš '{1}', ƀúţ ƒóúñð á ðíƒƒéŕéñţ ŕéƒéŕéñçé. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE_SAME_INSTANCE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ţĥé šáɱé íñšţáñçé áš '{1}', ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="OBJECT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ íţ ŵáš ñóţ ñúļļ. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="OBJECT_BE_OF_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óƒ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE_OF_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé óƒ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áššíĝñáƀļé ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áššíĝñáƀļé ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_AS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé çášţáƀļé ţó {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ '{1}', ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="OBJECT_SATISFY_ALL_CONDITIONS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý áļļ çóñðíţíóñš, ƀúţ ţĥé ƒóļļóŵíñĝ ƒáíļéð:{1} !!]</value>
+  </data>
+  <data name="FILE_EXIST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éẋíšţ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="FILE_NOT_EXIST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éẋíšţ, ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="FILE_REQUIRE_EXISTS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éẋíšţ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="FILE_HAVE_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñáɱé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="FILE_HAVE_FULL_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƒúļļ ñáɱé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="FILE_HAVE_EXTENSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éẋţéñšíóñ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="FILE_HAVE_DIRECTORY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ðíŕéçţóŕý '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="FILE_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH_GREATER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ ĝŕéáţéŕ ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="FILE_HAVE_LENGTH_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ ļéšš ţĥáñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="FILE_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1} ƀýţé(š). !!]</value>
+  </data>
+  <data name="FILE_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="FILE_BE_READ_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéáð-óñļý, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="FILE_NOT_BE_READ_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŕéáð-óñļý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="FILE_BE_HIDDEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĥíððéñ, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="FILE_NOT_BE_HIDDEN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ĥíððéñ, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="FILE_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţţŕíƀúţé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="FILE_NOT_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé áţţŕíƀúţé {1}, ƀúţ íţ ŵáš þŕéšéñţ. !!]</value>
+  </data>
+  <data name="FILE_HAVE_CREATION_TIME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çŕéáţíóñ ţíɱé ŵíţĥíñ {1} óƒ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="FILE_HAVE_LAST_WRITE_TIME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļášţ ŵŕíţé ţíɱé ŵíţĥíñ {1} óƒ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="FILE_BE_PARENT_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þáŕéñţ ðíŕéçţóŕý óƒ {1}, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="FILE_ACCESS_DENIED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áççéššíƀļé, ƀúţ áççéšš ŵáš ðéñíéð. !!]</value>
+  </data>
+  <data name="DIRECTORY_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1} íţéɱ(š). !!]</value>
+  </data>
+  <data name="DIRECTORY_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="DIRECTORY_CONTAIN_FILE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ƒíļé '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="DIRECTORY_CONTAIN_DIRECTORY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ðíŕéçţóŕý '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="DIRECTORY_HAVE_FILE_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} ƒíļé(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DIRECTORY_HAVE_DIRECTORY_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} ðíŕéçţóŕý(íéš), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STREAM_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ íţ ŵáš ñóţ ñúļļ. !!]</value>
+  </data>
+  <data name="STREAM_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="STREAM_BE_READABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéáðáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="STREAM_NOT_BE_READABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŕéáðáƀļé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STREAM_BE_WRITABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵŕíţáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="STREAM_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŵŕíţáƀļé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STREAM_BE_SEEKABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šééķáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="STREAM_NOT_BE_SEEKABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé šééķáƀļé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STREAM_BE_READ_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéáð-óñļý, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="STREAM_NOT_BE_READ_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŕéáð-óñļý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STREAM_BE_WRITE_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵŕíţé-óñļý, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="STREAM_NOT_BE_WRITE_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŵŕíţé-óñļý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH_UNSEEKABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ţĥé šţŕéáɱ ðóéš ñóţ šúþþóŕţ šééķíñĝ. !!]</value>
+  </data>
+  <data name="STREAM_HAVE_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STREAM_NOT_HAVE_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ļéñĝţĥ {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þóšíţíóñ {1}, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION_UNSEEKABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þóšíţíóñ {1}, ƀúţ ţĥé šţŕéáɱ ðóéš ñóţ šúþþóŕţ šééķíñĝ. !!]</value>
+  </data>
+  <data name="STREAM_HAVE_POSITION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þóšíţíóñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STREAM_NOT_HAVE_POSITION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé þóšíţíóñ {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="ENUM_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_HAVE_FLAG" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƒļáĝ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_FLAG" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ƒļáĝ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_BE_DEFINED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ðéƒíñéð {1} ṽáļúé, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_BE_DEFINED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ðéƒíñéð {1} ṽáļúé, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_BE_ONE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñé óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_HAVE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ṽáļúé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ṽáļúé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_HAVE_SAME_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ţĥé šáɱé ñáɱé áš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_SAME_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ţĥé šáɱé ñáɱé áš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_HAVE_SAME_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ţĥé šáɱé ṽáļúé áš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_HAVE_SAME_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ţĥé šáɱé ṽáļúé áš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ENUM_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ '{1}', ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="ENUM_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="ENUM_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="GUID_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="GUID_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="GUID_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éɱþţý, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="GUID_NOT_BE_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éɱþţý, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="GUID_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="GUID_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ñóţ ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="JSON_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ, ƀúţ ƒóúñð {1} íñšţéáð óƒ {2}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ, ƀúţ ƒóúñð {1} íñšţéáð óƒ {2}. !!]</value>
+  </data>
+  <data name="JSON_CONTAIN_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="JSON_HAVE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ṽáļúé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="JSON_HAVE_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þŕóþéŕţý '{1}', ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="JSON_HAVE_PATH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þáţĥ '{1}', ƀúţ {2}. !!]</value>
+  </data>
+  <data name="JSON_NOT_HAVE_PATH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé þáţĥ '{1}', ƀúţ íţ éẋíšţš. !!]</value>
+  </data>
+  <data name="JSON_PATH_MULTIPLE_RESULTS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéšóļṽé þáţĥ '{1}' ţó á šíñĝļé ṽáļúé, ƀúţ íţ þŕóðúçéð {2} ṽáļúéš. Úšé ĤáṽéĴšóñÞáţĥṼáļúéš ƒóŕ ɱúļţíþļé ŕéšúļţš. !!]</value>
+  </data>
+  <data name="JSON_PATH_NO_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéšóļṽé þáţĥ '{1}', ƀúţ ñó ṽáļúéš ɱáţçĥéð. !!]</value>
+  </data>
+  <data name="JSON_PATH_TOO_MANY_RESULTS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéšóļṽé þáţĥ '{1}', ƀúţ íţ þŕóðúçéð ɱóŕé ţĥáñ {2} ṽáļúéš. !!]</value>
+  </data>
+  <data name="JSON_PATH_MISSING_PROPERTY" xml:space="preserve">
+    <value>[!! þŕóþéŕţý '{0}' ŵáš ñóţ ƒóúñð úñðéŕ '{1}' !!]</value>
+  </data>
+  <data name="JSON_PATH_AVAILABLE" xml:space="preserve">
+    <value>[!! (áṽáíļáƀļé: {0}) !!]</value>
+  </data>
+  <data name="JSON_PATH_INDEX_OUT_OF_RANGE" xml:space="preserve">
+    <value>[!! íñðéẋ {0} íš óúţ óƒ ŕáñĝé úñðéŕ '{1}' ({2} éļéɱéñţ(š) þŕéšéñţ) !!]</value>
+  </data>
+  <data name="JSON_PATH_IS_NULL" xml:space="preserve">
+    <value>[!! '{0}' íš ñúļļ !!]</value>
+  </data>
+  <data name="JSON_PATH_NOT_OBJECT" xml:space="preserve">
+    <value>[!! '{0}' íš ñóţ á ĴŠÓÑ óƀĵéçţ !!]</value>
+  </data>
+  <data name="JSON_PATH_NOT_ARRAY" xml:space="preserve">
+    <value>[!! '{0}' íš ñóţ á ĴŠÓÑ áŕŕáý !!]</value>
+  </data>
+  <data name="JSON_BE_STRING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ĴŠÓÑ šţŕíñĝ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_STRING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ĴŠÓÑ šţŕíñĝ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_BE_NUMERIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ĴŠÓÑ ñúɱƀéŕ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_NUMERIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ĴŠÓÑ ñúɱƀéŕ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_BE_BOOL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ĴŠÓÑ ƀóóļéáñ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_BOOL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ĴŠÓÑ ƀóóļéáñ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_BE_ARRAY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ĴŠÓÑ áŕŕáý, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_ARRAY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ĴŠÓÑ áŕŕáý, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_BE_OBJECT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ĴŠÓÑ óƀĵéçţ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_OBJECT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ĴŠÓÑ óƀĵéçţ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_DOCUMENT_DISPOSED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ļíṽé ĴŠÓÑ ðóçúɱéñţ, ƀúţ íţ ŵáš ðíšþóšéð. !!]</value>
+  </data>
+  <data name="JSON_BE_UTC_DATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ÚŢÇ ðáţé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_UTC_DATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ÚŢÇ ðáţé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_BE_LOCAL_DATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ļóçáļ ðáţé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_BE_LOCAL_DATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ļóçáļ ðáţé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="XML_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ íţ ŵáš ñóţ ñúļļ. !!]</value>
+  </data>
+  <data name="XML_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="XML_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="XML_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="XML_NOT_HAVE_ELEMENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé éļéɱéñţ '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_WITH_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="XML_NOT_HAVE_ELEMENT_WITH_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé éļéɱéñţ '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_ONCE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' éẋáçţļý óñçé, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_LEAST_ONCE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' áţ ļéášţ óñçé, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_LEAST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' áţ ļéášţ {2} ţíɱé(š), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_AT_MOST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' áţ ɱóšţ {2} ţíɱé(š), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' éẋáçţļý {2} ţíɱé(š), ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_OCCURRENCE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ELEMENT_WITH_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éļéɱéñţ '{1}' íñ ñáɱéšþáçé '{2}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţţŕíƀúţé '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="XML_NOT_HAVE_ATTRIBUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé áţţŕíƀúţé '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţţŕíƀúţé '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_WITH_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţţŕíƀúţé '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="XML_NOT_HAVE_ATTRIBUTE_WITH_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé áţţŕíƀúţé '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="XML_HAVE_ATTRIBUTE_WITH_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áţţŕíƀúţé '{1}' íñ ñáɱéšþáçé '{2}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="XML_HAVE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ṽáļúé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="XML_HAVE_INNER_TEXT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé íññéŕ ţéẋţ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="XML_NOT_HAVE_INNER_TEXT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé íññéŕ ţéẋţ '{1}', ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="XML_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éǫúíṽáļéñţ, ƀúţ ƒóúñð {1} íñšţéáð óƒ {2}. !!]</value>
+  </data>
+  <data name="XML_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ, ƀúţ ƒóúñð {1} íñšţéáð óƒ {2}. !!]</value>
+  </data>
+  <data name="XML_HAVE_ROOT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ŕóóţ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TIME_BE_LESS_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋéçúţíóñ ţíɱé ţó ƀé ļéšš ţĥáñ {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TIME_BE_LESS_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋéçúţíóñ ţíɱé ţó ƀé ļéšš ţĥáñ óŕ éǫúáļ ţó {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TIME_BE_GREATER_THAN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋéçúţíóñ ţíɱé ţó ƀé ĝŕéáţéŕ ţĥáñ {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TIME_BE_GREATER_THAN_OR_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋéçúţíóñ ţíɱé ţó ƀé ĝŕéáţéŕ ţĥáñ óŕ éǫúáļ ţó {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TIME_BE_CLOSE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋéçúţíóñ ţíɱé ţó ƀé çļóšé ţó {0} (±{1}), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="EXCEPTION_MESSAGE_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋçéþţíóñ ɱéššáĝé ţó ɱáţçĥ {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="EXCEPTION_MESSAGE_NOT_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋçéþţíóñ ɱéššáĝé ñóţ ţó ɱáţçĥ {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="EXCEPTION_INNER_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð íññéŕ éẋçéþţíóñ ţó ƀé {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="EXCEPTION_INNER_BE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð íññéŕ éẋçéþţíóñ ţó ƀé éẋáçţļý {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="EXCEPTION_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋçéþţíóñ ţó ɱáţçĥ '{0}', ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="EXCEPTION_PARAM_NAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð éẋçéþţíóñ þáŕáɱéţéŕ ñáɱé ţó ƀé {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="TASK_COMPLETE_WITHIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóɱþļéţé ŵíţĥíñ {1}, ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="TASK_COMPLETE_SUCCESSFULLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóɱþļéţé šúççéššƒúļļý ŵíţĥíñ {1}, ƀúţ {2} ŵáš ţĥŕóŵñ. !!]</value>
+  </data>
+  <data name="TASK_NOT_COMPLETE_WITHIN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóɱþļéţé ŵíţĥíñ {1}, ƀúţ íţ çóɱþļéţéð. !!]</value>
+  </data>
+  <data name="TASK_WITH_RESULT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ŕéšúļţ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TASK_WITH_RESULT_NOT_COMPLETED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé á çóɱþļéţéð ŕéšúļţ, ƀúţ íţ ðíð ñóţ çóɱþļéţé. !!]</value>
+  </data>
+  <data name="TASK_BE_COMPLETED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé çóɱþļéţéð, ƀúţ íţ ŵáš {1}. !!]</value>
+  </data>
+  <data name="TASK_NOT_BE_COMPLETED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé çóɱþļéţéð, ƀúţ íţ ŵáš {1}. !!]</value>
+  </data>
+  <data name="TASK_BE_COMPLETED_SUCCESSFULLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóɱþļéţé šúççéššƒúļļý, ƀúţ íţ ŵáš {1}. !!]</value>
+  </data>
+  <data name="TASK_BE_FAULTED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƒáúļţéð, ƀúţ íţ ŵáš {1}. !!]</value>
+  </data>
+  <data name="TASK_BE_CANCELED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé çáñçéļéð, ƀúţ íţ ŵáš {1}. !!]</value>
+  </data>
+  <data name="TASK_HAVE_RESULT_NOT_COMPLETED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé á ŕéšúļţ, ƀúţ íţ ŵáš {1}. !!]</value>
+  </data>
+  <data name="TASK_HAVE_RESULT_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé á ŕéšúļţ ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="EVENT_RAISE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕáíšé éṽéñţ '{1}', ƀúţ íţ ŵáš ñóţ ŕáíšéð. !!]</value>
+  </data>
+  <data name="EVENT_NOT_RAISE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ŕáíšé éṽéñţ '{1}', ƀúţ íţ ŵáš ŕáíšéð {2} ţíɱé(š). !!]</value>
+  </data>
+  <data name="EVENT_WITH_SENDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šéñðéŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="EVENT_WITH_ARGS_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} áŕĝúɱéñţ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="EVENT_WITH_ARGS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} áŕĝúɱéñţ áţ íñðéẋ {1} ţó šáţíšƒý ţĥé þŕéðíçáţé, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="EVENT_PROPERTY_CHANGE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕáíšé þŕóþéŕţý çĥáñĝé ƒóŕ '{1}', ƀúţ íţ ŵáš ñóţ ŕáíšéð. !!]</value>
+  </data>
+  <data name="EVENT_NOT_PROPERTY_CHANGE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ŕáíšé þŕóþéŕţý çĥáñĝé ƒóŕ '{1}', ƀúţ íţ ŵáš ŕáíšéð {2} ţíɱé(š). !!]</value>
+  </data>
+  <data name="BUFFERED_HAVE_SIZE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƀúƒƒéŕ šížé {1}, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="BUFFERED_HAVE_SIZE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƀúƒƒéŕ šížé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="BUFFERED_NOT_HAVE_SIZE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ƀúƒƒéŕ šížé {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="MESSAGE_BECAUSE" xml:space="preserve">
+    <value>[!! ƀéçáúšé  !!]</value>
+  </data>
+  <data name="MESSAGE_EXPECTED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð  !!]</value>
+  </data>
+  <data name="SCOPE_ASSERTION_FAILURES" xml:space="preserve">
+    <value>[!! {0} áššéŕţíóñ ƒáíļúŕéš: !!]</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_LINES" xml:space="preserve">
+    <value>[!! … ({0} ɱóŕé ļíñé(š)) !!]</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_CHARS" xml:space="preserve">
+    <value>[!! … ({0} ɱóŕé çĥáŕ(š)) !!]</value>
+  </data>
+  <data name="FORMATTING_TRUNCATED_ITEMS" xml:space="preserve">
+    <value>[!! … (ţŕúñçáţéð) !!]</value>
+  </data>
+  <data name="FORMATTING_MAX_DEPTH" xml:space="preserve">
+    <value>[!! … (ɱáẋ ðéþţĥ) !!]</value>
+  </data>
+  <data name="FORMATTING_CYCLE" xml:space="preserve">
+    <value>[!! … (çýçļé) !!]</value>
+  </data>
+  <data name="ACTION_EVENTUALLY_SATISFY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý ţĥé çóñðíţíóñ ŵíţĥíñ {1}, ƀúţ ţĥé ļášţ ṽáļúé ŵáš {2}. !!]</value>
+  </data>
+  <data name="ACTION_EVENTUALLY_SATISFY_ERROR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý ţĥé çóñðíţíóñ ŵíţĥíñ {1}, ƀúţ ţĥé ļášţ ṽáļúé ŵáš {2} (ļášţ éŕŕóŕ: {3}). !!]</value>
+  </data>
+  <data name="SNAPSHOT_MISSING_BASELINE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ šñáþšĥóţ '{1}', ƀúţ ñó ṽéŕíƒíéð šñáþšĥóţ éẋíšţš. Ŕéṽíéŵ '{2}' áñð ŕéñáɱé íţ ţó '{3}' ţó áççéþţ íţ. !!]</value>
+  </data>
+  <data name="SNAPSHOT_MISMATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ɱáţçĥ šñáþšĥóţ '{1}', ƀúţ ţĥé çóñţéñţ ðíƒƒéŕš. Ŕéṽíéŵ '{2}'. !!]</value>
+  </data>
+  <data name="SNAPSHOT_RECEIVED_PREVIEW" xml:space="preserve">
+    <value>[!! Ŕéçéíṽéð:
+{0} !!]</value>
+  </data>
+  <data name="HTTP_HAVE_STATUS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šţáţúš çóðé {1}, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_STATUS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šţáţúš çóðé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="HTTP_BE_SUCCESSFUL_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šúççéššƒúļ, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_BE_SUCCESSFUL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šúççéššƒúļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĥéáðéŕ '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĥéáðéŕ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_HEADER_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĥéáðéŕ '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="HTTP_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð á ŕéšþóñšé. !!]</value>
+  </data>
+  <data name="HTTP_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_BE_REDIRECT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ŕéðíŕéçţ (3ẋẋ), ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_BE_REDIRECT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ŕéðíŕéçţ (3ẋẋ), ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_NOT_BE_REDIRECT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ŕéðíŕéçţ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_BE_CLIENT_ERROR_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á çļíéñţ éŕŕóŕ (4ẋẋ), ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_BE_CLIENT_ERROR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á çļíéñţ éŕŕóŕ (4ẋẋ), ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_BE_SERVER_ERROR_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šéŕṽéŕ éŕŕóŕ (5ẋẋ), ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_BE_SERVER_ERROR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šéŕṽéŕ éŕŕóŕ (5ẋẋ), ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_BE_NO_CONTENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñó çóñţéñţ (204), ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_BE_NO_CONTENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ñó çóñţéñţ (204), ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_CONTENT_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ, ƀúţ çóñţéñţ ŵáš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_TYPE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ ţýþé '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_TYPE_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ ţýþé '{1}', ƀúţ ñó çóñţéñţ ţýþé ŵáš þŕéšéñţ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ ţýþé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_LENGTH_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ ļéñĝţĥ {1}, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_LENGTH_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ ļéñĝţĥ {1}, ƀúţ ñó çóñţéñţ ļéñĝţĥ ŵáš þŕéšéñţ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_CONTENT_LENGTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé çóñţéñţ ļéñĝţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_VERSION_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó úšé ĤŢŢÞ ṽéŕšíóñ {1}, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_VERSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó úšé ĤŢŢÞ ṽéŕšíóñ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_REASON_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ŕéášóñ þĥŕášé '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_REASON" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ŕéášóñ þĥŕášé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_ETAG_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ÉŢáĝ '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_ETAG_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ÉŢáĝ '{1}', ƀúţ ñó ÉŢáĝ ŵáš þŕéšéñţ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_ETAG" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ÉŢáĝ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_RETRY_AFTER_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé Ŕéţŕý-Áƒţéŕ '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_RETRY_AFTER_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé Ŕéţŕý-Áƒţéŕ '{1}', ƀúţ ñó Ŕéţŕý-Áƒţéŕ ŵáš þŕéšéñţ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_RETRY_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé Ŕéţŕý-Áƒţéŕ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_LOCATION_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé Ļóçáţíóñ '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_LOCATION_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé Ļóçáţíóñ '{1}', ƀúţ ñó Ļóçáţíóñ ŵáš þŕéšéñţ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_LOCATION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé Ļóçáţíóñ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_COOKIE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šéţ çóóķíé '{1}', ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_COOKIE_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šéţ çóóķíé '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="HTTP_HAVE_COOKIE_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šéţ çóóķíé '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="HTTP_STRING_CONTENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šţŕíñĝ çóñţéñţ, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_STRING_CONTENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šţŕíñĝ çóñţéñţ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="HTTP_STRING_CONTENT_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šţŕíñĝ çóñţéñţ ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ ƒóúñð '{1}'. !!]</value>
+  </data>
+  <data name="HTTP_JSON_CONTENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĴŠÓÑ çóñţéñţ, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_JSON_CONTENT_INVALID" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ṽáļíð ĴŠÓÑ çóñţéñţ, ƀúţ þáŕšíñĝ ƒáíļéð. Çóñţéñţ: {1} !!]</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ÞŕóƀļéɱÐéţáíļš, ƀúţ ŕéšþóñšé íš ñúļļ. !!]</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_CONTENT_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ÞŕóƀļéɱÐéţáíļš ŵíţĥ çóñţéñţ ţýþé 'áþþļíçáţíóñ/þŕóƀļéɱ+ĵšóñ' óŕ 'áþþļíçáţíóñ/ĵšóñ', ƀúţ ƒóúñð '{1}'. !!]</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_NOT_OBJECT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ÞŕóƀļéɱÐéţáíļš ĴŠÓÑ óƀĵéçţ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="HTTP_PROBLEM_DETAILS_FIELD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ÞŕóƀļéɱÐéţáíļš ƒíéļð '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="STRING_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ óŕ éɱþţý, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="STRING_NOT_BE_NULL_OR_EMPTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ óŕ éɱþţý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="STRING_CONTAIN_LINE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ ļíñé {1}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="STRING_NOT_CONTAIN_LINE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ļíñé {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="STRING_HAVE_LINE_COUNT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} ļíñé(š), ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="STRING_HAVE_LINE_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé {1} ļíñé(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="STRING_NOT_HAVE_LINE_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé {1} ļíñé(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ţĥé šáɱé çóúñţ áš {1} íţéɱ(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ţĥé šáɱé çóúñţ áš {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éǫúáļ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éǫúáļ {1}, ƀúţ ţĥéý áŕé éǫúáļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_APPROXIMATELY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó áþþŕóẋíɱáţéļý éǫúáļ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_APPROXIMATELY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó áþþŕóẋíɱáţéļý éǫúáļ {1}, ƀúţ ţĥéý áŕé áþþŕóẋíɱáţéļý éǫúáļ ŵíţĥ þŕéçíšíóñ '{2}'. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éǫúáļ {1}, ƀúţ ƒóúñð {2} íţéɱ(š) íñšţéáð óƒ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_EQUAL_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éǫúáļ {1}, ƀúţ ƒóúñð {2} áţ íñðéẋ {3} íñšţéáð óƒ {4}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ ţó {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ ţó {1}, ƀúţ ƒóúñð ðíƒƒéŕéñçéš. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_SUBSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á šúƀšéţ óƒ {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_BE_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á šúƀšéţ óƒ {1}, ƀúţ ƒóúñð {2} íñ ţĥé šúþéŕšéţ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_IN_ORDER_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íñ óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_IN_ORDER_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íñ óŕðéŕ, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONSECUTIVE_ORDER_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íñ çóñšéçúţíṽé óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONSECUTIVE_ORDER_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íñ çóñšéçúţíṽé óŕðéŕ, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_ASCENDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé íñ ášçéñðíñĝ óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_ASCENDING_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé íñ ášçéñðíñĝ óŕðéŕ, ƀúţ ƒóúñð {1} áƒţéŕ {2} áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_DESCENDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé íñ ðéšçéñðíñĝ óŕðéŕ, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_DESCENDING_ORDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé íñ ðéšçéñðíñĝ óŕðéŕ, ƀúţ ƒóúñð {1} áƒţéŕ {2} áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="DICT_NOT_EQUAL_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éǫúáļ {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_EQUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó éǫúáļ {1}, ƀúţ ƒóúñð ðíƒƒéŕéñçéš. !!]</value>
+  </data>
+  <data name="DICT_EQUAL_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_EQUAL_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ íţ ĥáš {2} íţéɱ(š) íñšţéáð óƒ {3}. !!]</value>
+  </data>
+  <data name="DICT_EQUAL_MISSING_KEY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ ķéý '{2}' ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="DICT_EQUAL_WRONG_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó éǫúáļ {1}, ƀúţ ķéý '{2}' ŵáš '{3}' íñšţéáð óƒ '{4}'. !!]</value>
+  </data>
+  <data name="DICT_BE_SUBSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúƀšéţ óƒ {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_BE_SUBSET_OUTSIDER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúƀšéţ óƒ {1}, ƀúţ ƒóúñð '{2}' óúţšíðé óƒ íţ. !!]</value>
+  </data>
+  <data name="DICT_BE_SUPERSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúþéŕšéţ óƒ {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_BE_SUPERSET" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á šúþéŕšéţ óƒ {1}, ƀúţ '{2}' ŵáš ɱíššíñĝ ƒŕóɱ íţ. !!]</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUBSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúƀšéţ óƒ {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUBSET_SAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúƀšéţ óƒ {1}, ƀúţ ţĥéý çóñţáíñ ţĥé šáɱé íţéɱš. !!]</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUPERSET_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúþéŕšéţ óƒ {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_BE_PROPER_SUPERSET_SAME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á þŕóþéŕ šúþéŕšéţ óƒ {1}, ƀúţ ţĥéý çóñţáíñ ţĥé šáɱé íţéɱš. !!]</value>
+  </data>
+  <data name="DICT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ţĥé šáɱé çóúñţ ({1}) áš ţĥé éẋþéçţéð çóļļéçţíóñ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ķéý {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ķéý {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIR_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ þáíŕ {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIRS_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ þáíŕš {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_PAIRS_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ þáíŕš {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_KEY_VALUE_PAIR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ķéý {1} ŵíţĥ ṽáļúé {2}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ṽáļúé {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUE_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ṽáļúé {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUES_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ṽáļúéš {1}, ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_CONTAIN_VALUES_FOUND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ ṽáļúéš {1}, ƀúţ ƒóúñð ţĥéɱ. !!]</value>
+  </data>
+  <data name="DICT_NOT_HAVE_EXACTLY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_HAVE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DICT_NOT_HAVE_SAME_COUNT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ţĥé šáɱé çóúñţ áš {1} íţéɱ(š), ƀúţ ðíçţíóñáŕý íš ñúļļ. !!]</value>
+  </data>
+  <data name="DICT_NOT_HAVE_SAME_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ţĥé šáɱé çóúñţ áš {1} íţéɱ(š), ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ ţó {1}, ƀúţ óƀĵéçţ íš ñúļļ. !!]</value>
+  </data>
+  <data name="OBJECT_NOT_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éǫúíṽáļéñţ ţó {1}, ƀúţ ƒóúñð ðíƒƒéŕéñçéš. !!]</value>
+  </data>
+  <data name="VALUE_THAT_MATCHES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ṽáļúé ţó ɱáţçĥ {0}, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="VALUE_THAT_SATISFIES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ṽáļúé ţó šáţíšƒý ţĥé ĝíṽéñ çĥéçķ, ƀúţ {0} ŵáš ţĥŕóŵñ: {1}. !!]</value>
+  </data>
+  <data name="JSON_NOT_HAVE_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé þŕóþéŕţý {1}, ƀúţ ƒóúñð íţ. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_ON_OR_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé óñ óŕ áƒţéŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_ON_OR_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé óñ óŕ ƀéƒóŕé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_YEAR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ýéáŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MONTH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ɱóñţĥ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_DAY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ðáý {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_HOUR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ĥóúŕ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MINUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ɱíñúţé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_SECOND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé šéçóñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_MILLISECOND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ɱíļļíšéçóñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_ONE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé óñé óƒ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_IN_KIND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ķíñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_IN_KIND" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ķíñð {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_HAVE_OFFSET" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé óƒƒšéţ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_HAVE_OFFSET" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé óƒƒšéţ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éẋáçţļý {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_NOT_BE_EXACTLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé éẋáçţļý {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_WITHIN_NOW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵíţĥíñ {1} óƒ ţĥé çúŕŕéñţ ɱóɱéñţ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_NOW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ {1} ƒŕóɱ ţĥé çúŕŕéñţ ɱóɱéñţ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_NOW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ɱóŕé ţĥáñ {1} ƒŕóɱ ţĥé çúŕŕéñţ ɱóɱéñţ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_NOW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áţ ļéášţ {1} ƒŕóɱ ţĥé çúŕŕéñţ ɱóɱéñţ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_NOW" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éẋáçţļý {1} ƒŕóɱ ţĥé çúŕŕéñţ ɱóɱéñţ, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="DATE_BE_WITHIN_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵíţĥíñ {1} ƀéƒóŕé {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_WITHIN_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵíţĥíñ {1} áƒţéŕ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ {1} ƀéƒóŕé {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_LESS_THAN_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ļéšš ţĥáñ {1} áƒţéŕ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ɱóŕé ţĥáñ {1} ƀéƒóŕé {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_MORE_THAN_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ɱóŕé ţĥáñ {1} áƒţéŕ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áţ ļéášţ {1} ƀéƒóŕé {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_AT_LEAST_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áţ ļéášţ {1} áƒţéŕ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_BEFORE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éẋáçţļý {1} ƀéƒóŕé {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="DATE_BE_EXACTLY_AFTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé éẋáçţļý {1} áƒţéŕ {2}, ƀúţ ƒóúñð {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý {1} íñšþéçţóŕ(š) ŕéšþéçţíṽéļý, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý {1} íñšþéçţóŕ(š) ŕéšþéçţíṽéļý, ƀúţ ƒóúñð {2} íţéɱ(š). !!]</value>
+  </data>
+  <data name="COLLECTION_SATISFY_RESPECTIVELY_FAILURES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý {1} íñšþéçţóŕ(š) ŕéšþéçţíṽéļý, ƀúţ {2} íñšþéçţíóñ(š) ƒáíļéð: !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_SATISFY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý ţĥé íñšþéçţóŕ ƒóŕ áļļ íţéɱš, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_SATISFY_FAILURES" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý ţĥé íñšþéçţóŕ ƒóŕ áļļ {1} íţéɱ(š), ƀúţ {2} íţéɱ(š) ƒáíļéð: !!]</value>
+  </data>
+  <data name="COLLECTION_SATISFY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý {1} þŕéðíçáţé(š), ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_SATISFY_UNMATCHED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó šáţíšƒý {1} þŕéðíçáţé(š), ƀúţ {2} ɱáţçĥéð ñó éļéɱéñţ: !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_OF_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ƒóŕ áļļ éļéɱéñţš ţó ƀé óƒ ţýþé {1}, ƀúţ ƒóúñð '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_OF_TYPE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ƒóŕ áļļ éļéɱéñţš ţó ƀé óƒ ţýþé {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_ASSIGNABLE_TO" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ƒóŕ áļļ éļéɱéñţš ţó ƀé áššíĝñáƀļé ţó {1}, ƀúţ ƒóúñð '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_ASSIGNABLE_TO_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ƒóŕ áļļ éļéɱéñţš ţó ƀé áššíĝñáƀļé ţó {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_EQUIVALENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ƒóŕ áļļ éļéɱéñţš ţó ƀé éǫúíṽáļéñţ ţó '{1}', ƀúţ ƒóúñð '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_ALL_BE_EQUIVALENT_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ƒóŕ áļļ éļéɱéñţš ţó ƀé éǫúíṽáļéñţ ţó '{1}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ASSIGNABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ áššíĝñáƀļé ţó {1}, ƀúţ ƒóúñð ñóñé. !!]</value>
+  </data>
+  <data name="COLLECTION_CONTAIN_ASSIGNABLE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó çóñţáíñ áñ íţéɱ áššíĝñáƀļé ţó {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ASSIGNABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ áñ íţéɱ áššíĝñáƀļé ţó {1}, ƀúţ ƒóúñð '{2}' áţ íñðéẋ {3}. !!]</value>
+  </data>
+  <data name="COLLECTION_NOT_CONTAIN_ASSIGNABLE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó çóñţáíñ áñ íţéɱ áššíĝñáƀļé ţó {1}, ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_PRECEDING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' íɱɱéðíáţéļý þŕéçéðíñĝ '{2}', ƀúţ ƒóúñð ñó šúçĥ þáíŕ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_PRECEDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' íɱɱéðíáţéļý þŕéçéðíñĝ '{2}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_SUCCEEDING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' íɱɱéðíáţéļý šúççééðíñĝ '{2}', ƀúţ ƒóúñð ñó šúçĥ þáíŕ. !!]</value>
+  </data>
+  <data name="COLLECTION_HAVE_SUCCEEDING_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé '{1}' íɱɱéðíáţéļý šúççééðíñĝ '{2}', ƀúţ çóļļéçţíóñ íš ñúļļ. !!]</value>
+  </data>
+  <data name="TYPE_IMPLEMENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó íɱþļéɱéñţ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_IMPLEMENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó íɱþļéɱéñţ {1}, ƀúţ íţ ðóéš. !!]</value>
+  </data>
+  <data name="TYPE_BE_DERIVED_FROM" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ðéŕíṽé ƒŕóɱ {1}, ƀúţ {2}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_DERIVED_FROM" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ðéŕíṽé ƒŕóɱ {1}, ƀúţ íţ ðóéš. !!]</value>
+  </data>
+  <data name="TYPE_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šţáţíç, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé šţáţíç, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_DEFAULT_CONSTRUCTOR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé á ðéƒáúļţ çóñšţŕúçţóŕ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_DEFAULT_CONSTRUCTOR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé á ðéƒáúļţ çóñšţŕúçţóŕ, ƀúţ íţ ðóéš. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_CONSTRUCTOR" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé çóñšţŕúçţóŕ ({1}), ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_INDEXER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé íñðéẋéŕ óƒ ţýþé {1} ŵíţĥ þáŕáɱéţéŕš ({2}), ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_INDEXER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé íñðéẋéŕ ŵíţĥ þáŕáɱéţéŕš ({1}), ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_IMPLICIT_CONVERSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áñ íɱþļíçíţ çóñṽéŕšíóñ óþéŕáţóŕ ƒóŕ {1}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_IMPLICIT_CONVERSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé áñ íɱþļíçíţ çóñṽéŕšíóñ óþéŕáţóŕ ƒóŕ {1}, ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_CONVERSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé áñ éẋþļíçíţ çóñṽéŕšíóñ óþéŕáţóŕ ƒóŕ {1}, ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_CONVERSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé áñ éẋþļíçíţ çóñṽéŕšíóñ óþéŕáţóŕ ƒóŕ {1}, ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_METHOD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éẋþļíçíţ ɱéţĥóð '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_METHOD" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé éẋþļíçíţ ɱéţĥóð '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_HAVE_EXPLICIT_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé éẋþļíçíţ þŕóþéŕţý '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_EXPLICIT_PROPERTY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé éẋþļíçíţ þŕóþéŕţý '{1}', ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1} óŕ íñĥéŕíţ íţ, ƀúţ íţ ŵáš ƒóúñð. !!]</value>
+  </data>
+  <data name="TYPE_NOT_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé {1} áççéššíƀíļíţý, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="TYPE_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="METHOD_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ṽíŕţúáļ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="METHOD_NOT_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé šţáţíç, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="METHOD_BE_ASYNC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ášýñç, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="METHOD_NOT_BE_ASYNC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ášýñç, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="METHOD_NOT_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ŕéţúŕñ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="METHOD_RETURN_VOID" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ŕéţúŕñ ṽóíð, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="METHOD_NOT_RETURN_VOID" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ŕéţúŕñ ṽóíð, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_READABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŕéáðáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŵŕíţáƀļé, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_VIRTUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ṽíŕţúáļ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ṽíŕţúáļ, ƀúţ {1}. !!]</value>
+  </data>
+  <data name="PROPERTY_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ŕéţúŕñ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_HAVE_RETURN_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ŕéţúŕñ ţýþé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_READABLE_ACCESS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéáðáƀļé ŵíţĥ {1} áççéšš, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_WRITABLE_ACCESS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŵŕíţáƀļé ŵíţĥ {1} áççéšš, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASSEMBLY_BE_UNSIGNED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé úñšíĝñéð, ƀúţ íţ ŵáš šíĝñéð. !!]</value>
+  </data>
+  <data name="ASSEMBLY_BE_UNSIGNED_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé úñšíĝñéð, ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="ASSEMBLY_BE_SIGNED_WITH_KEY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šíĝñéð ŵíţĥ þúƀļíç ķéý '{1}', ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="ASSEMBLY_BE_SIGNED_WITH_KEY_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé šíĝñéð ŵíţĥ þúƀļíç ķéý '{1}', ƀúţ ƒóúñð ñúļļ. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_SEALED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé šéáļéð, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1} óŕ íñĥéŕíţ íţ, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="TYPE_OFFENDER_NOT_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1} óŕ íñĥéŕíţ íţ, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="SELECTOR_BE_IN_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñ ñáɱéšþáçé '{1}', ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="SELECTOR_NOT_BE_IN_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé íñ ñáɱéšþáçé '{1}', ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="SELECTOR_BE_UNDER_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé úñðéŕ ñáɱéšþáçé '{1}', ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="SELECTOR_NOT_BE_UNDER_NAMESPACE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé úñðéŕ ñáɱéšþáçé '{1}', ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_HAVE_COUNT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð šéļéçţéð ɱéɱƀéŕš ţó çóñţáíñ {0} íţéɱ(š), ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_OR_INHERIT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ƀé ðéçóŕáţéð ŵíţĥ {1} óŕ íñĥéŕíţ íţ, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_RETURN" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ŕéţúŕñ {1}, ƀúţ íţ ŕéţúŕñš {2}. !!]</value>
+  </data>
+  <data name="MEMBER_RETURN_VOID" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ŕéţúŕñ ṽóíð, ƀúţ íţ ŕéţúŕñš {1}. !!]</value>
+  </data>
+  <data name="MEMBER_BE_ASYNC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéţĥóð '{0}' ţó ƀé ášýñç, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_BE_VIRTUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ƀé ṽíŕţúáļ, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_BE_STATIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ƀé šţáţíç, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ĥáṽé áççéšš ɱóðíƒíéŕ {1}, ƀúţ íţ ĥáš {2}. !!]</value>
+  </data>
+  <data name="MEMBER_HAVE_DECLARING_TYPE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ƀé ðéçļáŕéð íñ {1}, ƀúţ íţ íš ðéçļáŕéð íñ {2}. !!]</value>
+  </data>
+  <data name="MEMBER_BE_READ_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð þŕóþéŕţý '{0}' ţó ƀé ŕéáð-óñļý, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_BE_WRITE_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð þŕóþéŕţý '{0}' ţó ƀé ŵŕíţé-óñļý, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_BE_WRITABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð þŕóþéŕţý '{0}' ţó ƀé ŵŕíţáƀļé, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_HAVE_GETTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð þŕóþéŕţý '{0}' ţó ĥáṽé á ĝéţţéŕ, ƀúţ íţ ðóéš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_HAVE_SETTER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð þŕóþéŕţý '{0}' ţó ĥáṽé á šéţţéŕ, ƀúţ íţ ðóéš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_HAVE_ACCESS_MODIFIER" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ñóţ ţó ĥáṽé áççéšš ɱóðíƒíéŕ {1}, ƀúţ íţ ðóéš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ţó ƀé ðéçóŕáţéð ŵíţĥ {1} ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED_PREDICATE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1} ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_ASYNC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéţĥóð '{0}' ñóţ ţó ƀé ášýñç, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_VIRTUAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð ɱéɱƀéŕ '{0}' ñóţ ţó ƀé ṽíŕţúáļ, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_WRITABLE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð þŕóþéŕţý '{0}' ñóţ ţó ƀé ŵŕíţáƀļé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_ABSTRACT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áƀšţŕáçţ, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_ABSTRACT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áƀšţŕáçţ, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_OVERRIDE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áñ óṽéŕŕíðé, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_OVERRIDE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áñ óṽéŕŕíðé, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_FINAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ƒíñáļ (á šéáļéð óṽéŕŕíðé), ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_FINAL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ƒíñáļ, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_GENERIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ĝéñéŕíç, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_GENERIC" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ĝéñéŕíç, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_EXTENSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áñ éẋţéñšíóñ ɱéţĥóð, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_EXTENSION" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé áñ éẋţéñšíóñ ɱéţĥóð, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_HAVE_PARAMETERS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þáŕáɱéţéŕš ({1}), ƀúţ ƒóúñð ({2}). !!]</value>
+  </data>
+  <data name="MEMBER_BE_SAME_AS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ţĥé šáɱé íñšţáñçé áš {1}, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_SAME_AS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ţĥé šáɱé íñšţáñçé áš {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="MEMBER_BE_DECORATED_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ðéçóŕáţéð ŵíţĥ {1} ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ íţ ðíð ñóţ. !!]</value>
+  </data>
+  <data name="MEMBER_NOT_BE_DECORATED_MATCH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ðéçóŕáţéð ŵíţĥ {1} ɱáţçĥíñĝ ţĥé þŕéðíçáţé, ƀúţ íţ ðíð. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_REQUIRED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéǫúíŕéð, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_REQUIRED" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ŕéǫúíŕéð, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="PROPERTY_BE_INIT_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé íñíţ-óñļý, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="PROPERTY_NOT_BE_INIT_ONLY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé íñíţ-óñļý, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="PROPERTY_HAVE_INDEX_PARAMETERS" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé íñðéẋ þáŕáɱéţéŕš ({1}), ƀúţ ƒóúñð ({2}). !!]</value>
+  </data>
+  <data name="URI_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ÚŔÍ, ƀúţ ƒóúñð &lt;ñúļļ&gt;. !!]</value>
+  </data>
+  <data name="URI_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="URI_NOT_BE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="URI_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ñúļļ, ƀúţ ƒóúñð {1}. !!]</value>
+  </data>
+  <data name="URI_NOT_BE_NULL" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé ñúļļ, ƀúţ ƒóúñð &lt;ñúļļ&gt;. !!]</value>
+  </data>
+  <data name="URI_BE_ABSOLUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áƀšóļúţé, ƀúţ íţ íš ŕéļáţíṽé. !!]</value>
+  </data>
+  <data name="URI_BE_RELATIVE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé ŕéļáţíṽé, ƀúţ íţ íš áƀšóļúţé. !!]</value>
+  </data>
+  <data name="URI_REQUIRE_ABSOLUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áñ áƀšóļúţé ÚŔÍ, ƀúţ íţ íš ŕéļáţíṽé. !!]</value>
+  </data>
+  <data name="URI_HAVE_SCHEME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé šçĥéɱé '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="URI_NOT_HAVE_SCHEME" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé šçĥéɱé '{1}', ƀúţ íţ ðíð. !!]</value>
+  </data>
+  <data name="URI_HAVE_HOST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ĥóšţ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="URI_NOT_HAVE_HOST" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ĥóšţ '{1}', ƀúţ íţ ðíð. !!]</value>
+  </data>
+  <data name="URI_HAVE_PORT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þóŕţ {1}, ƀúţ ƒóúñð {2}. !!]</value>
+  </data>
+  <data name="URI_NOT_HAVE_PORT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé þóŕţ {1}, ƀúţ íţ ðíð. !!]</value>
+  </data>
+  <data name="URI_HAVE_PATH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé þáţĥ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="URI_NOT_HAVE_PATH" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé þáţĥ '{1}', ƀúţ íţ ðíð. !!]</value>
+  </data>
+  <data name="URI_HAVE_FRAGMENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ƒŕáĝɱéñţ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="URI_NOT_HAVE_FRAGMENT" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ƒŕáĝɱéñţ '{1}', ƀúţ íţ ðíð. !!]</value>
+  </data>
+  <data name="URI_QUERY_MISSING" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ǫúéŕý þáŕáɱéţéŕ '{1}', ƀúţ íţ ŵáš ñóţ ƒóúñð (áṽáíļáƀļé: {2}). !!]</value>
+  </data>
+  <data name="URI_QUERY_VALUE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ĥáṽé ǫúéŕý þáŕáɱéţéŕ '{1}' ŵíţĥ ṽáļúé '{2}', ƀúţ ƒóúñð '{3}'. !!]</value>
+  </data>
+  <data name="URI_NOT_QUERY" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ĥáṽé ǫúéŕý þáŕáɱéţéŕ '{1}', ƀúţ ƒóúñð '{2}'. !!]</value>
+  </data>
+  <data name="URI_BASE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé á ƀášé óƒ {1}, ƀúţ íţ ŵáš ñóţ. !!]</value>
+  </data>
+  <data name="URI_NOT_BASE_OF" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ñóţ ţó ƀé á ƀášé óƒ {1}, ƀúţ íţ ŵáš. !!]</value>
+  </data>
+  <data name="URI_BASE_REQUIRES_ABSOLUTE" xml:space="preserve">
+    <value>[!! Éẋþéçţéð {0} ţó ƀé áñ áƀšóļúţé ƀášé ÚŔÍ, ƀúţ íţ íš ŕéļáţíṽé. !!]</value>
+  </data>
+</root>

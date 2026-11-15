@@ -9,6 +9,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Localization expansion: complete Spanish (`es`) and German (`de`) satellite resources, a committed
+  `qps-ploc` pseudo-locale for detecting hardcoded messages, a `scripts/docs/check-localization.ps1`
+  completeness gate (missing/extra/empty keys, with the French reference satellite explicitly
+  allowlisted as partial), documented culture fallback (`es-ES` → `es` → English), and a translator
+  guide in `CONTRIBUTING.md`. Invariant numeric formatting and translated `because`/scope headers are
+  covered by tests.
 - CI report formats for `AssertionResult` and `SoftAssertions`: `ToReport(AssertionReportFormat)` emits
   SARIF 2.1.0, JUnit XML, GitHub Actions annotations, or Markdown alongside the existing JSON.
   `AssertionFailure` now accepts optional `RuleId`, `Severity`, `File`, `Line`, and `Column` metadata
