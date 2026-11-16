@@ -85,7 +85,7 @@ public class StringParsingTests {
 
         Assert.AreEqual(0, invalid.Which);
         Assert.AreEqual(0, missing.Which);
-        Assert.AreEqual(2, scope.Discard().Length);
+        Assert.HasCount(2, scope.Discard());
     }
 
     [TestMethod]

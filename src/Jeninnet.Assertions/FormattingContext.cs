@@ -141,10 +141,7 @@ internal static class FormattingContext {
 
     /// <summary>Creates the reference-identity set used for cycle detection.</summary>
     /// <returns>A new set using <see cref="ReferenceComparer.Instance"/>.</returns>
-    private static HashSet<object> CreateReferenceSet() {
-        var visited = new HashSet<object>(ReferenceComparer.Instance);
-        return visited;
-    }
+    private static HashSet<object> CreateReferenceSet() => [with(ReferenceComparer.Instance)];
 
     /// <summary>Collapses whitespace runs to single spaces and trims.</summary>
     /// <param name="text">The text to collapse.</param>
