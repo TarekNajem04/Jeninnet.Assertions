@@ -16,10 +16,7 @@ internal static class SnapshotNaming {
 #endif
     /// <summary>Creates the project-directory cache with the path comparer.</summary>
     /// <returns>A new dictionary using <see cref="PathComparer"/>.</returns>
-    private static Dictionary<string, string> CreateProjectDirectories() {
-        var directories = new Dictionary<string, string>(PathComparer);
-        return directories;
-    }
+    private static Dictionary<string, string> CreateProjectDirectories() => [with(PathComparer)];
 
     /// <summary>Resolves the snapshot base name and appends configured prefixes/suffixes.</summary>
     /// <param name="snapshotName">The explicit name supplied to the assertion, when any.</param>
