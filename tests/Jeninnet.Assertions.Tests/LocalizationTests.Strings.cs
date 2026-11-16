@@ -12,32 +12,32 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string subject = "actual";
-        var be = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().Be("expected"));
-        Assert.AreEqual("المتوقع من subject أن يكون 'expected'، لكن وُجد 'actual'.", be.Message);
+        var be = Throws<AssertionFailedException>(() => subject.Should().Be("expected"));
+        be.Message.Should().Be("المتوقع من subject أن يكون 'expected'، لكن وُجد 'actual'.");
 
         const string text = "x";
-        var notBe = Assert.ThrowsExactly<AssertionFailedException>(() => text.Should().NotBe("x"));
-        Assert.AreEqual("المتوقع من text ألا يكون 'x'، لكن وُجد 'x'.", notBe.Message);
+        var notBe = Throws<AssertionFailedException>(() => text.Should().NotBe("x"));
+        notBe.Message.Should().Be("المتوقع من text ألا يكون 'x'، لكن وُجد 'x'.");
 
         const string padded = "  hello";
-        var equivalent = Assert.ThrowsExactly<AssertionFailedException>(() => padded.Should().BeEquivalentTo("HELLO"));
-        Assert.AreEqual("المتوقع من padded أن يكافئ 'HELLO'، لكن وُجد '  hello'.", equivalent.Message);
+        var equivalent = Throws<AssertionFailedException>(() => padded.Should().BeEquivalentTo("HELLO"));
+        equivalent.Message.Should().Be("المتوقع من padded أن يكافئ 'HELLO'، لكن وُجد '  hello'.");
 
         const string word = "hello";
-        var notEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => word.Should().NotBeEquivalentTo("HELLO"));
-        Assert.AreEqual("المتوقع من word ألا يكافئ 'HELLO'، لكن وُجد 'hello'.", notEquivalent.Message);
+        var notEquivalent = Throws<AssertionFailedException>(() => word.Should().NotBeEquivalentTo("HELLO"));
+        notEquivalent.Message.Should().Be("المتوقع من word ألا يكافئ 'HELLO'، لكن وُجد 'hello'.");
 
         const string letter = "z";
-        var oneOf = Assert.ThrowsExactly<AssertionFailedException>(() => letter.Should().BeOneOf("a", "b"));
-        Assert.AreEqual("المتوقع من letter أن يكون أحد 'a', 'b'، لكن وُجد 'z'.", oneOf.Message);
+        var oneOf = Throws<AssertionFailedException>(() => letter.Should().BeOneOf("a", "b"));
+        oneOf.Message.Should().Be("المتوقع من letter أن يكون أحد 'a', 'b'، لكن وُجد 'z'.");
 
         const string present = "x";
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => present.Should().BeNull());
-        Assert.AreEqual("المتوقع من present أن يكون null، لكنه لم يكن null.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => present.Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من present أن يكون null، لكنه لم يكن null.");
 
         const string? missing = null;
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missing ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missing.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missing ألا يكون null، لكن وُجد null.");
     }
 
     [TestMethod]
@@ -45,33 +45,33 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string subject = "x";
-        var beEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().BeEmpty());
-        Assert.AreEqual("المتوقع من subject أن يكون فارغاً، لكن وُجد 'x'.", beEmpty.Message);
+        var beEmpty = Throws<AssertionFailedException>(() => subject.Should().BeEmpty());
+        beEmpty.Message.Should().Be("المتوقع من subject أن يكون فارغاً، لكن وُجد 'x'.");
 
         const string? missing = null;
-        var beEmptyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeEmpty());
-        Assert.AreEqual("المتوقع من missing أن يكون فارغاً، لكنه كان null.", beEmptyNull.Message);
+        var beEmptyNull = Throws<AssertionFailedException>(() => missing.Should().BeEmpty());
+        beEmptyNull.Message.Should().Be("المتوقع من missing أن يكون فارغاً، لكنه كان null.");
 
         const string empty = "";
-        var notBeEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => empty.Should().NotBeEmpty());
-        Assert.AreEqual("المتوقع من empty ألا يكون فارغاً، لكنه كان فارغاً.", notBeEmpty.Message);
+        var notBeEmpty = Throws<AssertionFailedException>(() => empty.Should().NotBeEmpty());
+        notBeEmpty.Message.Should().Be("المتوقع من empty ألا يكون فارغاً، لكنه كان فارغاً.");
 
-        var blank = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().BeNullOrWhiteSpace());
-        Assert.AreEqual("المتوقع من subject أن يكون null أو مسافة بيضاء، لكن وُجد 'x'.", blank.Message);
+        var blank = Throws<AssertionFailedException>(() => subject.Should().BeNullOrWhiteSpace());
+        blank.Message.Should().Be("المتوقع من subject أن يكون null أو مسافة بيضاء، لكن وُجد 'x'.");
 
         const string spaces = "   ";
-        var notBlank = Assert.ThrowsExactly<AssertionFailedException>(() => spaces.Should().NotBeNullOrWhiteSpace());
-        Assert.AreEqual("المتوقع من spaces ألا يكون null أو مسافة بيضاء، لكن وُجد '   '.", notBlank.Message);
+        var notBlank = Throws<AssertionFailedException>(() => spaces.Should().NotBeNullOrWhiteSpace());
+        notBlank.Message.Should().Be("المتوقع من spaces ألا يكون null أو مسافة بيضاء، لكن وُجد '   '.");
 
         const string greeting = "hi";
-        var length = Assert.ThrowsExactly<AssertionFailedException>(() => greeting.Should().HaveLength(3));
-        Assert.AreEqual("المتوقع من greeting أن يكون طوله 3، لكن وُجد 'hi' بطول 2.", length.Message);
+        var length = Throws<AssertionFailedException>(() => greeting.Should().HaveLength(3));
+        length.Message.Should().Be("المتوقع من greeting أن يكون طوله 3، لكن وُجد 'hi' بطول 2.");
 
-        var lengthNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveLength(3));
-        Assert.AreEqual("المتوقع من missing أن يكون طوله 3، لكنه كان null.", lengthNull.Message);
+        var lengthNull = Throws<AssertionFailedException>(() => missing.Should().HaveLength(3));
+        lengthNull.Message.Should().Be("المتوقع من missing أن يكون طوله 3، لكنه كان null.");
 
-        var notLength = Assert.ThrowsExactly<AssertionFailedException>(() => greeting.Should().NotHaveLength(2));
-        Assert.AreEqual("المتوقع من greeting ألا يكون طوله 2، لكن وُجد 'hi' بطول 2.", notLength.Message);
+        var notLength = Throws<AssertionFailedException>(() => greeting.Should().NotHaveLength(2));
+        notLength.Message.Should().Be("المتوقع من greeting ألا يكون طوله 2، لكن وُجد 'hi' بطول 2.");
     }
 
     [TestMethod]
@@ -79,19 +79,19 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string mixed = "aBC";
-        var upper = Assert.ThrowsExactly<AssertionFailedException>(() => mixed.Should().BeUpperCased());
-        Assert.AreEqual("المتوقع من mixed أن يكون بأحرف كبيرة، لكن وُجد 'aBC'.", upper.Message);
+        var upper = Throws<AssertionFailedException>(() => mixed.Should().BeUpperCased());
+        upper.Message.Should().Be("المتوقع من mixed أن يكون بأحرف كبيرة، لكن وُجد 'aBC'.");
 
         const string shout = "ABC";
-        var notUpper = Assert.ThrowsExactly<AssertionFailedException>(() => shout.Should().NotBeUpperCased());
-        Assert.AreEqual("المتوقع من shout ألا يكون بأحرف كبيرة، لكن وُجد 'ABC'.", notUpper.Message);
+        var notUpper = Throws<AssertionFailedException>(() => shout.Should().NotBeUpperCased());
+        notUpper.Message.Should().Be("المتوقع من shout ألا يكون بأحرف كبيرة، لكن وُجد 'ABC'.");
 
-        var lower = Assert.ThrowsExactly<AssertionFailedException>(() => mixed.Should().BeLowerCased());
-        Assert.AreEqual("المتوقع من mixed أن يكون بأحرف صغيرة، لكن وُجد 'aBC'.", lower.Message);
+        var lower = Throws<AssertionFailedException>(() => mixed.Should().BeLowerCased());
+        lower.Message.Should().Be("المتوقع من mixed أن يكون بأحرف صغيرة، لكن وُجد 'aBC'.");
 
         const string quiet = "abc";
-        var notLower = Assert.ThrowsExactly<AssertionFailedException>(() => quiet.Should().NotBeLowerCased());
-        Assert.AreEqual("المتوقع من quiet ألا يكون بأحرف صغيرة، لكن وُجد 'abc'.", notLower.Message);
+        var notLower = Throws<AssertionFailedException>(() => quiet.Should().NotBeLowerCased());
+        notLower.Message.Should().Be("المتوقع من quiet ألا يكون بأحرف صغيرة، لكن وُجد 'abc'.");
     }
 
     [TestMethod]
@@ -99,22 +99,22 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string? missing = null;
-        var containNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Contain("x"));
-        Assert.AreEqual("المتوقع من missing أن يحتوي 'x'، لكنه كان null.", containNull.Message);
+        var containNull = Throws<AssertionFailedException>(() => missing.Should().Contain("x"));
+        containNull.Message.Should().Be("المتوقع من missing أن يحتوي 'x'، لكنه كان null.");
 
         const string subject = "hello";
-        var contain = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().Contain("bye"));
-        Assert.AreEqual("المتوقع من subject أن يحتوي 'bye'، لكن وُجد 'hello'.", contain.Message);
+        var contain = Throws<AssertionFailedException>(() => subject.Should().Contain("bye"));
+        contain.Message.Should().Be("المتوقع من subject أن يحتوي 'bye'، لكن وُجد 'hello'.");
 
-        var containTimesNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Contain("a", Exactly.Twice()));
-        Assert.AreEqual("المتوقع من missing أن يحتوي 'a' exactly twice، لكنه كان null.", containTimesNull.Message);
+        var containTimesNull = Throws<AssertionFailedException>(() => missing.Should().Contain("a", Exactly.Twice()));
+        containTimesNull.Message.Should().Be("المتوقع من missing أن يحتوي 'a' exactly twice، لكنه كان null.");
 
         const string triple = "aaa";
-        var containTimes = Assert.ThrowsExactly<AssertionFailedException>(() => triple.Should().Contain("a", Exactly.Twice()));
-        Assert.AreEqual("المتوقع من triple أن يحتوي 'a' exactly twice، لكن وُجد 3 occurrences.", containTimes.Message);
+        var containTimes = Throws<AssertionFailedException>(() => triple.Should().Contain("a", Exactly.Twice()));
+        containTimes.Message.Should().Be("المتوقع من triple أن يحتوي 'a' exactly twice، لكن وُجد 3 occurrences.");
 
-        var notContain = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().NotContain("ell"));
-        Assert.AreEqual("المتوقع من subject ألا يحتوي 'ell'، لكن وُجد 'hello'.", notContain.Message);
+        var notContain = Throws<AssertionFailedException>(() => subject.Should().NotContain("ell"));
+        notContain.Message.Should().Be("المتوقع من subject ألا يحتوي 'ell'، لكن وُجد 'hello'.");
     }
 
     [TestMethod]
@@ -122,22 +122,22 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string? missing = null;
-        var allNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainAll("x"));
-        Assert.AreEqual("المتوقع من missing أن يحتوي كل السلاسل المعطاة، لكنه كان null.", allNull.Message);
+        var allNull = Throws<AssertionFailedException>(() => missing.Should().ContainAll("x"));
+        allNull.Message.Should().Be("المتوقع من missing أن يحتوي كل السلاسل المعطاة، لكنه كان null.");
 
         const string subject = "hello";
-        var allMissing = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().ContainAll("bye"));
-        Assert.AreEqual("المتوقع من subject أن يحتوي 'bye'، لكنه لم يُعثر عليه.", allMissing.Message);
+        var allMissing = Throws<AssertionFailedException>(() => subject.Should().ContainAll("bye"));
+        allMissing.Message.Should().Be("المتوقع من subject أن يحتوي 'bye'، لكنه لم يُعثر عليه.");
 
         const string sentence = "hello world";
-        var notAll = Assert.ThrowsExactly<AssertionFailedException>(() => sentence.Should().NotContainAll("hello", "world"));
-        Assert.AreEqual("المتوقع من sentence ألا يحتوي كل السلاسل المعطاة، لكنها كلها وُجدت.", notAll.Message);
+        var notAll = Throws<AssertionFailedException>(() => sentence.Should().NotContainAll("hello", "world"));
+        notAll.Message.Should().Be("المتوقع من sentence ألا يحتوي كل السلاسل المعطاة، لكنها كلها وُجدت.");
 
-        var any = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().ContainAny("x", "y"));
-        Assert.AreEqual("المتوقع من subject أن يحتوي واحداً على الأقل من 'x', 'y'، but none was found.", any.Message);
+        var any = Throws<AssertionFailedException>(() => subject.Should().ContainAny("x", "y"));
+        any.Message.Should().Be("المتوقع من subject أن يحتوي واحداً على الأقل من 'x', 'y'، but none was found.");
 
-        var notAny = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().NotContainAny("x", "ell"));
-        Assert.AreEqual("المتوقع من subject ألا يحتوي أياً من 'x', 'ell'، لكن وُجد 'ell'.", notAny.Message);
+        var notAny = Throws<AssertionFailedException>(() => subject.Should().NotContainAny("x", "ell"));
+        notAny.Message.Should().Be("المتوقع من subject ألا يحتوي أياً من 'x', 'ell'، لكن وُجد 'ell'.");
     }
 
     [TestMethod]
@@ -145,23 +145,23 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string subject = "Hello World";
-        var equivalent = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().ContainEquivalentOf("BYE"));
-        Assert.AreEqual("المتوقع من subject أن يحتوي ما يكافئ 'BYE'، لكن وُجد 'Hello World'.", equivalent.Message);
+        var equivalent = Throws<AssertionFailedException>(() => subject.Should().ContainEquivalentOf("BYE"));
+        equivalent.Message.Should().Be("المتوقع من subject أن يحتوي ما يكافئ 'BYE'، لكن وُجد 'Hello World'.");
 
         const string? missing = null;
-        var equivalentNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainEquivalentOf("BYE"));
-        Assert.AreEqual("المتوقع من missing أن يحتوي ما يكافئ 'BYE'، لكنه كان null.", equivalentNull.Message);
+        var equivalentNull = Throws<AssertionFailedException>(() => missing.Should().ContainEquivalentOf("BYE"));
+        equivalentNull.Message.Should().Be("المتوقع من missing أن يحتوي ما يكافئ 'BYE'، لكنه كان null.");
 
         const string triple = "aaa";
-        var equivalentTimes = Assert.ThrowsExactly<AssertionFailedException>(() => triple.Should().ContainEquivalentOf("a", Exactly.Twice()));
-        Assert.AreEqual("المتوقع من triple أن يحتوي ما يكافئ 'a' exactly twice، لكن وُجد 3 occurrences.", equivalentTimes.Message);
+        var equivalentTimes = Throws<AssertionFailedException>(() => triple.Should().ContainEquivalentOf("a", Exactly.Twice()));
+        equivalentTimes.Message.Should().Be("المتوقع من triple أن يحتوي ما يكافئ 'a' exactly twice، لكن وُجد 3 occurrences.");
 
-        var equivalentTimesNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainEquivalentOf("a", Exactly.Twice()));
-        Assert.AreEqual("المتوقع من missing أن يحتوي ما يكافئ 'a' exactly twice، لكنه كان null.", equivalentTimesNull.Message);
+        var equivalentTimesNull = Throws<AssertionFailedException>(() => missing.Should().ContainEquivalentOf("a", Exactly.Twice()));
+        equivalentTimesNull.Message.Should().Be("المتوقع من missing أن يحتوي ما يكافئ 'a' exactly twice، لكنه كان null.");
 
         const string greeting = "Hello";
-        var notEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => greeting.Should().NotContainEquivalentOf("ELL"));
-        Assert.AreEqual("المتوقع من greeting ألا يحتوي ما يكافئ 'ELL'، لكن وُجد 'Hello'.", notEquivalent.Message);
+        var notEquivalent = Throws<AssertionFailedException>(() => greeting.Should().NotContainEquivalentOf("ELL"));
+        notEquivalent.Message.Should().Be("المتوقع من greeting ألا يحتوي ما يكافئ 'ELL'، لكن وُجد 'Hello'.");
     }
 
     [TestMethod]
@@ -169,45 +169,45 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string subject = "hello";
-        var start = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().StartWith("bye"));
-        Assert.AreEqual("المتوقع من subject أن يبدأ بـ 'bye'، لكن وُجد 'hello'.", start.Message);
+        var start = Throws<AssertionFailedException>(() => subject.Should().StartWith("bye"));
+        start.Message.Should().Be("المتوقع من subject أن يبدأ بـ 'bye'، لكن وُجد 'hello'.");
 
         const string? missing = null;
-        var startNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().StartWith("he"));
-        Assert.AreEqual("المتوقع من missing أن يبدأ بـ 'he'، لكنه كان null.", startNull.Message);
+        var startNull = Throws<AssertionFailedException>(() => missing.Should().StartWith("he"));
+        startNull.Message.Should().Be("المتوقع من missing أن يبدأ بـ 'he'، لكنه كان null.");
 
-        var notStart = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().NotStartWith("he"));
-        Assert.AreEqual("المتوقع من subject ألا يبدأ بـ 'he'، لكن وُجد 'hello'.", notStart.Message);
+        var notStart = Throws<AssertionFailedException>(() => subject.Should().NotStartWith("he"));
+        notStart.Message.Should().Be("المتوقع من subject ألا يبدأ بـ 'he'، لكن وُجد 'hello'.");
 
         const string greeting = "Hello";
-        var startEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => greeting.Should().StartWithEquivalentOf("bye"));
-        Assert.AreEqual("المتوقع من greeting أن يبدأ بما يكافئ 'bye'، لكن وُجد 'Hello'.", startEquivalent.Message);
+        var startEquivalent = Throws<AssertionFailedException>(() => greeting.Should().StartWithEquivalentOf("bye"));
+        startEquivalent.Message.Should().Be("المتوقع من greeting أن يبدأ بما يكافئ 'bye'، لكن وُجد 'Hello'.");
 
-        var startEquivalentNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().StartWithEquivalentOf("he"));
-        Assert.AreEqual("المتوقع من missing أن يبدأ بما يكافئ 'he'، لكنه كان null.", startEquivalentNull.Message);
+        var startEquivalentNull = Throws<AssertionFailedException>(() => missing.Should().StartWithEquivalentOf("he"));
+        startEquivalentNull.Message.Should().Be("المتوقع من missing أن يبدأ بما يكافئ 'he'، لكنه كان null.");
 
-        var notStartEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => greeting.Should().NotStartWithEquivalentOf("HE"));
-        Assert.AreEqual("المتوقع من greeting ألا يبدأ بما يكافئ 'HE'، لكن وُجد 'Hello'.", notStartEquivalent.Message);
+        var notStartEquivalent = Throws<AssertionFailedException>(() => greeting.Should().NotStartWithEquivalentOf("HE"));
+        notStartEquivalent.Message.Should().Be("المتوقع من greeting ألا يبدأ بما يكافئ 'HE'، لكن وُجد 'Hello'.");
 
         const string file = "file.cs";
-        var end = Assert.ThrowsExactly<AssertionFailedException>(() => file.Should().EndWith(".txt"));
-        Assert.AreEqual("المتوقع من file أن ينتهي بـ '.txt'، لكن وُجد 'file.cs'.", end.Message);
+        var end = Throws<AssertionFailedException>(() => file.Should().EndWith(".txt"));
+        end.Message.Should().Be("المتوقع من file أن ينتهي بـ '.txt'، لكن وُجد 'file.cs'.");
 
-        var endNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().EndWith(".txt"));
-        Assert.AreEqual("المتوقع من missing أن ينتهي بـ '.txt'، لكنه كان null.", endNull.Message);
+        var endNull = Throws<AssertionFailedException>(() => missing.Should().EndWith(".txt"));
+        endNull.Message.Should().Be("المتوقع من missing أن ينتهي بـ '.txt'، لكنه كان null.");
 
-        var notEnd = Assert.ThrowsExactly<AssertionFailedException>(() => file.Should().NotEndWith(".cs"));
-        Assert.AreEqual("المتوقع من file ألا ينتهي بـ '.cs'، لكن وُجد 'file.cs'.", notEnd.Message);
+        var notEnd = Throws<AssertionFailedException>(() => file.Should().NotEndWith(".cs"));
+        notEnd.Message.Should().Be("المتوقع من file ألا ينتهي بـ '.cs'، لكن وُجد 'file.cs'.");
 
         const string upper = "file.CS";
-        var endEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => upper.Should().EndWithEquivalentOf(".txt"));
-        Assert.AreEqual("المتوقع من upper أن ينتهي بما يكافئ '.txt'، لكن وُجد 'file.CS'.", endEquivalent.Message);
+        var endEquivalent = Throws<AssertionFailedException>(() => upper.Should().EndWithEquivalentOf(".txt"));
+        endEquivalent.Message.Should().Be("المتوقع من upper أن ينتهي بما يكافئ '.txt'، لكن وُجد 'file.CS'.");
 
-        var endEquivalentNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().EndWithEquivalentOf(".txt"));
-        Assert.AreEqual("المتوقع من missing أن ينتهي بما يكافئ '.txt'، لكنه كان null.", endEquivalentNull.Message);
+        var endEquivalentNull = Throws<AssertionFailedException>(() => missing.Should().EndWithEquivalentOf(".txt"));
+        endEquivalentNull.Message.Should().Be("المتوقع من missing أن ينتهي بما يكافئ '.txt'، لكنه كان null.");
 
-        var notEndEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => upper.Should().NotEndWithEquivalentOf(".CS"));
-        Assert.AreEqual("المتوقع من upper ألا ينتهي بما يكافئ '.CS'، لكن وُجد 'file.CS'.", notEndEquivalent.Message);
+        var notEndEquivalent = Throws<AssertionFailedException>(() => upper.Should().NotEndWithEquivalentOf(".CS"));
+        notEndEquivalent.Message.Should().Be("المتوقع من upper ألا ينتهي بما يكافئ '.CS'، لكن وُجد 'file.CS'.");
     }
 
     [TestMethod]
@@ -215,38 +215,38 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         const string subject = "hello";
-        var match = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().Match("h?llo!"));
-        Assert.AreEqual("المتوقع من subject أن يطابق 'h?llo!'، but found 'hello'.", match.Message);
+        var match = Throws<AssertionFailedException>(() => subject.Should().Match("h?llo!"));
+        match.Message.Should().Be("المتوقع من subject أن يطابق 'h?llo!'، but found 'hello'.");
 
         const string? missing = null;
-        var matchNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Match("H*"));
-        Assert.AreEqual("المتوقع من missing أن يطابق 'H*'، but it was null.", matchNull.Message);
+        var matchNull = Throws<AssertionFailedException>(() => missing.Should().Match("H*"));
+        matchNull.Message.Should().Be("المتوقع من missing أن يطابق 'H*'، but it was null.");
 
-        var notMatch = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().NotMatch("h*"));
-        Assert.AreEqual("المتوقع من subject ألا يطابق 'h*'، لكن وُجد 'hello'.", notMatch.Message);
+        var notMatch = Throws<AssertionFailedException>(() => subject.Should().NotMatch("h*"));
+        notMatch.Message.Should().Be("المتوقع من subject ألا يطابق 'h*'، لكن وُجد 'hello'.");
 
-        var matchEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().MatchEquivalentOf("B*"));
-        Assert.AreEqual("المتوقع من subject أن يطابق ما يكافئ 'B*'، but found 'hello'.", matchEquivalent.Message);
+        var matchEquivalent = Throws<AssertionFailedException>(() => subject.Should().MatchEquivalentOf("B*"));
+        matchEquivalent.Message.Should().Be("المتوقع من subject أن يطابق ما يكافئ 'B*'، but found 'hello'.");
 
-        var notMatchEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().NotMatchEquivalentOf("H*"));
-        Assert.AreEqual("المتوقع من subject ألا يطابق ما يكافئ 'H*'، لكن وُجد 'hello'.", notMatchEquivalent.Message);
+        var notMatchEquivalent = Throws<AssertionFailedException>(() => subject.Should().NotMatchEquivalentOf("H*"));
+        notMatchEquivalent.Message.Should().Be("المتوقع من subject ألا يطابق ما يكافئ 'H*'، لكن وُجد 'hello'.");
 
-        var regexNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().MatchRegex(@"\d+"));
-        Assert.AreEqual(@"المتوقع من missing أن يطابق التعبير النمطي '\d+'، لكنه كان null.", regexNull.Message);
+        var regexNull = Throws<AssertionFailedException>(() => missing.Should().MatchRegex(@"\d+"));
+        regexNull.Message.Should().Be(@"المتوقع من missing أن يطابق التعبير النمطي '\d+'، لكنه كان null.");
 
-        var regex = Assert.ThrowsExactly<AssertionFailedException>(() => subject.Should().MatchRegex(@"\d+"));
-        Assert.AreEqual(@"المتوقع من subject أن يطابق التعبير النمطي '\d+'، لكن وُجد 'hello'.", regex.Message);
+        var regex = Throws<AssertionFailedException>(() => subject.Should().MatchRegex(@"\d+"));
+        regex.Message.Should().Be(@"المتوقع من subject أن يطابق التعبير النمطي '\d+'، لكن وُجد 'hello'.");
 
         const string order = "order 123 shipped";
-        var regexTimes = Assert.ThrowsExactly<AssertionFailedException>(() => order.Should().MatchRegex(@"\d", Exactly.Twice()));
-        Assert.AreEqual(@"المتوقع من order أن يطابق التعبير النمطي '\d' exactly twice، لكن وُجد 3 matches.", regexTimes.Message);
+        var regexTimes = Throws<AssertionFailedException>(() => order.Should().MatchRegex(@"\d", Exactly.Twice()));
+        regexTimes.Message.Should().Be(@"المتوقع من order أن يطابق التعبير النمطي '\d' exactly twice، لكن وُجد 3 matches.");
 
-        var regexTimesNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().MatchRegex(@"\d", Exactly.Twice()));
-        Assert.AreEqual(@"المتوقع من missing أن يطابق التعبير النمطي '\d' exactly twice، لكنه كان null.", regexTimesNull.Message);
+        var regexTimesNull = Throws<AssertionFailedException>(() => missing.Should().MatchRegex(@"\d", Exactly.Twice()));
+        regexTimesNull.Message.Should().Be(@"المتوقع من missing أن يطابق التعبير النمطي '\d' exactly twice، لكنه كان null.");
 
         const string code = "abc123";
-        var notRegex = Assert.ThrowsExactly<AssertionFailedException>(() => code.Should().NotMatchRegex(@"\d+"));
-        Assert.AreEqual(@"المتوقع من code ألا يطابق التعبير النمطي '\d+'، لكن وُجد 'abc123'.", notRegex.Message);
+        var notRegex = Throws<AssertionFailedException>(() => code.Should().NotMatchRegex(@"\d+"));
+        notRegex.Message.Should().Be(@"المتوقع من code ألا يطابق التعبير النمطي '\d+'، لكن وُجد 'abc123'.");
     }
 
     [TestMethod]
@@ -254,23 +254,23 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var words = new List<string> { "a", "b" };
-        var allBe = Assert.ThrowsExactly<AssertionFailedException>(() => words.Should().AllBe("a"));
-        Assert.AreEqual("المتوقع من words أن تكون كل عناصره 'a'، لكن وُجد 'b'.", allBe.Message);
+        var allBe = Throws<AssertionFailedException>(() => words.Should().AllBe("a"));
+        allBe.Message.Should().Be("المتوقع من words أن تكون كل عناصره 'a'، لكن وُجد 'b'.");
 
         IEnumerable<string>? missing = null;
-        var allBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().AllBe("a"));
-        Assert.AreEqual("المتوقع من missing أن تكون كل عناصره 'a'، لكن المجموعة null.", allBeNull.Message);
+        var allBeNull = Throws<AssertionFailedException>(() => missing.Should().AllBe("a"));
+        allBeNull.Message.Should().Be("المتوقع من missing أن تكون كل عناصره 'a'، لكن المجموعة null.");
 
-        var contain = Assert.ThrowsExactly<AssertionFailedException>(() => words.Should().ContainMatch("z*"));
-        Assert.AreEqual("المتوقع من words أن يحتوي عنصرًا يطابق 'z*'، لكن لم يُعثر على أي.", contain.Message);
+        var contain = Throws<AssertionFailedException>(() => words.Should().ContainMatch("z*"));
+        contain.Message.Should().Be("المتوقع من words أن يحتوي عنصرًا يطابق 'z*'، لكن لم يُعثر على أي.");
 
-        var containNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainMatch("z*"));
-        Assert.AreEqual("المتوقع من missing أن يحتوي عنصرًا يطابق 'z*'، لكن المجموعة null.", containNull.Message);
+        var containNull = Throws<AssertionFailedException>(() => missing.Should().ContainMatch("z*"));
+        containNull.Message.Should().Be("المتوقع من missing أن يحتوي عنصرًا يطابق 'z*'، لكن المجموعة null.");
 
-        var notContain = Assert.ThrowsExactly<AssertionFailedException>(() => words.Should().NotContainMatch("a"));
-        Assert.AreEqual("المتوقع من words ألا يحتوي عنصرًا يطابق 'a'، لكن وُجد 'a'.", notContain.Message);
+        var notContain = Throws<AssertionFailedException>(() => words.Should().NotContainMatch("a"));
+        notContain.Message.Should().Be("المتوقع من words ألا يحتوي عنصرًا يطابق 'a'، لكن وُجد 'a'.");
 
-        var notContainNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotContainMatch("z*"));
-        Assert.AreEqual("المتوقع من missing ألا يحتوي عنصرًا يطابق 'z*'، لكن المجموعة null.", notContainNull.Message);
+        var notContainNull = Throws<AssertionFailedException>(() => missing.Should().NotContainMatch("z*"));
+        notContainNull.Message.Should().Be("المتوقع من missing ألا يحتوي عنصرًا يطابق 'z*'، لكن المجموعة null.");
     }
 }

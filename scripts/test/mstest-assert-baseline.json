@@ -66,7 +66,6 @@
     "tests/Jeninnet.Assertions.Tests/LocalizationExpansionTests.cs": 22,
     "tests/Jeninnet.Assertions.Tests/LocalizationTests.Collections.cs": 198,
     "tests/Jeninnet.Assertions.Tests/LocalizationTests.cs": 17,
-    "tests/Jeninnet.Assertions.Tests/LocalizationTests.Strings.cs": 124,
     "tests/Jeninnet.Assertions.Tests/LocalizationTests.ValuesAndNumeric.cs": 144,
     "tests/Jeninnet.Assertions.Tests/ManualClockTests.cs": 13,
     "tests/Jeninnet.Assertions.Tests/MatchAssertionsTests.cs": 30,
