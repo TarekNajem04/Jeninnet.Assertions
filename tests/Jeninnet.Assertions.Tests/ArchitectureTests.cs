@@ -63,11 +63,11 @@ public class ArchitectureTests {
         selector.ThatHaveNameEndingWith("Handler").Should().HaveCount(2);
         selector.ThatHaveNameMatching("^Order.*$").Should().HaveCount(1);
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatHaveName(null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatHaveNameStartingWith(null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatHaveNameEndingWith(null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatHaveNameMatching(null!));
-        Assert.ThrowsExactly<RegexParseException>(() => selector.ThatHaveNameMatching("["));
+        Throws<ArgumentNullException>(() => selector.ThatHaveName(null!));
+        Throws<ArgumentNullException>(() => selector.ThatHaveNameStartingWith(null!));
+        Throws<ArgumentNullException>(() => selector.ThatHaveNameEndingWith(null!));
+        Throws<ArgumentNullException>(() => selector.ThatHaveNameMatching(null!));
+        Throws<RegexParseException>(() => selector.ThatHaveNameMatching("["));
     }
 
     [TestMethod]
@@ -82,8 +82,8 @@ public class ArchitectureTests {
 #pragma warning restore CA2263
         selector.ThatAreAssignableFrom<ShapeFixtures.Circle>().Should().HaveCount(2);
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatAreAssignableTo((Type)null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatAreAssignableFrom((Type)null!));
+        Throws<ArgumentNullException>(() => selector.ThatAreAssignableTo((Type)null!));
+        Throws<ArgumentNullException>(() => selector.ThatAreAssignableFrom((Type)null!));
     }
 
     [TestMethod]
@@ -104,9 +104,9 @@ public class ArchitectureTests {
         new TypeSelector([typeof(DomainFixtures.MethodOnlyLeak)])
             .ThatHaveDependencyOn(InfrastructureNamespace).Should().HaveCount(0);
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatHaveDependencyOn(null!));
-        Assert.ThrowsExactly<ArgumentException>(() => selector.ThatHaveDependencyOn("  "));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selector.ThatDoNotHaveDependencyOn(null!));
+        Throws<ArgumentNullException>(() => selector.ThatHaveDependencyOn(null!));
+        Throws<ArgumentException>(() => selector.ThatHaveDependencyOn("  "));
+        Throws<ArgumentNullException>(() => selector.ThatDoNotHaveDependencyOn(null!));
     }
 
     [TestMethod]
@@ -114,12 +114,12 @@ public class ArchitectureTests {
         var selection = new TypeSelector([typeof(DomainFixtures.Order)]).Should();
         Type[] exposedWithNull = [null!];
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.HaveNameStartingWith(null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.HaveNameMatching(null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.NotDependOn((Type)null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.NotExposeTypes(exposedWithNull));
-        Assert.ThrowsExactly<ArgumentNullException>(() => new TypeSelector([typeof(object)]).ThatAreInAssembly(null!));
-        Assert.ThrowsExactly<ArgumentNullException>(() => new TypeSelector([typeof(object)]).ThatAreNotInAssembly(null!));
+        Throws<ArgumentNullException>(() => selection.HaveNameStartingWith(null!));
+        Throws<ArgumentNullException>(() => selection.HaveNameMatching(null!));
+        Throws<ArgumentNullException>(() => selection.NotDependOn((Type)null!));
+        Throws<ArgumentNullException>(() => selection.NotExposeTypes(exposedWithNull));
+        Throws<ArgumentNullException>(() => new TypeSelector([typeof(object)]).ThatAreInAssembly(null!));
+        Throws<ArgumentNullException>(() => new TypeSelector([typeof(object)]).ThatAreNotInAssembly(null!));
     }
 
     [TestMethod]
@@ -131,23 +131,23 @@ public class ArchitectureTests {
             typeof(DomainFixtures.MethodOnlyLeak),
         ]);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => selection.Should().NotDependOn(InfrastructureNamespace));
+        var ex = Throws<AssertionFailedException>(() => selection.Should().NotDependOn(InfrastructureNamespace));
 
-        Assert.Contains("2 type(s) do", ex.Message);
-        Assert.Contains("LeakyOrder", ex.Message);
-        Assert.Contains("AttributedLeak", ex.Message);
-        Assert.Contains("SqlConnection", ex.Message);
-        Assert.DoesNotContain("MethodOnlyLeak", ex.Message);
+        ex.Message.Should().Contain("2 type(s) do");
+        ex.Message.Should().Contain("LeakyOrder");
+        ex.Message.Should().Contain("AttributedLeak");
+        ex.Message.Should().Contain("SqlConnection");
+        ex.Message.Should().NotContain("MethodOnlyLeak");
 
         new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().NotDependOn(InfrastructureNamespace);
 
-        var typeEx = Assert.ThrowsExactly<AssertionFailedException>(
+        var typeEx = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(DomainFixtures.LeakyOrder)]).Should().NotDependOn(typeof(InfrastructureFixtures.SqlConnection)));
-        Assert.Contains("SqlConnection", typeEx.Message);
+        typeEx.Message.Should().Contain("SqlConnection");
 
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotDependOn((string)null!));
-        Assert.ThrowsExactly<ArgumentException>(
+        Throws<ArgumentException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotDependOn("  "));
     }
 
@@ -158,32 +158,32 @@ public class ArchitectureTests {
         application.Should().OnlyDependOn(DomainNamespace, "System");
         application.Should().OnlyDependOn([DomainNamespace, "System"], "the application layer stays above domain and the BCL");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => application.Should().OnlyDependOn(DomainNamespace));
+        var ex = Throws<AssertionFailedException>(() => application.Should().OnlyDependOn(DomainNamespace));
 
-        Assert.Contains("other dependencies", ex.Message);
-        Assert.Contains("System", ex.Message);
-        Assert.Contains("OrderService", ex.Message);
-        Assert.Contains("PricingService", ex.Message);
+        ex.Message.Should().Contain("other dependencies");
+        ex.Message.Should().Contain("System");
+        ex.Message.Should().Contain("OrderService");
+        ex.Message.Should().Contain("PricingService");
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => application.Should().OnlyDependOn((string[])null!));
-        Assert.ThrowsExactly<ArgumentException>(() => application.Should().OnlyDependOn());
-        Assert.ThrowsExactly<ArgumentException>(() => application.Should().OnlyDependOn("  "));
+        Throws<ArgumentNullException>(() => application.Should().OnlyDependOn((string[])null!));
+        Throws<ArgumentException>(() => application.Should().OnlyDependOn());
+        Throws<ArgumentException>(() => application.Should().OnlyDependOn("  "));
     }
 
     [TestMethod]
     public void NotDependOnAny_MatchesEveryTarget() {
         var selection = new TypeSelector([typeof(DomainFixtures.LeakyOrder)]);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => selection.Should().NotDependOnAny(InfrastructureNamespace, "System.Data"));
-        Assert.Contains("any of", ex.Message);
-        Assert.Contains("LeakyOrder", ex.Message);
+        ex.Message.Should().Contain("any of");
+        ex.Message.Should().Contain("LeakyOrder");
 
         selection.Should().NotDependOnAny("No.Such.Namespace");
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.Should().NotDependOnAny((string[])null!));
-        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().NotDependOnAny());
-        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().NotDependOnAny("  "));
+        Throws<ArgumentNullException>(() => selection.Should().NotDependOnAny((string[])null!));
+        Throws<ArgumentException>(() => selection.Should().NotDependOnAny());
+        Throws<ArgumentException>(() => selection.Should().NotDependOnAny("  "));
     }
 
     [TestMethod]
@@ -191,16 +191,16 @@ public class ArchitectureTests {
         new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().DependOn(DomainNamespace);
         new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().DependOn(typeof(DomainFixtures.IOrderRepository));
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn(InfrastructureNamespace));
-        Assert.Contains("do not", ex.Message);
-        Assert.Contains("Order", ex.Message);
+        ex.Message.Should().Contain("do not");
+        ex.Message.Should().Contain("Order");
 
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn((string)null!));
-        Assert.ThrowsExactly<ArgumentException>(
+        Throws<ArgumentException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn("  "));
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOn((Type)null!));
     }
 
@@ -208,16 +208,16 @@ public class ArchitectureTests {
     public void DependOnAny_RequiresAtLeastOneTarget() {
         new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().DependOnAny(DomainNamespace, "No.Such.Namespace");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny(InfrastructureNamespace, "No.Such.Namespace"));
-        Assert.Contains("at least one", ex.Message);
-        Assert.Contains("Order", ex.Message);
+        ex.Message.Should().Contain("at least one");
+        ex.Message.Should().Contain("Order");
 
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny((string[])null!));
-        Assert.ThrowsExactly<ArgumentException>(
+        Throws<ArgumentException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny());
-        Assert.ThrowsExactly<ArgumentException>(
+        Throws<ArgumentException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().DependOnAny("  "));
     }
 
@@ -228,33 +228,33 @@ public class ArchitectureTests {
         order.Should().OnlyBeDependedOnBy(ApplicationNamespace, InfrastructureNamespace, DomainNamespace);
         order.Should().OnlyBeDependedOnBy([ApplicationNamespace, InfrastructureNamespace, DomainNamespace], "the domain is the bottom layer");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => order.Should().OnlyBeDependedOnBy(ApplicationNamespace, InfrastructureNamespace));
-        Assert.Contains("only by", ex.Message);
-        Assert.Contains("IOrderRepository", ex.Message);
-        Assert.Contains("Quote", ex.Message);
-        Assert.DoesNotContain("OrderService", ex.Message);
-        Assert.DoesNotContain("SqlOrderRepository", ex.Message);
+        ex.Message.Should().Contain("only by");
+        ex.Message.Should().Contain("IOrderRepository");
+        ex.Message.Should().Contain("Quote");
+        ex.Message.Should().NotContain("OrderService");
+        ex.Message.Should().NotContain("SqlOrderRepository");
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => order.Should().OnlyBeDependedOnBy((string[])null!));
-        Assert.ThrowsExactly<ArgumentException>(() => order.Should().OnlyBeDependedOnBy());
-        Assert.ThrowsExactly<ArgumentException>(() => order.Should().OnlyBeDependedOnBy("  "));
+        Throws<ArgumentNullException>(() => order.Should().OnlyBeDependedOnBy((string[])null!));
+        Throws<ArgumentException>(() => order.Should().OnlyBeDependedOnBy());
+        Throws<ArgumentException>(() => order.Should().OnlyBeDependedOnBy("  "));
     }
 
     [TestMethod]
     public void NotBeDependedOnBy_MatchesSourcesAndIgnoresInternalDependencies() {
         new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy("No.Such.Namespace");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy(ApplicationNamespace));
-        Assert.Contains("OrderService", ex.Message);
+        ex.Message.Should().Contain("OrderService");
 
         var internalSelection = new TypeSelector([typeof(DomainFixtures.IOrderRepository), typeof(InfrastructureFixtures.SqlOrderRepository)]);
         internalSelection.Should().NotBeDependedOnBy(DomainNamespace);
 
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy(null!));
-        Assert.ThrowsExactly<ArgumentException>(
+        Throws<ArgumentException>(
             () => new TypeSelector([typeof(DomainFixtures.Order)]).Should().NotBeDependedOnBy("  "));
     }
 
@@ -277,10 +277,10 @@ public class ArchitectureTests {
         selection.Should().FollowLayers(domain, application, infrastructure);
 
         var reversed = new ArchitectureLayer("Application", ApplicationNamespace);
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => selection.Should().FollowLayers(domain, reversed, infrastructure));
-        Assert.Contains("Application -> Domain", ex.Message);
-        Assert.Contains("OrderService", ex.Message);
+        ex.Message.Should().Contain("Application -> Domain");
+        ex.Message.Should().Contain("OrderService");
     }
 
     [TestMethod]
@@ -289,9 +289,9 @@ public class ArchitectureTests {
         var sales = new ArchitectureLayer("Sales", typeof(DomainFixtures.Sales.Quote).Namespace!).DependsOn("Domain");
         var selection = new TypeSelector([typeof(DomainFixtures.OrderWithQuote), typeof(DomainFixtures.Sales.Quote)]);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => selection.Should().FollowLayers(domain, sales));
-        Assert.Contains("Domain -> Sales", ex.Message);
-        Assert.Contains("OrderWithQuote", ex.Message);
+        var ex = Throws<AssertionFailedException>(() => selection.Should().FollowLayers(domain, sales));
+        ex.Message.Should().Contain("Domain -> Sales");
+        ex.Message.Should().Contain("OrderWithQuote");
 
         new TypeSelector([typeof(DomainFixtures.Sales.Quote)]).Should().FollowLayers(domain, sales);
     }
@@ -303,9 +303,9 @@ public class ArchitectureTests {
 
         selection.Should().FollowLayers(shapes);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => selection.Should().FollowLayers([shapes], includingFrameworkDependencies: true));
-        Assert.Contains("Shapes -> Framework", ex.Message);
+        ex.Message.Should().Contain("Shapes -> Framework");
 
         var frameworkAware = new ArchitectureLayer("Shapes", ShapesNamespace).DependsOn(ArchitectureLayer.FrameworkLayerName);
         selection.Should().FollowLayers([frameworkAware], includingFrameworkDependencies: true);
@@ -315,34 +315,34 @@ public class ArchitectureTests {
     public void FollowLayers_ValidatesLayerDefinitions() {
         var selection = new TypeSelector([typeof(DomainFixtures.Order)]);
 
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.Should().FollowLayers((ArchitectureLayer[])null!));
-        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers());
+        Throws<ArgumentNullException>(() => selection.Should().FollowLayers((ArchitectureLayer[])null!));
+        Throws<ArgumentException>(() => selection.Should().FollowLayers());
         ArchitectureLayer[] layersWithNull = [null!];
-        Assert.ThrowsExactly<ArgumentNullException>(() => selection.Should().FollowLayers(layersWithNull));
-        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers(
+        Throws<ArgumentNullException>(() => selection.Should().FollowLayers(layersWithNull));
+        Throws<ArgumentException>(() => selection.Should().FollowLayers(
             new ArchitectureLayer("A", DomainNamespace),
             new ArchitectureLayer("A", ApplicationNamespace)));
-        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers(
+        Throws<ArgumentException>(() => selection.Should().FollowLayers(
             new ArchitectureLayer("A", DomainNamespace),
             new ArchitectureLayer("B", DomainNamespace)));
-        Assert.ThrowsExactly<ArgumentException>(() => selection.Should().FollowLayers(
+        Throws<ArgumentException>(() => selection.Should().FollowLayers(
             new ArchitectureLayer("A", DomainNamespace).DependsOn("Missing")));
     }
 
     [TestMethod]
     public void ArchitectureLayer_ValidatesNamePrefixAndDependencies() {
-        Assert.ThrowsExactly<ArgumentNullException>(() => new ArchitectureLayer(null!, DomainNamespace));
-        Assert.ThrowsExactly<ArgumentException>(() => new ArchitectureLayer(" ", DomainNamespace));
-        Assert.ThrowsExactly<ArgumentNullException>(() => new ArchitectureLayer("Domain", null!));
-        Assert.ThrowsExactly<ArgumentException>(() => new ArchitectureLayer("Domain", "  "));
+        Throws<ArgumentNullException>(() => GC.KeepAlive(new ArchitectureLayer(null!, DomainNamespace)));
+        Throws<ArgumentException>(() => GC.KeepAlive(new ArchitectureLayer(" ", DomainNamespace)));
+        Throws<ArgumentNullException>(() => GC.KeepAlive(new ArchitectureLayer("Domain", null!)));
+        Throws<ArgumentException>(() => GC.KeepAlive(new ArchitectureLayer("Domain", "  ")));
 
         var layer = new ArchitectureLayer(" Domain ", " " + DomainNamespace + " ");
-        Assert.AreEqual("Domain", layer.Name);
-        Assert.AreEqual(DomainNamespace, layer.NamespacePrefix);
-        Assert.AreSame(layer, layer.DependsOn("Application"));
-        Assert.ThrowsExactly<ArgumentNullException>(() => layer.DependsOn((string[])null!));
-        Assert.ThrowsExactly<ArgumentException>(() => layer.DependsOn());
-        Assert.ThrowsExactly<ArgumentException>(() => layer.DependsOn(" "));
+        layer.Name.Should().Be("Domain");
+        layer.NamespacePrefix.Should().Be(DomainNamespace);
+        layer.DependsOn("Application").Should().BeSameAs(layer);
+        Throws<ArgumentNullException>(() => layer.DependsOn((string[])null!));
+        Throws<ArgumentException>(() => layer.DependsOn());
+        Throws<ArgumentException>(() => layer.DependsOn(" "));
     }
 
     [TestMethod]
@@ -355,14 +355,14 @@ public class ArchitectureTests {
             typeof(CycleFixtures.NoCycleRoot),
         ]);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(() => selection.Should().HaveNoCycles());
+        var ex = Throws<AssertionFailedException>(() => selection.Should().HaveNoCycles());
 
-        Assert.Contains("2 cycle(s)", ex.Message);
+        ex.Message.Should().Contain("2 cycle(s)");
         var cycleA = typeof(CycleFixtures.CycleA).FullName;
         var cycleB = typeof(CycleFixtures.CycleB).FullName;
         var selfCycle = typeof(CycleFixtures.SelfCycle).FullName;
-        Assert.Contains($"{cycleA} -> {cycleB} -> {cycleA}", ex.Message);
-        Assert.Contains($"{selfCycle} -> {selfCycle}", ex.Message);
+        ex.Message.Should().Contain($"{cycleA} -> {cycleB} -> {cycleA}");
+        ex.Message.Should().Contain($"{selfCycle} -> {selfCycle}");
 
         new TypeSelector([typeof(CycleFixtures.CycleLeaf), typeof(CycleFixtures.NoCycleRoot)]).Should().HaveNoCycles();
     }
@@ -372,14 +372,14 @@ public class ArchitectureTests {
         new TypeSelector([typeof(ShapeFixtures.PublicSurface)]).Should().BePublic();
         new TypeSelector([typeof(ShapeFixtures.InternalThing)]).Should().BeInternal();
 
-        var publicEx = Assert.ThrowsExactly<AssertionFailedException>(
+        var publicEx = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.InternalThing)]).Should().BePublic());
-        Assert.Contains("1 type(s) are not", publicEx.Message);
-        Assert.Contains("InternalThing", publicEx.Message);
+        publicEx.Message.Should().Contain("1 type(s) are not");
+        publicEx.Message.Should().Contain("InternalThing");
 
-        var internalEx = Assert.ThrowsExactly<AssertionFailedException>(
+        var internalEx = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.PublicSurface)]).Should().BeInternal());
-        Assert.Contains("PublicSurface", internalEx.Message);
+        internalEx.Message.Should().Contain("PublicSurface");
     }
 
     [TestMethod]
@@ -387,9 +387,9 @@ public class ArchitectureTests {
         new TypeSelector([typeof(ShapeFixtures.Outer.NestedPublic)]).Should().BeNested();
         new TypeSelector([typeof(ShapeFixtures.AuditService)]).Should().NotBeNested();
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.AuditService)]).Should().BeNested());
-        Assert.Contains("AuditService", ex.Message);
+        ex.Message.Should().Contain("AuditService");
     }
 
     [TestMethod]
@@ -399,13 +399,13 @@ public class ArchitectureTests {
         new TypeSelector([typeof(ShapeFixtures.AuditService)]).Should().NotBeRecord();
         new TypeSelector([typeof(ShapeFixtures.MutableBox)]).Should().NotBeImmutable();
 
-        var recordEx = Assert.ThrowsExactly<AssertionFailedException>(
+        var recordEx = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.AuditService)]).Should().BeRecord());
-        Assert.Contains("AuditService", recordEx.Message);
+        recordEx.Message.Should().Contain("AuditService");
 
-        var immutableEx = Assert.ThrowsExactly<AssertionFailedException>(
+        var immutableEx = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.MutableBox)]).Should().BeImmutable());
-        Assert.Contains("MutableBox", immutableEx.Message);
+        immutableEx.Message.Should().Contain("MutableBox");
     }
 
     [TestMethod]
@@ -415,15 +415,15 @@ public class ArchitectureTests {
             .Should().HaveNameEndingWith("Handler");
         new TypeSelector([typeof(ShapeFixtures.OrderHandler)]).Should().HaveNameMatching("^Order.*$");
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.PaymentHandler), typeof(ShapeFixtures.AuditService)])
                 .Should().HaveNameEndingWith("Handler"));
-        Assert.Contains("1 type(s) do not", ex.Message);
-        Assert.Contains("AuditService", ex.Message);
+        ex.Message.Should().Contain("1 type(s) do not");
+        ex.Message.Should().Contain("AuditService");
 
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(ShapeFixtures.AuditService)]).Should().HaveNameEndingWith(null!));
-        Assert.ThrowsExactly<RegexParseException>(
+        Throws<RegexParseException>(
             () => new TypeSelector([typeof(ShapeFixtures.AuditService)]).Should().HaveNameMatching("["));
     }
 
@@ -431,34 +431,34 @@ public class ArchitectureTests {
     public void ResideInNamespace_AliasesBeInNamespace() {
         new TypeSelector([typeof(ShapeFixtures.PublicSurface)]).Should().ResideInNamespace(ShapesNamespace);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.PublicSurface)]).Should().ResideInNamespace("No.Such.Namespace"));
-        Assert.Contains("PublicSurface", ex.Message);
+        ex.Message.Should().Contain("PublicSurface");
     }
 
     [TestMethod]
     public void OnlyHavePublicMembers_IgnoresPrivateImplementation() {
         new TypeSelector([typeof(ShapeFixtures.PublicSurface)]).Should().OnlyHavePublicMembers();
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(ShapeFixtures.MixedVisibility)]).Should().OnlyHavePublicMembers());
-        Assert.Contains("MixedVisibility", ex.Message);
-        Assert.IsTrue(ex.Message.Contains("InternalValue", StringComparison.Ordinal) || ex.Message.Contains("ProtectedValue", StringComparison.Ordinal));
+        ex.Message.Should().Contain("MixedVisibility");
+        (ex.Message.Contains("InternalValue", StringComparison.Ordinal) || ex.Message.Contains("ProtectedValue", StringComparison.Ordinal)).Should().BeTrue();
     }
 
     [TestMethod]
     public void NotExposeTypes_ReportsPublicSignatures() {
         new TypeSelector([typeof(ApplicationFixtures.OrderService)]).Should().NotExposeTypes(typeof(InfrastructureFixtures.SqlConnection));
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => new TypeSelector([typeof(DomainFixtures.LeakyOrder)]).Should().NotExposeTypes(typeof(InfrastructureFixtures.SqlConnection)));
-        Assert.Contains("LeakyOrder", ex.Message);
-        Assert.Contains("Connection", ex.Message);
-        Assert.Contains("SqlConnection", ex.Message);
+        ex.Message.Should().Contain("LeakyOrder");
+        ex.Message.Should().Contain("Connection");
+        ex.Message.Should().Contain("SqlConnection");
 
-        Assert.ThrowsExactly<ArgumentNullException>(
+        Throws<ArgumentNullException>(
             () => new TypeSelector([typeof(DomainFixtures.LeakyOrder)]).Should().NotExposeTypes((Type[])null!));
-        Assert.ThrowsExactly<ArgumentException>(
+        Throws<ArgumentException>(
             () => new TypeSelector([typeof(DomainFixtures.LeakyOrder)]).Should().NotExposeTypes());
     }
 
@@ -471,14 +471,21 @@ public class ArchitectureTests {
             .ThatHaveDependencyOn(InfrastructureNamespace)
             .Should().HaveCount(2);
 
-        var ex = Assert.ThrowsExactly<AssertionFailedException>(
+        var ex = Throws<AssertionFailedException>(
             () => AllTypes.From(assembly)
                 .ThatAreUnderNamespace(DomainNamespace)
                 .Should().NotDependOn(InfrastructureNamespace, "the domain layer stays pure"));
-        Assert.Contains("LeakyOrder", ex.Message);
+        ex.Message.Should().Contain("LeakyOrder");
 
         AllTypes.From(assembly)
             .ThatAreUnderNamespace(DomainNamespace)
             .Should().HaveNoCycles();
     }
+
+    /// <summary>Asserts the exact exception type through the library and returns the caught exception.</summary>
+    /// <typeparam name="TException">The expected exception type.</typeparam>
+    /// <param name="action">The action expected to throw.</param>
+    /// <returns>The caught exception.</returns>
+    private static TException Throws<TException>(Action action) where TException : Exception =>
+        action.Should().ThrowExactly<TException>().Which;
 }
