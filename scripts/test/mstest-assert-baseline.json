@@ -64,7 +64,6 @@
     "tests/Jeninnet.Assertions.Tests/JsonPathTests.cs": 46,
     "tests/Jeninnet.Assertions.Tests/JsonTests.cs": 43,
     "tests/Jeninnet.Assertions.Tests/LocalizationExpansionTests.cs": 22,
-    "tests/Jeninnet.Assertions.Tests/LocalizationTests.Collections.cs": 198,
     "tests/Jeninnet.Assertions.Tests/LocalizationTests.cs": 17,
     "tests/Jeninnet.Assertions.Tests/ManualClockTests.cs": 13,
     "tests/Jeninnet.Assertions.Tests/MatchAssertionsTests.cs": 30,
