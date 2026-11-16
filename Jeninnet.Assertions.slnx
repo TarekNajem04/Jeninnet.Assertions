@@ -51,6 +51,11 @@
     <Folder Name="/scripts/release/">
         <File Path="scripts/release/verify-package.ps1" />
     </Folder>
+    <Folder Name="/scripts/test/">
+        <File Path="scripts/test/check-mstest-assert-usage.ps1" />
+        <File Path="scripts/test/mstest-assert-baseline.json" />
+        <File Path="scripts/test/README.md" />
+    </Folder>
     <Folder Name="/scripts/sonar/">
         <File Path="scripts/sonar/preview.ps1" />
         <File Path="scripts/sonar/README.md" />
