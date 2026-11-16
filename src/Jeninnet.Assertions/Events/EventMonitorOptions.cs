@@ -8,8 +8,8 @@ namespace Jeninnet.Assertions.Events;
 
 /// <summary>Configures how an <see cref="EventMonitor"/> attaches to its source. Grows gradually; start with one fluent option.</summary>
 public class EventMonitorOptions {
-    private readonly HashSet<string> _includedEvents = new(StringComparer.Ordinal); // NOSONAR: a collection expression would drop the ordinal comparer.
-    private readonly HashSet<string> _excludedEvents = new(StringComparer.Ordinal); // NOSONAR: a collection expression would drop the ordinal comparer.
+    private readonly HashSet<string> _includedEvents = [];
+    private readonly HashSet<string> _excludedEvents = [];
 
     /// <summary>Gets whether events whose subscription accessor throws are skipped instead of failing monitor creation.</summary>
     public bool IgnoreEventAccessorExceptions { get; private set; }

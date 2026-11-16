@@ -8,12 +8,19 @@ namespace Jeninnet.Assertions.Snapshots;
 
 /// <summary>Resolves snapshot file names and directories from caller context and options.</summary>
 internal static class SnapshotNaming {
-    private static readonly Dictionary<string, string> _projectDirectories = new(PathComparer); // NOSONAR: a collection expression would drop the path comparer.
+    private static readonly Dictionary<string, string> _projectDirectories = CreateProjectDirectories();
 #if NET9_0_OR_GREATER
     private static readonly Lock _projectDirectoriesLock = new();
 #else
     private static readonly object _projectDirectoriesLock = new();
 #endif
+    /// <summary>Creates the project-directory cache with the path comparer.</summary>
+    /// <returns>A new dictionary using <see cref="PathComparer"/>.</returns>
+    private static Dictionary<string, string> CreateProjectDirectories() {
+        var directories = new Dictionary<string, string>(PathComparer);
+        return directories;
+    }
+
     /// <summary>Resolves the snapshot base name and appends configured prefixes/suffixes.</summary>
     /// <param name="snapshotName">The explicit name supplied to the assertion, when any.</param>
     /// <param name="options">The snapshot options.</param>
