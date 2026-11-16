@@ -78,15 +78,7 @@ public class ActionAssertions(Action action, string? expression = null) : Assert
             return Task.CompletedTask;
         }, copies, wait).ConfigureAwait(false);
 
-        if(result.Pending != 0) {
-            Fail(Strings.Format(StringKeys.ACTION_THREAD_SAFE_TIMEOUT, Expression, AssertionScope.FormatInvariant(result.Pending), AssertionScope.FormatInvariant(copies), AssertionScope.FormatInvariant(wait)), because, becauseArgs);
-            return new(this);
-        }
-
-        if(result.Failures.Count != 0) {
-            Fail(ConcurrencyStress.BuildFailureMessage(Expression, result.Failures, copies), because, becauseArgs);
-        }
-
+        ConcurrencyStress.ReportThreadSafe(result, wait, copies, Expression, message => Fail(message, because, becauseArgs));
         return new(this);
     }
 

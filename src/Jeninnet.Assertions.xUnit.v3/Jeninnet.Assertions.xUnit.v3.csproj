@@ -1,5 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
+    <Import Project="..\shared\Xunit\Xunit.projitems" Label="Shared" />
+
     <PropertyGroup Label="Target frameworks">
         <TargetFrameworks>net8.0;net10.0;net11.0</TargetFrameworks>
         <!-- Clear the repo-wide single TargetFramework so cross-targeting dispatch runs. -->

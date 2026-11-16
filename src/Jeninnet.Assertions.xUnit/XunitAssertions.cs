@@ -15,34 +15,12 @@ public static class XunitAssertions {
     /// <param name="assertion">The assertions to run (must not be <see langword="null"/>).</param>
     /// <exception cref="ArgumentNullException"><paramref name="assertion"/> is <see langword="null"/>.</exception>
     /// <exception cref="XunitException">A Jeninnet assertion failed (message and inner exception preserved).</exception>
-    public static void That(Action assertion) {
-        ArgumentNullException.ThrowIfNull(assertion);
-
-        try {
-            assertion();
-        }
-        catch(AssertionFailedException ex) {
-            throw ex.InnerException is null
-                ? new XunitException(ex.Message)
-                : new XunitException(ex.Message, ex.InnerException);
-        }
-    }
+    public static void That(Action assertion) => XunitAssertionRunner.That(assertion);
 
     /// <summary>Runs an asynchronous assertion block, translating failures to xUnit.</summary>
     /// <param name="assertion">The assertions to run (must not be <see langword="null"/>).</param>
     /// <returns>A task that represents the asynchronous assertion operation.</returns>
     /// <exception cref="ArgumentNullException"><paramref name="assertion"/> is <see langword="null"/>.</exception>
     /// <exception cref="XunitException">A Jeninnet assertion failed (message and inner exception preserved).</exception>
-    public static async Task ThatAsync(Func<Task> assertion) {
-        ArgumentNullException.ThrowIfNull(assertion);
-
-        try {
-            await assertion();
-        }
-        catch(AssertionFailedException ex) {
-            throw ex.InnerException is null
-                ? new XunitException(ex.Message)
-                : new XunitException(ex.Message, ex.InnerException);
-        }
-    }
+    public static Task ThatAsync(Func<Task> assertion) => XunitAssertionRunner.ThatAsync(assertion);
 }

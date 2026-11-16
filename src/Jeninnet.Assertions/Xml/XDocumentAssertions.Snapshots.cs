@@ -26,9 +26,7 @@ public partial class XDocumentAssertions {
         [CallerFilePath] string? callerFilePath = null,
         string? because = null,
         params object?[] becauseArgs) {
-        var options = config?.Invoke(new SnapshotOptions()) ?? new SnapshotOptions();
-        var xml = _value?.ToString() ?? "<null>";
-        Snapshot.Verify(xml.Replace("\r\n", "\n").Replace('\r', '\n'), snapshotName, snapshotsDirectory, ".xml", options, new(Expression, callerFilePath, because, becauseArgs));
+        XmlSnapshot.Verify(_value, snapshotName, snapshotsDirectory, config, callerFilePath, Expression, because, becauseArgs);
         return new(this);
     }
 }

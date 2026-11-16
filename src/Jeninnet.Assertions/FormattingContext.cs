@@ -18,7 +18,7 @@ internal static class FormattingContext {
         }
 
         if(options.RespectRuntimeTypes && value is IEnumerable enumerable && value is not string) {
-            return ApplyLimits(FormatEnumerable(enumerable, options, 0, new HashSet<object>(ReferenceComparer.Instance)), options);
+            return ApplyLimits(FormatEnumerable(enumerable, options, 0, new HashSet<object>(ReferenceComparer.Instance)), options); // NOSONAR: a collection expression would drop the reference comparer.
         }
 
         return ApplyLimits(string.Format(CultureInfo.InvariantCulture, "{0}", value), options);

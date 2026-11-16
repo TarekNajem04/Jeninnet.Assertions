@@ -119,6 +119,12 @@
         <Project Path="src/Jeninnet.Assertions.xUnit.v3/Jeninnet.Assertions.xUnit.v3.csproj" />
         <Project Path="src/Jeninnet.Assertions/Jeninnet.Assertions.csproj" />
     </Folder>
+
+    <Folder Name="/src/Shared/" />
+    <Folder Name="/src/Shared/Xunit/">
+        <File Path="src/shared/Xunit/XunitAssertionRunner.cs" />
+        <File Path="src/shared/Xunit/Xunit.projitems" />
+    </Folder>
     
     <Folder Name="/tests/">
         <Project Path="tests/Jeninnet.Assertions.Analyzer.Tests/Jeninnet.Assertions.Analyzer.Tests.csproj" />

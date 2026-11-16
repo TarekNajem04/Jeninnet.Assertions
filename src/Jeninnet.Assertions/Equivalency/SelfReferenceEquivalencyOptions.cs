@@ -41,7 +41,7 @@ public partial class SelfReferenceEquivalencyOptions<TExpectation> {
     private readonly List<string[]> _exclusions = [];
     private readonly List<string[]> _inclusions = [];
     private readonly HashSet<Type> _byValueTypes = [];
-    private readonly HashSet<string> _excludedMemberNames = new(StringComparer.Ordinal);
+    private readonly HashSet<string> _excludedMemberNames = new(StringComparer.Ordinal); // NOSONAR: a collection expression would drop the ordinal comparer.
     private readonly List<Type> _excludedMemberTypes = [];
     private readonly List<Func<MemberInfo, bool>> _excludePredicates = [];
     private readonly List<Func<MemberInfo, bool>> _includePredicates = [];

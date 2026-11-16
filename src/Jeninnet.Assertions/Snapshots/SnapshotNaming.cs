@@ -8,7 +8,7 @@ namespace Jeninnet.Assertions.Snapshots;
 
 /// <summary>Resolves snapshot file names and directories from caller context and options.</summary>
 internal static class SnapshotNaming {
-    private static readonly Dictionary<string, string> _projectDirectories = new(PathComparer);
+    private static readonly Dictionary<string, string> _projectDirectories = new(PathComparer); // NOSONAR: a collection expression would drop the path comparer.
 #if NET9_0_OR_GREATER
     private static readonly Lock _projectDirectoriesLock = new();
 #else
