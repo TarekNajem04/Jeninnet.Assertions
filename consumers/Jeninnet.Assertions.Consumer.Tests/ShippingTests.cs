@@ -33,7 +33,7 @@ public class ShippingTests {
         using var httpClient = new HttpClient(new StubShippingHandler(HttpStatusCode.NotFound, """{"error":"missing"}"""));
         var client = new ShippingClient(httpClient);
 
-        Func<Task> call = () => client.GetTrackingNumberAsync("C-404", TestContext.CancellationToken);
+        var call = () => client.GetTrackingNumberAsync("C-404", TestContext.CancellationToken);
 
         await call.Should().ThrowAsync<HttpRequestException>();
     }

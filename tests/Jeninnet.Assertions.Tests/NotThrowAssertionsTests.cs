@@ -38,7 +38,7 @@ public class NotThrowAssertionsTests {
 
     [TestMethod]
     public async Task NotThrowAsync_PassForAsyncThatCompletes_Async() {
-        Func<Task> func = () => Task.Delay(1, TestContext.CancellationToken);
+        var func = () => Task.Delay(1, TestContext.CancellationToken);
         await func.Should().NotThrowAsync();
     }
 

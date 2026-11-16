@@ -117,7 +117,7 @@ public class AsyncFunctionTests {
         Func<Task> quick = static () => Task.CompletedTask;
         await quick.Should().CompleteWithinAsync(TimeSpan.FromSeconds(5));
 
-        Func<Task> slow = () => Task.Delay(TimeSpan.FromSeconds(30), TestContext.CancellationToken);
+        var slow = () => Task.Delay(TimeSpan.FromSeconds(30), TestContext.CancellationToken);
         var ex = await Assert.ThrowsExactlyAsync<AssertionFailedException>(
             () => slow.Should().CompleteWithinAsync(TimeSpan.FromMilliseconds(50)));
         Assert.AreEqual("Expected slow to complete within 00:00:00.0500000, but it did not.", ex.Message);
@@ -128,7 +128,7 @@ public class AsyncFunctionTests {
 
     [TestMethod]
     public async Task NotCompleteWithinAsync_PassAndFail_Async() {
-        Func<Task> slow = () => Task.Delay(TimeSpan.FromSeconds(30), TestContext.CancellationToken);
+        var slow = () => Task.Delay(TimeSpan.FromSeconds(30), TestContext.CancellationToken);
         await slow.Should().NotCompleteWithinAsync(TimeSpan.FromMilliseconds(50));
 
         Func<Task> quick = static () => Task.CompletedTask;
@@ -143,7 +143,7 @@ public class AsyncFunctionTests {
         var which = await quick.Should().CompleteWithinAsync(TimeSpan.FromSeconds(5));
         Assert.AreEqual(42, which.Which);
 
-        Func<Task<int>> slow = async () => {
+        var slow = async () => {
             await Task.Delay(TimeSpan.FromSeconds(30), TestContext.CancellationToken);
             return 1;
         };

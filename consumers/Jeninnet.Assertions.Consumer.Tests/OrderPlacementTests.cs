@@ -45,7 +45,7 @@ public class OrderPlacementTests {
         using var httpClient = new HttpClient(new StubShippingHandler());
         var service = CreateService(httpClient);
 
-        Func<Task> place = () => service.PlaceOrderAsync(TestOrders.SampleOrder(), TestContext.CancellationToken);
+        var place = () => service.PlaceOrderAsync(TestOrders.SampleOrder(), TestContext.CancellationToken);
 
         await place.Should().CompleteWithinAsync(TimeSpan.FromSeconds(5));
     }
