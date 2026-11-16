@@ -13,21 +13,15 @@ internal static class XmlSnapshot {
     /// <param name="snapshotName">The snapshot name, or <see langword="null"/> to derive it from the expression.</param>
     /// <param name="snapshotsDirectory">The snapshots folder, or <see langword="null"/> for the caller-relative default.</param>
     /// <param name="config">Optional snapshot configuration.</param>
-    /// <param name="callerFilePath">The calling source file.</param>
-    /// <param name="expression">The subject expression.</param>
-    /// <param name="because">The reason for the assertion, appended to the failure message.</param>
-    /// <param name="becauseArgs">Optional arguments used to format <paramref name="because"/>.</param>
+    /// <param name="context">The caller context for the snapshot.</param>
     internal static void Verify(
         object? value,
         string? snapshotName,
         string? snapshotsDirectory,
         Func<SnapshotOptions, SnapshotOptions>? config,
-        string? callerFilePath,
-        string expression,
-        string? because,
-        object?[] becauseArgs) {
+        SnapshotContext context) {
         var options = config?.Invoke(new SnapshotOptions()) ?? new SnapshotOptions();
         var xml = value?.ToString() ?? "<null>";
-        Snapshot.Verify(xml.Replace("\r\n", "\n").Replace('\r', '\n'), snapshotName, snapshotsDirectory, ".xml", options, new(expression, callerFilePath, because, becauseArgs));
+        Snapshot.Verify(xml.Replace("\r\n", "\n").Replace('\r', '\n'), snapshotName, snapshotsDirectory, ".xml", options, context);
     }
 }

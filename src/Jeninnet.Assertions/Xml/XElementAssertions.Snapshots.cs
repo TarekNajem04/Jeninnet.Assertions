@@ -26,7 +26,7 @@ public partial class XElementAssertions {
         [CallerFilePath] string? callerFilePath = null,
         string? because = null,
         params object?[] becauseArgs) {
-        XmlSnapshot.Verify(_value, snapshotName, snapshotsDirectory, config, callerFilePath, Expression, because, becauseArgs);
+        XmlSnapshot.Verify(_value, snapshotName, snapshotsDirectory, config, new(Expression, callerFilePath, because, becauseArgs));
         return new(this);
     }
 }
