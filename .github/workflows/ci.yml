@@ -67,6 +67,10 @@ jobs:
         with:
           global-json-file: global.json
 
+      - name: Check MSTest Assert ratchet
+        shell: pwsh
+        run: pwsh scripts/test/check-mstest-assert-usage.ps1
+
       - name: Pack library for the local consumer feed
         run: dotnet pack src/Jeninnet.Assertions/Jeninnet.Assertions.csproj --configuration Release --output artifacts/packages
 
