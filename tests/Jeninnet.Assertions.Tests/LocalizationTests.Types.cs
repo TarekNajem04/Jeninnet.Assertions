@@ -11,53 +11,53 @@ public partial class LocalizationTests {
     public void Arabic_TypeBasics() {
         using var _ = new ArabicScope();
 
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().BeNull());
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يكون null، لكن وُجد Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يكون null، لكن وُجد Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget.");
 
         Type? missingType = null;
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingType.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missingType ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missingType.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missingType ألا يكون null، لكن وُجد null.");
 
-        var signature = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveMethod("Add", [typeof(string)]));
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يحتوي الدالة 'Add(String)'، لكنه لم يُعثر عليها.", signature.Message);
+        var signature = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveMethod("Add", [typeof(string)]));
+        signature.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يحتوي الدالة 'Add(String)'، لكنه لم يُعثر عليها.");
 
-        var notMethod = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().NotHaveMethod("Add"));
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) ألا يحتوي الدالة 'Add'، لكنها وُجدت.", notMethod.Message);
+        var notMethod = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().NotHaveMethod("Add"));
+        notMethod.Message.Should().Be("المتوقع من typeof(SampleWidget) ألا يحتوي الدالة 'Add'، لكنها وُجدت.");
 
-        var property = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveProperty("Missing"));
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يحتوي الخاصية 'Missing'، لكنه لم يُعثر عليها.", property.Message);
+        var property = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveProperty("Missing"));
+        property.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يحتوي الخاصية 'Missing'، لكنه لم يُعثر عليها.");
 
-        var notProperty = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().NotHaveProperty("Name"));
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) ألا يحتوي الخاصية 'Name'، لكنها وُجدت.", notProperty.Message);
+        var notProperty = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().NotHaveProperty("Name"));
+        notProperty.Message.Should().Be("المتوقع من typeof(SampleWidget) ألا يحتوي الخاصية 'Name'، لكنها وُجدت.");
 
-        var sealedType = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(BaseWidget).Should().BeSealed());
-        Assert.AreEqual("المتوقع من typeof(BaseWidget) أن يكون مختوماً، لكن it was not.", sealedType.Message);
+        var sealedType = Throws<AssertionFailedException>(() => typeof(BaseWidget).Should().BeSealed());
+        sealedType.Message.Should().Be("المتوقع من typeof(BaseWidget) أن يكون مختوماً، لكن it was not.");
 
-        var notSealed = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(string).Should().NotBeSealed());
-        Assert.AreEqual("المتوقع من typeof(string) ألا يكون مختوماً، لكنه كان.", notSealed.Message);
+        var notSealed = Throws<AssertionFailedException>(() => typeof(string).Should().NotBeSealed());
+        notSealed.Message.Should().Be("المتوقع من typeof(string) ألا يكون مختوماً، لكنه كان.");
 
-        var abstractType = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().BeAbstract());
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يكون مجرداً، لكن it was not.", abstractType.Message);
+        var abstractType = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().BeAbstract());
+        abstractType.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يكون مجرداً، لكن it was not.");
 
-        var notAbstract = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(System.IO.Stream).Should().NotBeAbstract());
-        Assert.AreEqual("المتوقع من typeof(System.IO.Stream) ألا يكون مجرداً، لكنه كان.", notAbstract.Message);
+        var notAbstract = Throws<AssertionFailedException>(() => typeof(System.IO.Stream).Should().NotBeAbstract());
+        notAbstract.Message.Should().Be("المتوقع من typeof(System.IO.Stream) ألا يكون مجرداً، لكنه كان.");
     }
 
     [TestMethod]
     public void Arabic_TypeAttributes() {
         using var _ = new ArabicScope();
 
-        var assignable = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().BeAssignableTo<int>());
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يكون قابلاً للإسناد إلى Int32، لكن found Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget.", assignable.Message);
+        var assignable = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().BeAssignableTo<int>());
+        assignable.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يكون قابلاً للإسناد إلى Int32، لكن found Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget.");
 
-        var notAssignable = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().NotBeAssignableTo<object>());
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) ألا يكون قابلاً للإسناد إلى Object، لكنه كان.", notAssignable.Message);
+        var notAssignable = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().NotBeAssignableTo<object>());
+        notAssignable.Message.Should().Be("المتوقع من typeof(SampleWidget) ألا يكون قابلاً للإسناد إلى Object، لكنه كان.");
 
-        var decorated = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().BeDecoratedWith<GadgetAttribute>());
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يكون موسوماً بـ GadgetAttribute، لكن found Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget.", decorated.Message);
+        var decorated = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().BeDecoratedWith<GadgetAttribute>());
+        decorated.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يكون موسوماً بـ GadgetAttribute، لكن found Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget.");
 
-        var notDecorated = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(MarkedWidget).Should().NotBeDecoratedWith<GadgetAttribute>());
-        Assert.AreEqual("المتوقع من typeof(MarkedWidget) ألا يكون موسوماً بـ GadgetAttribute، لكنه كان.", notDecorated.Message);
+        var notDecorated = Throws<AssertionFailedException>(() => typeof(MarkedWidget).Should().NotBeDecoratedWith<GadgetAttribute>());
+        notDecorated.Message.Should().Be("المتوقع من typeof(MarkedWidget) ألا يكون موسوماً بـ GadgetAttribute، لكنه كان.");
     }
 
     [TestMethod]
@@ -65,27 +65,27 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var method = typeof(SampleWidget).Should().HaveMethod("Add").Which;
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().BeNull());
-        Assert.AreEqual("المتوقع من method أن يكون null، لكن وُجد Add.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => method.Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من method أن يكون null، لكن وُجد Add.");
 
-        var returns = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().Return<string>());
-        Assert.AreEqual("المتوقع من method أن يكون نوع إرجاعه String، لكن وُجد Int32.", returns.Message);
+        var returns = Throws<AssertionFailedException>(() => method.Should().Return<string>());
+        returns.Message.Should().Be("المتوقع من method أن يكون نوع إرجاعه String، لكن وُجد Int32.");
 
-        var parameter = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().HaveParameter("z", typeof(int)));
-        Assert.AreEqual("المتوقع من method أن يحتوي المعامل 'z' من النوع Int32، لكنه لم يُعثر عليه.", parameter.Message);
+        var parameter = Throws<AssertionFailedException>(() => method.Should().HaveParameter("z", typeof(int)));
+        parameter.Message.Should().Be("المتوقع من method أن يحتوي المعامل 'z' من النوع Int32، لكنه لم يُعثر عليه.");
 
-        var nonVirtual = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().BeVirtual());
-        Assert.AreEqual("المتوقع من method أن يكون افتراضياً، لكن it was not.", nonVirtual.Message);
+        var nonVirtual = Throws<AssertionFailedException>(() => method.Should().BeVirtual());
+        nonVirtual.Message.Should().Be("المتوقع من method أن يكون افتراضياً، لكن it was not.");
 
-        var staticMethod = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().BeStatic());
-        Assert.AreEqual("المتوقع من method أن يكون ساكناً، لكن it was not.", staticMethod.Message);
+        var staticMethod = Throws<AssertionFailedException>(() => method.Should().BeStatic());
+        staticMethod.Message.Should().Be("المتوقع من method أن يكون ساكناً، لكن it was not.");
 
-        var decorated = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().BeDecoratedWith<GadgetAttribute>());
-        Assert.AreEqual("المتوقع من method أن يكون موسوماً بـ GadgetAttribute، لكن it was not.", decorated.Message);
+        var decorated = Throws<AssertionFailedException>(() => method.Should().BeDecoratedWith<GadgetAttribute>());
+        decorated.Message.Should().Be("المتوقع من method أن يكون موسوماً بـ GadgetAttribute، لكن it was not.");
 
         MethodInfo? missingMethod = null;
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingMethod.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missingMethod ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missingMethod.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missingMethod ألا يكون null، لكن وُجد null.");
     }
 
     [TestMethod]
@@ -93,26 +93,26 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var property = typeof(SampleWidget).Should().HaveProperty("Name").Which;
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => property.Should().BeNull());
-        Assert.AreEqual("المتوقع من property أن يكون null، لكن وُجد Name.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => property.Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من property أن يكون null، لكن وُجد Name.");
 
-        var ofType = Assert.ThrowsExactly<AssertionFailedException>(() => property.Should().Return<int>());
-        Assert.AreEqual("المتوقع من property أن يكون نوع إرجاعه Int32، لكن وُجد String.", ofType.Message);
+        var ofType = Throws<AssertionFailedException>(() => property.Should().Return<int>());
+        ofType.Message.Should().Be("المتوقع من property أن يكون نوع إرجاعه Int32، لكن وُجد String.");
 
         var writeOnly = typeof(SampleWidget).Should().HaveProperty("WriteOnly").Which;
-        var readable = Assert.ThrowsExactly<AssertionFailedException>(() => writeOnly.Should().BeReadable());
-        Assert.AreEqual("المتوقع من writeOnly أن يكون قابلاً للقراءة، لكن it was not.", readable.Message);
+        var readable = Throws<AssertionFailedException>(() => writeOnly.Should().BeReadable());
+        readable.Message.Should().Be("المتوقع من writeOnly أن يكون قابلاً للقراءة، لكن it was not.");
 
         var readOnly = typeof(SampleWidget).Should().HaveProperty("ReadOnly").Which;
-        var writable = Assert.ThrowsExactly<AssertionFailedException>(() => readOnly.Should().BeWritable());
-        Assert.AreEqual("المتوقع من readOnly أن يكون قابلاً للكتابة، لكن it was not.", writable.Message);
+        var writable = Throws<AssertionFailedException>(() => readOnly.Should().BeWritable());
+        writable.Message.Should().Be("المتوقع من readOnly أن يكون قابلاً للكتابة، لكن it was not.");
 
-        var decorated = Assert.ThrowsExactly<AssertionFailedException>(() => property.Should().BeDecoratedWith<GadgetAttribute>());
-        Assert.AreEqual("المتوقع من property أن يكون موسوماً بـ GadgetAttribute، لكن it was not.", decorated.Message);
+        var decorated = Throws<AssertionFailedException>(() => property.Should().BeDecoratedWith<GadgetAttribute>());
+        decorated.Message.Should().Be("المتوقع من property أن يكون موسوماً بـ GadgetAttribute، لكن it was not.");
 
         PropertyInfo? missingProperty = null;
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingProperty.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missingProperty ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missingProperty.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missingProperty ألا يكون null، لكن وُجد null.");
     }
 
     [TestMethod]
@@ -120,25 +120,25 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var constructor = typeof(SampleWidget).Should().HaveConstructor().Which;
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().BeNull());
-        Assert.AreEqual("المتوقع من constructor أن يكون null، لكنه لم يكن null.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => constructor.Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من constructor أن يكون null، لكنه لم يكن null.");
 
-        var parameter = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().HaveParameter("zzz", typeof(int)));
-        Assert.AreEqual("المتوقع من constructor أن يحتوي المعامل 'zzz' من النوع Int32، لكنه لم يُعثر عليه.", parameter.Message);
+        var parameter = Throws<AssertionFailedException>(() => constructor.Should().HaveParameter("zzz", typeof(int)));
+        parameter.Message.Should().Be("المتوقع من constructor أن يحتوي المعامل 'zzz' من النوع Int32، لكنه لم يُعثر عليه.");
 
-        var decorated = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().BeDecoratedWith<GadgetAttribute>());
-        Assert.AreEqual("المتوقع من constructor أن يكون موسوماً بـ GadgetAttribute، لكن it was not.", decorated.Message);
+        var decorated = Throws<AssertionFailedException>(() => constructor.Should().BeDecoratedWith<GadgetAttribute>());
+        decorated.Message.Should().Be("المتوقع من constructor أن يكون موسوماً بـ GadgetAttribute، لكن it was not.");
 
-        var missing = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveConstructor(typeof(int)));
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يحتوي المنشئ '(Int32)'، لكنه لم يُعثر عليه.", missing.Message);
+        var missing = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveConstructor(typeof(int)));
+        missing.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يحتوي المنشئ '(Int32)'، لكنه لم يُعثر عليه.");
 
         var hidden = typeof(SampleWidget).GetConstructor(BindingFlags.NonPublic | BindingFlags.Instance, binder: null, [typeof(int)], modifiers: null)!;
-        var bePublic = Assert.ThrowsExactly<AssertionFailedException>(() => hidden.Should().BePublic());
-        Assert.AreEqual("المتوقع من hidden أن يكون عاماً، لكن it was not.", bePublic.Message);
+        var bePublic = Throws<AssertionFailedException>(() => hidden.Should().BePublic());
+        bePublic.Message.Should().Be("المتوقع من hidden أن يكون عاماً، لكن it was not.");
 
         ConstructorInfo? missingConstructor = null;
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingConstructor.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missingConstructor ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missingConstructor.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missingConstructor ألا يكون null، لكن وُجد null.");
     }
 
     [TestMethod]
@@ -146,57 +146,57 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var assembly = typeof(SampleWidget).Assembly;
-        var define = Assert.ThrowsExactly<AssertionFailedException>(() => assembly.Should().DefineType("No.Such.Type"));
-        Assert.AreEqual("المتوقع من assembly أن يعرّف النوع 'No.Such.Type'، لكنه لم يُعثر عليه.", define.Message);
+        var define = Throws<AssertionFailedException>(() => assembly.Should().DefineType("No.Such.Type"));
+        define.Message.Should().Be("المتوقع من assembly أن يعرّف النوع 'No.Such.Type'، لكنه لم يُعثر عليه.");
 
-        var notDefine = Assert.ThrowsExactly<AssertionFailedException>(() => assembly.Should().NotDefineType("Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget"));
-        Assert.AreEqual("المتوقع من assembly ألا يعرّف النوع 'Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget'، لكنه وُجد.", notDefine.Message);
+        var notDefine = Throws<AssertionFailedException>(() => assembly.Should().NotDefineType("Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget"));
+        notDefine.Message.Should().Be("المتوقع من assembly ألا يعرّف النوع 'Jeninnet.Assertions.Tests.LocalizationTests+SampleWidget'، لكنه وُجد.");
 
-        var reference = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(string).Assembly.Should().Reference(assembly));
-        Assert.AreEqual("المتوقع من typeof(string).Assembly أن يشير إلى التجميع 'Jeninnet.Assertions.Tests'، لكنه لم يُعثر عليه.", reference.Message);
+        var reference = Throws<AssertionFailedException>(() => typeof(string).Assembly.Should().Reference(assembly));
+        reference.Message.Should().Be("المتوقع من typeof(string).Assembly أن يشير إلى التجميع 'Jeninnet.Assertions.Tests'، لكنه لم يُعثر عليه.");
 
         Assembly? missingAssembly = null;
-        var referenceNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingAssembly.Should().Reference(assembly));
-        Assert.AreEqual("المتوقع من missingAssembly أن يشير إلى التجميع 'Jeninnet.Assertions.Tests'، لكن وُجد null.", referenceNull.Message);
+        var referenceNull = Throws<AssertionFailedException>(() => missingAssembly.Should().Reference(assembly));
+        referenceNull.Message.Should().Be("المتوقع من missingAssembly أن يشير إلى التجميع 'Jeninnet.Assertions.Tests'، لكن وُجد null.");
 
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => assembly.Should().BeNull());
-        Assert.Contains("المتوقع من assembly أن يكون null، لكن وُجد Jeninnet.Assertions.Tests,", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => assembly.Should().BeNull());
+        beNull.Message.Should().Contain("المتوقع من assembly أن يكون null، لكن وُجد Jeninnet.Assertions.Tests,");
 
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missingAssembly.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missingAssembly ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missingAssembly.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missingAssembly ألا يكون null، لكن وُجد null.");
     }
 
     [TestMethod]
     public void Arabic_ReflectionMetadataMessages() {
         using var _ = new ArabicScope();
 
-        var kind = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(IWorker).Should().BeClass());
-        Assert.AreEqual("المتوقع من typeof(IWorker) أن يكون من النوع class، لكن وُجد interface.", kind.Message);
+        var kind = Throws<AssertionFailedException>(() => typeof(IWorker).Should().BeClass());
+        kind.Message.Should().Be("المتوقع من typeof(IWorker) أن يكون من النوع class، لكن وُجد interface.");
 
-        var name = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveName("Other"));
-        Assert.AreEqual("المتوقع من typeof(SampleWidget) أن يكون اسمه 'Other'، لكن وُجد 'SampleWidget'.", name.Message);
+        var name = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().HaveName("Other"));
+        name.Message.Should().Be("المتوقع من typeof(SampleWidget) أن يكون اسمه 'Other'، لكن وُجد 'SampleWidget'.");
 
-        var sameAs = Assert.ThrowsExactly<AssertionFailedException>(() => typeof(SampleWidget).Should().NotBeSameAs(typeof(SampleWidget)));
-        Assert.Contains("المتوقع من typeof(SampleWidget) ألا يكون نفس النسخة مثل", sameAs.Message);
+        var sameAs = Throws<AssertionFailedException>(() => typeof(SampleWidget).Should().NotBeSameAs(typeof(SampleWidget)));
+        sameAs.Message.Should().Contain("المتوقع من typeof(SampleWidget) ألا يكون نفس النسخة مثل");
 
         var method = typeof(SampleWidget).Should().HaveMethod("Add").Which;
-        var abstractMethod = Assert.ThrowsExactly<AssertionFailedException>(() => method.Should().BeAbstract());
-        Assert.AreEqual("المتوقع من method أن يكون مجرداً، لكنه لم يكن.", abstractMethod.Message);
+        var abstractMethod = Throws<AssertionFailedException>(() => method.Should().BeAbstract());
+        abstractMethod.Message.Should().Be("المتوقع من method أن يكون مجرداً، لكنه لم يكن.");
 
         var property = typeof(SampleWidget).Should().HaveProperty("Name").Which;
-        var required = Assert.ThrowsExactly<AssertionFailedException>(() => property.Should().BeRequired());
-        Assert.AreEqual("المتوقع من property أن يكون مطلوباً (required)، لكنه لم يكن.", required.Message);
+        var required = Throws<AssertionFailedException>(() => property.Should().BeRequired());
+        required.Message.Should().Be("المتوقع من property أن يكون مطلوباً (required)، لكنه لم يكن.");
 
         var constructor = typeof(SampleWidget).Should().HaveConstructor().Which;
-        var privateCtor = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().BePrivate());
-        Assert.AreEqual("المتوقع من constructor أن يكون خاصاً، لكن it was Public.", privateCtor.Message);
+        var privateCtor = Throws<AssertionFailedException>(() => constructor.Should().BePrivate());
+        privateCtor.Message.Should().Be("المتوقع من constructor أن يكون خاصاً، لكن it was Public.");
 
-        var staticCtor = Assert.ThrowsExactly<AssertionFailedException>(() => constructor.Should().BeStatic());
-        Assert.AreEqual("المتوقع من constructor أن يكون منشئاً ساكناً، لكن it was not.", staticCtor.Message);
+        var staticCtor = Throws<AssertionFailedException>(() => constructor.Should().BeStatic());
+        staticCtor.Message.Should().Be("المتوقع من constructor أن يكون منشئاً ساكناً، لكن it was not.");
 
-        var decorated = Assert.ThrowsExactly<AssertionFailedException>(
+        var decorated = Throws<AssertionFailedException>(
             () => method.Should().BeDecoratedWith<GadgetAttribute>(static _ => true));
-        Assert.AreEqual("المتوقع من method أن يكون موسوماً بـ GadgetAttribute مطابقاً للشرط، لكنه لم يكن.", decorated.Message);
+        decorated.Message.Should().Be("المتوقع من method أن يكون موسوماً بـ GadgetAttribute مطابقاً للشرط، لكنه لم يكن.");
     }
 
     [TestMethod]
@@ -252,7 +252,7 @@ public partial class LocalizationTests {
 
             AssertionCulture.Current = new CultureInfo("ar");
             foreach(var key in keys) {
-                Assert.AreNotEqual(english[key], AssertionCulture.GetMessage(key), key);
+                AssertionCulture.GetMessage(key).Should().NotBe(english[key], because: key);
             }
         }
         finally {
@@ -264,50 +264,50 @@ public partial class LocalizationTests {
     public void Arabic_TypeSelector() {
         using var _ = new ArabicScope();
 
-        var count = Assert.ThrowsExactly<AssertionFailedException>(
+        var count = Throws<AssertionFailedException>(
             () => AllTypes.From(typeof(SampleWidget).Assembly).ThatAreInNamespace("No.Such.Namespace").Should().HaveCount(2));
-        Assert.AreEqual("المتوقع من الأنواع المحددة أن تحتوي 2 من العناصر، لكن وُجد 0.", count.Message);
+        count.Message.Should().Be("المتوقع من الأنواع المحددة أن تحتوي 2 من العناصر، لكن وُجد 0.");
 
         var lonely = AllTypes.From(typeof(LonelyWidget).Assembly).ThatAreInNamespace("Jeninnet.Assertions.Tests.LocalizationFixtures");
-        var method = Assert.ThrowsExactly<AssertionFailedException>(() => lonely.Should().HaveMethod("Missing"));
-        Assert.AreEqual("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يحتوي الدالة 'Missing'، لكنه لم يُعثر عليها.", method.Message);
+        var method = Throws<AssertionFailedException>(() => lonely.Should().HaveMethod("Missing"));
+        method.Message.Should().Be("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يحتوي الدالة 'Missing'، لكنه لم يُعثر عليها.");
 
-        var property = Assert.ThrowsExactly<AssertionFailedException>(() => lonely.Should().HaveProperty("Missing"));
-        Assert.AreEqual("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يحتوي الخاصية 'Missing'، لكنه لم يُعثر عليها.", property.Message);
+        var property = Throws<AssertionFailedException>(() => lonely.Should().HaveProperty("Missing"));
+        property.Message.Should().Be("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يحتوي الخاصية 'Missing'، لكنه لم يُعثر عليها.");
 
-        var sealedType = Assert.ThrowsExactly<AssertionFailedException>(() => lonely.Should().BeSealed());
-        Assert.AreEqual("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يكون مختوماً، لكنه لم يكن.", sealedType.Message);
+        var sealedType = Throws<AssertionFailedException>(() => lonely.Should().BeSealed());
+        sealedType.Message.Should().Be("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يكون مختوماً، لكنه لم يكن.");
 
-        var abstractType = Assert.ThrowsExactly<AssertionFailedException>(() => lonely.Should().BeAbstract());
-        Assert.AreEqual("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يكون مجرداً، لكنه لم يكن.", abstractType.Message);
+        var abstractType = Throws<AssertionFailedException>(() => lonely.Should().BeAbstract());
+        abstractType.Message.Should().Be("المتوقع من Jeninnet.Assertions.Tests.LocalizationFixtures.LonelyWidget أن يكون مجرداً، لكنه لم يكن.");
     }
 
     [TestMethod]
     public void Arabic_SelectorCompatVerbs() {
         using var _ = new ArabicScope();
 
-        var notAccess = Assert.ThrowsExactly<AssertionFailedException>(
+        var notAccess = Throws<AssertionFailedException>(
             () => typeof(OrderService).Methods().ThatSatisfy(static m => m.Name == "PlaceOrder").Should().NotBe(AccessModifier.Public));
-        Assert.AreEqual("المتوقع من العضو 'PlaceOrder' ألا يكون معدّل الوصول Public، لكنه كذلك.", notAccess.Message);
+        notAccess.Message.Should().Be("المتوقع من العضو 'PlaceOrder' ألا يكون معدّل الوصول Public، لكنه كذلك.");
 
-        var notAsync = Assert.ThrowsExactly<AssertionFailedException>(
+        var notAsync = Throws<AssertionFailedException>(
             () => typeof(OrderService).Methods().ThatSatisfy(static m => m.Name == "SaveAsync").Should().NotBeAsync());
-        Assert.AreEqual("المتوقع من الدالة 'SaveAsync' ألا تكون async، لكنها كانت كذلك.", notAsync.Message);
+        notAsync.Message.Should().Be("المتوقع من الدالة 'SaveAsync' ألا تكون async، لكنها كانت كذلك.");
 
-        var notVirtual = Assert.ThrowsExactly<AssertionFailedException>(
+        var notVirtual = Throws<AssertionFailedException>(
             () => typeof(OrderService).Methods().ThatSatisfy(static m => m.Name == "Validate").Should().NotBeVirtual());
-        Assert.AreEqual("المتوقع من العضو 'Validate' ألا يكون virtual، لكنه كان كذلك.", notVirtual.Message);
+        notVirtual.Message.Should().Be("المتوقع من العضو 'Validate' ألا يكون virtual، لكنه كان كذلك.");
 
-        var decoratedPredicate = Assert.ThrowsExactly<AssertionFailedException>(
+        var decoratedPredicate = Throws<AssertionFailedException>(
             () => typeof(OrderService).Methods().ThatAreDecoratedWith<MarkerAttribute>().Should().BeDecoratedWith<MarkerAttribute>(static _ => false));
-        Assert.AreEqual("المتوقع من العضو 'Marked' أن يكون مزيّناً بـ MarkerAttribute مطابقاً للشرط، لكنه لم يكن كذلك.", decoratedPredicate.Message);
+        decoratedPredicate.Message.Should().Be("المتوقع من العضو 'Marked' أن يكون مزيّناً بـ MarkerAttribute مطابقاً للشرط، لكنه لم يكن كذلك.");
 
-        var notDecoratedPredicate = Assert.ThrowsExactly<AssertionFailedException>(
+        var notDecoratedPredicate = Throws<AssertionFailedException>(
             () => typeof(OrderService).Methods().ThatAreDecoratedWith<MarkerAttribute>().Should().NotBeDecoratedWith<MarkerAttribute>(static _ => true));
-        Assert.AreEqual("المتوقع من العضو 'Marked' ألا يكون مزيّناً بـ MarkerAttribute مطابقاً للشرط، لكنه كان كذلك.", notDecoratedPredicate.Message);
+        notDecoratedPredicate.Message.Should().Be("المتوقع من العضو 'Marked' ألا يكون مزيّناً بـ MarkerAttribute مطابقاً للشرط، لكنه كان كذلك.");
 
-        var notWritable = Assert.ThrowsExactly<AssertionFailedException>(
+        var notWritable = Throws<AssertionFailedException>(
             () => typeof(OrderService).Properties().ThatSatisfy(static p => p.Name == "Name").Should().NotBeWritable());
-        Assert.AreEqual("المتوقع من الخاصية 'Name' ألا تكون قابلة للكتابة، لكنها كانت كذلك.", notWritable.Message);
+        notWritable.Message.Should().Be("المتوقع من الخاصية 'Name' ألا تكون قابلة للكتابة، لكنها كانت كذلك.");
     }
 }
