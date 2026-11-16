@@ -12,37 +12,37 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[] values = [1, 2];
-        var exact = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().HaveCount(3));
-        Assert.AreEqual("المتوقع من values أن يحتوي 3 من العناصر، لكن وُجد 2.", exact.Message);
+        var exact = Throws<AssertionFailedException>(() => values.Should().HaveCount(3));
+        exact.Message.Should().Be("المتوقع من values أن يحتوي 3 من العناصر، لكن وُجد 2.");
 
         int[]? missing = null;
-        var exactNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCount(0));
-        Assert.AreEqual("المتوقع من missing أن يحتوي 0 من العناصر، لكن المجموعة null.", exactNull.Message);
+        var exactNull = Throws<AssertionFailedException>(() => missing.Should().HaveCount(0));
+        exactNull.Message.Should().Be("المتوقع من missing أن يحتوي 0 من العناصر، لكن المجموعة null.");
 
-        var more = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().HaveCountGreaterThan(5));
-        Assert.AreEqual("المتوقع من values أن يحتوي أكثر من 5 من العناصر، لكن وُجد 2.", more.Message);
+        var more = Throws<AssertionFailedException>(() => values.Should().HaveCountGreaterThan(5));
+        more.Message.Should().Be("المتوقع من values أن يحتوي أكثر من 5 من العناصر، لكن وُجد 2.");
 
-        var least = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().HaveCountGreaterThanOrEqualTo(5));
-        Assert.AreEqual("المتوقع من values أن يحتوي على الأقل 5 من العناصر، لكن وُجد 2.", least.Message);
+        var least = Throws<AssertionFailedException>(() => values.Should().HaveCountGreaterThanOrEqualTo(5));
+        least.Message.Should().Be("المتوقع من values أن يحتوي على الأقل 5 من العناصر، لكن وُجد 2.");
 
-        var fewer = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().HaveCountLessThan(1));
-        Assert.AreEqual("المتوقع من values أن يحتوي أقل من 1 من العناصر، لكن وُجد 2.", fewer.Message);
+        var fewer = Throws<AssertionFailedException>(() => values.Should().HaveCountLessThan(1));
+        fewer.Message.Should().Be("المتوقع من values أن يحتوي أقل من 1 من العناصر، لكن وُجد 2.");
 
-        var most = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().HaveCountLessThanOrEqualTo(1));
-        Assert.AreEqual("المتوقع من values أن يحتوي على الأكثر 1 من العناصر، لكن وُجد 2.", most.Message);
+        var most = Throws<AssertionFailedException>(() => values.Should().HaveCountLessThanOrEqualTo(1));
+        most.Message.Should().Be("المتوقع من values أن يحتوي على الأكثر 1 من العناصر، لكن وُجد 2.");
 
         int[] trio = [1, 2, 3];
-        var same = Assert.ThrowsExactly<AssertionFailedException>(() => trio.Should().HaveSameCount([1, 2]));
-        Assert.AreEqual("المتوقع من trio أن يكون له نفس العدد (2) مثل المجموعة المتوقعة، لكن وُجد 3.", same.Message);
+        var same = Throws<AssertionFailedException>(() => trio.Should().HaveSameCount([1, 2]));
+        same.Message.Should().Be("المتوقع من trio أن يكون له نفس العدد (2) مثل المجموعة المتوقعة، لكن وُجد 3.");
 
-        var sameNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveSameCount([1]));
-        Assert.AreEqual("المتوقع من missing أن يكون له نفس عدد المجموعة المتوقعة، لكن المجموعة null.", sameNull.Message);
+        var sameNull = Throws<AssertionFailedException>(() => missing.Should().HaveSameCount([1]));
+        sameNull.Message.Should().Be("المتوقع من missing أن يكون له نفس عدد المجموعة المتوقعة، لكن المجموعة null.");
 
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeNull());
-        Assert.AreEqual("المتوقع من values أن يكون null، لكن وُجد 2 من العناصر.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => values.Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من values أن يكون null، لكن وُجد 2 من العناصر.");
 
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missing ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missing.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missing ألا يكون null، لكن وُجد null.");
     }
 
     [TestMethod]
@@ -50,19 +50,19 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[] values = [1];
-        var beEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeEmpty());
-        Assert.AreEqual("المتوقع من values أن يكون فارغاً، لكن وُجد 1 من العناصر.", beEmpty.Message);
+        var beEmpty = Throws<AssertionFailedException>(() => values.Should().BeEmpty());
+        beEmpty.Message.Should().Be("المتوقع من values أن يكون فارغاً، لكن وُجد 1 من العناصر.");
 
         int[]? missing = null;
-        var beEmptyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeEmpty());
-        Assert.AreEqual("المتوقع من missing أن يكون فارغاً، لكن المجموعة null.", beEmptyNull.Message);
+        var beEmptyNull = Throws<AssertionFailedException>(() => missing.Should().BeEmpty());
+        beEmptyNull.Message.Should().Be("المتوقع من missing أن يكون فارغاً، لكن المجموعة null.");
 
         int[] empty = [];
-        var notBeEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => empty.Should().NotBeEmpty());
-        Assert.AreEqual("المتوقع من empty ألا يكون فارغاً، لكنه كان فارغاً.", notBeEmpty.Message);
+        var notBeEmpty = Throws<AssertionFailedException>(() => empty.Should().NotBeEmpty());
+        notBeEmpty.Message.Should().Be("المتوقع من empty ألا يكون فارغاً، لكنه كان فارغاً.");
 
-        var notBeEmptyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotBeEmpty());
-        Assert.AreEqual("المتوقع من missing ألا يكون فارغاً، لكن المجموعة null.", notBeEmptyNull.Message);
+        var notBeEmptyNull = Throws<AssertionFailedException>(() => missing.Should().NotBeEmpty());
+        notBeEmptyNull.Message.Should().Be("المتوقع من missing ألا يكون فارغاً، لكن المجموعة null.");
     }
 
     [TestMethod]
@@ -70,42 +70,42 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[] values = [1, 2];
-        var predicate = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().Contain(x => x > 10));
-        Assert.AreEqual("المتوقع من values أن يحتوي عنصراً يطابق الشرط، لكن لم يُعثر على أي عنصر.", predicate.Message);
+        var predicate = Throws<AssertionFailedException>(() => values.Should().Contain(x => x > 10));
+        predicate.Message.Should().Be("المتوقع من values أن يحتوي عنصراً يطابق الشرط، لكن لم يُعثر على أي عنصر.");
 
         int[]? missing = null;
-        var predicateNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Contain(x => x > 10));
-        Assert.AreEqual("المتوقع من missing أن يحتوي عنصراً يطابق الشرط، لكن المجموعة null.", predicateNull.Message);
+        var predicateNull = Throws<AssertionFailedException>(() => missing.Should().Contain(x => x > 10));
+        predicateNull.Message.Should().Be("المتوقع من missing أن يحتوي عنصراً يطابق الشرط، لكن المجموعة null.");
 
-        var item = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().Contain(9));
-        Assert.AreEqual("المتوقع من values أن يحتوي '9'، لكنه لم يُعثر عليه.", item.Message);
+        var item = Throws<AssertionFailedException>(() => values.Should().Contain(9));
+        item.Message.Should().Be("المتوقع من values أن يحتوي '9'، لكنه لم يُعثر عليه.");
 
-        var itemNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Contain(9));
-        Assert.AreEqual("المتوقع من missing أن يحتوي '9'، لكن المجموعة null.", itemNull.Message);
+        var itemNull = Throws<AssertionFailedException>(() => missing.Should().Contain(9));
+        itemNull.Message.Should().Be("المتوقع من missing أن يحتوي '9'، لكن المجموعة null.");
 
-        var only = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().OnlyContain(x => x > 10));
-        Assert.AreEqual("المتوقع من values أن يحتوي عناصر مطابقة فقط، لكن وُجد '1'.", only.Message);
+        var only = Throws<AssertionFailedException>(() => values.Should().OnlyContain(x => x > 10));
+        only.Message.Should().Be("المتوقع من values أن يحتوي عناصر مطابقة فقط، لكن وُجد '1'.");
 
-        var onlyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().OnlyContain(x => x > 10));
-        Assert.AreEqual("المتوقع من missing أن يحتوي عناصر مطابقة فقط، لكن المجموعة null.", onlyNull.Message);
+        var onlyNull = Throws<AssertionFailedException>(() => missing.Should().OnlyContain(x => x > 10));
+        onlyNull.Message.Should().Be("المتوقع من missing أن يحتوي عناصر مطابقة فقط، لكن المجموعة null.");
 
-        var single = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().ContainSingle());
-        Assert.AreEqual("المتوقع من values أن يحتوي عنصراً واحداً بالضبط، لكن وُجد 2.", single.Message);
+        var single = Throws<AssertionFailedException>(() => values.Should().ContainSingle());
+        single.Message.Should().Be("المتوقع من values أن يحتوي عنصراً واحداً بالضبط، لكن وُجد 2.");
 
-        var singleNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainSingle());
-        Assert.AreEqual("المتوقع من missing أن يحتوي عنصراً واحداً بالضبط، لكن المجموعة null.", singleNull.Message);
+        var singleNull = Throws<AssertionFailedException>(() => missing.Should().ContainSingle());
+        singleNull.Message.Should().Be("المتوقع من missing أن يحتوي عنصراً واحداً بالضبط، لكن المجموعة null.");
 
-        var notItem = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().NotContain(2));
-        Assert.AreEqual("المتوقع من values ألا يحتوي '2'، لكنه وُجد.", notItem.Message);
+        var notItem = Throws<AssertionFailedException>(() => values.Should().NotContain(2));
+        notItem.Message.Should().Be("المتوقع من values ألا يحتوي '2'، لكنه وُجد.");
 
-        var notItemNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotContain(2));
-        Assert.AreEqual("المتوقع من missing ألا يحتوي '2'، لكن المجموعة null.", notItemNull.Message);
+        var notItemNull = Throws<AssertionFailedException>(() => missing.Should().NotContain(2));
+        notItemNull.Message.Should().Be("المتوقع من missing ألا يحتوي '2'، لكن المجموعة null.");
 
-        var notPredicate = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().NotContain(x => x < 10));
-        Assert.AreEqual("المتوقع من values ألا يحتوي عنصراً يطابق الشرط، لكن وُجد عنصر.", notPredicate.Message);
+        var notPredicate = Throws<AssertionFailedException>(() => values.Should().NotContain(x => x < 10));
+        notPredicate.Message.Should().Be("المتوقع من values ألا يحتوي عنصراً يطابق الشرط، لكن وُجد عنصر.");
 
-        var notPredicateNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotContain(x => x < 10));
-        Assert.AreEqual("المتوقع من missing ألا يحتوي عنصراً يطابق الشرط، لكن المجموعة null.", notPredicateNull.Message);
+        var notPredicateNull = Throws<AssertionFailedException>(() => missing.Should().NotContain(x => x < 10));
+        notPredicateNull.Message.Should().Be("المتوقع من missing ألا يحتوي عنصراً يطابق الشرط، لكن المجموعة null.");
     }
 
     [TestMethod]
@@ -113,20 +113,20 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[]? missing = null;
-        var nullEquivalent = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeEquivalentTo(1));
-        Assert.AreEqual("المتوقع من missing أن يكون مكافئاً، لكن المجموعة null.", nullEquivalent.Message);
+        var nullEquivalent = Throws<AssertionFailedException>(() => missing.Should().BeEquivalentTo(1));
+        nullEquivalent.Message.Should().Be("المتوقع من missing أن يكون مكافئاً، لكن المجموعة null.");
 
         int[] values = [1, 2, 3];
-        var count = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeEquivalentTo(1, 2));
-        Assert.AreEqual("المتوقع من values أن يحتوي 2 من العناصر، لكن وُجد 3.", count.Message);
+        var count = Throws<AssertionFailedException>(() => values.Should().BeEquivalentTo(1, 2));
+        count.Message.Should().Be("المتوقع من values أن يحتوي 2 من العناصر، لكن وُجد 3.");
 
         // S3878 waived: the params form cannot infer T alongside the config lambda.
-        var order = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeEquivalentTo([3, 2, 1], static o => o.WithStrictOrdering()));
-        Assert.AreEqual("المتوقع من values أن يكون مكافئاً بنفس الترتيب، لكن العنصر في الفهرس 0 كان '1' بدل '3'.", order.Message);
+        var order = Throws<AssertionFailedException>(() => values.Should().BeEquivalentTo([3, 2, 1], static o => o.WithStrictOrdering()));
+        order.Message.Should().Be("المتوقع من values أن يكون مكافئاً بنفس الترتيب، لكن العنصر في الفهرس 0 كان '1' بدل '3'.");
 
         int[] pair = [1, 1, 2];
-        var cardinality = Assert.ThrowsExactly<AssertionFailedException>(() => pair.Should().BeEquivalentTo(1, 2, 3));
-        Assert.AreEqual("المتوقع من pair أن يكون مكافئاً، لكن العنصر '1' وُجد 2 من المرات؛ والمتوقع 1.", cardinality.Message);
+        var cardinality = Throws<AssertionFailedException>(() => pair.Should().BeEquivalentTo(1, 2, 3));
+        cardinality.Message.Should().Be("المتوقع من pair أن يكون مكافئاً، لكن العنصر '1' وُجد 2 من المرات؛ والمتوقع 1.");
     }
 
     [TestMethod]
@@ -134,15 +134,15 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[]? missing = null;
-        var nullEqual = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().Equal(1));
-        Assert.AreEqual("المتوقع من missing أن يساوي ['1']، لكن المجموعة null.", nullEqual.Message);
+        var nullEqual = Throws<AssertionFailedException>(() => missing.Should().Equal(1));
+        nullEqual.Message.Should().Be("المتوقع من missing أن يساوي ['1']، لكن المجموعة null.");
 
         int[] values = [1, 2, 3];
-        var count = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().Equal(1, 2));
-        Assert.AreEqual("المتوقع من values أن يساوي ['1', '2']، لكن وُجد 3 من العناصر بدل 2.", count.Message);
+        var count = Throws<AssertionFailedException>(() => values.Should().Equal(1, 2));
+        count.Message.Should().Be("المتوقع من values أن يساوي ['1', '2']، لكن وُجد 3 من العناصر بدل 2.");
 
-        var order = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().Equal(3, 2, 1));
-        Assert.AreEqual("المتوقع من values أن يساوي ['3', '2', '1']، لكن العنصر في الفهرس 0 كان '1' بدل '3'.", order.Message);
+        var order = Throws<AssertionFailedException>(() => values.Should().Equal(3, 2, 1));
+        order.Message.Should().Be("المتوقع من values أن يساوي ['3', '2', '1']، لكن العنصر في الفهرس 0 كان '1' بدل '3'.");
     }
 
     [TestMethod]
@@ -150,24 +150,24 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[]? missing = null;
-        var startNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().StartWith(1, 9));
-        Assert.AreEqual("المتوقع من missing أن يبدأ بـ ['1', '9']، لكن المجموعة null.", startNull.Message);
+        var startNull = Throws<AssertionFailedException>(() => missing.Should().StartWith(1, 9));
+        startNull.Message.Should().Be("المتوقع من missing أن يبدأ بـ ['1', '9']، لكن المجموعة null.");
 
         int[] values = [1, 2, 3];
-        var startShort = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().StartWith(1, 2, 3, 4));
-        Assert.AreEqual("المتوقع من values أن يبدأ بـ ['1', '2', '3', '4']، لكن وُجد 3 من العناصر فقط.", startShort.Message);
+        var startShort = Throws<AssertionFailedException>(() => values.Should().StartWith(1, 2, 3, 4));
+        startShort.Message.Should().Be("المتوقع من values أن يبدأ بـ ['1', '2', '3', '4']، لكن وُجد 3 من العناصر فقط.");
 
-        var startOrder = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().StartWith(1, 9));
-        Assert.AreEqual("المتوقع من values أن يبدأ بـ ['1', '9']، لكن العنصر في الفهرس 1 كان '2'.", startOrder.Message);
+        var startOrder = Throws<AssertionFailedException>(() => values.Should().StartWith(1, 9));
+        startOrder.Message.Should().Be("المتوقع من values أن يبدأ بـ ['1', '9']، لكن العنصر في الفهرس 1 كان '2'.");
 
-        var endNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().EndWith(2, 3));
-        Assert.AreEqual("المتوقع من missing أن ينتهي بـ ['2', '3']، لكن المجموعة null.", endNull.Message);
+        var endNull = Throws<AssertionFailedException>(() => missing.Should().EndWith(2, 3));
+        endNull.Message.Should().Be("المتوقع من missing أن ينتهي بـ ['2', '3']، لكن المجموعة null.");
 
-        var endShort = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().EndWith(9, 1, 2, 3));
-        Assert.AreEqual("المتوقع من values أن ينتهي بـ ['9', '1', '2', '3']، لكن وُجد 3 من العناصر فقط.", endShort.Message);
+        var endShort = Throws<AssertionFailedException>(() => values.Should().EndWith(9, 1, 2, 3));
+        endShort.Message.Should().Be("المتوقع من values أن ينتهي بـ ['9', '1', '2', '3']، لكن وُجد 3 من العناصر فقط.");
 
-        var endOrder = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().EndWith(1, 3));
-        Assert.AreEqual("المتوقع من values أن ينتهي بـ ['1', '3']، لكن العنصر في الفهرس 1 كان '2'.", endOrder.Message);
+        var endOrder = Throws<AssertionFailedException>(() => values.Should().EndWith(1, 3));
+        endOrder.Message.Should().Be("المتوقع من values أن ينتهي بـ ['1', '3']، لكن العنصر في الفهرس 1 كان '2'.");
     }
 
     [TestMethod]
@@ -175,26 +175,26 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[]? missing = null;
-        var sequenceNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainInOrder(1));
-        Assert.AreEqual("المتوقع من missing أن يحتوي العناصر بالترتيب، لكن المجموعة null.", sequenceNull.Message);
+        var sequenceNull = Throws<AssertionFailedException>(() => missing.Should().ContainInOrder(1));
+        sequenceNull.Message.Should().Be("المتوقع من missing أن يحتوي العناصر بالترتيب، لكن المجموعة null.");
 
         int[] values = [3, 1, 2];
-        var sequenceMissing = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().ContainInOrder(1, 9));
-        Assert.AreEqual("المتوقع من values أن يحتوي '9' بالترتيب، لكنه لم يُعثر عليه في التسلسل.", sequenceMissing.Message);
+        var sequenceMissing = Throws<AssertionFailedException>(() => values.Should().ContainInOrder(1, 9));
+        sequenceMissing.Message.Should().Be("المتوقع من values أن يحتوي '9' بالترتيب، لكنه لم يُعثر عليه في التسلسل.");
 
-        var ascendingNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeInAscendingOrder());
-        Assert.AreEqual("المتوقع من missing أن يكون بترتيب تصاعدي، لكن المجموعة null.", ascendingNull.Message);
+        var ascendingNull = Throws<AssertionFailedException>(() => missing.Should().BeInAscendingOrder());
+        ascendingNull.Message.Should().Be("المتوقع من missing أن يكون بترتيب تصاعدي، لكن المجموعة null.");
 
         int[] pair = [2, 1];
-        var ascending = Assert.ThrowsExactly<AssertionFailedException>(() => pair.Should().BeInAscendingOrder());
-        Assert.AreEqual("المتوقع من pair أن يكون بترتيب تصاعدي، لكن وُجد '1' بعد '2' في الفهرس 1.", ascending.Message);
+        var ascending = Throws<AssertionFailedException>(() => pair.Should().BeInAscendingOrder());
+        ascending.Message.Should().Be("المتوقع من pair أن يكون بترتيب تصاعدي، لكن وُجد '1' بعد '2' في الفهرس 1.");
 
-        var descendingNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeInDescendingOrder());
-        Assert.AreEqual("المتوقع من missing أن يكون بترتيب تنازلي، لكن المجموعة null.", descendingNull.Message);
+        var descendingNull = Throws<AssertionFailedException>(() => missing.Should().BeInDescendingOrder());
+        descendingNull.Message.Should().Be("المتوقع من missing أن يكون بترتيب تنازلي، لكن المجموعة null.");
 
         int[] rising = [1, 2];
-        var descending = Assert.ThrowsExactly<AssertionFailedException>(() => rising.Should().BeInDescendingOrder());
-        Assert.AreEqual("المتوقع من rising أن يكون بترتيب تنازلي، لكن وُجد '2' بعد '1' في الفهرس 1.", descending.Message);
+        var descending = Throws<AssertionFailedException>(() => rising.Should().BeInDescendingOrder());
+        descending.Message.Should().Be("المتوقع من rising أن يكون بترتيب تنازلي، لكن وُجد '2' بعد '1' في الفهرس 1.");
     }
 
     [TestMethod]
@@ -202,24 +202,24 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[]? missing = null;
-        var subsetNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeSubsetOf([1, 3]));
-        Assert.AreEqual("المتوقع من missing أن يكون مجموعة جزئية من ['1', '3']، لكن المجموعة null.", subsetNull.Message);
+        var subsetNull = Throws<AssertionFailedException>(() => missing.Should().BeSubsetOf([1, 3]));
+        subsetNull.Message.Should().Be("المتوقع من missing أن يكون مجموعة جزئية من ['1', '3']، لكن المجموعة null.");
 
         int[] values = [1, 2];
-        var outsider = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeSubsetOf([1, 3]));
-        Assert.AreEqual("المتوقع من values أن يكون مجموعة جزئية من ['1', '3']، لكن وُجد '2' خارجها.", outsider.Message);
+        var outsider = Throws<AssertionFailedException>(() => values.Should().BeSubsetOf([1, 3]));
+        outsider.Message.Should().Be("المتوقع من values أن يكون مجموعة جزئية من ['1', '3']، لكن وُجد '2' خارجها.");
 
-        var intersectNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().IntersectWith([3, 4]));
-        Assert.AreEqual("المتوقع من missing أن يتقاطع مع ['3', '4']، لكن المجموعة null.", intersectNull.Message);
+        var intersectNull = Throws<AssertionFailedException>(() => missing.Should().IntersectWith([3, 4]));
+        intersectNull.Message.Should().Be("المتوقع من missing أن يتقاطع مع ['3', '4']، لكن المجموعة null.");
 
-        var intersectEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().IntersectWith([3, 4]));
-        Assert.AreEqual("المتوقع من values أن يتقاطع مع ['3', '4']، لكن لم تُعثر على عناصر مشتركة.", intersectEmpty.Message);
+        var intersectEmpty = Throws<AssertionFailedException>(() => values.Should().IntersectWith([3, 4]));
+        intersectEmpty.Message.Should().Be("المتوقع من values أن يتقاطع مع ['3', '4']، لكن لم تُعثر على عناصر مشتركة.");
 
-        var checkNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainSubset([9]));
-        Assert.AreEqual("المتوقع من missing أن يحتوي المجموعة الجزئية، لكن المجموعة null.", checkNull.Message);
+        var checkNull = Throws<AssertionFailedException>(() => missing.Should().ContainSubset([9]));
+        checkNull.Message.Should().Be("المتوقع من missing أن يحتوي المجموعة الجزئية، لكن المجموعة null.");
 
-        var checkMissing = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().ContainSubset([9]));
-        Assert.AreEqual("المتوقع من values أن يحتوي عنصر المجموعة الجزئية '9'، لكنه لم يُعثر عليه.", checkMissing.Message);
+        var checkMissing = Throws<AssertionFailedException>(() => values.Should().ContainSubset([9]));
+        checkMissing.Message.Should().Be("المتوقع من values أن يحتوي عنصر المجموعة الجزئية '9'، لكنه لم يُعثر عليه.");
     }
 
     [TestMethod]
@@ -227,21 +227,21 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[] actual = [1, 2, 3];
-        var order = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().EqualApproximately([1, 2, 4], 0));
-        Assert.AreEqual("المتوقع من actual أن يساوي تقريباً ['1', '2', '4']، لكن العنصر في الفهرس 2 كان '3' بدل '4' بدقة '0'.", order.Message);
+        var order = Throws<AssertionFailedException>(() => actual.Should().EqualApproximately([1, 2, 4], 0));
+        order.Message.Should().Be("المتوقع من actual أن يساوي تقريباً ['1', '2', '4']، لكن العنصر في الفهرس 2 كان '3' بدل '4' بدقة '0'.");
 
-        var count = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().EqualApproximately([1, 2], 0));
-        Assert.AreEqual("المتوقع من actual أن يساوي تقريباً ['1', '2']، لكن وُجد 3 من العناصر بدل 2.", count.Message);
+        var count = Throws<AssertionFailedException>(() => actual.Should().EqualApproximately([1, 2], 0));
+        count.Message.Should().Be("المتوقع من actual أن يساوي تقريباً ['1', '2']، لكن وُجد 3 من العناصر بدل 2.");
 
         int[]? missing = null;
-        var nullCollection = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().EqualApproximately([1], 0));
-        Assert.AreEqual("المتوقع من missing أن يساوي تقريباً ['1']، لكن المجموعة null.", nullCollection.Message);
+        var nullCollection = Throws<AssertionFailedException>(() => missing.Should().EqualApproximately([1], 0));
+        nullCollection.Message.Should().Be("المتوقع من missing أن يساوي تقريباً ['1']، لكن المجموعة null.");
 
-        var notEqual = Assert.ThrowsExactly<AssertionFailedException>(() => actual.Should().NotEqualApproximately([1, 2, 3], 0));
-        Assert.AreEqual("المتوقع من actual ألا يساوي تقريباً ['1', '2', '3']، لكنهما متساويان تقريباً بدقة '0'.", notEqual.Message);
+        var notEqual = Throws<AssertionFailedException>(() => actual.Should().NotEqualApproximately([1, 2, 3], 0));
+        notEqual.Message.Should().Be("المتوقع من actual ألا يساوي تقريباً ['1', '2', '3']، لكنهما متساويان تقريباً بدقة '0'.");
 
-        var notEqualNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotEqualApproximately([1], 0));
-        Assert.AreEqual("المتوقع من missing ألا يساوي تقريباً ['1']، لكن المجموعة null.", notEqualNull.Message);
+        var notEqualNull = Throws<AssertionFailedException>(() => missing.Should().NotEqualApproximately([1], 0));
+        notEqualNull.Message.Should().Be("المتوقع من missing ألا يساوي تقريباً ['1']، لكن المجموعة null.");
     }
 
     [TestMethod]
@@ -249,91 +249,91 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var scores = new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 };
-        var count = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCount(3));
-        Assert.AreEqual("المتوقع من scores أن يحتوي 3 من العناصر، لكن وُجد 2.", count.Message);
+        var count = Throws<AssertionFailedException>(() => scores.Should().HaveCount(3));
+        count.Message.Should().Be("المتوقع من scores أن يحتوي 3 من العناصر، لكن وُجد 2.");
 
-        var empty = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().BeEmpty());
-        Assert.AreEqual("المتوقع من scores أن يكون فارغاً، لكن وُجد 2 من العناصر.", empty.Message);
+        var empty = Throws<AssertionFailedException>(() => scores.Should().BeEmpty());
+        empty.Message.Should().Be("المتوقع من scores أن يكون فارغاً، لكن وُجد 2 من العناصر.");
 
-        var key = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().ContainKey("z"));
-        Assert.AreEqual("المتوقع من scores أن يحتوي المفتاح 'z'، لكنه لم يُعثر عليه.", key.Message);
+        var key = Throws<AssertionFailedException>(() => scores.Should().ContainKey("z"));
+        key.Message.Should().Be("المتوقع من scores أن يحتوي المفتاح 'z'، لكنه لم يُعثر عليه.");
 
-        var notKey = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().NotContainKey("a"));
-        Assert.AreEqual("المتوقع من scores ألا يحتوي المفتاح 'a'، لكنه وُجد.", notKey.Message);
+        var notKey = Throws<AssertionFailedException>(() => scores.Should().NotContainKey("a"));
+        notKey.Message.Should().Be("المتوقع من scores ألا يحتوي المفتاح 'a'، لكنه وُجد.");
 
-        var keys = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().ContainKeys("z"));
-        Assert.AreEqual("المتوقع من scores أن يحتوي المفتاح 'z'، لكنه لم يُعثر عليه.", keys.Message);
+        var keys = Throws<AssertionFailedException>(() => scores.Should().ContainKeys("z"));
+        keys.Message.Should().Be("المتوقع من scores أن يحتوي المفتاح 'z'، لكنه لم يُعثر عليه.");
 
-        var notKeys = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().NotContainKeys("a", "b"));
-        Assert.AreEqual("المتوقع من scores ألا يحتوي المفتاح 'a'، لكنه وُجد.", notKeys.Message);
+        var notKeys = Throws<AssertionFailedException>(() => scores.Should().NotContainKeys("a", "b"));
+        notKeys.Message.Should().Be("المتوقع من scores ألا يحتوي المفتاح 'a'، لكنه وُجد.");
 
-        var value = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().ContainValue(9));
-        Assert.AreEqual("المتوقع من scores أن يحتوي القيمة '9'، لكنه لم يُعثر عليها.", value.Message);
+        var value = Throws<AssertionFailedException>(() => scores.Should().ContainValue(9));
+        value.Message.Should().Be("المتوقع من scores أن يحتوي القيمة '9'، لكنه لم يُعثر عليها.");
 
-        var atKey = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().Contain("a", 2));
-        Assert.AreEqual("المتوقع من scores أن تكون قيمته '2' عند المفتاح 'a'، لكن وُجد '1'.", atKey.Message);
+        var atKey = Throws<AssertionFailedException>(() => scores.Should().Contain("a", 2));
+        atKey.Message.Should().Be("المتوقع من scores أن تكون قيمته '2' عند المفتاح 'a'، لكن وُجد '1'.");
 
-        var moreThan = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountGreaterThan(2));
-        Assert.AreEqual("المتوقع من scores أن يحتوي أكثر من 2 من العناصر، لكن وُجد 2.", moreThan.Message);
+        var moreThan = Throws<AssertionFailedException>(() => scores.Should().HaveCountGreaterThan(2));
+        moreThan.Message.Should().Be("المتوقع من scores أن يحتوي أكثر من 2 من العناصر، لكن وُجد 2.");
 
-        var atLeast = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountGreaterThanOrEqualTo(3));
-        Assert.AreEqual("المتوقع من scores أن يحتوي على الأقل 3 من العناصر، لكن وُجد 2.", atLeast.Message);
+        var atLeast = Throws<AssertionFailedException>(() => scores.Should().HaveCountGreaterThanOrEqualTo(3));
+        atLeast.Message.Should().Be("المتوقع من scores أن يحتوي على الأقل 3 من العناصر، لكن وُجد 2.");
 
-        var fewerThan = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountLessThan(2));
-        Assert.AreEqual("المتوقع من scores أن يحتوي أقل من 2 من العناصر، لكن وُجد 2.", fewerThan.Message);
+        var fewerThan = Throws<AssertionFailedException>(() => scores.Should().HaveCountLessThan(2));
+        fewerThan.Message.Should().Be("المتوقع من scores أن يحتوي أقل من 2 من العناصر، لكن وُجد 2.");
 
-        var atMost = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().HaveCountLessThanOrEqualTo(1));
-        Assert.AreEqual("المتوقع من scores أن يحتوي على الأكثر 1 من العناصر، لكن وُجد 2.", atMost.Message);
+        var atMost = Throws<AssertionFailedException>(() => scores.Should().HaveCountLessThanOrEqualTo(1));
+        atMost.Message.Should().Be("المتوقع من scores أن يحتوي على الأكثر 1 من العناصر، لكن وُجد 2.");
 
-        var single = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().ContainSingle());
-        Assert.AreEqual("المتوقع من scores أن يحتوي عنصراً واحداً بالضبط، لكن وُجد 2.", single.Message);
+        var single = Throws<AssertionFailedException>(() => scores.Should().ContainSingle());
+        single.Message.Should().Be("المتوقع من scores أن يحتوي عنصراً واحداً بالضبط، لكن وُجد 2.");
 
         IReadOnlyDictionary<string, int> readOnly = scores;
-        var readOnlyCount = Assert.ThrowsExactly<AssertionFailedException>(() => readOnly.Should().HaveCount(3));
-        Assert.AreEqual("المتوقع من readOnly أن يحتوي 3 من العناصر، لكن وُجد 2.", readOnlyCount.Message);
+        var readOnlyCount = Throws<AssertionFailedException>(() => readOnly.Should().HaveCount(3));
+        readOnlyCount.Message.Should().Be("المتوقع من readOnly أن يحتوي 3 من العناصر، لكن وُجد 2.");
 
-        var beNull = Assert.ThrowsExactly<AssertionFailedException>(() => scores.Should().BeNull());
-        Assert.AreEqual("المتوقع من scores أن يكون null، لكن وُجد 2 من العناصر.", beNull.Message);
+        var beNull = Throws<AssertionFailedException>(() => scores.Should().BeNull());
+        beNull.Message.Should().Be("المتوقع من scores أن يكون null، لكن وُجد 2 من العناصر.");
 
         Dictionary<string, int>? missing = null;
-        var haveCountNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCount(3));
-        Assert.AreEqual("المتوقع من missing أن يحتوي 3 من العناصر، لكن القاموس null.", haveCountNull.Message);
+        var haveCountNull = Throws<AssertionFailedException>(() => missing.Should().HaveCount(3));
+        haveCountNull.Message.Should().Be("المتوقع من missing أن يحتوي 3 من العناصر، لكن القاموس null.");
 
-        var beEmptyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeEmpty());
-        Assert.AreEqual("المتوقع من missing أن يكون فارغاً، لكن القاموس null.", beEmptyNull.Message);
+        var beEmptyNull = Throws<AssertionFailedException>(() => missing.Should().BeEmpty());
+        beEmptyNull.Message.Should().Be("المتوقع من missing أن يكون فارغاً، لكن القاموس null.");
 
-        var keyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainKey("a"));
-        Assert.AreEqual("المتوقع من missing أن يحتوي المفتاح 'a'، لكن القاموس null.", keyNull.Message);
+        var keyNull = Throws<AssertionFailedException>(() => missing.Should().ContainKey("a"));
+        keyNull.Message.Should().Be("المتوقع من missing أن يحتوي المفتاح 'a'، لكن القاموس null.");
 
-        var valueNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainValue(1));
-        Assert.AreEqual("المتوقع من missing أن يحتوي القيمة '1'، لكن القاموس null.", valueNull.Message);
+        var valueNull = Throws<AssertionFailedException>(() => missing.Should().ContainValue(1));
+        valueNull.Message.Should().Be("المتوقع من missing أن يحتوي القيمة '1'، لكن القاموس null.");
 
-        var keysNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainKeys("a"));
-        Assert.AreEqual("المتوقع من missing أن يحتوي المفاتيح المعطاة، لكن القاموس null.", keysNull.Message);
+        var keysNull = Throws<AssertionFailedException>(() => missing.Should().ContainKeys("a"));
+        keysNull.Message.Should().Be("المتوقع من missing أن يحتوي المفاتيح المعطاة، لكن القاموس null.");
 
-        var notKeysNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotContainKeys("a"));
-        Assert.AreEqual("المتوقع من missing ألا يحتوي المفاتيح المعطاة، لكن القاموس null.", notKeysNull.Message);
+        var notKeysNull = Throws<AssertionFailedException>(() => missing.Should().NotContainKeys("a"));
+        notKeysNull.Message.Should().Be("المتوقع من missing ألا يحتوي المفاتيح المعطاة، لكن القاموس null.");
 
-        var notKeyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotContainKey("a"));
-        Assert.AreEqual("المتوقع من missing ألا يحتوي المفتاح 'a'، لكن القاموس null.", notKeyNull.Message);
+        var notKeyNull = Throws<AssertionFailedException>(() => missing.Should().NotContainKey("a"));
+        notKeyNull.Message.Should().Be("المتوقع من missing ألا يحتوي المفتاح 'a'، لكن القاموس null.");
 
-        var notBeNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotBeNull());
-        Assert.AreEqual("المتوقع من missing ألا يكون null، لكن وُجد null.", notBeNull.Message);
+        var notBeNull = Throws<AssertionFailedException>(() => missing.Should().NotBeNull());
+        notBeNull.Message.Should().Be("المتوقع من missing ألا يكون null، لكن وُجد null.");
 
-        var moreThanNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountGreaterThan(2));
-        Assert.AreEqual("المتوقع من missing أن يحتوي أكثر من 2 من العناصر، لكن القاموس null.", moreThanNull.Message);
+        var moreThanNull = Throws<AssertionFailedException>(() => missing.Should().HaveCountGreaterThan(2));
+        moreThanNull.Message.Should().Be("المتوقع من missing أن يحتوي أكثر من 2 من العناصر، لكن القاموس null.");
 
-        var atLeastNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountGreaterThanOrEqualTo(2));
-        Assert.AreEqual("المتوقع من missing أن يحتوي على الأقل 2 من العناصر، لكن القاموس null.", atLeastNull.Message);
+        var atLeastNull = Throws<AssertionFailedException>(() => missing.Should().HaveCountGreaterThanOrEqualTo(2));
+        atLeastNull.Message.Should().Be("المتوقع من missing أن يحتوي على الأقل 2 من العناصر، لكن القاموس null.");
 
-        var fewerThanNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountLessThan(2));
-        Assert.AreEqual("المتوقع من missing أن يحتوي أقل من 2 من العناصر، لكن القاموس null.", fewerThanNull.Message);
+        var fewerThanNull = Throws<AssertionFailedException>(() => missing.Should().HaveCountLessThan(2));
+        fewerThanNull.Message.Should().Be("المتوقع من missing أن يحتوي أقل من 2 من العناصر، لكن القاموس null.");
 
-        var atMostNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().HaveCountLessThanOrEqualTo(2));
-        Assert.AreEqual("المتوقع من missing أن يحتوي على الأكثر 2 من العناصر، لكن القاموس null.", atMostNull.Message);
+        var atMostNull = Throws<AssertionFailedException>(() => missing.Should().HaveCountLessThanOrEqualTo(2));
+        atMostNull.Message.Should().Be("المتوقع من missing أن يحتوي على الأكثر 2 من العناصر، لكن القاموس null.");
 
-        var singleNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().ContainSingle());
-        Assert.AreEqual("المتوقع من missing أن يحتوي عنصراً واحداً بالضبط، لكن القاموس null.", singleNull.Message);
+        var singleNull = Throws<AssertionFailedException>(() => missing.Should().ContainSingle());
+        singleNull.Message.Should().Be("المتوقع من missing أن يحتوي عنصراً واحداً بالضبط، لكن القاموس null.");
     }
 
     [TestMethod]
@@ -341,24 +341,24 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[] values = [1, 2];
-        var superset = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeSupersetOf([1, 3]));
-        Assert.AreEqual("المتوقع من values أن يكون مجموعة شاملة لـ['1', '3']، لكن '3' كان مفقودًا منها.", superset.Message);
+        var superset = Throws<AssertionFailedException>(() => values.Should().BeSupersetOf([1, 3]));
+        superset.Message.Should().Be("المتوقع من values أن يكون مجموعة شاملة لـ['1', '3']، لكن '3' كان مفقودًا منها.");
 
-        var properSubsetSame = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeProperSubsetOf([1, 2]));
-        Assert.AreEqual("المتوقع من values أن يكون مجموعة جزئية فعلية من ['1', '2']، لكنهما يحتويان نفس العناصر.", properSubsetSame.Message);
+        var properSubsetSame = Throws<AssertionFailedException>(() => values.Should().BeProperSubsetOf([1, 2]));
+        properSubsetSame.Message.Should().Be("المتوقع من values أن يكون مجموعة جزئية فعلية من ['1', '2']، لكنهما يحتويان نفس العناصر.");
 
-        var properSupersetSame = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeProperSupersetOf([1, 2]));
-        Assert.AreEqual("المتوقع من values أن يكون مجموعة شاملة فعلية لـ['1', '2']، لكنهما يحتويان نفس العناصر.", properSupersetSame.Message);
+        var properSupersetSame = Throws<AssertionFailedException>(() => values.Should().BeProperSupersetOf([1, 2]));
+        properSupersetSame.Message.Should().Be("المتوقع من values أن يكون مجموعة شاملة فعلية لـ['1', '2']، لكنهما يحتويان نفس العناصر.");
 
         int[]? missing = null;
-        var supersetNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeSupersetOf([1]));
-        Assert.AreEqual("المتوقع من missing أن يكون مجموعة شاملة لـ['1']، لكن المجموعة null.", supersetNull.Message);
+        var supersetNull = Throws<AssertionFailedException>(() => missing.Should().BeSupersetOf([1]));
+        supersetNull.Message.Should().Be("المتوقع من missing أن يكون مجموعة شاملة لـ['1']، لكن المجموعة null.");
 
-        var properSubsetNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeProperSubsetOf([1]));
-        Assert.AreEqual("المتوقع من missing أن يكون مجموعة جزئية فعلية من ['1']، لكن المجموعة null.", properSubsetNull.Message);
+        var properSubsetNull = Throws<AssertionFailedException>(() => missing.Should().BeProperSubsetOf([1]));
+        properSubsetNull.Message.Should().Be("المتوقع من missing أن يكون مجموعة جزئية فعلية من ['1']، لكن المجموعة null.");
 
-        var properSupersetNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().BeProperSupersetOf([1]));
-        Assert.AreEqual("المتوقع من missing أن يكون مجموعة شاملة فعلية لـ['1']، لكن المجموعة null.", properSupersetNull.Message);
+        var properSupersetNull = Throws<AssertionFailedException>(() => missing.Should().BeProperSupersetOf([1]));
+        properSupersetNull.Message.Should().Be("المتوقع من missing أن يكون مجموعة شاملة فعلية لـ['1']، لكن المجموعة null.");
     }
 
     [TestMethod]
@@ -366,16 +366,16 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         int[] values = [1, 2];
-        var beNullOrEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => values.Should().BeNullOrEmpty());
-        Assert.AreEqual("المتوقع من values أن يكون null أو فارغاً، لكن وُجد 2 من العناصر.", beNullOrEmpty.Message);
+        var beNullOrEmpty = Throws<AssertionFailedException>(() => values.Should().BeNullOrEmpty());
+        beNullOrEmpty.Message.Should().Be("المتوقع من values أن يكون null أو فارغاً، لكن وُجد 2 من العناصر.");
 
         int[]? missing = null;
-        var notBeNullOrEmptyNull = Assert.ThrowsExactly<AssertionFailedException>(() => missing.Should().NotBeNullOrEmpty());
-        Assert.AreEqual("المتوقع من missing ألا يكون null أو فارغاً، لكن المجموعة null.", notBeNullOrEmptyNull.Message);
+        var notBeNullOrEmptyNull = Throws<AssertionFailedException>(() => missing.Should().NotBeNullOrEmpty());
+        notBeNullOrEmptyNull.Message.Should().Be("المتوقع من missing ألا يكون null أو فارغاً، لكن المجموعة null.");
 
         int[] empty = [];
-        var notBeNullOrEmpty = Assert.ThrowsExactly<AssertionFailedException>(() => empty.Should().NotBeNullOrEmpty());
-        Assert.AreEqual("المتوقع من empty ألا يكون null أو فارغاً، لكنه كان فارغاً.", notBeNullOrEmpty.Message);
+        var notBeNullOrEmpty = Throws<AssertionFailedException>(() => empty.Should().NotBeNullOrEmpty());
+        notBeNullOrEmpty.Message.Should().Be("المتوقع من empty ألا يكون null أو فارغاً، لكنه كان فارغاً.");
     }
 
     [TestMethod]
@@ -383,21 +383,21 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var scores = new Dictionary<string, int> { ["a"] = 1, ["b"] = 2 };
-        var count = Assert.ThrowsExactly<AssertionFailedException>(
+        var count = Throws<AssertionFailedException>(
             () => scores.Should().Equal(new Dictionary<string, int> { ["a"] = 1 }));
-        Assert.AreEqual("المتوقع من scores أن يساوي ['[a, 1]']، لكنه يحتوي 2 من العناصر بدل 1.", count.Message);
+        count.Message.Should().Be("المتوقع من scores أن يساوي ['[a, 1]']، لكنه يحتوي 2 من العناصر بدل 1.");
 
-        var missingKey = Assert.ThrowsExactly<AssertionFailedException>(
+        var missingKey = Throws<AssertionFailedException>(
             () => scores.Should().Equal(new Dictionary<string, int> { ["a"] = 1, ["z"] = 9 }));
-        Assert.AreEqual("المتوقع من scores أن يساوي ['[a, 1]', '[z, 9]']، لكن المفتاح ''z'' لم يُعثر عليه.", missingKey.Message);
+        missingKey.Message.Should().Be("المتوقع من scores أن يساوي ['[a, 1]', '[z, 9]']، لكن المفتاح ''z'' لم يُعثر عليه.");
 
-        var wrongValue = Assert.ThrowsExactly<AssertionFailedException>(
+        var wrongValue = Throws<AssertionFailedException>(
             () => scores.Should().Equal(new Dictionary<string, int> { ["a"] = 1, ["b"] = 9 }));
-        Assert.AreEqual("المتوقع من scores أن يساوي ['[a, 1]', '[b, 9]']، لكن المفتاح ''b'' كان ''2'' بدل ''9''.", wrongValue.Message);
+        wrongValue.Message.Should().Be("المتوقع من scores أن يساوي ['[a, 1]', '[b, 9]']، لكن المفتاح ''b'' كان ''2'' بدل ''9''.");
 
         IDictionary<string, int>? missingMap = null;
-        var nullEqual = Assert.ThrowsExactly<AssertionFailedException>(() => missingMap.Should().Equal(scores));
-        Assert.AreEqual("المتوقع من missingMap أن يساوي ['[a, 1]', '[b, 2]']، لكن القاموس null.", nullEqual.Message);
+        var nullEqual = Throws<AssertionFailedException>(() => missingMap.Should().Equal(scores));
+        nullEqual.Message.Should().Be("المتوقع من missingMap أن يساوي ['[a, 1]', '[b, 2]']، لكن القاموس null.");
     }
 
     [TestMethod]
@@ -405,13 +405,13 @@ public partial class LocalizationTests {
         using var _ = new ArabicScope();
 
         var ascending = new[] { (Key: 1, Value: 2), (Key: 1, Value: 1) };
-        var thenAsc = Assert.ThrowsExactly<AssertionFailedException>(() =>
+        var thenAsc = Throws<AssertionFailedException>(() =>
             ascending.Should().BeInAscendingOrder(static x => x.Key).And.ThenBeInAscendingOrder(static x => x.Value));
-        Assert.AreEqual("المتوقع من ascending أن يكون بعد ذلك بترتيب تصاعدي، لكن وُجد '(1, 1)' بعد '(1, 2)' في الفهرس 1.", thenAsc.Message);
+        thenAsc.Message.Should().Be("المتوقع من ascending أن يكون بعد ذلك بترتيب تصاعدي، لكن وُجد '(1, 1)' بعد '(1, 2)' في الفهرس 1.");
 
         var descending = new[] { (Key: 1, Value: 1), (Key: 1, Value: 2) };
-        var thenDesc = Assert.ThrowsExactly<AssertionFailedException>(() =>
+        var thenDesc = Throws<AssertionFailedException>(() =>
             descending.Should().BeInAscendingOrder(static x => x.Key).And.ThenBeInDescendingOrder(static x => x.Value));
-        Assert.AreEqual("المتوقع من descending أن يكون بعد ذلك بترتيب تنازلي، لكن وُجد '(1, 2)' بعد '(1, 1)' في الفهرس 1.", thenDesc.Message);
+        thenDesc.Message.Should().Be("المتوقع من descending أن يكون بعد ذلك بترتيب تنازلي، لكن وُجد '(1, 2)' بعد '(1, 1)' في الفهرس 1.");
     }
 }
