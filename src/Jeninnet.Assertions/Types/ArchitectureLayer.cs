@@ -20,7 +20,7 @@ public sealed class ArchitectureLayer(string name, string namespacePrefix) {
     /// <summary>Gets the reserved layer name used for framework dependencies when <c>includingFrameworkDependencies</c> is enabled.</summary>
     public static string FrameworkLayerName => "Framework";
 
-    private readonly HashSet<string> _dependencies = new(StringComparer.Ordinal);
+    private readonly HashSet<string> _dependencies = new(StringComparer.Ordinal); // NOSONAR: a collection expression would drop the ordinal comparer.
 
     /// <summary>Gets the unique layer name.</summary>
     public string Name { get; } = Validate(name, nameof(name), "The layer name must not be empty.");

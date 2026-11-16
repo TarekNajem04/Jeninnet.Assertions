@@ -4,4 +4,5 @@
 // Repository: https://github.com/TarekNajem04/Jeninnet.Assertions/
 // Licensed under the MIT License.
 //
+global using Jeninnet.Assertions.Xunit.Internal;
 global using Xunit.Sdk;

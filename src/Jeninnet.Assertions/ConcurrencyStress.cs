@@ -83,6 +83,23 @@ internal static class ConcurrencyStress {
         return new ConcurrencyStressResult(failures, 0);
     }
 
+    /// <summary>Reports a concurrency result through the caller's failure sink.</summary>
+    /// <param name="result">The completed stress run.</param>
+    /// <param name="wait">The timeout used for the run.</param>
+    /// <param name="copies">The number of simultaneous copies.</param>
+    /// <param name="expression">The subject expression.</param>
+    /// <param name="fail">The assertion failure callback.</param>
+    internal static void ReportThreadSafe(ConcurrencyStressResult result, TimeSpan wait, int copies, string expression, Action<string> fail) {
+        if(result.Pending != 0) {
+            fail(Strings.Format(StringKeys.ACTION_THREAD_SAFE_TIMEOUT, expression, AssertionScope.FormatInvariant(result.Pending), AssertionScope.FormatInvariant(copies), AssertionScope.FormatInvariant(wait)));
+            return;
+        }
+
+        if(result.Failures.Count != 0) {
+            fail(BuildFailureMessage(expression, result.Failures, copies));
+        }
+    }
+
     /// <summary>Builds the aggregated failure message for concurrent invocation failures, grouping identical exceptions.</summary>
     /// <param name="expression">The subject expression.</param>
     /// <param name="failures">The failed copies with their exceptions.</param>

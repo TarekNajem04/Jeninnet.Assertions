@@ -22,7 +22,7 @@ public sealed class SnapshotOptions {
     private readonly List<(Type Type, Func<string, string> Scrubber)> _typeScrubbers = [];
     private readonly List<(string Member, Func<string, string> Scrubber)> _memberScrubbers = [];
     private readonly List<string[]> _ignoredJsonPaths = [];
-    private readonly HashSet<string> _ignoredMemberNames = new(StringComparer.Ordinal);
+    private readonly HashSet<string> _ignoredMemberNames = new(StringComparer.Ordinal); // NOSONAR: a collection expression would drop the ordinal comparer.
 
     /// <summary>Adds a transformation applied to received text (e.g. masking dates or identifiers).</summary>
     /// <param name="scrubber">The transformation (must not be <see langword="null"/>).</param>
