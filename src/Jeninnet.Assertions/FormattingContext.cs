@@ -18,7 +18,7 @@ internal static class FormattingContext {
         }
 
         if(options.RespectRuntimeTypes && value is IEnumerable enumerable && value is not string) {
-            return ApplyLimits(FormatEnumerable(enumerable, options, 0, new HashSet<object>(ReferenceComparer.Instance)), options); // NOSONAR: a collection expression would drop the reference comparer.
+            return ApplyLimits(FormatEnumerable(enumerable, options, 0, CreateReferenceSet()), options);
         }
 
         return ApplyLimits(string.Format(CultureInfo.InvariantCulture, "{0}", value), options);
@@ -137,6 +137,13 @@ internal static class FormattingContext {
         return item is IEnumerable nested and not string
             ? FormatEnumerable(nested, options, depth, visited)
             : string.Format(CultureInfo.InvariantCulture, "{0}", item);
+    }
+
+    /// <summary>Creates the reference-identity set used for cycle detection.</summary>
+    /// <returns>A new set using <see cref="ReferenceComparer.Instance"/>.</returns>
+    private static HashSet<object> CreateReferenceSet() {
+        var visited = new HashSet<object>(ReferenceComparer.Instance);
+        return visited;
     }
 
     /// <summary>Collapses whitespace runs to single spaces and trims.</summary>
