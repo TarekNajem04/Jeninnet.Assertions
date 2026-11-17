@@ -67,7 +67,7 @@ jobs:
         with:
           global-json-file: global.json
 
-      - name: Check MSTest Assert ratchet
+      - name: Check MSTest Assert meta allowlist
         shell: pwsh
         run: pwsh scripts/test/check-mstest-assert-usage.ps1
 
