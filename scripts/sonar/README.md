@@ -21,7 +21,7 @@ An explicit `-Token` always wins. Create a User Token at
 
 ## Prerequisites
 
-- .NET SDK 10; the script installs `dotnet-sonarscanner` automatically when it is missing.
+- .NET SDK 11 (`11.0.100` is pinned in `global.json`); the script installs `dotnet-sonarscanner` automatically when it is missing.
 - Java 17 or newer (required by SonarScanner); the script resolves a JDK automatically from
   `SONAR_JAVA_PATH` (path to `java.exe`), `JAVA_HOME`, and the common install locations.
 - Local mode: SonarQube Community Build running at <http://localhost:9000> (default).

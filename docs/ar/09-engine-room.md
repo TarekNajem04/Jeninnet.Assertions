@@ -353,7 +353,7 @@ dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertio
 
 يشغّل سير عمل <code dir="ltr">Benchmarks</code> الأسبوعي الأمر نفسه على Linux وWindows ويرفع <code dir="ltr">BenchmarkDotNet.Artifacts</code>؛ وهو استشاري ولا يمنع دمج أي طلب.
 
-قيس على Windows 11، معالج Intel Core i7-8850H (2.60 GHz، 6 أنوية فعلية/12 منطقية)، .NET SDK 10.0.404، .NET 10.0.15، X64 RyuJIT، BenchmarkDotNet 0.15.8، 3 تسخينات + 5 تكرارات. تعامل مع الأرقام كرتبة حجم لا كمقارنة بين أجهزة:
+الأرقام أدناه خط أساس مسجَّل على .NET 10، وليست قياسًا على .NET 11. المكتبة تشحن هدف <code dir="ltr">net11.0</code>، ويُبنى المستودع بـSDK الإصدار 11 ولغة C# 15؛ أعد تشغيل الأمر في هذا الفصل للحصول على أرقام حالية. قيس على Windows 11، معالج Intel Core i7-8850H (2.60 GHz، 6 أنوية فعلية/12 منطقية)، .NET SDK 10.0.404، .NET 10.0.15، X64 RyuJIT، BenchmarkDotNet 0.15.8، 3 تسخينات + 5 تكرارات. تعامل مع الأرقام كرتبة حجم لا كمقارنة بين أجهزة:
 
 | السيناريو | المتوسط | المخصَّص |
 |---|---:|---:|

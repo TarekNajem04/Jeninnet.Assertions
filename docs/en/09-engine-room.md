@@ -262,7 +262,7 @@ dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertio
 
 The weekly `Benchmarks` workflow runs the same command on Linux and Windows and uploads `BenchmarkDotNet.Artifacts`; it is advisory and never blocks a pull request.
 
-Measured on Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cores), .NET SDK 10.0.404, .NET 10.0.15, X64 RyuJIT, BenchmarkDotNet 0.15.8, 3 warmup + 5 iterations. Treat the numbers as order-of-magnitude, not a cross-machine comparison:
+The figures below are a recorded .NET 10 baseline, not a .NET 11 measurement. The library ships `net11.0` and the repository builds with the .NET 11 SDK and C# 15; rerun the command in this chapter for current numbers. Measured on Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cores), .NET SDK 10.0.404, .NET 10.0.15, X64 RyuJIT, BenchmarkDotNet 0.15.8, 3 warmup + 5 iterations. Treat the numbers as order-of-magnitude, not a cross-machine comparison:
 
 | Scenario | Mean | Allocated |
 |---|---:|---:|

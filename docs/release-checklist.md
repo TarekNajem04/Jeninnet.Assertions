@@ -6,9 +6,10 @@ explicitly approved step (`nuget-publish.yml`), and no task may bump `<Version>`
 ## 1. Pre-flight
 
 - [ ] Work is on the intended branch and `git status` contains only the release changes.
-- [ ] `dotnet build src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release` ends with `0 Error(s)` for all four TFMs.
+- [ ] `dotnet --version` resolves the pinned .NET 11 SDK (`11.0.100`, `latestFeature` roll-forward) and `LangVersion` is 15.0.
+- [ ] `dotnet build src/Jeninnet.Assertions/Jeninnet.Assertions.csproj -c Release` ends with `0 Error(s)` for all five TFMs.
 - [ ] `dotnet test tests/Jeninnet.Assertions.Tests/Jeninnet.Assertions.Tests.csproj -c Release` ends with `Failed: 0`.
-- [ ] `pwsh scripts/docs/check-doc-parity.ps1`, `check-readme-claims.ps1`, and `check-localization.ps1` are green.
+- [ ] `pwsh scripts/docs/check-doc-parity.ps1`, `check-readme-claims.ps1`, `check-localization.ps1`, and `check-framework-docs.ps1` are green.
 - [ ] The analyzer audit (temporary IDE severities with `EnforceCodeStyleInBuild`, then reverted) reports no IDE/CA/S/RCS diagnostics.
 
 ## 2. Public API and documentation
