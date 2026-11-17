@@ -53,7 +53,7 @@
     </Folder>
     <Folder Name="/scripts/test/">
         <File Path="scripts/test/check-mstest-assert-usage.ps1" />
-        <File Path="scripts/test/mstest-assert-baseline.json" />
+        <File Path="scripts/test/mstest-assert-meta.json" />
         <File Path="scripts/test/README.md" />
     </Folder>
     <Folder Name="/scripts/sonar/">

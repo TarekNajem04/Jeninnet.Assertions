@@ -1,14 +1,18 @@
-# MSTest Assert ratchet
+# MSTest Assert meta allowlist
 
-This folder contains the guardrail that keeps the MSTest `Assert` migration from growing.
+This folder contains the guardrail that keeps MSTest `Assert` confined to the tests that need an independent oracle.
 
 ## Policy
 
 - `src/` never references a test framework.
-- MSTest `Assert` remains the independent oracle for the assertion engine and the adapter tests.
-- Every other test file migrates to `Should()` incrementally.
-- No new `Assert.*` usage is allowed, and an existing file cannot increase its count.
-- The baseline is debt, not an allowlist for new code. Lower or remove entries as files migrate.
+- MSTest `Assert` is allowed only in the **engine** and **adapter** meta tests.
+- Every other test file uses `Should()`.
+- The allowlist is explicit and reviewed. Adding a file is a policy decision, not a mechanical baseline update.
+
+## Categories
+
+- **engine**: `tests/Jeninnet.Assertions.Tests/` — tests that verify the assertion engine, failure messages, scopes, reports, snapshots, equivalency, reflection, IO, and HTTP assertions.
+- **adapter**: `tests/Jeninnet.Assertions.MSTest.Tests/`, `tests/Jeninnet.Assertions.NUnit.Tests/`, `tests/Jeninnet.Assertions.xUnit.Tests/`, and `tests/Jeninnet.Assertions.xUnit.v3.Tests/` — tests of the framework adapters.
 
 ## Usage
 
@@ -16,28 +20,20 @@ This folder contains the guardrail that keeps the MSTest `Assert` migration from
 pwsh scripts/test/check-mstest-assert-usage.ps1
 ```
 
-The check fails when:
+The check fails when a file outside the allowlist contains `Assert.*`.
 
-- a file outside `mstest-assert-baseline.json` contains `Assert.*`;
-- a baseline file contains more `Assert.*` calls than the recorded count.
-
-After an intentional migration, regenerate the baseline and commit it with the migration:
-
-```pwsh
-pwsh scripts/test/check-mstest-assert-usage.ps1 -UpdateBaseline
-```
-
-## Scope and exclusions
+## Exclusions
 
 - Scans `tests/**/*.cs` and `consumers/**/*.cs`.
 - Excludes `bin/`, `obj/`, and `tests/Jeninnet.Assertions.Analyzer.Tests/` because the latter contains `Assert.*` snippets that are inputs to the analyzer, not assertions executed by the test runner.
 - Counts are textual occurrences of `Assert.`; keep comments and source snippets free of accidental matches.
-- The baseline file is `mstest-assert-baseline.json` beside this README.
 
-## Migration pattern
+## Adding a meta file
 
-1. Replace `Assert.*` with the equivalent `Should()` assertion.
-2. Add a small test-local helper when an exception instance is needed (`Throws<T>` backed by `ThrowExactly`).
-3. Run the full test suite.
-4. Run the ratchet with `-UpdateBaseline`.
-5. Commit the migration and the baseline together.
+1. Explain why the test cannot use the library (normally because it asserts the library itself).
+2. Add the path to `meta.engine` or `meta.adapter` in `mstest-assert-meta.json`.
+3. Run the check and include the justification in the pull request.
+
+## Why the engine keeps MSTest
+
+The engine tests need an assertion mechanism that is independent of the code under test. Using `Should()` to verify `Should()` would make failures circular. High-level tests (architecture, independence, localization, and the consumer template) use the library directly.
