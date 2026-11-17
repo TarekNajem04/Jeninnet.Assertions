@@ -15,9 +15,19 @@ A fluent, framework-agnostic assertion library for .NET, providing expressive va
 
 This repository contains the **standalone** `Jeninnet.Assertions` package. It has been separated from the `Jeninnet.Localization` repository so it can build, test, and publish independently.
 
-Targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`, `net11.0`.
+Current release: **1.2.0** (assembly `1.2.0.0`, tag `v1.2.0.0`). Runtime targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`, `net11.0`. The repository builds with the pinned .NET 11 SDK (`11.0.100`) and C# 15; `net11.0` is the newest runtime target, not a requirement for consumers.
 
-**Documentation:** [English book](https://tareknajem04.github.io/Jeninnet.Assertions/) · [API reference](https://tareknajem04.github.io/Jeninnet.Assertions/api/toc.html) · [العربية](https://tareknajem04.github.io/Jeninnet.Assertions/ar/00-index.html)
+| Package | Purpose | Package README |
+|---|---|---|
+| `Jeninnet.Assertions` | Framework-agnostic assertion engine | [README](src/Jeninnet.Assertions/README.md) |
+| `Jeninnet.Assertions.Analyzer` | Migration analyzer and code fixes | [README](src/Jeninnet.Assertions.Analyzer/README.md) |
+| `Jeninnet.Assertions.MSTest` | MSTest failure translation | [README](src/Jeninnet.Assertions.MSTest/README.md) |
+| `Jeninnet.Assertions.NUnit` | NUnit failure translation | [README](src/Jeninnet.Assertions.NUnit/README.md) |
+| `Jeninnet.Assertions.xUnit` | xUnit v2 failure translation | [README](src/Jeninnet.Assertions.xUnit/README.md) |
+| `Jeninnet.Assertions.xUnit.v3` | xUnit v3 failure translation | [README](src/Jeninnet.Assertions.xUnit.v3/README.md) |
+| `Jeninnet.Assertions.TUnit` | TUnit failure translation | [README](src/Jeninnet.Assertions.TUnit/README.md) |
+
+**Documentation:** [English book](https://tareknajem04.github.io/Jeninnet.Assertions/) · [API reference](https://tareknajem04.github.io/Jeninnet.Assertions/api/toc.html) · [العربية](https://tareknajem04.github.io/Jeninnet.Assertions/ar/00-index.html) · [Release notes](docs/releases/v1.2.0.0.md)
 
 ## See it in action
 
@@ -165,9 +175,10 @@ current source — `.\scripts\badges\generate.ps1` builds the library, runs the 
   `WithExpectation` lets custom assertions name the real subject. Long or multiline strings append an invariant
   unified diff (`Be`, `BeEquivalentTo`) so the exact change is visible.
 - **Measured performance** — a tested invariant guarantees hot verbs (`Be`, `BeTrue`, `Contain`, `HaveCount`)
-  allocate only 56–128 B for the success path (656 B inside an `AssertionScope`) on .NET 10 Release, while failures
+  allocate only 56–128 B for the success path (656 B inside an `AssertionScope`) in Release builds, while failures
   pay for full diagnostics (1.2–2.2 KB for the measured scalar verbs); published BenchmarkDotNet numbers and a
-  weekly advisory workflow keep the larger picture honest, so rich messages never tax green tests.
+  weekly advisory workflow keep the larger picture honest, so rich messages never tax green tests. The table below
+  is a recorded .NET 10 baseline; it is not a .NET 11 measurement.
 - **Extensible** — custom formatters, global configuration, assembly-level engine initializers,
   custom equivalency steps/plans/rules, and marker discovery for extension assemblies.
 - **Architecture as assertions** — reflection-level layer rules (`NotDependOn`, `OnlyDependOn`,
@@ -635,7 +646,7 @@ The same run compares the hot success path with the free peer libraries (mean / 
 
 ¹ Shouldly uses `ShouldSatisfyAllConditions`; ² NFluent has no aggregating scope and is measured as two fail-fast checks. The full failure table, environment, and caveats are in [chapter 9](docs/en/09-engine-room.md#97-performance-and-release-verification). Hot-verb, scope, and peer rows are from the 2026-11-15 run; equivalency and snapshot rows are from the earlier engine run.
 
-Measured on Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cores), .NET SDK 10.0.404, .NET 10.0.15, X64 RyuJIT, BenchmarkDotNet 0.15.8, 3 warmup + 5 iterations. Treat them as order-of-magnitude. Run them yourself with:
+Baseline measurement (not a .NET 11 result): Windows 11, Intel Core i7-8850H (2.60 GHz, 6 physical/12 logical cores), .NET SDK 10.0.404, .NET 10.0.15, X64 RyuJIT, BenchmarkDotNet 0.15.8, 3 warmup + 5 iterations. Treat them as order-of-magnitude. The library itself supports `net11.0`; rerun the command below on the .NET 11 SDK for current numbers.
 
 ```powershell
 dotnet run --project benchmarks/Jeninnet.Assertions.Benchmarks/Jeninnet.Assertions.Benchmarks.csproj -c Release -- --filter '*' --exporters github

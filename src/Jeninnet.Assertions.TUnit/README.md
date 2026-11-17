@@ -11,9 +11,16 @@ rather than errors.
 dotnet add package Jeninnet.Assertions.TUnit
 ```
 
+Current release: NuGet package `1.2.0`; assembly version `1.2.0.0`; tag `v1.2.0.0`.
+
 The adapter targets `net8.0`, `net10.0`, and `net11.0`, and pulls the core `Jeninnet.Assertions` package and
 the TUnit assertion types automatically. It does not reference the TUnit test host or
-Microsoft.Testing.Platform runtime.
+Microsoft.Testing.Platform runtime. The repository builds the adapter with the pinned .NET 11 SDK
+(`11.0.100`) and C# 15; consumers can use any adapter target.
+
+See the [English book](https://tareknajem04.github.io/Jeninnet.Assertions/), the
+[API reference](https://tareknajem04.github.io/Jeninnet.Assertions/api/toc.html), or
+[الدليل العربي](https://tareknajem04.github.io/Jeninnet.Assertions/ar/00-index.html).
 
 ## Usage
 

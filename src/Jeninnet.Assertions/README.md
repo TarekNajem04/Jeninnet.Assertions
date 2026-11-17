@@ -17,10 +17,14 @@ A fluent, framework-agnostic assertion library for .NET tests, providing express
 dotnet add package Jeninnet.Assertions
 ```
 
-## Supported Frameworks
+## Current release and supported frameworks
 
-- .NET 10.0+
-- Works with MSTest, xUnit, NUnit, and any other .NET test framework
+- NuGet package: `1.2.0`; assembly version: `1.2.0.0`; tag: `v1.2.0.0`.
+- Runtime targets: `netstandard2.0`, `net6.0`, `net8.0`, `net10.0`, and `net11.0`.
+- HTTP assertions require `net6.0` or newer; the rest of the engine works on every listed target.
+- Works with MSTest, xUnit, NUnit, TUnit, or a plain console project; the core package references no test framework.
+- The repository builds with the pinned .NET 11 SDK (`11.0.100`) and C# 15. Consumers may use any supported target; the SDK pin is a build requirement for contributors.
+- Full documentation: [English book](https://tareknajem04.github.io/Jeninnet.Assertions/) · [API reference](https://tareknajem04.github.io/Jeninnet.Assertions/api/toc.html) · [العربية](https://tareknajem04.github.io/Jeninnet.Assertions/ar/00-index.html).
 
 ## Usage
 

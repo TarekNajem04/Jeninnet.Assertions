@@ -23,7 +23,7 @@ This book is not meant to be read in one sitting. Each chapter stands on its own
 - **Chapter 11:** Production validators: the same `Should()` verbs, collecting a result instead of throwing.
 - **Chapter 12:** Snapshots in depth: the `.verified`/`.received` workflow, the evidence in each failure, and the deliberate update switch.
 
-Code samples target `net11.0`. The library multi-targets `netstandard2.0;net6.0;net8.0;net10.0;net11.0` (HTTP assertions require `net6.0+` only).
+The current release is `1.2.0` (assembly `1.2.0.0`, tag `v1.2.0.0`). Code samples target `net11.0`. The library multi-targets `netstandard2.0;net6.0;net8.0;net10.0;net11.0` (HTTP assertions require `net6.0+` only). The repository builds with the pinned .NET 11 SDK (`11.0.100`) and C# 15; consumers may use any supported target.
 
 ## Contents
 

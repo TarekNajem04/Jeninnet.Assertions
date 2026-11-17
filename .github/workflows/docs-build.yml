@@ -81,6 +81,10 @@ jobs:
         shell: pwsh
         run: pwsh scripts/docs/check-readme-claims.ps1
 
+      - name: Check framework documentation
+        shell: pwsh
+        run: pwsh scripts/docs/check-framework-docs.ps1
+
       - name: Build Documentation Site
         run: docfx docs/docfx.json --warningsAsErrors
 
